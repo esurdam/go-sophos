@@ -2,7 +2,6 @@ package sophos
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -17,10 +16,10 @@ type Response struct {
 func (r *Response) MarshalTo(x interface{}) error {
 	bodyText, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		return errors.New(fmt.Sprintf("response: could not read response body: %s", err.Error()))
+		return fmt.Errorf("response: could not read response body: %s", err.Error())
 	}
 	if err = json.Unmarshal(bodyText, x); err != nil {
-		return errors.New(fmt.Sprintf("response: could not unmsarshal response to interface: %s", err.Error()))
+		return fmt.Errorf("response: could not unmsarshal response to interface: %s", err.Error())
 	}
 	return nil
 }
