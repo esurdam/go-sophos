@@ -3,6 +3,7 @@ package sophos_test
 import (
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"reflect"
 	"testing"
@@ -12,6 +13,9 @@ import (
 
 var client *sophos.Client
 
+var errOptions = func(r *http.Request)error{
+	return fmt.Errorf("this is a fake error")
+}
 func init() {
 	ep := os.Getenv("ENDPOINT")
 	token := os.Getenv("TOKEN")
@@ -102,5 +106,10 @@ func TestClient_Do(t *testing.T) {
 	_, err := client.Do("é", "/api", nil)
 	if err == nil {
 		t.Error("should have error since bad method")
+	}
+
+	_, err = client.Do("GET", "/api", nil, errOptions)
+	if err == nil {
+		t.Error("should have error since bad errOption")
 	}
 }
