@@ -162,7 +162,7 @@ func main() {
 	}
 
 	var err error
-	client, err = sophos.New(ep, sophos.WithApiToken(token))
+	client, err = sophos.New(ep, sophos.WithAPIToken(token))
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -32,8 +32,8 @@ func WithBasicAuth(username, password string) Option {
 	}
 }
 
-// WithApiToken is an Option which sets the Authorization header to the provided token
-func WithApiToken(token string) Option {
+// WithAPIToken is an Option which sets the Authorization header to the provided token
+func WithAPIToken(token string) Option {
 	return func(r *http.Request) error {
 		r.Header.Set(Authorization, "Basic "+base64.StdEncoding.EncodeToString([]byte("token:"+token)))
 		return nil

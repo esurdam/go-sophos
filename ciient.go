@@ -119,6 +119,7 @@ func (c Client) Patch(path string, body io.Reader, options ...Option) (*Response
 	return c.Do(http.MethodPatch, path, body, options...)
 }
 
+// Version contains the UTMs version data
 type Version struct {
 	UTM   string `json:"utm"`
 	Restd string `json:"restd"`

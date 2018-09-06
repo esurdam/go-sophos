@@ -18,7 +18,7 @@ func init() {
 		panic("need endpoint and token")
 	}
 
-	clientF, err := sophos.New(ep, sophos.WithApiToken(token))
+	clientF, err := sophos.New(ep, sophos.WithAPIToken(token))
 	if err == nil {
 		client = clientF
 	}
@@ -49,7 +49,7 @@ func TestClient_Request(t *testing.T) {
 
 	wanted := fmt.Sprintf("%s/api/status/version", client.Endpoint())
 	if r.URL.String() != wanted {
-		t.Error(errors.New(fmt.Sprintf("incorrect URL: wanted %s, got %s", wanted, r.URL.String())))
+		t.Error(fmt.Errorf("incorrect URL: wanted %s, got %s", wanted, r.URL.String()))
 	}
 }
 

@@ -201,7 +201,7 @@ func TestWithApiToken(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			r := httptest.NewRequest("GET", "/api", nil)
-			opt := sophos.WithApiToken(tt.args.token)
+			opt := sophos.WithAPIToken(tt.args.token)
 			err := opt(r)
 			if err == nil && tt.wantErr {
 				t.Errorf("TestWithApiToken() = should error, want %v", tt.wantErr)
