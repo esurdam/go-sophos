@@ -15,27 +15,29 @@ Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDF
 ```
 go get github.com/esurdam/go-sophos
 ```
+Create a client
 
-Using the client
+
 
 ```
-// All options passed on initialize will be applied to all subsequent calls
+import "github.com/esurdam/go-sophos"
+
+// All Options passed on initialize will be applied to all subsequent calls
 client, _ := sophos.New(
     "192.168.0.1:4848", 
-    sophos.WithApiToken("abCDEFghIjklMNOPQkwSnwbutCpHdjQz"),
+    sophos.WithBasicAuth("user", "pass"),
 )
-res, _ := client.Get("/api/nodes") 
-
-var nodes sophos.Nodes
-_ = res.MarshalTo(&nodes) // Marshal to Nodes struct
-
-nodes.Licensing_activeIps // active Ips
 ```
 
 Requesting the current port of the WebAdmin:
 
 ```
-client, _ := New("192.168.0.1:4848", sophos.WithBasicAuth("user", "pass))
+import "github.com/esurdam/go-sophos"
+
+client, _ := sophos.New(
+    "192.168.0.1:4848", 
+    sophos.WithApiToken("abCDEFghIjklMNOPQkwSnwbutCpHdjQz"),
+)
 res, _ := client.Get("/api/nodes/webadmin.port")
 
 var port int
@@ -44,12 +46,16 @@ fmt.Println(port)
 // Output: 4848
 ```
 
-Requesting a REST Object:
+Requesting a REST type:
 
 ```
-var dns sophos.Dns
-res, _ := client.Get(dns.GetPath())
-err := res.MarshalTo(&dns)
+import "github.com/esurdam/go-sophos/types"
+
+var nodes types.Nodes
+res, _ := client.Get(nodes.GetPath()) 
+_ = res.MarshalTo(&nodes) 
+
+nodes.Licensing_activeIps // active Ips
 ```
 
 
