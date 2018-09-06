@@ -18,13 +18,8 @@ var errOption = func(r *http.Request) error {
 }
 
 func init() {
-	ep := os.Getenv("ENDPOINT")
 	token := os.Getenv("TOKEN")
-	if ep == "" || token == "" {
-		panic("need endpoint and token")
-	}
-
-	clientF, err := sophos.New(ep, sophos.WithAPIToken(token))
+	clientF, err := sophos.New("https://httpbin.org", sophos.WithAPIToken(token))
 	if err == nil {
 		client = clientF
 	}
@@ -68,7 +63,10 @@ func TestClient_Ping(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	if _, err := client.Ping(); err != nil {
+	if _, err := client.Ping(func(r *http.Request) error {
+		r.URL.Path = "/json"
+		return nil
+	}); err != nil {
 		t.Error(err)
 	}
 
@@ -88,6 +86,20 @@ func TestClient_Delete(t *testing.T) {
 
 	if r.Request.Method != http.MethodDelete {
 		t.Error("method should be DELETE")
+	}
+}
+
+func TestClient_Get(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r, err := client.Get("/api", errOption)
+	if err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	if r.Request.Method != http.MethodGet {
+		t.Error("method should be GET")
 	}
 }
 
