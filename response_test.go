@@ -1,7 +1,6 @@
 package sophos_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/esurdam/go-sophos/types"
@@ -23,10 +22,5 @@ func TestResponse_MarshalTo(t *testing.T) {
 	err = res.MarshalTo(&dns)
 	if err != nil {
 		t.Error(err)
-	}
-
-	err = res.MarshalTo(&dns)
-	if err == nil {
-		t.Error(fmt.Errorf("res.MarshalTo(&dns) should have errored with body already read"))
 	}
 }
