@@ -3,14 +3,15 @@ GOCMD=go
 GOFMT=gofmt
 GOIMPORTS=goimports
 GOTEST=$(GOCMD) test
+GENOUTPUT="types/generated.go"
 
 all: build test
 build:
-	([[ -f generated.go ]] && rm generated.go)
+	([[ -f $GENOUTPUT ]] && rm $GENOUTPUT || echo )
 	$(GOCMD) run bin/gen.go
 	$(GOFMT) -s -w .
 	$(GOIMPORTS) -w .
 test:
-	$(GOTEST) .
+	$(GOTEST) -v .
 clean:
 	$(GOCLEAN)

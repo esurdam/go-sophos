@@ -3,19 +3,23 @@ package sophos_test
 import (
 	"testing"
 
-	"github.com/esurdam/go-sophos"
+	"github.com/esurdam/go-sophos/types"
 )
 
 func TestResponse_MarshalTo(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	var nodes sophos.Dns
-	res, err := client.Get(nodes.GetPath())
+	var dns types.Dns
+	res, err := client.Get(dns.GetPath())
 	if err != nil {
 		t.Error(err)
 	}
-	err = res.MarshalTo(&nodes)
+	if res.StatusCode > 300 {
+		t.Error(res.Body)
+		return
+	}
+	err = res.MarshalTo(&dns)
 	if err != nil {
 		t.Error(err)
 	}
