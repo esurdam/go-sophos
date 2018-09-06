@@ -2,6 +2,7 @@
 
 [![Documentation](https://godoc.org/github.com/esurdam/go-sophos?status.svg)](http://godoc.org/github.com/esurdam/go-sophos)
 [![Go Report Card](https://goreportcard.com/badge/github.com/esurdam/go-sophos)](https://goreportcard.com/report/github.com/esurdam/go-sophos)
+[![codecov](https://codecov.io/gh/esurdam/go-sophos/branch/master/graph/badge.svg)](https://codecov.io/gh/esurdam/go-sophos)
 
 A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en). 
 
