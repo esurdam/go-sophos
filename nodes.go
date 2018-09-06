@@ -1,6 +1,6 @@
 package sophos
 
-// Node is a resource within Sophos UTM that you can update but cannot create, delete, or move.
+// A Node is a resource within Sophos UTM that you can update but cannot create, delete, or move.
 // Nodes are organized hierarchically as in a filesystem. An example of a node is the “Shell Access”
 // service module within Sophos UTM (identified as the “ssh” node). To enable the Shell Access service,
 // you can set the ssh.status leaf node.

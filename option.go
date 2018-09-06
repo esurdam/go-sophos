@@ -10,21 +10,21 @@ import (
 // Option is a functional config that is used to modify outgoing requests.
 type Option func(r *http.Request) error
 
-// AutoResolveErrsMode sets the X-Restd-Err-Ack header to 'all' which will auto resolve all
+// AutoResolveErrsMode is an Option which sets the X-Restd-Err-Ack header to 'all' which will auto resolve all
 // non-fatal errors. e.g. deleting sub-dependencies.
 func AutoResolveErrsMode(r *http.Request) error {
 	r.Header.Set(http.CanonicalHeaderKey(XRestdErrAck), "all")
 	return nil
 }
 
-// CancelResolveErrsMode sets the X-Restd-Err-Ack header to 'none' which will automatically acknowledge
+// CancelResolveErrsMode is an Option which sets the X-Restd-Err-Ack header to 'none' which will automatically acknowledge
 // the error and cancel the operation. Use this setting only when you’re not deleting important data or objects.
 func CancelResolveErrsMode(r *http.Request) error {
 	r.Header.Set(http.CanonicalHeaderKey(XRestdErrAck), "none")
 	return nil
 }
 
-// WithBasicAuth sets the Authorization header to the provided username and password
+// WithBasicAuth is an Option which sets the Authorization header to the provided username and password
 func WithBasicAuth(username, password string) Option {
 	return func(r *http.Request) error {
 		r.Header.Set(Authoization, "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
@@ -32,7 +32,7 @@ func WithBasicAuth(username, password string) Option {
 	}
 }
 
-// WithApiToken sets the Authorization header to the provided token
+// WithApiToken is an Option which sets the Authorization header to the provided token
 func WithApiToken(token string) Option {
 	return func(r *http.Request) error {
 		r.Header.Set(Authoization, "Basic "+base64.StdEncoding.EncodeToString([]byte("token:"+token)))
@@ -40,13 +40,13 @@ func WithApiToken(token string) Option {
 	}
 }
 
-// WithRestdLockOverride sets the X-Restd-Lock-Override to yes
+// WithRestdLockOverride is an Option which sets the X-Restd-Lock-Override to yes
 func WithRestdLockOverride(r *http.Request) error {
 	r.Header.Set(http.CanonicalHeaderKey(XRestdLockOverride), "yes")
 	return nil
 }
 
-// WithRestdInsert adds the XRestdInsert header to insert a reference at the given position inside the node
+// WithRestdInsert is an Option which adds the XRestdInsert header to insert a reference at the given position inside the node
 // X-Restd-Insert: packetfilter.rules 4
 func WithRestdInsert(rule string, position int) Option {
 	return func(r *http.Request) error {
@@ -62,7 +62,7 @@ func WithRestdInsert(rule string, position int) Option {
 	}
 }
 
-// WithSessionClose sets the X-Restd-Session to close, be sure to only send this command with the last request.
+// WithSessionClose is an Option which sets the X-Restd-Session to close, be sure to only send this command with the last request.
 func WithSessionClose(r *http.Request) error {
 	r.Header.Set(http.CanonicalHeaderKey(XRestdSession), "close")
 	return nil

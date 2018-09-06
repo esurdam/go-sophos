@@ -1,6 +1,7 @@
 package sophos
 
 const (
+	// XRestdErrAck is an http.Header key.
 	// As described, there are multiple RESTful API interactions that can fail due to incon
 	// sistencies, e.g., object A references object B but object B is deleted. The RESTful API
 	// will prevent damage and inconsistency to confd by returning an error.
@@ -19,6 +20,7 @@ const (
 	// Refer to Section 3.4 of Sophos documentation
 	XRestdErrAck = "X-Restd-Err-Ack"
 
+	// XRestdLockOverride is an http.Header key.
 	// The confd object model supports locking objects to avoid unintended changes. To
 	// check if an object is locked or unlocked, you can use the GET method. The response
 	// will indicate the specific lock level, i.e., “_locked” can be set to “global”, “user”, or “”
@@ -36,6 +38,7 @@ const (
 	// Refer to Section 3.5 of Sophos documentation
 	XRestdLockOverride = "X-Restd-Lock-Override"
 
+	// XRestdInsert is an http.Header key.
 	// In many cases when you create a new object, the object needs to be directly inserted
 	// into a node in order to be active. This usually takes two operations; however, there is
 	// an additional header you can use when creating objects to automatically activate the
@@ -52,6 +55,7 @@ const (
 	// Refer to Section 3.6 of Sophos documentation
 	XRestdInsert = "X-Restd-Insert"
 
+	// XRestdSession is an http.Header key.
 	// Each interaction with the confd creates or reuses a session. Sessions are important
 	// for validation interaction and performance. However, maintaining sessions are
 	// resource intensive and can degrade performance. If you use the RESTful API to auto
