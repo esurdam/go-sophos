@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"reflect"
 	"testing"
 
 	"github.com/esurdam/go-sophos"
@@ -51,6 +52,11 @@ func TestClient_Request(t *testing.T) {
 	if r.URL.String() != wanted {
 		t.Error(fmt.Errorf("incorrect URL: wanted %s, got %s", wanted, r.URL.String()))
 	}
+
+	r, err = client.Request("é", "/api/status/version", nil)
+	if err == nil {
+		t.Error(fmt.Errorf("request should have errored"))
+	}
 }
 
 func TestClient_Ping(t *testing.T) {
@@ -59,5 +65,42 @@ func TestClient_Ping(t *testing.T) {
 
 	if _, err := client.Ping(); err != nil {
 		t.Error(err)
+	}
+}
+
+func TestNew(t *testing.T) {
+	type args struct {
+		endpoint string
+		opts     []sophos.Option
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    *sophos.Client
+		wantErr bool
+	}{
+		{"testNewNoEndpoint", args{endpoint: ""}, nil, true},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := sophos.New(tt.args.endpoint, tt.args.opts...)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("New() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("New() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestClient_Do(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	_, err := client.Do("é", "/api", nil)
+	if err == nil {
+		t.Error("should have error since bad method")
 	}
 }
