@@ -12,6 +12,6 @@ build:
 	$(GOFMT) -s -w .
 	$(GOIMPORTS) -w .
 test:
-	$(GOTEST) -v .
+	$(GOTEST) -race -v -coverprofile=coverage.txt -covermode=atomic
 clean:
 	$(GOCLEAN)
