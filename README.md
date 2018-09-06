@@ -88,11 +88,7 @@ make
 
 ## Testing
 
-Testing requres a valid endpoint and token
 ```bash
-export ENDPOINT=192.168.0.1:4848
-export TOKEN=abcde1234
-
 make test
 ```
 
