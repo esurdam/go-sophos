@@ -13,9 +13,10 @@ import (
 
 var client *sophos.Client
 
-var errOptions = func(r *http.Request)error{
+var errOption = func(r *http.Request) error {
 	return fmt.Errorf("this is a fake error")
 }
+
 func init() {
 	ep := os.Getenv("ENDPOINT")
 	token := os.Getenv("TOKEN")
@@ -70,6 +71,10 @@ func TestClient_Ping(t *testing.T) {
 	if _, err := client.Ping(); err != nil {
 		t.Error(err)
 	}
+
+	if _, err := client.Ping(errOption); err == nil {
+		t.Error("error should not be nil with errOption")
+	}
 }
 
 func TestNew(t *testing.T) {
@@ -108,7 +113,7 @@ func TestClient_Do(t *testing.T) {
 		t.Error("should have error since bad method")
 	}
 
-	_, err = client.Do("GET", "/api", nil, errOptions)
+	_, err = client.Do("GET", "/api", nil, errOption)
 	if err == nil {
 		t.Error("should have error since bad errOption")
 	}

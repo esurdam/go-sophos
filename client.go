@@ -126,8 +126,8 @@ type Version struct {
 }
 
 // Ping the gateway to retrieve its versioning
-func (c Client) Ping() (v *Version, err error) {
-	r, err := c.Get("/api/status/version")
+func (c Client) Ping(options ...Option) (v *Version, err error) {
+	r, err := c.Get("/api/status/version", options...)
 	if err != nil {
 		return nil, err
 	}
