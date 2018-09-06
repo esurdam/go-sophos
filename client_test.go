@@ -81,7 +81,7 @@ func TestClient_Delete(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	r, err := client.Delete("/api", errOption);
+	r, err := client.Delete("/api", errOption)
 	if err == nil {
 		t.Error("error should not be nil with errOption")
 	}
@@ -95,7 +95,7 @@ func TestClient_Put(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	r, err := client.Put("/api", nil, errOption);
+	r, err := client.Put("/api", nil, errOption)
 	if err == nil {
 		t.Error("error should not be nil with errOption")
 	}
@@ -109,7 +109,7 @@ func TestClient_Post(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	r, err := client.Post("/api", nil, errOption);
+	r, err := client.Post("/api", nil, errOption)
 	if err == nil {
 		t.Error("error should not be nil with errOption")
 	}
@@ -123,7 +123,7 @@ func TestClient_Patch(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	r, err := client.Patch("/api", nil, errOption);
+	r, err := client.Patch("/api", nil, errOption)
 	if err == nil {
 		t.Error("error should not be nil with errOption")
 	}

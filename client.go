@@ -49,11 +49,9 @@ func New(endpoint string, opts ...Option) (*Client, error) {
 
 // Do executes the call and returns a *Response
 func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Response, error) {
-	var tempres http.Response
 	req, err := c.Request(method, path, body, options...)
-	tempres.Request = req
 	if err != nil {
-		return  &Response{&tempres}, err
+		return &Response{&http.Response{Request: req}}, err
 	}
 
 	res, err := DefaultHTTPClient.Do(req)
