@@ -77,6 +77,62 @@ func TestClient_Ping(t *testing.T) {
 	}
 }
 
+func TestClient_Delete(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r, err := client.Delete("/api", errOption);
+	if err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	if r.Request.Method != http.MethodDelete {
+		t.Error("method should be DELETE")
+	}
+}
+
+func TestClient_Put(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r, err := client.Put("/api", nil, errOption);
+	if err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	if r.Request.Method != http.MethodPut {
+		t.Error("method should be PUT")
+	}
+}
+
+func TestClient_Post(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r, err := client.Post("/api", nil, errOption);
+	if err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	if r.Request.Method != http.MethodPost {
+		t.Error("method should be DELETE")
+	}
+}
+
+func TestClient_Patch(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r, err := client.Patch("/api", nil, errOption);
+	if err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	if r.Request.Method != http.MethodPatch {
+		t.Error("method should be DELETE")
+	}
+}
+
 func TestNew(t *testing.T) {
 	type args struct {
 		endpoint string
