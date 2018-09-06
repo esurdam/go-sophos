@@ -5,10 +5,11 @@ GOIMPORTS=goimports
 GOTEST=$(GOCMD) test
 GENOUTPUT="types/generated.go"
 
-all: build test
+all: build fmt test
 build:
 	([[ -f $GENOUTPUT ]] && rm $GENOUTPUT || echo )
 	$(GOCMD) run bin/gen.go
+fmt:
 	$(GOFMT) -s -w .
 	$(GOIMPORTS) -w .
 test:
