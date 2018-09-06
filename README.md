@@ -2,14 +2,13 @@
 
 A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en). 
 
-
-Sophos types are automatically generated using `bin/gen.go` which queries a UTM's Gateway  `/api/definitions`  path
-
 No foreign deps.
 
 ### Prerequisites
 
 The Sophos UTM REST API must be enabled in Administrator settings.
+
+Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
 
 ### Usage
 
@@ -20,13 +19,17 @@ go get github.com/esurdam/go-sophos
 Using the client
 
 ```
-// Query the gateway
-client, _ := sophos.New("192.168.0.1:4848", sophos.WithApiToken("abCDEFghIjklMNOPQkwSnwbutCpHdjQz"))
-res, _ := client.Get("/api/nodes")
+// All options passed on initialize will be applied to all subsequent calls
+client, _ := sophos.New(
+    "192.168.0.1:4848", 
+    sophos.WithApiToken("abCDEFghIjklMNOPQkwSnwbutCpHdjQz"),
+)
+res, _ := client.Get("/api/nodes") 
 
-// Marshal to Nodes struct
 var nodes sophos.Nodes
-_ = res.MarshalTo(&nodes)
+_ = res.MarshalTo(&nodes) // Marshal to Nodes struct
+
+nodes.Licensing_activeIps // active Ips
 ```
 
 Requesting the current port of the WebAdmin:
@@ -38,7 +41,7 @@ res, _ := client.Get("/api/nodes/webadmin.port")
 var port int
 res.MarshalTo(&port)
 fmt.Println(port)
-// Output: 4444
+// Output: 4848
 ```
 
 Requesting a REST Object:
@@ -50,26 +53,24 @@ err := res.MarshalTo(&dns)
 ```
 
 
-Deleting a packet filter rule with reference REF_PacPacXYZ.
+Deleting a packet filter rule with reference `REF_PacPacXYZ`.
 
-Note – The example uses the X-RESTD-ERR-ACK: all to automatically approve the deletion of the object.
+This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object.
 ```
-client, _ := sophos.New("192.168.0.1:4848", 
-    sophos.WithApiToken("abCDEFghIjklMNOPQkwSnwbutCpHdjQz"),
+res, err := client.Delete(
+    "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
     sophos.WithSessionClose,
     sophos.AutoResolveErrsMode,
 )
-
-res, err := client.Delete("api/objects/packetfilter/packetfilter/REF_PacPacXYZ")
 ```
 
 ## Generating Types
 
-`bin/gen.go` will query the UTM `api/definitions` path to generate the`generated.go` file which contains structs corresponding to UTM API definitions.
+Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](generated.go) file which contains structs corresponding to UTM API definitions.
 
 
 ```
-export ENDPOINT=192.168.0.1:4444
+export ENDPOINT=192.168.0.1:4848
 export TOKEN=abcde1234
 
 make
@@ -79,7 +80,7 @@ make
 
 Testing requres a valid endpoint and token
 ```
-export ENDPOINT=192.168.0.1:4444
+export ENDPOINT=192.168.0.1:4848
 export TOKEN=abcde1234
 
 make test
@@ -87,7 +88,8 @@ make test
 
 ## Todo
 
-- Expand generated types to include Resources and Node edge types (e.g. Licensing and Packetfilter(ediit) types)
+- [ ] Add PUT, POST, PATCH and DELETE methods to generated objects
+- [ ] Create a wrapper Client for REST objects `client.Get(&nodes)` 
 
 ## Contributing
 
@@ -95,4 +97,4 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
