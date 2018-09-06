@@ -1,2 +1,2 @@
-// Package go-sophos is a Sophos UTM 9 REST API Client
+// Package sophos is a Sophos UTM 9 REST API Client
 package sophos
