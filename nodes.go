@@ -8,7 +8,11 @@ package sophos
 // Unlike filesystems which use a slash “/” to separate the different nodes, Sophos UTM RESTful API uses
 // a dot “.” to separate different nodes. Nodes reference objects, for example “Shell Access” and have a
 // leaf node of allowed_networks which is an array of references to network objects.
-type Node interface{}
+type Node interface {
+	Object
+	// ApiRoutes returns all known Node paths
+	ApiRoutes() []string
+}
 
 // An Object resides in collections, which you can create, change, or delete. The collections of objects are
 // predefined into classes and types. A class describes the general purpose of the objects whereas the type
@@ -19,8 +23,8 @@ type Node interface{}
 // (e.g. 192.168.0.1) or “network” for subnets (e.g. 192.168.0.0/24). The collection of objects is always expressed
 // with a class and a type, e.g. “network/host” or “network/network”.
 type Object interface {
-	// ApiRoutes returns a slice of strings containing the generated structs endpoints
-	ApiRoutes() []string
+	// Definitions returns a map of the Node's editable Objects
+	Definitions() map[string]RestObject
 }
 
 // A Reference is the connections between nodes and objects as well as between one object and another object.
@@ -29,3 +33,9 @@ type Object interface {
 // in scenarios where nodes and objects are designed to be connected. Technically, references are strings that
 // always start with the prefix “REF_”.
 type Reference string
+
+// RestObject is an interface for REST objects
+type RestObject interface {
+	// GetPath returns the GET path of the Object
+	GetPath() string
+}

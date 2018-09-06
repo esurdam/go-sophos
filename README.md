@@ -5,24 +5,21 @@
 [![codecov](https://codecov.io/gh/esurdam/go-sophos/branch/master/graph/badge.svg)](https://codecov.io/gh/esurdam/go-sophos)
 [![Build Status](https://travis-ci.com/esurdam/go-sophos.svg?branch=master)](https://travis-ci.com/esurdam/go-sophos)
 
-A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en). 
-
-No foreign deps.
+A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go. 
 
 ### Prerequisites
 
 The Sophos UTM REST API must be enabled in Administrator settings.
 
-Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
+Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en).
 
 ### Usage
 
 ```bash
 go get github.com/esurdam/go-sophos
 ```
-Create a client
 
-
+Create a client:
 
 ```go
 import "github.com/esurdam/go-sophos"
@@ -66,9 +63,9 @@ nodes.Licensing_activeIps // active Ips
 
 Deleting a packet filter rule with reference `REF_PacPacXYZ`.
 
-This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object.
+This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object:
 ```go
-res, err := client.Delete(
+_, err := client.Delete(
     "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
     sophos.WithSessionClose,
     sophos.AutoResolveErrsMode,
@@ -77,7 +74,7 @@ res, err := client.Delete(
 
 ## Generating Types
 
-Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](generated.go) file which contains structs corresponding to UTM API definitions.
+Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](types/generated.go) file which contains structs corresponding to UTM API definitions.
 
 
 ```bash
