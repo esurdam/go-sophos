@@ -15,14 +15,14 @@ Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDF
 
 ### Usage
 
-```
+```bash
 go get github.com/esurdam/go-sophos
 ```
 Create a client
 
 
 
-```
+```go
 import "github.com/esurdam/go-sophos"
 
 // All Options passed on initialize will be applied to all subsequent calls
@@ -34,7 +34,7 @@ client, _ := sophos.New(
 
 Requesting the current port of the WebAdmin:
 
-```
+```go
 import "github.com/esurdam/go-sophos"
 
 client, _ := sophos.New(
@@ -51,7 +51,7 @@ fmt.Println(port)
 
 Requesting a REST type:
 
-```
+```go
 import "github.com/esurdam/go-sophos/types"
 
 var nodes types.Nodes
@@ -65,7 +65,7 @@ nodes.Licensing_activeIps // active Ips
 Deleting a packet filter rule with reference `REF_PacPacXYZ`.
 
 This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object.
-```
+```go
 res, err := client.Delete(
     "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
     sophos.WithSessionClose,
@@ -78,7 +78,7 @@ res, err := client.Delete(
 Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](generated.go) file which contains structs corresponding to UTM API definitions.
 
 
-```
+```bash
 export ENDPOINT=192.168.0.1:4848
 export TOKEN=abcde1234
 
@@ -88,7 +88,7 @@ make
 ## Testing
 
 Testing requres a valid endpoint and token
-```
+```bash
 export ENDPOINT=192.168.0.1:4848
 export TOKEN=abcde1234
 
