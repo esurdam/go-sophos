@@ -18,8 +18,5 @@ func (r *Response) MarshalTo(x interface{}) error {
 	if err != nil {
 		return fmt.Errorf("response: could not read response body: %s", err.Error())
 	}
-	if err = json.Unmarshal(bodyText, x); err != nil {
-		return fmt.Errorf("response: could not unmsarshal response to interface: %s", err.Error())
-	}
-	return nil
+	return json.Unmarshal(bodyText, x)
 }
