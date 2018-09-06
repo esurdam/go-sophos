@@ -37,7 +37,7 @@ func New(endpoint string, opts ...Option) (*Client, error) {
 		return nil, errors.New("endpoint and api key required")
 	}
 
-	if !strings.HasPrefix(endpoint, "http") {
+	if !strings.HasPrefix(endpoint, "http:") || !strings.HasPrefix(endpoint, "https:") {
 		endpoint = "https://" + endpoint
 	}
 

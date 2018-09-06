@@ -19,7 +19,7 @@ var errOption = func(r *http.Request) error {
 
 func init() {
 	token := os.Getenv("TOKEN")
-	clientF, err := sophos.New("https://httpbin.org", sophos.WithAPIToken(token))
+	clientF, err := sophos.New("httpbin.org", sophos.WithAPIToken(token))
 	if err == nil {
 		client = clientF
 	}
