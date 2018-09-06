@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// DefaultHTTPClient is the default http.Client used. Caller can modify Client (e.g. to allow SkipInsecure)
 var DefaultHTTPClient = http.Client{}
 
 // ClientInterface represents a Sophos 9 REST API client
@@ -57,6 +58,8 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Res
 	return &Response{res}, err
 }
 
+// Delete executes a DELETE call
+//
 // You can use DELETE requests to destroy object resources that were created with
 // POST or PUT requests.
 // Confd may deny DELETE requests due to validation checks. To use confd auto
@@ -64,10 +67,10 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Res
 //
 // DELETE /api/objects/packetfilter/packetfilter/REF_PacPacAllowAnyFTPOut
 func (c Client) Delete(path string, options ...Option) (*Response, error) {
-	return c.Do("DELETE", path, nil, options...)
+	return c.Do(http.MethodDelete, path, nil, options...)
 }
 
-// GET requests are used to retrieve information. The GET request cannot modify the data from confd.
+// Get requests are used to retrieve information. The GET request cannot modify the data from confd.
 //
 // Examples for GET calls:
 // GET /api/nodes
@@ -75,9 +78,11 @@ func (c Client) Delete(path string, options ...Option) (*Response, error) {
 // GET /api/objects/network/network
 // GET /api/objects/network/network/REF_NetNet100008
 func (c Client) Get(path string, options ...Option) (*Response, error) {
-	return c.Do("GET", path, nil, options...)
+	return c.Do(http.MethodGet, path, nil, options...)
 }
 
+// Put executes a PUT call
+//
 // You can use PUT and POST for creating new resources. POST will create a new
 // resource with an auto generated REF_ string whereas PUT will create resource for the
 // REF_ string. You can use PUT to update the same resource after creation. PUT and
@@ -88,9 +93,11 @@ func (c Client) Get(path string, options ...Option) (*Response, error) {
 // POST /api/objects/packetfilter/packetfilter
 // PUT /api/objects/packetfilter/packetfilter/REF_PacPacAllowAnyFTPOut
 func (c Client) Put(path string, body io.Reader, options ...Option) (*Response, error) {
-	return c.Do("PUT", path, body, options...)
+	return c.Do(http.MethodPut, path, body, options...)
 }
 
+// Post executes a POST call
+//
 // You can use PUT and POST for creating new resources. POST will create a new
 // resource with an auto generated REF_ string whereas PUT will create resource for the
 // REF_ string. You can use PUT to update the same resource after creation. PUT and
@@ -101,13 +108,15 @@ func (c Client) Put(path string, body io.Reader, options ...Option) (*Response, 
 // POST /api/objects/packetfilter/packetfilter
 // PUT /api/objects/packetfilter/packetfilter/REF_PacPacAllowAnyFTPOut
 func (c Client) Post(path string, body io.Reader, options ...Option) (*Response, error) {
-	return c.Do("POST", path, body, options...)
+	return c.Do(http.MethodPost, path, body, options...)
 }
 
+// Patch executes a PATCH call
+//
 // You can use PATCH requests to update fields on an existing object:
 // PATCH /api/objects/packetfilter/packetfilter/REF_PacPacAllowAnyFTPOut
 func (c Client) Patch(path string, body io.Reader, options ...Option) (*Response, error) {
-	return c.Do("PATCH", path, body, options...)
+	return c.Do(http.MethodPatch, path, body, options...)
 }
 
 type Version struct {

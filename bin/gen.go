@@ -177,7 +177,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	f, err := os.Create(os.Getenv("GOPATH") + "/src/github.com/esurdam/go-sophos/types/generated.go")
+	f, err := os.Create("types/generated.go")
 	if err != nil {
 		log.Fatal(err)
 	}

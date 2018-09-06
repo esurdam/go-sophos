@@ -1311,16 +1311,6 @@ func (AaaGroup) GetPath() string {
 	return "/api/objects/aaa/group/"
 }
 
-type AmazonVpcTunnel []struct {
-	Locked  string `json:"_locked"`
-	Address string `json:"address"`
-	Bgp     string `json:"bgp"`
-	Comment string `json:"comment"`
-	Ipsec   string `json:"ipsec"`
-	Name    string `json:"name"`
-	Netmask int64  `json:"netmask"`
-}
-
 type AmazonVpcConnection []struct {
 	Locked     string   `json:"_locked"`
 	Comment    string   `json:"comment"`
@@ -1338,6 +1328,16 @@ type AmazonVpcConnection []struct {
 
 type AmazonVpcGroup []interface{}
 
+type AmazonVpcTunnel []struct {
+	Locked  string `json:"_locked"`
+	Address string `json:"address"`
+	Bgp     string `json:"bgp"`
+	Comment string `json:"comment"`
+	Ipsec   string `json:"ipsec"`
+	Name    string `json:"name"`
+	Netmask int64  `json:"netmask"`
+}
+
 type AmazonVpc struct {
 	AutoPfrule  int64    `json:"auto_pfrule"`
 	Connections []string `json:"connections"`
@@ -1348,20 +1348,15 @@ type AmazonVpc struct {
 // Definitions implements the Resource interface and returns a map of AmazonVpc's RestObjects
 func (AmazonVpc) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"AmazonVpcTunnel":     AmazonVpcTunnel{},
 		"AmazonVpcConnection": AmazonVpcConnection{},
 		"AmazonVpcGroup":      AmazonVpcGroup{},
+		"AmazonVpcTunnel":     AmazonVpcTunnel{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the AmazonVpc GET path
 func (AmazonVpc) GetPath() string {
 	return "/api/nodes/amazon_vpc"
-}
-
-// GetPath implements RestObject interface and returns the AmazonVpcTunnel GET path
-func (AmazonVpcTunnel) GetPath() string {
-	return "/objects/amazon_vpc/tunnel/"
 }
 
 // GetPath implements RestObject interface and returns the AmazonVpcConnection GET path
@@ -1374,27 +1369,32 @@ func (AmazonVpcGroup) GetPath() string {
 	return "/objects/amazon_vpc/group/"
 }
 
+// GetPath implements RestObject interface and returns the AmazonVpcTunnel GET path
+func (AmazonVpcTunnel) GetPath() string {
+	return "/objects/amazon_vpc/tunnel/"
+}
+
 // ApiRoutes returns all known AmazonVpc paths
 func (AmazonVpc) ApiRoutes() []string {
 	return []string{
 		"/api/objects/amazon_vpc/connection/{ref}",
 		"/api/objects/amazon_vpc/connection/{ref}/usedby",
+		"/api/objects/amazon_vpc/tunnel/",
+		"/api/objects/amazon_vpc/tunnel/{ref}",
 		"/api/objects/amazon_vpc/connection/",
 		"/api/objects/amazon_vpc/group/",
 		"/api/objects/amazon_vpc/group/{ref}",
 		"/api/objects/amazon_vpc/group/{ref}/usedby",
-		"/api/objects/amazon_vpc/tunnel/",
-		"/api/objects/amazon_vpc/tunnel/{ref}",
 		"/api/objects/amazon_vpc/tunnel/{ref}/usedby",
-		"/api/objects/amazon_vpc/group/{ref}/usedby",
-		"/api/objects/amazon_vpc/tunnel/",
-		"/api/objects/amazon_vpc/tunnel/{ref}",
 		"/api/objects/amazon_vpc/tunnel/{ref}/usedby",
 		"/api/objects/amazon_vpc/connection/",
 		"/api/objects/amazon_vpc/group/",
 		"/api/objects/amazon_vpc/group/{ref}",
+		"/api/objects/amazon_vpc/group/{ref}/usedby",
 		"/api/objects/amazon_vpc/connection/{ref}",
 		"/api/objects/amazon_vpc/connection/{ref}/usedby",
+		"/api/objects/amazon_vpc/tunnel/",
+		"/api/objects/amazon_vpc/tunnel/{ref}",
 	}
 }
 
@@ -1441,58 +1441,43 @@ func (ApplicationControlRule) GetPath() string {
 	return "/api/objects/application_control/rule/"
 }
 
-type AuthenticationTacacs []interface{}
-
-type AuthenticationGroup []interface{}
+type AuthenticationEdirectory []interface{}
 
 type AuthenticationOtpToken []interface{}
 
-type AuthenticationEdirectory []interface{}
+type AuthenticationTacacs []interface{}
 
-type AuthenticationRadius []interface{}
+type AuthenticationLdap []interface{}
 
 type AuthenticationAdirectory []interface{}
 
-type AuthenticationLdap []interface{}
+type AuthenticationGroup []interface{}
+
+type AuthenticationRadius []interface{}
 
 // Authentication is a generated struct representing the Sophos authentication Node Leaf
 // GET /api/nodes/authentication
 type Authentication struct {
-	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
-	AuthenticationGroup      AuthenticationGroup      `json:"authentication_group"`
-	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
 	AuthenticationEdirectory AuthenticationEdirectory `json:"authentication_edirectory"`
-	AuthenticationRadius     AuthenticationRadius     `json:"authentication_radius"`
-	AuthenticationAdirectory AuthenticationAdirectory `json:"authentication_adirectory"`
+	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
+	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
 	AuthenticationLdap       AuthenticationLdap       `json:"authentication_ldap"`
+	AuthenticationAdirectory AuthenticationAdirectory `json:"authentication_adirectory"`
+	AuthenticationGroup      AuthenticationGroup      `json:"authentication_group"`
+	AuthenticationRadius     AuthenticationRadius     `json:"authentication_radius"`
 }
 
 // Definitions implements the Resource interface and returns a map of Authentication's RestObjects
 func (Authentication) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"authentication_tacacs":     AuthenticationTacacs{},
-		"authentication_group":      AuthenticationGroup{},
-		"authentication_otp_token":  AuthenticationOtpToken{},
 		"authentication_edirectory": AuthenticationEdirectory{},
-		"authentication_radius":     AuthenticationRadius{},
-		"authentication_adirectory": AuthenticationAdirectory{},
+		"authentication_otp_token":  AuthenticationOtpToken{},
+		"authentication_tacacs":     AuthenticationTacacs{},
 		"authentication_ldap":       AuthenticationLdap{},
+		"authentication_adirectory": AuthenticationAdirectory{},
+		"authentication_group":      AuthenticationGroup{},
+		"authentication_radius":     AuthenticationRadius{},
 	}
-}
-
-// GetPath implements RestObject and returns the AuthenticationTacacs GET path
-func (AuthenticationTacacs) GetPath() string {
-	return "/api/objects/authentication/tacacs/"
-}
-
-// GetPath implements RestObject and returns the AuthenticationGroup GET path
-func (AuthenticationGroup) GetPath() string {
-	return "/api/objects/authentication/group/"
-}
-
-// GetPath implements RestObject and returns the AuthenticationOtpToken GET path
-func (AuthenticationOtpToken) GetPath() string {
-	return "/api/objects/authentication/otp_token/"
 }
 
 // GetPath implements RestObject and returns the AuthenticationEdirectory GET path
@@ -1500,14 +1485,14 @@ func (AuthenticationEdirectory) GetPath() string {
 	return "/api/objects/authentication/edirectory/"
 }
 
-// GetPath implements RestObject and returns the AuthenticationRadius GET path
-func (AuthenticationRadius) GetPath() string {
-	return "/api/objects/authentication/radius/"
+// GetPath implements RestObject and returns the AuthenticationOtpToken GET path
+func (AuthenticationOtpToken) GetPath() string {
+	return "/api/objects/authentication/otp_token/"
 }
 
-// GetPath implements RestObject and returns the AuthenticationAdirectory GET path
-func (AuthenticationAdirectory) GetPath() string {
-	return "/api/objects/authentication/adirectory/"
+// GetPath implements RestObject and returns the AuthenticationTacacs GET path
+func (AuthenticationTacacs) GetPath() string {
+	return "/api/objects/authentication/tacacs/"
 }
 
 // GetPath implements RestObject and returns the AuthenticationLdap GET path
@@ -1515,15 +1500,30 @@ func (AuthenticationLdap) GetPath() string {
 	return "/api/objects/authentication/ldap/"
 }
 
-type AweDevice []interface{}
+// GetPath implements RestObject and returns the AuthenticationAdirectory GET path
+func (AuthenticationAdirectory) GetPath() string {
+	return "/api/objects/authentication/adirectory/"
+}
 
-type AweGroup []interface{}
+// GetPath implements RestObject and returns the AuthenticationGroup GET path
+func (AuthenticationGroup) GetPath() string {
+	return "/api/objects/authentication/group/"
+}
+
+// GetPath implements RestObject and returns the AuthenticationRadius GET path
+func (AuthenticationRadius) GetPath() string {
+	return "/api/objects/authentication/radius/"
+}
+
+type AweRed []interface{}
 
 type AweLocal []interface{}
 
 type AweClient []interface{}
 
-type AweRed []interface{}
+type AweDevice []interface{}
+
+type AweGroup []interface{}
 
 type Awe struct {
 	AllowedInterfaces []interface{} `json:"allowed_interfaces"`
@@ -1553,11 +1553,11 @@ type Awe struct {
 // Definitions implements the Resource interface and returns a map of Awe's RestObjects
 func (Awe) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"AweDevice": AweDevice{},
-		"AweGroup":  AweGroup{},
+		"AweRed":    AweRed{},
 		"AweLocal":  AweLocal{},
 		"AweClient": AweClient{},
-		"AweRed":    AweRed{},
+		"AweDevice": AweDevice{},
+		"AweGroup":  AweGroup{},
 	}
 }
 
@@ -1566,14 +1566,9 @@ func (Awe) GetPath() string {
 	return "/api/nodes/awe"
 }
 
-// GetPath implements RestObject interface and returns the AweDevice GET path
-func (AweDevice) GetPath() string {
-	return "/objects/awe/device/"
-}
-
-// GetPath implements RestObject interface and returns the AweGroup GET path
-func (AweGroup) GetPath() string {
-	return "/objects/awe/group/"
+// GetPath implements RestObject interface and returns the AweRed GET path
+func (AweRed) GetPath() string {
+	return "/objects/awe/red/"
 }
 
 // GetPath implements RestObject interface and returns the AweLocal GET path
@@ -1586,44 +1581,49 @@ func (AweClient) GetPath() string {
 	return "/objects/awe/client/"
 }
 
-// GetPath implements RestObject interface and returns the AweRed GET path
-func (AweRed) GetPath() string {
-	return "/objects/awe/red/"
+// GetPath implements RestObject interface and returns the AweDevice GET path
+func (AweDevice) GetPath() string {
+	return "/objects/awe/device/"
+}
+
+// GetPath implements RestObject interface and returns the AweGroup GET path
+func (AweGroup) GetPath() string {
+	return "/objects/awe/group/"
 }
 
 // ApiRoutes returns all known Awe paths
 func (Awe) ApiRoutes() []string {
 	return []string{
-		"/api/objects/awe/device/",
-		"/api/objects/awe/group/",
 		"/api/objects/awe/group/{ref}",
-		"/api/objects/awe/group/{ref}/usedby",
 		"/api/objects/awe/local/",
-		"/api/objects/awe/local/{ref}/usedby",
-		"/api/objects/awe/client/{ref}/usedby",
-		"/api/objects/awe/device/{ref}/usedby",
-		"/api/objects/awe/device/{ref}",
-		"/api/objects/awe/client/{ref}",
-		"/api/objects/awe/local/{ref}",
-		"/api/objects/awe/red/",
-		"/api/objects/awe/red/{ref}",
 		"/api/objects/awe/red/{ref}/usedby",
 		"/api/objects/awe/client/",
-		"/api/objects/awe/local/{ref}/usedby",
-		"/api/objects/awe/client/{ref}/usedby",
 		"/api/objects/awe/device/",
 		"/api/objects/awe/group/",
-		"/api/objects/awe/group/{ref}",
 		"/api/objects/awe/group/{ref}/usedby",
-		"/api/objects/awe/local/",
-		"/api/objects/awe/device/{ref}/usedby",
-		"/api/objects/awe/device/{ref}",
-		"/api/objects/awe/client/",
-		"/api/objects/awe/client/{ref}",
 		"/api/objects/awe/local/{ref}",
+		"/api/objects/awe/local/{ref}/usedby",
+		"/api/objects/awe/client/{ref}",
+		"/api/objects/awe/client/{ref}/usedby",
+		"/api/objects/awe/device/{ref}",
+		"/api/objects/awe/device/{ref}/usedby",
 		"/api/objects/awe/red/",
 		"/api/objects/awe/red/{ref}",
+		"/api/objects/awe/red/",
+		"/api/objects/awe/red/{ref}",
+		"/api/objects/awe/group/{ref}",
+		"/api/objects/awe/local/",
 		"/api/objects/awe/red/{ref}/usedby",
+		"/api/objects/awe/client/",
+		"/api/objects/awe/device/",
+		"/api/objects/awe/group/",
+		"/api/objects/awe/group/{ref}/usedby",
+		"/api/objects/awe/local/{ref}",
+		"/api/objects/awe/local/{ref}/usedby",
+		"/api/objects/awe/client/{ref}",
+		"/api/objects/awe/client/{ref}/usedby",
+		"/api/objects/awe/device/{ref}",
+		"/api/objects/awe/device/{ref}/usedby",
 	}
 }
 
@@ -1656,16 +1656,7 @@ func (AweNetworkDeviceAssociationMeshRole) GetPath() string {
 	return "/api/objects/awe_network_device_association/mesh_role/"
 }
 
-type AwsInstanceType []struct {
-	Locked             string      `json:"_locked"`
-	Comment            string      `json:"comment"`
-	CPUCores           int64       `json:"cpu_cores"`
-	Deprecated         bool        `json:"deprecated"`
-	MemoryBytes        interface{} `json:"memory_bytes"`
-	Model              string      `json:"model"`
-	Name               string      `json:"name"`
-	NetworkPerformance string      `json:"network_performance"`
-}
+type AwsGroup []interface{}
 
 type AwsRegion []struct {
 	Locked            string   `json:"_locked"`
@@ -1677,28 +1668,37 @@ type AwsRegion []struct {
 	Partition         string   `json:"partition"`
 }
 
-type AwsGroup []interface{}
+type AwsInstanceType []struct {
+	Locked             string      `json:"_locked"`
+	Comment            string      `json:"comment"`
+	CPUCores           int64       `json:"cpu_cores"`
+	Deprecated         bool        `json:"deprecated"`
+	MemoryBytes        interface{} `json:"memory_bytes"`
+	Model              string      `json:"model"`
+	Name               string      `json:"name"`
+	NetworkPerformance string      `json:"network_performance"`
+}
 
 // Aws is a generated struct representing the Sophos aws Node Leaf
 // GET /api/nodes/aws
 type Aws struct {
-	AwsInstanceType AwsInstanceType `json:"aws_instance_type"`
-	AwsRegion       AwsRegion       `json:"aws_region"`
 	AwsGroup        AwsGroup        `json:"aws_group"`
+	AwsRegion       AwsRegion       `json:"aws_region"`
+	AwsInstanceType AwsInstanceType `json:"aws_instance_type"`
 }
 
 // Definitions implements the Resource interface and returns a map of Aws's RestObjects
 func (Aws) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"aws_instance_type": AwsInstanceType{},
-		"aws_region":        AwsRegion{},
 		"aws_group":         AwsGroup{},
+		"aws_region":        AwsRegion{},
+		"aws_instance_type": AwsInstanceType{},
 	}
 }
 
-// GetPath implements RestObject and returns the AwsInstanceType GET path
-func (AwsInstanceType) GetPath() string {
-	return "/api/objects/aws/instance_type/"
+// GetPath implements RestObject and returns the AwsGroup GET path
+func (AwsGroup) GetPath() string {
+	return "/api/objects/aws/group/"
 }
 
 // GetPath implements RestObject and returns the AwsRegion GET path
@@ -1706,9 +1706,9 @@ func (AwsRegion) GetPath() string {
 	return "/api/objects/aws/region/"
 }
 
-// GetPath implements RestObject and returns the AwsGroup GET path
-func (AwsGroup) GetPath() string {
-	return "/api/objects/aws/group/"
+// GetPath implements RestObject and returns the AwsInstanceType GET path
+func (AwsInstanceType) GetPath() string {
+	return "/api/objects/aws/instance_type/"
 }
 
 type AwscliGroup []interface{}
@@ -1760,7 +1760,9 @@ func (Awscli) ApiRoutes() []string {
 	}
 }
 
-type BgpSystem []interface{}
+type BgpRouteMap []interface{}
+
+type BgpGroup []interface{}
 
 type BgpAmazonVpc []struct {
 	Locked       string   `json:"_locked"`
@@ -1775,45 +1777,33 @@ type BgpAmazonVpc []struct {
 	RemoteAsn    int64    `json:"remote_asn"`
 }
 
-type BgpRouteMap []interface{}
+type BgpNeighbor []interface{}
 
-type BgpGroup []interface{}
+type BgpSystem []interface{}
 
 type BgpFilter []interface{}
-
-type BgpNeighbor []interface{}
 
 // Bgp is a generated struct representing the Sophos bgp Node Leaf
 // GET /api/nodes/bgp
 type Bgp struct {
-	BgpSystem    BgpSystem    `json:"bgp_system"`
-	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
 	BgpRouteMap  BgpRouteMap  `json:"bgp_route_map"`
 	BgpGroup     BgpGroup     `json:"bgp_group"`
-	BgpFilter    BgpFilter    `json:"bgp_filter"`
+	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
 	BgpNeighbor  BgpNeighbor  `json:"bgp_neighbor"`
+	BgpSystem    BgpSystem    `json:"bgp_system"`
+	BgpFilter    BgpFilter    `json:"bgp_filter"`
 }
 
 // Definitions implements the Resource interface and returns a map of Bgp's RestObjects
 func (Bgp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"bgp_system":     BgpSystem{},
-		"bgp_amazon_vpc": BgpAmazonVpc{},
 		"bgp_route_map":  BgpRouteMap{},
 		"bgp_group":      BgpGroup{},
-		"bgp_filter":     BgpFilter{},
+		"bgp_amazon_vpc": BgpAmazonVpc{},
 		"bgp_neighbor":   BgpNeighbor{},
+		"bgp_system":     BgpSystem{},
+		"bgp_filter":     BgpFilter{},
 	}
-}
-
-// GetPath implements RestObject and returns the BgpSystem GET path
-func (BgpSystem) GetPath() string {
-	return "/api/objects/bgp/system/"
-}
-
-// GetPath implements RestObject and returns the BgpAmazonVpc GET path
-func (BgpAmazonVpc) GetPath() string {
-	return "/api/objects/bgp/amazon_vpc/"
 }
 
 // GetPath implements RestObject and returns the BgpRouteMap GET path
@@ -1826,14 +1816,75 @@ func (BgpGroup) GetPath() string {
 	return "/api/objects/bgp/group/"
 }
 
-// GetPath implements RestObject and returns the BgpFilter GET path
-func (BgpFilter) GetPath() string {
-	return "/api/objects/bgp/filter/"
+// GetPath implements RestObject and returns the BgpAmazonVpc GET path
+func (BgpAmazonVpc) GetPath() string {
+	return "/api/objects/bgp/amazon_vpc/"
 }
 
 // GetPath implements RestObject and returns the BgpNeighbor GET path
 func (BgpNeighbor) GetPath() string {
 	return "/api/objects/bgp/neighbor/"
+}
+
+// GetPath implements RestObject and returns the BgpSystem GET path
+func (BgpSystem) GetPath() string {
+	return "/api/objects/bgp/system/"
+}
+
+// GetPath implements RestObject and returns the BgpFilter GET path
+func (BgpFilter) GetPath() string {
+	return "/api/objects/bgp/filter/"
+}
+
+type CaHostKeyCert []struct {
+	Locked      string `json:"_locked"`
+	Ca          string `json:"ca"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+	Encrypted   bool   `json:"encrypted"`
+	Key         string `json:"key"`
+	Meta        string `json:"meta"`
+	Name        string `json:"name"`
+}
+
+type CaMetaCrl []interface{}
+
+type CaVerificationCa []interface{}
+
+type CaGroup []interface{}
+
+type CaHostCert []struct {
+	Locked      string `json:"_locked"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+	Meta        string `json:"meta"`
+	Name        string `json:"name"`
+}
+
+type CaSigningCa []struct {
+	Locked      string `json:"_locked"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+	Config      string `json:"config"`
+	Encrypted   bool   `json:"encrypted"`
+	Index       string `json:"index"`
+	Key         string `json:"key"`
+	Meta        string `json:"meta"`
+	Name        string `json:"name"`
+	Serial      string `json:"serial"`
+}
+
+type CaHttpVerificationCa []interface{}
+
+type CaRsa []struct {
+	Locked    string `json:"_locked"`
+	Comment   string `json:"comment"`
+	Key       string `json:"key"`
+	KeySize   int64  `json:"key_size"`
+	Name      string `json:"name"`
+	Pubkey    string `json:"pubkey"`
+	VpnID     string `json:"vpn_id"`
+	VpnIDType string `json:"vpn_id_type"`
 }
 
 type CaMetaX509 []struct {
@@ -1854,58 +1905,7 @@ type CaMetaX509 []struct {
 	VpnIDType          string   `json:"vpn_id_type"`
 }
 
-type CaHttpVerificationCa []interface{}
-
-type CaMetaCrl []interface{}
-
-type CaRsa []struct {
-	Locked    string `json:"_locked"`
-	Comment   string `json:"comment"`
-	Key       string `json:"key"`
-	KeySize   int64  `json:"key_size"`
-	Name      string `json:"name"`
-	Pubkey    string `json:"pubkey"`
-	VpnID     string `json:"vpn_id"`
-	VpnIDType string `json:"vpn_id_type"`
-}
-
 type CaCrl []interface{}
-
-type CaHostCert []struct {
-	Locked      string `json:"_locked"`
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
-	Meta        string `json:"meta"`
-	Name        string `json:"name"`
-}
-
-type CaHostKeyCert []struct {
-	Locked      string `json:"_locked"`
-	Ca          string `json:"ca"`
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
-	Encrypted   bool   `json:"encrypted"`
-	Key         string `json:"key"`
-	Meta        string `json:"meta"`
-	Name        string `json:"name"`
-}
-
-type CaSigningCa []struct {
-	Locked      string `json:"_locked"`
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
-	Config      string `json:"config"`
-	Encrypted   bool   `json:"encrypted"`
-	Index       string `json:"index"`
-	Key         string `json:"key"`
-	Meta        string `json:"meta"`
-	Name        string `json:"name"`
-	Serial      string `json:"serial"`
-}
-
-type CaVerificationCa []interface{}
-
-type CaGroup []interface{}
 
 type Ca struct {
 	CaGost     string `json:"ca_gost"`
@@ -1930,16 +1930,16 @@ type Ca struct {
 // Definitions implements the Resource interface and returns a map of Ca's RestObjects
 func (Ca) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"CaMetaX509":           CaMetaX509{},
-		"CaHttpVerificationCa": CaHttpVerificationCa{},
-		"CaMetaCrl":            CaMetaCrl{},
-		"CaRsa":                CaRsa{},
-		"CaCrl":                CaCrl{},
-		"CaHostCert":           CaHostCert{},
 		"CaHostKeyCert":        CaHostKeyCert{},
-		"CaSigningCa":          CaSigningCa{},
+		"CaMetaCrl":            CaMetaCrl{},
 		"CaVerificationCa":     CaVerificationCa{},
 		"CaGroup":              CaGroup{},
+		"CaHostCert":           CaHostCert{},
+		"CaSigningCa":          CaSigningCa{},
+		"CaHttpVerificationCa": CaHttpVerificationCa{},
+		"CaRsa":                CaRsa{},
+		"CaMetaX509":           CaMetaX509{},
+		"CaCrl":                CaCrl{},
 	}
 }
 
@@ -1948,44 +1948,14 @@ func (Ca) GetPath() string {
 	return "/api/nodes/ca"
 }
 
-// GetPath implements RestObject interface and returns the CaMetaX509 GET path
-func (CaMetaX509) GetPath() string {
-	return "/objects/ca/meta_x509/"
-}
-
-// GetPath implements RestObject interface and returns the CaHttpVerificationCa GET path
-func (CaHttpVerificationCa) GetPath() string {
-	return "/objects/ca/http_verification_ca/"
-}
-
-// GetPath implements RestObject interface and returns the CaMetaCrl GET path
-func (CaMetaCrl) GetPath() string {
-	return "/objects/ca/meta_crl/"
-}
-
-// GetPath implements RestObject interface and returns the CaRsa GET path
-func (CaRsa) GetPath() string {
-	return "/objects/ca/rsa/"
-}
-
-// GetPath implements RestObject interface and returns the CaCrl GET path
-func (CaCrl) GetPath() string {
-	return "/objects/ca/crl/"
-}
-
-// GetPath implements RestObject interface and returns the CaHostCert GET path
-func (CaHostCert) GetPath() string {
-	return "/objects/ca/host_cert/"
-}
-
 // GetPath implements RestObject interface and returns the CaHostKeyCert GET path
 func (CaHostKeyCert) GetPath() string {
 	return "/objects/ca/host_key_cert/"
 }
 
-// GetPath implements RestObject interface and returns the CaSigningCa GET path
-func (CaSigningCa) GetPath() string {
-	return "/objects/ca/signing_ca/"
+// GetPath implements RestObject interface and returns the CaMetaCrl GET path
+func (CaMetaCrl) GetPath() string {
+	return "/objects/ca/meta_crl/"
 }
 
 // GetPath implements RestObject interface and returns the CaVerificationCa GET path
@@ -1998,69 +1968,99 @@ func (CaGroup) GetPath() string {
 	return "/objects/ca/group/"
 }
 
+// GetPath implements RestObject interface and returns the CaHostCert GET path
+func (CaHostCert) GetPath() string {
+	return "/objects/ca/host_cert/"
+}
+
+// GetPath implements RestObject interface and returns the CaSigningCa GET path
+func (CaSigningCa) GetPath() string {
+	return "/objects/ca/signing_ca/"
+}
+
+// GetPath implements RestObject interface and returns the CaHttpVerificationCa GET path
+func (CaHttpVerificationCa) GetPath() string {
+	return "/objects/ca/http_verification_ca/"
+}
+
+// GetPath implements RestObject interface and returns the CaRsa GET path
+func (CaRsa) GetPath() string {
+	return "/objects/ca/rsa/"
+}
+
+// GetPath implements RestObject interface and returns the CaMetaX509 GET path
+func (CaMetaX509) GetPath() string {
+	return "/objects/ca/meta_x509/"
+}
+
+// GetPath implements RestObject interface and returns the CaCrl GET path
+func (CaCrl) GetPath() string {
+	return "/objects/ca/crl/"
+}
+
 // ApiRoutes returns all known Ca paths
 func (Ca) ApiRoutes() []string {
 	return []string{
-		"/api/objects/ca/host_key_cert/{ref}/usedby",
-		"/api/objects/ca/verification_ca/{ref}",
+		"/api/objects/ca/http_verification_ca/{ref}",
+		"/api/objects/ca/signing_ca/{ref}",
+		"/api/objects/ca/http_verification_ca/",
+		"/api/objects/ca/rsa/",
 		"/api/objects/ca/rsa/{ref}",
+		"/api/objects/ca/group/{ref}",
+		"/api/objects/ca/meta_x509/",
+		"/api/objects/ca/crl/{ref}/usedby",
+		"/api/objects/ca/crl/",
 		"/api/objects/ca/verification_ca/{ref}/usedby",
-		"/api/objects/ca/host_cert/{ref}",
-		"/api/objects/ca/meta_crl/{ref}",
-		"/api/objects/ca/rsa/{ref}/usedby",
-		"/api/objects/ca/group/",
-		"/api/objects/ca/host_cert/{ref}/usedby",
-		"/api/objects/ca/meta_x509/{ref}/usedby",
 		"/api/objects/ca/host_key_cert/{ref}",
-		"/api/objects/ca/group/{ref}",
-		"/api/objects/ca/group/{ref}/usedby",
-		"/api/objects/ca/meta_x509/{ref}",
-		"/api/objects/ca/meta_crl/{ref}/usedby",
-		"/api/objects/ca/meta_x509/",
-		"/api/objects/ca/signing_ca/{ref}/usedby",
-		"/api/objects/ca/http_verification_ca/",
-		"/api/objects/ca/http_verification_ca/{ref}",
-		"/api/objects/ca/crl/{ref}/usedby",
-		"/api/objects/ca/host_cert/",
-		"/api/objects/ca/host_key_cert/",
-		"/api/objects/ca/http_verification_ca/{ref}/usedby",
-		"/api/objects/ca/meta_crl/",
-		"/api/objects/ca/rsa/",
-		"/api/objects/ca/crl/",
-		"/api/objects/ca/crl/{ref}",
-		"/api/objects/ca/verification_ca/",
-		"/api/objects/ca/signing_ca/",
-		"/api/objects/ca/signing_ca/{ref}",
-		"/api/objects/ca/meta_crl/{ref}/usedby",
-		"/api/objects/ca/meta_x509/",
-		"/api/objects/ca/meta_x509/{ref}",
-		"/api/objects/ca/http_verification_ca/",
-		"/api/objects/ca/http_verification_ca/{ref}",
-		"/api/objects/ca/signing_ca/{ref}/usedby",
-		"/api/objects/ca/http_verification_ca/{ref}/usedby",
-		"/api/objects/ca/meta_crl/",
-		"/api/objects/ca/rsa/",
-		"/api/objects/ca/crl/",
-		"/api/objects/ca/crl/{ref}",
-		"/api/objects/ca/crl/{ref}/usedby",
-		"/api/objects/ca/host_cert/",
-		"/api/objects/ca/host_key_cert/",
-		"/api/objects/ca/signing_ca/",
-		"/api/objects/ca/signing_ca/{ref}",
-		"/api/objects/ca/verification_ca/",
 		"/api/objects/ca/host_key_cert/{ref}/usedby",
-		"/api/objects/ca/verification_ca/{ref}",
-		"/api/objects/ca/host_cert/{ref}",
-		"/api/objects/ca/meta_crl/{ref}",
-		"/api/objects/ca/rsa/{ref}",
-		"/api/objects/ca/verification_ca/{ref}/usedby",
-		"/api/objects/ca/group/",
-		"/api/objects/ca/host_cert/{ref}/usedby",
+		"/api/objects/ca/http_verification_ca/{ref}/usedby",
 		"/api/objects/ca/rsa/{ref}/usedby",
+		"/api/objects/ca/verification_ca/{ref}",
+		"/api/objects/ca/group/{ref}/usedby",
+		"/api/objects/ca/host_cert/{ref}/usedby",
+		"/api/objects/ca/host_key_cert/",
+		"/api/objects/ca/meta_crl/",
+		"/api/objects/ca/meta_crl/{ref}",
+		"/api/objects/ca/meta_crl/{ref}/usedby",
 		"/api/objects/ca/meta_x509/{ref}/usedby",
-		"/api/objects/ca/group/{ref}",
+		"/api/objects/ca/signing_ca/{ref}/usedby",
+		"/api/objects/ca/host_cert/{ref}",
+		"/api/objects/ca/verification_ca/",
+		"/api/objects/ca/group/",
+		"/api/objects/ca/host_cert/",
+		"/api/objects/ca/meta_x509/{ref}",
+		"/api/objects/ca/signing_ca/",
+		"/api/objects/ca/crl/{ref}",
 		"/api/objects/ca/group/{ref}/usedby",
 		"/api/objects/ca/host_key_cert/{ref}",
+		"/api/objects/ca/host_key_cert/{ref}/usedby",
+		"/api/objects/ca/http_verification_ca/{ref}/usedby",
+		"/api/objects/ca/rsa/{ref}/usedby",
+		"/api/objects/ca/verification_ca/{ref}",
+		"/api/objects/ca/host_cert/{ref}",
+		"/api/objects/ca/host_cert/{ref}/usedby",
+		"/api/objects/ca/host_key_cert/",
+		"/api/objects/ca/meta_crl/",
+		"/api/objects/ca/meta_crl/{ref}",
+		"/api/objects/ca/meta_crl/{ref}/usedby",
+		"/api/objects/ca/meta_x509/{ref}/usedby",
+		"/api/objects/ca/signing_ca/{ref}/usedby",
+		"/api/objects/ca/verification_ca/",
+		"/api/objects/ca/crl/{ref}",
+		"/api/objects/ca/group/",
+		"/api/objects/ca/host_cert/",
+		"/api/objects/ca/meta_x509/{ref}",
+		"/api/objects/ca/signing_ca/",
+		"/api/objects/ca/http_verification_ca/",
+		"/api/objects/ca/http_verification_ca/{ref}",
+		"/api/objects/ca/signing_ca/{ref}",
+		"/api/objects/ca/group/{ref}",
+		"/api/objects/ca/rsa/",
+		"/api/objects/ca/rsa/{ref}",
+		"/api/objects/ca/meta_x509/",
+		"/api/objects/ca/crl/",
+		"/api/objects/ca/crl/{ref}/usedby",
+		"/api/objects/ca/verification_ca/{ref}/usedby",
 	}
 }
 
@@ -2113,6 +2113,8 @@ func (ClientlessVpnConnection) GetPath() string {
 	return "/api/objects/clientless_vpn/connection/"
 }
 
+type ConditionGroup []interface{}
+
 type ConditionObjref []struct {
 	Locked   string `json:"_locked"`
 	Attr     string `json:"attr"`
@@ -2123,31 +2125,29 @@ type ConditionObjref []struct {
 	Value    string `json:"value"`
 }
 
-type ConditionGroup []interface{}
-
 // Condition is a generated struct representing the Sophos condition Node Leaf
 // GET /api/nodes/condition
 type Condition struct {
-	ConditionObjref ConditionObjref `json:"condition_objref"`
 	ConditionGroup  ConditionGroup  `json:"condition_group"`
+	ConditionObjref ConditionObjref `json:"condition_objref"`
 }
 
 // Definitions implements the Resource interface and returns a map of Condition's RestObjects
 func (Condition) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"condition_objref": ConditionObjref{},
 		"condition_group":  ConditionGroup{},
+		"condition_objref": ConditionObjref{},
 	}
-}
-
-// GetPath implements RestObject and returns the ConditionObjref GET path
-func (ConditionObjref) GetPath() string {
-	return "/api/objects/condition/objref/"
 }
 
 // GetPath implements RestObject and returns the ConditionGroup GET path
 func (ConditionGroup) GetPath() string {
 	return "/api/objects/condition/group/"
+}
+
+// GetPath implements RestObject and returns the ConditionObjref GET path
+func (ConditionObjref) GetPath() string {
+	return "/api/objects/condition/objref/"
 }
 
 type CronAt []interface{}
@@ -2179,11 +2179,30 @@ func (CronGroup) GetPath() string {
 	return "/api/objects/cron/group/"
 }
 
+type DhcpOption6 []interface{}
+
 type DhcpStateless []interface{}
 
 type DhcpGroup []interface{}
 
-type DhcpOption6 []interface{}
+type DhcpOption []struct {
+	Locked   string        `json:"_locked"`
+	Address  string        `json:"address"`
+	Code     int64         `json:"code"`
+	Comment  string        `json:"comment"`
+	DhcpName string        `json:"dhcp_name"`
+	Host     []interface{} `json:"host"`
+	Integer  int64         `json:"integer"`
+	Mac      string        `json:"mac"`
+	Name     string        `json:"name"`
+	Scope    string        `json:"scope"`
+	Server   []interface{} `json:"server"`
+	Status   bool          `json:"status"`
+	String   string        `json:"string"`
+	Text     string        `json:"text"`
+	Type     string        `json:"type"`
+	Vendor   string        `json:"vendor"`
+}
 
 type DhcpServer []struct {
 	Locked          string   `json:"_locked"`
@@ -2209,25 +2228,6 @@ type DhcpServer []struct {
 	WinsNodeType    string   `json:"wins_node_type"`
 }
 
-type DhcpOption []struct {
-	Locked   string        `json:"_locked"`
-	Address  string        `json:"address"`
-	Code     int64         `json:"code"`
-	Comment  string        `json:"comment"`
-	DhcpName string        `json:"dhcp_name"`
-	Host     []interface{} `json:"host"`
-	Integer  int64         `json:"integer"`
-	Mac      string        `json:"mac"`
-	Name     string        `json:"name"`
-	Scope    string        `json:"scope"`
-	Server   []interface{} `json:"server"`
-	Status   bool          `json:"status"`
-	String   string        `json:"string"`
-	Text     string        `json:"text"`
-	Type     string        `json:"type"`
-	Vendor   string        `json:"vendor"`
-}
-
 type DhcpServer6 []interface{}
 
 type Dhcp struct {
@@ -2251,11 +2251,11 @@ type Dhcp struct {
 // Definitions implements the Resource interface and returns a map of Dhcp's RestObjects
 func (Dhcp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"DhcpOption6":   DhcpOption6{},
 		"DhcpStateless": DhcpStateless{},
 		"DhcpGroup":     DhcpGroup{},
-		"DhcpOption6":   DhcpOption6{},
-		"DhcpServer":    DhcpServer{},
 		"DhcpOption":    DhcpOption{},
+		"DhcpServer":    DhcpServer{},
 		"DhcpServer6":   DhcpServer6{},
 	}
 }
@@ -2263,6 +2263,11 @@ func (Dhcp) Definitions() map[string]RestObject {
 // GetPath implements RestObject interface and returns the Dhcp GET path
 func (Dhcp) GetPath() string {
 	return "/api/nodes/dhcp"
+}
+
+// GetPath implements RestObject interface and returns the DhcpOption6 GET path
+func (DhcpOption6) GetPath() string {
+	return "/objects/dhcp/option6/"
 }
 
 // GetPath implements RestObject interface and returns the DhcpStateless GET path
@@ -2275,19 +2280,14 @@ func (DhcpGroup) GetPath() string {
 	return "/objects/dhcp/group/"
 }
 
-// GetPath implements RestObject interface and returns the DhcpOption6 GET path
-func (DhcpOption6) GetPath() string {
-	return "/objects/dhcp/option6/"
+// GetPath implements RestObject interface and returns the DhcpOption GET path
+func (DhcpOption) GetPath() string {
+	return "/objects/dhcp/option/"
 }
 
 // GetPath implements RestObject interface and returns the DhcpServer GET path
 func (DhcpServer) GetPath() string {
 	return "/objects/dhcp/server/"
-}
-
-// GetPath implements RestObject interface and returns the DhcpOption GET path
-func (DhcpOption) GetPath() string {
-	return "/objects/dhcp/option/"
 }
 
 // GetPath implements RestObject interface and returns the DhcpServer6 GET path
@@ -2298,46 +2298,44 @@ func (DhcpServer6) GetPath() string {
 // ApiRoutes returns all known Dhcp paths
 func (Dhcp) ApiRoutes() []string {
 	return []string{
-		"/api/objects/dhcp/group/{ref}/usedby",
-		"/api/objects/dhcp/option/",
-		"/api/objects/dhcp/server/{ref}",
-		"/api/objects/dhcp/server6/",
+		"/api/objects/dhcp/group/",
 		"/api/objects/dhcp/group/{ref}",
-		"/api/objects/dhcp/option6/{ref}",
-		"/api/objects/dhcp/option6/{ref}/usedby",
+		"/api/objects/dhcp/option/",
+		"/api/objects/dhcp/option6/",
+		"/api/objects/dhcp/server/{ref}",
 		"/api/objects/dhcp/server6/{ref}/usedby",
 		"/api/objects/dhcp/stateless/",
-		"/api/objects/dhcp/stateless/{ref}/usedby",
-		"/api/objects/dhcp/group/",
-		"/api/objects/dhcp/option6/",
-		"/api/objects/dhcp/server/",
-		"/api/objects/dhcp/server6/{ref}",
-		"/api/objects/dhcp/option/{ref}",
-		"/api/objects/dhcp/option/{ref}/usedby",
-		"/api/objects/dhcp/server/{ref}/usedby",
 		"/api/objects/dhcp/stateless/{ref}",
-		"/api/objects/dhcp/group/{ref}",
 		"/api/objects/dhcp/option6/{ref}",
+		"/api/objects/dhcp/server6/{ref}",
+		"/api/objects/dhcp/option/{ref}/usedby",
 		"/api/objects/dhcp/option6/{ref}/usedby",
+		"/api/objects/dhcp/server/",
+		"/api/objects/dhcp/group/{ref}/usedby",
+		"/api/objects/dhcp/option/{ref}",
+		"/api/objects/dhcp/server/{ref}/usedby",
+		"/api/objects/dhcp/server6/",
+		"/api/objects/dhcp/stateless/{ref}/usedby",
+		"/api/objects/dhcp/option6/",
+		"/api/objects/dhcp/server/{ref}",
 		"/api/objects/dhcp/server6/{ref}/usedby",
 		"/api/objects/dhcp/stateless/",
-		"/api/objects/dhcp/stateless/{ref}/usedby",
-		"/api/objects/dhcp/group/",
-		"/api/objects/dhcp/option6/",
-		"/api/objects/dhcp/server/",
-		"/api/objects/dhcp/server6/{ref}",
-		"/api/objects/dhcp/option/{ref}",
-		"/api/objects/dhcp/option/{ref}/usedby",
-		"/api/objects/dhcp/server/{ref}/usedby",
 		"/api/objects/dhcp/stateless/{ref}",
-		"/api/objects/dhcp/group/{ref}/usedby",
+		"/api/objects/dhcp/group/",
+		"/api/objects/dhcp/group/{ref}",
 		"/api/objects/dhcp/option/",
-		"/api/objects/dhcp/server/{ref}",
+		"/api/objects/dhcp/option6/{ref}",
+		"/api/objects/dhcp/server6/{ref}",
+		"/api/objects/dhcp/option/{ref}/usedby",
+		"/api/objects/dhcp/option6/{ref}/usedby",
+		"/api/objects/dhcp/server/",
 		"/api/objects/dhcp/server6/",
+		"/api/objects/dhcp/stateless/{ref}/usedby",
+		"/api/objects/dhcp/group/{ref}/usedby",
+		"/api/objects/dhcp/option/{ref}",
+		"/api/objects/dhcp/server/{ref}/usedby",
 	}
 }
-
-type DnsGroup []interface{}
 
 type DnsRoute []struct {
 	Locked  string   `json:"_locked"`
@@ -2349,6 +2347,8 @@ type DnsRoute []struct {
 }
 
 type DnsAxfr []interface{}
+
+type DnsGroup []interface{}
 
 type Dns struct {
 	AllowedNetworks []string      `json:"allowed_networks"`
@@ -2365,20 +2365,15 @@ type Dns struct {
 // Definitions implements the Resource interface and returns a map of Dns's RestObjects
 func (Dns) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"DnsGroup": DnsGroup{},
 		"DnsRoute": DnsRoute{},
 		"DnsAxfr":  DnsAxfr{},
+		"DnsGroup": DnsGroup{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the Dns GET path
 func (Dns) GetPath() string {
 	return "/api/nodes/dns"
-}
-
-// GetPath implements RestObject interface and returns the DnsGroup GET path
-func (DnsGroup) GetPath() string {
-	return "/objects/dns/group/"
 }
 
 // GetPath implements RestObject interface and returns the DnsRoute GET path
@@ -2391,33 +2386,38 @@ func (DnsAxfr) GetPath() string {
 	return "/objects/dns/axfr/"
 }
 
+// GetPath implements RestObject interface and returns the DnsGroup GET path
+func (DnsGroup) GetPath() string {
+	return "/objects/dns/group/"
+}
+
 // ApiRoutes returns all known Dns paths
 func (Dns) ApiRoutes() []string {
 	return []string{
 		"/api/objects/dns/route/",
+		"/api/objects/dns/route/{ref}",
 		"/api/objects/dns/route/{ref}/usedby",
+		"/api/objects/dns/group/{ref}",
+		"/api/objects/dns/axfr/{ref}",
+		"/api/objects/dns/axfr/{ref}/usedby",
+		"/api/objects/dns/group/",
+		"/api/objects/dns/group/{ref}/usedby",
 		"/api/objects/dns/axfr/",
-		"/api/objects/dns/group/",
 		"/api/objects/dns/group/{ref}",
-		"/api/objects/dns/group/{ref}/usedby",
-		"/api/objects/dns/axfr/{ref}",
-		"/api/objects/dns/axfr/{ref}/usedby",
-		"/api/objects/dns/route/{ref}",
-		"/api/objects/dns/axfr/{ref}/usedby",
-		"/api/objects/dns/route/{ref}",
-		"/api/objects/dns/axfr/{ref}",
-		"/api/objects/dns/group/",
-		"/api/objects/dns/group/{ref}",
-		"/api/objects/dns/group/{ref}/usedby",
 		"/api/objects/dns/route/",
+		"/api/objects/dns/route/{ref}",
 		"/api/objects/dns/route/{ref}/usedby",
 		"/api/objects/dns/axfr/",
+		"/api/objects/dns/axfr/{ref}",
+		"/api/objects/dns/axfr/{ref}/usedby",
+		"/api/objects/dns/group/",
+		"/api/objects/dns/group/{ref}/usedby",
 	}
 }
 
-type DyndnsGroup []interface{}
-
 type DyndnsDyndns []interface{}
+
+type DyndnsGroup []interface{}
 
 type Dyndns struct {
 	Rules []interface{} `json:"rules"`
@@ -2426,8 +2426,8 @@ type Dyndns struct {
 // Definitions implements the Resource interface and returns a map of Dyndns's RestObjects
 func (Dyndns) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"DyndnsGroup":  DyndnsGroup{},
 		"DyndnsDyndns": DyndnsDyndns{},
+		"DyndnsGroup":  DyndnsGroup{},
 	}
 }
 
@@ -2436,41 +2436,41 @@ func (Dyndns) GetPath() string {
 	return "/api/nodes/dyndns"
 }
 
-// GetPath implements RestObject interface and returns the DyndnsGroup GET path
-func (DyndnsGroup) GetPath() string {
-	return "/objects/dyndns/group/"
-}
-
 // GetPath implements RestObject interface and returns the DyndnsDyndns GET path
 func (DyndnsDyndns) GetPath() string {
 	return "/objects/dyndns/dyndns/"
 }
 
+// GetPath implements RestObject interface and returns the DyndnsGroup GET path
+func (DyndnsGroup) GetPath() string {
+	return "/objects/dyndns/group/"
+}
+
 // ApiRoutes returns all known Dyndns paths
 func (Dyndns) ApiRoutes() []string {
 	return []string{
-		"/api/objects/dyndns/dyndns/{ref}",
-		"/api/objects/dyndns/dyndns/{ref}/usedby",
-		"/api/objects/dyndns/group/",
-		"/api/objects/dyndns/group/{ref}",
-		"/api/objects/dyndns/group/{ref}/usedby",
-		"/api/objects/dyndns/dyndns/",
-		"/api/objects/dyndns/group/",
 		"/api/objects/dyndns/group/{ref}",
 		"/api/objects/dyndns/group/{ref}/usedby",
 		"/api/objects/dyndns/dyndns/",
 		"/api/objects/dyndns/dyndns/{ref}",
 		"/api/objects/dyndns/dyndns/{ref}/usedby",
+		"/api/objects/dyndns/group/",
+		"/api/objects/dyndns/dyndns/",
+		"/api/objects/dyndns/dyndns/{ref}",
+		"/api/objects/dyndns/dyndns/{ref}/usedby",
+		"/api/objects/dyndns/group/",
+		"/api/objects/dyndns/group/{ref}",
+		"/api/objects/dyndns/group/{ref}/usedby",
 	}
 }
+
+type EmailpkiOpenpgp []interface{}
 
 type EmailpkiSmime []interface{}
 
 type EmailpkiUser []interface{}
 
 type EmailpkiGroup []interface{}
-
-type EmailpkiOpenpgp []interface{}
 
 type Emailpki struct {
 	Authority struct {
@@ -2511,16 +2511,21 @@ type Emailpki struct {
 // Definitions implements the Resource interface and returns a map of Emailpki's RestObjects
 func (Emailpki) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"EmailpkiOpenpgp": EmailpkiOpenpgp{},
 		"EmailpkiSmime":   EmailpkiSmime{},
 		"EmailpkiUser":    EmailpkiUser{},
 		"EmailpkiGroup":   EmailpkiGroup{},
-		"EmailpkiOpenpgp": EmailpkiOpenpgp{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the Emailpki GET path
 func (Emailpki) GetPath() string {
 	return "/api/nodes/emailpki"
+}
+
+// GetPath implements RestObject interface and returns the EmailpkiOpenpgp GET path
+func (EmailpkiOpenpgp) GetPath() string {
+	return "/objects/emailpki/openpgp/"
 }
 
 // GetPath implements RestObject interface and returns the EmailpkiSmime GET path
@@ -2538,40 +2543,37 @@ func (EmailpkiGroup) GetPath() string {
 	return "/objects/emailpki/group/"
 }
 
-// GetPath implements RestObject interface and returns the EmailpkiOpenpgp GET path
-func (EmailpkiOpenpgp) GetPath() string {
-	return "/objects/emailpki/openpgp/"
-}
-
 // ApiRoutes returns all known Emailpki paths
 func (Emailpki) ApiRoutes() []string {
 	return []string{
-		"/api/objects/emailpki/group/",
 		"/api/objects/emailpki/group/{ref}",
-		"/api/objects/emailpki/openpgp/",
-		"/api/objects/emailpki/user/",
-		"/api/objects/emailpki/group/{ref}/usedby",
-		"/api/objects/emailpki/openpgp/{ref}",
-		"/api/objects/emailpki/openpgp/{ref}/usedby",
-		"/api/objects/emailpki/smime/",
 		"/api/objects/emailpki/smime/{ref}",
 		"/api/objects/emailpki/smime/{ref}/usedby",
 		"/api/objects/emailpki/user/{ref}",
-		"/api/objects/emailpki/user/{ref}/usedby",
-		"/api/objects/emailpki/smime/",
-		"/api/objects/emailpki/smime/{ref}",
-		"/api/objects/emailpki/smime/{ref}/usedby",
-		"/api/objects/emailpki/user/{ref}",
-		"/api/objects/emailpki/user/{ref}/usedby",
+		"/api/objects/emailpki/group/",
 		"/api/objects/emailpki/group/{ref}/usedby",
+		"/api/objects/emailpki/openpgp/",
 		"/api/objects/emailpki/openpgp/{ref}",
 		"/api/objects/emailpki/openpgp/{ref}/usedby",
+		"/api/objects/emailpki/smime/",
 		"/api/objects/emailpki/user/",
-		"/api/objects/emailpki/group/",
+		"/api/objects/emailpki/user/{ref}/usedby",
+		"/api/objects/emailpki/smime/{ref}",
+		"/api/objects/emailpki/smime/{ref}/usedby",
 		"/api/objects/emailpki/group/{ref}",
+		"/api/objects/emailpki/group/{ref}/usedby",
 		"/api/objects/emailpki/openpgp/",
+		"/api/objects/emailpki/openpgp/{ref}",
+		"/api/objects/emailpki/openpgp/{ref}/usedby",
+		"/api/objects/emailpki/smime/",
+		"/api/objects/emailpki/user/",
+		"/api/objects/emailpki/user/{ref}",
+		"/api/objects/emailpki/group/",
+		"/api/objects/emailpki/user/{ref}/usedby",
 	}
 }
+
+type EppAvException []interface{}
 
 type EppAvPolicy []struct {
 	Locked                    string `json:"_locked"`
@@ -2602,27 +2604,9 @@ type EppAvPolicy []struct {
 	WebProtection             bool   `json:"web_protection"`
 }
 
-type EppGroup []interface{}
-
 type EppDcException []interface{}
 
-type EppDcPolicy []struct {
-	Locked           string `json:"_locked"`
-	Bluetooth        string `json:"bluetooth"`
-	Comment          string `json:"comment"`
-	EncryptedStorage string `json:"encrypted_storage"`
-	FloppyDrive      string `json:"floppy_drive"`
-	Infrared         string `json:"infrared"`
-	Modem            string `json:"modem"`
-	Name             string `json:"name"`
-	OpticalDrive     string `json:"optical_drive"`
-	RemovableStorage string `json:"removable_storage"`
-	Wireless         string `json:"wireless"`
-}
-
 type EppEndpoint []interface{}
-
-type EppAvException []interface{}
 
 type EppEndpointsGroup []struct {
 	Locked           string        `json:"_locked"`
@@ -2640,7 +2624,23 @@ type EppEndpointsGroup []struct {
 	WebControl       bool          `json:"web_control"`
 }
 
+type EppGroup []interface{}
+
 type EppDevice []interface{}
+
+type EppDcPolicy []struct {
+	Locked           string `json:"_locked"`
+	Bluetooth        string `json:"bluetooth"`
+	Comment          string `json:"comment"`
+	EncryptedStorage string `json:"encrypted_storage"`
+	FloppyDrive      string `json:"floppy_drive"`
+	Infrared         string `json:"infrared"`
+	Modem            string `json:"modem"`
+	Name             string `json:"name"`
+	OpticalDrive     string `json:"optical_drive"`
+	RemovableStorage string `json:"removable_storage"`
+	Wireless         string `json:"wireless"`
+}
 
 type Epp struct {
 	AllowedNetworks       []string      `json:"allowed_networks"`
@@ -2685,14 +2685,14 @@ type Epp struct {
 // Definitions implements the Resource interface and returns a map of Epp's RestObjects
 func (Epp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"EppAvPolicy":       EppAvPolicy{},
-		"EppGroup":          EppGroup{},
-		"EppDcException":    EppDcException{},
-		"EppDcPolicy":       EppDcPolicy{},
-		"EppEndpoint":       EppEndpoint{},
 		"EppAvException":    EppAvException{},
+		"EppAvPolicy":       EppAvPolicy{},
+		"EppDcException":    EppDcException{},
+		"EppEndpoint":       EppEndpoint{},
 		"EppEndpointsGroup": EppEndpointsGroup{},
+		"EppGroup":          EppGroup{},
 		"EppDevice":         EppDevice{},
+		"EppDcPolicy":       EppDcPolicy{},
 	}
 }
 
@@ -2701,14 +2701,14 @@ func (Epp) GetPath() string {
 	return "/api/nodes/epp"
 }
 
+// GetPath implements RestObject interface and returns the EppAvException GET path
+func (EppAvException) GetPath() string {
+	return "/objects/epp/av_exception/"
+}
+
 // GetPath implements RestObject interface and returns the EppAvPolicy GET path
 func (EppAvPolicy) GetPath() string {
 	return "/objects/epp/av_policy/"
-}
-
-// GetPath implements RestObject interface and returns the EppGroup GET path
-func (EppGroup) GetPath() string {
-	return "/objects/epp/group/"
 }
 
 // GetPath implements RestObject interface and returns the EppDcException GET path
@@ -2716,19 +2716,9 @@ func (EppDcException) GetPath() string {
 	return "/objects/epp/dc_exception/"
 }
 
-// GetPath implements RestObject interface and returns the EppDcPolicy GET path
-func (EppDcPolicy) GetPath() string {
-	return "/objects/epp/dc_policy/"
-}
-
 // GetPath implements RestObject interface and returns the EppEndpoint GET path
 func (EppEndpoint) GetPath() string {
 	return "/objects/epp/endpoint/"
-}
-
-// GetPath implements RestObject interface and returns the EppAvException GET path
-func (EppAvException) GetPath() string {
-	return "/objects/epp/av_exception/"
 }
 
 // GetPath implements RestObject interface and returns the EppEndpointsGroup GET path
@@ -2736,68 +2726,78 @@ func (EppEndpointsGroup) GetPath() string {
 	return "/objects/epp/endpoints_group/"
 }
 
+// GetPath implements RestObject interface and returns the EppGroup GET path
+func (EppGroup) GetPath() string {
+	return "/objects/epp/group/"
+}
+
 // GetPath implements RestObject interface and returns the EppDevice GET path
 func (EppDevice) GetPath() string {
 	return "/objects/epp/device/"
 }
 
+// GetPath implements RestObject interface and returns the EppDcPolicy GET path
+func (EppDcPolicy) GetPath() string {
+	return "/objects/epp/dc_policy/"
+}
+
 // ApiRoutes returns all known Epp paths
 func (Epp) ApiRoutes() []string {
 	return []string{
-		"/api/objects/epp/dc_policy/",
-		"/api/objects/epp/dc_policy/{ref}",
-		"/api/objects/epp/endpoint/",
-		"/api/objects/epp/endpoint/{ref}/usedby",
-		"/api/objects/epp/group/",
-		"/api/objects/epp/group/{ref}/usedby",
-		"/api/objects/epp/dc_exception/",
-		"/api/objects/epp/av_exception/{ref}",
-		"/api/objects/epp/av_policy/{ref}/usedby",
 		"/api/objects/epp/dc_policy/{ref}/usedby",
-		"/api/objects/epp/endpoints_group/{ref}",
-		"/api/objects/epp/av_exception/",
-		"/api/objects/epp/av_policy/{ref}",
-		"/api/objects/epp/dc_exception/{ref}/usedby",
 		"/api/objects/epp/device/",
-		"/api/objects/epp/device/{ref}",
-		"/api/objects/epp/device/{ref}/usedby",
+		"/api/objects/epp/endpoint/",
 		"/api/objects/epp/endpoints_group/",
-		"/api/objects/epp/group/{ref}",
+		"/api/objects/epp/group/",
+		"/api/objects/epp/av_exception/{ref}",
 		"/api/objects/epp/av_exception/{ref}/usedby",
 		"/api/objects/epp/dc_exception/{ref}",
-		"/api/objects/epp/endpoint/{ref}",
-		"/api/objects/epp/endpoints_group/{ref}/usedby",
-		"/api/objects/epp/av_policy/",
-		"/api/objects/epp/av_policy/",
-		"/api/objects/epp/dc_exception/{ref}",
-		"/api/objects/epp/endpoint/{ref}",
-		"/api/objects/epp/endpoints_group/{ref}/usedby",
-		"/api/objects/epp/group/",
-		"/api/objects/epp/group/{ref}/usedby",
-		"/api/objects/epp/dc_exception/",
-		"/api/objects/epp/dc_policy/",
-		"/api/objects/epp/dc_policy/{ref}",
-		"/api/objects/epp/endpoint/",
-		"/api/objects/epp/endpoint/{ref}/usedby",
-		"/api/objects/epp/av_exception/",
-		"/api/objects/epp/av_exception/{ref}",
-		"/api/objects/epp/av_policy/{ref}/usedby",
-		"/api/objects/epp/dc_policy/{ref}/usedby",
-		"/api/objects/epp/endpoints_group/{ref}",
-		"/api/objects/epp/device/{ref}/usedby",
-		"/api/objects/epp/endpoints_group/",
 		"/api/objects/epp/group/{ref}",
-		"/api/objects/epp/av_exception/{ref}/usedby",
+		"/api/objects/epp/endpoints_group/{ref}/usedby",
 		"/api/objects/epp/av_policy/{ref}",
-		"/api/objects/epp/dc_exception/{ref}/usedby",
-		"/api/objects/epp/device/",
+		"/api/objects/epp/dc_policy/",
+		"/api/objects/epp/device/{ref}/usedby",
 		"/api/objects/epp/device/{ref}",
+		"/api/objects/epp/endpoint/{ref}",
+		"/api/objects/epp/endpoint/{ref}/usedby",
+		"/api/objects/epp/group/{ref}/usedby",
+		"/api/objects/epp/av_exception/",
+		"/api/objects/epp/av_policy/",
+		"/api/objects/epp/dc_policy/{ref}",
+		"/api/objects/epp/endpoints_group/{ref}",
+		"/api/objects/epp/av_policy/{ref}/usedby",
+		"/api/objects/epp/dc_exception/",
+		"/api/objects/epp/dc_exception/{ref}/usedby",
+		"/api/objects/epp/endpoint/{ref}/usedby",
+		"/api/objects/epp/group/{ref}/usedby",
+		"/api/objects/epp/av_exception/",
+		"/api/objects/epp/av_policy/",
+		"/api/objects/epp/dc_policy/{ref}",
+		"/api/objects/epp/device/{ref}",
+		"/api/objects/epp/endpoint/{ref}",
+		"/api/objects/epp/av_policy/{ref}/usedby",
+		"/api/objects/epp/dc_exception/",
+		"/api/objects/epp/dc_exception/{ref}/usedby",
+		"/api/objects/epp/endpoints_group/{ref}",
+		"/api/objects/epp/endpoint/",
+		"/api/objects/epp/endpoints_group/",
+		"/api/objects/epp/group/",
+		"/api/objects/epp/av_exception/{ref}",
+		"/api/objects/epp/av_exception/{ref}/usedby",
+		"/api/objects/epp/dc_exception/{ref}",
+		"/api/objects/epp/dc_policy/{ref}/usedby",
+		"/api/objects/epp/device/",
+		"/api/objects/epp/group/{ref}",
+		"/api/objects/epp/av_policy/{ref}",
+		"/api/objects/epp/dc_policy/",
+		"/api/objects/epp/device/{ref}/usedby",
+		"/api/objects/epp/endpoints_group/{ref}/usedby",
 	}
 }
 
-type FtpException []interface{}
-
 type FtpGroup []interface{}
+
+type FtpException []interface{}
 
 type Ftp struct {
 	AllowedClients        []interface{} `json:"allowed_clients"`
@@ -2818,8 +2818,8 @@ type Ftp struct {
 // Definitions implements the Resource interface and returns a map of Ftp's RestObjects
 func (Ftp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"FtpException": FtpException{},
 		"FtpGroup":     FtpGroup{},
+		"FtpException": FtpException{},
 	}
 }
 
@@ -2828,14 +2828,14 @@ func (Ftp) GetPath() string {
 	return "/api/nodes/ftp"
 }
 
-// GetPath implements RestObject interface and returns the FtpException GET path
-func (FtpException) GetPath() string {
-	return "/objects/ftp/exception/"
-}
-
 // GetPath implements RestObject interface and returns the FtpGroup GET path
 func (FtpGroup) GetPath() string {
 	return "/objects/ftp/group/"
+}
+
+// GetPath implements RestObject interface and returns the FtpException GET path
+func (FtpException) GetPath() string {
+	return "/objects/ftp/exception/"
 }
 
 // ApiRoutes returns all known Ftp paths
@@ -2847,18 +2847,14 @@ func (Ftp) ApiRoutes() []string {
 		"/api/objects/ftp/exception/{ref}",
 		"/api/objects/ftp/exception/{ref}/usedby",
 		"/api/objects/ftp/group/",
-		"/api/objects/ftp/exception/",
 		"/api/objects/ftp/exception/{ref}",
 		"/api/objects/ftp/exception/{ref}/usedby",
 		"/api/objects/ftp/group/",
 		"/api/objects/ftp/group/{ref}",
 		"/api/objects/ftp/group/{ref}/usedby",
+		"/api/objects/ftp/exception/",
 	}
 }
-
-type GeoipSrcexception []interface{}
-
-type GeoipDstexception []interface{}
 
 type GeoipGeoipgroup []struct {
 	Locked    string   `json:"_locked"`
@@ -2866,6 +2862,10 @@ type GeoipGeoipgroup []struct {
 	Countries []string `json:"countries"`
 	Name      string   `json:"name"`
 }
+
+type GeoipSrcexception []interface{}
+
+type GeoipDstexception []interface{}
 
 type GeoipGroup []interface{}
 
@@ -2880,9 +2880,9 @@ type Geoip struct {
 // Definitions implements the Resource interface and returns a map of Geoip's RestObjects
 func (Geoip) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"GeoipGeoipgroup":   GeoipGeoipgroup{},
 		"GeoipSrcexception": GeoipSrcexception{},
 		"GeoipDstexception": GeoipDstexception{},
-		"GeoipGeoipgroup":   GeoipGeoipgroup{},
 		"GeoipGroup":        GeoipGroup{},
 	}
 }
@@ -2890,6 +2890,11 @@ func (Geoip) Definitions() map[string]RestObject {
 // GetPath implements RestObject interface and returns the Geoip GET path
 func (Geoip) GetPath() string {
 	return "/api/nodes/geoip"
+}
+
+// GetPath implements RestObject interface and returns the GeoipGeoipgroup GET path
+func (GeoipGeoipgroup) GetPath() string {
+	return "/objects/geoip/geoipgroup/"
 }
 
 // GetPath implements RestObject interface and returns the GeoipSrcexception GET path
@@ -2902,11 +2907,6 @@ func (GeoipDstexception) GetPath() string {
 	return "/objects/geoip/dstexception/"
 }
 
-// GetPath implements RestObject interface and returns the GeoipGeoipgroup GET path
-func (GeoipGeoipgroup) GetPath() string {
-	return "/objects/geoip/geoipgroup/"
-}
-
 // GetPath implements RestObject interface and returns the GeoipGroup GET path
 func (GeoipGroup) GetPath() string {
 	return "/objects/geoip/group/"
@@ -2915,36 +2915,36 @@ func (GeoipGroup) GetPath() string {
 // ApiRoutes returns all known Geoip paths
 func (Geoip) ApiRoutes() []string {
 	return []string{
+		"/api/objects/geoip/dstexception/{ref}",
+		"/api/objects/geoip/dstexception/{ref}/usedby",
+		"/api/objects/geoip/geoipgroup/",
 		"/api/objects/geoip/geoipgroup/{ref}",
 		"/api/objects/geoip/geoipgroup/{ref}/usedby",
-		"/api/objects/geoip/group/{ref}/usedby",
-		"/api/objects/geoip/srcexception/{ref}",
-		"/api/objects/geoip/srcexception/{ref}/usedby",
-		"/api/objects/geoip/dstexception/{ref}/usedby",
-		"/api/objects/geoip/dstexception/{ref}",
-		"/api/objects/geoip/geoipgroup/",
+		"/api/objects/geoip/group/{ref}",
+		"/api/objects/geoip/dstexception/",
 		"/api/objects/geoip/group/",
-		"/api/objects/geoip/group/{ref}",
+		"/api/objects/geoip/group/{ref}/usedby",
 		"/api/objects/geoip/srcexception/",
-		"/api/objects/geoip/dstexception/",
 		"/api/objects/geoip/srcexception/{ref}",
 		"/api/objects/geoip/srcexception/{ref}/usedby",
-		"/api/objects/geoip/dstexception/{ref}/usedby",
+		"/api/objects/geoip/geoipgroup/",
 		"/api/objects/geoip/geoipgroup/{ref}",
 		"/api/objects/geoip/geoipgroup/{ref}/usedby",
-		"/api/objects/geoip/group/{ref}/usedby",
 		"/api/objects/geoip/group/{ref}",
-		"/api/objects/geoip/srcexception/",
-		"/api/objects/geoip/dstexception/",
 		"/api/objects/geoip/dstexception/{ref}",
-		"/api/objects/geoip/geoipgroup/",
+		"/api/objects/geoip/dstexception/{ref}/usedby",
+		"/api/objects/geoip/group/{ref}/usedby",
+		"/api/objects/geoip/srcexception/",
+		"/api/objects/geoip/srcexception/{ref}",
+		"/api/objects/geoip/srcexception/{ref}/usedby",
+		"/api/objects/geoip/dstexception/",
 		"/api/objects/geoip/group/",
 	}
 }
 
-type HotspotVoucher []interface{}
-
 type HotspotPortal []interface{}
+
+type HotspotVoucher []interface{}
 
 type HotspotGroup []interface{}
 
@@ -2959,8 +2959,8 @@ type Hotspot struct {
 // Definitions implements the Resource interface and returns a map of Hotspot's RestObjects
 func (Hotspot) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"HotspotVoucher": HotspotVoucher{},
 		"HotspotPortal":  HotspotPortal{},
+		"HotspotVoucher": HotspotVoucher{},
 		"HotspotGroup":   HotspotGroup{},
 	}
 }
@@ -2970,14 +2970,14 @@ func (Hotspot) GetPath() string {
 	return "/api/nodes/hotspot"
 }
 
-// GetPath implements RestObject interface and returns the HotspotVoucher GET path
-func (HotspotVoucher) GetPath() string {
-	return "/objects/hotspot/voucher/"
-}
-
 // GetPath implements RestObject interface and returns the HotspotPortal GET path
 func (HotspotPortal) GetPath() string {
 	return "/objects/hotspot/portal/"
+}
+
+// GetPath implements RestObject interface and returns the HotspotVoucher GET path
+func (HotspotVoucher) GetPath() string {
+	return "/objects/hotspot/voucher/"
 }
 
 // GetPath implements RestObject interface and returns the HotspotGroup GET path
@@ -2989,50 +2989,25 @@ func (HotspotGroup) GetPath() string {
 func (Hotspot) ApiRoutes() []string {
 	return []string{
 		"/api/objects/hotspot/portal/",
-		"/api/objects/hotspot/portal/{ref}",
+		"/api/objects/hotspot/portal/{ref}/usedby",
+		"/api/objects/hotspot/voucher/",
 		"/api/objects/hotspot/voucher/{ref}",
 		"/api/objects/hotspot/voucher/{ref}/usedby",
 		"/api/objects/hotspot/group/",
 		"/api/objects/hotspot/group/{ref}",
 		"/api/objects/hotspot/group/{ref}/usedby",
-		"/api/objects/hotspot/portal/{ref}/usedby",
-		"/api/objects/hotspot/voucher/",
-		"/api/objects/hotspot/voucher/",
-		"/api/objects/hotspot/portal/{ref}/usedby",
-		"/api/objects/hotspot/group/{ref}",
-		"/api/objects/hotspot/group/{ref}/usedby",
+		"/api/objects/hotspot/portal/{ref}",
 		"/api/objects/hotspot/portal/",
-		"/api/objects/hotspot/portal/{ref}",
+		"/api/objects/hotspot/portal/{ref}/usedby",
+		"/api/objects/hotspot/voucher/",
 		"/api/objects/hotspot/voucher/{ref}",
 		"/api/objects/hotspot/voucher/{ref}/usedby",
 		"/api/objects/hotspot/group/",
+		"/api/objects/hotspot/group/{ref}",
+		"/api/objects/hotspot/group/{ref}/usedby",
+		"/api/objects/hotspot/portal/{ref}",
 	}
 }
-
-type HttpCffProfile []struct {
-	Locked         string   `json:"_locked"`
-	Aaa            []string `json:"aaa"`
-	Action         string   `json:"action"`
-	CffProfileName string   `json:"cff_profile_name"`
-	Comment        string   `json:"comment"`
-	InProgress     string   `json:"in_progress"`
-	Name           string   `json:"name"`
-	SkipAuth       bool     `json:"skip_auth"`
-	TimeEvent      string   `json:"time_event"`
-}
-
-type HttpSpSubcat []struct {
-	Locked  string `json:"_locked"`
-	Comment string `json:"comment"`
-	ID      string `json:"id"`
-	Name    string `json:"name"`
-}
-
-type HttpParentProxy []interface{}
-
-type HttpDomainRegex []interface{}
-
-type HttpLocalSite []interface{}
 
 type HttpCffAction []struct {
 	Locked                   string        `json:"_locked"`
@@ -3076,6 +3051,30 @@ type HttpCffAction []struct {
 	YahooSafesearch          string        `json:"yahoo_safesearch"`
 }
 
+type HttpCffProfile []struct {
+	Locked         string   `json:"_locked"`
+	Aaa            []string `json:"aaa"`
+	Action         string   `json:"action"`
+	CffProfileName string   `json:"cff_profile_name"`
+	Comment        string   `json:"comment"`
+	InProgress     string   `json:"in_progress"`
+	Name           string   `json:"name"`
+	SkipAuth       bool     `json:"skip_auth"`
+	TimeEvent      string   `json:"time_event"`
+}
+
+type HttpLocalSite []interface{}
+
+type HttpSpCategory []struct {
+	Locked  string   `json:"_locked"`
+	Comment string   `json:"comment"`
+	ID      string   `json:"id"`
+	Name    string   `json:"name"`
+	Subcats []string `json:"subcats"`
+}
+
+type HttpParentProxy []interface{}
+
 type HttpException []struct {
 	Locked          string        `json:"_locked"`
 	Aaa             []interface{} `json:"aaa"`
@@ -3092,17 +3091,28 @@ type HttpException []struct {
 	UserAgents      []interface{} `json:"user_agents"`
 }
 
-type HttpSpCategory []struct {
-	Locked  string   `json:"_locked"`
-	Comment string   `json:"comment"`
-	ID      string   `json:"id"`
-	Name    string   `json:"name"`
-	Subcats []string `json:"subcats"`
+type HttpGroup []interface{}
+
+type HttpPacFile []struct {
+	Locked  string `json:"_locked"`
+	Comment string `json:"comment"`
+	Content string `json:"content"`
+	Name    string `json:"name"`
+	Status  bool   `json:"status"`
 }
+
+type HttpDeviceAuth []interface{}
 
 type HttpLslTag []interface{}
 
-type HttpDeviceAuth []interface{}
+type HttpSpSubcat []struct {
+	Locked  string `json:"_locked"`
+	Comment string `json:"comment"`
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+}
+
+type HttpDomainRegex []interface{}
 
 type HttpProfile []struct {
 	Locked             string        `json:"_locked"`
@@ -3130,16 +3140,6 @@ type HttpProfile []struct {
 	Transparent        bool          `json:"transparent"`
 	TransparentAac     bool          `json:"transparent_aac"`
 	TransparentAuth    bool          `json:"transparent_auth"`
-}
-
-type HttpGroup []interface{}
-
-type HttpPacFile []struct {
-	Locked  string `json:"_locked"`
-	Comment string `json:"comment"`
-	Content string `json:"content"`
-	Name    string `json:"name"`
-	Status  bool   `json:"status"`
 }
 
 type Http struct {
@@ -3242,19 +3242,19 @@ type Http struct {
 // Definitions implements the Resource interface and returns a map of Http's RestObjects
 func (Http) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"HttpCffProfile":  HttpCffProfile{},
-		"HttpSpSubcat":    HttpSpSubcat{},
-		"HttpParentProxy": HttpParentProxy{},
-		"HttpDomainRegex": HttpDomainRegex{},
-		"HttpLocalSite":   HttpLocalSite{},
 		"HttpCffAction":   HttpCffAction{},
-		"HttpException":   HttpException{},
+		"HttpCffProfile":  HttpCffProfile{},
+		"HttpLocalSite":   HttpLocalSite{},
 		"HttpSpCategory":  HttpSpCategory{},
-		"HttpLslTag":      HttpLslTag{},
-		"HttpDeviceAuth":  HttpDeviceAuth{},
-		"HttpProfile":     HttpProfile{},
+		"HttpParentProxy": HttpParentProxy{},
+		"HttpException":   HttpException{},
 		"HttpGroup":       HttpGroup{},
 		"HttpPacFile":     HttpPacFile{},
+		"HttpDeviceAuth":  HttpDeviceAuth{},
+		"HttpLslTag":      HttpLslTag{},
+		"HttpSpSubcat":    HttpSpSubcat{},
+		"HttpDomainRegex": HttpDomainRegex{},
+		"HttpProfile":     HttpProfile{},
 	}
 }
 
@@ -3263,24 +3263,14 @@ func (Http) GetPath() string {
 	return "/api/nodes/http"
 }
 
+// GetPath implements RestObject interface and returns the HttpCffAction GET path
+func (HttpCffAction) GetPath() string {
+	return "/objects/http/cff_action/"
+}
+
 // GetPath implements RestObject interface and returns the HttpCffProfile GET path
 func (HttpCffProfile) GetPath() string {
 	return "/objects/http/cff_profile/"
-}
-
-// GetPath implements RestObject interface and returns the HttpSpSubcat GET path
-func (HttpSpSubcat) GetPath() string {
-	return "/objects/http/sp_subcat/"
-}
-
-// GetPath implements RestObject interface and returns the HttpParentProxy GET path
-func (HttpParentProxy) GetPath() string {
-	return "/objects/http/parent_proxy/"
-}
-
-// GetPath implements RestObject interface and returns the HttpDomainRegex GET path
-func (HttpDomainRegex) GetPath() string {
-	return "/objects/http/domain_regex/"
 }
 
 // GetPath implements RestObject interface and returns the HttpLocalSite GET path
@@ -3288,34 +3278,19 @@ func (HttpLocalSite) GetPath() string {
 	return "/objects/http/local_site/"
 }
 
-// GetPath implements RestObject interface and returns the HttpCffAction GET path
-func (HttpCffAction) GetPath() string {
-	return "/objects/http/cff_action/"
-}
-
-// GetPath implements RestObject interface and returns the HttpException GET path
-func (HttpException) GetPath() string {
-	return "/objects/http/exception/"
-}
-
 // GetPath implements RestObject interface and returns the HttpSpCategory GET path
 func (HttpSpCategory) GetPath() string {
 	return "/objects/http/sp_category/"
 }
 
-// GetPath implements RestObject interface and returns the HttpLslTag GET path
-func (HttpLslTag) GetPath() string {
-	return "/objects/http/lsl_tag/"
+// GetPath implements RestObject interface and returns the HttpParentProxy GET path
+func (HttpParentProxy) GetPath() string {
+	return "/objects/http/parent_proxy/"
 }
 
-// GetPath implements RestObject interface and returns the HttpDeviceAuth GET path
-func (HttpDeviceAuth) GetPath() string {
-	return "/objects/http/device_auth/"
-}
-
-// GetPath implements RestObject interface and returns the HttpProfile GET path
-func (HttpProfile) GetPath() string {
-	return "/objects/http/profile/"
+// GetPath implements RestObject interface and returns the HttpException GET path
+func (HttpException) GetPath() string {
+	return "/objects/http/exception/"
 }
 
 // GetPath implements RestObject interface and returns the HttpGroup GET path
@@ -3328,124 +3303,114 @@ func (HttpPacFile) GetPath() string {
 	return "/objects/http/pac_file/"
 }
 
+// GetPath implements RestObject interface and returns the HttpDeviceAuth GET path
+func (HttpDeviceAuth) GetPath() string {
+	return "/objects/http/device_auth/"
+}
+
+// GetPath implements RestObject interface and returns the HttpLslTag GET path
+func (HttpLslTag) GetPath() string {
+	return "/objects/http/lsl_tag/"
+}
+
+// GetPath implements RestObject interface and returns the HttpSpSubcat GET path
+func (HttpSpSubcat) GetPath() string {
+	return "/objects/http/sp_subcat/"
+}
+
+// GetPath implements RestObject interface and returns the HttpDomainRegex GET path
+func (HttpDomainRegex) GetPath() string {
+	return "/objects/http/domain_regex/"
+}
+
+// GetPath implements RestObject interface and returns the HttpProfile GET path
+func (HttpProfile) GetPath() string {
+	return "/objects/http/profile/"
+}
+
 // ApiRoutes returns all known Http paths
 func (Http) ApiRoutes() []string {
 	return []string{
-		"/api/objects/http/cff_action/",
-		"/api/objects/http/exception/",
 		"/api/objects/http/sp_category/",
-		"/api/objects/http/sp_category/{ref}",
-		"/api/objects/http/cff_profile/{ref}/usedby",
-		"/api/objects/http/lsl_tag/",
 		"/api/objects/http/lsl_tag/{ref}/usedby",
-		"/api/objects/http/parent_proxy/{ref}/usedby",
-		"/api/objects/http/sp_subcat/{ref}",
-		"/api/objects/http/pac_file/{ref}",
-		"/api/objects/http/pac_file/{ref}/usedby",
-		"/api/objects/http/cff_action/{ref}",
-		"/api/objects/http/device_auth/",
-		"/api/objects/http/device_auth/{ref}",
-		"/api/objects/http/exception/{ref}/usedby",
-		"/api/objects/http/group/{ref}/usedby",
-		"/api/objects/http/local_site/{ref}/usedby",
-		"/api/objects/http/profile/",
-		"/api/objects/http/sp_category/{ref}/usedby",
-		"/api/objects/http/device_auth/{ref}/usedby",
-		"/api/objects/http/group/",
 		"/api/objects/http/pac_file/",
-		"/api/objects/http/parent_proxy/{ref}",
-		"/api/objects/http/profile/{ref}/usedby",
-		"/api/objects/http/sp_subcat/{ref}/usedby",
-		"/api/objects/http/cff_profile/{ref}",
-		"/api/objects/http/domain_regex/{ref}/usedby",
-		"/api/objects/http/exception/{ref}",
+		"/api/objects/http/parent_proxy/",
+		"/api/objects/http/sp_subcat/{ref}",
+		"/api/objects/http/device_auth/{ref}/usedby",
+		"/api/objects/http/domain_regex/{ref}",
+		"/api/objects/http/exception/",
+		"/api/objects/http/group/",
+		"/api/objects/http/cff_profile/{ref}/usedby",
 		"/api/objects/http/group/{ref}",
-		"/api/objects/http/cff_profile/",
+		"/api/objects/http/sp_category/{ref}",
+		"/api/objects/http/profile/{ref}",
+		"/api/objects/http/profile/{ref}/usedby",
+		"/api/objects/http/exception/{ref}/usedby",
+		"/api/objects/http/local_site/{ref}/usedby",
+		"/api/objects/http/pac_file/{ref}/usedby",
+		"/api/objects/http/parent_proxy/{ref}/usedby",
+		"/api/objects/http/exception/{ref}",
 		"/api/objects/http/lsl_tag/{ref}",
 		"/api/objects/http/sp_subcat/",
-		"/api/objects/http/cff_action/{ref}/usedby",
-		"/api/objects/http/local_site/{ref}",
-		"/api/objects/http/parent_proxy/",
-		"/api/objects/http/domain_regex/",
-		"/api/objects/http/domain_regex/{ref}",
-		"/api/objects/http/local_site/",
-		"/api/objects/http/profile/{ref}",
-		"/api/objects/http/cff_profile/",
-		"/api/objects/http/lsl_tag/{ref}",
-		"/api/objects/http/sp_subcat/",
-		"/api/objects/http/cff_action/{ref}/usedby",
-		"/api/objects/http/local_site/{ref}",
-		"/api/objects/http/parent_proxy/",
-		"/api/objects/http/profile/{ref}",
-		"/api/objects/http/domain_regex/",
-		"/api/objects/http/domain_regex/{ref}",
-		"/api/objects/http/local_site/",
-		"/api/objects/http/sp_category/{ref}",
-		"/api/objects/http/cff_action/",
-		"/api/objects/http/exception/",
-		"/api/objects/http/sp_category/",
-		"/api/objects/http/parent_proxy/{ref}/usedby",
-		"/api/objects/http/sp_subcat/{ref}",
-		"/api/objects/http/cff_profile/{ref}/usedby",
-		"/api/objects/http/lsl_tag/",
-		"/api/objects/http/lsl_tag/{ref}/usedby",
-		"/api/objects/http/exception/{ref}/usedby",
-		"/api/objects/http/group/{ref}/usedby",
-		"/api/objects/http/local_site/{ref}/usedby",
-		"/api/objects/http/pac_file/{ref}",
-		"/api/objects/http/pac_file/{ref}/usedby",
-		"/api/objects/http/cff_action/{ref}",
-		"/api/objects/http/device_auth/",
-		"/api/objects/http/device_auth/{ref}",
-		"/api/objects/http/profile/",
-		"/api/objects/http/sp_category/{ref}/usedby",
-		"/api/objects/http/parent_proxy/{ref}",
-		"/api/objects/http/profile/{ref}/usedby",
 		"/api/objects/http/sp_subcat/{ref}/usedby",
-		"/api/objects/http/device_auth/{ref}/usedby",
-		"/api/objects/http/group/",
-		"/api/objects/http/pac_file/",
-		"/api/objects/http/group/{ref}",
-		"/api/objects/http/cff_profile/{ref}",
+		"/api/objects/http/device_auth/",
 		"/api/objects/http/domain_regex/{ref}/usedby",
+		"/api/objects/http/local_site/{ref}",
+		"/api/objects/http/lsl_tag/",
+		"/api/objects/http/profile/",
+		"/api/objects/http/cff_action/{ref}",
+		"/api/objects/http/cff_action/{ref}/usedby",
+		"/api/objects/http/device_auth/{ref}",
+		"/api/objects/http/domain_regex/",
+		"/api/objects/http/local_site/",
+		"/api/objects/http/pac_file/{ref}",
+		"/api/objects/http/parent_proxy/{ref}",
+		"/api/objects/http/sp_category/{ref}/usedby",
+		"/api/objects/http/cff_action/",
+		"/api/objects/http/cff_profile/",
+		"/api/objects/http/cff_profile/{ref}",
+		"/api/objects/http/group/{ref}/usedby",
+		"/api/objects/http/parent_proxy/{ref}",
+		"/api/objects/http/sp_category/{ref}/usedby",
+		"/api/objects/http/cff_action/",
+		"/api/objects/http/cff_profile/",
+		"/api/objects/http/cff_profile/{ref}",
+		"/api/objects/http/group/{ref}/usedby",
+		"/api/objects/http/local_site/",
+		"/api/objects/http/pac_file/{ref}",
+		"/api/objects/http/sp_category/",
+		"/api/objects/http/parent_proxy/",
+		"/api/objects/http/sp_subcat/{ref}",
+		"/api/objects/http/device_auth/{ref}/usedby",
+		"/api/objects/http/domain_regex/{ref}",
+		"/api/objects/http/exception/",
+		"/api/objects/http/group/",
+		"/api/objects/http/lsl_tag/{ref}/usedby",
+		"/api/objects/http/pac_file/",
+		"/api/objects/http/cff_profile/{ref}/usedby",
+		"/api/objects/http/group/{ref}",
+		"/api/objects/http/sp_category/{ref}",
+		"/api/objects/http/exception/{ref}/usedby",
+		"/api/objects/http/local_site/{ref}/usedby",
+		"/api/objects/http/pac_file/{ref}/usedby",
+		"/api/objects/http/parent_proxy/{ref}/usedby",
+		"/api/objects/http/profile/{ref}",
+		"/api/objects/http/profile/{ref}/usedby",
 		"/api/objects/http/exception/{ref}",
+		"/api/objects/http/lsl_tag/{ref}",
+		"/api/objects/http/device_auth/",
+		"/api/objects/http/domain_regex/{ref}/usedby",
+		"/api/objects/http/local_site/{ref}",
+		"/api/objects/http/lsl_tag/",
+		"/api/objects/http/sp_subcat/",
+		"/api/objects/http/sp_subcat/{ref}/usedby",
+		"/api/objects/http/cff_action/{ref}",
+		"/api/objects/http/cff_action/{ref}/usedby",
+		"/api/objects/http/device_auth/{ref}",
+		"/api/objects/http/domain_regex/",
+		"/api/objects/http/profile/",
 	}
 }
-
-type InterfaceBridge []interface{}
-
-type InterfacePppoa []interface{}
-
-type InterfaceTunnel []interface{}
-
-type InterfaceEthernet []struct {
-	Locked              string        `json:"_locked"`
-	AdditionalAddresses []interface{} `json:"additional_addresses"`
-	Bandwidth           int64         `json:"bandwidth"`
-	Comment             string        `json:"comment"`
-	Inbandwidth         int64         `json:"inbandwidth"`
-	Itfhw               string        `json:"itfhw"`
-	Link                bool          `json:"link"`
-	Mtu                 int64         `json:"mtu"`
-	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
-	Name                string        `json:"name"`
-	Outbandwidth        int64         `json:"outbandwidth"`
-	PrimaryAddress      string        `json:"primary_address"`
-	Proxyarp            bool          `json:"proxyarp"`
-	Proxyndp            bool          `json:"proxyndp"`
-	Status              bool          `json:"status"`
-}
-
-type InterfaceGroup []struct {
-	Locked           string        `json:"_locked"`
-	Comment          string        `json:"comment"`
-	Link             bool          `json:"link"`
-	Members          []interface{} `json:"members"`
-	Name             string        `json:"name"`
-	PrimaryAddresses string        `json:"primary_addresses"`
-}
-
-type InterfacePppmodem []interface{}
 
 type InterfaceVlan []struct {
 	Locked              string        `json:"_locked"`
@@ -3467,57 +3432,87 @@ type InterfaceVlan []struct {
 	Vlantag             int64         `json:"vlantag"`
 }
 
+type InterfaceEthernet []struct {
+	Locked              string        `json:"_locked"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	Bandwidth           int64         `json:"bandwidth"`
+	Comment             string        `json:"comment"`
+	Inbandwidth         int64         `json:"inbandwidth"`
+	Itfhw               string        `json:"itfhw"`
+	Link                bool          `json:"link"`
+	Mtu                 int64         `json:"mtu"`
+	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
+	Name                string        `json:"name"`
+	Outbandwidth        int64         `json:"outbandwidth"`
+	PrimaryAddress      string        `json:"primary_address"`
+	Proxyarp            bool          `json:"proxyarp"`
+	Proxyndp            bool          `json:"proxyndp"`
+	Status              bool          `json:"status"`
+}
+
+type InterfaceBridge []interface{}
+
+type InterfaceGroup []struct {
+	Locked           string        `json:"_locked"`
+	Comment          string        `json:"comment"`
+	Link             bool          `json:"link"`
+	Members          []interface{} `json:"members"`
+	Name             string        `json:"name"`
+	PrimaryAddresses string        `json:"primary_addresses"`
+}
+
+type InterfacePppmodem []interface{}
+
+type InterfaceTunnel []interface{}
+
 type InterfacePppoe []interface{}
 
 type InterfacePpp3G []interface{}
 
+type InterfacePppoa []interface{}
+
 // Interface is a generated struct representing the Sophos interface Node Leaf
 // GET /api/nodes/interface
 type Interface struct {
-	InterfaceBridge   InterfaceBridge   `json:"interface_bridge"`
-	InterfacePppoa    InterfacePppoa    `json:"interface_pppoa"`
-	InterfaceTunnel   InterfaceTunnel   `json:"interface_tunnel"`
+	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
 	InterfaceEthernet InterfaceEthernet `json:"interface_ethernet"`
+	InterfaceBridge   InterfaceBridge   `json:"interface_bridge"`
 	InterfaceGroup    InterfaceGroup    `json:"interface_group"`
 	InterfacePppmodem InterfacePppmodem `json:"interface_pppmodem"`
-	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
+	InterfaceTunnel   InterfaceTunnel   `json:"interface_tunnel"`
 	InterfacePppoe    InterfacePppoe    `json:"interface_pppoe"`
 	InterfacePpp3G    InterfacePpp3G    `json:"interface_ppp3g"`
+	InterfacePppoa    InterfacePppoa    `json:"interface_pppoa"`
 }
 
 // Definitions implements the Resource interface and returns a map of Interface's RestObjects
 func (Interface) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"interface_bridge":   InterfaceBridge{},
-		"interface_pppoa":    InterfacePppoa{},
-		"interface_tunnel":   InterfaceTunnel{},
+		"interface_vlan":     InterfaceVlan{},
 		"interface_ethernet": InterfaceEthernet{},
+		"interface_bridge":   InterfaceBridge{},
 		"interface_group":    InterfaceGroup{},
 		"interface_pppmodem": InterfacePppmodem{},
-		"interface_vlan":     InterfaceVlan{},
+		"interface_tunnel":   InterfaceTunnel{},
 		"interface_pppoe":    InterfacePppoe{},
 		"interface_ppp3g":    InterfacePpp3G{},
+		"interface_pppoa":    InterfacePppoa{},
 	}
 }
 
-// GetPath implements RestObject and returns the InterfaceBridge GET path
-func (InterfaceBridge) GetPath() string {
-	return "/api/objects/interface/bridge/"
-}
-
-// GetPath implements RestObject and returns the InterfacePppoa GET path
-func (InterfacePppoa) GetPath() string {
-	return "/api/objects/interface/pppoa/"
-}
-
-// GetPath implements RestObject and returns the InterfaceTunnel GET path
-func (InterfaceTunnel) GetPath() string {
-	return "/api/objects/interface/tunnel/"
+// GetPath implements RestObject and returns the InterfaceVlan GET path
+func (InterfaceVlan) GetPath() string {
+	return "/api/objects/interface/vlan/"
 }
 
 // GetPath implements RestObject and returns the InterfaceEthernet GET path
 func (InterfaceEthernet) GetPath() string {
 	return "/api/objects/interface/ethernet/"
+}
+
+// GetPath implements RestObject and returns the InterfaceBridge GET path
+func (InterfaceBridge) GetPath() string {
+	return "/api/objects/interface/bridge/"
 }
 
 // GetPath implements RestObject and returns the InterfaceGroup GET path
@@ -3530,9 +3525,9 @@ func (InterfacePppmodem) GetPath() string {
 	return "/api/objects/interface/pppmodem/"
 }
 
-// GetPath implements RestObject and returns the InterfaceVlan GET path
-func (InterfaceVlan) GetPath() string {
-	return "/api/objects/interface/vlan/"
+// GetPath implements RestObject and returns the InterfaceTunnel GET path
+func (InterfaceTunnel) GetPath() string {
+	return "/api/objects/interface/tunnel/"
 }
 
 // GetPath implements RestObject and returns the InterfacePppoe GET path
@@ -3543,6 +3538,11 @@ func (InterfacePppoe) GetPath() string {
 // GetPath implements RestObject and returns the InterfacePpp3G GET path
 func (InterfacePpp3G) GetPath() string {
 	return "/api/objects/interface/ppp3g/"
+}
+
+// GetPath implements RestObject and returns the InterfacePppoa GET path
+func (InterfacePppoa) GetPath() string {
+	return "/api/objects/interface/pppoa/"
 }
 
 type IpfixConnectionGroup []interface{}
@@ -3574,6 +3574,10 @@ func (IpfixConnectionIpfixConnection) GetPath() string {
 	return "/api/objects/ipfix_connection/ipfix_connection/"
 }
 
+type IpsRule []interface{}
+
+type IpsRuleModifier []interface{}
+
 type IpsException []struct {
 	Locked              string   `json:"_locked"`
 	Comment             string   `json:"comment"`
@@ -3585,10 +3589,6 @@ type IpsException []struct {
 	SourceNetworks      []string `json:"source_networks"`
 	Status              bool     `json:"status"`
 }
-
-type IpsRule []interface{}
-
-type IpsRuleModifier []interface{}
 
 type IpsGroup []struct {
 	Locked       string   `json:"_locked"`
@@ -3643,9 +3643,9 @@ type Ips struct {
 // Definitions implements the Resource interface and returns a map of Ips's RestObjects
 func (Ips) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"IpsException":    IpsException{},
 		"IpsRule":         IpsRule{},
 		"IpsRuleModifier": IpsRuleModifier{},
+		"IpsException":    IpsException{},
 		"IpsGroup":        IpsGroup{},
 	}
 }
@@ -3653,11 +3653,6 @@ func (Ips) Definitions() map[string]RestObject {
 // GetPath implements RestObject interface and returns the Ips GET path
 func (Ips) GetPath() string {
 	return "/api/nodes/ips"
-}
-
-// GetPath implements RestObject interface and returns the IpsException GET path
-func (IpsException) GetPath() string {
-	return "/objects/ips/exception/"
 }
 
 // GetPath implements RestObject interface and returns the IpsRule GET path
@@ -3670,6 +3665,11 @@ func (IpsRuleModifier) GetPath() string {
 	return "/objects/ips/rule_modifier/"
 }
 
+// GetPath implements RestObject interface and returns the IpsException GET path
+func (IpsException) GetPath() string {
+	return "/objects/ips/exception/"
+}
+
 // GetPath implements RestObject interface and returns the IpsGroup GET path
 func (IpsGroup) GetPath() string {
 	return "/objects/ips/group/"
@@ -3679,30 +3679,44 @@ func (IpsGroup) GetPath() string {
 func (Ips) ApiRoutes() []string {
 	return []string{
 		"/api/objects/ips/rule_modifier/{ref}/usedby",
-		"/api/objects/ips/exception/",
-		"/api/objects/ips/group/{ref}/usedby",
+		"/api/objects/ips/exception/{ref}",
+		"/api/objects/ips/exception/{ref}/usedby",
 		"/api/objects/ips/rule/",
-		"/api/objects/ips/rule_modifier/{ref}",
 		"/api/objects/ips/rule/{ref}",
 		"/api/objects/ips/rule/{ref}/usedby",
 		"/api/objects/ips/rule_modifier/",
-		"/api/objects/ips/exception/{ref}",
-		"/api/objects/ips/exception/{ref}/usedby",
+		"/api/objects/ips/rule_modifier/{ref}",
+		"/api/objects/ips/exception/",
 		"/api/objects/ips/group/",
 		"/api/objects/ips/group/{ref}",
+		"/api/objects/ips/group/{ref}/usedby",
+		"/api/objects/ips/rule/",
+		"/api/objects/ips/rule/{ref}",
+		"/api/objects/ips/rule/{ref}/usedby",
+		"/api/objects/ips/rule_modifier/",
+		"/api/objects/ips/rule_modifier/{ref}",
 		"/api/objects/ips/rule_modifier/{ref}/usedby",
-		"/api/objects/ips/exception/",
-		"/api/objects/ips/group/{ref}/usedby",
-		"/api/objects/ips/rule/",
-		"/api/objects/ips/rule_modifier/{ref}",
-		"/api/objects/ips/rule/{ref}",
-		"/api/objects/ips/rule/{ref}/usedby",
-		"/api/objects/ips/rule_modifier/",
 		"/api/objects/ips/exception/{ref}",
 		"/api/objects/ips/exception/{ref}/usedby",
-		"/api/objects/ips/group/",
 		"/api/objects/ips/group/{ref}",
+		"/api/objects/ips/group/{ref}/usedby",
+		"/api/objects/ips/exception/",
+		"/api/objects/ips/group/",
 	}
+}
+
+type IpsecRemoteGateway []struct {
+	Locked         string   `json:"_locked"`
+	Authentication string   `json:"authentication"`
+	Comment        string   `json:"comment"`
+	Ecn            bool     `json:"ecn"`
+	Host           string   `json:"host"`
+	Name           string   `json:"name"`
+	Networks       []string `json:"networks"`
+	PmtuDiscovery  bool     `json:"pmtu_discovery"`
+	Xauth          bool     `json:"xauth"`
+	XauthPassword  string   `json:"xauth_password"`
+	XauthUsername  string   `json:"xauth_username"`
 }
 
 type IpsecGroup []interface{}
@@ -3721,20 +3735,6 @@ type IpsecPolicy []struct {
 	IpsecSaLifetime   int64  `json:"ipsec_sa_lifetime"`
 	IpsecStrictPolicy bool   `json:"ipsec_strict_policy"`
 	Name              string `json:"name"`
-}
-
-type IpsecRemoteGateway []struct {
-	Locked         string   `json:"_locked"`
-	Authentication string   `json:"authentication"`
-	Comment        string   `json:"comment"`
-	Ecn            bool     `json:"ecn"`
-	Host           string   `json:"host"`
-	Name           string   `json:"name"`
-	Networks       []string `json:"networks"`
-	PmtuDiscovery  bool     `json:"pmtu_discovery"`
-	Xauth          bool     `json:"xauth"`
-	XauthPassword  string   `json:"xauth_password"`
-	XauthUsername  string   `json:"xauth_username"`
 }
 
 type Ipsec struct {
@@ -3760,15 +3760,20 @@ type Ipsec struct {
 // Definitions implements the Resource interface and returns a map of Ipsec's RestObjects
 func (Ipsec) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"IpsecRemoteGateway": IpsecRemoteGateway{},
 		"IpsecGroup":         IpsecGroup{},
 		"IpsecPolicy":        IpsecPolicy{},
-		"IpsecRemoteGateway": IpsecRemoteGateway{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the Ipsec GET path
 func (Ipsec) GetPath() string {
 	return "/api/nodes/ipsec"
+}
+
+// GetPath implements RestObject interface and returns the IpsecRemoteGateway GET path
+func (IpsecRemoteGateway) GetPath() string {
+	return "/objects/ipsec/remote_gateway/"
 }
 
 // GetPath implements RestObject interface and returns the IpsecGroup GET path
@@ -3781,56 +3786,31 @@ func (IpsecPolicy) GetPath() string {
 	return "/objects/ipsec/policy/"
 }
 
-// GetPath implements RestObject interface and returns the IpsecRemoteGateway GET path
-func (IpsecRemoteGateway) GetPath() string {
-	return "/objects/ipsec/remote_gateway/"
-}
-
 // ApiRoutes returns all known Ipsec paths
 func (Ipsec) ApiRoutes() []string {
 	return []string{
 		"/api/objects/ipsec/group/{ref}",
+		"/api/objects/ipsec/policy/{ref}",
+		"/api/objects/ipsec/policy/{ref}/usedby",
+		"/api/objects/ipsec/remote_gateway/",
+		"/api/objects/ipsec/remote_gateway/{ref}",
+		"/api/objects/ipsec/group/",
 		"/api/objects/ipsec/group/{ref}/usedby",
-		"/api/objects/ipsec/policy/{ref}/usedby",
-		"/api/objects/ipsec/remote_gateway/",
-		"/api/objects/ipsec/remote_gateway/{ref}/usedby",
-		"/api/objects/ipsec/group/",
 		"/api/objects/ipsec/policy/",
-		"/api/objects/ipsec/policy/{ref}",
-		"/api/objects/ipsec/remote_gateway/{ref}",
-		"/api/objects/ipsec/policy/{ref}",
-		"/api/objects/ipsec/remote_gateway/{ref}",
-		"/api/objects/ipsec/group/",
-		"/api/objects/ipsec/policy/",
-		"/api/objects/ipsec/policy/{ref}/usedby",
-		"/api/objects/ipsec/remote_gateway/",
 		"/api/objects/ipsec/remote_gateway/{ref}/usedby",
+		"/api/objects/ipsec/remote_gateway/",
+		"/api/objects/ipsec/remote_gateway/{ref}",
 		"/api/objects/ipsec/group/{ref}",
+		"/api/objects/ipsec/policy/{ref}",
+		"/api/objects/ipsec/policy/{ref}/usedby",
+		"/api/objects/ipsec/remote_gateway/{ref}/usedby",
+		"/api/objects/ipsec/group/",
 		"/api/objects/ipsec/group/{ref}/usedby",
+		"/api/objects/ipsec/policy/",
 	}
 }
 
-type IpsecConnectionSiteToSite []struct {
-	Locked        string   `json:"_locked"`
-	AutoPfIn      string   `json:"auto_pf_in"`
-	AutoPfOut     string   `json:"auto_pf_out"`
-	AutoPfrule    bool     `json:"auto_pfrule"`
-	Bind          bool     `json:"bind"`
-	Comment       string   `json:"comment"`
-	Interface     string   `json:"interface"`
-	Name          string   `json:"name"`
-	Networks      []string `json:"networks"`
-	Policy        string   `json:"policy"`
-	RemoteGateway string   `json:"remote_gateway"`
-	Status        bool     `json:"status"`
-	StrictRouting bool     `json:"strict_routing"`
-}
-
 type IpsecConnectionRoadwarriorPsk []interface{}
-
-type IpsecConnectionRoadwarriorX509 []interface{}
-
-type IpsecConnectionGroup []interface{}
 
 type IpsecConnectionL2Tp []struct {
 	Locked                    string   `json:"_locked"`
@@ -3853,6 +3833,30 @@ type IpsecConnectionL2Tp []struct {
 	Users                     []string `json:"users"`
 }
 
+type IpsecConnectionRoadwarriorX509 []interface{}
+
+type IpsecConnectionSiteToSite []struct {
+	Locked        string   `json:"_locked"`
+	AutoPfIn      string   `json:"auto_pf_in"`
+	AutoPfOut     string   `json:"auto_pf_out"`
+	AutoPfrule    bool     `json:"auto_pfrule"`
+	Bind          bool     `json:"bind"`
+	Comment       string   `json:"comment"`
+	Interface     string   `json:"interface"`
+	Name          string   `json:"name"`
+	Networks      []string `json:"networks"`
+	Policy        string   `json:"policy"`
+	RemoteGateway string   `json:"remote_gateway"`
+	Status        bool     `json:"status"`
+	StrictRouting bool     `json:"strict_routing"`
+}
+
+type IpsecConnectionGroup []interface{}
+
+type IpsecConnectionRoadwarriorCisco []interface{}
+
+type IpsecConnectionRoadwarriorCa []interface{}
+
 type IpsecConnectionAmazonVpc []struct {
 	Locked         string `json:"_locked"`
 	Authentication string `json:"authentication"`
@@ -3863,40 +3867,31 @@ type IpsecConnectionAmazonVpc []struct {
 	Remote         string `json:"remote"`
 }
 
-type IpsecConnectionRoadwarriorCa []interface{}
-
-type IpsecConnectionRoadwarriorCisco []interface{}
-
 // IpsecConnection is a generated struct representing the Sophos ipsec_connection Node Leaf
 // GET /api/nodes/ipsec_connection
 type IpsecConnection struct {
-	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
 	IpsecConnectionRoadwarriorPsk   IpsecConnectionRoadwarriorPsk   `json:"ipsec_connection_roadwarrior_psk"`
-	IpsecConnectionRoadwarriorX509  IpsecConnectionRoadwarriorX509  `json:"ipsec_connection_roadwarrior_x509"`
-	IpsecConnectionGroup            IpsecConnectionGroup            `json:"ipsec_connection_group"`
 	IpsecConnectionL2Tp             IpsecConnectionL2Tp             `json:"ipsec_connection_l2tp"`
-	IpsecConnectionAmazonVpc        IpsecConnectionAmazonVpc        `json:"ipsec_connection_amazon_vpc"`
-	IpsecConnectionRoadwarriorCa    IpsecConnectionRoadwarriorCa    `json:"ipsec_connection_roadwarrior_ca"`
+	IpsecConnectionRoadwarriorX509  IpsecConnectionRoadwarriorX509  `json:"ipsec_connection_roadwarrior_x509"`
+	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
+	IpsecConnectionGroup            IpsecConnectionGroup            `json:"ipsec_connection_group"`
 	IpsecConnectionRoadwarriorCisco IpsecConnectionRoadwarriorCisco `json:"ipsec_connection_roadwarrior_cisco"`
+	IpsecConnectionRoadwarriorCa    IpsecConnectionRoadwarriorCa    `json:"ipsec_connection_roadwarrior_ca"`
+	IpsecConnectionAmazonVpc        IpsecConnectionAmazonVpc        `json:"ipsec_connection_amazon_vpc"`
 }
 
 // Definitions implements the Resource interface and returns a map of IpsecConnection's RestObjects
 func (IpsecConnection) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"ipsec_connection_site_to_site":      IpsecConnectionSiteToSite{},
 		"ipsec_connection_roadwarrior_psk":   IpsecConnectionRoadwarriorPsk{},
-		"ipsec_connection_roadwarrior_x509":  IpsecConnectionRoadwarriorX509{},
-		"ipsec_connection_group":             IpsecConnectionGroup{},
 		"ipsec_connection_l2tp":              IpsecConnectionL2Tp{},
-		"ipsec_connection_amazon_vpc":        IpsecConnectionAmazonVpc{},
-		"ipsec_connection_roadwarrior_ca":    IpsecConnectionRoadwarriorCa{},
+		"ipsec_connection_roadwarrior_x509":  IpsecConnectionRoadwarriorX509{},
+		"ipsec_connection_site_to_site":      IpsecConnectionSiteToSite{},
+		"ipsec_connection_group":             IpsecConnectionGroup{},
 		"ipsec_connection_roadwarrior_cisco": IpsecConnectionRoadwarriorCisco{},
+		"ipsec_connection_roadwarrior_ca":    IpsecConnectionRoadwarriorCa{},
+		"ipsec_connection_amazon_vpc":        IpsecConnectionAmazonVpc{},
 	}
-}
-
-// GetPath implements RestObject and returns the IpsecConnectionSiteToSite GET path
-func (IpsecConnectionSiteToSite) GetPath() string {
-	return "/api/objects/ipsec_connection/site_to_site/"
 }
 
 // GetPath implements RestObject and returns the IpsecConnectionRoadwarriorPsk GET path
@@ -3904,9 +3899,19 @@ func (IpsecConnectionRoadwarriorPsk) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_psk/"
 }
 
+// GetPath implements RestObject and returns the IpsecConnectionL2Tp GET path
+func (IpsecConnectionL2Tp) GetPath() string {
+	return "/api/objects/ipsec_connection/l2tp/"
+}
+
 // GetPath implements RestObject and returns the IpsecConnectionRoadwarriorX509 GET path
 func (IpsecConnectionRoadwarriorX509) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_x509/"
+}
+
+// GetPath implements RestObject and returns the IpsecConnectionSiteToSite GET path
+func (IpsecConnectionSiteToSite) GetPath() string {
+	return "/api/objects/ipsec_connection/site_to_site/"
 }
 
 // GetPath implements RestObject and returns the IpsecConnectionGroup GET path
@@ -3914,14 +3919,9 @@ func (IpsecConnectionGroup) GetPath() string {
 	return "/api/objects/ipsec_connection/group/"
 }
 
-// GetPath implements RestObject and returns the IpsecConnectionL2Tp GET path
-func (IpsecConnectionL2Tp) GetPath() string {
-	return "/api/objects/ipsec_connection/l2tp/"
-}
-
-// GetPath implements RestObject and returns the IpsecConnectionAmazonVpc GET path
-func (IpsecConnectionAmazonVpc) GetPath() string {
-	return "/api/objects/ipsec_connection/amazon_vpc/"
+// GetPath implements RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
+func (IpsecConnectionRoadwarriorCisco) GetPath() string {
+	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
 }
 
 // GetPath implements RestObject and returns the IpsecConnectionRoadwarriorCa GET path
@@ -3929,12 +3929,10 @@ func (IpsecConnectionRoadwarriorCa) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_ca/"
 }
 
-// GetPath implements RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
-func (IpsecConnectionRoadwarriorCisco) GetPath() string {
-	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
+// GetPath implements RestObject and returns the IpsecConnectionAmazonVpc GET path
+func (IpsecConnectionAmazonVpc) GetPath() string {
+	return "/api/objects/ipsec_connection/amazon_vpc/"
 }
-
-type IpsecRemoteAuthGroup []interface{}
 
 type IpsecRemoteAuthX509 []struct {
 	Locked      string `json:"_locked"`
@@ -3945,9 +3943,9 @@ type IpsecRemoteAuthX509 []struct {
 	VpnIDType   string `json:"vpn_id_type"`
 }
 
-type IpsecRemoteAuthRsa []interface{}
-
 type IpsecRemoteAuthCa []interface{}
+
+type IpsecRemoteAuthGroup []interface{}
 
 type IpsecRemoteAuthPsk []struct {
 	Locked    string `json:"_locked"`
@@ -3958,30 +3956,27 @@ type IpsecRemoteAuthPsk []struct {
 	VpnIDType string `json:"vpn_id_type"`
 }
 
+type IpsecRemoteAuthRsa []interface{}
+
 // IpsecRemoteAuth is a generated struct representing the Sophos ipsec_remote_auth Node Leaf
 // GET /api/nodes/ipsec_remote_auth
 type IpsecRemoteAuth struct {
-	IpsecRemoteAuthGroup IpsecRemoteAuthGroup `json:"ipsec_remote_auth_group"`
 	IpsecRemoteAuthX509  IpsecRemoteAuthX509  `json:"ipsec_remote_auth_x509"`
-	IpsecRemoteAuthRsa   IpsecRemoteAuthRsa   `json:"ipsec_remote_auth_rsa"`
 	IpsecRemoteAuthCa    IpsecRemoteAuthCa    `json:"ipsec_remote_auth_ca"`
+	IpsecRemoteAuthGroup IpsecRemoteAuthGroup `json:"ipsec_remote_auth_group"`
 	IpsecRemoteAuthPsk   IpsecRemoteAuthPsk   `json:"ipsec_remote_auth_psk"`
+	IpsecRemoteAuthRsa   IpsecRemoteAuthRsa   `json:"ipsec_remote_auth_rsa"`
 }
 
 // Definitions implements the Resource interface and returns a map of IpsecRemoteAuth's RestObjects
 func (IpsecRemoteAuth) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"ipsec_remote_auth_group": IpsecRemoteAuthGroup{},
 		"ipsec_remote_auth_x509":  IpsecRemoteAuthX509{},
-		"ipsec_remote_auth_rsa":   IpsecRemoteAuthRsa{},
 		"ipsec_remote_auth_ca":    IpsecRemoteAuthCa{},
+		"ipsec_remote_auth_group": IpsecRemoteAuthGroup{},
 		"ipsec_remote_auth_psk":   IpsecRemoteAuthPsk{},
+		"ipsec_remote_auth_rsa":   IpsecRemoteAuthRsa{},
 	}
-}
-
-// GetPath implements RestObject and returns the IpsecRemoteAuthGroup GET path
-func (IpsecRemoteAuthGroup) GetPath() string {
-	return "/api/objects/ipsec_remote_auth/group/"
 }
 
 // GetPath implements RestObject and returns the IpsecRemoteAuthX509 GET path
@@ -3989,14 +3984,14 @@ func (IpsecRemoteAuthX509) GetPath() string {
 	return "/api/objects/ipsec_remote_auth/x509/"
 }
 
-// GetPath implements RestObject and returns the IpsecRemoteAuthRsa GET path
-func (IpsecRemoteAuthRsa) GetPath() string {
-	return "/api/objects/ipsec_remote_auth/rsa/"
-}
-
 // GetPath implements RestObject and returns the IpsecRemoteAuthCa GET path
 func (IpsecRemoteAuthCa) GetPath() string {
 	return "/api/objects/ipsec_remote_auth/ca/"
+}
+
+// GetPath implements RestObject and returns the IpsecRemoteAuthGroup GET path
+func (IpsecRemoteAuthGroup) GetPath() string {
+	return "/api/objects/ipsec_remote_auth/group/"
 }
 
 // GetPath implements RestObject and returns the IpsecRemoteAuthPsk GET path
@@ -4004,7 +3999,56 @@ func (IpsecRemoteAuthPsk) GetPath() string {
 	return "/api/objects/ipsec_remote_auth/psk/"
 }
 
-type ItfhwRedClient []interface{}
+// GetPath implements RestObject and returns the IpsecRemoteAuthRsa GET path
+func (IpsecRemoteAuthRsa) GetPath() string {
+	return "/api/objects/ipsec_remote_auth/rsa/"
+}
+
+type ItfhwRedServer []interface{}
+
+type ItfhwGroup []interface{}
+
+type ItfhwUsbserial []interface{}
+
+type ItfhwAweNetworkGroup []interface{}
+
+type ItfhwEthernet []struct {
+	Locked                string `json:"_locked"`
+	AutoNegotiation       bool   `json:"auto_negotiation"`
+	AutoNegotiationStatus bool   `json:"auto_negotiation_status"`
+	Comment               string `json:"comment"`
+	Description           string `json:"description"`
+	Duplex                string `json:"duplex"`
+	Hardware              string `json:"hardware"`
+	Irq                   int64  `json:"irq"`
+	LinkMonitoring        bool   `json:"link_monitoring"`
+	Mac                   string `json:"mac"`
+	Mii                   bool   `json:"mii"`
+	Name                  string `json:"name"`
+	Pcidev                string `json:"pcidev"`
+	PoeEnabled            bool   `json:"poe_enabled"`
+	PoeStatus             string `json:"poe_status"`
+	Slot                  string `json:"slot"`
+	Speed                 string `json:"speed"`
+	SupportedLinkModes    string `json:"supported_link_modes"`
+	VirtualMac            string `json:"virtual_mac"`
+}
+
+type ItfhwBridge []interface{}
+
+type ItfhwSerial []interface{}
+
+type ItfhwVirtual []interface{}
+
+type ItfhwLag []struct {
+	Locked         string `json:"_locked"`
+	Comment        string `json:"comment"`
+	Description    string `json:"description"`
+	Hardware       string `json:"hardware"`
+	LinkMonitoring bool   `json:"link_monitoring"`
+	Mac            string `json:"mac"`
+	Name           string `json:"name"`
+}
 
 type ItfhwAweNetwork []struct {
 	Locked            string        `json:"_locked"`
@@ -4044,98 +4088,54 @@ type ItfhwAweNetwork []struct {
 	WepAuthentication string        `json:"wep_authentication"`
 }
 
-type ItfhwVirtual []interface{}
-
-type ItfhwAweNetworkGroup []interface{}
-
-type ItfhwEthernet []struct {
-	Locked                string `json:"_locked"`
-	AutoNegotiation       bool   `json:"auto_negotiation"`
-	AutoNegotiationStatus bool   `json:"auto_negotiation_status"`
-	Comment               string `json:"comment"`
-	Description           string `json:"description"`
-	Duplex                string `json:"duplex"`
-	Hardware              string `json:"hardware"`
-	Irq                   int64  `json:"irq"`
-	LinkMonitoring        bool   `json:"link_monitoring"`
-	Mac                   string `json:"mac"`
-	Mii                   bool   `json:"mii"`
-	Name                  string `json:"name"`
-	Pcidev                string `json:"pcidev"`
-	PoeEnabled            bool   `json:"poe_enabled"`
-	PoeStatus             string `json:"poe_status"`
-	Slot                  string `json:"slot"`
-	Speed                 string `json:"speed"`
-	SupportedLinkModes    string `json:"supported_link_modes"`
-	VirtualMac            string `json:"virtual_mac"`
-}
-
-type ItfhwSerial []interface{}
-
-type ItfhwUsbserial []interface{}
-
-type ItfhwGroup []interface{}
-
-type ItfhwBridge []interface{}
-
-type ItfhwLag []struct {
-	Locked         string `json:"_locked"`
-	Comment        string `json:"comment"`
-	Description    string `json:"description"`
-	Hardware       string `json:"hardware"`
-	LinkMonitoring bool   `json:"link_monitoring"`
-	Mac            string `json:"mac"`
-	Name           string `json:"name"`
-}
-
-type ItfhwRedServer []interface{}
+type ItfhwRedClient []interface{}
 
 // Itfhw is a generated struct representing the Sophos itfhw Node Leaf
 // GET /api/nodes/itfhw
 type Itfhw struct {
-	ItfhwRedClient       ItfhwRedClient       `json:"itfhw_red_client"`
-	ItfhwAweNetwork      ItfhwAweNetwork      `json:"itfhw_awe_network"`
-	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
+	ItfhwRedServer       ItfhwRedServer       `json:"itfhw_red_server"`
+	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
+	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
 	ItfhwAweNetworkGroup ItfhwAweNetworkGroup `json:"itfhw_awe_network_group"`
 	ItfhwEthernet        ItfhwEthernet        `json:"itfhw_ethernet"`
-	ItfhwSerial          ItfhwSerial          `json:"itfhw_serial"`
-	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
-	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
 	ItfhwBridge          ItfhwBridge          `json:"itfhw_bridge"`
+	ItfhwSerial          ItfhwSerial          `json:"itfhw_serial"`
+	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
 	ItfhwLag             ItfhwLag             `json:"itfhw_lag"`
-	ItfhwRedServer       ItfhwRedServer       `json:"itfhw_red_server"`
+	ItfhwAweNetwork      ItfhwAweNetwork      `json:"itfhw_awe_network"`
+	ItfhwRedClient       ItfhwRedClient       `json:"itfhw_red_client"`
 }
 
 // Definitions implements the Resource interface and returns a map of Itfhw's RestObjects
 func (Itfhw) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"itfhw_red_client":        ItfhwRedClient{},
-		"itfhw_awe_network":       ItfhwAweNetwork{},
-		"itfhw_virtual":           ItfhwVirtual{},
+		"itfhw_red_server":        ItfhwRedServer{},
+		"itfhw_group":             ItfhwGroup{},
+		"itfhw_usbserial":         ItfhwUsbserial{},
 		"itfhw_awe_network_group": ItfhwAweNetworkGroup{},
 		"itfhw_ethernet":          ItfhwEthernet{},
-		"itfhw_serial":            ItfhwSerial{},
-		"itfhw_usbserial":         ItfhwUsbserial{},
-		"itfhw_group":             ItfhwGroup{},
 		"itfhw_bridge":            ItfhwBridge{},
+		"itfhw_serial":            ItfhwSerial{},
+		"itfhw_virtual":           ItfhwVirtual{},
 		"itfhw_lag":               ItfhwLag{},
-		"itfhw_red_server":        ItfhwRedServer{},
+		"itfhw_awe_network":       ItfhwAweNetwork{},
+		"itfhw_red_client":        ItfhwRedClient{},
 	}
 }
 
-// GetPath implements RestObject and returns the ItfhwRedClient GET path
-func (ItfhwRedClient) GetPath() string {
-	return "/api/objects/itfhw/red_client/"
+// GetPath implements RestObject and returns the ItfhwRedServer GET path
+func (ItfhwRedServer) GetPath() string {
+	return "/api/objects/itfhw/red_server/"
 }
 
-// GetPath implements RestObject and returns the ItfhwAweNetwork GET path
-func (ItfhwAweNetwork) GetPath() string {
-	return "/api/objects/itfhw/awe_network/"
+// GetPath implements RestObject and returns the ItfhwGroup GET path
+func (ItfhwGroup) GetPath() string {
+	return "/api/objects/itfhw/group/"
 }
 
-// GetPath implements RestObject and returns the ItfhwVirtual GET path
-func (ItfhwVirtual) GetPath() string {
-	return "/api/objects/itfhw/virtual/"
+// GetPath implements RestObject and returns the ItfhwUsbserial GET path
+func (ItfhwUsbserial) GetPath() string {
+	return "/api/objects/itfhw/usbserial/"
 }
 
 // GetPath implements RestObject and returns the ItfhwAweNetworkGroup GET path
@@ -4148,24 +4148,19 @@ func (ItfhwEthernet) GetPath() string {
 	return "/api/objects/itfhw/ethernet/"
 }
 
+// GetPath implements RestObject and returns the ItfhwBridge GET path
+func (ItfhwBridge) GetPath() string {
+	return "/api/objects/itfhw/bridge/"
+}
+
 // GetPath implements RestObject and returns the ItfhwSerial GET path
 func (ItfhwSerial) GetPath() string {
 	return "/api/objects/itfhw/serial/"
 }
 
-// GetPath implements RestObject and returns the ItfhwUsbserial GET path
-func (ItfhwUsbserial) GetPath() string {
-	return "/api/objects/itfhw/usbserial/"
-}
-
-// GetPath implements RestObject and returns the ItfhwGroup GET path
-func (ItfhwGroup) GetPath() string {
-	return "/api/objects/itfhw/group/"
-}
-
-// GetPath implements RestObject and returns the ItfhwBridge GET path
-func (ItfhwBridge) GetPath() string {
-	return "/api/objects/itfhw/bridge/"
+// GetPath implements RestObject and returns the ItfhwVirtual GET path
+func (ItfhwVirtual) GetPath() string {
+	return "/api/objects/itfhw/virtual/"
 }
 
 // GetPath implements RestObject and returns the ItfhwLag GET path
@@ -4173,12 +4168,21 @@ func (ItfhwLag) GetPath() string {
 	return "/api/objects/itfhw/lag/"
 }
 
-// GetPath implements RestObject and returns the ItfhwRedServer GET path
-func (ItfhwRedServer) GetPath() string {
-	return "/api/objects/itfhw/red_server/"
+// GetPath implements RestObject and returns the ItfhwAweNetwork GET path
+func (ItfhwAweNetwork) GetPath() string {
+	return "/api/objects/itfhw/awe_network/"
 }
 
+// GetPath implements RestObject and returns the ItfhwRedClient GET path
+func (ItfhwRedClient) GetPath() string {
+	return "/api/objects/itfhw/red_client/"
+}
+
+type ItfparamsSecondary []interface{}
+
 type ItfparamsGroup []interface{}
+
+type ItfparamsBridgePort []interface{}
 
 type ItfparamsPrimary []struct {
 	Locked                 string `json:"_locked"`
@@ -4213,10 +4217,6 @@ type ItfparamsPrimary []struct {
 	Type6                  string `json:"type6"`
 }
 
-type ItfparamsSecondary []interface{}
-
-type ItfparamsBridgePort []interface{}
-
 type ItfparamsLinkAggregationGroup []struct {
 	Locked         string   `json:"_locked"`
 	AdSelect       int64    `json:"ad_select"`
@@ -4243,32 +4243,22 @@ type ItfparamsLinkAggregationGroup []struct {
 // Itfparams is a generated struct representing the Sophos itfparams Node Leaf
 // GET /api/nodes/itfparams
 type Itfparams struct {
-	ItfparamsGroup                ItfparamsGroup                `json:"itfparams_group"`
-	ItfparamsPrimary              ItfparamsPrimary              `json:"itfparams_primary"`
 	ItfparamsSecondary            ItfparamsSecondary            `json:"itfparams_secondary"`
+	ItfparamsGroup                ItfparamsGroup                `json:"itfparams_group"`
 	ItfparamsBridgePort           ItfparamsBridgePort           `json:"itfparams_bridge_port"`
+	ItfparamsPrimary              ItfparamsPrimary              `json:"itfparams_primary"`
 	ItfparamsLinkAggregationGroup ItfparamsLinkAggregationGroup `json:"itfparams_link_aggregation_group"`
 }
 
 // Definitions implements the Resource interface and returns a map of Itfparams's RestObjects
 func (Itfparams) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"itfparams_group":                  ItfparamsGroup{},
-		"itfparams_primary":                ItfparamsPrimary{},
 		"itfparams_secondary":              ItfparamsSecondary{},
+		"itfparams_group":                  ItfparamsGroup{},
 		"itfparams_bridge_port":            ItfparamsBridgePort{},
+		"itfparams_primary":                ItfparamsPrimary{},
 		"itfparams_link_aggregation_group": ItfparamsLinkAggregationGroup{},
 	}
-}
-
-// GetPath implements RestObject and returns the ItfparamsGroup GET path
-func (ItfparamsGroup) GetPath() string {
-	return "/api/objects/itfparams/group/"
-}
-
-// GetPath implements RestObject and returns the ItfparamsPrimary GET path
-func (ItfparamsPrimary) GetPath() string {
-	return "/api/objects/itfparams/primary/"
 }
 
 // GetPath implements RestObject and returns the ItfparamsSecondary GET path
@@ -4276,9 +4266,19 @@ func (ItfparamsSecondary) GetPath() string {
 	return "/api/objects/itfparams/secondary/"
 }
 
+// GetPath implements RestObject and returns the ItfparamsGroup GET path
+func (ItfparamsGroup) GetPath() string {
+	return "/api/objects/itfparams/group/"
+}
+
 // GetPath implements RestObject and returns the ItfparamsBridgePort GET path
 func (ItfparamsBridgePort) GetPath() string {
 	return "/api/objects/itfparams/bridge_port/"
+}
+
+// GetPath implements RestObject and returns the ItfparamsPrimary GET path
+func (ItfparamsPrimary) GetPath() string {
+	return "/api/objects/itfparams/primary/"
 }
 
 // GetPath implements RestObject and returns the ItfparamsLinkAggregationGroup GET path
@@ -4286,23 +4286,28 @@ func (ItfparamsLinkAggregationGroup) GetPath() string {
 	return "/api/objects/itfparams/link_aggregation_group/"
 }
 
-type MacListMacList []interface{}
-
 type MacListGroup []interface{}
+
+type MacListMacList []interface{}
 
 // MacList is a generated struct representing the Sophos mac_list Node Leaf
 // GET /api/nodes/mac_list
 type MacList struct {
-	MacListMacList MacListMacList `json:"mac_list_mac_list"`
 	MacListGroup   MacListGroup   `json:"mac_list_group"`
+	MacListMacList MacListMacList `json:"mac_list_mac_list"`
 }
 
 // Definitions implements the Resource interface and returns a map of MacList's RestObjects
 func (MacList) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"mac_list_mac_list": MacListMacList{},
 		"mac_list_group":    MacListGroup{},
+		"mac_list_mac_list": MacListMacList{},
 	}
+}
+
+// GetPath implements RestObject and returns the MacListGroup GET path
+func (MacListGroup) GetPath() string {
+	return "/api/objects/mac_list/group/"
 }
 
 // GetPath implements RestObject and returns the MacListMacList GET path
@@ -4310,10 +4315,7 @@ func (MacListMacList) GetPath() string {
 	return "/api/objects/mac_list/mac_list/"
 }
 
-// GetPath implements RestObject and returns the MacListGroup GET path
-func (MacListGroup) GetPath() string {
-	return "/api/objects/mac_list/group/"
-}
+type NetworkAvailabilityGroup []interface{}
 
 type NetworkDnsHost []struct {
 	Locked    string `json:"_locked"`
@@ -4327,38 +4329,6 @@ type NetworkDnsHost []struct {
 	Resolved6 bool   `json:"resolved6"`
 	Timeout   int64  `json:"timeout"`
 }
-
-type NetworkAaa []struct {
-	Locked     string        `json:"_locked"`
-	Addresses  []interface{} `json:"addresses"`
-	Addresses6 []interface{} `json:"addresses6"`
-	Comment    string        `json:"comment"`
-	Name       string        `json:"name"`
-	Resolved   bool          `json:"resolved"`
-	Resolved6  bool          `json:"resolved6"`
-}
-
-type NetworkInterfaceBroadcast []struct {
-	Locked   string `json:"_locked"`
-	Address  string `json:"address"`
-	Comment  string `json:"comment"`
-	Name     string `json:"name"`
-	Resolved bool   `json:"resolved"`
-}
-
-type NetworkInterfaceNetwork []struct {
-	Locked    string `json:"_locked"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-}
-
-type NetworkMulticast []interface{}
 
 type NetworkDnsGroup []struct {
 	Locked     string        `json:"_locked"`
@@ -4386,12 +4356,16 @@ type NetworkAny []struct {
 	Resolved6 bool   `json:"resolved6"`
 }
 
-type NetworkInterfaceAddress []struct {
+type NetworkMulticast []interface{}
+
+type NetworkInterfaceNetwork []struct {
 	Locked    string `json:"_locked"`
 	Address   string `json:"address"`
 	Address6  string `json:"address6"`
 	Comment   string `json:"comment"`
 	Name      string `json:"name"`
+	Netmask   int64  `json:"netmask"`
+	Netmask6  int64  `json:"netmask6"`
 	Resolved  bool   `json:"resolved"`
 	Resolved6 bool   `json:"resolved6"`
 }
@@ -4409,19 +4383,32 @@ type NetworkNetwork []struct {
 	Resolved6 bool   `json:"resolved6"`
 }
 
-type NetworkHost []struct {
+type NetworkAaa []struct {
 	Locked     string        `json:"_locked"`
-	Address    string        `json:"address"`
-	Address6   string        `json:"address6"`
+	Addresses  []interface{} `json:"addresses"`
+	Addresses6 []interface{} `json:"addresses6"`
 	Comment    string        `json:"comment"`
-	Duids      []interface{} `json:"duids"`
-	Hostnames  []string      `json:"hostnames"`
-	Interface  string        `json:"interface"`
-	Macs       []interface{} `json:"macs"`
 	Name       string        `json:"name"`
 	Resolved   bool          `json:"resolved"`
 	Resolved6  bool          `json:"resolved6"`
-	ReverseDNS bool          `json:"reverse_dns"`
+}
+
+type NetworkInterfaceBroadcast []struct {
+	Locked   string `json:"_locked"`
+	Address  string `json:"address"`
+	Comment  string `json:"comment"`
+	Name     string `json:"name"`
+	Resolved bool   `json:"resolved"`
+}
+
+type NetworkInterfaceAddress []struct {
+	Locked    string `json:"_locked"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
 }
 
 type NetworkRange []struct {
@@ -4437,8 +4424,6 @@ type NetworkRange []struct {
 	To6       string `json:"to6"`
 }
 
-type NetworkAvailabilityGroup []interface{}
-
 type NetworkGroup []struct {
 	Locked  string   `json:"_locked"`
 	Comment string   `json:"comment"`
@@ -4447,66 +4432,66 @@ type NetworkGroup []struct {
 	Types   []string `json:"types"`
 }
 
+type NetworkHost []struct {
+	Locked     string        `json:"_locked"`
+	Address    string        `json:"address"`
+	Address6   string        `json:"address6"`
+	Comment    string        `json:"comment"`
+	Duids      []interface{} `json:"duids"`
+	Hostnames  []string      `json:"hostnames"`
+	Interface  string        `json:"interface"`
+	Macs       []interface{} `json:"macs"`
+	Name       string        `json:"name"`
+	Resolved   bool          `json:"resolved"`
+	Resolved6  bool          `json:"resolved6"`
+	ReverseDNS bool          `json:"reverse_dns"`
+}
+
 // Network is a generated struct representing the Sophos network Node Leaf
 // GET /api/nodes/network
 type Network struct {
+	NetworkAvailabilityGroup  NetworkAvailabilityGroup  `json:"network_availability_group"`
 	NetworkDnsHost            NetworkDnsHost            `json:"network_dns_host"`
-	NetworkAaa                NetworkAaa                `json:"network_aaa"`
-	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
-	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
-	NetworkMulticast          NetworkMulticast          `json:"network_multicast"`
 	NetworkDnsGroup           NetworkDnsGroup           `json:"network_dns_group"`
 	NetworkAny                NetworkAny                `json:"network_any"`
-	NetworkInterfaceAddress   NetworkInterfaceAddress   `json:"network_interface_address"`
+	NetworkMulticast          NetworkMulticast          `json:"network_multicast"`
+	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
 	NetworkNetwork            NetworkNetwork            `json:"network_network"`
-	NetworkHost               NetworkHost               `json:"network_host"`
+	NetworkAaa                NetworkAaa                `json:"network_aaa"`
+	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
+	NetworkInterfaceAddress   NetworkInterfaceAddress   `json:"network_interface_address"`
 	NetworkRange              NetworkRange              `json:"network_range"`
-	NetworkAvailabilityGroup  NetworkAvailabilityGroup  `json:"network_availability_group"`
 	NetworkGroup              NetworkGroup              `json:"network_group"`
+	NetworkHost               NetworkHost               `json:"network_host"`
 }
 
 // Definitions implements the Resource interface and returns a map of Network's RestObjects
 func (Network) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"network_availability_group":  NetworkAvailabilityGroup{},
 		"network_dns_host":            NetworkDnsHost{},
-		"network_aaa":                 NetworkAaa{},
-		"network_interface_broadcast": NetworkInterfaceBroadcast{},
-		"network_interface_network":   NetworkInterfaceNetwork{},
-		"network_multicast":           NetworkMulticast{},
 		"network_dns_group":           NetworkDnsGroup{},
 		"network_any":                 NetworkAny{},
-		"network_interface_address":   NetworkInterfaceAddress{},
+		"network_multicast":           NetworkMulticast{},
+		"network_interface_network":   NetworkInterfaceNetwork{},
 		"network_network":             NetworkNetwork{},
-		"network_host":                NetworkHost{},
+		"network_aaa":                 NetworkAaa{},
+		"network_interface_broadcast": NetworkInterfaceBroadcast{},
+		"network_interface_address":   NetworkInterfaceAddress{},
 		"network_range":               NetworkRange{},
-		"network_availability_group":  NetworkAvailabilityGroup{},
 		"network_group":               NetworkGroup{},
+		"network_host":                NetworkHost{},
 	}
+}
+
+// GetPath implements RestObject and returns the NetworkAvailabilityGroup GET path
+func (NetworkAvailabilityGroup) GetPath() string {
+	return "/api/objects/network/availability_group/"
 }
 
 // GetPath implements RestObject and returns the NetworkDnsHost GET path
 func (NetworkDnsHost) GetPath() string {
 	return "/api/objects/network/dns_host/"
-}
-
-// GetPath implements RestObject and returns the NetworkAaa GET path
-func (NetworkAaa) GetPath() string {
-	return "/api/objects/network/aaa/"
-}
-
-// GetPath implements RestObject and returns the NetworkInterfaceBroadcast GET path
-func (NetworkInterfaceBroadcast) GetPath() string {
-	return "/api/objects/network/interface_broadcast/"
-}
-
-// GetPath implements RestObject and returns the NetworkInterfaceNetwork GET path
-func (NetworkInterfaceNetwork) GetPath() string {
-	return "/api/objects/network/interface_network/"
-}
-
-// GetPath implements RestObject and returns the NetworkMulticast GET path
-func (NetworkMulticast) GetPath() string {
-	return "/api/objects/network/multicast/"
 }
 
 // GetPath implements RestObject and returns the NetworkDnsGroup GET path
@@ -4519,9 +4504,14 @@ func (NetworkAny) GetPath() string {
 	return "/api/objects/network/any/"
 }
 
-// GetPath implements RestObject and returns the NetworkInterfaceAddress GET path
-func (NetworkInterfaceAddress) GetPath() string {
-	return "/api/objects/network/interface_address/"
+// GetPath implements RestObject and returns the NetworkMulticast GET path
+func (NetworkMulticast) GetPath() string {
+	return "/api/objects/network/multicast/"
+}
+
+// GetPath implements RestObject and returns the NetworkInterfaceNetwork GET path
+func (NetworkInterfaceNetwork) GetPath() string {
+	return "/api/objects/network/interface_network/"
 }
 
 // GetPath implements RestObject and returns the NetworkNetwork GET path
@@ -4529,9 +4519,19 @@ func (NetworkNetwork) GetPath() string {
 	return "/api/objects/network/network/"
 }
 
-// GetPath implements RestObject and returns the NetworkHost GET path
-func (NetworkHost) GetPath() string {
-	return "/api/objects/network/host/"
+// GetPath implements RestObject and returns the NetworkAaa GET path
+func (NetworkAaa) GetPath() string {
+	return "/api/objects/network/aaa/"
+}
+
+// GetPath implements RestObject and returns the NetworkInterfaceBroadcast GET path
+func (NetworkInterfaceBroadcast) GetPath() string {
+	return "/api/objects/network/interface_broadcast/"
+}
+
+// GetPath implements RestObject and returns the NetworkInterfaceAddress GET path
+func (NetworkInterfaceAddress) GetPath() string {
+	return "/api/objects/network/interface_address/"
 }
 
 // GetPath implements RestObject and returns the NetworkRange GET path
@@ -4539,38 +4539,33 @@ func (NetworkRange) GetPath() string {
 	return "/api/objects/network/range/"
 }
 
-// GetPath implements RestObject and returns the NetworkAvailabilityGroup GET path
-func (NetworkAvailabilityGroup) GetPath() string {
-	return "/api/objects/network/availability_group/"
-}
-
 // GetPath implements RestObject and returns the NetworkGroup GET path
 func (NetworkGroup) GetPath() string {
 	return "/api/objects/network/group/"
 }
 
-type NotificationGroup []interface{}
+// GetPath implements RestObject and returns the NetworkHost GET path
+func (NetworkHost) GetPath() string {
+	return "/api/objects/network/host/"
+}
 
 type NotificationNotification []interface{}
+
+type NotificationGroup []interface{}
 
 // Notification is a generated struct representing the Sophos notification Node Leaf
 // GET /api/nodes/notification
 type Notification struct {
-	NotificationGroup        NotificationGroup        `json:"notification_group"`
 	NotificationNotification NotificationNotification `json:"notification_notification"`
+	NotificationGroup        NotificationGroup        `json:"notification_group"`
 }
 
 // Definitions implements the Resource interface and returns a map of Notification's RestObjects
 func (Notification) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"notification_group":        NotificationGroup{},
 		"notification_notification": NotificationNotification{},
+		"notification_group":        NotificationGroup{},
 	}
-}
-
-// GetPath implements RestObject and returns the NotificationGroup GET path
-func (NotificationGroup) GetPath() string {
-	return "/api/objects/notification/group/"
 }
 
 // GetPath implements RestObject and returns the NotificationNotification GET path
@@ -4578,30 +4573,35 @@ func (NotificationNotification) GetPath() string {
 	return "/api/objects/notification/notification/"
 }
 
+// GetPath implements RestObject and returns the NotificationGroup GET path
+func (NotificationGroup) GetPath() string {
+	return "/api/objects/notification/group/"
+}
+
 type OspfArea []interface{}
 
-type OspfInterface []interface{}
+type OspfGroup []interface{}
 
 type OspfMessageDigestKey []interface{}
 
-type OspfGroup []interface{}
+type OspfInterface []interface{}
 
 // Ospf is a generated struct representing the Sophos ospf Node Leaf
 // GET /api/nodes/ospf
 type Ospf struct {
 	OspfArea             OspfArea             `json:"ospf_area"`
-	OspfInterface        OspfInterface        `json:"ospf_interface"`
-	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
 	OspfGroup            OspfGroup            `json:"ospf_group"`
+	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
+	OspfInterface        OspfInterface        `json:"ospf_interface"`
 }
 
 // Definitions implements the Resource interface and returns a map of Ospf's RestObjects
 func (Ospf) Definitions() map[string]RestObject {
 	return map[string]RestObject{
 		"ospf_area":               OspfArea{},
-		"ospf_interface":          OspfInterface{},
-		"ospf_message_digest_key": OspfMessageDigestKey{},
 		"ospf_group":              OspfGroup{},
+		"ospf_message_digest_key": OspfMessageDigestKey{},
+		"ospf_interface":          OspfInterface{},
 	}
 }
 
@@ -4610,9 +4610,9 @@ func (OspfArea) GetPath() string {
 	return "/api/objects/ospf/area/"
 }
 
-// GetPath implements RestObject and returns the OspfInterface GET path
-func (OspfInterface) GetPath() string {
-	return "/api/objects/ospf/interface/"
+// GetPath implements RestObject and returns the OspfGroup GET path
+func (OspfGroup) GetPath() string {
+	return "/api/objects/ospf/group/"
 }
 
 // GetPath implements RestObject and returns the OspfMessageDigestKey GET path
@@ -4620,33 +4620,28 @@ func (OspfMessageDigestKey) GetPath() string {
 	return "/api/objects/ospf/message_digest_key/"
 }
 
-// GetPath implements RestObject and returns the OspfGroup GET path
-func (OspfGroup) GetPath() string {
-	return "/api/objects/ospf/group/"
+// GetPath implements RestObject and returns the OspfInterface GET path
+func (OspfInterface) GetPath() string {
+	return "/api/objects/ospf/interface/"
 }
 
-type OverrideObjref []interface{}
-
 type OverrideGroup []interface{}
+
+type OverrideObjref []interface{}
 
 // Override is a generated struct representing the Sophos override Node Leaf
 // GET /api/nodes/override
 type Override struct {
-	OverrideObjref OverrideObjref `json:"override_objref"`
 	OverrideGroup  OverrideGroup  `json:"override_group"`
+	OverrideObjref OverrideObjref `json:"override_objref"`
 }
 
 // Definitions implements the Resource interface and returns a map of Override's RestObjects
 func (Override) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"override_objref": OverrideObjref{},
 		"override_group":  OverrideGroup{},
+		"override_objref": OverrideObjref{},
 	}
-}
-
-// GetPath implements RestObject and returns the OverrideObjref GET path
-func (OverrideObjref) GetPath() string {
-	return "/api/objects/override/objref/"
 }
 
 // GetPath implements RestObject and returns the OverrideGroup GET path
@@ -4654,7 +4649,27 @@ func (OverrideGroup) GetPath() string {
 	return "/api/objects/override/group/"
 }
 
+// GetPath implements RestObject and returns the OverrideObjref GET path
+func (OverrideObjref) GetPath() string {
+	return "/api/objects/override/objref/"
+}
+
 type PacketfilterMangle []interface{}
+
+type PacketfilterMasq []struct {
+	Locked                   string `json:"_locked"`
+	AdditionalAddress        string `json:"additional_address"`
+	AdditionalAddressRestore string `json:"additional_address_restore"`
+	Comment                  string `json:"comment"`
+	Name                     string `json:"name"`
+	Source                   string `json:"source"`
+	SourceNatInterface       string `json:"source_nat_interface"`
+	Status                   bool   `json:"status"`
+}
+
+type PacketfilterGroup []interface{}
+
+type Packetfilter1to1Nat []interface{}
 
 type PacketfilterNat []struct {
 	Locked                string `json:"_locked"`
@@ -4675,8 +4690,6 @@ type PacketfilterNat []struct {
 	SourceNatService      string `json:"source_nat_service"`
 	Status                bool   `json:"status"`
 }
-
-type PacketfilterGenericProxy []interface{}
 
 type PacketfilterPacketfilter []struct {
 	Locked             string   `json:"_locked"`
@@ -4701,20 +4714,7 @@ type PacketfilterRuleset []interface{}
 
 type PacketfilterLoadbalance []interface{}
 
-type PacketfilterMasq []struct {
-	Locked                   string `json:"_locked"`
-	AdditionalAddress        string `json:"additional_address"`
-	AdditionalAddressRestore string `json:"additional_address_restore"`
-	Comment                  string `json:"comment"`
-	Name                     string `json:"name"`
-	Source                   string `json:"source"`
-	SourceNatInterface       string `json:"source_nat_interface"`
-	Status                   bool   `json:"status"`
-}
-
-type Packetfilter1to1Nat []interface{}
-
-type PacketfilterGroup []interface{}
+type PacketfilterGenericProxy []interface{}
 
 type Packetfilter struct {
 	Advanced struct {
@@ -4763,14 +4763,14 @@ type Packetfilter struct {
 func (Packetfilter) Definitions() map[string]RestObject {
 	return map[string]RestObject{
 		"PacketfilterMangle":       PacketfilterMangle{},
+		"PacketfilterMasq":         PacketfilterMasq{},
+		"PacketfilterGroup":        PacketfilterGroup{},
+		"Packetfilter1to1Nat":      Packetfilter1to1Nat{},
 		"PacketfilterNat":          PacketfilterNat{},
-		"PacketfilterGenericProxy": PacketfilterGenericProxy{},
 		"PacketfilterPacketfilter": PacketfilterPacketfilter{},
 		"PacketfilterRuleset":      PacketfilterRuleset{},
 		"PacketfilterLoadbalance":  PacketfilterLoadbalance{},
-		"PacketfilterMasq":         PacketfilterMasq{},
-		"Packetfilter1to1Nat":      Packetfilter1to1Nat{},
-		"PacketfilterGroup":        PacketfilterGroup{},
+		"PacketfilterGenericProxy": PacketfilterGenericProxy{},
 	}
 }
 
@@ -4784,14 +4784,24 @@ func (PacketfilterMangle) GetPath() string {
 	return "/objects/packetfilter/mangle/"
 }
 
+// GetPath implements RestObject interface and returns the PacketfilterMasq GET path
+func (PacketfilterMasq) GetPath() string {
+	return "/objects/packetfilter/masq/"
+}
+
+// GetPath implements RestObject interface and returns the PacketfilterGroup GET path
+func (PacketfilterGroup) GetPath() string {
+	return "/objects/packetfilter/group/"
+}
+
+// GetPath implements RestObject interface and returns the Packetfilter1to1Nat GET path
+func (Packetfilter1to1Nat) GetPath() string {
+	return "/objects/packetfilter/1to1nat/"
+}
+
 // GetPath implements RestObject interface and returns the PacketfilterNat GET path
 func (PacketfilterNat) GetPath() string {
 	return "/objects/packetfilter/nat/"
-}
-
-// GetPath implements RestObject interface and returns the PacketfilterGenericProxy GET path
-func (PacketfilterGenericProxy) GetPath() string {
-	return "/objects/packetfilter/generic_proxy/"
 }
 
 // GetPath implements RestObject interface and returns the PacketfilterPacketfilter GET path
@@ -4809,88 +4819,78 @@ func (PacketfilterLoadbalance) GetPath() string {
 	return "/objects/packetfilter/loadbalance/"
 }
 
-// GetPath implements RestObject interface and returns the PacketfilterMasq GET path
-func (PacketfilterMasq) GetPath() string {
-	return "/objects/packetfilter/masq/"
-}
-
-// GetPath implements RestObject interface and returns the Packetfilter1to1Nat GET path
-func (Packetfilter1to1Nat) GetPath() string {
-	return "/objects/packetfilter/1to1nat/"
-}
-
-// GetPath implements RestObject interface and returns the PacketfilterGroup GET path
-func (PacketfilterGroup) GetPath() string {
-	return "/objects/packetfilter/group/"
+// GetPath implements RestObject interface and returns the PacketfilterGenericProxy GET path
+func (PacketfilterGenericProxy) GetPath() string {
+	return "/objects/packetfilter/generic_proxy/"
 }
 
 // ApiRoutes returns all known Packetfilter paths
 func (Packetfilter) ApiRoutes() []string {
 	return []string{
-		"/api/objects/packetfilter/generic_proxy/{ref}/usedby",
-		"/api/objects/packetfilter/loadbalance/",
+		"/api/objects/packetfilter/masq/{ref}",
 		"/api/objects/packetfilter/loadbalance/{ref}/usedby",
-		"/api/objects/packetfilter/masq/{ref}/usedby",
+		"/api/objects/packetfilter/group/",
+		"/api/objects/packetfilter/ruleset/{ref}",
+		"/api/objects/packetfilter/loadbalance/{ref}",
+		"/api/objects/packetfilter/nat/",
 		"/api/objects/packetfilter/packetfilter/",
 		"/api/objects/packetfilter/ruleset/",
-		"/api/objects/packetfilter/1to1nat/{ref}/usedby",
-		"/api/objects/packetfilter/group/{ref}/usedby",
-		"/api/objects/packetfilter/1to1nat/{ref}",
-		"/api/objects/packetfilter/loadbalance/{ref}",
-		"/api/objects/packetfilter/masq/",
-		"/api/objects/packetfilter/ruleset/{ref}",
-		"/api/objects/packetfilter/mangle/{ref}/usedby",
-		"/api/objects/packetfilter/packetfilter/{ref}",
 		"/api/objects/packetfilter/1to1nat/",
-		"/api/objects/packetfilter/group/",
-		"/api/objects/packetfilter/masq/{ref}",
-		"/api/objects/packetfilter/nat/{ref}/usedby",
+		"/api/objects/packetfilter/packetfilter/{ref}",
+		"/api/objects/packetfilter/loadbalance/",
+		"/api/objects/packetfilter/nat/{ref}",
+		"/api/objects/packetfilter/mangle/{ref}/usedby",
 		"/api/objects/packetfilter/packetfilter/{ref}/usedby",
+		"/api/objects/packetfilter/generic_proxy/",
+		"/api/objects/packetfilter/generic_proxy/{ref}/usedby",
+		"/api/objects/packetfilter/group/{ref}",
+		"/api/objects/packetfilter/masq/{ref}/usedby",
 		"/api/objects/packetfilter/ruleset/{ref}/usedby",
-		"/api/objects/packetfilter/mangle/",
-		"/api/objects/packetfilter/generic_proxy/",
-		"/api/objects/packetfilter/group/{ref}",
-		"/api/objects/packetfilter/mangle/{ref}",
-		"/api/objects/packetfilter/nat/",
-		"/api/objects/packetfilter/nat/{ref}",
+		"/api/objects/packetfilter/1to1nat/{ref}",
 		"/api/objects/packetfilter/generic_proxy/{ref}",
-		"/api/objects/packetfilter/mangle/",
 		"/api/objects/packetfilter/mangle/{ref}",
-		"/api/objects/packetfilter/nat/",
-		"/api/objects/packetfilter/nat/{ref}",
-		"/api/objects/packetfilter/generic_proxy/",
-		"/api/objects/packetfilter/group/{ref}",
+		"/api/objects/packetfilter/nat/{ref}/usedby",
+		"/api/objects/packetfilter/group/{ref}/usedby",
+		"/api/objects/packetfilter/masq/",
+		"/api/objects/packetfilter/1to1nat/{ref}/usedby",
+		"/api/objects/packetfilter/mangle/",
+		"/api/objects/packetfilter/1to1nat/{ref}",
 		"/api/objects/packetfilter/generic_proxy/{ref}",
+		"/api/objects/packetfilter/generic_proxy/{ref}/usedby",
+		"/api/objects/packetfilter/group/{ref}",
+		"/api/objects/packetfilter/masq/{ref}/usedby",
+		"/api/objects/packetfilter/ruleset/{ref}/usedby",
+		"/api/objects/packetfilter/group/{ref}/usedby",
+		"/api/objects/packetfilter/mangle/{ref}",
+		"/api/objects/packetfilter/nat/{ref}/usedby",
+		"/api/objects/packetfilter/1to1nat/{ref}/usedby",
+		"/api/objects/packetfilter/mangle/",
+		"/api/objects/packetfilter/masq/",
+		"/api/objects/packetfilter/loadbalance/{ref}/usedby",
+		"/api/objects/packetfilter/masq/{ref}",
+		"/api/objects/packetfilter/group/",
+		"/api/objects/packetfilter/ruleset/{ref}",
+		"/api/objects/packetfilter/1to1nat/",
+		"/api/objects/packetfilter/loadbalance/{ref}",
+		"/api/objects/packetfilter/nat/",
 		"/api/objects/packetfilter/packetfilter/",
 		"/api/objects/packetfilter/ruleset/",
-		"/api/objects/packetfilter/generic_proxy/{ref}/usedby",
 		"/api/objects/packetfilter/loadbalance/",
-		"/api/objects/packetfilter/loadbalance/{ref}/usedby",
-		"/api/objects/packetfilter/masq/{ref}/usedby",
-		"/api/objects/packetfilter/1to1nat/{ref}/usedby",
-		"/api/objects/packetfilter/group/{ref}/usedby",
-		"/api/objects/packetfilter/masq/",
-		"/api/objects/packetfilter/1to1nat/{ref}",
-		"/api/objects/packetfilter/loadbalance/{ref}",
-		"/api/objects/packetfilter/ruleset/{ref}",
-		"/api/objects/packetfilter/mangle/{ref}/usedby",
+		"/api/objects/packetfilter/nat/{ref}",
 		"/api/objects/packetfilter/packetfilter/{ref}",
+		"/api/objects/packetfilter/generic_proxy/",
+		"/api/objects/packetfilter/mangle/{ref}/usedby",
 		"/api/objects/packetfilter/packetfilter/{ref}/usedby",
-		"/api/objects/packetfilter/ruleset/{ref}/usedby",
-		"/api/objects/packetfilter/1to1nat/",
-		"/api/objects/packetfilter/group/",
-		"/api/objects/packetfilter/masq/{ref}",
-		"/api/objects/packetfilter/nat/{ref}/usedby",
 	}
 }
-
-type PimSmRoute []interface{}
-
-type PimSmRpRouter []interface{}
 
 type PimSmGroup []interface{}
 
 type PimSmInterface []interface{}
+
+type PimSmRpRouter []interface{}
+
+type PimSmRoute []interface{}
 
 type PimSm struct {
 	AutoPfOut       string        `json:"auto_pf_out"`
@@ -4906,26 +4906,16 @@ type PimSm struct {
 // Definitions implements the Resource interface and returns a map of PimSm's RestObjects
 func (PimSm) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"PimSmRoute":     PimSmRoute{},
-		"PimSmRpRouter":  PimSmRpRouter{},
 		"PimSmGroup":     PimSmGroup{},
 		"PimSmInterface": PimSmInterface{},
+		"PimSmRpRouter":  PimSmRpRouter{},
+		"PimSmRoute":     PimSmRoute{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the PimSm GET path
 func (PimSm) GetPath() string {
 	return "/api/nodes/pim_sm"
-}
-
-// GetPath implements RestObject interface and returns the PimSmRoute GET path
-func (PimSmRoute) GetPath() string {
-	return "/objects/pim_sm/route/"
-}
-
-// GetPath implements RestObject interface and returns the PimSmRpRouter GET path
-func (PimSmRpRouter) GetPath() string {
-	return "/objects/pim_sm/rp_router/"
 }
 
 // GetPath implements RestObject interface and returns the PimSmGroup GET path
@@ -4938,43 +4928,53 @@ func (PimSmInterface) GetPath() string {
 	return "/objects/pim_sm/interface/"
 }
 
+// GetPath implements RestObject interface and returns the PimSmRpRouter GET path
+func (PimSmRpRouter) GetPath() string {
+	return "/objects/pim_sm/rp_router/"
+}
+
+// GetPath implements RestObject interface and returns the PimSmRoute GET path
+func (PimSmRoute) GetPath() string {
+	return "/objects/pim_sm/route/"
+}
+
 // ApiRoutes returns all known PimSm paths
 func (PimSm) ApiRoutes() []string {
 	return []string{
-		"/api/objects/pim_sm/group/{ref}",
-		"/api/objects/pim_sm/interface/",
+		"/api/objects/pim_sm/group/{ref}/usedby",
+		"/api/objects/pim_sm/interface/{ref}",
 		"/api/objects/pim_sm/interface/{ref}/usedby",
-		"/api/objects/pim_sm/rp_router/{ref}",
-		"/api/objects/pim_sm/rp_router/{ref}/usedby",
-		"/api/objects/pim_sm/route/{ref}/usedby",
-		"/api/objects/pim_sm/rp_router/",
-		"/api/objects/pim_sm/group/",
-		"/api/objects/pim_sm/group/{ref}/usedby",
-		"/api/objects/pim_sm/interface/{ref}",
-		"/api/objects/pim_sm/route/",
-		"/api/objects/pim_sm/route/{ref}",
-		"/api/objects/pim_sm/group/{ref}/usedby",
-		"/api/objects/pim_sm/interface/{ref}",
 		"/api/objects/pim_sm/route/",
 		"/api/objects/pim_sm/route/{ref}",
 		"/api/objects/pim_sm/route/{ref}/usedby",
 		"/api/objects/pim_sm/rp_router/",
+		"/api/objects/pim_sm/group/{ref}",
+		"/api/objects/pim_sm/rp_router/{ref}/usedby",
+		"/api/objects/pim_sm/rp_router/{ref}",
+		"/api/objects/pim_sm/interface/",
+		"/api/objects/pim_sm/group/",
 		"/api/objects/pim_sm/group/",
 		"/api/objects/pim_sm/interface/",
+		"/api/objects/pim_sm/route/{ref}/usedby",
+		"/api/objects/pim_sm/rp_router/",
+		"/api/objects/pim_sm/group/{ref}",
+		"/api/objects/pim_sm/group/{ref}/usedby",
+		"/api/objects/pim_sm/interface/{ref}",
 		"/api/objects/pim_sm/interface/{ref}/usedby",
+		"/api/objects/pim_sm/route/",
+		"/api/objects/pim_sm/route/{ref}",
 		"/api/objects/pim_sm/rp_router/{ref}",
 		"/api/objects/pim_sm/rp_router/{ref}/usedby",
-		"/api/objects/pim_sm/group/{ref}",
 	}
 }
 
-type Pop3Account []interface{}
+type Pop3Group []interface{}
 
 type Pop3Server []interface{}
 
-type Pop3Exception []interface{}
+type Pop3Account []interface{}
 
-type Pop3Group []interface{}
+type Pop3Exception []interface{}
 
 type Pop3 struct {
 	AllowedClients            []interface{} `json:"allowed_clients"`
@@ -5013,10 +5013,10 @@ type Pop3 struct {
 // Definitions implements the Resource interface and returns a map of Pop3's RestObjects
 func (Pop3) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"Pop3Account":   Pop3Account{},
-		"Pop3Server":    Pop3Server{},
-		"Pop3Exception": Pop3Exception{},
 		"Pop3Group":     Pop3Group{},
+		"Pop3Server":    Pop3Server{},
+		"Pop3Account":   Pop3Account{},
+		"Pop3Exception": Pop3Exception{},
 	}
 }
 
@@ -5025,9 +5025,9 @@ func (Pop3) GetPath() string {
 	return "/api/nodes/pop3"
 }
 
-// GetPath implements RestObject interface and returns the Pop3Account GET path
-func (Pop3Account) GetPath() string {
-	return "/objects/pop3/account/"
+// GetPath implements RestObject interface and returns the Pop3Group GET path
+func (Pop3Group) GetPath() string {
+	return "/objects/pop3/group/"
 }
 
 // GetPath implements RestObject interface and returns the Pop3Server GET path
@@ -5035,53 +5035,51 @@ func (Pop3Server) GetPath() string {
 	return "/objects/pop3/server/"
 }
 
+// GetPath implements RestObject interface and returns the Pop3Account GET path
+func (Pop3Account) GetPath() string {
+	return "/objects/pop3/account/"
+}
+
 // GetPath implements RestObject interface and returns the Pop3Exception GET path
 func (Pop3Exception) GetPath() string {
 	return "/objects/pop3/exception/"
-}
-
-// GetPath implements RestObject interface and returns the Pop3Group GET path
-func (Pop3Group) GetPath() string {
-	return "/objects/pop3/group/"
 }
 
 // ApiRoutes returns all known Pop3 paths
 func (Pop3) ApiRoutes() []string {
 	return []string{
 		"/api/objects/pop3/account/{ref}",
-		"/api/objects/pop3/account/{ref}/usedby",
 		"/api/objects/pop3/exception/",
 		"/api/objects/pop3/exception/{ref}",
 		"/api/objects/pop3/group/",
+		"/api/objects/pop3/group/{ref}/usedby",
+		"/api/objects/pop3/server/",
+		"/api/objects/pop3/account/",
+		"/api/objects/pop3/exception/{ref}/usedby",
+		"/api/objects/pop3/group/{ref}",
 		"/api/objects/pop3/server/{ref}",
 		"/api/objects/pop3/server/{ref}/usedby",
-		"/api/objects/pop3/account/",
-		"/api/objects/pop3/exception/{ref}/usedby",
-		"/api/objects/pop3/group/{ref}",
+		"/api/objects/pop3/account/{ref}/usedby",
+		"/api/objects/pop3/exception/{ref}",
+		"/api/objects/pop3/group/",
 		"/api/objects/pop3/group/{ref}/usedby",
 		"/api/objects/pop3/server/",
 		"/api/objects/pop3/account/",
-		"/api/objects/pop3/exception/{ref}/usedby",
-		"/api/objects/pop3/group/{ref}",
-		"/api/objects/pop3/group/{ref}/usedby",
-		"/api/objects/pop3/server/",
 		"/api/objects/pop3/account/{ref}",
-		"/api/objects/pop3/account/{ref}/usedby",
 		"/api/objects/pop3/exception/",
-		"/api/objects/pop3/exception/{ref}",
-		"/api/objects/pop3/group/",
 		"/api/objects/pop3/server/{ref}",
 		"/api/objects/pop3/server/{ref}/usedby",
+		"/api/objects/pop3/account/{ref}/usedby",
+		"/api/objects/pop3/exception/{ref}/usedby",
+		"/api/objects/pop3/group/{ref}",
 	}
 }
 
+type QosTrafficSelector []interface{}
+
 type QosApplicationSelector []interface{}
 
-type QosIngressRule []interface{}
-
-type QosRule []interface{}
-
-type QosTrafficSelectorGroup []interface{}
+type QosGroup []interface{}
 
 type QosInterface []struct {
 	Locked            string        `json:"_locked"`
@@ -5098,9 +5096,11 @@ type QosInterface []struct {
 	UplinkOptimizer   bool          `json:"uplink_optimizer"`
 }
 
-type QosTrafficSelector []interface{}
+type QosRule []interface{}
 
-type QosGroup []interface{}
+type QosTrafficSelectorGroup []interface{}
+
+type QosIngressRule []interface{}
 
 type Qos struct {
 	Advanced struct {
@@ -5113,13 +5113,13 @@ type Qos struct {
 // Definitions implements the Resource interface and returns a map of Qos's RestObjects
 func (Qos) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"QosTrafficSelector":      QosTrafficSelector{},
 		"QosApplicationSelector":  QosApplicationSelector{},
-		"QosIngressRule":          QosIngressRule{},
+		"QosGroup":                QosGroup{},
+		"QosInterface":            QosInterface{},
 		"QosRule":                 QosRule{},
 		"QosTrafficSelectorGroup": QosTrafficSelectorGroup{},
-		"QosInterface":            QosInterface{},
-		"QosTrafficSelector":      QosTrafficSelector{},
-		"QosGroup":                QosGroup{},
+		"QosIngressRule":          QosIngressRule{},
 	}
 }
 
@@ -5128,14 +5128,24 @@ func (Qos) GetPath() string {
 	return "/api/nodes/qos"
 }
 
+// GetPath implements RestObject interface and returns the QosTrafficSelector GET path
+func (QosTrafficSelector) GetPath() string {
+	return "/objects/qos/traffic_selector/"
+}
+
 // GetPath implements RestObject interface and returns the QosApplicationSelector GET path
 func (QosApplicationSelector) GetPath() string {
 	return "/objects/qos/application_selector/"
 }
 
-// GetPath implements RestObject interface and returns the QosIngressRule GET path
-func (QosIngressRule) GetPath() string {
-	return "/objects/qos/ingress_rule/"
+// GetPath implements RestObject interface and returns the QosGroup GET path
+func (QosGroup) GetPath() string {
+	return "/objects/qos/group/"
+}
+
+// GetPath implements RestObject interface and returns the QosInterface GET path
+func (QosInterface) GetPath() string {
+	return "/objects/qos/interface/"
 }
 
 // GetPath implements RestObject interface and returns the QosRule GET path
@@ -5148,72 +5158,62 @@ func (QosTrafficSelectorGroup) GetPath() string {
 	return "/objects/qos/traffic_selector_group/"
 }
 
-// GetPath implements RestObject interface and returns the QosInterface GET path
-func (QosInterface) GetPath() string {
-	return "/objects/qos/interface/"
-}
-
-// GetPath implements RestObject interface and returns the QosTrafficSelector GET path
-func (QosTrafficSelector) GetPath() string {
-	return "/objects/qos/traffic_selector/"
-}
-
-// GetPath implements RestObject interface and returns the QosGroup GET path
-func (QosGroup) GetPath() string {
-	return "/objects/qos/group/"
+// GetPath implements RestObject interface and returns the QosIngressRule GET path
+func (QosIngressRule) GetPath() string {
+	return "/objects/qos/ingress_rule/"
 }
 
 // ApiRoutes returns all known Qos paths
 func (Qos) ApiRoutes() []string {
 	return []string{
-		"/api/objects/qos/group/{ref}",
-		"/api/objects/qos/rule/",
-		"/api/objects/qos/traffic_selector_group/",
-		"/api/objects/qos/traffic_selector_group/{ref}",
-		"/api/objects/qos/ingress_rule/{ref}",
-		"/api/objects/qos/interface/",
+		"/api/objects/qos/interface/{ref}",
 		"/api/objects/qos/rule/{ref}",
-		"/api/objects/qos/traffic_selector/",
-		"/api/objects/qos/traffic_selector_group/{ref}/usedby",
-		"/api/objects/qos/application_selector/{ref}/usedby",
-		"/api/objects/qos/group/",
-		"/api/objects/qos/interface/{ref}/usedby",
-		"/api/objects/qos/rule/{ref}/usedby",
-		"/api/objects/qos/traffic_selector/{ref}",
 		"/api/objects/qos/traffic_selector/{ref}/usedby",
-		"/api/objects/qos/application_selector/",
-		"/api/objects/qos/application_selector/{ref}",
+		"/api/objects/qos/traffic_selector_group/",
+		"/api/objects/qos/group/{ref}",
 		"/api/objects/qos/group/{ref}/usedby",
 		"/api/objects/qos/ingress_rule/",
-		"/api/objects/qos/ingress_rule/{ref}/usedby",
-		"/api/objects/qos/interface/{ref}",
-		"/api/objects/qos/ingress_rule/{ref}/usedby",
-		"/api/objects/qos/interface/{ref}",
+		"/api/objects/qos/interface/",
+		"/api/objects/qos/rule/",
+		"/api/objects/qos/rule/{ref}/usedby",
+		"/api/objects/qos/traffic_selector/",
 		"/api/objects/qos/application_selector/",
 		"/api/objects/qos/application_selector/{ref}",
-		"/api/objects/qos/group/{ref}/usedby",
-		"/api/objects/qos/ingress_rule/",
-		"/api/objects/qos/group/{ref}",
-		"/api/objects/qos/rule/",
-		"/api/objects/qos/traffic_selector_group/",
-		"/api/objects/qos/traffic_selector_group/{ref}",
-		"/api/objects/qos/traffic_selector_group/{ref}/usedby",
-		"/api/objects/qos/ingress_rule/{ref}",
-		"/api/objects/qos/interface/",
-		"/api/objects/qos/rule/{ref}",
-		"/api/objects/qos/traffic_selector/",
-		"/api/objects/qos/traffic_selector/{ref}",
-		"/api/objects/qos/traffic_selector/{ref}/usedby",
-		"/api/objects/qos/application_selector/{ref}/usedby",
 		"/api/objects/qos/group/",
+		"/api/objects/qos/application_selector/{ref}/usedby",
+		"/api/objects/qos/traffic_selector_group/{ref}/usedby",
+		"/api/objects/qos/traffic_selector/{ref}",
+		"/api/objects/qos/traffic_selector_group/{ref}",
+		"/api/objects/qos/ingress_rule/{ref}",
+		"/api/objects/qos/ingress_rule/{ref}/usedby",
 		"/api/objects/qos/interface/{ref}/usedby",
 		"/api/objects/qos/rule/{ref}/usedby",
+		"/api/objects/qos/traffic_selector/",
+		"/api/objects/qos/application_selector/",
+		"/api/objects/qos/application_selector/{ref}",
+		"/api/objects/qos/group/",
+		"/api/objects/qos/interface/",
+		"/api/objects/qos/rule/",
+		"/api/objects/qos/application_selector/{ref}/usedby",
+		"/api/objects/qos/traffic_selector_group/{ref}/usedby",
+		"/api/objects/qos/ingress_rule/{ref}",
+		"/api/objects/qos/ingress_rule/{ref}/usedby",
+		"/api/objects/qos/interface/{ref}/usedby",
+		"/api/objects/qos/traffic_selector/{ref}",
+		"/api/objects/qos/traffic_selector_group/{ref}",
+		"/api/objects/qos/traffic_selector/{ref}/usedby",
+		"/api/objects/qos/traffic_selector_group/",
+		"/api/objects/qos/group/{ref}",
+		"/api/objects/qos/group/{ref}/usedby",
+		"/api/objects/qos/ingress_rule/",
+		"/api/objects/qos/interface/{ref}",
+		"/api/objects/qos/rule/{ref}",
 	}
 }
 
-type RemoteSyslogServer []interface{}
-
 type RemoteSyslogGroup []interface{}
+
+type RemoteSyslogServer []interface{}
 
 type RemoteSyslog struct {
 	Buffer int64         `json:"buffer"`
@@ -5225,8 +5225,8 @@ type RemoteSyslog struct {
 // Definitions implements the Resource interface and returns a map of RemoteSyslog's RestObjects
 func (RemoteSyslog) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"RemoteSyslogServer": RemoteSyslogServer{},
 		"RemoteSyslogGroup":  RemoteSyslogGroup{},
+		"RemoteSyslogServer": RemoteSyslogServer{},
 	}
 }
 
@@ -5235,35 +5235,33 @@ func (RemoteSyslog) GetPath() string {
 	return "/api/nodes/remote_syslog"
 }
 
-// GetPath implements RestObject interface and returns the RemoteSyslogServer GET path
-func (RemoteSyslogServer) GetPath() string {
-	return "/objects/remote_syslog/server/"
-}
-
 // GetPath implements RestObject interface and returns the RemoteSyslogGroup GET path
 func (RemoteSyslogGroup) GetPath() string {
 	return "/objects/remote_syslog/group/"
 }
 
+// GetPath implements RestObject interface and returns the RemoteSyslogServer GET path
+func (RemoteSyslogServer) GetPath() string {
+	return "/objects/remote_syslog/server/"
+}
+
 // ApiRoutes returns all known RemoteSyslog paths
 func (RemoteSyslog) ApiRoutes() []string {
 	return []string{
-		"/api/objects/remote_syslog/server/",
-		"/api/objects/remote_syslog/server/{ref}",
-		"/api/objects/remote_syslog/server/{ref}/usedby",
-		"/api/objects/remote_syslog/group/",
-		"/api/objects/remote_syslog/group/{ref}",
-		"/api/objects/remote_syslog/group/{ref}/usedby",
-		"/api/objects/remote_syslog/group/{ref}",
 		"/api/objects/remote_syslog/group/{ref}/usedby",
 		"/api/objects/remote_syslog/server/",
 		"/api/objects/remote_syslog/server/{ref}",
 		"/api/objects/remote_syslog/server/{ref}/usedby",
 		"/api/objects/remote_syslog/group/",
+		"/api/objects/remote_syslog/group/{ref}",
+		"/api/objects/remote_syslog/group/",
+		"/api/objects/remote_syslog/group/{ref}",
+		"/api/objects/remote_syslog/group/{ref}/usedby",
+		"/api/objects/remote_syslog/server/",
+		"/api/objects/remote_syslog/server/{ref}",
+		"/api/objects/remote_syslog/server/{ref}/usedby",
 	}
 }
-
-type ReportingDepartment []interface{}
 
 type ReportingFilter []struct {
 	Locked     string `json:"_locked"`
@@ -5281,6 +5279,8 @@ type ReportingFilter []struct {
 	Timeframe string `json:"timeframe"`
 	Top       int64  `json:"top"`
 }
+
+type ReportingDepartment []interface{}
 
 type ReportingGroup []interface{}
 
@@ -5330,8 +5330,8 @@ type Reporting struct {
 // Definitions implements the Resource interface and returns a map of Reporting's RestObjects
 func (Reporting) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"ReportingDepartment": ReportingDepartment{},
 		"ReportingFilter":     ReportingFilter{},
+		"ReportingDepartment": ReportingDepartment{},
 		"ReportingGroup":      ReportingGroup{},
 		"ReportingMail":       ReportingMail{},
 	}
@@ -5342,14 +5342,14 @@ func (Reporting) GetPath() string {
 	return "/api/nodes/reporting"
 }
 
-// GetPath implements RestObject interface and returns the ReportingDepartment GET path
-func (ReportingDepartment) GetPath() string {
-	return "/objects/reporting/department/"
-}
-
 // GetPath implements RestObject interface and returns the ReportingFilter GET path
 func (ReportingFilter) GetPath() string {
 	return "/objects/reporting/filter/"
+}
+
+// GetPath implements RestObject interface and returns the ReportingDepartment GET path
+func (ReportingDepartment) GetPath() string {
+	return "/objects/reporting/department/"
 }
 
 // GetPath implements RestObject interface and returns the ReportingGroup GET path
@@ -5365,82 +5365,50 @@ func (ReportingMail) GetPath() string {
 // ApiRoutes returns all known Reporting paths
 func (Reporting) ApiRoutes() []string {
 	return []string{
-		"/api/objects/reporting/filter/",
-		"/api/objects/reporting/group/{ref}",
-		"/api/objects/reporting/group/{ref}/usedby",
-		"/api/objects/reporting/mail/{ref}",
-		"/api/objects/reporting/department/",
+		"/api/objects/reporting/department/{ref}",
 		"/api/objects/reporting/department/{ref}/usedby",
+		"/api/objects/reporting/filter/",
 		"/api/objects/reporting/filter/{ref}",
+		"/api/objects/reporting/group/{ref}",
+		"/api/objects/reporting/mail/{ref}/usedby",
+		"/api/objects/reporting/department/",
 		"/api/objects/reporting/filter/{ref}/usedby",
 		"/api/objects/reporting/group/",
-		"/api/objects/reporting/mail/",
-		"/api/objects/reporting/mail/{ref}/usedby",
-		"/api/objects/reporting/department/{ref}",
-		"/api/objects/reporting/department/",
-		"/api/objects/reporting/filter/",
-		"/api/objects/reporting/group/{ref}",
 		"/api/objects/reporting/group/{ref}/usedby",
+		"/api/objects/reporting/mail/",
 		"/api/objects/reporting/mail/{ref}",
 		"/api/objects/reporting/department/{ref}",
 		"/api/objects/reporting/department/{ref}/usedby",
+		"/api/objects/reporting/filter/",
 		"/api/objects/reporting/filter/{ref}",
+		"/api/objects/reporting/group/{ref}",
+		"/api/objects/reporting/mail/{ref}/usedby",
+		"/api/objects/reporting/department/",
 		"/api/objects/reporting/filter/{ref}/usedby",
 		"/api/objects/reporting/group/",
+		"/api/objects/reporting/group/{ref}/usedby",
 		"/api/objects/reporting/mail/",
-		"/api/objects/reporting/mail/{ref}/usedby",
+		"/api/objects/reporting/mail/{ref}",
 	}
 }
 
-type ReverseProxyRedirection []interface{}
-
-type ReverseProxyAuthProfile []struct {
-	Locked                          string        `json:"_locked"`
-	Aaa                             []string      `json:"aaa"`
-	BackendMode                     string        `json:"backend_mode"`
-	BackendStripBasicAuth           bool          `json:"backend_strip_basic_auth"`
-	BackendUserPrefix               string        `json:"backend_user_prefix"`
-	BackendUserSuffix               string        `json:"backend_user_suffix"`
-	BasicPrompt                     string        `json:"basic_prompt"`
-	Comment                         string        `json:"comment"`
-	FrontendCookie                  string        `json:"frontend_cookie"`
-	FrontendCookieSecret            string        `json:"frontend_cookie_secret"`
-	FrontendForm                    string        `json:"frontend_form"`
-	FrontendFormTemplate            string        `json:"frontend_form_template"`
-	FrontendLogin                   string        `json:"frontend_login"`
-	FrontendLogout                  string        `json:"frontend_logout"`
-	FrontendMode                    string        `json:"frontend_mode"`
-	FrontendRealm                   string        `json:"frontend_realm"`
-	FrontendSessionAllowPersistency bool          `json:"frontend_session_allow_persistency"`
-	FrontendSessionLifetime         int64         `json:"frontend_session_lifetime"`
-	FrontendSessionLifetimeLimited  bool          `json:"frontend_session_lifetime_limited"`
-	FrontendSessionLifetimeScope    string        `json:"frontend_session_lifetime_scope"`
-	FrontendSessionTimeout          int64         `json:"frontend_session_timeout"`
-	FrontendSessionTimeoutEnabled   bool          `json:"frontend_session_timeout_enabled"`
-	FrontendSessionTimeoutScope     string        `json:"frontend_session_timeout_scope"`
-	LogoutDelegationUrls            []interface{} `json:"logout_delegation_urls"`
-	LogoutMode                      string        `json:"logout_mode"`
-	Name                            string        `json:"name"`
-	RedirectToRequestedURL          bool          `json:"redirect_to_requested_url"`
+type ReverseProxyLocation []struct {
+	Locked               string        `json:"_locked"`
+	AccessControl        string        `json:"access_control"`
+	AllowedNetworks      []string      `json:"allowed_networks"`
+	AuthProfile          string        `json:"auth_profile"`
+	Backend              []string      `json:"backend"`
+	BePath               string        `json:"be_path"`
+	Comment              string        `json:"comment"`
+	DeniedNetworks       []interface{} `json:"denied_networks"`
+	HotStandby           bool          `json:"hot_standby"`
+	Name                 string        `json:"name"`
+	Path                 string        `json:"path"`
+	Status               bool          `json:"status"`
+	StickysessionID      string        `json:"stickysession_id"`
+	StickysessionStatus  bool          `json:"stickysession_status"`
+	WebsocketPassthrough bool          `json:"websocket_passthrough"`
 }
-
-type ReverseProxyBackend []struct {
-	Locked                          string `json:"_locked"`
-	Comment                         string `json:"comment"`
-	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
-	Host                            string `json:"host"`
-	Keepalive                       bool   `json:"keepalive"`
-	Name                            string `json:"name"`
-	Path                            string `json:"path"`
-	Port                            int64  `json:"port"`
-	Ssl                             bool   `json:"ssl"`
-	Status                          bool   `json:"status"`
-	Timeout                         int64  `json:"timeout"`
-}
-
-type ReverseProxyFilter []interface{}
-
-type ReverseProxyThreatsFilter []interface{}
 
 type ReverseProxyFrontend []struct {
 	Locked               string        `json:"_locked"`
@@ -5465,6 +5433,8 @@ type ReverseProxyFrontend []struct {
 	Type                 string        `json:"type"`
 	Xheaders             bool          `json:"xheaders"`
 }
+
+type ReverseProxyFilter []interface{}
 
 type ReverseProxyException []interface{}
 
@@ -5517,25 +5487,55 @@ type ReverseProxyProfile []struct {
 	Wafparanoia                  bool          `json:"wafparanoia"`
 }
 
+type ReverseProxyThreatsFilter []interface{}
+
 type ReverseProxyGroup []interface{}
 
-type ReverseProxyLocation []struct {
-	Locked               string        `json:"_locked"`
-	AccessControl        string        `json:"access_control"`
-	AllowedNetworks      []string      `json:"allowed_networks"`
-	AuthProfile          string        `json:"auth_profile"`
-	Backend              []string      `json:"backend"`
-	BePath               string        `json:"be_path"`
-	Comment              string        `json:"comment"`
-	DeniedNetworks       []interface{} `json:"denied_networks"`
-	HotStandby           bool          `json:"hot_standby"`
-	Name                 string        `json:"name"`
-	Path                 string        `json:"path"`
-	Status               bool          `json:"status"`
-	StickysessionID      string        `json:"stickysession_id"`
-	StickysessionStatus  bool          `json:"stickysession_status"`
-	WebsocketPassthrough bool          `json:"websocket_passthrough"`
+type ReverseProxyAuthProfile []struct {
+	Locked                          string        `json:"_locked"`
+	Aaa                             []string      `json:"aaa"`
+	BackendMode                     string        `json:"backend_mode"`
+	BackendStripBasicAuth           bool          `json:"backend_strip_basic_auth"`
+	BackendUserPrefix               string        `json:"backend_user_prefix"`
+	BackendUserSuffix               string        `json:"backend_user_suffix"`
+	BasicPrompt                     string        `json:"basic_prompt"`
+	Comment                         string        `json:"comment"`
+	FrontendCookie                  string        `json:"frontend_cookie"`
+	FrontendCookieSecret            string        `json:"frontend_cookie_secret"`
+	FrontendForm                    string        `json:"frontend_form"`
+	FrontendFormTemplate            string        `json:"frontend_form_template"`
+	FrontendLogin                   string        `json:"frontend_login"`
+	FrontendLogout                  string        `json:"frontend_logout"`
+	FrontendMode                    string        `json:"frontend_mode"`
+	FrontendRealm                   string        `json:"frontend_realm"`
+	FrontendSessionAllowPersistency bool          `json:"frontend_session_allow_persistency"`
+	FrontendSessionLifetime         int64         `json:"frontend_session_lifetime"`
+	FrontendSessionLifetimeLimited  bool          `json:"frontend_session_lifetime_limited"`
+	FrontendSessionLifetimeScope    string        `json:"frontend_session_lifetime_scope"`
+	FrontendSessionTimeout          int64         `json:"frontend_session_timeout"`
+	FrontendSessionTimeoutEnabled   bool          `json:"frontend_session_timeout_enabled"`
+	FrontendSessionTimeoutScope     string        `json:"frontend_session_timeout_scope"`
+	LogoutDelegationUrls            []interface{} `json:"logout_delegation_urls"`
+	LogoutMode                      string        `json:"logout_mode"`
+	Name                            string        `json:"name"`
+	RedirectToRequestedURL          bool          `json:"redirect_to_requested_url"`
 }
+
+type ReverseProxyBackend []struct {
+	Locked                          string `json:"_locked"`
+	Comment                         string `json:"comment"`
+	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
+	Host                            string `json:"host"`
+	Keepalive                       bool   `json:"keepalive"`
+	Name                            string `json:"name"`
+	Path                            string `json:"path"`
+	Port                            int64  `json:"port"`
+	Ssl                             bool   `json:"ssl"`
+	Status                          bool   `json:"status"`
+	Timeout                         int64  `json:"timeout"`
+}
+
+type ReverseProxyRedirection []interface{}
 
 type ReverseProxy struct {
 	AuaRefreshEnabled  int64 `json:"aua_refresh_enabled"`
@@ -5581,17 +5581,17 @@ type ReverseProxy struct {
 // Definitions implements the Resource interface and returns a map of ReverseProxy's RestObjects
 func (ReverseProxy) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"ReverseProxyRedirection":   ReverseProxyRedirection{},
-		"ReverseProxyAuthProfile":   ReverseProxyAuthProfile{},
-		"ReverseProxyBackend":       ReverseProxyBackend{},
-		"ReverseProxyFilter":        ReverseProxyFilter{},
-		"ReverseProxyThreatsFilter": ReverseProxyThreatsFilter{},
+		"ReverseProxyLocation":      ReverseProxyLocation{},
 		"ReverseProxyFrontend":      ReverseProxyFrontend{},
+		"ReverseProxyFilter":        ReverseProxyFilter{},
 		"ReverseProxyException":     ReverseProxyException{},
 		"ReverseProxyFormTemplate":  ReverseProxyFormTemplate{},
 		"ReverseProxyProfile":       ReverseProxyProfile{},
+		"ReverseProxyThreatsFilter": ReverseProxyThreatsFilter{},
 		"ReverseProxyGroup":         ReverseProxyGroup{},
-		"ReverseProxyLocation":      ReverseProxyLocation{},
+		"ReverseProxyAuthProfile":   ReverseProxyAuthProfile{},
+		"ReverseProxyBackend":       ReverseProxyBackend{},
+		"ReverseProxyRedirection":   ReverseProxyRedirection{},
 	}
 }
 
@@ -5600,34 +5600,19 @@ func (ReverseProxy) GetPath() string {
 	return "/api/nodes/reverse_proxy"
 }
 
-// GetPath implements RestObject interface and returns the ReverseProxyRedirection GET path
-func (ReverseProxyRedirection) GetPath() string {
-	return "/objects/reverse_proxy/redirection/"
-}
-
-// GetPath implements RestObject interface and returns the ReverseProxyAuthProfile GET path
-func (ReverseProxyAuthProfile) GetPath() string {
-	return "/objects/reverse_proxy/auth_profile/"
-}
-
-// GetPath implements RestObject interface and returns the ReverseProxyBackend GET path
-func (ReverseProxyBackend) GetPath() string {
-	return "/objects/reverse_proxy/backend/"
-}
-
-// GetPath implements RestObject interface and returns the ReverseProxyFilter GET path
-func (ReverseProxyFilter) GetPath() string {
-	return "/objects/reverse_proxy/filter/"
-}
-
-// GetPath implements RestObject interface and returns the ReverseProxyThreatsFilter GET path
-func (ReverseProxyThreatsFilter) GetPath() string {
-	return "/objects/reverse_proxy/threats_filter/"
+// GetPath implements RestObject interface and returns the ReverseProxyLocation GET path
+func (ReverseProxyLocation) GetPath() string {
+	return "/objects/reverse_proxy/location/"
 }
 
 // GetPath implements RestObject interface and returns the ReverseProxyFrontend GET path
 func (ReverseProxyFrontend) GetPath() string {
 	return "/objects/reverse_proxy/frontend/"
+}
+
+// GetPath implements RestObject interface and returns the ReverseProxyFilter GET path
+func (ReverseProxyFilter) GetPath() string {
+	return "/objects/reverse_proxy/filter/"
 }
 
 // GetPath implements RestObject interface and returns the ReverseProxyException GET path
@@ -5645,85 +5630,100 @@ func (ReverseProxyProfile) GetPath() string {
 	return "/objects/reverse_proxy/profile/"
 }
 
+// GetPath implements RestObject interface and returns the ReverseProxyThreatsFilter GET path
+func (ReverseProxyThreatsFilter) GetPath() string {
+	return "/objects/reverse_proxy/threats_filter/"
+}
+
 // GetPath implements RestObject interface and returns the ReverseProxyGroup GET path
 func (ReverseProxyGroup) GetPath() string {
 	return "/objects/reverse_proxy/group/"
 }
 
-// GetPath implements RestObject interface and returns the ReverseProxyLocation GET path
-func (ReverseProxyLocation) GetPath() string {
-	return "/objects/reverse_proxy/location/"
+// GetPath implements RestObject interface and returns the ReverseProxyAuthProfile GET path
+func (ReverseProxyAuthProfile) GetPath() string {
+	return "/objects/reverse_proxy/auth_profile/"
+}
+
+// GetPath implements RestObject interface and returns the ReverseProxyBackend GET path
+func (ReverseProxyBackend) GetPath() string {
+	return "/objects/reverse_proxy/backend/"
+}
+
+// GetPath implements RestObject interface and returns the ReverseProxyRedirection GET path
+func (ReverseProxyRedirection) GetPath() string {
+	return "/objects/reverse_proxy/redirection/"
 }
 
 // ApiRoutes returns all known ReverseProxy paths
 func (ReverseProxy) ApiRoutes() []string {
 	return []string{
+		"/api/objects/reverse_proxy/threats_filter/{ref}/usedby",
+		"/api/objects/reverse_proxy/backend/{ref}",
 		"/api/objects/reverse_proxy/exception/",
+		"/api/objects/reverse_proxy/filter/",
+		"/api/objects/reverse_proxy/redirection/{ref}",
+		"/api/objects/reverse_proxy/filter/{ref}",
 		"/api/objects/reverse_proxy/form_template/",
-		"/api/objects/reverse_proxy/frontend/{ref}",
-		"/api/objects/reverse_proxy/profile/",
-		"/api/objects/reverse_proxy/backend/{ref}/usedby",
-		"/api/objects/reverse_proxy/frontend/{ref}/usedby",
-		"/api/objects/reverse_proxy/group/",
-		"/api/objects/reverse_proxy/location/",
-		"/api/objects/reverse_proxy/profile/{ref}/usedby",
-		"/api/objects/reverse_proxy/form_template/{ref}/usedby",
 		"/api/objects/reverse_proxy/profile/{ref}",
-		"/api/objects/reverse_proxy/redirection/",
+		"/api/objects/reverse_proxy/profile/",
+		"/api/objects/reverse_proxy/threats_filter/",
 		"/api/objects/reverse_proxy/auth_profile/{ref}",
 		"/api/objects/reverse_proxy/auth_profile/{ref}/usedby",
-		"/api/objects/reverse_proxy/backend/{ref}",
-		"/api/objects/reverse_proxy/exception/{ref}/usedby",
-		"/api/objects/reverse_proxy/filter/{ref}",
-		"/api/objects/reverse_proxy/threats_filter/{ref}/usedby",
-		"/api/objects/reverse_proxy/filter/{ref}/usedby",
+		"/api/objects/reverse_proxy/form_template/{ref}/usedby",
+		"/api/objects/reverse_proxy/group/{ref}/usedby",
+		"/api/objects/reverse_proxy/group/",
+		"/api/objects/reverse_proxy/group/{ref}",
 		"/api/objects/reverse_proxy/location/{ref}",
+		"/api/objects/reverse_proxy/threats_filter/{ref}",
 		"/api/objects/reverse_proxy/auth_profile/",
 		"/api/objects/reverse_proxy/backend/",
-		"/api/objects/reverse_proxy/filter/",
-		"/api/objects/reverse_proxy/group/{ref}/usedby",
-		"/api/objects/reverse_proxy/redirection/{ref}",
+		"/api/objects/reverse_proxy/exception/{ref}/usedby",
+		"/api/objects/reverse_proxy/filter/{ref}/usedby",
+		"/api/objects/reverse_proxy/frontend/{ref}/usedby",
+		"/api/objects/reverse_proxy/redirection/",
+		"/api/objects/reverse_proxy/backend/{ref}/usedby",
 		"/api/objects/reverse_proxy/exception/{ref}",
+		"/api/objects/reverse_proxy/location/",
 		"/api/objects/reverse_proxy/redirection/{ref}/usedby",
-		"/api/objects/reverse_proxy/threats_filter/",
-		"/api/objects/reverse_proxy/group/{ref}",
+		"/api/objects/reverse_proxy/profile/{ref}/usedby",
 		"/api/objects/reverse_proxy/form_template/{ref}",
 		"/api/objects/reverse_proxy/frontend/",
+		"/api/objects/reverse_proxy/frontend/{ref}",
 		"/api/objects/reverse_proxy/location/{ref}/usedby",
-		"/api/objects/reverse_proxy/threats_filter/{ref}",
-		"/api/objects/reverse_proxy/form_template/{ref}/usedby",
+		"/api/objects/reverse_proxy/location/",
+		"/api/objects/reverse_proxy/redirection/{ref}/usedby",
+		"/api/objects/reverse_proxy/backend/{ref}/usedby",
+		"/api/objects/reverse_proxy/exception/{ref}",
+		"/api/objects/reverse_proxy/frontend/{ref}",
+		"/api/objects/reverse_proxy/location/{ref}/usedby",
+		"/api/objects/reverse_proxy/profile/{ref}/usedby",
+		"/api/objects/reverse_proxy/form_template/{ref}",
+		"/api/objects/reverse_proxy/frontend/",
+		"/api/objects/reverse_proxy/filter/",
+		"/api/objects/reverse_proxy/redirection/{ref}",
+		"/api/objects/reverse_proxy/threats_filter/{ref}/usedby",
+		"/api/objects/reverse_proxy/backend/{ref}",
+		"/api/objects/reverse_proxy/exception/",
 		"/api/objects/reverse_proxy/profile/{ref}",
-		"/api/objects/reverse_proxy/redirection/",
+		"/api/objects/reverse_proxy/filter/{ref}",
+		"/api/objects/reverse_proxy/form_template/",
+		"/api/objects/reverse_proxy/form_template/{ref}/usedby",
+		"/api/objects/reverse_proxy/group/{ref}/usedby",
+		"/api/objects/reverse_proxy/profile/",
+		"/api/objects/reverse_proxy/threats_filter/",
 		"/api/objects/reverse_proxy/auth_profile/{ref}",
 		"/api/objects/reverse_proxy/auth_profile/{ref}/usedby",
-		"/api/objects/reverse_proxy/backend/{ref}",
 		"/api/objects/reverse_proxy/exception/{ref}/usedby",
-		"/api/objects/reverse_proxy/filter/{ref}",
-		"/api/objects/reverse_proxy/threats_filter/{ref}/usedby",
 		"/api/objects/reverse_proxy/filter/{ref}/usedby",
+		"/api/objects/reverse_proxy/group/",
+		"/api/objects/reverse_proxy/group/{ref}",
 		"/api/objects/reverse_proxy/location/{ref}",
+		"/api/objects/reverse_proxy/threats_filter/{ref}",
 		"/api/objects/reverse_proxy/auth_profile/",
 		"/api/objects/reverse_proxy/backend/",
-		"/api/objects/reverse_proxy/filter/",
-		"/api/objects/reverse_proxy/group/{ref}/usedby",
-		"/api/objects/reverse_proxy/redirection/{ref}",
-		"/api/objects/reverse_proxy/exception/{ref}",
-		"/api/objects/reverse_proxy/redirection/{ref}/usedby",
-		"/api/objects/reverse_proxy/threats_filter/",
-		"/api/objects/reverse_proxy/group/{ref}",
-		"/api/objects/reverse_proxy/form_template/{ref}",
-		"/api/objects/reverse_proxy/frontend/",
-		"/api/objects/reverse_proxy/location/{ref}/usedby",
-		"/api/objects/reverse_proxy/threats_filter/{ref}",
-		"/api/objects/reverse_proxy/exception/",
-		"/api/objects/reverse_proxy/form_template/",
-		"/api/objects/reverse_proxy/frontend/{ref}",
-		"/api/objects/reverse_proxy/profile/",
-		"/api/objects/reverse_proxy/backend/{ref}/usedby",
 		"/api/objects/reverse_proxy/frontend/{ref}/usedby",
-		"/api/objects/reverse_proxy/group/",
-		"/api/objects/reverse_proxy/location/",
-		"/api/objects/reverse_proxy/profile/{ref}/usedby",
+		"/api/objects/reverse_proxy/redirection/",
 	}
 }
 
@@ -5798,8 +5798,6 @@ func (RoleRole) GetPath() string {
 
 type RouteGroup []interface{}
 
-type RoutePolicy []interface{}
-
 type RouteStatic []struct {
 	Locked  string `json:"_locked"`
 	Comment string `json:"comment"`
@@ -5811,20 +5809,22 @@ type RouteStatic []struct {
 	Type    string `json:"type"`
 }
 
+type RoutePolicy []interface{}
+
 // Route is a generated struct representing the Sophos route Node Leaf
 // GET /api/nodes/route
 type Route struct {
 	RouteGroup  RouteGroup  `json:"route_group"`
-	RoutePolicy RoutePolicy `json:"route_policy"`
 	RouteStatic RouteStatic `json:"route_static"`
+	RoutePolicy RoutePolicy `json:"route_policy"`
 }
 
 // Definitions implements the Resource interface and returns a map of Route's RestObjects
 func (Route) Definitions() map[string]RestObject {
 	return map[string]RestObject{
 		"route_group":  RouteGroup{},
-		"route_policy": RoutePolicy{},
 		"route_static": RouteStatic{},
+		"route_policy": RoutePolicy{},
 	}
 }
 
@@ -5833,14 +5833,29 @@ func (RouteGroup) GetPath() string {
 	return "/api/objects/route/group/"
 }
 
+// GetPath implements RestObject and returns the RouteStatic GET path
+func (RouteStatic) GetPath() string {
+	return "/api/objects/route/static/"
+}
+
 // GetPath implements RestObject and returns the RoutePolicy GET path
 func (RoutePolicy) GetPath() string {
 	return "/api/objects/route/policy/"
 }
 
-// GetPath implements RestObject and returns the RouteStatic GET path
-func (RouteStatic) GetPath() string {
-	return "/api/objects/route/static/"
+type SchedulerRule []struct {
+	Locked          string `json:"_locked"`
+	Comment         string `json:"comment"`
+	Destination     string `json:"destination"`
+	Interface       string `json:"interface"`
+	InterfaceGroup  string `json:"interface_group"`
+	Name            string `json:"name"`
+	Persistence     bool   `json:"persistence"`
+	PersistenceHash string `json:"persistence_hash"`
+	Service         string `json:"service"`
+	SkipOnError     bool   `json:"skip_on_error"`
+	Source          string `json:"source"`
+	Status          bool   `json:"status"`
 }
 
 type SchedulerGroup []interface{}
@@ -5863,36 +5878,26 @@ type SchedulerLoadbalance []struct {
 	Weight          struct{}      `json:"weight"`
 }
 
-type SchedulerRule []struct {
-	Locked          string `json:"_locked"`
-	Comment         string `json:"comment"`
-	Destination     string `json:"destination"`
-	Interface       string `json:"interface"`
-	InterfaceGroup  string `json:"interface_group"`
-	Name            string `json:"name"`
-	Persistence     bool   `json:"persistence"`
-	PersistenceHash string `json:"persistence_hash"`
-	Service         string `json:"service"`
-	SkipOnError     bool   `json:"skip_on_error"`
-	Source          string `json:"source"`
-	Status          bool   `json:"status"`
-}
-
 // Scheduler is a generated struct representing the Sophos scheduler Node Leaf
 // GET /api/nodes/scheduler
 type Scheduler struct {
+	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 	SchedulerGroup       SchedulerGroup       `json:"scheduler_group"`
 	SchedulerLoadbalance SchedulerLoadbalance `json:"scheduler_loadbalance"`
-	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 }
 
 // Definitions implements the Resource interface and returns a map of Scheduler's RestObjects
 func (Scheduler) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"scheduler_rule":        SchedulerRule{},
 		"scheduler_group":       SchedulerGroup{},
 		"scheduler_loadbalance": SchedulerLoadbalance{},
-		"scheduler_rule":        SchedulerRule{},
 	}
+}
+
+// GetPath implements RestObject and returns the SchedulerRule GET path
+func (SchedulerRule) GetPath() string {
+	return "/api/objects/scheduler/rule/"
 }
 
 // GetPath implements RestObject and returns the SchedulerGroup GET path
@@ -5903,23 +5908,6 @@ func (SchedulerGroup) GetPath() string {
 // GetPath implements RestObject and returns the SchedulerLoadbalance GET path
 func (SchedulerLoadbalance) GetPath() string {
 	return "/api/objects/scheduler/loadbalance/"
-}
-
-// GetPath implements RestObject and returns the SchedulerRule GET path
-func (SchedulerRule) GetPath() string {
-	return "/api/objects/scheduler/rule/"
-}
-
-type ServiceTcp []struct {
-	Locked       string `json:"_locked"`
-	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
-	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
-	Comment      string `json:"comment"`
-	DstHigh      int64  `json:"dst_high"`
-	DstLow       int64  `json:"dst_low"`
-	Name         string `json:"name"`
-	SrcHigh      int64  `json:"src_high"`
-	SrcLow       int64  `json:"src_low"`
 }
 
 type ServiceTcpudp []struct {
@@ -5934,7 +5922,19 @@ type ServiceTcpudp []struct {
 	SrcLow       int64  `json:"src_low"`
 }
 
-type ServiceUdp []struct {
+type ServiceGroup []struct {
+	Locked  string   `json:"_locked"`
+	Comment string   `json:"comment"`
+	Members []string `json:"members"`
+	Name    string   `json:"name"`
+	Types   []string `json:"types"`
+}
+
+type ServiceEsp []interface{}
+
+type ServiceIcmpv6 []interface{}
+
+type ServiceTcp []struct {
 	Locked       string `json:"_locked"`
 	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
 	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
@@ -5945,18 +5945,6 @@ type ServiceUdp []struct {
 	SrcHigh      int64  `json:"src_high"`
 	SrcLow       int64  `json:"src_low"`
 }
-
-type ServiceEsp []interface{}
-
-type ServiceGroup []struct {
-	Locked  string   `json:"_locked"`
-	Comment string   `json:"comment"`
-	Members []string `json:"members"`
-	Name    string   `json:"name"`
-	Types   []string `json:"types"`
-}
-
-type ServiceIcmpv6 []interface{}
 
 type ServiceAh []interface{}
 
@@ -5974,6 +5962,18 @@ type ServiceIcmp []struct {
 	Type    int64  `json:"type"`
 }
 
+type ServiceUdp []struct {
+	Locked       string `json:"_locked"`
+	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
+	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
+	Comment      string `json:"comment"`
+	DstHigh      int64  `json:"dst_high"`
+	DstLow       int64  `json:"dst_low"`
+	Name         string `json:"name"`
+	SrcHigh      int64  `json:"src_high"`
+	SrcLow       int64  `json:"src_low"`
+}
+
 type ServiceIp []struct {
 	Locked  string `json:"_locked"`
 	Comment string `json:"comment"`
@@ -5984,37 +5984,32 @@ type ServiceIp []struct {
 // Service is a generated struct representing the Sophos service Node Leaf
 // GET /api/nodes/service
 type Service struct {
-	ServiceTcp    ServiceTcp    `json:"service_tcp"`
 	ServiceTcpudp ServiceTcpudp `json:"service_tcpudp"`
-	ServiceUdp    ServiceUdp    `json:"service_udp"`
-	ServiceEsp    ServiceEsp    `json:"service_esp"`
 	ServiceGroup  ServiceGroup  `json:"service_group"`
+	ServiceEsp    ServiceEsp    `json:"service_esp"`
 	ServiceIcmpv6 ServiceIcmpv6 `json:"service_icmpv6"`
+	ServiceTcp    ServiceTcp    `json:"service_tcp"`
 	ServiceAh     ServiceAh     `json:"service_ah"`
 	ServiceAny    ServiceAny    `json:"service_any"`
 	ServiceIcmp   ServiceIcmp   `json:"service_icmp"`
+	ServiceUdp    ServiceUdp    `json:"service_udp"`
 	ServiceIp     ServiceIp     `json:"service_ip"`
 }
 
 // Definitions implements the Resource interface and returns a map of Service's RestObjects
 func (Service) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"service_tcp":    ServiceTcp{},
 		"service_tcpudp": ServiceTcpudp{},
-		"service_udp":    ServiceUdp{},
-		"service_esp":    ServiceEsp{},
 		"service_group":  ServiceGroup{},
+		"service_esp":    ServiceEsp{},
 		"service_icmpv6": ServiceIcmpv6{},
+		"service_tcp":    ServiceTcp{},
 		"service_ah":     ServiceAh{},
 		"service_any":    ServiceAny{},
 		"service_icmp":   ServiceIcmp{},
+		"service_udp":    ServiceUdp{},
 		"service_ip":     ServiceIp{},
 	}
-}
-
-// GetPath implements RestObject and returns the ServiceTcp GET path
-func (ServiceTcp) GetPath() string {
-	return "/api/objects/service/tcp/"
 }
 
 // GetPath implements RestObject and returns the ServiceTcpudp GET path
@@ -6022,9 +6017,9 @@ func (ServiceTcpudp) GetPath() string {
 	return "/api/objects/service/tcpudp/"
 }
 
-// GetPath implements RestObject and returns the ServiceUdp GET path
-func (ServiceUdp) GetPath() string {
-	return "/api/objects/service/udp/"
+// GetPath implements RestObject and returns the ServiceGroup GET path
+func (ServiceGroup) GetPath() string {
+	return "/api/objects/service/group/"
 }
 
 // GetPath implements RestObject and returns the ServiceEsp GET path
@@ -6032,14 +6027,14 @@ func (ServiceEsp) GetPath() string {
 	return "/api/objects/service/esp/"
 }
 
-// GetPath implements RestObject and returns the ServiceGroup GET path
-func (ServiceGroup) GetPath() string {
-	return "/api/objects/service/group/"
-}
-
 // GetPath implements RestObject and returns the ServiceIcmpv6 GET path
 func (ServiceIcmpv6) GetPath() string {
 	return "/api/objects/service/icmpv6/"
+}
+
+// GetPath implements RestObject and returns the ServiceTcp GET path
+func (ServiceTcp) GetPath() string {
+	return "/api/objects/service/tcp/"
 }
 
 // GetPath implements RestObject and returns the ServiceAh GET path
@@ -6057,12 +6052,15 @@ func (ServiceIcmp) GetPath() string {
 	return "/api/objects/service/icmp/"
 }
 
+// GetPath implements RestObject and returns the ServiceUdp GET path
+func (ServiceUdp) GetPath() string {
+	return "/api/objects/service/udp/"
+}
+
 // GetPath implements RestObject and returns the ServiceIp GET path
 func (ServiceIp) GetPath() string {
 	return "/api/objects/service/ip/"
 }
-
-type SmtpException []interface{}
 
 type SmtpGroup []interface{}
 
@@ -6118,6 +6116,8 @@ type SmtpProfile []struct {
 	Status                      bool          `json:"status"`
 	Unscannable                 string        `json:"unscannable"`
 }
+
+type SmtpException []interface{}
 
 type Smtp struct {
 	AuthAaa                   []interface{} `json:"auth_aaa"`
@@ -6181,21 +6181,16 @@ type Smtp struct {
 // Definitions implements the Resource interface and returns a map of Smtp's RestObjects
 func (Smtp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"SmtpException":       SmtpException{},
 		"SmtpGroup":           SmtpGroup{},
 		"SmtpHeaderOperation": SmtpHeaderOperation{},
 		"SmtpProfile":         SmtpProfile{},
+		"SmtpException":       SmtpException{},
 	}
 }
 
 // GetPath implements RestObject interface and returns the Smtp GET path
 func (Smtp) GetPath() string {
 	return "/api/nodes/smtp"
-}
-
-// GetPath implements RestObject interface and returns the SmtpException GET path
-func (SmtpException) GetPath() string {
-	return "/objects/smtp/exception/"
 }
 
 // GetPath implements RestObject interface and returns the SmtpGroup GET path
@@ -6213,39 +6208,44 @@ func (SmtpProfile) GetPath() string {
 	return "/objects/smtp/profile/"
 }
 
+// GetPath implements RestObject interface and returns the SmtpException GET path
+func (SmtpException) GetPath() string {
+	return "/objects/smtp/exception/"
+}
+
 // ApiRoutes returns all known Smtp paths
 func (Smtp) ApiRoutes() []string {
 	return []string{
-		"/api/objects/smtp/exception/{ref}",
-		"/api/objects/smtp/group/",
-		"/api/objects/smtp/header_operation/",
+		"/api/objects/smtp/group/{ref}",
+		"/api/objects/smtp/group/{ref}/usedby",
+		"/api/objects/smtp/header_operation/{ref}/usedby",
 		"/api/objects/smtp/profile/",
 		"/api/objects/smtp/profile/{ref}",
 		"/api/objects/smtp/profile/{ref}/usedby",
 		"/api/objects/smtp/exception/",
-		"/api/objects/smtp/exception/{ref}/usedby",
-		"/api/objects/smtp/group/{ref}",
-		"/api/objects/smtp/group/{ref}/usedby",
-		"/api/objects/smtp/header_operation/{ref}",
-		"/api/objects/smtp/header_operation/{ref}/usedby",
-		"/api/objects/smtp/profile/{ref}/usedby",
-		"/api/objects/smtp/exception/",
-		"/api/objects/smtp/exception/{ref}/usedby",
-		"/api/objects/smtp/group/{ref}",
-		"/api/objects/smtp/group/{ref}/usedby",
-		"/api/objects/smtp/header_operation/{ref}",
-		"/api/objects/smtp/header_operation/{ref}/usedby",
-		"/api/objects/smtp/profile/{ref}",
 		"/api/objects/smtp/exception/{ref}",
+		"/api/objects/smtp/header_operation/",
+		"/api/objects/smtp/header_operation/{ref}",
+		"/api/objects/smtp/exception/{ref}/usedby",
+		"/api/objects/smtp/group/",
 		"/api/objects/smtp/group/",
 		"/api/objects/smtp/header_operation/",
+		"/api/objects/smtp/header_operation/{ref}",
+		"/api/objects/smtp/exception/{ref}/usedby",
+		"/api/objects/smtp/exception/{ref}",
+		"/api/objects/smtp/group/{ref}",
+		"/api/objects/smtp/group/{ref}/usedby",
+		"/api/objects/smtp/header_operation/{ref}/usedby",
 		"/api/objects/smtp/profile/",
+		"/api/objects/smtp/profile/{ref}",
+		"/api/objects/smtp/profile/{ref}/usedby",
+		"/api/objects/smtp/exception/",
 	}
 }
 
-type SnmpTrap []interface{}
-
 type SnmpGroup []interface{}
+
+type SnmpTrap []interface{}
 
 type Snmp struct {
 	AllowedNetworks []interface{} `json:"allowed_networks"`
@@ -6267,8 +6267,8 @@ type Snmp struct {
 // Definitions implements the Resource interface and returns a map of Snmp's RestObjects
 func (Snmp) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"SnmpTrap":  SnmpTrap{},
 		"SnmpGroup": SnmpGroup{},
+		"SnmpTrap":  SnmpTrap{},
 	}
 }
 
@@ -6277,31 +6277,31 @@ func (Snmp) GetPath() string {
 	return "/api/nodes/snmp"
 }
 
-// GetPath implements RestObject interface and returns the SnmpTrap GET path
-func (SnmpTrap) GetPath() string {
-	return "/objects/snmp/trap/"
-}
-
 // GetPath implements RestObject interface and returns the SnmpGroup GET path
 func (SnmpGroup) GetPath() string {
 	return "/objects/snmp/group/"
 }
 
+// GetPath implements RestObject interface and returns the SnmpTrap GET path
+func (SnmpTrap) GetPath() string {
+	return "/objects/snmp/trap/"
+}
+
 // ApiRoutes returns all known Snmp paths
 func (Snmp) ApiRoutes() []string {
 	return []string{
+		"/api/objects/snmp/trap/",
+		"/api/objects/snmp/trap/{ref}",
+		"/api/objects/snmp/trap/{ref}/usedby",
+		"/api/objects/snmp/group/",
+		"/api/objects/snmp/group/{ref}",
+		"/api/objects/snmp/group/{ref}/usedby",
 		"/api/objects/snmp/group/",
 		"/api/objects/snmp/group/{ref}",
 		"/api/objects/snmp/group/{ref}/usedby",
 		"/api/objects/snmp/trap/",
 		"/api/objects/snmp/trap/{ref}",
 		"/api/objects/snmp/trap/{ref}/usedby",
-		"/api/objects/snmp/group/{ref}",
-		"/api/objects/snmp/group/{ref}/usedby",
-		"/api/objects/snmp/trap/",
-		"/api/objects/snmp/trap/{ref}",
-		"/api/objects/snmp/trap/{ref}/usedby",
-		"/api/objects/snmp/group/",
 	}
 }
 
@@ -6411,12 +6411,12 @@ func (SpxTemplate) GetPath() string {
 // ApiRoutes returns all known Spx paths
 func (Spx) ApiRoutes() []string {
 	return []string{
-		"/api/objects/spx/template/{ref}",
-		"/api/objects/spx/template/{ref}/usedby",
 		"/api/objects/spx/group/",
 		"/api/objects/spx/group/{ref}",
 		"/api/objects/spx/group/{ref}/usedby",
 		"/api/objects/spx/template/",
+		"/api/objects/spx/template/{ref}",
+		"/api/objects/spx/template/{ref}/usedby",
 		"/api/objects/spx/group/",
 		"/api/objects/spx/group/{ref}",
 		"/api/objects/spx/group/{ref}/usedby",
@@ -6532,50 +6532,55 @@ func (SslVpnServerConnection) GetPath() string {
 // ApiRoutes returns all known SslVpn paths
 func (SslVpn) ApiRoutes() []string {
 	return []string{
-		"/api/objects/ssl_vpn/client_connection/{ref}",
+		"/api/objects/ssl_vpn/group/{ref}/usedby",
 		"/api/objects/ssl_vpn/remote_access_profile/",
 		"/api/objects/ssl_vpn/remote_access_profile/{ref}/usedby",
-		"/api/objects/ssl_vpn/server_connection/{ref}/usedby",
 		"/api/objects/ssl_vpn/client_connection/",
+		"/api/objects/ssl_vpn/group/",
+		"/api/objects/ssl_vpn/group/{ref}",
+		"/api/objects/ssl_vpn/server_connection/",
+		"/api/objects/ssl_vpn/server_connection/{ref}",
+		"/api/objects/ssl_vpn/server_connection/{ref}/usedby",
+		"/api/objects/ssl_vpn/client_connection/{ref}",
 		"/api/objects/ssl_vpn/client_connection/{ref}/usedby",
+		"/api/objects/ssl_vpn/remote_access_profile/{ref}",
+		"/api/objects/ssl_vpn/remote_access_profile/",
+		"/api/objects/ssl_vpn/remote_access_profile/{ref}/usedby",
+		"/api/objects/ssl_vpn/client_connection/",
 		"/api/objects/ssl_vpn/group/",
 		"/api/objects/ssl_vpn/group/{ref}",
 		"/api/objects/ssl_vpn/group/{ref}/usedby",
-		"/api/objects/ssl_vpn/remote_access_profile/{ref}",
-		"/api/objects/ssl_vpn/server_connection/",
 		"/api/objects/ssl_vpn/server_connection/{ref}",
-		"/api/objects/ssl_vpn/client_connection/{ref}",
-		"/api/objects/ssl_vpn/remote_access_profile/",
-		"/api/objects/ssl_vpn/remote_access_profile/{ref}/usedby",
 		"/api/objects/ssl_vpn/server_connection/{ref}/usedby",
-		"/api/objects/ssl_vpn/client_connection/",
+		"/api/objects/ssl_vpn/client_connection/{ref}",
 		"/api/objects/ssl_vpn/client_connection/{ref}/usedby",
-		"/api/objects/ssl_vpn/group/",
-		"/api/objects/ssl_vpn/group/{ref}",
-		"/api/objects/ssl_vpn/group/{ref}/usedby",
 		"/api/objects/ssl_vpn/remote_access_profile/{ref}",
 		"/api/objects/ssl_vpn/server_connection/",
-		"/api/objects/ssl_vpn/server_connection/{ref}",
 	}
 }
 
-type StasCollector []interface{}
-
 type StasGroup []interface{}
+
+type StasCollector []interface{}
 
 // Stas is a generated struct representing the Sophos stas Node Leaf
 // GET /api/nodes/stas
 type Stas struct {
-	StasCollector StasCollector `json:"stas_collector"`
 	StasGroup     StasGroup     `json:"stas_group"`
+	StasCollector StasCollector `json:"stas_collector"`
 }
 
 // Definitions implements the Resource interface and returns a map of Stas's RestObjects
 func (Stas) Definitions() map[string]RestObject {
 	return map[string]RestObject{
-		"stas_collector": StasCollector{},
 		"stas_group":     StasGroup{},
+		"stas_collector": StasCollector{},
 	}
+}
+
+// GetPath implements RestObject and returns the StasGroup GET path
+func (StasGroup) GetPath() string {
+	return "/api/objects/stas/group/"
 }
 
 // GetPath implements RestObject and returns the StasCollector GET path
@@ -6583,10 +6588,7 @@ func (StasCollector) GetPath() string {
 	return "/api/objects/stas/collector/"
 }
 
-// GetPath implements RestObject and returns the StasGroup GET path
-func (StasGroup) GetPath() string {
-	return "/api/objects/stas/group/"
-}
+type TimeSingle []interface{}
 
 type TimeGroup []interface{}
 
@@ -6599,23 +6601,26 @@ type TimeRecurring []struct {
 	Weekdays  []string `json:"weekdays"`
 }
 
-type TimeSingle []interface{}
-
 // Time is a generated struct representing the Sophos time Node Leaf
 // GET /api/nodes/time
 type Time struct {
+	TimeSingle    TimeSingle    `json:"time_single"`
 	TimeGroup     TimeGroup     `json:"time_group"`
 	TimeRecurring TimeRecurring `json:"time_recurring"`
-	TimeSingle    TimeSingle    `json:"time_single"`
 }
 
 // Definitions implements the Resource interface and returns a map of Time's RestObjects
 func (Time) Definitions() map[string]RestObject {
 	return map[string]RestObject{
+		"time_single":    TimeSingle{},
 		"time_group":     TimeGroup{},
 		"time_recurring": TimeRecurring{},
-		"time_single":    TimeSingle{},
 	}
+}
+
+// GetPath implements RestObject and returns the TimeSingle GET path
+func (TimeSingle) GetPath() string {
+	return "/api/objects/time/single/"
 }
 
 // GetPath implements RestObject and returns the TimeGroup GET path
@@ -6626,11 +6631,6 @@ func (TimeGroup) GetPath() string {
 // GetPath implements RestObject and returns the TimeRecurring GET path
 func (TimeRecurring) GetPath() string {
 	return "/api/objects/time/recurring/"
-}
-
-// GetPath implements RestObject and returns the TimeSingle GET path
-func (TimeSingle) GetPath() string {
-	return "/api/objects/time/single/"
 }
 
 type UserPreferencesGroup []interface{}
