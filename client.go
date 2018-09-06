@@ -126,17 +126,16 @@ type Version struct {
 }
 
 // Ping the gateway to retrieve its versioning
-func (c Client) Ping() (*Version, error) {
+func (c Client) Ping() (v *Version, err error) {
 	r, err := c.Get("/api/status/version")
 	if err != nil {
 		return nil, err
 	}
 
-	var v Version
-	if err := r.MarshalTo(&v); err != nil {
-		return nil, err
-	}
-	return &v, nil
+	v = &Version{}
+	err = r.MarshalTo(&v)
+
+	return
 }
 
 // Endpoint returns the client's UTM endpoint
