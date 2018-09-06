@@ -179,7 +179,7 @@ func TestWithBasicAuth(t *testing.T) {
 				return
 			}
 
-			if header := r.Header.Get(sophos.Authoization); header != tt.want {
+			if header := r.Header.Get(sophos.Authorization); header != tt.want {
 				t.Errorf("TestWithBasicAuth() = %v, want %v", header, tt.want)
 			}
 		})
@@ -214,7 +214,7 @@ func TestWithApiToken(t *testing.T) {
 				return
 			}
 
-			if header := r.Header.Get(sophos.Authoization); header != tt.want {
+			if header := r.Header.Get(sophos.Authorization); header != tt.want {
 				t.Errorf("TestWithApiToken() = %v, want %v", header, tt.want)
 			}
 		})

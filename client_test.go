@@ -43,7 +43,7 @@ func TestClient_Request(t *testing.T) {
 		t.Error(err)
 	}
 
-	if r.Header.Get(sophos.Authoization) == "" {
+	if r.Header.Get(sophos.Authorization) == "" {
 		t.Error(errors.New("authorization is empty"))
 	}
 

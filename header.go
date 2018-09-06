@@ -71,5 +71,6 @@ const (
 	// Refer to Section 3.7 of Sophos documentation
 	XRestdSession = "X-Restd-Session"
 
-	Authoization = "Authorization"
+	// Authorization is the Authorization http.Header key
+	Authorization = "Authorization"
 )
