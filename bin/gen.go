@@ -325,70 +325,70 @@ func (n *node) fetch() error {
 	return nil
 }
 
-func (e *node) AddReference(ref string) {
-	for _, se := range e.References {
+func (n *node) AddReference(ref string) {
+	for _, se := range n.References {
 		if se == ref {
 			return
 		}
 	}
-	e.References = append(e.References, ref)
+	n.References = append(n.References, ref)
 }
 
-func (e *node) AddMethod(m string) {
-	for _, se := range e.Methods {
+func (n *node) AddMethod(m string) {
+	for _, se := range n.Methods {
 		if se == m {
 			return
 		}
 	}
-	e.Methods = append(e.Methods, m)
+	n.Methods = append(n.Methods, m)
 }
 
-func (e *node) AddSubType(s subtype) {
-	for idx, se := range e.SubTypes {
+func (n *node) AddSubType(s subtype) {
+	for idx, se := range n.SubTypes {
 		if se.Name == s.Name {
 			if s.HasRef {
-				e.SubTypes[idx].HasRef = true
+				n.SubTypes[idx].HasRef = true
 			}
 			if len(s.GetPaths) > 0 {
-				e.SubTypes[idx].GetPaths = append(e.SubTypes[idx].GetPaths, s.GetPaths...)
+				n.SubTypes[idx].GetPaths = append(n.SubTypes[idx].GetPaths, s.GetPaths...)
 			}
 
 			if s.GetPath != "" {
-				e.SubTypes[idx].GetPath = s.GetPath
+				n.SubTypes[idx].GetPath = s.GetPath
 			}
 
 			if s.PutPath != "" {
-				e.SubTypes[idx].PutPath = s.PutPath
+				n.SubTypes[idx].PutPath = s.PutPath
 			}
 
 			if s.PostPath != "" {
-				e.SubTypes[idx].PostPath = s.PostPath
+				n.SubTypes[idx].PostPath = s.PostPath
 			}
 
 			if s.DeletePath != "" {
-				e.SubTypes[idx].DeletePath = s.DeletePath
+				n.SubTypes[idx].DeletePath = s.DeletePath
 			}
 
 			if s.PatchPath != "" {
-				e.SubTypes[idx].PatchPath = s.PatchPath
+				n.SubTypes[idx].PatchPath = s.PatchPath
 			}
 
 			if s.Bytes != "" {
-				e.SubTypes[idx].Bytes = s.Bytes
+				n.SubTypes[idx].Bytes = s.Bytes
 			}
 
 			if !se.IsPlural && s.IsPlural {
-				e.SubTypes[idx].IsPlural = s.IsPlural
+				n.SubTypes[idx].IsPlural = s.IsPlural
 			}
 
 			if !se.IsType && s.IsType {
-				e.SubTypes[idx].IsType = s.IsType
+				n.SubTypes[idx].IsType = s.IsType
 			}
 			return
 		}
 	}
 
-	e.SubTypes = append(e.SubTypes, s)
+	n.SubTypes = append(n.SubTypes, s)
 }
 
 func addWordBoundariesToNumbers(s string) string {
@@ -618,12 +618,12 @@ var funcMap = template.FuncMap{
 	},
 }
 
-func (ep *node) ExecuteTemplate(w io.Writer) error {
+func (n *node) ExecuteTemplate(w io.Writer) error {
 	tmpl, err := template.New("").Funcs(funcMap).Parse(nodeTemplate)
 	if err != nil {
 		return err
 	}
-	err = tmpl.Execute(w, ep)
+	err = tmpl.Execute(w, n)
 	if err != nil {
 		fmt.Println(err.Error())
 		return err

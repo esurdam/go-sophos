@@ -66,6 +66,7 @@ type Definition struct {
 	Link        string
 }
 
+// Swag represents a Swagger API document.
 // The Swagger API document contains API endpoints along with parameters and object
 // definitions for those endpoints. When objects have references to other objects the
 // type is a regular string (REF_ string). Since not all references are allowed, each object

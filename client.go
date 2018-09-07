@@ -201,7 +201,7 @@ func (c Client) PatchObject(o RestObject, options ...Option) error {
 	return err
 }
 
-// PatchObject PUTs the RestObject
+// PutObject PUTs the RestObject
 func (c Client) PutObject(o RestObject, options ...Option) error {
 	ref, required := o.RefRequired()
 	if required && ref == "" {
