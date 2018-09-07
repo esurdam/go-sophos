@@ -64,26 +64,26 @@ type Definition struct {
 	Description string
 	Name        string
 	Link        string
-	// The Swagger API document contains API endpoints along with parameters and object
-	// definitions for those endpoints. When objects have references to other objects the
-	// type is a regular string (REF_ string). Since not all references are allowed, each object
-	// has a description that states which subset of an object can be used as a reference. For
-	// example, the string REF(network/*) means that all network objects can be used as ref
-	// erences while REF(network/host) means that only network host objects can be used.
-	Swag *map[string]MethodMap
 }
 
+// The Swagger API document contains API endpoints along with parameters and object
+// definitions for those endpoints. When objects have references to other objects the
+// type is a regular string (REF_ string). Since not all references are allowed, each object
+// has a description that states which subset of an object can be used as a reference. For
+// example, the string REF(network/*) means that all network objects can be used as ref
+// erences while REF(network/host) means that only network host objects can be used.
+type Swag map[string]MethodMap
+
 // GetSwag will use the Client to request its Swag
-func (d *Definition) GetSwag(c *Client, options ...Option) error {
-	if d.Swag == nil {
-		d.Swag = &map[string]MethodMap{}
-	}
+func (d *Definition) GetSwag(c *Client, options ...Option) (Swag, error) {
+	var swag map[string]MethodMap
 	r, err := c.Get(d.Link, options...)
 	if err != nil {
-		return err
+		return swag, err
 	}
 
-	return r.MarshalTo(&d.Swag)
+	err = r.MarshalTo(&swag)
+	return swag, err
 }
 
 // MethodMap is a map of Methods -> MethodDescriptions
