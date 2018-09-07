@@ -89,6 +89,12 @@ func (*DyndnsDyndns) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*DyndnsDyndns) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s/usedby", ref)
+}
+
 // DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DyndnsGroup []interface{}
 
@@ -121,4 +127,10 @@ func (*DyndnsGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*DyndnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*DyndnsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/group/%s/usedby", ref)
 }

@@ -106,6 +106,12 @@ func (*PimSmGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PimSmGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/group/%s/usedby", ref)
+}
+
 // PimSmInterface is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmInterface []interface{}
 
@@ -138,6 +144,12 @@ func (*PimSmInterface) PostPath() string {
 // Creates or updates the complete object interface
 func (*PimSmInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/interface/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PimSmInterface) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/interface/%s/usedby", ref)
 }
 
 // PimSmRoute is an Sophos Endpoint subType and implements sophos.RestObject
@@ -174,6 +186,12 @@ func (*PimSmRoute) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PimSmRoute) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/route/%s/usedby", ref)
+}
+
 // PimSmRpRouter is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmRpRouter []interface{}
 
@@ -206,4 +224,10 @@ func (*PimSmRpRouter) PostPath() string {
 // Creates or updates the complete object rp_router
 func (*PimSmRpRouter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PimSmRpRouter) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s/usedby", ref)
 }

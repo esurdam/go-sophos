@@ -98,6 +98,12 @@ func (*HotspotGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*HotspotGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/hotspot/group/%s/usedby", ref)
+}
+
 // HotspotPortal is an Sophos Endpoint subType and implements sophos.RestObject
 type HotspotPortal []interface{}
 
@@ -132,6 +138,12 @@ func (*HotspotPortal) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*HotspotPortal) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/hotspot/portal/%s/usedby", ref)
+}
+
 // HotspotVoucher is an Sophos Endpoint subType and implements sophos.RestObject
 type HotspotVoucher []interface{}
 
@@ -164,4 +176,10 @@ func (*HotspotVoucher) PostPath() string {
 // Creates or updates the complete object voucher
 func (*HotspotVoucher) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/voucher/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*HotspotVoucher) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/hotspot/voucher/%s/usedby", ref)
 }

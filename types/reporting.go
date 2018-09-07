@@ -136,6 +136,12 @@ func (*ReportingDepartment) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReportingDepartment) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/department/%s/usedby", ref)
+}
+
 // ReportingFilters is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingFilters []ReportingFilter
 
@@ -199,6 +205,12 @@ func (*ReportingFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/filter/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReportingFilter) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/filter/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (r *ReportingFilter) GetType() string { return r._type }
 
@@ -236,6 +248,12 @@ func (*ReportingGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReportingGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/group/%s/usedby", ref)
+}
+
 // ReportingMail is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingMail []interface{}
 
@@ -268,4 +286,10 @@ func (*ReportingMail) PostPath() string {
 // Creates or updates the complete object mail
 func (*ReportingMail) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/mail/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReportingMail) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/mail/%s/usedby", ref)
 }

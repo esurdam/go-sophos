@@ -156,6 +156,12 @@ func (*IpsException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (i *IpsException) GetType() string { return i._type }
 
@@ -216,6 +222,12 @@ func (*IpsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/group/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (i *IpsGroup) GetType() string { return i._type }
 
@@ -253,6 +265,12 @@ func (*IpsRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsRule) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/rule/%s/usedby", ref)
+}
+
 // IpsRuleModifier is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsRuleModifier []interface{}
 
@@ -285,4 +303,10 @@ func (*IpsRuleModifier) PostPath() string {
 // Creates or updates the complete object rule_modifier
 func (*IpsRuleModifier) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsRuleModifier) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s/usedby", ref)
 }

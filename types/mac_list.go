@@ -90,6 +90,12 @@ func (*MacListGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*MacListGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/mac_list/group/%s/usedby", ref)
+}
+
 // MacListMacList is an Sophos Endpoint subType and implements sophos.RestObject
 type MacListMacList []interface{}
 
@@ -122,4 +128,10 @@ func (*MacListMacList) PostPath() string {
 // Creates or updates the complete object mac_list
 func (*MacListMacList) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*MacListMacList) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s/usedby", ref)
 }

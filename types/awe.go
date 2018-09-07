@@ -125,6 +125,12 @@ func (*AweClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/client/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweClient) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/client/%s/usedby", ref)
+}
+
 // AweDevice is an Sophos Endpoint subType and implements sophos.RestObject
 type AweDevice []interface{}
 
@@ -157,6 +163,12 @@ func (*AweDevice) PostPath() string {
 // Creates or updates the complete object device
 func (*AweDevice) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweDevice) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/device/%s/usedby", ref)
 }
 
 // AweGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -193,6 +205,12 @@ func (*AweGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/group/%s/usedby", ref)
+}
+
 // AweLocal is an Sophos Endpoint subType and implements sophos.RestObject
 type AweLocal []interface{}
 
@@ -227,6 +245,12 @@ func (*AweLocal) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/local/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweLocal) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/local/%s/usedby", ref)
+}
+
 // AweRed is an Sophos Endpoint subType and implements sophos.RestObject
 type AweRed []interface{}
 
@@ -259,4 +283,10 @@ func (*AweRed) PostPath() string {
 // Creates or updates the complete object red
 func (*AweRed) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/red/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweRed) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/red/%s/usedby", ref)
 }

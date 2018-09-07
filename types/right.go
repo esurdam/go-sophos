@@ -90,6 +90,12 @@ func (*RightGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RightGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/right/group/%s/usedby", ref)
+}
+
 // RightRights is an Sophos Endpoint subType and implements sophos.RestObject
 type RightRights []RightRight
 
@@ -138,6 +144,12 @@ func (*RightRight) PostPath() string {
 // Creates or updates the complete object right
 func (*RightRight) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/right/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RightRight) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/right/right/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

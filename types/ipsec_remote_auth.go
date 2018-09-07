@@ -108,6 +108,12 @@ func (*IpsecRemoteAuthCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/ca/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteAuthCa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/ca/%s/usedby", ref)
+}
+
 // IpsecRemoteAuthGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecRemoteAuthGroup []interface{}
 
@@ -140,6 +146,12 @@ func (*IpsecRemoteAuthGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*IpsecRemoteAuthGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteAuthGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s/usedby", ref)
 }
 
 // IpsecRemoteAuthPsks is an Sophos Endpoint subType and implements sophos.RestObject
@@ -197,6 +209,12 @@ func (*IpsecRemoteAuthPsk) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/psk/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteAuthPsk) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/psk/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (i *IpsecRemoteAuthPsk) GetType() string { return i._type }
 
@@ -232,6 +250,12 @@ func (*IpsecRemoteAuthRsa) PostPath() string {
 // Creates or updates the complete object rsa
 func (*IpsecRemoteAuthRsa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteAuthRsa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s/usedby", ref)
 }
 
 // IpsecRemoteAuthX509s is an Sophos Endpoint subType and implements sophos.RestObject
@@ -287,6 +311,12 @@ func (*IpsecRemoteAuthX509) PostPath() string {
 // Creates or updates the complete object x509
 func (*IpsecRemoteAuthX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteAuthX509) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

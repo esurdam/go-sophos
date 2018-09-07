@@ -145,6 +145,12 @@ func (*CaCrl) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/crl/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaCrl) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/crl/%s/usedby", ref)
+}
+
 // CaGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type CaGroup []interface{}
 
@@ -177,6 +183,12 @@ func (*CaGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*CaGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/group/%s/usedby", ref)
 }
 
 // CaHostCerts is an Sophos Endpoint subType and implements sophos.RestObject
@@ -229,6 +241,12 @@ func (*CaHostCert) PostPath() string {
 // Creates or updates the complete object host_cert
 func (*CaHostCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_cert/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaHostCert) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/host_cert/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -291,6 +309,12 @@ func (*CaHostKeyCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_key_cert/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaHostKeyCert) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/host_key_cert/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (c *CaHostKeyCert) GetType() string { return c._type }
 
@@ -328,6 +352,12 @@ func (*CaHttpVerificationCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaHttpVerificationCa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s/usedby", ref)
+}
+
 // CaMetaCrl is an Sophos Endpoint subType and implements sophos.RestObject
 type CaMetaCrl []interface{}
 
@@ -360,6 +390,12 @@ func (*CaMetaCrl) PostPath() string {
 // Creates or updates the complete object meta_crl
 func (*CaMetaCrl) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_crl/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaMetaCrl) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/meta_crl/%s/usedby", ref)
 }
 
 // CaMetaX509s is an Sophos Endpoint subType and implements sophos.RestObject
@@ -424,6 +460,12 @@ func (*CaMetaX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_x509/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaMetaX509) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/meta_x509/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (c *CaMetaX509) GetType() string { return c._type }
 
@@ -480,6 +522,12 @@ func (*CaRsa) PostPath() string {
 // Creates or updates the complete object rsa
 func (*CaRsa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/rsa/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaRsa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/rsa/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -544,6 +592,12 @@ func (*CaSigningCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/signing_ca/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaSigningCa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/signing_ca/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (c *CaSigningCa) GetType() string { return c._type }
 
@@ -579,4 +633,10 @@ func (*CaVerificationCa) PostPath() string {
 // Creates or updates the complete object verification_ca
 func (*CaVerificationCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/verification_ca/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*CaVerificationCa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ca/verification_ca/%s/usedby", ref)
 }

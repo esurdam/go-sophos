@@ -78,3 +78,8 @@ func (*StatusVersion) PostPath() string {
 func (*StatusVersion) PutPath(ref string) string {
 	return fmt.Sprintf("/api", ref)
 }
+
+// UsedByPath implements sophos.Object
+func (*StatusVersion) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/usedby", ref)
+}

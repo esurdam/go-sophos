@@ -138,6 +138,12 @@ func (*ServiceAh) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceAh) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ah/%s/usedby", ref)
+}
+
 // ServiceAnys is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceAnys []ServiceAny
 
@@ -188,6 +194,12 @@ func (*ServiceAny) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/any/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceAny) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/any/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *ServiceAny) GetType() string { return s._type }
 
@@ -223,6 +235,12 @@ func (*ServiceEsp) PostPath() string {
 // Creates or updates the complete object esp
 func (*ServiceEsp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceEsp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/esp/%s/usedby", ref)
 }
 
 // ServiceGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -277,6 +295,12 @@ func (*ServiceGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*ServiceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/group/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -336,6 +360,12 @@ func (*ServiceIcmp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceIcmp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmp/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *ServiceIcmp) GetType() string { return s._type }
 
@@ -371,6 +401,12 @@ func (*ServiceIcmpv6) PostPath() string {
 // Creates or updates the complete object icmpv6
 func (*ServiceIcmpv6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceIcmpv6) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmpv6/%s/usedby", ref)
 }
 
 // ServiceIps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -422,6 +458,12 @@ func (*ServiceIp) PostPath() string {
 // Creates or updates the complete object ip
 func (*ServiceIp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceIp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ip/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -481,6 +523,12 @@ func (*ServiceTcp) PostPath() string {
 // Creates or updates the complete object tcp
 func (*ServiceTcp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcp/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceTcp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/tcp/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -544,6 +592,12 @@ func (*ServiceTcpudp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcpudp/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceTcpudp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/tcpudp/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *ServiceTcpudp) GetType() string { return s._type }
 
@@ -601,6 +655,12 @@ func (*ServiceUdp) PostPath() string {
 // Creates or updates the complete object udp
 func (*ServiceUdp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/udp/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ServiceUdp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/udp/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

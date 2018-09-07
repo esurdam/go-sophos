@@ -90,6 +90,12 @@ func (*ApplicationControlGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ApplicationControlGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/application_control/group/%s/usedby", ref)
+}
+
 // ApplicationControlRules is an Sophos Endpoint subType and implements sophos.RestObject
 type ApplicationControlRules []ApplicationControlRule
 
@@ -150,6 +156,12 @@ func (*ApplicationControlRule) PostPath() string {
 // Creates or updates the complete object rule
 func (*ApplicationControlRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/rule/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ApplicationControlRule) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/application_control/rule/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

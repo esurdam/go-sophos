@@ -96,6 +96,12 @@ func (*AwsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AwsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/group/%s/usedby", ref)
+}
+
 // AwsInstanceTypes is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsInstanceTypes []AwsInstanceType
 
@@ -153,6 +159,12 @@ func (*AwsInstanceType) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AwsInstanceType) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/instance_type/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (a *AwsInstanceType) GetType() string { return a._type }
 
@@ -208,6 +220,12 @@ func (*AwsRegion) PostPath() string {
 // Creates or updates the complete object region
 func (*AwsRegion) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AwsRegion) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/region/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

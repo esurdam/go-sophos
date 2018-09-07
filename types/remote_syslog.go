@@ -92,6 +92,12 @@ func (*RemoteSyslogGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/remote_syslog/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RemoteSyslogGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/remote_syslog/group/%s/usedby", ref)
+}
+
 // RemoteSyslogServer is an Sophos Endpoint subType and implements sophos.RestObject
 type RemoteSyslogServer []interface{}
 
@@ -124,4 +130,10 @@ func (*RemoteSyslogServer) PostPath() string {
 // Creates or updates the complete object server
 func (*RemoteSyslogServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/remote_syslog/server/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RemoteSyslogServer) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/remote_syslog/server/%s/usedby", ref)
 }

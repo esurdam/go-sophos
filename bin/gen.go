@@ -188,7 +188,6 @@ func (def *definition) process() error {
 	for path, methodMap := range def.Swag.Paths {
 		// add the path to the known Node Paths
 		ep.Routes = append(ep.Routes, path)
-
 		// make a human readable name
 		parts := strings.Split(path, "/")
 		name := parts[len(parts)-2]
@@ -590,6 +589,11 @@ func(*{{.Name}}) PutPath(ref string) string {
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}", ref)
 }
 
+// UsedByPath implements sophos.Object{{getUsedBy .}}
+func(*{{.Name}}) UsedByPath(ref string) string { 
+	return fmt.Sprintf("/api{{asRefUrl .PutPath}}/usedby", ref)
+}
+
 {{if .IsType}}
 // GetType implements sophos.Object
 func({{firstLetter .Name}} *{{.Name}}) GetType() string { return {{firstLetter .Name}}._type }
@@ -602,6 +606,13 @@ var funcMap = template.FuncMap{
 	"asRefUrl": func(path string) string { return strings.Replace(path, "{ref}", "%s", -1) },
 	"getDesc": func(s *subtype, p, m string) string {
 		v := s.Node.Paths[p][m].Description
+		if strings.TrimSpace(v) == "" {
+			return ""
+		}
+		return fmt.Sprintf("\n// %s", v)
+	},
+	"getUsedBy": func(s *subtype) string {
+		v := s.Node.Paths[s.PatchPath+"/usedby"]["get"].Description
 		if strings.TrimSpace(v) == "" {
 			return ""
 		}

@@ -98,6 +98,12 @@ func (*AweNetworkDeviceAssociationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweNetworkDeviceAssociationGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s/usedby", ref)
+}
+
 // AweNetworkDeviceAssociationMeshRole is an Sophos Endpoint subType and implements sophos.RestObject
 type AweNetworkDeviceAssociationMeshRole []interface{}
 
@@ -132,4 +138,10 @@ func (*AweNetworkDeviceAssociationMeshRole) PostPath() string {
 // Creates or updates the complete object mesh_role
 func (*AweNetworkDeviceAssociationMeshRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AweNetworkDeviceAssociationMeshRole) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s/usedby", ref)
 }

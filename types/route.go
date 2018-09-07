@@ -96,6 +96,12 @@ func (*RouteGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RouteGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/group/%s/usedby", ref)
+}
+
 // RoutePolicy is an Sophos Endpoint subType and implements sophos.RestObject
 type RoutePolicy []interface{}
 
@@ -128,6 +134,12 @@ func (*RoutePolicy) PostPath() string {
 // Creates or updates the complete object policy
 func (*RoutePolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RoutePolicy) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/policy/%s/usedby", ref)
 }
 
 // RouteStatics is an Sophos Endpoint subType and implements sophos.RestObject
@@ -185,6 +197,12 @@ func (*RouteStatic) PostPath() string {
 // Creates or updates the complete object static
 func (*RouteStatic) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RouteStatic) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/static/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

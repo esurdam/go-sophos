@@ -154,6 +154,12 @@ func (*SmtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SmtpException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/exception/%s/usedby", ref)
+}
+
 // SmtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpGroup []interface{}
 
@@ -188,6 +194,12 @@ func (*SmtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SmtpGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/group/%s/usedby", ref)
+}
+
 // SmtpHeaderOperation is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpHeaderOperation []interface{}
 
@@ -220,6 +232,12 @@ func (*SmtpHeaderOperation) PostPath() string {
 // Creates or updates the complete object header_operation
 func (*SmtpHeaderOperation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SmtpHeaderOperation) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/header_operation/%s/usedby", ref)
 }
 
 // SmtpProfiles is an Sophos Endpoint subType and implements sophos.RestObject
@@ -317,6 +335,12 @@ func (*SmtpProfile) PostPath() string {
 // Creates or updates the complete object profile
 func (*SmtpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SmtpProfile) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/profile/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

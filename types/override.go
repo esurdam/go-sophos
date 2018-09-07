@@ -90,6 +90,12 @@ func (*OverrideGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*OverrideGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/override/group/%s/usedby", ref)
+}
+
 // OverrideObjref is an Sophos Endpoint subType and implements sophos.RestObject
 type OverrideObjref []interface{}
 
@@ -122,4 +128,10 @@ func (*OverrideObjref) PostPath() string {
 // Creates or updates the complete object objref
 func (*OverrideObjref) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*OverrideObjref) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/override/objref/%s/usedby", ref)
 }

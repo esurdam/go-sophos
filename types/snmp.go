@@ -102,6 +102,12 @@ func (*SnmpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SnmpGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/snmp/group/%s/usedby", ref)
+}
+
 // SnmpTrap is an Sophos Endpoint subType and implements sophos.RestObject
 type SnmpTrap []interface{}
 
@@ -134,4 +140,10 @@ func (*SnmpTrap) PostPath() string {
 // Creates or updates the complete object trap
 func (*SnmpTrap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/trap/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SnmpTrap) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/snmp/trap/%s/usedby", ref)
 }

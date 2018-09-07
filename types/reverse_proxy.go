@@ -213,6 +213,12 @@ func (*ReverseProxyAuthProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/auth_profile/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyAuthProfile) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/auth_profile/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (r *ReverseProxyAuthProfile) GetType() string { return r._type }
 
@@ -276,6 +282,12 @@ func (*ReverseProxyBackend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyBackend) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (r *ReverseProxyBackend) GetType() string { return r._type }
 
@@ -313,6 +325,12 @@ func (*ReverseProxyException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s/usedby", ref)
+}
+
 // ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFilter []interface{}
 
@@ -345,6 +363,12 @@ func (*ReverseProxyFilter) PostPath() string {
 // Creates or updates the complete object filter
 func (*ReverseProxyFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyFilter) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s/usedby", ref)
 }
 
 // ReverseProxyFormTemplates is an Sophos Endpoint subType and implements sophos.RestObject
@@ -402,6 +426,12 @@ func (*ReverseProxyFormTemplate) PostPath() string {
 // Creates or updates the complete object form_template
 func (*ReverseProxyFormTemplate) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyFormTemplate) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -477,6 +507,12 @@ func (*ReverseProxyFrontend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/frontend/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyFrontend) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/frontend/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
@@ -512,6 +548,12 @@ func (*ReverseProxyGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*ReverseProxyGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s/usedby", ref)
 }
 
 // ReverseProxyLocations is an Sophos Endpoint subType and implements sophos.RestObject
@@ -576,6 +618,12 @@ func (*ReverseProxyLocation) PostPath() string {
 // Creates or updates the complete object location
 func (*ReverseProxyLocation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyLocation) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -665,6 +713,12 @@ func (*ReverseProxyProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyProfile) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (r *ReverseProxyProfile) GetType() string { return r._type }
 
@@ -702,6 +756,12 @@ func (*ReverseProxyRedirection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyRedirection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s/usedby", ref)
+}
+
 // ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyThreatsFilter []interface{}
 
@@ -736,4 +796,10 @@ func (*ReverseProxyThreatsFilter) PostPath() string {
 // Creates or updates the complete object threats_filter
 func (*ReverseProxyThreatsFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ReverseProxyThreatsFilter) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s/usedby", ref)
 }

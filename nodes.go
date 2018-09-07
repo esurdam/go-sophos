@@ -1,5 +1,16 @@
 package sophos
 
+// An Endpoint represents a UTM endpoint which is defined by its definitions endpoint
+// GET /api/definitions/aws
+type Endpoint interface {
+	// Definition returns the endpoint Definition
+	Definition() Definition
+	// Objects returns a map of the Node's editable Objects
+	RestObjects() map[string]RestObject
+	// ApiRoutes returns all known Node paths
+	ApiRoutes() []string
+}
+
 // A Node is a resource within Sophos UTM that you can update but cannot create, delete, or move.
 // Nodes are organized hierarchically as in a filesystem. An example of a node is the “Shell Access”
 // service module within Sophos UTM (identified as the “ssh” node). To enable the Shell Access service,
@@ -8,14 +19,7 @@ package sophos
 // Unlike filesystems which use a slash “/” to separate the different nodes, Sophos UTM RESTful API uses
 // a dot “.” to separate different nodes. Nodes reference objects, for example “Shell Access” and have a
 // leaf node of allowed_networks which is an array of references to network objects.
-type Node interface {
-	// Definition returns the endpoint Definition
-	Definition() Definition
-	// Objects returns a map of the Node's editable Objects
-	RestObjects() map[string]RestObject
-	// ApiRoutes returns all known Node paths
-	ApiRoutes() []string
-}
+type Node string
 
 // An Object resides in collections, which you can create, change, or delete. The collections of objects are
 // predefined into classes and types. A class describes the general purpose of the objects whereas the type
@@ -28,6 +32,12 @@ type Node interface {
 type Object interface {
 	// GetType returns the objects Type
 	GetType() string
+}
+
+// UsedObject is an interface for Objects that can be used by other Objects and Nodes.
+type UsedObject interface {
+	// UsedByPath returns the usedby URL path to query for UsedBy data
+	UsedByPath(ref string) string
 }
 
 // A Reference is the connections between nodes and objects as well as between one object and another object.

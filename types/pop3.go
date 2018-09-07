@@ -129,6 +129,12 @@ func (*Pop3Account) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/account/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*Pop3Account) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/account/%s/usedby", ref)
+}
+
 // Pop3Exception is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Exception []interface{}
 
@@ -161,6 +167,12 @@ func (*Pop3Exception) PostPath() string {
 // Creates or updates the complete object exception
 func (*Pop3Exception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*Pop3Exception) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/exception/%s/usedby", ref)
 }
 
 // Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
@@ -197,6 +209,12 @@ func (*Pop3Group) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*Pop3Group) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/group/%s/usedby", ref)
+}
+
 // Pop3Server is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Server []interface{}
 
@@ -229,4 +247,10 @@ func (*Pop3Server) PostPath() string {
 // Creates or updates the complete object server
 func (*Pop3Server) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*Pop3Server) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/server/%s/usedby", ref)
 }

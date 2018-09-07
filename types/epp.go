@@ -155,6 +155,12 @@ func (*EppAvException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppAvException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/av_exception/%s/usedby", ref)
+}
+
 // EppAvPolicys is an Sophos Endpoint subType and implements sophos.RestObject
 type EppAvPolicys []EppAvPolicy
 
@@ -230,6 +236,12 @@ func (*EppAvPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppAvPolicy) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/av_policy/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (e *EppAvPolicy) GetType() string { return e._type }
 
@@ -265,6 +277,12 @@ func (*EppDcException) PostPath() string {
 // Creates or updates the complete object dc_exception
 func (*EppDcException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppDcException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_exception/%s/usedby", ref)
 }
 
 // EppDcPolicys is an Sophos Endpoint subType and implements sophos.RestObject
@@ -327,6 +345,12 @@ func (*EppDcPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppDcPolicy) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_policy/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (e *EppDcPolicy) GetType() string { return e._type }
 
@@ -364,6 +388,12 @@ func (*EppDevice) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppDevice) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/device/%s/usedby", ref)
+}
+
 // EppEndpoint is an Sophos Endpoint subType and implements sophos.RestObject
 type EppEndpoint []interface{}
 
@@ -396,6 +426,12 @@ func (*EppEndpoint) PostPath() string {
 // Creates or updates the complete object endpoint
 func (*EppEndpoint) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppEndpoint) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/endpoint/%s/usedby", ref)
 }
 
 // EppEndpointsGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -460,6 +496,12 @@ func (*EppEndpointsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppEndpointsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (e *EppEndpointsGroup) GetType() string { return e._type }
 
@@ -495,4 +537,10 @@ func (*EppGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*EppGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EppGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/group/%s/usedby", ref)
 }

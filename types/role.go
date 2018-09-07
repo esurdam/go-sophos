@@ -90,6 +90,12 @@ func (*RoleGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RoleGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s/usedby", ref)
+}
+
 // RoleRoles is an Sophos Endpoint subType and implements sophos.RestObject
 type RoleRoles []RoleRole
 
@@ -141,6 +147,12 @@ func (*RoleRole) PostPath() string {
 // Creates or updates the complete object role
 func (*RoleRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*RoleRole) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/role/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

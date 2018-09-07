@@ -90,6 +90,12 @@ func (*IpfixConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpfixConnectionGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s/usedby", ref)
+}
+
 // IpfixConnectionIpfixConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type IpfixConnectionIpfixConnection []interface{}
 
@@ -124,4 +130,10 @@ func (*IpfixConnectionIpfixConnection) PostPath() string {
 // Creates or updates the complete object ipfix_connection
 func (*IpfixConnectionIpfixConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpfixConnectionIpfixConnection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s/usedby", ref)
 }

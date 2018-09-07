@@ -101,6 +101,12 @@ func (*FtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*FtpException) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ftp/exception/%s/usedby", ref)
+}
+
 // FtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type FtpGroup []interface{}
 
@@ -133,4 +139,10 @@ func (*FtpGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*FtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*FtpGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ftp/group/%s/usedby", ref)
 }

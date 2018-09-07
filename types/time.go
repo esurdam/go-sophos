@@ -96,6 +96,12 @@ func (*TimeGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*TimeGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/time/group/%s/usedby", ref)
+}
+
 // TimeRecurrings is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeRecurrings []TimeRecurring
 
@@ -151,6 +157,12 @@ func (*TimeRecurring) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/recurring/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*TimeRecurring) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/time/recurring/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (t *TimeRecurring) GetType() string { return t._type }
 
@@ -186,4 +198,10 @@ func (*TimeSingle) PostPath() string {
 // Creates or updates the complete object single
 func (*TimeSingle) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/single/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*TimeSingle) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/time/single/%s/usedby", ref)
 }

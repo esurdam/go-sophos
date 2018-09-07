@@ -96,6 +96,12 @@ func (*SchedulerGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SchedulerGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/group/%s/usedby", ref)
+}
+
 // SchedulerLoadbalances is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerLoadbalances []SchedulerLoadbalance
 
@@ -160,6 +166,12 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SchedulerLoadbalance) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *SchedulerLoadbalance) GetType() string { return s._type }
 
@@ -222,6 +234,12 @@ func (*SchedulerRule) PostPath() string {
 // Creates or updates the complete object rule
 func (*SchedulerRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SchedulerRule) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/rule/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

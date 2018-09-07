@@ -51,6 +51,20 @@ func main() {
 	}
 	fmt.Println(swag.Paths)
 
+	var cc types.AmazonVpcConnections
+	err = client.GetObject(&cc)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, c := range cc {
+		fmt.Println(c.Name)
+		r, _ := client.Get(c.UsedByPath(c.Reference))
+		var usedBy map[string]interface{}
+		r.MarshalTo(&usedBy)
+		fmt.Println(usedBy)
+	}
+
 	// Use any ref as a sample
 	var sampleRef string
 	for _, ds := range dss {

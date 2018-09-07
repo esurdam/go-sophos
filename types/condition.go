@@ -90,6 +90,12 @@ func (*ConditionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ConditionGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s/usedby", ref)
+}
+
 // ConditionObjrefs is an Sophos Endpoint subType and implements sophos.RestObject
 type ConditionObjrefs []ConditionObjref
 
@@ -144,6 +150,12 @@ func (*ConditionObjref) PostPath() string {
 // Creates or updates the complete object objref
 func (*ConditionObjref) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/objref/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ConditionObjref) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/objref/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

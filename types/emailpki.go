@@ -131,6 +131,12 @@ func (*EmailpkiGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EmailpkiGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/group/%s/usedby", ref)
+}
+
 // EmailpkiOpenpgp is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiOpenpgp []interface{}
 
@@ -163,6 +169,12 @@ func (*EmailpkiOpenpgp) PostPath() string {
 // Creates or updates the complete object openpgp
 func (*EmailpkiOpenpgp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EmailpkiOpenpgp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s/usedby", ref)
 }
 
 // EmailpkiSmime is an Sophos Endpoint subType and implements sophos.RestObject
@@ -199,6 +211,12 @@ func (*EmailpkiSmime) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/smime/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EmailpkiSmime) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/smime/%s/usedby", ref)
+}
+
 // EmailpkiUser is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiUser []interface{}
 
@@ -231,4 +249,10 @@ func (*EmailpkiUser) PostPath() string {
 // Creates or updates the complete object user
 func (*EmailpkiUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/user/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*EmailpkiUser) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/user/%s/usedby", ref)
 }

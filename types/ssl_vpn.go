@@ -160,6 +160,12 @@ func (*SslVpnClientConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/client_connection/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SslVpnClientConnection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/client_connection/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *SslVpnClientConnection) GetType() string { return s._type }
 
@@ -195,6 +201,12 @@ func (*SslVpnGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*SslVpnGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SslVpnGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s/usedby", ref)
 }
 
 // SslVpnRemoteAccessProfiles is an Sophos Endpoint subType and implements sophos.RestObject
@@ -256,6 +268,12 @@ func (*SslVpnRemoteAccessProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/remote_access_profile/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SslVpnRemoteAccessProfile) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/remote_access_profile/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
 
@@ -291,4 +309,10 @@ func (*SslVpnServerConnection) PostPath() string {
 // Creates or updates the complete object server_connection
 func (*SslVpnServerConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/server_connection/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*SslVpnServerConnection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/server_connection/%s/usedby", ref)
 }

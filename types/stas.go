@@ -90,6 +90,12 @@ func (*StasCollector) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*StasCollector) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/stas/collector/%s/usedby", ref)
+}
+
 // StasGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type StasGroup []interface{}
 
@@ -122,4 +128,10 @@ func (*StasGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*StasGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/stas/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*StasGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/stas/group/%s/usedby", ref)
 }

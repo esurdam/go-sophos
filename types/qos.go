@@ -118,6 +118,12 @@ func (*QosApplicationSelector) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosApplicationSelector) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/application_selector/%s/usedby", ref)
+}
+
 // QosGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type QosGroup []interface{}
 
@@ -152,6 +158,12 @@ func (*QosGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/group/%s/usedby", ref)
+}
+
 // QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
 type QosIngressRule []interface{}
 
@@ -184,6 +196,12 @@ func (*QosIngressRule) PostPath() string {
 // Creates or updates the complete object ingress_rule
 func (*QosIngressRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosIngressRule) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s/usedby", ref)
 }
 
 // QosInterfaces is an Sophos Endpoint subType and implements sophos.RestObject
@@ -247,6 +265,12 @@ func (*QosInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosInterface) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/interface/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (q *QosInterface) GetType() string { return q._type }
 
@@ -284,6 +308,12 @@ func (*QosRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/rule/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosRule) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/rule/%s/usedby", ref)
+}
+
 // QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
 type QosTrafficSelector []interface{}
 
@@ -318,6 +348,12 @@ func (*QosTrafficSelector) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosTrafficSelector) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s/usedby", ref)
+}
+
 // QosTrafficSelectorGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type QosTrafficSelectorGroup []interface{}
 
@@ -350,4 +386,10 @@ func (*QosTrafficSelectorGroup) PostPath() string {
 // Creates or updates the complete object traffic_selector_group
 func (*QosTrafficSelectorGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*QosTrafficSelectorGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s/usedby", ref)
 }

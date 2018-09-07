@@ -120,6 +120,12 @@ func (*AuthenticationAdirectory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationAdirectory) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/adirectory/%s/usedby", ref)
+}
+
 // AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationEdirectory []interface{}
 
@@ -152,6 +158,12 @@ func (*AuthenticationEdirectory) PostPath() string {
 // Creates or updates the complete object edirectory
 func (*AuthenticationEdirectory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationEdirectory) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/edirectory/%s/usedby", ref)
 }
 
 // AuthenticationGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -188,6 +200,12 @@ func (*AuthenticationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/group/%s/usedby", ref)
+}
+
 // AuthenticationLdap is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationLdap []interface{}
 
@@ -220,6 +238,12 @@ func (*AuthenticationLdap) PostPath() string {
 // Creates or updates the complete object ldap
 func (*AuthenticationLdap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationLdap) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/ldap/%s/usedby", ref)
 }
 
 // AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
@@ -256,6 +280,12 @@ func (*AuthenticationOtpToken) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationOtpToken) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s/usedby", ref)
+}
+
 // AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationRadius []interface{}
 
@@ -290,6 +320,12 @@ func (*AuthenticationRadius) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationRadius) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/radius/%s/usedby", ref)
+}
+
 // AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationTacacs []interface{}
 
@@ -322,4 +358,10 @@ func (*AuthenticationTacacs) PostPath() string {
 // Creates or updates the complete object tacacs
 func (*AuthenticationTacacs) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AuthenticationTacacs) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s/usedby", ref)
 }

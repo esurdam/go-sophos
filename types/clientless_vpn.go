@@ -124,6 +124,12 @@ func (*ClientlessVpnConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/connection/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ClientlessVpnConnection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/connection/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (c *ClientlessVpnConnection) GetType() string { return c._type }
 
@@ -159,4 +165,10 @@ func (*ClientlessVpnGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*ClientlessVpnGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*ClientlessVpnGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s/usedby", ref)
 }

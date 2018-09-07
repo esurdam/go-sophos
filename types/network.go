@@ -176,6 +176,12 @@ func (*NetworkAaa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkAaa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkAaa) GetType() string { return n._type }
 
@@ -236,6 +242,12 @@ func (*NetworkAny) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/any/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkAny) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/any/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkAny) GetType() string { return n._type }
 
@@ -271,6 +283,12 @@ func (*NetworkAvailabilityGroup) PostPath() string {
 // Creates or updates the complete object availability_group
 func (*NetworkAvailabilityGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkAvailabilityGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/availability_group/%s/usedby", ref)
 }
 
 // NetworkDnsGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -330,6 +348,12 @@ func (*NetworkDnsGroup) PostPath() string {
 // Creates or updates the complete object dns_group
 func (*NetworkDnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkDnsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_group/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -394,6 +418,12 @@ func (*NetworkDnsHost) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkDnsHost) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_host/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkDnsHost) GetType() string { return n._type }
 
@@ -449,6 +479,12 @@ func (*NetworkGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*NetworkGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -515,6 +551,12 @@ func (*NetworkHost) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/host/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkHost) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/host/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkHost) GetType() string { return n._type }
 
@@ -574,6 +616,12 @@ func (*NetworkInterfaceAddress) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkInterfaceAddress) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkInterfaceAddress) GetType() string { return n._type }
 
@@ -631,6 +679,12 @@ func (*NetworkInterfaceBroadcast) PostPath() string {
 // Creates or updates the complete object interface_broadcast
 func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkInterfaceBroadcast) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -694,6 +748,12 @@ func (*NetworkInterfaceNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkInterfaceNetwork) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_network/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
 
@@ -729,6 +789,12 @@ func (*NetworkMulticast) PostPath() string {
 // Creates or updates the complete object multicast
 func (*NetworkMulticast) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/multicast/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkMulticast) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/multicast/%s/usedby", ref)
 }
 
 // NetworkNetworks is an Sophos Endpoint subType and implements sophos.RestObject
@@ -788,6 +854,12 @@ func (*NetworkNetwork) PostPath() string {
 // Creates or updates the complete object network
 func (*NetworkNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/network/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkNetwork) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/network/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -850,6 +922,12 @@ func (*NetworkRange) PostPath() string {
 // Creates or updates the complete object range
 func (*NetworkRange) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/range/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*NetworkRange) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/range/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

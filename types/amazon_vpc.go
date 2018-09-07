@@ -124,6 +124,12 @@ func (*AmazonVpcConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/connection/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AmazonVpcConnection) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/connection/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (a *AmazonVpcConnection) GetType() string { return a._type }
 
@@ -159,6 +165,12 @@ func (*AmazonVpcGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*AmazonVpcGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AmazonVpcGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s/usedby", ref)
 }
 
 // AmazonVpcTunnels is an Sophos Endpoint subType and implements sophos.RestObject
@@ -215,6 +227,12 @@ func (*AmazonVpcTunnel) PostPath() string {
 // Creates or updates the complete object tunnel
 func (*AmazonVpcTunnel) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*AmazonVpcTunnel) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

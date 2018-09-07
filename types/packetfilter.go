@@ -163,6 +163,12 @@ func (*Packetfilter1to1Nat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*Packetfilter1to1Nat) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s/usedby", ref)
+}
+
 // PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGenericProxy []interface{}
 
@@ -195,6 +201,12 @@ func (*PacketfilterGenericProxy) PostPath() string {
 // Creates or updates the complete object generic_proxy
 func (*PacketfilterGenericProxy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterGenericProxy) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s/usedby", ref)
 }
 
 // PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -231,6 +243,12 @@ func (*PacketfilterGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s/usedby", ref)
+}
+
 // PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterLoadbalance []interface{}
 
@@ -265,6 +283,12 @@ func (*PacketfilterLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterLoadbalance) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s/usedby", ref)
+}
+
 // PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterMangle []interface{}
 
@@ -297,6 +321,12 @@ func (*PacketfilterMangle) PostPath() string {
 // Creates or updates the complete object mangle
 func (*PacketfilterMangle) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterMangle) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s/usedby", ref)
 }
 
 // PacketfilterMasqs is an Sophos Endpoint subType and implements sophos.RestObject
@@ -354,6 +384,12 @@ func (*PacketfilterMasq) PostPath() string {
 // Creates or updates the complete object masq
 func (*PacketfilterMasq) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterMasq) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/masq/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -425,6 +461,12 @@ func (*PacketfilterNat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterNat) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/nat/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (p *PacketfilterNat) GetType() string { return p._type }
 
@@ -493,6 +535,12 @@ func (*PacketfilterPacketfilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/packetfilter/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterPacketfilter) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/packetfilter/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
@@ -528,4 +576,10 @@ func (*PacketfilterRuleset) PostPath() string {
 // Creates or updates the complete object ruleset
 func (*PacketfilterRuleset) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*PacketfilterRuleset) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s/usedby", ref)
 }

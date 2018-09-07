@@ -148,6 +148,12 @@ func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionAmazonVpc) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
 
@@ -183,6 +189,12 @@ func (*IpsecConnectionGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*IpsecConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s/usedby", ref)
 }
 
 // IpsecConnectionL2Tps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -252,6 +264,12 @@ func (*IpsecConnectionL2Tp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionL2Tp) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s/usedby", ref)
+}
+
 // GetType implements sophos.Object
 func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 
@@ -291,6 +309,12 @@ func (*IpsecConnectionRoadwarriorCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s/usedby", ref)
+}
+
 // IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCisco []interface{}
 
@@ -325,6 +349,12 @@ func (*IpsecConnectionRoadwarriorCisco) PostPath() string {
 // Creates or updates the complete object roadwarrior_cisco
 func (*IpsecConnectionRoadwarriorCisco) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s/usedby", ref)
 }
 
 // IpsecConnectionRoadwarriorPsk is an Sophos Endpoint subType and implements sophos.RestObject
@@ -363,6 +393,12 @@ func (*IpsecConnectionRoadwarriorPsk) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s/usedby", ref)
+}
+
 // IpsecConnectionRoadwarriorX509 is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorX509 []interface{}
 
@@ -397,6 +433,12 @@ func (*IpsecConnectionRoadwarriorX509) PostPath() string {
 // Creates or updates the complete object roadwarrior_x509
 func (*IpsecConnectionRoadwarriorX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionRoadwarriorX509) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s/usedby", ref)
 }
 
 // IpsecConnectionSiteToSites is an Sophos Endpoint subType and implements sophos.RestObject
@@ -461,6 +503,12 @@ func (*IpsecConnectionSiteToSite) PostPath() string {
 // Creates or updates the complete object site_to_site
 func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecConnectionSiteToSite) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

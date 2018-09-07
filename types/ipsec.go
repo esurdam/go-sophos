@@ -110,6 +110,12 @@ func (*IpsecGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/group/%s/usedby", ref)
+}
+
 // IpsecPolicys is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecPolicys []IpsecPolicy
 
@@ -170,6 +176,12 @@ func (*IpsecPolicy) PostPath() string {
 // Creates or updates the complete object policy
 func (*IpsecPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecPolicy) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/policy/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
@@ -233,6 +245,12 @@ func (*IpsecRemoteGateway) PostPath() string {
 // Creates or updates the complete object remote_gateway
 func (*IpsecRemoteGateway) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*IpsecRemoteGateway) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

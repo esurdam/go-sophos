@@ -90,6 +90,12 @@ func (*UserPreferencesGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*UserPreferencesGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/user_preferences/group/%s/usedby", ref)
+}
+
 // UserPreferencesWebadmins is an Sophos Endpoint subType and implements sophos.RestObject
 type UserPreferencesWebadmins []UserPreferencesWebadmin
 
@@ -156,6 +162,12 @@ func (*UserPreferencesWebadmin) PostPath() string {
 // Creates or updates the complete object webadmin
 func (*UserPreferencesWebadmin) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/webadmin/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*UserPreferencesWebadmin) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/user_preferences/webadmin/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object

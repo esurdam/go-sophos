@@ -102,6 +102,12 @@ func (*DnsAxfr) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/axfr/%s", ref)
 }
 
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*DnsAxfr) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/axfr/%s/usedby", ref)
+}
+
 // DnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DnsGroup []interface{}
 
@@ -134,6 +140,12 @@ func (*DnsGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*DnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*DnsGroup) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/group/%s/usedby", ref)
 }
 
 // DnsRoutes is an Sophos Endpoint subType and implements sophos.RestObject
@@ -187,6 +199,12 @@ func (*DnsRoute) PostPath() string {
 // Creates or updates the complete object route
 func (*DnsRoute) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/route/%s", ref)
+}
+
+// UsedByPath implements sophos.Object
+// Returns the objects and the nodes that use the object with the given ref
+func (*DnsRoute) UsedByPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/route/%s/usedby", ref)
 }
 
 // GetType implements sophos.Object
