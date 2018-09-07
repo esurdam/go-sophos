@@ -259,6 +259,7 @@ func (def *definition) process() error {
 	sort.Strings(ep.Routes)
 	sort.Strings(ep.Methods)
 	sort.Strings(ep.References)
+	sort.SliceStable(ep.SubTypes, func(i, j int) bool { return ep.SubTypes[i].Name < ep.SubTypes[j].Name })
 	return nil
 }
 
@@ -434,6 +435,7 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 				// make pluralized
 				newLine := strings.Replace(line, " []struct {", "s []"+name, 1)
 				outBuf.Write([]byte(newLine))
+				outBuf.Write([]byte("// " + name + " is a generated Sophos object\n"))
 				newType := strings.Replace(line, " []struct {", " struct {", 1)
 				outBuf.Write([]byte(newType))
 				continue
@@ -546,7 +548,7 @@ func({{.Title}}) References() []string {
 }
 
 {{range .SubTypes}}
-// {{.Name}} is an Sophos Endpoint subType and implements sophos.RestObject
+// {{.Name}}{{if .IsPlural}}s{{end}} is an Sophos Endpoint subType and implements sophos.RestObject
 {{.Bytes}}
 
 {{if .IsPlural}}

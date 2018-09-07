@@ -98,8 +98,10 @@ func (*TimeGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/group/%s", ref)
 }
 
-// TimeRecurring is an Sophos Endpoint subType and implements sophos.RestObject
+// TimeRecurrings is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeRecurrings []TimeRecurring
+
+// TimeRecurring is a generated Sophos object
 type TimeRecurring struct {
 	Locked    string   `json:"_locked"`
 	Reference string   `json:"_ref"`

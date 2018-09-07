@@ -12,17 +12,17 @@ import (
 // Ospf is a generated struct representing the Sophos Ospf Endpoint
 // GET /api/nodes/ospf
 type Ospf struct {
-	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
 	OspfArea             OspfArea             `json:"ospf_area"`
 	OspfGroup            OspfGroup            `json:"ospf_group"`
 	OspfInterface        OspfInterface        `json:"ospf_interface"`
+	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
 }
 
 var defsOspf = map[string]sophos.RestObject{
-	"OspfMessageDigestKey": &OspfMessageDigestKey{},
 	"OspfArea":             &OspfArea{},
 	"OspfGroup":            &OspfGroup{},
 	"OspfInterface":        &OspfInterface{},
+	"OspfMessageDigestKey": &OspfMessageDigestKey{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ospf's Objects
@@ -68,40 +68,6 @@ func (Ospf) References() []string {
 		"REF_OspfInterface",
 		"REF_OspfMessageDigestKey",
 	}
-}
-
-// OspfMessageDigestKey is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfMessageDigestKey []interface{}
-
-// GetPath implements sophos.RestObject and returns the OspfMessageDigestKey GET path
-// Returns all available ospf/message_digest_key objects
-func (*OspfMessageDigestKey) GetPath() string { return "/api/objects/ospf/message_digest_key/" }
-
-// RefRequired implements sophos.RestObject
-func (*OspfMessageDigestKey) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the OspfMessageDigestKey DELETE path
-// Creates or updates the complete object message_digest_key
-func (*OspfMessageDigestKey) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the OspfMessageDigestKey PATCH path
-// Changes to parts of the object message_digest_key types
-func (*OspfMessageDigestKey) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the OspfMessageDigestKey POST path
-// Create a new ospf/message_digest_key object
-func (*OspfMessageDigestKey) PostPath() string {
-	return "/api/objects/ospf/message_digest_key/"
-}
-
-// PutPath implements sophos.RestObject and returns the OspfMessageDigestKey PUT path
-// Creates or updates the complete object message_digest_key
-func (*OspfMessageDigestKey) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
 }
 
 // OspfArea is an Sophos Endpoint subType and implements sophos.RestObject
@@ -204,4 +170,38 @@ func (*OspfInterface) PostPath() string {
 // Creates or updates the complete object interface
 func (*OspfInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/interface/%s", ref)
+}
+
+// OspfMessageDigestKey is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfMessageDigestKey []interface{}
+
+// GetPath implements sophos.RestObject and returns the OspfMessageDigestKey GET path
+// Returns all available ospf/message_digest_key objects
+func (*OspfMessageDigestKey) GetPath() string { return "/api/objects/ospf/message_digest_key/" }
+
+// RefRequired implements sophos.RestObject
+func (*OspfMessageDigestKey) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the OspfMessageDigestKey DELETE path
+// Creates or updates the complete object message_digest_key
+func (*OspfMessageDigestKey) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the OspfMessageDigestKey PATCH path
+// Changes to parts of the object message_digest_key types
+func (*OspfMessageDigestKey) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the OspfMessageDigestKey POST path
+// Create a new ospf/message_digest_key object
+func (*OspfMessageDigestKey) PostPath() string {
+	return "/api/objects/ospf/message_digest_key/"
+}
+
+// PutPath implements sophos.RestObject and returns the OspfMessageDigestKey PUT path
+// Creates or updates the complete object message_digest_key
+func (*OspfMessageDigestKey) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
 }

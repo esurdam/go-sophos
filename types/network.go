@@ -12,35 +12,35 @@ import (
 // Network is a generated struct representing the Sophos Network Endpoint
 // GET /api/nodes/network
 type Network struct {
-	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
-	NetworkMulticast          NetworkMulticast          `json:"network_multicast"`
+	NetworkAaa                NetworkAaa                `json:"network_aaa"`
+	NetworkAny                NetworkAny                `json:"network_any"`
 	NetworkAvailabilityGroup  NetworkAvailabilityGroup  `json:"network_availability_group"`
 	NetworkDnsGroup           NetworkDnsGroup           `json:"network_dns_group"`
 	NetworkDnsHost            NetworkDnsHost            `json:"network_dns_host"`
 	NetworkGroup              NetworkGroup              `json:"network_group"`
-	NetworkAny                NetworkAny                `json:"network_any"`
 	NetworkHost               NetworkHost               `json:"network_host"`
-	NetworkNetwork            NetworkNetwork            `json:"network_network"`
-	NetworkAaa                NetworkAaa                `json:"network_aaa"`
-	NetworkRange              NetworkRange              `json:"network_range"`
-	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
 	NetworkInterfaceAddress   NetworkInterfaceAddress   `json:"network_interface_address"`
+	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
+	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
+	NetworkMulticast          NetworkMulticast          `json:"network_multicast"`
+	NetworkNetwork            NetworkNetwork            `json:"network_network"`
+	NetworkRange              NetworkRange              `json:"network_range"`
 }
 
 var defsNetwork = map[string]sophos.RestObject{
-	"NetworkInterfaceNetwork":   &NetworkInterfaceNetwork{},
-	"NetworkMulticast":          &NetworkMulticast{},
+	"NetworkAaa":                &NetworkAaa{},
+	"NetworkAny":                &NetworkAny{},
 	"NetworkAvailabilityGroup":  &NetworkAvailabilityGroup{},
 	"NetworkDnsGroup":           &NetworkDnsGroup{},
 	"NetworkDnsHost":            &NetworkDnsHost{},
 	"NetworkGroup":              &NetworkGroup{},
-	"NetworkAny":                &NetworkAny{},
 	"NetworkHost":               &NetworkHost{},
-	"NetworkNetwork":            &NetworkNetwork{},
-	"NetworkAaa":                &NetworkAaa{},
-	"NetworkRange":              &NetworkRange{},
-	"NetworkInterfaceBroadcast": &NetworkInterfaceBroadcast{},
 	"NetworkInterfaceAddress":   &NetworkInterfaceAddress{},
+	"NetworkInterfaceBroadcast": &NetworkInterfaceBroadcast{},
+	"NetworkInterfaceNetwork":   &NetworkInterfaceNetwork{},
+	"NetworkMulticast":          &NetworkMulticast{},
+	"NetworkNetwork":            &NetworkNetwork{},
+	"NetworkRange":              &NetworkRange{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Network's Objects
@@ -124,8 +124,524 @@ func (Network) References() []string {
 	}
 }
 
-// NetworkInterfaceNetwork is an Sophos Endpoint subType and implements sophos.RestObject
+// NetworkAaas is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkAaas []NetworkAaa
+
+// NetworkAaa is a generated Sophos object
+type NetworkAaa struct {
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	_type      string        `json:"_type"`
+	Addresses  []interface{} `json:"addresses"`
+	Addresses6 []interface{} `json:"addresses6"`
+	Comment    string        `json:"comment"`
+	Name       string        `json:"name"`
+	Resolved   bool          `json:"resolved"`
+	Resolved6  bool          `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
+// Returns all available network/aaa objects
+func (*NetworkAaas) GetPath() string { return "/api/objects/network/aaa/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkAaas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
+// Returns all available aaa types
+func (n *NetworkAaa) GetPath() string { return fmt.Sprintf("/api/objects/network/aaa/%s", n.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkAaa) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkAaa DELETE path
+// Creates or updates the complete object aaa
+func (*NetworkAaa) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkAaa PATCH path
+// Changes to parts of the object aaa types
+func (*NetworkAaa) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkAaa POST path
+// Create a new network/aaa object
+func (*NetworkAaa) PostPath() string {
+	return "/api/objects/network/aaa/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkAaa PUT path
+// Creates or updates the complete object aaa
+func (*NetworkAaa) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkAaa) GetType() string { return n._type }
+
+// NetworkAnys is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkAnys []NetworkAny
+
+// NetworkAny is a generated Sophos object
+type NetworkAny struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	Netmask   int64  `json:"netmask"`
+	Netmask6  int64  `json:"netmask6"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkAnys GET path
+// Returns all available network/any objects
+func (*NetworkAnys) GetPath() string { return "/api/objects/network/any/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkAnys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkAnys GET path
+// Returns all available any types
+func (n *NetworkAny) GetPath() string { return fmt.Sprintf("/api/objects/network/any/%s", n.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkAny) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkAny DELETE path
+// Creates or updates the complete object any
+func (*NetworkAny) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/any/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkAny PATCH path
+// Changes to parts of the object any types
+func (*NetworkAny) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/any/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkAny POST path
+// Create a new network/any object
+func (*NetworkAny) PostPath() string {
+	return "/api/objects/network/any/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkAny PUT path
+// Creates or updates the complete object any
+func (*NetworkAny) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/any/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkAny) GetType() string { return n._type }
+
+// NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkAvailabilityGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroup GET path
+// Returns all available network/availability_group objects
+func (*NetworkAvailabilityGroup) GetPath() string { return "/api/objects/network/availability_group/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkAvailabilityGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the NetworkAvailabilityGroup DELETE path
+// Creates or updates the complete object availability_group
+func (*NetworkAvailabilityGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkAvailabilityGroup PATCH path
+// Changes to parts of the object availability_group types
+func (*NetworkAvailabilityGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkAvailabilityGroup POST path
+// Create a new network/availability_group object
+func (*NetworkAvailabilityGroup) PostPath() string {
+	return "/api/objects/network/availability_group/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkAvailabilityGroup PUT path
+// Creates or updates the complete object availability_group
+func (*NetworkAvailabilityGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
+}
+
+// NetworkDnsGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkDnsGroups []NetworkDnsGroup
+
+// NetworkDnsGroup is a generated Sophos object
+type NetworkDnsGroup struct {
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	_type      string        `json:"_type"`
+	Addresses  []string      `json:"addresses"`
+	Addresses6 []interface{} `json:"addresses6"`
+	Comment    string        `json:"comment"`
+	Hostname   string        `json:"hostname"`
+	Interface  string        `json:"interface"`
+	Name       string        `json:"name"`
+	Resolved   bool          `json:"resolved"`
+	Resolved6  bool          `json:"resolved6"`
+	Timeout    int64         `json:"timeout"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkDnsGroups GET path
+// Returns all available network/dns_group objects
+func (*NetworkDnsGroups) GetPath() string { return "/api/objects/network/dns_group/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkDnsGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkDnsGroups GET path
+// Returns all available dns_group types
+func (n *NetworkDnsGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/dns_group/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkDnsGroup) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkDnsGroup DELETE path
+// Creates or updates the complete object dns_group
+func (*NetworkDnsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkDnsGroup PATCH path
+// Changes to parts of the object dns_group types
+func (*NetworkDnsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkDnsGroup POST path
+// Create a new network/dns_group object
+func (*NetworkDnsGroup) PostPath() string {
+	return "/api/objects/network/dns_group/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkDnsGroup PUT path
+// Creates or updates the complete object dns_group
+func (*NetworkDnsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkDnsGroup) GetType() string { return n._type }
+
+// NetworkDnsHosts is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkDnsHosts []NetworkDnsHost
+
+// NetworkDnsHost is a generated Sophos object
+type NetworkDnsHost struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Hostname  string `json:"hostname"`
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+	Timeout   int64  `json:"timeout"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkDnsHosts GET path
+// Returns all available network/dns_host objects
+func (*NetworkDnsHosts) GetPath() string { return "/api/objects/network/dns_host/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkDnsHosts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkDnsHosts GET path
+// Returns all available dns_host types
+func (n *NetworkDnsHost) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/dns_host/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkDnsHost) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkDnsHost DELETE path
+// Creates or updates the complete object dns_host
+func (*NetworkDnsHost) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkDnsHost PATCH path
+// Changes to parts of the object dns_host types
+func (*NetworkDnsHost) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkDnsHost POST path
+// Create a new network/dns_host object
+func (*NetworkDnsHost) PostPath() string {
+	return "/api/objects/network/dns_host/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkDnsHost PUT path
+// Creates or updates the complete object dns_host
+func (*NetworkDnsHost) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkDnsHost) GetType() string { return n._type }
+
+// NetworkGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkGroups []NetworkGroup
+
+// NetworkGroup is a generated Sophos object
+type NetworkGroup struct {
+	Locked    string   `json:"_locked"`
+	Reference string   `json:"_ref"`
+	_type     string   `json:"_type"`
+	Comment   string   `json:"comment"`
+	Members   []string `json:"members"`
+	Name      string   `json:"name"`
+	Types     []string `json:"types"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
+// Returns all available network/group objects
+func (*NetworkGroups) GetPath() string { return "/api/objects/network/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
+// Returns all available group types
+func (n *NetworkGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/group/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkGroup) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkGroup DELETE path
+// Creates or updates the complete object group
+func (*NetworkGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkGroup PATCH path
+// Changes to parts of the object group types
+func (*NetworkGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkGroup POST path
+// Create a new network/group object
+func (*NetworkGroup) PostPath() string {
+	return "/api/objects/network/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkGroup PUT path
+// Creates or updates the complete object group
+func (*NetworkGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkGroup) GetType() string { return n._type }
+
+// NetworkHosts is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkHosts []NetworkHost
+
+// NetworkHost is a generated Sophos object
+type NetworkHost struct {
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	_type      string        `json:"_type"`
+	Address    string        `json:"address"`
+	Address6   string        `json:"address6"`
+	Comment    string        `json:"comment"`
+	Duids      []interface{} `json:"duids"`
+	Hostnames  []string      `json:"hostnames"`
+	Interface  string        `json:"interface"`
+	Macs       []interface{} `json:"macs"`
+	Name       string        `json:"name"`
+	Resolved   bool          `json:"resolved"`
+	Resolved6  bool          `json:"resolved6"`
+	ReverseDNS bool          `json:"reverse_dns"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkHosts GET path
+// Returns all available network/host objects
+func (*NetworkHosts) GetPath() string { return "/api/objects/network/host/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkHosts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkHosts GET path
+// Returns all available host types
+func (n *NetworkHost) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/host/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkHost) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkHost DELETE path
+// Creates or updates the complete object host
+func (*NetworkHost) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/host/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkHost PATCH path
+// Changes to parts of the object host types
+func (*NetworkHost) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/host/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkHost POST path
+// Create a new network/host object
+func (*NetworkHost) PostPath() string {
+	return "/api/objects/network/host/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkHost PUT path
+// Creates or updates the complete object host
+func (*NetworkHost) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/host/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkHost) GetType() string { return n._type }
+
+// NetworkInterfaceAddresss is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkInterfaceAddresss []NetworkInterfaceAddress
+
+// NetworkInterfaceAddress is a generated Sophos object
+type NetworkInterfaceAddress struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
+// Returns all available network/interface_address objects
+func (*NetworkInterfaceAddresss) GetPath() string { return "/api/objects/network/interface_address/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkInterfaceAddresss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
+// Returns all available interface_address types
+func (n *NetworkInterfaceAddress) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkInterfaceAddress) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkInterfaceAddress DELETE path
+// Creates or updates the complete object interface_address
+func (*NetworkInterfaceAddress) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkInterfaceAddress PATCH path
+// Changes to parts of the object interface_address types
+func (*NetworkInterfaceAddress) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkInterfaceAddress POST path
+// Create a new network/interface_address object
+func (*NetworkInterfaceAddress) PostPath() string {
+	return "/api/objects/network/interface_address/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkInterfaceAddress PUT path
+// Creates or updates the complete object interface_address
+func (*NetworkInterfaceAddress) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkInterfaceAddress) GetType() string { return n._type }
+
+// NetworkInterfaceBroadcasts is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkInterfaceBroadcasts []NetworkInterfaceBroadcast
+
+// NetworkInterfaceBroadcast is a generated Sophos object
+type NetworkInterfaceBroadcast struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
+// Returns all available network/interface_broadcast objects
+func (*NetworkInterfaceBroadcasts) GetPath() string {
+	return "/api/objects/network/interface_broadcast/"
+}
+
+// RefRequired implements sophos.RestObject
+func (*NetworkInterfaceBroadcasts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
+// Returns all available interface_broadcast types
+func (n *NetworkInterfaceBroadcast) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkInterfaceBroadcast) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkInterfaceBroadcast DELETE path
+// Creates or updates the complete object interface_broadcast
+func (*NetworkInterfaceBroadcast) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PATCH path
+// Changes to parts of the object interface_broadcast types
+func (*NetworkInterfaceBroadcast) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast POST path
+// Create a new network/interface_broadcast object
+func (*NetworkInterfaceBroadcast) PostPath() string {
+	return "/api/objects/network/interface_broadcast/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PUT path
+// Creates or updates the complete object interface_broadcast
+func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
+
+// NetworkInterfaceNetworks is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkInterfaceNetworks []NetworkInterfaceNetwork
+
+// NetworkInterfaceNetwork is a generated Sophos object
 type NetworkInterfaceNetwork struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`
@@ -217,337 +733,10 @@ func (*NetworkMulticast) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/multicast/%s", ref)
 }
 
-// NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkAvailabilityGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroup GET path
-// Returns all available network/availability_group objects
-func (*NetworkAvailabilityGroup) GetPath() string { return "/api/objects/network/availability_group/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkAvailabilityGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the NetworkAvailabilityGroup DELETE path
-// Creates or updates the complete object availability_group
-func (*NetworkAvailabilityGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkAvailabilityGroup PATCH path
-// Changes to parts of the object availability_group types
-func (*NetworkAvailabilityGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkAvailabilityGroup POST path
-// Create a new network/availability_group object
-func (*NetworkAvailabilityGroup) PostPath() string {
-	return "/api/objects/network/availability_group/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkAvailabilityGroup PUT path
-// Creates or updates the complete object availability_group
-func (*NetworkAvailabilityGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
-}
-
-// NetworkDnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkDnsGroups []NetworkDnsGroup
-type NetworkDnsGroup struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
-	Addresses  []string      `json:"addresses"`
-	Addresses6 []interface{} `json:"addresses6"`
-	Comment    string        `json:"comment"`
-	Hostname   string        `json:"hostname"`
-	Interface  string        `json:"interface"`
-	Name       string        `json:"name"`
-	Resolved   bool          `json:"resolved"`
-	Resolved6  bool          `json:"resolved6"`
-	Timeout    int64         `json:"timeout"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkDnsGroups GET path
-// Returns all available network/dns_group objects
-func (*NetworkDnsGroups) GetPath() string { return "/api/objects/network/dns_group/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkDnsGroups) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkDnsGroups GET path
-// Returns all available dns_group types
-func (n *NetworkDnsGroup) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/dns_group/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkDnsGroup) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkDnsGroup DELETE path
-// Creates or updates the complete object dns_group
-func (*NetworkDnsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkDnsGroup PATCH path
-// Changes to parts of the object dns_group types
-func (*NetworkDnsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkDnsGroup POST path
-// Create a new network/dns_group object
-func (*NetworkDnsGroup) PostPath() string {
-	return "/api/objects/network/dns_group/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkDnsGroup PUT path
-// Creates or updates the complete object dns_group
-func (*NetworkDnsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkDnsGroup) GetType() string { return n._type }
-
-// NetworkDnsHost is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkDnsHosts []NetworkDnsHost
-type NetworkDnsHost struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Hostname  string `json:"hostname"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-	Timeout   int64  `json:"timeout"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkDnsHosts GET path
-// Returns all available network/dns_host objects
-func (*NetworkDnsHosts) GetPath() string { return "/api/objects/network/dns_host/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkDnsHosts) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkDnsHosts GET path
-// Returns all available dns_host types
-func (n *NetworkDnsHost) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/dns_host/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkDnsHost) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkDnsHost DELETE path
-// Creates or updates the complete object dns_host
-func (*NetworkDnsHost) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkDnsHost PATCH path
-// Changes to parts of the object dns_host types
-func (*NetworkDnsHost) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkDnsHost POST path
-// Create a new network/dns_host object
-func (*NetworkDnsHost) PostPath() string {
-	return "/api/objects/network/dns_host/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkDnsHost PUT path
-// Creates or updates the complete object dns_host
-func (*NetworkDnsHost) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkDnsHost) GetType() string { return n._type }
-
-// NetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkGroups []NetworkGroup
-type NetworkGroup struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Members   []string `json:"members"`
-	Name      string   `json:"name"`
-	Types     []string `json:"types"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
-// Returns all available network/group objects
-func (*NetworkGroups) GetPath() string { return "/api/objects/network/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkGroups) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
-// Returns all available group types
-func (n *NetworkGroup) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/group/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkGroup) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkGroup DELETE path
-// Creates or updates the complete object group
-func (*NetworkGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkGroup PATCH path
-// Changes to parts of the object group types
-func (*NetworkGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkGroup POST path
-// Create a new network/group object
-func (*NetworkGroup) PostPath() string {
-	return "/api/objects/network/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkGroup PUT path
-// Creates or updates the complete object group
-func (*NetworkGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkGroup) GetType() string { return n._type }
-
-// NetworkAny is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkAnys []NetworkAny
-type NetworkAny struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkAnys GET path
-// Returns all available network/any objects
-func (*NetworkAnys) GetPath() string { return "/api/objects/network/any/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkAnys) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkAnys GET path
-// Returns all available any types
-func (n *NetworkAny) GetPath() string { return fmt.Sprintf("/api/objects/network/any/%s", n.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkAny) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkAny DELETE path
-// Creates or updates the complete object any
-func (*NetworkAny) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/any/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkAny PATCH path
-// Changes to parts of the object any types
-func (*NetworkAny) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/any/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkAny POST path
-// Create a new network/any object
-func (*NetworkAny) PostPath() string {
-	return "/api/objects/network/any/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkAny PUT path
-// Creates or updates the complete object any
-func (*NetworkAny) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/any/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkAny) GetType() string { return n._type }
-
-// NetworkHost is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkHosts []NetworkHost
-type NetworkHost struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
-	Address    string        `json:"address"`
-	Address6   string        `json:"address6"`
-	Comment    string        `json:"comment"`
-	Duids      []interface{} `json:"duids"`
-	Hostnames  []string      `json:"hostnames"`
-	Interface  string        `json:"interface"`
-	Macs       []interface{} `json:"macs"`
-	Name       string        `json:"name"`
-	Resolved   bool          `json:"resolved"`
-	Resolved6  bool          `json:"resolved6"`
-	ReverseDNS bool          `json:"reverse_dns"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkHosts GET path
-// Returns all available network/host objects
-func (*NetworkHosts) GetPath() string { return "/api/objects/network/host/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkHosts) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkHosts GET path
-// Returns all available host types
-func (n *NetworkHost) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/host/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkHost) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkHost DELETE path
-// Creates or updates the complete object host
-func (*NetworkHost) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/host/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkHost PATCH path
-// Changes to parts of the object host types
-func (*NetworkHost) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/host/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkHost POST path
-// Create a new network/host object
-func (*NetworkHost) PostPath() string {
-	return "/api/objects/network/host/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkHost PUT path
-// Creates or updates the complete object host
-func (*NetworkHost) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/host/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkHost) GetType() string { return n._type }
-
-// NetworkNetwork is an Sophos Endpoint subType and implements sophos.RestObject
+// NetworkNetworks is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkNetworks []NetworkNetwork
+
+// NetworkNetwork is a generated Sophos object
 type NetworkNetwork struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`
@@ -606,63 +795,10 @@ func (*NetworkNetwork) PutPath(ref string) string {
 // Type implements sophos.Object
 func (n *NetworkNetwork) GetType() string { return n._type }
 
-// NetworkAaa is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkAaas []NetworkAaa
-type NetworkAaa struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
-	Addresses  []interface{} `json:"addresses"`
-	Addresses6 []interface{} `json:"addresses6"`
-	Comment    string        `json:"comment"`
-	Name       string        `json:"name"`
-	Resolved   bool          `json:"resolved"`
-	Resolved6  bool          `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
-// Returns all available network/aaa objects
-func (*NetworkAaas) GetPath() string { return "/api/objects/network/aaa/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkAaas) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
-// Returns all available aaa types
-func (n *NetworkAaa) GetPath() string { return fmt.Sprintf("/api/objects/network/aaa/%s", n.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkAaa) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkAaa DELETE path
-// Creates or updates the complete object aaa
-func (*NetworkAaa) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkAaa PATCH path
-// Changes to parts of the object aaa types
-func (*NetworkAaa) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkAaa POST path
-// Create a new network/aaa object
-func (*NetworkAaa) PostPath() string {
-	return "/api/objects/network/aaa/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkAaa PUT path
-// Creates or updates the complete object aaa
-func (*NetworkAaa) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkAaa) GetType() string { return n._type }
-
-// NetworkRange is an Sophos Endpoint subType and implements sophos.RestObject
+// NetworkRanges is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkRanges []NetworkRange
+
+// NetworkRange is a generated Sophos object
 type NetworkRange struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`
@@ -720,117 +856,3 @@ func (*NetworkRange) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (n *NetworkRange) GetType() string { return n._type }
-
-// NetworkInterfaceBroadcast is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkInterfaceBroadcasts []NetworkInterfaceBroadcast
-type NetworkInterfaceBroadcast struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
-// Returns all available network/interface_broadcast objects
-func (*NetworkInterfaceBroadcasts) GetPath() string {
-	return "/api/objects/network/interface_broadcast/"
-}
-
-// RefRequired implements sophos.RestObject
-func (*NetworkInterfaceBroadcasts) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
-// Returns all available interface_broadcast types
-func (n *NetworkInterfaceBroadcast) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkInterfaceBroadcast) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkInterfaceBroadcast DELETE path
-// Creates or updates the complete object interface_broadcast
-func (*NetworkInterfaceBroadcast) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PATCH path
-// Changes to parts of the object interface_broadcast types
-func (*NetworkInterfaceBroadcast) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast POST path
-// Create a new network/interface_broadcast object
-func (*NetworkInterfaceBroadcast) PostPath() string {
-	return "/api/objects/network/interface_broadcast/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PUT path
-// Creates or updates the complete object interface_broadcast
-func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
-
-// NetworkInterfaceAddress is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkInterfaceAddresss []NetworkInterfaceAddress
-type NetworkInterfaceAddress struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
-// Returns all available network/interface_address objects
-func (*NetworkInterfaceAddresss) GetPath() string { return "/api/objects/network/interface_address/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkInterfaceAddresss) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
-// Returns all available interface_address types
-func (n *NetworkInterfaceAddress) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkInterfaceAddress) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkInterfaceAddress DELETE path
-// Creates or updates the complete object interface_address
-func (*NetworkInterfaceAddress) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkInterfaceAddress PATCH path
-// Changes to parts of the object interface_address types
-func (*NetworkInterfaceAddress) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkInterfaceAddress POST path
-// Create a new network/interface_address object
-func (*NetworkInterfaceAddress) PostPath() string {
-	return "/api/objects/network/interface_address/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkInterfaceAddress PUT path
-// Creates or updates the complete object interface_address
-func (*NetworkInterfaceAddress) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkInterfaceAddress) GetType() string { return n._type }

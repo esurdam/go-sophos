@@ -38,10 +38,10 @@ type Awe struct {
 
 var defsAwe = map[string]sophos.RestObject{
 	"AweClient": &AweClient{},
+	"AweDevice": &AweDevice{},
 	"AweGroup":  &AweGroup{},
 	"AweLocal":  &AweLocal{},
 	"AweRed":    &AweRed{},
-	"AweDevice": &AweDevice{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Awe's Objects
@@ -125,6 +125,40 @@ func (*AweClient) PostPath() string {
 // Creates or updates the complete object client
 func (*AweClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/client/%s", ref)
+}
+
+// AweDevice is an Sophos Endpoint subType and implements sophos.RestObject
+type AweDevice []interface{}
+
+// GetPath implements sophos.RestObject and returns the AweDevice GET path
+// Returns all available awe/device objects
+func (*AweDevice) GetPath() string { return "/api/objects/awe/device/" }
+
+// RefRequired implements sophos.RestObject
+func (*AweDevice) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AweDevice DELETE path
+// Creates or updates the complete object device
+func (*AweDevice) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AweDevice PATCH path
+// Changes to parts of the object device types
+func (*AweDevice) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AweDevice POST path
+// Create a new awe/device object
+func (*AweDevice) PostPath() string {
+	return "/api/objects/awe/device/"
+}
+
+// PutPath implements sophos.RestObject and returns the AweDevice PUT path
+// Creates or updates the complete object device
+func (*AweDevice) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
 }
 
 // AweGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -227,38 +261,4 @@ func (*AweRed) PostPath() string {
 // Creates or updates the complete object red
 func (*AweRed) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/red/%s", ref)
-}
-
-// AweDevice is an Sophos Endpoint subType and implements sophos.RestObject
-type AweDevice []interface{}
-
-// GetPath implements sophos.RestObject and returns the AweDevice GET path
-// Returns all available awe/device objects
-func (*AweDevice) GetPath() string { return "/api/objects/awe/device/" }
-
-// RefRequired implements sophos.RestObject
-func (*AweDevice) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AweDevice DELETE path
-// Creates or updates the complete object device
-func (*AweDevice) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AweDevice PATCH path
-// Changes to parts of the object device types
-func (*AweDevice) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AweDevice POST path
-// Create a new awe/device object
-func (*AweDevice) PostPath() string {
-	return "/api/objects/awe/device/"
-}
-
-// PutPath implements sophos.RestObject and returns the AweDevice PUT path
-// Creates or updates the complete object device
-func (*AweDevice) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
 }

@@ -138,8 +138,10 @@ func (*ReportingDepartment) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
 }
 
-// ReportingFilter is an Sophos Endpoint subType and implements sophos.RestObject
+// ReportingFilters is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingFilters []ReportingFilter
+
+// ReportingFilter is a generated Sophos object
 type ReportingFilter struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`

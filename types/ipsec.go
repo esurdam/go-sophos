@@ -32,9 +32,9 @@ type Ipsec struct {
 }
 
 var defsIpsec = map[string]sophos.RestObject{
-	"IpsecRemoteGateway": &IpsecRemoteGateway{},
 	"IpsecGroup":         &IpsecGroup{},
 	"IpsecPolicy":        &IpsecPolicy{},
+	"IpsecRemoteGateway": &IpsecRemoteGateway{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ipsec's Objects
@@ -78,67 +78,6 @@ func (Ipsec) References() []string {
 	}
 }
 
-// IpsecRemoteGateway is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteGateways []IpsecRemoteGateway
-type IpsecRemoteGateway struct {
-	Locked         string   `json:"_locked"`
-	Reference      string   `json:"_ref"`
-	_type          string   `json:"_type"`
-	Authentication string   `json:"authentication"`
-	Comment        string   `json:"comment"`
-	Ecn            bool     `json:"ecn"`
-	Host           string   `json:"host"`
-	Name           string   `json:"name"`
-	Networks       []string `json:"networks"`
-	PmtuDiscovery  bool     `json:"pmtu_discovery"`
-	Xauth          bool     `json:"xauth"`
-	XauthPassword  string   `json:"xauth_password"`
-	XauthUsername  string   `json:"xauth_username"`
-}
-
-// GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
-// Returns all available ipsec/remote_gateway objects
-func (*IpsecRemoteGateways) GetPath() string { return "/api/objects/ipsec/remote_gateway/" }
-
-// RefRequired implements sophos.RestObject
-func (*IpsecRemoteGateways) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
-// Returns all available remote_gateway types
-func (i *IpsecRemoteGateway) GetPath() string {
-	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *IpsecRemoteGateway) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the IpsecRemoteGateway DELETE path
-// Creates or updates the complete object remote_gateway
-func (*IpsecRemoteGateway) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpsecRemoteGateway PATCH path
-// Changes to parts of the object remote_gateway types
-func (*IpsecRemoteGateway) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsecRemoteGateway POST path
-// Create a new ipsec/remote_gateway object
-func (*IpsecRemoteGateway) PostPath() string {
-	return "/api/objects/ipsec/remote_gateway/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecRemoteGateway PUT path
-// Creates or updates the complete object remote_gateway
-func (*IpsecRemoteGateway) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *IpsecRemoteGateway) GetType() string { return i._type }
-
 // IpsecGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecGroup []interface{}
 
@@ -173,8 +112,10 @@ func (*IpsecGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s", ref)
 }
 
-// IpsecPolicy is an Sophos Endpoint subType and implements sophos.RestObject
+// IpsecPolicys is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecPolicys []IpsecPolicy
+
+// IpsecPolicy is a generated Sophos object
 type IpsecPolicy struct {
 	Locked            string `json:"_locked"`
 	Reference         string `json:"_ref"`
@@ -235,3 +176,66 @@ func (*IpsecPolicy) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (i *IpsecPolicy) GetType() string { return i._type }
+
+// IpsecRemoteGateways is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteGateways []IpsecRemoteGateway
+
+// IpsecRemoteGateway is a generated Sophos object
+type IpsecRemoteGateway struct {
+	Locked         string   `json:"_locked"`
+	Reference      string   `json:"_ref"`
+	_type          string   `json:"_type"`
+	Authentication string   `json:"authentication"`
+	Comment        string   `json:"comment"`
+	Ecn            bool     `json:"ecn"`
+	Host           string   `json:"host"`
+	Name           string   `json:"name"`
+	Networks       []string `json:"networks"`
+	PmtuDiscovery  bool     `json:"pmtu_discovery"`
+	Xauth          bool     `json:"xauth"`
+	XauthPassword  string   `json:"xauth_password"`
+	XauthUsername  string   `json:"xauth_username"`
+}
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
+// Returns all available ipsec/remote_gateway objects
+func (*IpsecRemoteGateways) GetPath() string { return "/api/objects/ipsec/remote_gateway/" }
+
+// RefRequired implements sophos.RestObject
+func (*IpsecRemoteGateways) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
+// Returns all available remote_gateway types
+func (i *IpsecRemoteGateway) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecRemoteGateway) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the IpsecRemoteGateway DELETE path
+// Creates or updates the complete object remote_gateway
+func (*IpsecRemoteGateway) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpsecRemoteGateway PATCH path
+// Changes to parts of the object remote_gateway types
+func (*IpsecRemoteGateway) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsecRemoteGateway POST path
+// Create a new ipsec/remote_gateway object
+func (*IpsecRemoteGateway) PostPath() string {
+	return "/api/objects/ipsec/remote_gateway/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsecRemoteGateway PUT path
+// Creates or updates the complete object remote_gateway
+func (*IpsecRemoteGateway) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *IpsecRemoteGateway) GetType() string { return i._type }

@@ -12,21 +12,21 @@ import (
 // Bgp is a generated struct representing the Sophos Bgp Endpoint
 // GET /api/nodes/bgp
 type Bgp struct {
+	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
+	BgpFilter    BgpFilter    `json:"bgp_filter"`
 	BgpGroup     BgpGroup     `json:"bgp_group"`
 	BgpNeighbor  BgpNeighbor  `json:"bgp_neighbor"`
-	BgpSystem    BgpSystem    `json:"bgp_system"`
-	BgpFilter    BgpFilter    `json:"bgp_filter"`
 	BgpRouteMap  BgpRouteMap  `json:"bgp_route_map"`
-	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
+	BgpSystem    BgpSystem    `json:"bgp_system"`
 }
 
 var defsBgp = map[string]sophos.RestObject{
+	"BgpAmazonVpc": &BgpAmazonVpc{},
+	"BgpFilter":    &BgpFilter{},
 	"BgpGroup":     &BgpGroup{},
 	"BgpNeighbor":  &BgpNeighbor{},
-	"BgpSystem":    &BgpSystem{},
-	"BgpFilter":    &BgpFilter{},
 	"BgpRouteMap":  &BgpRouteMap{},
-	"BgpAmazonVpc": &BgpAmazonVpc{},
+	"BgpSystem":    &BgpSystem{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Bgp's Objects
@@ -80,6 +80,102 @@ func (Bgp) References() []string {
 		"REF_BgpRouteMap",
 		"REF_BgpSystem",
 	}
+}
+
+// BgpAmazonVpcs is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpAmazonVpcs []BgpAmazonVpc
+
+// BgpAmazonVpc is a generated Sophos object
+type BgpAmazonVpc struct {
+	Locked       string   `json:"_locked"`
+	Reference    string   `json:"_ref"`
+	_type        string   `json:"_type"`
+	Comment      string   `json:"comment"`
+	Custom       string   `json:"custom"`
+	Host         string   `json:"host"`
+	ID           string   `json:"id"`
+	LocalAsn     int64    `json:"local_asn"`
+	MaximumPaths int64    `json:"maximum_paths"`
+	Name         string   `json:"name"`
+	Network      []string `json:"network"`
+	RemoteAsn    int64    `json:"remote_asn"`
+}
+
+// GetPath implements sophos.RestObject and returns the BgpAmazonVpcs GET path
+// Returns all available bgp/amazon_vpc objects
+func (*BgpAmazonVpcs) GetPath() string { return "/api/objects/bgp/amazon_vpc/" }
+
+// RefRequired implements sophos.RestObject
+func (*BgpAmazonVpcs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the BgpAmazonVpcs GET path
+// Returns all available amazon_vpc types
+func (b *BgpAmazonVpc) GetPath() string {
+	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", b.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (b *BgpAmazonVpc) RefRequired() (string, bool) { return b.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the BgpAmazonVpc DELETE path
+// Creates or updates the complete object amazon_vpc
+func (*BgpAmazonVpc) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the BgpAmazonVpc PATCH path
+// Changes to parts of the object amazon_vpc types
+func (*BgpAmazonVpc) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the BgpAmazonVpc POST path
+// Create a new bgp/amazon_vpc object
+func (*BgpAmazonVpc) PostPath() string {
+	return "/api/objects/bgp/amazon_vpc/"
+}
+
+// PutPath implements sophos.RestObject and returns the BgpAmazonVpc PUT path
+// Creates or updates the complete object amazon_vpc
+func (*BgpAmazonVpc) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
+}
+
+// Type implements sophos.Object
+func (b *BgpAmazonVpc) GetType() string { return b._type }
+
+// BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpFilter []interface{}
+
+// GetPath implements sophos.RestObject and returns the BgpFilter GET path
+// Returns all available bgp/filter objects
+func (*BgpFilter) GetPath() string { return "/api/objects/bgp/filter/" }
+
+// RefRequired implements sophos.RestObject
+func (*BgpFilter) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the BgpFilter DELETE path
+// Creates or updates the complete object filter
+func (*BgpFilter) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the BgpFilter PATCH path
+// Changes to parts of the object filter types
+func (*BgpFilter) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the BgpFilter POST path
+// Create a new bgp/filter object
+func (*BgpFilter) PostPath() string {
+	return "/api/objects/bgp/filter/"
+}
+
+// PutPath implements sophos.RestObject and returns the BgpFilter PUT path
+// Creates or updates the complete object filter
+func (*BgpFilter) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
 }
 
 // BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -150,74 +246,6 @@ func (*BgpNeighbor) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }
 
-// BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpSystem []interface{}
-
-// GetPath implements sophos.RestObject and returns the BgpSystem GET path
-// Returns all available bgp/system objects
-func (*BgpSystem) GetPath() string { return "/api/objects/bgp/system/" }
-
-// RefRequired implements sophos.RestObject
-func (*BgpSystem) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the BgpSystem DELETE path
-// Creates or updates the complete object system
-func (*BgpSystem) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the BgpSystem PATCH path
-// Changes to parts of the object system types
-func (*BgpSystem) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the BgpSystem POST path
-// Create a new bgp/system object
-func (*BgpSystem) PostPath() string {
-	return "/api/objects/bgp/system/"
-}
-
-// PutPath implements sophos.RestObject and returns the BgpSystem PUT path
-// Creates or updates the complete object system
-func (*BgpSystem) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
-}
-
-// BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpFilter []interface{}
-
-// GetPath implements sophos.RestObject and returns the BgpFilter GET path
-// Returns all available bgp/filter objects
-func (*BgpFilter) GetPath() string { return "/api/objects/bgp/filter/" }
-
-// RefRequired implements sophos.RestObject
-func (*BgpFilter) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the BgpFilter DELETE path
-// Creates or updates the complete object filter
-func (*BgpFilter) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the BgpFilter PATCH path
-// Changes to parts of the object filter types
-func (*BgpFilter) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the BgpFilter POST path
-// Create a new bgp/filter object
-func (*BgpFilter) PostPath() string {
-	return "/api/objects/bgp/filter/"
-}
-
-// PutPath implements sophos.RestObject and returns the BgpFilter PUT path
-// Creates or updates the complete object filter
-func (*BgpFilter) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
-}
-
 // BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpRouteMap []interface{}
 
@@ -252,62 +280,36 @@ func (*BgpRouteMap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
-// BgpAmazonVpc is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpAmazonVpcs []BgpAmazonVpc
-type BgpAmazonVpc struct {
-	Locked       string   `json:"_locked"`
-	Reference    string   `json:"_ref"`
-	_type        string   `json:"_type"`
-	Comment      string   `json:"comment"`
-	Custom       string   `json:"custom"`
-	Host         string   `json:"host"`
-	ID           string   `json:"id"`
-	LocalAsn     int64    `json:"local_asn"`
-	MaximumPaths int64    `json:"maximum_paths"`
-	Name         string   `json:"name"`
-	Network      []string `json:"network"`
-	RemoteAsn    int64    `json:"remote_asn"`
-}
+// BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpSystem []interface{}
 
-// GetPath implements sophos.RestObject and returns the BgpAmazonVpcs GET path
-// Returns all available bgp/amazon_vpc objects
-func (*BgpAmazonVpcs) GetPath() string { return "/api/objects/bgp/amazon_vpc/" }
+// GetPath implements sophos.RestObject and returns the BgpSystem GET path
+// Returns all available bgp/system objects
+func (*BgpSystem) GetPath() string { return "/api/objects/bgp/system/" }
 
 // RefRequired implements sophos.RestObject
-func (*BgpAmazonVpcs) RefRequired() (string, bool) { return "", false }
+func (*BgpSystem) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the BgpAmazonVpcs GET path
-// Returns all available amazon_vpc types
-func (b *BgpAmazonVpc) GetPath() string {
-	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", b.Reference)
+// DeletePath implements sophos.RestObject and returns the BgpSystem DELETE path
+// Creates or updates the complete object system
+func (*BgpSystem) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (b *BgpAmazonVpc) RefRequired() (string, bool) { return b.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the BgpAmazonVpc DELETE path
-// Creates or updates the complete object amazon_vpc
-func (*BgpAmazonVpc) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
+// PatchPath implements sophos.RestObject and returns the BgpSystem PATCH path
+// Changes to parts of the object system types
+func (*BgpSystem) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the BgpAmazonVpc PATCH path
-// Changes to parts of the object amazon_vpc types
-func (*BgpAmazonVpc) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
+// PostPath implements sophos.RestObject and returns the BgpSystem POST path
+// Create a new bgp/system object
+func (*BgpSystem) PostPath() string {
+	return "/api/objects/bgp/system/"
 }
 
-// PostPath implements sophos.RestObject and returns the BgpAmazonVpc POST path
-// Create a new bgp/amazon_vpc object
-func (*BgpAmazonVpc) PostPath() string {
-	return "/api/objects/bgp/amazon_vpc/"
+// PutPath implements sophos.RestObject and returns the BgpSystem PUT path
+// Creates or updates the complete object system
+func (*BgpSystem) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
-
-// PutPath implements sophos.RestObject and returns the BgpAmazonVpc PUT path
-// Creates or updates the complete object amazon_vpc
-func (*BgpAmazonVpc) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
-}
-
-// Type implements sophos.Object
-func (b *BgpAmazonVpc) GetType() string { return b._type }

@@ -46,10 +46,10 @@ type Pop3 struct {
 }
 
 var defsPop3 = map[string]sophos.RestObject{
-	"Pop3Group":     &Pop3Group{},
-	"Pop3Server":    &Pop3Server{},
 	"Pop3Account":   &Pop3Account{},
 	"Pop3Exception": &Pop3Exception{},
+	"Pop3Group":     &Pop3Group{},
+	"Pop3Server":    &Pop3Server{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Pop3's Objects
@@ -95,74 +95,6 @@ func (Pop3) References() []string {
 		"REF_Pop3Group",
 		"REF_Pop3Server",
 	}
-}
-
-// Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Group []interface{}
-
-// GetPath implements sophos.RestObject and returns the Pop3Group GET path
-// Returns all available pop3/group objects
-func (*Pop3Group) GetPath() string { return "/api/objects/pop3/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*Pop3Group) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the Pop3Group DELETE path
-// Creates or updates the complete object group
-func (*Pop3Group) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the Pop3Group PATCH path
-// Changes to parts of the object group types
-func (*Pop3Group) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the Pop3Group POST path
-// Create a new pop3/group object
-func (*Pop3Group) PostPath() string {
-	return "/api/objects/pop3/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the Pop3Group PUT path
-// Creates or updates the complete object group
-func (*Pop3Group) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
-}
-
-// Pop3Server is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Server []interface{}
-
-// GetPath implements sophos.RestObject and returns the Pop3Server GET path
-// Returns all available pop3/server objects
-func (*Pop3Server) GetPath() string { return "/api/objects/pop3/server/" }
-
-// RefRequired implements sophos.RestObject
-func (*Pop3Server) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the Pop3Server DELETE path
-// Creates or updates the complete object server
-func (*Pop3Server) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the Pop3Server PATCH path
-// Changes to parts of the object server types
-func (*Pop3Server) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the Pop3Server POST path
-// Create a new pop3/server object
-func (*Pop3Server) PostPath() string {
-	return "/api/objects/pop3/server/"
-}
-
-// PutPath implements sophos.RestObject and returns the Pop3Server PUT path
-// Creates or updates the complete object server
-func (*Pop3Server) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
 }
 
 // Pop3Account is an Sophos Endpoint subType and implements sophos.RestObject
@@ -231,4 +163,72 @@ func (*Pop3Exception) PostPath() string {
 // Creates or updates the complete object exception
 func (*Pop3Exception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
+}
+
+// Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Group []interface{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Group GET path
+// Returns all available pop3/group objects
+func (*Pop3Group) GetPath() string { return "/api/objects/pop3/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*Pop3Group) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the Pop3Group DELETE path
+// Creates or updates the complete object group
+func (*Pop3Group) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the Pop3Group PATCH path
+// Changes to parts of the object group types
+func (*Pop3Group) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the Pop3Group POST path
+// Create a new pop3/group object
+func (*Pop3Group) PostPath() string {
+	return "/api/objects/pop3/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the Pop3Group PUT path
+// Creates or updates the complete object group
+func (*Pop3Group) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/group/%s", ref)
+}
+
+// Pop3Server is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Server []interface{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Server GET path
+// Returns all available pop3/server objects
+func (*Pop3Server) GetPath() string { return "/api/objects/pop3/server/" }
+
+// RefRequired implements sophos.RestObject
+func (*Pop3Server) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the Pop3Server DELETE path
+// Creates or updates the complete object server
+func (*Pop3Server) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the Pop3Server PATCH path
+// Changes to parts of the object server types
+func (*Pop3Server) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the Pop3Server POST path
+// Create a new pop3/server object
+func (*Pop3Server) PostPath() string {
+	return "/api/objects/pop3/server/"
+}
+
+// PutPath implements sophos.RestObject and returns the Pop3Server PUT path
+// Creates or updates the complete object server
+func (*Pop3Server) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/server/%s", ref)
 }

@@ -12,27 +12,27 @@ import (
 // Interface is a generated struct representing the Sophos Interface Endpoint
 // GET /api/nodes/interface
 type Interface struct {
-	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
 	InterfaceBridge   InterfaceBridge   `json:"interface_bridge"`
+	InterfaceEthernet InterfaceEthernet `json:"interface_ethernet"`
 	InterfaceGroup    InterfaceGroup    `json:"interface_group"`
-	InterfaceTunnel   InterfaceTunnel   `json:"interface_tunnel"`
-	InterfacePppoe    InterfacePppoe    `json:"interface_pppoe"`
 	InterfacePpp3G    InterfacePpp3G    `json:"interface_ppp3g"`
 	InterfacePppmodem InterfacePppmodem `json:"interface_pppmodem"`
 	InterfacePppoa    InterfacePppoa    `json:"interface_pppoa"`
-	InterfaceEthernet InterfaceEthernet `json:"interface_ethernet"`
+	InterfacePppoe    InterfacePppoe    `json:"interface_pppoe"`
+	InterfaceTunnel   InterfaceTunnel   `json:"interface_tunnel"`
+	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
 }
 
 var defsInterface = map[string]sophos.RestObject{
-	"InterfaceVlan":     &InterfaceVlan{},
 	"InterfaceBridge":   &InterfaceBridge{},
+	"InterfaceEthernet": &InterfaceEthernet{},
 	"InterfaceGroup":    &InterfaceGroup{},
-	"InterfaceTunnel":   &InterfaceTunnel{},
-	"InterfacePppoe":    &InterfacePppoe{},
 	"InterfacePpp3G":    &InterfacePpp3G{},
 	"InterfacePppmodem": &InterfacePppmodem{},
 	"InterfacePppoa":    &InterfacePppoa{},
-	"InterfaceEthernet": &InterfaceEthernet{},
+	"InterfacePppoe":    &InterfacePppoe{},
+	"InterfaceTunnel":   &InterfaceTunnel{},
+	"InterfaceVlan":     &InterfaceVlan{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Interface's Objects
@@ -100,73 +100,6 @@ func (Interface) References() []string {
 	}
 }
 
-// InterfaceVlan is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceVlans []InterfaceVlan
-type InterfaceVlan struct {
-	Locked              string        `json:"_locked"`
-	Reference           string        `json:"_ref"`
-	_type               string        `json:"_type"`
-	AdditionalAddresses []interface{} `json:"additional_addresses"`
-	Bandwidth           int64         `json:"bandwidth"`
-	Comment             string        `json:"comment"`
-	Inbandwidth         int64         `json:"inbandwidth"`
-	Itfhw               string        `json:"itfhw"`
-	Link                bool          `json:"link"`
-	Macvlan             bool          `json:"macvlan"`
-	Mtu                 int64         `json:"mtu"`
-	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
-	Name                string        `json:"name"`
-	Outbandwidth        int64         `json:"outbandwidth"`
-	PrimaryAddress      string        `json:"primary_address"`
-	Proxyarp            bool          `json:"proxyarp"`
-	Proxyndp            bool          `json:"proxyndp"`
-	Status              bool          `json:"status"`
-	Vlantag             int64         `json:"vlantag"`
-}
-
-// GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
-// Returns all available interface/vlan objects
-func (*InterfaceVlans) GetPath() string { return "/api/objects/interface/vlan/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfaceVlans) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
-// Returns all available vlan types
-func (i *InterfaceVlan) GetPath() string {
-	return fmt.Sprintf("/api/objects/interface/vlan/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *InterfaceVlan) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the InterfaceVlan DELETE path
-// Creates or updates the complete object vlan
-func (*InterfaceVlan) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfaceVlan PATCH path
-// Changes to parts of the object vlan types
-func (*InterfaceVlan) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfaceVlan POST path
-// Create a new interface/vlan object
-func (*InterfaceVlan) PostPath() string {
-	return "/api/objects/interface/vlan/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfaceVlan PUT path
-// Creates or updates the complete object vlan
-func (*InterfaceVlan) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *InterfaceVlan) GetType() string { return i._type }
-
 // InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceBridge []interface{}
 
@@ -201,8 +134,77 @@ func (*InterfaceBridge) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
 }
 
-// InterfaceGroup is an Sophos Endpoint subType and implements sophos.RestObject
+// InterfaceEthernets is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceEthernets []InterfaceEthernet
+
+// InterfaceEthernet is a generated Sophos object
+type InterfaceEthernet struct {
+	Locked              string        `json:"_locked"`
+	Reference           string        `json:"_ref"`
+	_type               string        `json:"_type"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	Bandwidth           int64         `json:"bandwidth"`
+	Comment             string        `json:"comment"`
+	Inbandwidth         int64         `json:"inbandwidth"`
+	Itfhw               string        `json:"itfhw"`
+	Link                bool          `json:"link"`
+	Mtu                 int64         `json:"mtu"`
+	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
+	Name                string        `json:"name"`
+	Outbandwidth        int64         `json:"outbandwidth"`
+	PrimaryAddress      string        `json:"primary_address"`
+	Proxyarp            bool          `json:"proxyarp"`
+	Proxyndp            bool          `json:"proxyndp"`
+	Status              bool          `json:"status"`
+}
+
+// GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
+// Returns all available interface/ethernet objects
+func (*InterfaceEthernets) GetPath() string { return "/api/objects/interface/ethernet/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfaceEthernets) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
+// Returns all available ethernet types
+func (i *InterfaceEthernet) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/ethernet/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfaceEthernet) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the InterfaceEthernet DELETE path
+// Creates or updates the complete object ethernet
+func (*InterfaceEthernet) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfaceEthernet PATCH path
+// Changes to parts of the object ethernet types
+func (*InterfaceEthernet) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfaceEthernet POST path
+// Create a new interface/ethernet object
+func (*InterfaceEthernet) PostPath() string {
+	return "/api/objects/interface/ethernet/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfaceEthernet PUT path
+// Creates or updates the complete object ethernet
+func (*InterfaceEthernet) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *InterfaceEthernet) GetType() string { return i._type }
+
+// InterfaceGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceGroups []InterfaceGroup
+
+// InterfaceGroup is a generated Sophos object
 type InterfaceGroup struct {
 	Locked           string        `json:"_locked"`
 	Reference        string        `json:"_ref"`
@@ -256,74 +258,6 @@ func (*InterfaceGroup) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (i *InterfaceGroup) GetType() string { return i._type }
-
-// InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceTunnel []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
-// Returns all available interface/tunnel objects
-func (*InterfaceTunnel) GetPath() string { return "/api/objects/interface/tunnel/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfaceTunnel) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfaceTunnel DELETE path
-// Creates or updates the complete object tunnel
-func (*InterfaceTunnel) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfaceTunnel PATCH path
-// Changes to parts of the object tunnel types
-func (*InterfaceTunnel) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfaceTunnel POST path
-// Create a new interface/tunnel object
-func (*InterfaceTunnel) PostPath() string {
-	return "/api/objects/interface/tunnel/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfaceTunnel PUT path
-// Creates or updates the complete object tunnel
-func (*InterfaceTunnel) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}
-
-// InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppoe []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
-// Returns all available interface/pppoe objects
-func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfacePppoe) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfacePppoe DELETE path
-// Creates or updates the complete object pppoe
-func (*InterfacePppoe) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfacePppoe PATCH path
-// Changes to parts of the object pppoe types
-func (*InterfacePppoe) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfacePppoe POST path
-// Create a new interface/pppoe object
-func (*InterfacePppoe) PostPath() string {
-	return "/api/objects/interface/pppoe/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfacePppoe PUT path
-// Creates or updates the complete object pppoe
-func (*InterfacePppoe) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
-}
 
 // InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePpp3G []interface{}
@@ -427,9 +361,79 @@ func (*InterfacePppoa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
 }
 
-// InterfaceEthernet is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceEthernets []InterfaceEthernet
-type InterfaceEthernet struct {
+// InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppoe []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
+// Returns all available interface/pppoe objects
+func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfacePppoe) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfacePppoe DELETE path
+// Creates or updates the complete object pppoe
+func (*InterfacePppoe) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfacePppoe PATCH path
+// Changes to parts of the object pppoe types
+func (*InterfacePppoe) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfacePppoe POST path
+// Create a new interface/pppoe object
+func (*InterfacePppoe) PostPath() string {
+	return "/api/objects/interface/pppoe/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfacePppoe PUT path
+// Creates or updates the complete object pppoe
+func (*InterfacePppoe) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceTunnel []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
+// Returns all available interface/tunnel objects
+func (*InterfaceTunnel) GetPath() string { return "/api/objects/interface/tunnel/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfaceTunnel) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfaceTunnel DELETE path
+// Creates or updates the complete object tunnel
+func (*InterfaceTunnel) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfaceTunnel PATCH path
+// Changes to parts of the object tunnel types
+func (*InterfaceTunnel) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfaceTunnel POST path
+// Create a new interface/tunnel object
+func (*InterfaceTunnel) PostPath() string {
+	return "/api/objects/interface/tunnel/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfaceTunnel PUT path
+// Creates or updates the complete object tunnel
+func (*InterfaceTunnel) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// InterfaceVlans is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceVlans []InterfaceVlan
+
+// InterfaceVlan is a generated Sophos object
+type InterfaceVlan struct {
 	Locked              string        `json:"_locked"`
 	Reference           string        `json:"_ref"`
 	_type               string        `json:"_type"`
@@ -439,6 +443,7 @@ type InterfaceEthernet struct {
 	Inbandwidth         int64         `json:"inbandwidth"`
 	Itfhw               string        `json:"itfhw"`
 	Link                bool          `json:"link"`
+	Macvlan             bool          `json:"macvlan"`
 	Mtu                 int64         `json:"mtu"`
 	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
 	Name                string        `json:"name"`
@@ -447,47 +452,48 @@ type InterfaceEthernet struct {
 	Proxyarp            bool          `json:"proxyarp"`
 	Proxyndp            bool          `json:"proxyndp"`
 	Status              bool          `json:"status"`
+	Vlantag             int64         `json:"vlantag"`
 }
 
-// GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
-// Returns all available interface/ethernet objects
-func (*InterfaceEthernets) GetPath() string { return "/api/objects/interface/ethernet/" }
+// GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
+// Returns all available interface/vlan objects
+func (*InterfaceVlans) GetPath() string { return "/api/objects/interface/vlan/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfaceEthernets) RefRequired() (string, bool) { return "", false }
+func (*InterfaceVlans) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
-// Returns all available ethernet types
-func (i *InterfaceEthernet) GetPath() string {
-	return fmt.Sprintf("/api/objects/interface/ethernet/%s", i.Reference)
+// GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
+// Returns all available vlan types
+func (i *InterfaceVlan) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/vlan/%s", i.Reference)
 }
 
 // RefRequired implements sophos.RestObject
-func (i *InterfaceEthernet) RefRequired() (string, bool) { return i.Reference, true }
+func (i *InterfaceVlan) RefRequired() (string, bool) { return i.Reference, true }
 
-// DeletePath implements sophos.RestObject and returns the InterfaceEthernet DELETE path
-// Creates or updates the complete object ethernet
-func (*InterfaceEthernet) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+// DeletePath implements sophos.RestObject and returns the InterfaceVlan DELETE path
+// Creates or updates the complete object vlan
+func (*InterfaceVlan) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the InterfaceEthernet PATCH path
-// Changes to parts of the object ethernet types
-func (*InterfaceEthernet) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+// PatchPath implements sophos.RestObject and returns the InterfaceVlan PATCH path
+// Changes to parts of the object vlan types
+func (*InterfaceVlan) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the InterfaceEthernet POST path
-// Create a new interface/ethernet object
-func (*InterfaceEthernet) PostPath() string {
-	return "/api/objects/interface/ethernet/"
+// PostPath implements sophos.RestObject and returns the InterfaceVlan POST path
+// Create a new interface/vlan object
+func (*InterfaceVlan) PostPath() string {
+	return "/api/objects/interface/vlan/"
 }
 
-// PutPath implements sophos.RestObject and returns the InterfaceEthernet PUT path
-// Creates or updates the complete object ethernet
-func (*InterfaceEthernet) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
+// PutPath implements sophos.RestObject and returns the InterfaceVlan PUT path
+// Creates or updates the complete object vlan
+func (*InterfaceVlan) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
 // Type implements sophos.Object
-func (i *InterfaceEthernet) GetType() string { return i._type }
+func (i *InterfaceVlan) GetType() string { return i._type }

@@ -25,8 +25,8 @@ type Dns struct {
 
 var defsDns = map[string]sophos.RestObject{
 	"DnsAxfr":  &DnsAxfr{},
-	"DnsRoute": &DnsRoute{},
 	"DnsGroup": &DnsGroup{},
+	"DnsRoute": &DnsRoute{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dns's Objects
@@ -104,8 +104,44 @@ func (*DnsAxfr) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/axfr/%s", ref)
 }
 
-// DnsRoute is an Sophos Endpoint subType and implements sophos.RestObject
+// DnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type DnsGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the DnsGroup GET path
+// Returns all available dns/group objects
+func (*DnsGroup) GetPath() string { return "/api/objects/dns/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*DnsGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the DnsGroup DELETE path
+// Creates or updates the complete object group
+func (*DnsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the DnsGroup PATCH path
+// Changes to parts of the object group types
+func (*DnsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the DnsGroup POST path
+// Create a new dns/group object
+func (*DnsGroup) PostPath() string {
+	return "/api/objects/dns/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the DnsGroup PUT path
+// Creates or updates the complete object group
+func (*DnsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
+}
+
+// DnsRoutes is an Sophos Endpoint subType and implements sophos.RestObject
 type DnsRoutes []DnsRoute
+
+// DnsRoute is a generated Sophos object
 type DnsRoute struct {
 	Locked    string   `json:"_locked"`
 	Reference string   `json:"_ref"`
@@ -157,37 +193,3 @@ func (*DnsRoute) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (d *DnsRoute) GetType() string { return d._type }
-
-// DnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DnsGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the DnsGroup GET path
-// Returns all available dns/group objects
-func (*DnsGroup) GetPath() string { return "/api/objects/dns/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*DnsGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the DnsGroup DELETE path
-// Creates or updates the complete object group
-func (*DnsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the DnsGroup PATCH path
-// Changes to parts of the object group types
-func (*DnsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the DnsGroup POST path
-// Create a new dns/group object
-func (*DnsGroup) PostPath() string {
-	return "/api/objects/dns/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the DnsGroup PUT path
-// Creates or updates the complete object group
-func (*DnsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dns/group/%s", ref)
-}

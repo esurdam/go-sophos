@@ -53,17 +53,17 @@ type ReverseProxy struct {
 }
 
 var defsReverseProxy = map[string]sophos.RestObject{
-	"ReverseProxyBackend":       &ReverseProxyBackend{},
-	"ReverseProxyLocation":      &ReverseProxyLocation{},
-	"ReverseProxyThreatsFilter": &ReverseProxyThreatsFilter{},
-	"ReverseProxyFormTemplate":  &ReverseProxyFormTemplate{},
 	"ReverseProxyAuthProfile":   &ReverseProxyAuthProfile{},
+	"ReverseProxyBackend":       &ReverseProxyBackend{},
 	"ReverseProxyException":     &ReverseProxyException{},
+	"ReverseProxyFilter":        &ReverseProxyFilter{},
+	"ReverseProxyFormTemplate":  &ReverseProxyFormTemplate{},
 	"ReverseProxyFrontend":      &ReverseProxyFrontend{},
+	"ReverseProxyGroup":         &ReverseProxyGroup{},
+	"ReverseProxyLocation":      &ReverseProxyLocation{},
 	"ReverseProxyProfile":       &ReverseProxyProfile{},
 	"ReverseProxyRedirection":   &ReverseProxyRedirection{},
-	"ReverseProxyGroup":         &ReverseProxyGroup{},
-	"ReverseProxyFilter":        &ReverseProxyFilter{},
+	"ReverseProxyThreatsFilter": &ReverseProxyThreatsFilter{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ReverseProxy's Objects
@@ -139,228 +139,10 @@ func (ReverseProxy) References() []string {
 	}
 }
 
-// ReverseProxyBackend is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyBackends []ReverseProxyBackend
-type ReverseProxyBackend struct {
-	Locked                          string `json:"_locked"`
-	Reference                       string `json:"_ref"`
-	_type                           string `json:"_type"`
-	Comment                         string `json:"comment"`
-	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
-	Host                            string `json:"host"`
-	Keepalive                       bool   `json:"keepalive"`
-	Name                            string `json:"name"`
-	Path                            string `json:"path"`
-	Port                            int64  `json:"port"`
-	Ssl                             bool   `json:"ssl"`
-	Status                          bool   `json:"status"`
-	Timeout                         int64  `json:"timeout"`
-}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
-// Returns all available reverse_proxy/backend objects
-func (*ReverseProxyBackends) GetPath() string { return "/api/objects/reverse_proxy/backend/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyBackends) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
-// Returns all available backend types
-func (r *ReverseProxyBackend) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", r.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyBackend) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyBackend DELETE path
-// Creates or updates the complete object backend
-func (*ReverseProxyBackend) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyBackend PATCH path
-// Changes to parts of the object backend types
-func (*ReverseProxyBackend) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyBackend POST path
-// Create a new reverse_proxy/backend object
-func (*ReverseProxyBackend) PostPath() string {
-	return "/api/objects/reverse_proxy/backend/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyBackend PUT path
-// Creates or updates the complete object backend
-func (*ReverseProxyBackend) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyBackend) GetType() string { return r._type }
-
-// ReverseProxyLocation is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyLocations []ReverseProxyLocation
-type ReverseProxyLocation struct {
-	Locked               string        `json:"_locked"`
-	Reference            string        `json:"_ref"`
-	_type                string        `json:"_type"`
-	AccessControl        string        `json:"access_control"`
-	AllowedNetworks      []string      `json:"allowed_networks"`
-	AuthProfile          string        `json:"auth_profile"`
-	Backend              []string      `json:"backend"`
-	BePath               string        `json:"be_path"`
-	Comment              string        `json:"comment"`
-	DeniedNetworks       []interface{} `json:"denied_networks"`
-	HotStandby           bool          `json:"hot_standby"`
-	Name                 string        `json:"name"`
-	Path                 string        `json:"path"`
-	Status               bool          `json:"status"`
-	StickysessionID      string        `json:"stickysession_id"`
-	StickysessionStatus  bool          `json:"stickysession_status"`
-	WebsocketPassthrough bool          `json:"websocket_passthrough"`
-}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
-// Returns all available reverse_proxy/location objects
-func (*ReverseProxyLocations) GetPath() string { return "/api/objects/reverse_proxy/location/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyLocations) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
-// Returns all available location types
-func (r *ReverseProxyLocation) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", r.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyLocation) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyLocation DELETE path
-// Creates or updates the complete object location
-func (*ReverseProxyLocation) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyLocation PATCH path
-// Changes to parts of the object location types
-func (*ReverseProxyLocation) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyLocation POST path
-// Create a new reverse_proxy/location object
-func (*ReverseProxyLocation) PostPath() string {
-	return "/api/objects/reverse_proxy/location/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyLocation PUT path
-// Creates or updates the complete object location
-func (*ReverseProxyLocation) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyLocation) GetType() string { return r._type }
-
-// ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyThreatsFilter []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter GET path
-// Returns all available reverse_proxy/threats_filter objects
-func (*ReverseProxyThreatsFilter) GetPath() string {
-	return "/api/objects/reverse_proxy/threats_filter/"
-}
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyThreatsFilter) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyThreatsFilter DELETE path
-// Creates or updates the complete object threats_filter
-func (*ReverseProxyThreatsFilter) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter PATCH path
-// Changes to parts of the object threats_filter types
-func (*ReverseProxyThreatsFilter) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter POST path
-// Create a new reverse_proxy/threats_filter object
-func (*ReverseProxyThreatsFilter) PostPath() string {
-	return "/api/objects/reverse_proxy/threats_filter/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter PUT path
-// Creates or updates the complete object threats_filter
-func (*ReverseProxyThreatsFilter) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
-}
-
-// ReverseProxyFormTemplate is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyFormTemplates []ReverseProxyFormTemplate
-type ReverseProxyFormTemplate struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Assets    struct {
-		DefaultStylesheet_css string `json:"default_stylesheet.css"`
-	} `json:"assets"`
-	Comment  string `json:"comment"`
-	Filename string `json:"filename"`
-	Name     string `json:"name"`
-	Template string `json:"template"`
-}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyFormTemplates GET path
-// Returns all available reverse_proxy/form_template objects
-func (*ReverseProxyFormTemplates) GetPath() string { return "/api/objects/reverse_proxy/form_template/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyFormTemplates) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyFormTemplates GET path
-// Returns all available form_template types
-func (r *ReverseProxyFormTemplate) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", r.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyFormTemplate) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyFormTemplate DELETE path
-// Creates or updates the complete object form_template
-func (*ReverseProxyFormTemplate) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyFormTemplate PATCH path
-// Changes to parts of the object form_template types
-func (*ReverseProxyFormTemplate) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyFormTemplate POST path
-// Create a new reverse_proxy/form_template object
-func (*ReverseProxyFormTemplate) PostPath() string {
-	return "/api/objects/reverse_proxy/form_template/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyFormTemplate PUT path
-// Creates or updates the complete object form_template
-func (*ReverseProxyFormTemplate) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyFormTemplate) GetType() string { return r._type }
-
-// ReverseProxyAuthProfile is an Sophos Endpoint subType and implements sophos.RestObject
+// ReverseProxyAuthProfiles is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyAuthProfiles []ReverseProxyAuthProfile
+
+// ReverseProxyAuthProfile is a generated Sophos object
 type ReverseProxyAuthProfile struct {
 	Locked                          string        `json:"_locked"`
 	Reference                       string        `json:"_ref"`
@@ -436,6 +218,69 @@ func (*ReverseProxyAuthProfile) PutPath(ref string) string {
 // Type implements sophos.Object
 func (r *ReverseProxyAuthProfile) GetType() string { return r._type }
 
+// ReverseProxyBackends is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyBackends []ReverseProxyBackend
+
+// ReverseProxyBackend is a generated Sophos object
+type ReverseProxyBackend struct {
+	Locked                          string `json:"_locked"`
+	Reference                       string `json:"_ref"`
+	_type                           string `json:"_type"`
+	Comment                         string `json:"comment"`
+	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
+	Host                            string `json:"host"`
+	Keepalive                       bool   `json:"keepalive"`
+	Name                            string `json:"name"`
+	Path                            string `json:"path"`
+	Port                            int64  `json:"port"`
+	Ssl                             bool   `json:"ssl"`
+	Status                          bool   `json:"status"`
+	Timeout                         int64  `json:"timeout"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
+// Returns all available reverse_proxy/backend objects
+func (*ReverseProxyBackends) GetPath() string { return "/api/objects/reverse_proxy/backend/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyBackends) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
+// Returns all available backend types
+func (r *ReverseProxyBackend) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyBackend) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyBackend DELETE path
+// Creates or updates the complete object backend
+func (*ReverseProxyBackend) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyBackend PATCH path
+// Changes to parts of the object backend types
+func (*ReverseProxyBackend) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyBackend POST path
+// Create a new reverse_proxy/backend object
+func (*ReverseProxyBackend) PostPath() string {
+	return "/api/objects/reverse_proxy/backend/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyBackend PUT path
+// Creates or updates the complete object backend
+func (*ReverseProxyBackend) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyBackend) GetType() string { return r._type }
+
 // ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyException []interface{}
 
@@ -470,8 +315,104 @@ func (*ReverseProxyException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
 
-// ReverseProxyFrontend is an Sophos Endpoint subType and implements sophos.RestObject
+// ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyFilter []interface{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyFilter GET path
+// Returns all available reverse_proxy/filter objects
+func (*ReverseProxyFilter) GetPath() string { return "/api/objects/reverse_proxy/filter/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyFilter) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyFilter DELETE path
+// Creates or updates the complete object filter
+func (*ReverseProxyFilter) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyFilter PATCH path
+// Changes to parts of the object filter types
+func (*ReverseProxyFilter) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyFilter POST path
+// Create a new reverse_proxy/filter object
+func (*ReverseProxyFilter) PostPath() string {
+	return "/api/objects/reverse_proxy/filter/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyFilter PUT path
+// Creates or updates the complete object filter
+func (*ReverseProxyFilter) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
+}
+
+// ReverseProxyFormTemplates is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyFormTemplates []ReverseProxyFormTemplate
+
+// ReverseProxyFormTemplate is a generated Sophos object
+type ReverseProxyFormTemplate struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Assets    struct {
+		DefaultStylesheet_css string `json:"default_stylesheet.css"`
+	} `json:"assets"`
+	Comment  string `json:"comment"`
+	Filename string `json:"filename"`
+	Name     string `json:"name"`
+	Template string `json:"template"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyFormTemplates GET path
+// Returns all available reverse_proxy/form_template objects
+func (*ReverseProxyFormTemplates) GetPath() string { return "/api/objects/reverse_proxy/form_template/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyFormTemplates) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyFormTemplates GET path
+// Returns all available form_template types
+func (r *ReverseProxyFormTemplate) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyFormTemplate) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyFormTemplate DELETE path
+// Creates or updates the complete object form_template
+func (*ReverseProxyFormTemplate) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyFormTemplate PATCH path
+// Changes to parts of the object form_template types
+func (*ReverseProxyFormTemplate) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyFormTemplate POST path
+// Create a new reverse_proxy/form_template object
+func (*ReverseProxyFormTemplate) PostPath() string {
+	return "/api/objects/reverse_proxy/form_template/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyFormTemplate PUT path
+// Creates or updates the complete object form_template
+func (*ReverseProxyFormTemplate) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyFormTemplate) GetType() string { return r._type }
+
+// ReverseProxyFrontends is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFrontends []ReverseProxyFrontend
+
+// ReverseProxyFrontend is a generated Sophos object
 type ReverseProxyFrontend struct {
 	Locked               string        `json:"_locked"`
 	Reference            string        `json:"_ref"`
@@ -541,8 +482,111 @@ func (*ReverseProxyFrontend) PutPath(ref string) string {
 // Type implements sophos.Object
 func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
-// ReverseProxyProfile is an Sophos Endpoint subType and implements sophos.RestObject
+// ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
+// Returns all available reverse_proxy/group objects
+func (*ReverseProxyGroup) GetPath() string { return "/api/objects/reverse_proxy/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyGroup DELETE path
+// Creates or updates the complete object group
+func (*ReverseProxyGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyGroup PATCH path
+// Changes to parts of the object group types
+func (*ReverseProxyGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyGroup POST path
+// Create a new reverse_proxy/group object
+func (*ReverseProxyGroup) PostPath() string {
+	return "/api/objects/reverse_proxy/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyGroup PUT path
+// Creates or updates the complete object group
+func (*ReverseProxyGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// ReverseProxyLocations is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyLocations []ReverseProxyLocation
+
+// ReverseProxyLocation is a generated Sophos object
+type ReverseProxyLocation struct {
+	Locked               string        `json:"_locked"`
+	Reference            string        `json:"_ref"`
+	_type                string        `json:"_type"`
+	AccessControl        string        `json:"access_control"`
+	AllowedNetworks      []string      `json:"allowed_networks"`
+	AuthProfile          string        `json:"auth_profile"`
+	Backend              []string      `json:"backend"`
+	BePath               string        `json:"be_path"`
+	Comment              string        `json:"comment"`
+	DeniedNetworks       []interface{} `json:"denied_networks"`
+	HotStandby           bool          `json:"hot_standby"`
+	Name                 string        `json:"name"`
+	Path                 string        `json:"path"`
+	Status               bool          `json:"status"`
+	StickysessionID      string        `json:"stickysession_id"`
+	StickysessionStatus  bool          `json:"stickysession_status"`
+	WebsocketPassthrough bool          `json:"websocket_passthrough"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
+// Returns all available reverse_proxy/location objects
+func (*ReverseProxyLocations) GetPath() string { return "/api/objects/reverse_proxy/location/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyLocations) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
+// Returns all available location types
+func (r *ReverseProxyLocation) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyLocation) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyLocation DELETE path
+// Creates or updates the complete object location
+func (*ReverseProxyLocation) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyLocation PATCH path
+// Changes to parts of the object location types
+func (*ReverseProxyLocation) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyLocation POST path
+// Create a new reverse_proxy/location object
+func (*ReverseProxyLocation) PostPath() string {
+	return "/api/objects/reverse_proxy/location/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyLocation PUT path
+// Creates or updates the complete object location
+func (*ReverseProxyLocation) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyLocation) GetType() string { return r._type }
+
+// ReverseProxyProfiles is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyProfiles []ReverseProxyProfile
+
+// ReverseProxyProfile is a generated Sophos object
 type ReverseProxyProfile struct {
 	Locked                       string        `json:"_locked"`
 	Reference                    string        `json:"_ref"`
@@ -660,70 +704,38 @@ func (*ReverseProxyRedirection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
 }
 
-// ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyGroup []interface{}
+// ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyThreatsFilter []interface{}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
-// Returns all available reverse_proxy/group objects
-func (*ReverseProxyGroup) GetPath() string { return "/api/objects/reverse_proxy/group/" }
+// GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter GET path
+// Returns all available reverse_proxy/threats_filter objects
+func (*ReverseProxyThreatsFilter) GetPath() string {
+	return "/api/objects/reverse_proxy/threats_filter/"
+}
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyGroup) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyThreatsFilter) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ReverseProxyGroup DELETE path
-// Creates or updates the complete object group
-func (*ReverseProxyGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ReverseProxyThreatsFilter DELETE path
+// Creates or updates the complete object threats_filter
+func (*ReverseProxyThreatsFilter) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ReverseProxyGroup PATCH path
-// Changes to parts of the object group types
-func (*ReverseProxyGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter PATCH path
+// Changes to parts of the object threats_filter types
+func (*ReverseProxyThreatsFilter) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ReverseProxyGroup POST path
-// Create a new reverse_proxy/group object
-func (*ReverseProxyGroup) PostPath() string {
-	return "/api/objects/reverse_proxy/group/"
+// PostPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter POST path
+// Create a new reverse_proxy/threats_filter object
+func (*ReverseProxyThreatsFilter) PostPath() string {
+	return "/api/objects/reverse_proxy/threats_filter/"
 }
 
-// PutPath implements sophos.RestObject and returns the ReverseProxyGroup PUT path
-// Creates or updates the complete object group
-func (*ReverseProxyGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
-}
-
-// ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyFilter []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyFilter GET path
-// Returns all available reverse_proxy/filter objects
-func (*ReverseProxyFilter) GetPath() string { return "/api/objects/reverse_proxy/filter/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyFilter) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyFilter DELETE path
-// Creates or updates the complete object filter
-func (*ReverseProxyFilter) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyFilter PATCH path
-// Changes to parts of the object filter types
-func (*ReverseProxyFilter) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyFilter POST path
-// Create a new reverse_proxy/filter object
-func (*ReverseProxyFilter) PostPath() string {
-	return "/api/objects/reverse_proxy/filter/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyFilter PUT path
-// Creates or updates the complete object filter
-func (*ReverseProxyFilter) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
+// PutPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter PUT path
+// Creates or updates the complete object threats_filter
+func (*ReverseProxyThreatsFilter) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
 }

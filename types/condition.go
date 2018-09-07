@@ -12,13 +12,13 @@ import (
 // Condition is a generated struct representing the Sophos Condition Endpoint
 // GET /api/nodes/condition
 type Condition struct {
-	ConditionObjref ConditionObjref `json:"condition_objref"`
 	ConditionGroup  ConditionGroup  `json:"condition_group"`
+	ConditionObjref ConditionObjref `json:"condition_objref"`
 }
 
 var defsCondition = map[string]sophos.RestObject{
-	"ConditionObjref": &ConditionObjref{},
 	"ConditionGroup":  &ConditionGroup{},
+	"ConditionObjref": &ConditionObjref{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Condition's Objects
@@ -58,8 +58,44 @@ func (Condition) References() []string {
 	}
 }
 
-// ConditionObjref is an Sophos Endpoint subType and implements sophos.RestObject
+// ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ConditionGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ConditionGroup GET path
+// Returns all available condition/group objects
+func (*ConditionGroup) GetPath() string { return "/api/objects/condition/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ConditionGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ConditionGroup DELETE path
+// Creates or updates the complete object group
+func (*ConditionGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ConditionGroup PATCH path
+// Changes to parts of the object group types
+func (*ConditionGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ConditionGroup POST path
+// Create a new condition/group object
+func (*ConditionGroup) PostPath() string {
+	return "/api/objects/condition/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ConditionGroup PUT path
+// Creates or updates the complete object group
+func (*ConditionGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}
+
+// ConditionObjrefs is an Sophos Endpoint subType and implements sophos.RestObject
 type ConditionObjrefs []ConditionObjref
+
+// ConditionObjref is a generated Sophos object
 type ConditionObjref struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`
@@ -114,37 +150,3 @@ func (*ConditionObjref) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (c *ConditionObjref) GetType() string { return c._type }
-
-// ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ConditionGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ConditionGroup GET path
-// Returns all available condition/group objects
-func (*ConditionGroup) GetPath() string { return "/api/objects/condition/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ConditionGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ConditionGroup DELETE path
-// Creates or updates the complete object group
-func (*ConditionGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ConditionGroup PATCH path
-// Changes to parts of the object group types
-func (*ConditionGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ConditionGroup POST path
-// Create a new condition/group object
-func (*ConditionGroup) PostPath() string {
-	return "/api/objects/condition/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ConditionGroup PUT path
-// Creates or updates the complete object group
-func (*ConditionGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
-}

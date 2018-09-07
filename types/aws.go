@@ -98,8 +98,10 @@ func (*AwsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
 }
 
-// AwsInstanceType is an Sophos Endpoint subType and implements sophos.RestObject
+// AwsInstanceTypes is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsInstanceTypes []AwsInstanceType
+
+// AwsInstanceType is a generated Sophos object
 type AwsInstanceType struct {
 	Locked             string      `json:"_locked"`
 	Reference          string      `json:"_ref"`
@@ -156,8 +158,10 @@ func (*AwsInstanceType) PutPath(ref string) string {
 // Type implements sophos.Object
 func (a *AwsInstanceType) GetType() string { return a._type }
 
-// AwsRegion is an Sophos Endpoint subType and implements sophos.RestObject
+// AwsRegions is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsRegions []AwsRegion
+
+// AwsRegion is a generated Sophos object
 type AwsRegion struct {
 	Locked            string   `json:"_locked"`
 	Reference         string   `json:"_ref"`

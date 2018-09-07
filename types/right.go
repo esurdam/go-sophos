@@ -92,8 +92,10 @@ func (*RightGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/group/%s", ref)
 }
 
-// RightRight is an Sophos Endpoint subType and implements sophos.RestObject
+// RightRights is an Sophos Endpoint subType and implements sophos.RestObject
 type RightRights []RightRight
+
+// RightRight is a generated Sophos object
 type RightRight struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`

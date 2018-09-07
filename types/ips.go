@@ -100,8 +100,10 @@ func (Ips) References() []string {
 	}
 }
 
-// IpsException is an Sophos Endpoint subType and implements sophos.RestObject
+// IpsExceptions is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsExceptions []IpsException
+
+// IpsException is a generated Sophos object
 type IpsException struct {
 	Locked              string   `json:"_locked"`
 	Reference           string   `json:"_ref"`
@@ -159,8 +161,10 @@ func (*IpsException) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *IpsException) GetType() string { return i._type }
 
-// IpsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+// IpsGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsGroups []IpsGroup
+
+// IpsGroup is a generated Sophos object
 type IpsGroup struct {
 	Locked       string   `json:"_locked"`
 	Reference    string   `json:"_ref"`

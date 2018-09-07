@@ -12,13 +12,13 @@ import (
 // ApplicationControl is a generated struct representing the Sophos ApplicationControl Endpoint
 // GET /api/nodes/application_control
 type ApplicationControl struct {
-	ApplicationControlRule  ApplicationControlRule  `json:"application_control_rule"`
 	ApplicationControlGroup ApplicationControlGroup `json:"application_control_group"`
+	ApplicationControlRule  ApplicationControlRule  `json:"application_control_rule"`
 }
 
 var defsApplicationControl = map[string]sophos.RestObject{
-	"ApplicationControlRule":  &ApplicationControlRule{},
 	"ApplicationControlGroup": &ApplicationControlGroup{},
+	"ApplicationControlRule":  &ApplicationControlRule{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ApplicationControl's Objects
@@ -58,8 +58,44 @@ func (ApplicationControl) References() []string {
 	}
 }
 
-// ApplicationControlRule is an Sophos Endpoint subType and implements sophos.RestObject
+// ApplicationControlGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ApplicationControlGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ApplicationControlGroup GET path
+// Returns all available application_control/group objects
+func (*ApplicationControlGroup) GetPath() string { return "/api/objects/application_control/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ApplicationControlGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ApplicationControlGroup DELETE path
+// Creates or updates the complete object group
+func (*ApplicationControlGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ApplicationControlGroup PATCH path
+// Changes to parts of the object group types
+func (*ApplicationControlGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ApplicationControlGroup POST path
+// Create a new application_control/group object
+func (*ApplicationControlGroup) PostPath() string {
+	return "/api/objects/application_control/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ApplicationControlGroup PUT path
+// Creates or updates the complete object group
+func (*ApplicationControlGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
+}
+
+// ApplicationControlRules is an Sophos Endpoint subType and implements sophos.RestObject
 type ApplicationControlRules []ApplicationControlRule
+
+// ApplicationControlRule is a generated Sophos object
 type ApplicationControlRule struct {
 	Locked                  string        `json:"_locked"`
 	Reference               string        `json:"_ref"`
@@ -120,37 +156,3 @@ func (*ApplicationControlRule) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (a *ApplicationControlRule) GetType() string { return a._type }
-
-// ApplicationControlGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ApplicationControlGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ApplicationControlGroup GET path
-// Returns all available application_control/group objects
-func (*ApplicationControlGroup) GetPath() string { return "/api/objects/application_control/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ApplicationControlGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ApplicationControlGroup DELETE path
-// Creates or updates the complete object group
-func (*ApplicationControlGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ApplicationControlGroup PATCH path
-// Changes to parts of the object group types
-func (*ApplicationControlGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ApplicationControlGroup POST path
-// Create a new application_control/group object
-func (*ApplicationControlGroup) PostPath() string {
-	return "/api/objects/application_control/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ApplicationControlGroup PUT path
-// Creates or updates the complete object group
-func (*ApplicationControlGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
-}

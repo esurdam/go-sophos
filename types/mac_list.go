@@ -12,13 +12,13 @@ import (
 // MacList is a generated struct representing the Sophos MacList Endpoint
 // GET /api/nodes/mac_list
 type MacList struct {
-	MacListMacList MacListMacList `json:"mac_list_mac_list"`
 	MacListGroup   MacListGroup   `json:"mac_list_group"`
+	MacListMacList MacListMacList `json:"mac_list_mac_list"`
 }
 
 var defsMacList = map[string]sophos.RestObject{
-	"MacListMacList": &MacListMacList{},
 	"MacListGroup":   &MacListGroup{},
+	"MacListMacList": &MacListMacList{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of MacList's Objects
@@ -58,40 +58,6 @@ func (MacList) References() []string {
 	}
 }
 
-// MacListMacList is an Sophos Endpoint subType and implements sophos.RestObject
-type MacListMacList []interface{}
-
-// GetPath implements sophos.RestObject and returns the MacListMacList GET path
-// Returns all available mac_list/mac_list objects
-func (*MacListMacList) GetPath() string { return "/api/objects/mac_list/mac_list/" }
-
-// RefRequired implements sophos.RestObject
-func (*MacListMacList) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the MacListMacList DELETE path
-// Creates or updates the complete object mac_list
-func (*MacListMacList) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the MacListMacList PATCH path
-// Changes to parts of the object mac_list types
-func (*MacListMacList) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the MacListMacList POST path
-// Create a new mac_list/mac_list object
-func (*MacListMacList) PostPath() string {
-	return "/api/objects/mac_list/mac_list/"
-}
-
-// PutPath implements sophos.RestObject and returns the MacListMacList PUT path
-// Creates or updates the complete object mac_list
-func (*MacListMacList) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
-}
-
 // MacListGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type MacListGroup []interface{}
 
@@ -124,4 +90,38 @@ func (*MacListGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*MacListGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/group/%s", ref)
+}
+
+// MacListMacList is an Sophos Endpoint subType and implements sophos.RestObject
+type MacListMacList []interface{}
+
+// GetPath implements sophos.RestObject and returns the MacListMacList GET path
+// Returns all available mac_list/mac_list objects
+func (*MacListMacList) GetPath() string { return "/api/objects/mac_list/mac_list/" }
+
+// RefRequired implements sophos.RestObject
+func (*MacListMacList) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the MacListMacList DELETE path
+// Creates or updates the complete object mac_list
+func (*MacListMacList) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the MacListMacList PATCH path
+// Changes to parts of the object mac_list types
+func (*MacListMacList) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the MacListMacList POST path
+// Create a new mac_list/mac_list object
+func (*MacListMacList) PostPath() string {
+	return "/api/objects/mac_list/mac_list/"
+}
+
+// PutPath implements sophos.RestObject and returns the MacListMacList PUT path
+// Creates or updates the complete object mac_list
+func (*MacListMacList) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
 }

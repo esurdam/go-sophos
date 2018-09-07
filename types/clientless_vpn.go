@@ -12,13 +12,13 @@ import (
 // ClientlessVpn is a generated struct representing the Sophos ClientlessVpn Endpoint
 // GET /api/nodes/clientless_vpn
 type ClientlessVpn struct {
-	ClientlessVpnGroup      ClientlessVpnGroup      `json:"clientless_vpn_group"`
 	ClientlessVpnConnection ClientlessVpnConnection `json:"clientless_vpn_connection"`
+	ClientlessVpnGroup      ClientlessVpnGroup      `json:"clientless_vpn_group"`
 }
 
 var defsClientlessVpn = map[string]sophos.RestObject{
-	"ClientlessVpnGroup":      &ClientlessVpnGroup{},
 	"ClientlessVpnConnection": &ClientlessVpnConnection{},
+	"ClientlessVpnGroup":      &ClientlessVpnGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ClientlessVpn's Objects
@@ -58,42 +58,10 @@ func (ClientlessVpn) References() []string {
 	}
 }
 
-// ClientlessVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ClientlessVpnGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ClientlessVpnGroup GET path
-// Returns all available clientless_vpn/group objects
-func (*ClientlessVpnGroup) GetPath() string { return "/api/objects/clientless_vpn/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ClientlessVpnGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ClientlessVpnGroup DELETE path
-// Creates or updates the complete object group
-func (*ClientlessVpnGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ClientlessVpnGroup PATCH path
-// Changes to parts of the object group types
-func (*ClientlessVpnGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ClientlessVpnGroup POST path
-// Create a new clientless_vpn/group object
-func (*ClientlessVpnGroup) PostPath() string {
-	return "/api/objects/clientless_vpn/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ClientlessVpnGroup PUT path
-// Creates or updates the complete object group
-func (*ClientlessVpnGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
-}
-
-// ClientlessVpnConnection is an Sophos Endpoint subType and implements sophos.RestObject
+// ClientlessVpnConnections is an Sophos Endpoint subType and implements sophos.RestObject
 type ClientlessVpnConnections []ClientlessVpnConnection
+
+// ClientlessVpnConnection is a generated Sophos object
 type ClientlessVpnConnection struct {
 	Locked        string        `json:"_locked"`
 	Reference     string        `json:"_ref"`
@@ -160,3 +128,37 @@ func (*ClientlessVpnConnection) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (c *ClientlessVpnConnection) GetType() string { return c._type }
+
+// ClientlessVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ClientlessVpnGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ClientlessVpnGroup GET path
+// Returns all available clientless_vpn/group objects
+func (*ClientlessVpnGroup) GetPath() string { return "/api/objects/clientless_vpn/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ClientlessVpnGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ClientlessVpnGroup DELETE path
+// Creates or updates the complete object group
+func (*ClientlessVpnGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ClientlessVpnGroup PATCH path
+// Changes to parts of the object group types
+func (*ClientlessVpnGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ClientlessVpnGroup POST path
+// Create a new clientless_vpn/group object
+func (*ClientlessVpnGroup) PostPath() string {
+	return "/api/objects/clientless_vpn/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ClientlessVpnGroup PUT path
+// Creates or updates the complete object group
+func (*ClientlessVpnGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
+}

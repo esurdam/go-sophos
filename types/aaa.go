@@ -58,8 +58,10 @@ func (Aaa) References() []string {
 	}
 }
 
-// AaaGroup is an Sophos Endpoint subType and implements sophos.RestObject
+// AaaGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type AaaGroups []AaaGroup
+
+// AaaGroup is a generated Sophos object
 type AaaGroup struct {
 	Locked               string        `json:"_locked"`
 	Reference            string        `json:"_ref"`
@@ -121,8 +123,10 @@ func (*AaaGroup) PutPath(ref string) string {
 // Type implements sophos.Object
 func (a *AaaGroup) GetType() string { return a._type }
 
-// AaaUser is an Sophos Endpoint subType and implements sophos.RestObject
+// AaaUsers is an Sophos Endpoint subType and implements sophos.RestObject
 type AaaUsers []AaaUser
+
+// AaaUser is a generated Sophos object
 type AaaUser struct {
 	Locked           string        `json:"_locked"`
 	Reference        string        `json:"_ref"`

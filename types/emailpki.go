@@ -48,10 +48,10 @@ type Emailpki struct {
 }
 
 var defsEmailpki = map[string]sophos.RestObject{
+	"EmailpkiGroup":   &EmailpkiGroup{},
 	"EmailpkiOpenpgp": &EmailpkiOpenpgp{},
 	"EmailpkiSmime":   &EmailpkiSmime{},
 	"EmailpkiUser":    &EmailpkiUser{},
-	"EmailpkiGroup":   &EmailpkiGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Emailpki's Objects
@@ -97,6 +97,40 @@ func (Emailpki) References() []string {
 		"REF_EmailpkiSmime",
 		"REF_EmailpkiUser",
 	}
+}
+
+// EmailpkiGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type EmailpkiGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the EmailpkiGroup GET path
+// Returns all available emailpki/group objects
+func (*EmailpkiGroup) GetPath() string { return "/api/objects/emailpki/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*EmailpkiGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the EmailpkiGroup DELETE path
+// Creates or updates the complete object group
+func (*EmailpkiGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the EmailpkiGroup PATCH path
+// Changes to parts of the object group types
+func (*EmailpkiGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the EmailpkiGroup POST path
+// Create a new emailpki/group object
+func (*EmailpkiGroup) PostPath() string {
+	return "/api/objects/emailpki/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the EmailpkiGroup PUT path
+// Creates or updates the complete object group
+func (*EmailpkiGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
 }
 
 // EmailpkiOpenpgp is an Sophos Endpoint subType and implements sophos.RestObject
@@ -199,38 +233,4 @@ func (*EmailpkiUser) PostPath() string {
 // Creates or updates the complete object user
 func (*EmailpkiUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/user/%s", ref)
-}
-
-// EmailpkiGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type EmailpkiGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the EmailpkiGroup GET path
-// Returns all available emailpki/group objects
-func (*EmailpkiGroup) GetPath() string { return "/api/objects/emailpki/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*EmailpkiGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the EmailpkiGroup DELETE path
-// Creates or updates the complete object group
-func (*EmailpkiGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the EmailpkiGroup PATCH path
-// Changes to parts of the object group types
-func (*EmailpkiGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the EmailpkiGroup POST path
-// Create a new emailpki/group object
-func (*EmailpkiGroup) PostPath() string {
-	return "/api/objects/emailpki/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the EmailpkiGroup PUT path
-// Creates or updates the complete object group
-func (*EmailpkiGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
 }

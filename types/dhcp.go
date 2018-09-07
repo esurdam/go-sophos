@@ -30,12 +30,12 @@ type Dhcp struct {
 }
 
 var defsDhcp = map[string]sophos.RestObject{
+	"DhcpGroup":     &DhcpGroup{},
+	"DhcpOption":    &DhcpOption{},
 	"DhcpOption6":   &DhcpOption6{},
 	"DhcpServer":    &DhcpServer{},
 	"DhcpServer6":   &DhcpServer6{},
 	"DhcpStateless": &DhcpStateless{},
-	"DhcpOption":    &DhcpOption{},
-	"DhcpGroup":     &DhcpGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dhcp's Objects
@@ -91,6 +91,106 @@ func (Dhcp) References() []string {
 	}
 }
 
+// DhcpGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the DhcpGroup GET path
+// Returns all available dhcp/group objects
+func (*DhcpGroup) GetPath() string { return "/api/objects/dhcp/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*DhcpGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the DhcpGroup DELETE path
+// Creates or updates the complete object group
+func (*DhcpGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the DhcpGroup PATCH path
+// Changes to parts of the object group types
+func (*DhcpGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the DhcpGroup POST path
+// Create a new dhcp/group object
+func (*DhcpGroup) PostPath() string {
+	return "/api/objects/dhcp/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the DhcpGroup PUT path
+// Creates or updates the complete object group
+func (*DhcpGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
+}
+
+// DhcpOptions is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpOptions []DhcpOption
+
+// DhcpOption is a generated Sophos object
+type DhcpOption struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Address   string        `json:"address"`
+	Code      int64         `json:"code"`
+	Comment   string        `json:"comment"`
+	DhcpName  string        `json:"dhcp_name"`
+	Host      []interface{} `json:"host"`
+	Integer   int64         `json:"integer"`
+	Mac       string        `json:"mac"`
+	Name      string        `json:"name"`
+	Scope     string        `json:"scope"`
+	Server    []interface{} `json:"server"`
+	Status    bool          `json:"status"`
+	String    string        `json:"string"`
+	Text      string        `json:"text"`
+	Type      string        `json:"type"`
+	Vendor    string        `json:"vendor"`
+}
+
+// GetPath implements sophos.RestObject and returns the DhcpOptions GET path
+// Returns all available dhcp/option objects
+func (*DhcpOptions) GetPath() string { return "/api/objects/dhcp/option/" }
+
+// RefRequired implements sophos.RestObject
+func (*DhcpOptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DhcpOptions GET path
+// Returns all available option types
+func (d *DhcpOption) GetPath() string { return fmt.Sprintf("/api/objects/dhcp/option/%s", d.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (d *DhcpOption) RefRequired() (string, bool) { return d.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the DhcpOption DELETE path
+// Creates or updates the complete object option
+func (*DhcpOption) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the DhcpOption PATCH path
+// Changes to parts of the object option types
+func (*DhcpOption) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the DhcpOption POST path
+// Create a new dhcp/option object
+func (*DhcpOption) PostPath() string {
+	return "/api/objects/dhcp/option/"
+}
+
+// PutPath implements sophos.RestObject and returns the DhcpOption PUT path
+// Creates or updates the complete object option
+func (*DhcpOption) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
+}
+
+// Type implements sophos.Object
+func (d *DhcpOption) GetType() string { return d._type }
+
 // DhcpOption6 is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpOption6 []interface{}
 
@@ -125,8 +225,10 @@ func (*DhcpOption6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option6/%s", ref)
 }
 
-// DhcpServer is an Sophos Endpoint subType and implements sophos.RestObject
+// DhcpServers is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpServers []DhcpServer
+
+// DhcpServer is a generated Sophos object
 type DhcpServer struct {
 	Locked          string   `json:"_locked"`
 	Reference       string   `json:"_ref"`
@@ -260,102 +362,4 @@ func (*DhcpStateless) PostPath() string {
 // Creates or updates the complete object stateless
 func (*DhcpStateless) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/stateless/%s", ref)
-}
-
-// DhcpOption is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpOptions []DhcpOption
-type DhcpOption struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Address   string        `json:"address"`
-	Code      int64         `json:"code"`
-	Comment   string        `json:"comment"`
-	DhcpName  string        `json:"dhcp_name"`
-	Host      []interface{} `json:"host"`
-	Integer   int64         `json:"integer"`
-	Mac       string        `json:"mac"`
-	Name      string        `json:"name"`
-	Scope     string        `json:"scope"`
-	Server    []interface{} `json:"server"`
-	Status    bool          `json:"status"`
-	String    string        `json:"string"`
-	Text      string        `json:"text"`
-	Type      string        `json:"type"`
-	Vendor    string        `json:"vendor"`
-}
-
-// GetPath implements sophos.RestObject and returns the DhcpOptions GET path
-// Returns all available dhcp/option objects
-func (*DhcpOptions) GetPath() string { return "/api/objects/dhcp/option/" }
-
-// RefRequired implements sophos.RestObject
-func (*DhcpOptions) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the DhcpOptions GET path
-// Returns all available option types
-func (d *DhcpOption) GetPath() string { return fmt.Sprintf("/api/objects/dhcp/option/%s", d.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (d *DhcpOption) RefRequired() (string, bool) { return d.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the DhcpOption DELETE path
-// Creates or updates the complete object option
-func (*DhcpOption) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the DhcpOption PATCH path
-// Changes to parts of the object option types
-func (*DhcpOption) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the DhcpOption POST path
-// Create a new dhcp/option object
-func (*DhcpOption) PostPath() string {
-	return "/api/objects/dhcp/option/"
-}
-
-// PutPath implements sophos.RestObject and returns the DhcpOption PUT path
-// Creates or updates the complete object option
-func (*DhcpOption) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
-}
-
-// Type implements sophos.Object
-func (d *DhcpOption) GetType() string { return d._type }
-
-// DhcpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the DhcpGroup GET path
-// Returns all available dhcp/group objects
-func (*DhcpGroup) GetPath() string { return "/api/objects/dhcp/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*DhcpGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the DhcpGroup DELETE path
-// Creates or updates the complete object group
-func (*DhcpGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the DhcpGroup PATCH path
-// Changes to parts of the object group types
-func (*DhcpGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the DhcpGroup POST path
-// Create a new dhcp/group object
-func (*DhcpGroup) PostPath() string {
-	return "/api/objects/dhcp/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the DhcpGroup PUT path
-// Creates or updates the complete object group
-func (*DhcpGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
 }

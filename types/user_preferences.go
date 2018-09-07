@@ -92,8 +92,10 @@ func (*UserPreferencesGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
 }
 
-// UserPreferencesWebadmin is an Sophos Endpoint subType and implements sophos.RestObject
+// UserPreferencesWebadmins is an Sophos Endpoint subType and implements sophos.RestObject
 type UserPreferencesWebadmins []UserPreferencesWebadmin
+
+// UserPreferencesWebadmin is a generated Sophos object
 type UserPreferencesWebadmin struct {
 	Locked               string   `json:"_locked"`
 	Reference            string   `json:"_ref"`

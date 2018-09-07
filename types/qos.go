@@ -20,13 +20,13 @@ type Qos struct {
 }
 
 var defsQos = map[string]sophos.RestObject{
-	"QosIngressRule":          &QosIngressRule{},
-	"QosInterface":            &QosInterface{},
-	"QosTrafficSelector":      &QosTrafficSelector{},
 	"QosApplicationSelector":  &QosApplicationSelector{},
 	"QosGroup":                &QosGroup{},
-	"QosTrafficSelectorGroup": &QosTrafficSelectorGroup{},
+	"QosIngressRule":          &QosIngressRule{},
+	"QosInterface":            &QosInterface{},
 	"QosRule":                 &QosRule{},
+	"QosTrafficSelector":      &QosTrafficSelector{},
+	"QosTrafficSelectorGroup": &QosTrafficSelectorGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Qos's Objects
@@ -84,136 +84,6 @@ func (Qos) References() []string {
 		"REF_QosTrafficSelector",
 		"REF_QosTrafficSelectorGroup",
 	}
-}
-
-// QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
-type QosIngressRule []interface{}
-
-// GetPath implements sophos.RestObject and returns the QosIngressRule GET path
-// Returns all available qos/ingress_rule objects
-func (*QosIngressRule) GetPath() string { return "/api/objects/qos/ingress_rule/" }
-
-// RefRequired implements sophos.RestObject
-func (*QosIngressRule) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the QosIngressRule DELETE path
-// Creates or updates the complete object ingress_rule
-func (*QosIngressRule) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the QosIngressRule PATCH path
-// Changes to parts of the object ingress_rule types
-func (*QosIngressRule) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the QosIngressRule POST path
-// Create a new qos/ingress_rule object
-func (*QosIngressRule) PostPath() string {
-	return "/api/objects/qos/ingress_rule/"
-}
-
-// PutPath implements sophos.RestObject and returns the QosIngressRule PUT path
-// Creates or updates the complete object ingress_rule
-func (*QosIngressRule) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
-// QosInterface is an Sophos Endpoint subType and implements sophos.RestObject
-type QosInterfaces []QosInterface
-type QosInterface struct {
-	Locked            string        `json:"_locked"`
-	Reference         string        `json:"_ref"`
-	_type             string        `json:"_type"`
-	Comment           string        `json:"comment"`
-	Downlink          int64         `json:"downlink"`
-	DownlinkOptimizer bool          `json:"downlink_optimizer"`
-	IngressRules      []interface{} `json:"ingress_rules"`
-	Interface         string        `json:"interface"`
-	Name              string        `json:"name"`
-	Rules             []interface{} `json:"rules"`
-	Status            bool          `json:"status"`
-	Uplink            int64         `json:"uplink"`
-	UplinkLimit       bool          `json:"uplink_limit"`
-	UplinkOptimizer   bool          `json:"uplink_optimizer"`
-}
-
-// GetPath implements sophos.RestObject and returns the QosInterfaces GET path
-// Returns all available qos/interface objects
-func (*QosInterfaces) GetPath() string { return "/api/objects/qos/interface/" }
-
-// RefRequired implements sophos.RestObject
-func (*QosInterfaces) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the QosInterfaces GET path
-// Returns all available interface types
-func (q *QosInterface) GetPath() string {
-	return fmt.Sprintf("/api/objects/qos/interface/%s", q.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (q *QosInterface) RefRequired() (string, bool) { return q.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the QosInterface DELETE path
-// Creates or updates the complete object interface
-func (*QosInterface) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the QosInterface PATCH path
-// Changes to parts of the object interface types
-func (*QosInterface) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the QosInterface POST path
-// Create a new qos/interface object
-func (*QosInterface) PostPath() string {
-	return "/api/objects/qos/interface/"
-}
-
-// PutPath implements sophos.RestObject and returns the QosInterface PUT path
-// Creates or updates the complete object interface
-func (*QosInterface) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
-}
-
-// Type implements sophos.Object
-func (q *QosInterface) GetType() string { return q._type }
-
-// QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
-type QosTrafficSelector []interface{}
-
-// GetPath implements sophos.RestObject and returns the QosTrafficSelector GET path
-// Returns all available qos/traffic_selector objects
-func (*QosTrafficSelector) GetPath() string { return "/api/objects/qos/traffic_selector/" }
-
-// RefRequired implements sophos.RestObject
-func (*QosTrafficSelector) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the QosTrafficSelector DELETE path
-// Creates or updates the complete object traffic_selector
-func (*QosTrafficSelector) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the QosTrafficSelector PATCH path
-// Changes to parts of the object traffic_selector types
-func (*QosTrafficSelector) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the QosTrafficSelector POST path
-// Create a new qos/traffic_selector object
-func (*QosTrafficSelector) PostPath() string {
-	return "/api/objects/qos/traffic_selector/"
-}
-
-// PutPath implements sophos.RestObject and returns the QosTrafficSelector PUT path
-// Creates or updates the complete object traffic_selector
-func (*QosTrafficSelector) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
 }
 
 // QosApplicationSelector is an Sophos Endpoint subType and implements sophos.RestObject
@@ -284,39 +154,103 @@ func (*QosGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
-// QosTrafficSelectorGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type QosTrafficSelectorGroup []interface{}
+// QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
+type QosIngressRule []interface{}
 
-// GetPath implements sophos.RestObject and returns the QosTrafficSelectorGroup GET path
-// Returns all available qos/traffic_selector_group objects
-func (*QosTrafficSelectorGroup) GetPath() string { return "/api/objects/qos/traffic_selector_group/" }
+// GetPath implements sophos.RestObject and returns the QosIngressRule GET path
+// Returns all available qos/ingress_rule objects
+func (*QosIngressRule) GetPath() string { return "/api/objects/qos/ingress_rule/" }
 
 // RefRequired implements sophos.RestObject
-func (*QosTrafficSelectorGroup) RefRequired() (string, bool) { return "", false }
+func (*QosIngressRule) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the QosTrafficSelectorGroup DELETE path
-// Creates or updates the complete object traffic_selector_group
-func (*QosTrafficSelectorGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the QosIngressRule DELETE path
+// Creates or updates the complete object ingress_rule
+func (*QosIngressRule) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the QosTrafficSelectorGroup PATCH path
-// Changes to parts of the object traffic_selector_group types
-func (*QosTrafficSelectorGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the QosIngressRule PATCH path
+// Changes to parts of the object ingress_rule types
+func (*QosIngressRule) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the QosTrafficSelectorGroup POST path
-// Create a new qos/traffic_selector_group object
-func (*QosTrafficSelectorGroup) PostPath() string {
-	return "/api/objects/qos/traffic_selector_group/"
+// PostPath implements sophos.RestObject and returns the QosIngressRule POST path
+// Create a new qos/ingress_rule object
+func (*QosIngressRule) PostPath() string {
+	return "/api/objects/qos/ingress_rule/"
 }
 
-// PutPath implements sophos.RestObject and returns the QosTrafficSelectorGroup PUT path
-// Creates or updates the complete object traffic_selector_group
-func (*QosTrafficSelectorGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+// PutPath implements sophos.RestObject and returns the QosIngressRule PUT path
+// Creates or updates the complete object ingress_rule
+func (*QosIngressRule) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
 }
+
+// QosInterfaces is an Sophos Endpoint subType and implements sophos.RestObject
+type QosInterfaces []QosInterface
+
+// QosInterface is a generated Sophos object
+type QosInterface struct {
+	Locked            string        `json:"_locked"`
+	Reference         string        `json:"_ref"`
+	_type             string        `json:"_type"`
+	Comment           string        `json:"comment"`
+	Downlink          int64         `json:"downlink"`
+	DownlinkOptimizer bool          `json:"downlink_optimizer"`
+	IngressRules      []interface{} `json:"ingress_rules"`
+	Interface         string        `json:"interface"`
+	Name              string        `json:"name"`
+	Rules             []interface{} `json:"rules"`
+	Status            bool          `json:"status"`
+	Uplink            int64         `json:"uplink"`
+	UplinkLimit       bool          `json:"uplink_limit"`
+	UplinkOptimizer   bool          `json:"uplink_optimizer"`
+}
+
+// GetPath implements sophos.RestObject and returns the QosInterfaces GET path
+// Returns all available qos/interface objects
+func (*QosInterfaces) GetPath() string { return "/api/objects/qos/interface/" }
+
+// RefRequired implements sophos.RestObject
+func (*QosInterfaces) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the QosInterfaces GET path
+// Returns all available interface types
+func (q *QosInterface) GetPath() string {
+	return fmt.Sprintf("/api/objects/qos/interface/%s", q.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (q *QosInterface) RefRequired() (string, bool) { return q.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the QosInterface DELETE path
+// Creates or updates the complete object interface
+func (*QosInterface) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the QosInterface PATCH path
+// Changes to parts of the object interface types
+func (*QosInterface) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the QosInterface POST path
+// Create a new qos/interface object
+func (*QosInterface) PostPath() string {
+	return "/api/objects/qos/interface/"
+}
+
+// PutPath implements sophos.RestObject and returns the QosInterface PUT path
+// Creates or updates the complete object interface
+func (*QosInterface) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
+}
+
+// Type implements sophos.Object
+func (q *QosInterface) GetType() string { return q._type }
 
 // QosRule is an Sophos Endpoint subType and implements sophos.RestObject
 type QosRule []interface{}
@@ -350,4 +284,72 @@ func (*QosRule) PostPath() string {
 // Creates or updates the complete object rule
 func (*QosRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/rule/%s", ref)
+}
+
+// QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
+type QosTrafficSelector []interface{}
+
+// GetPath implements sophos.RestObject and returns the QosTrafficSelector GET path
+// Returns all available qos/traffic_selector objects
+func (*QosTrafficSelector) GetPath() string { return "/api/objects/qos/traffic_selector/" }
+
+// RefRequired implements sophos.RestObject
+func (*QosTrafficSelector) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the QosTrafficSelector DELETE path
+// Creates or updates the complete object traffic_selector
+func (*QosTrafficSelector) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the QosTrafficSelector PATCH path
+// Changes to parts of the object traffic_selector types
+func (*QosTrafficSelector) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the QosTrafficSelector POST path
+// Create a new qos/traffic_selector object
+func (*QosTrafficSelector) PostPath() string {
+	return "/api/objects/qos/traffic_selector/"
+}
+
+// PutPath implements sophos.RestObject and returns the QosTrafficSelector PUT path
+// Creates or updates the complete object traffic_selector
+func (*QosTrafficSelector) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+}
+
+// QosTrafficSelectorGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type QosTrafficSelectorGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the QosTrafficSelectorGroup GET path
+// Returns all available qos/traffic_selector_group objects
+func (*QosTrafficSelectorGroup) GetPath() string { return "/api/objects/qos/traffic_selector_group/" }
+
+// RefRequired implements sophos.RestObject
+func (*QosTrafficSelectorGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the QosTrafficSelectorGroup DELETE path
+// Creates or updates the complete object traffic_selector_group
+func (*QosTrafficSelectorGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the QosTrafficSelectorGroup PATCH path
+// Changes to parts of the object traffic_selector_group types
+func (*QosTrafficSelectorGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the QosTrafficSelectorGroup POST path
+// Create a new qos/traffic_selector_group object
+func (*QosTrafficSelectorGroup) PostPath() string {
+	return "/api/objects/qos/traffic_selector_group/"
+}
+
+// PutPath implements sophos.RestObject and returns the QosTrafficSelectorGroup PUT path
+// Creates or updates the complete object traffic_selector_group
+func (*QosTrafficSelectorGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
 }

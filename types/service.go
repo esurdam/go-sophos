@@ -12,29 +12,29 @@ import (
 // Service is a generated struct representing the Sophos Service Endpoint
 // GET /api/nodes/service
 type Service struct {
+	ServiceAh     ServiceAh     `json:"service_ah"`
+	ServiceAny    ServiceAny    `json:"service_any"`
 	ServiceEsp    ServiceEsp    `json:"service_esp"`
+	ServiceGroup  ServiceGroup  `json:"service_group"`
+	ServiceIcmp   ServiceIcmp   `json:"service_icmp"`
 	ServiceIcmpv6 ServiceIcmpv6 `json:"service_icmpv6"`
 	ServiceIp     ServiceIp     `json:"service_ip"`
-	ServiceAny    ServiceAny    `json:"service_any"`
-	ServiceIcmp   ServiceIcmp   `json:"service_icmp"`
-	ServiceGroup  ServiceGroup  `json:"service_group"`
 	ServiceTcp    ServiceTcp    `json:"service_tcp"`
 	ServiceTcpudp ServiceTcpudp `json:"service_tcpudp"`
 	ServiceUdp    ServiceUdp    `json:"service_udp"`
-	ServiceAh     ServiceAh     `json:"service_ah"`
 }
 
 var defsService = map[string]sophos.RestObject{
+	"ServiceAh":     &ServiceAh{},
+	"ServiceAny":    &ServiceAny{},
 	"ServiceEsp":    &ServiceEsp{},
+	"ServiceGroup":  &ServiceGroup{},
+	"ServiceIcmp":   &ServiceIcmp{},
 	"ServiceIcmpv6": &ServiceIcmpv6{},
 	"ServiceIp":     &ServiceIp{},
-	"ServiceAny":    &ServiceAny{},
-	"ServiceIcmp":   &ServiceIcmp{},
-	"ServiceGroup":  &ServiceGroup{},
 	"ServiceTcp":    &ServiceTcp{},
 	"ServiceTcpudp": &ServiceTcpudp{},
 	"ServiceUdp":    &ServiceUdp{},
-	"ServiceAh":     &ServiceAh{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Service's Objects
@@ -106,128 +106,44 @@ func (Service) References() []string {
 	}
 }
 
-// ServiceEsp is an Sophos Endpoint subType and implements sophos.RestObject
-type ServiceEsp []interface{}
+// ServiceAh is an Sophos Endpoint subType and implements sophos.RestObject
+type ServiceAh []interface{}
 
-// GetPath implements sophos.RestObject and returns the ServiceEsp GET path
-// Returns all available service/esp objects
-func (*ServiceEsp) GetPath() string { return "/api/objects/service/esp/" }
-
-// RefRequired implements sophos.RestObject
-func (*ServiceEsp) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ServiceEsp DELETE path
-// Creates or updates the complete object esp
-func (*ServiceEsp) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ServiceEsp PATCH path
-// Changes to parts of the object esp types
-func (*ServiceEsp) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ServiceEsp POST path
-// Create a new service/esp object
-func (*ServiceEsp) PostPath() string {
-	return "/api/objects/service/esp/"
-}
-
-// PutPath implements sophos.RestObject and returns the ServiceEsp PUT path
-// Creates or updates the complete object esp
-func (*ServiceEsp) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
-}
-
-// ServiceIcmpv6 is an Sophos Endpoint subType and implements sophos.RestObject
-type ServiceIcmpv6 []interface{}
-
-// GetPath implements sophos.RestObject and returns the ServiceIcmpv6 GET path
-// Returns all available service/icmpv6 objects
-func (*ServiceIcmpv6) GetPath() string { return "/api/objects/service/icmpv6/" }
+// GetPath implements sophos.RestObject and returns the ServiceAh GET path
+// Returns all available service/ah objects
+func (*ServiceAh) GetPath() string { return "/api/objects/service/ah/" }
 
 // RefRequired implements sophos.RestObject
-func (*ServiceIcmpv6) RefRequired() (string, bool) { return "", false }
+func (*ServiceAh) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ServiceIcmpv6 DELETE path
-// Creates or updates the complete object icmpv6
-func (*ServiceIcmpv6) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ServiceAh DELETE path
+// Creates or updates the complete object ah
+func (*ServiceAh) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ServiceIcmpv6 PATCH path
-// Changes to parts of the object icmpv6 types
-func (*ServiceIcmpv6) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ServiceAh PATCH path
+// Changes to parts of the object ah types
+func (*ServiceAh) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ServiceIcmpv6 POST path
-// Create a new service/icmpv6 object
-func (*ServiceIcmpv6) PostPath() string {
-	return "/api/objects/service/icmpv6/"
+// PostPath implements sophos.RestObject and returns the ServiceAh POST path
+// Create a new service/ah object
+func (*ServiceAh) PostPath() string {
+	return "/api/objects/service/ah/"
 }
 
-// PutPath implements sophos.RestObject and returns the ServiceIcmpv6 PUT path
-// Creates or updates the complete object icmpv6
-func (*ServiceIcmpv6) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+// PutPath implements sophos.RestObject and returns the ServiceAh PUT path
+// Creates or updates the complete object ah
+func (*ServiceAh) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
 }
 
-// ServiceIp is an Sophos Endpoint subType and implements sophos.RestObject
-type ServiceIps []ServiceIp
-type ServiceIp struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Proto     int64  `json:"proto"`
-}
-
-// GetPath implements sophos.RestObject and returns the ServiceIps GET path
-// Returns all available service/ip objects
-func (*ServiceIps) GetPath() string { return "/api/objects/service/ip/" }
-
-// RefRequired implements sophos.RestObject
-func (*ServiceIps) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ServiceIps GET path
-// Returns all available ip types
-func (s *ServiceIp) GetPath() string { return fmt.Sprintf("/api/objects/service/ip/%s", s.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (s *ServiceIp) RefRequired() (string, bool) { return s.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ServiceIp DELETE path
-// Creates or updates the complete object ip
-func (*ServiceIp) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ServiceIp PATCH path
-// Changes to parts of the object ip types
-func (*ServiceIp) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ServiceIp POST path
-// Create a new service/ip object
-func (*ServiceIp) PostPath() string {
-	return "/api/objects/service/ip/"
-}
-
-// PutPath implements sophos.RestObject and returns the ServiceIp PUT path
-// Creates or updates the complete object ip
-func (*ServiceIp) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
-}
-
-// Type implements sophos.Object
-func (s *ServiceIp) GetType() string { return s._type }
-
-// ServiceAny is an Sophos Endpoint subType and implements sophos.RestObject
+// ServiceAnys is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceAnys []ServiceAny
+
+// ServiceAny is a generated Sophos object
 type ServiceAny struct {
 	Locked    string `json:"_locked"`
 	Reference string `json:"_ref"`
@@ -277,63 +193,44 @@ func (*ServiceAny) PutPath(ref string) string {
 // Type implements sophos.Object
 func (s *ServiceAny) GetType() string { return s._type }
 
-// ServiceIcmp is an Sophos Endpoint subType and implements sophos.RestObject
-type ServiceIcmps []ServiceIcmp
-type ServiceIcmp struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Code      int64  `json:"code"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Type      int64  `json:"type"`
-}
+// ServiceEsp is an Sophos Endpoint subType and implements sophos.RestObject
+type ServiceEsp []interface{}
 
-// GetPath implements sophos.RestObject and returns the ServiceIcmps GET path
-// Returns all available service/icmp objects
-func (*ServiceIcmps) GetPath() string { return "/api/objects/service/icmp/" }
+// GetPath implements sophos.RestObject and returns the ServiceEsp GET path
+// Returns all available service/esp objects
+func (*ServiceEsp) GetPath() string { return "/api/objects/service/esp/" }
 
 // RefRequired implements sophos.RestObject
-func (*ServiceIcmps) RefRequired() (string, bool) { return "", false }
+func (*ServiceEsp) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the ServiceIcmps GET path
-// Returns all available icmp types
-func (s *ServiceIcmp) GetPath() string {
-	return fmt.Sprintf("/api/objects/service/icmp/%s", s.Reference)
+// DeletePath implements sophos.RestObject and returns the ServiceEsp DELETE path
+// Creates or updates the complete object esp
+func (*ServiceEsp) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (s *ServiceIcmp) RefRequired() (string, bool) { return s.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ServiceIcmp DELETE path
-// Creates or updates the complete object icmp
-func (*ServiceIcmp) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ServiceEsp PATCH path
+// Changes to parts of the object esp types
+func (*ServiceEsp) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ServiceIcmp PATCH path
-// Changes to parts of the object icmp types
-func (*ServiceIcmp) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
+// PostPath implements sophos.RestObject and returns the ServiceEsp POST path
+// Create a new service/esp object
+func (*ServiceEsp) PostPath() string {
+	return "/api/objects/service/esp/"
 }
 
-// PostPath implements sophos.RestObject and returns the ServiceIcmp POST path
-// Create a new service/icmp object
-func (*ServiceIcmp) PostPath() string {
-	return "/api/objects/service/icmp/"
+// PutPath implements sophos.RestObject and returns the ServiceEsp PUT path
+// Creates or updates the complete object esp
+func (*ServiceEsp) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
 }
 
-// PutPath implements sophos.RestObject and returns the ServiceIcmp PUT path
-// Creates or updates the complete object icmp
-func (*ServiceIcmp) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
-}
-
-// Type implements sophos.Object
-func (s *ServiceIcmp) GetType() string { return s._type }
-
-// ServiceGroup is an Sophos Endpoint subType and implements sophos.RestObject
+// ServiceGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceGroups []ServiceGroup
+
+// ServiceGroup is a generated Sophos object
 type ServiceGroup struct {
 	Locked    string   `json:"_locked"`
 	Reference string   `json:"_ref"`
@@ -387,8 +284,155 @@ func (*ServiceGroup) PutPath(ref string) string {
 // Type implements sophos.Object
 func (s *ServiceGroup) GetType() string { return s._type }
 
-// ServiceTcp is an Sophos Endpoint subType and implements sophos.RestObject
+// ServiceIcmps is an Sophos Endpoint subType and implements sophos.RestObject
+type ServiceIcmps []ServiceIcmp
+
+// ServiceIcmp is a generated Sophos object
+type ServiceIcmp struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Code      int64  `json:"code"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Type      int64  `json:"type"`
+}
+
+// GetPath implements sophos.RestObject and returns the ServiceIcmps GET path
+// Returns all available service/icmp objects
+func (*ServiceIcmps) GetPath() string { return "/api/objects/service/icmp/" }
+
+// RefRequired implements sophos.RestObject
+func (*ServiceIcmps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ServiceIcmps GET path
+// Returns all available icmp types
+func (s *ServiceIcmp) GetPath() string {
+	return fmt.Sprintf("/api/objects/service/icmp/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *ServiceIcmp) RefRequired() (string, bool) { return s.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ServiceIcmp DELETE path
+// Creates or updates the complete object icmp
+func (*ServiceIcmp) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ServiceIcmp PATCH path
+// Changes to parts of the object icmp types
+func (*ServiceIcmp) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ServiceIcmp POST path
+// Create a new service/icmp object
+func (*ServiceIcmp) PostPath() string {
+	return "/api/objects/service/icmp/"
+}
+
+// PutPath implements sophos.RestObject and returns the ServiceIcmp PUT path
+// Creates or updates the complete object icmp
+func (*ServiceIcmp) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
+}
+
+// Type implements sophos.Object
+func (s *ServiceIcmp) GetType() string { return s._type }
+
+// ServiceIcmpv6 is an Sophos Endpoint subType and implements sophos.RestObject
+type ServiceIcmpv6 []interface{}
+
+// GetPath implements sophos.RestObject and returns the ServiceIcmpv6 GET path
+// Returns all available service/icmpv6 objects
+func (*ServiceIcmpv6) GetPath() string { return "/api/objects/service/icmpv6/" }
+
+// RefRequired implements sophos.RestObject
+func (*ServiceIcmpv6) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ServiceIcmpv6 DELETE path
+// Creates or updates the complete object icmpv6
+func (*ServiceIcmpv6) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ServiceIcmpv6 PATCH path
+// Changes to parts of the object icmpv6 types
+func (*ServiceIcmpv6) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ServiceIcmpv6 POST path
+// Create a new service/icmpv6 object
+func (*ServiceIcmpv6) PostPath() string {
+	return "/api/objects/service/icmpv6/"
+}
+
+// PutPath implements sophos.RestObject and returns the ServiceIcmpv6 PUT path
+// Creates or updates the complete object icmpv6
+func (*ServiceIcmpv6) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
+}
+
+// ServiceIps is an Sophos Endpoint subType and implements sophos.RestObject
+type ServiceIps []ServiceIp
+
+// ServiceIp is a generated Sophos object
+type ServiceIp struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Proto     int64  `json:"proto"`
+}
+
+// GetPath implements sophos.RestObject and returns the ServiceIps GET path
+// Returns all available service/ip objects
+func (*ServiceIps) GetPath() string { return "/api/objects/service/ip/" }
+
+// RefRequired implements sophos.RestObject
+func (*ServiceIps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ServiceIps GET path
+// Returns all available ip types
+func (s *ServiceIp) GetPath() string { return fmt.Sprintf("/api/objects/service/ip/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *ServiceIp) RefRequired() (string, bool) { return s.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ServiceIp DELETE path
+// Creates or updates the complete object ip
+func (*ServiceIp) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ServiceIp PATCH path
+// Changes to parts of the object ip types
+func (*ServiceIp) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ServiceIp POST path
+// Create a new service/ip object
+func (*ServiceIp) PostPath() string {
+	return "/api/objects/service/ip/"
+}
+
+// PutPath implements sophos.RestObject and returns the ServiceIp PUT path
+// Creates or updates the complete object ip
+func (*ServiceIp) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
+}
+
+// Type implements sophos.Object
+func (s *ServiceIp) GetType() string { return s._type }
+
+// ServiceTcps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceTcps []ServiceTcp
+
+// ServiceTcp is a generated Sophos object
 type ServiceTcp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
@@ -444,8 +488,10 @@ func (*ServiceTcp) PutPath(ref string) string {
 // Type implements sophos.Object
 func (s *ServiceTcp) GetType() string { return s._type }
 
-// ServiceTcpudp is an Sophos Endpoint subType and implements sophos.RestObject
+// ServiceTcpudps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceTcpudps []ServiceTcpudp
+
+// ServiceTcpudp is a generated Sophos object
 type ServiceTcpudp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
@@ -503,8 +549,10 @@ func (*ServiceTcpudp) PutPath(ref string) string {
 // Type implements sophos.Object
 func (s *ServiceTcpudp) GetType() string { return s._type }
 
-// ServiceUdp is an Sophos Endpoint subType and implements sophos.RestObject
+// ServiceUdps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceUdps []ServiceUdp
+
+// ServiceUdp is a generated Sophos object
 type ServiceUdp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
@@ -559,37 +607,3 @@ func (*ServiceUdp) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (s *ServiceUdp) GetType() string { return s._type }
-
-// ServiceAh is an Sophos Endpoint subType and implements sophos.RestObject
-type ServiceAh []interface{}
-
-// GetPath implements sophos.RestObject and returns the ServiceAh GET path
-// Returns all available service/ah objects
-func (*ServiceAh) GetPath() string { return "/api/objects/service/ah/" }
-
-// RefRequired implements sophos.RestObject
-func (*ServiceAh) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ServiceAh DELETE path
-// Creates or updates the complete object ah
-func (*ServiceAh) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ServiceAh PATCH path
-// Changes to parts of the object ah types
-func (*ServiceAh) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ServiceAh POST path
-// Create a new service/ah object
-func (*ServiceAh) PostPath() string {
-	return "/api/objects/service/ah/"
-}
-
-// PutPath implements sophos.RestObject and returns the ServiceAh PUT path
-// Creates or updates the complete object ah
-func (*ServiceAh) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
-}

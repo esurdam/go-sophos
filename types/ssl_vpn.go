@@ -81,8 +81,10 @@ func (SslVpn) References() []string {
 	}
 }
 
-// SslVpnClientConnection is an Sophos Endpoint subType and implements sophos.RestObject
+// SslVpnClientConnections is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnClientConnections []SslVpnClientConnection
+
+// SslVpnClientConnection is a generated Sophos object
 type SslVpnClientConnection struct {
 	Locked                  string   `json:"_locked"`
 	Reference               string   `json:"_ref"`
@@ -197,8 +199,10 @@ func (*SslVpnGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s", ref)
 }
 
-// SslVpnRemoteAccessProfile is an Sophos Endpoint subType and implements sophos.RestObject
+// SslVpnRemoteAccessProfiles is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnRemoteAccessProfiles []SslVpnRemoteAccessProfile
+
+// SslVpnRemoteAccessProfile is a generated Sophos object
 type SslVpnRemoteAccessProfile struct {
 	Locked     string   `json:"_locked"`
 	Reference  string   `json:"_ref"`

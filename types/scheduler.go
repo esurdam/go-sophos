@@ -12,15 +12,15 @@ import (
 // Scheduler is a generated struct representing the Sophos Scheduler Endpoint
 // GET /api/nodes/scheduler
 type Scheduler struct {
-	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 	SchedulerGroup       SchedulerGroup       `json:"scheduler_group"`
 	SchedulerLoadbalance SchedulerLoadbalance `json:"scheduler_loadbalance"`
+	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 }
 
 var defsScheduler = map[string]sophos.RestObject{
-	"SchedulerRule":        &SchedulerRule{},
 	"SchedulerGroup":       &SchedulerGroup{},
 	"SchedulerLoadbalance": &SchedulerLoadbalance{},
+	"SchedulerRule":        &SchedulerRule{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Scheduler's Objects
@@ -64,68 +64,6 @@ func (Scheduler) References() []string {
 	}
 }
 
-// SchedulerRule is an Sophos Endpoint subType and implements sophos.RestObject
-type SchedulerRules []SchedulerRule
-type SchedulerRule struct {
-	Locked          string `json:"_locked"`
-	Reference       string `json:"_ref"`
-	_type           string `json:"_type"`
-	Comment         string `json:"comment"`
-	Destination     string `json:"destination"`
-	Interface       string `json:"interface"`
-	InterfaceGroup  string `json:"interface_group"`
-	Name            string `json:"name"`
-	Persistence     bool   `json:"persistence"`
-	PersistenceHash string `json:"persistence_hash"`
-	Service         string `json:"service"`
-	SkipOnError     bool   `json:"skip_on_error"`
-	Source          string `json:"source"`
-	Status          bool   `json:"status"`
-}
-
-// GetPath implements sophos.RestObject and returns the SchedulerRules GET path
-// Returns all available scheduler/rule objects
-func (*SchedulerRules) GetPath() string { return "/api/objects/scheduler/rule/" }
-
-// RefRequired implements sophos.RestObject
-func (*SchedulerRules) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the SchedulerRules GET path
-// Returns all available rule types
-func (s *SchedulerRule) GetPath() string {
-	return fmt.Sprintf("/api/objects/scheduler/rule/%s", s.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (s *SchedulerRule) RefRequired() (string, bool) { return s.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the SchedulerRule DELETE path
-// Creates or updates the complete object rule
-func (*SchedulerRule) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the SchedulerRule PATCH path
-// Changes to parts of the object rule types
-func (*SchedulerRule) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the SchedulerRule POST path
-// Create a new scheduler/rule object
-func (*SchedulerRule) PostPath() string {
-	return "/api/objects/scheduler/rule/"
-}
-
-// PutPath implements sophos.RestObject and returns the SchedulerRule PUT path
-// Creates or updates the complete object rule
-func (*SchedulerRule) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
-}
-
-// Type implements sophos.Object
-func (s *SchedulerRule) GetType() string { return s._type }
-
 // SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerGroup []interface{}
 
@@ -160,8 +98,10 @@ func (*SchedulerGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
 }
 
-// SchedulerLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
+// SchedulerLoadbalances is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerLoadbalances []SchedulerLoadbalance
+
+// SchedulerLoadbalance is a generated Sophos object
 type SchedulerLoadbalance struct {
 	Locked          string        `json:"_locked"`
 	Reference       string        `json:"_ref"`
@@ -224,3 +164,67 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (s *SchedulerLoadbalance) GetType() string { return s._type }
+
+// SchedulerRules is an Sophos Endpoint subType and implements sophos.RestObject
+type SchedulerRules []SchedulerRule
+
+// SchedulerRule is a generated Sophos object
+type SchedulerRule struct {
+	Locked          string `json:"_locked"`
+	Reference       string `json:"_ref"`
+	_type           string `json:"_type"`
+	Comment         string `json:"comment"`
+	Destination     string `json:"destination"`
+	Interface       string `json:"interface"`
+	InterfaceGroup  string `json:"interface_group"`
+	Name            string `json:"name"`
+	Persistence     bool   `json:"persistence"`
+	PersistenceHash string `json:"persistence_hash"`
+	Service         string `json:"service"`
+	SkipOnError     bool   `json:"skip_on_error"`
+	Source          string `json:"source"`
+	Status          bool   `json:"status"`
+}
+
+// GetPath implements sophos.RestObject and returns the SchedulerRules GET path
+// Returns all available scheduler/rule objects
+func (*SchedulerRules) GetPath() string { return "/api/objects/scheduler/rule/" }
+
+// RefRequired implements sophos.RestObject
+func (*SchedulerRules) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SchedulerRules GET path
+// Returns all available rule types
+func (s *SchedulerRule) GetPath() string {
+	return fmt.Sprintf("/api/objects/scheduler/rule/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SchedulerRule) RefRequired() (string, bool) { return s.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the SchedulerRule DELETE path
+// Creates or updates the complete object rule
+func (*SchedulerRule) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the SchedulerRule PATCH path
+// Changes to parts of the object rule types
+func (*SchedulerRule) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the SchedulerRule POST path
+// Create a new scheduler/rule object
+func (*SchedulerRule) PostPath() string {
+	return "/api/objects/scheduler/rule/"
+}
+
+// PutPath implements sophos.RestObject and returns the SchedulerRule PUT path
+// Creates or updates the complete object rule
+func (*SchedulerRule) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
+}
+
+// Type implements sophos.Object
+func (s *SchedulerRule) GetType() string { return s._type }

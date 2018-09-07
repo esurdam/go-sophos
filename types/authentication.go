@@ -12,23 +12,23 @@ import (
 // Authentication is a generated struct representing the Sophos Authentication Endpoint
 // GET /api/nodes/authentication
 type Authentication struct {
-	AuthenticationEdirectory AuthenticationEdirectory `json:"authentication_edirectory"`
-	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
-	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
 	AuthenticationAdirectory AuthenticationAdirectory `json:"authentication_adirectory"`
-	AuthenticationRadius     AuthenticationRadius     `json:"authentication_radius"`
+	AuthenticationEdirectory AuthenticationEdirectory `json:"authentication_edirectory"`
 	AuthenticationGroup      AuthenticationGroup      `json:"authentication_group"`
 	AuthenticationLdap       AuthenticationLdap       `json:"authentication_ldap"`
+	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
+	AuthenticationRadius     AuthenticationRadius     `json:"authentication_radius"`
+	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
 }
 
 var defsAuthentication = map[string]sophos.RestObject{
-	"AuthenticationEdirectory": &AuthenticationEdirectory{},
-	"AuthenticationOtpToken":   &AuthenticationOtpToken{},
-	"AuthenticationTacacs":     &AuthenticationTacacs{},
 	"AuthenticationAdirectory": &AuthenticationAdirectory{},
-	"AuthenticationRadius":     &AuthenticationRadius{},
+	"AuthenticationEdirectory": &AuthenticationEdirectory{},
 	"AuthenticationGroup":      &AuthenticationGroup{},
 	"AuthenticationLdap":       &AuthenticationLdap{},
+	"AuthenticationOtpToken":   &AuthenticationOtpToken{},
+	"AuthenticationRadius":     &AuthenticationRadius{},
+	"AuthenticationTacacs":     &AuthenticationTacacs{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Authentication's Objects
@@ -88,108 +88,6 @@ func (Authentication) References() []string {
 	}
 }
 
-// AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationEdirectory []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationEdirectory GET path
-// Returns all available authentication/edirectory objects
-func (*AuthenticationEdirectory) GetPath() string { return "/api/objects/authentication/edirectory/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationEdirectory) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationEdirectory DELETE path
-// Creates or updates the complete object edirectory
-func (*AuthenticationEdirectory) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationEdirectory PATCH path
-// Changes to parts of the object edirectory types
-func (*AuthenticationEdirectory) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationEdirectory POST path
-// Create a new authentication/edirectory object
-func (*AuthenticationEdirectory) PostPath() string {
-	return "/api/objects/authentication/edirectory/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationEdirectory PUT path
-// Creates or updates the complete object edirectory
-func (*AuthenticationEdirectory) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
-}
-
-// AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationOtpToken []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
-// Returns all available authentication/otp_token objects
-func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationOtpToken) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationOtpToken DELETE path
-// Creates or updates the complete object otp_token
-func (*AuthenticationOtpToken) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationOtpToken PATCH path
-// Changes to parts of the object otp_token types
-func (*AuthenticationOtpToken) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationOtpToken POST path
-// Create a new authentication/otp_token object
-func (*AuthenticationOtpToken) PostPath() string {
-	return "/api/objects/authentication/otp_token/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationOtpToken PUT path
-// Creates or updates the complete object otp_token
-func (*AuthenticationOtpToken) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationTacacs []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
-// Returns all available authentication/tacacs objects
-func (*AuthenticationTacacs) GetPath() string { return "/api/objects/authentication/tacacs/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationTacacs) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationTacacs DELETE path
-// Creates or updates the complete object tacacs
-func (*AuthenticationTacacs) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationTacacs PATCH path
-// Changes to parts of the object tacacs types
-func (*AuthenticationTacacs) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationTacacs POST path
-// Create a new authentication/tacacs object
-func (*AuthenticationTacacs) PostPath() string {
-	return "/api/objects/authentication/tacacs/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationTacacs PUT path
-// Creates or updates the complete object tacacs
-func (*AuthenticationTacacs) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
 // AuthenticationAdirectory is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationAdirectory []interface{}
 
@@ -224,38 +122,38 @@ func (*AuthenticationAdirectory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
 }
 
-// AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationRadius []interface{}
+// AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationEdirectory []interface{}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationRadius GET path
-// Returns all available authentication/radius objects
-func (*AuthenticationRadius) GetPath() string { return "/api/objects/authentication/radius/" }
+// GetPath implements sophos.RestObject and returns the AuthenticationEdirectory GET path
+// Returns all available authentication/edirectory objects
+func (*AuthenticationEdirectory) GetPath() string { return "/api/objects/authentication/edirectory/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationRadius) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationEdirectory) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the AuthenticationRadius DELETE path
-// Creates or updates the complete object radius
-func (*AuthenticationRadius) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+// DeletePath implements sophos.RestObject and returns the AuthenticationEdirectory DELETE path
+// Creates or updates the complete object edirectory
+func (*AuthenticationEdirectory) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the AuthenticationRadius PATCH path
-// Changes to parts of the object radius types
-func (*AuthenticationRadius) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+// PatchPath implements sophos.RestObject and returns the AuthenticationEdirectory PATCH path
+// Changes to parts of the object edirectory types
+func (*AuthenticationEdirectory) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the AuthenticationRadius POST path
-// Create a new authentication/radius object
-func (*AuthenticationRadius) PostPath() string {
-	return "/api/objects/authentication/radius/"
+// PostPath implements sophos.RestObject and returns the AuthenticationEdirectory POST path
+// Create a new authentication/edirectory object
+func (*AuthenticationEdirectory) PostPath() string {
+	return "/api/objects/authentication/edirectory/"
 }
 
-// PutPath implements sophos.RestObject and returns the AuthenticationRadius PUT path
-// Creates or updates the complete object radius
-func (*AuthenticationRadius) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+// PutPath implements sophos.RestObject and returns the AuthenticationEdirectory PUT path
+// Creates or updates the complete object edirectory
+func (*AuthenticationEdirectory) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
 }
 
 // AuthenticationGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -324,4 +222,106 @@ func (*AuthenticationLdap) PostPath() string {
 // Creates or updates the complete object ldap
 func (*AuthenticationLdap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+}
+
+// AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationOtpToken []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
+// Returns all available authentication/otp_token objects
+func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationOtpToken) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationOtpToken DELETE path
+// Creates or updates the complete object otp_token
+func (*AuthenticationOtpToken) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationOtpToken PATCH path
+// Changes to parts of the object otp_token types
+func (*AuthenticationOtpToken) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationOtpToken POST path
+// Create a new authentication/otp_token object
+func (*AuthenticationOtpToken) PostPath() string {
+	return "/api/objects/authentication/otp_token/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationOtpToken PUT path
+// Creates or updates the complete object otp_token
+func (*AuthenticationOtpToken) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
+}
+
+// AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationRadius []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationRadius GET path
+// Returns all available authentication/radius objects
+func (*AuthenticationRadius) GetPath() string { return "/api/objects/authentication/radius/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationRadius) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationRadius DELETE path
+// Creates or updates the complete object radius
+func (*AuthenticationRadius) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationRadius PATCH path
+// Changes to parts of the object radius types
+func (*AuthenticationRadius) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationRadius POST path
+// Create a new authentication/radius object
+func (*AuthenticationRadius) PostPath() string {
+	return "/api/objects/authentication/radius/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationRadius PUT path
+// Creates or updates the complete object radius
+func (*AuthenticationRadius) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+}
+
+// AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationTacacs []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
+// Returns all available authentication/tacacs objects
+func (*AuthenticationTacacs) GetPath() string { return "/api/objects/authentication/tacacs/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationTacacs) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationTacacs DELETE path
+// Creates or updates the complete object tacacs
+func (*AuthenticationTacacs) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationTacacs PATCH path
+// Changes to parts of the object tacacs types
+func (*AuthenticationTacacs) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationTacacs POST path
+// Create a new authentication/tacacs object
+func (*AuthenticationTacacs) PostPath() string {
+	return "/api/objects/authentication/tacacs/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationTacacs PUT path
+// Creates or updates the complete object tacacs
+func (*AuthenticationTacacs) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
 }

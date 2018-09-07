@@ -105,8 +105,10 @@ func (*GeoipDstexception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
 }
 
-// GeoipGeoipgroup is an Sophos Endpoint subType and implements sophos.RestObject
+// GeoipGeoipgroups is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipGeoipgroups []GeoipGeoipgroup
+
+// GeoipGeoipgroup is a generated Sophos object
 type GeoipGeoipgroup struct {
 	Locked    string   `json:"_locked"`
 	Reference string   `json:"_ref"`

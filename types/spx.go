@@ -119,8 +119,10 @@ func (*SpxGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/group/%s", ref)
 }
 
-// SpxTemplate is an Sophos Endpoint subType and implements sophos.RestObject
+// SpxTemplates is an Sophos Endpoint subType and implements sophos.RestObject
 type SpxTemplates []SpxTemplate
+
+// SpxTemplate is a generated Sophos object
 type SpxTemplate struct {
 	Locked                         string `json:"_locked"`
 	Reference                      string `json:"_ref"`

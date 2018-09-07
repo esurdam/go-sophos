@@ -92,8 +92,10 @@ func (*RoleGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
-// RoleRole is an Sophos Endpoint subType and implements sophos.RestObject
+// RoleRoles is an Sophos Endpoint subType and implements sophos.RestObject
 type RoleRoles []RoleRole
+
+// RoleRole is a generated Sophos object
 type RoleRole struct {
 	Locked         string   `json:"_locked"`
 	Reference      string   `json:"_ref"`
