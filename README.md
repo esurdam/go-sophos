@@ -58,7 +58,7 @@ var nodes types.Nodes
 res, _ := client.Get(nodes.GetPath()) 
 _ = res.MarshalTo(&nodes) 
 
-nodes.Licensing_activeIps // active Ips
+nodes.LicensingActiveIps // active Ips
 ```
 
 
@@ -93,8 +93,8 @@ make test
 
 ## Todo
 
-- [ ] Add PUT, POST, PATCH and DELETE methods to generated objects
-- [ ] Create a wrapper Client for REST objects `client.Get(&nodes)` 
+- [x] Add PUT, POST, PATCH and DELETE methods to generated objects
+- [x] Create a wrapper Client for REST objects `client.Get(&nodes)` 
 
 ## Contributing
 
