@@ -20,13 +20,13 @@ type Qos struct {
 }
 
 var defsQos = map[string]sophos.RestObject{
-	"QosGroup":                &QosGroup{},
-	"QosTrafficSelector":      &QosTrafficSelector{},
-	"QosTrafficSelectorGroup": &QosTrafficSelectorGroup{},
 	"QosApplicationSelector":  &QosApplicationSelector{},
-	"QosInterface":            &QosInterface{},
 	"QosIngressRule":          &QosIngressRule{},
+	"QosTrafficSelectorGroup": &QosTrafficSelectorGroup{},
+	"QosGroup":                &QosGroup{},
+	"QosInterface":            &QosInterface{},
 	"QosRule":                 &QosRule{},
+	"QosTrafficSelector":      &QosTrafficSelector{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Qos's Objects
@@ -40,7 +40,7 @@ func (*Qos) GetPath() string { return "/api/nodes/qos" }
 // RefRequired implements sophos.RestGetter
 func (*Qos) RefRequired() (string, bool) { return "", false }
 
-var defQos = &sophos.Definition{Description: "qos", Name: "qos", Link: "/api/definitions/qos", Swag: map[string]sophos.MethodMap{"/objects/qos/application_selector/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/application_selector objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/application_selector object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/application_selector that will be created", Type: "", Required: true}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/application_selector/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available application_selector types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object application_selector types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/application_selector that will be changes", Type: "", Required: true}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object application_selector", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/application_selector that will be updated", Type: "", Required: true}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object application_selector", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/group that will be created", Type: "", Required: true}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/qos/interface/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/interface objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/interface object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/interface that will be created", Type: "", Required: true}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/interface/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/interface that will be updated", Type: "", Required: true}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available interface types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object interface types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/interface that will be changes", Type: "", Required: true}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/qos/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/ingress_rule/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/ingress_rule objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/ingress_rule object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/ingress_rule that will be created", Type: "", Required: true}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/qos/ingress_rule/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object ingress_rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/ingress_rule that will be updated", Type: "", Required: true}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object ingress_rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available ingress_rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object ingress_rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/ingress_rule that will be changes", Type: "", Required: true}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/rule/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/rule that will be changes", Type: "", Required: true}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/rule that will be updated", Type: "", Required: true}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/qos/rule/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/qos/traffic_selector/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/traffic_selector_group/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/traffic_selector_group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/traffic_selector_group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector_group that will be created", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/qos/application_selector/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/application_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/ingress_rule/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/ingress_rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/interface/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/rule/": {"post": sophos.MethodDescriptions{Description: "Create a new qos/rule object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/rule that will be created", Type: "", Required: true}}, Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available qos/rule objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/rule"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/qos/traffic_selector/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object traffic_selector", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available traffic_selector types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object traffic_selector types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector that will be changes", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object traffic_selector", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector that will be updated", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/qos/traffic_selector_group/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object traffic_selector_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector_group that will be changes", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object traffic_selector_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector_group that will be updated", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object traffic_selector_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available traffic_selector_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/qos/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/group that will be changes", Type: "", Required: true}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/group that will be updated", Type: "", Required: true}}, Tags: []string{"qos/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/qos/traffic_selector/": {"get": sophos.MethodDescriptions{Description: "Returns all available qos/traffic_selector objects", Parameters: []sophos.Parameter(nil), Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new qos/traffic_selector object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "qos/traffic_selector that will be created", Type: "", Required: true}}, Tags: []string{"qos/traffic_selector"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/qos/traffic_selector_group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"qos/traffic_selector_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defQos = &sophos.Definition{Description: "qos", Name: "qos", Link: "/api/definitions/qos"}
 
 // Definition returns the /api/definitions struct of Qos
 func (Qos) Definition() sophos.Definition { return *defQos }
@@ -86,72 +86,72 @@ func (Qos) References() []string {
 	}
 }
 
-// QosGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type QosGroup []interface{}
+// QosApplicationSelector is an Sophos Endpoint subType and implements sophos.RestObject
+type QosApplicationSelector []interface{}
 
-// GetPath implements sophos.RestObject and returns the QosGroup GET path
-// Returns all available qos/group objects
-func (*QosGroup) GetPath() string { return "/api/objects/qos/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*QosGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the QosGroup DELETE path
-// Creates or updates the complete object group
-func (*QosGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the QosGroup PATCH path
-// Changes to parts of the object group types
-func (*QosGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the QosGroup POST path
-// Create a new qos/group object
-func (*QosGroup) PostPath() string {
-	return "/api/objects/qos/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the QosGroup PUT path
-// Creates or updates the complete object group
-func (*QosGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
-}
-
-// QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
-type QosTrafficSelector []interface{}
-
-// GetPath implements sophos.RestObject and returns the QosTrafficSelector GET path
-// Returns all available qos/traffic_selector objects
-func (*QosTrafficSelector) GetPath() string { return "/api/objects/qos/traffic_selector/" }
+// GetPath implements sophos.RestObject and returns the QosApplicationSelector GET path
+// Returns all available qos/application_selector objects
+func (*QosApplicationSelector) GetPath() string { return "/api/objects/qos/application_selector/" }
 
 // RefRequired implements sophos.RestObject
-func (*QosTrafficSelector) RefRequired() (string, bool) { return "", false }
+func (*QosApplicationSelector) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the QosTrafficSelector DELETE path
-// Creates or updates the complete object traffic_selector
-func (*QosTrafficSelector) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+// DeletePath implements sophos.RestObject and returns the QosApplicationSelector DELETE path
+// Creates or updates the complete object application_selector
+func (*QosApplicationSelector) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the QosTrafficSelector PATCH path
-// Changes to parts of the object traffic_selector types
-func (*QosTrafficSelector) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+// PatchPath implements sophos.RestObject and returns the QosApplicationSelector PATCH path
+// Changes to parts of the object application_selector types
+func (*QosApplicationSelector) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the QosTrafficSelector POST path
-// Create a new qos/traffic_selector object
-func (*QosTrafficSelector) PostPath() string {
-	return "/api/objects/qos/traffic_selector/"
+// PostPath implements sophos.RestObject and returns the QosApplicationSelector POST path
+// Create a new qos/application_selector object
+func (*QosApplicationSelector) PostPath() string {
+	return "/api/objects/qos/application_selector/"
 }
 
-// PutPath implements sophos.RestObject and returns the QosTrafficSelector PUT path
-// Creates or updates the complete object traffic_selector
-func (*QosTrafficSelector) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+// PutPath implements sophos.RestObject and returns the QosApplicationSelector PUT path
+// Creates or updates the complete object application_selector
+func (*QosApplicationSelector) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
+}
+
+// QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
+type QosIngressRule []interface{}
+
+// GetPath implements sophos.RestObject and returns the QosIngressRule GET path
+// Returns all available qos/ingress_rule objects
+func (*QosIngressRule) GetPath() string { return "/api/objects/qos/ingress_rule/" }
+
+// RefRequired implements sophos.RestObject
+func (*QosIngressRule) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the QosIngressRule DELETE path
+// Creates or updates the complete object ingress_rule
+func (*QosIngressRule) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the QosIngressRule PATCH path
+// Changes to parts of the object ingress_rule types
+func (*QosIngressRule) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the QosIngressRule POST path
+// Create a new qos/ingress_rule object
+func (*QosIngressRule) PostPath() string {
+	return "/api/objects/qos/ingress_rule/"
+}
+
+// PutPath implements sophos.RestObject and returns the QosIngressRule PUT path
+// Creates or updates the complete object ingress_rule
+func (*QosIngressRule) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
 }
 
 // QosTrafficSelectorGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -188,38 +188,38 @@ func (*QosTrafficSelectorGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
 }
 
-// QosApplicationSelector is an Sophos Endpoint subType and implements sophos.RestObject
-type QosApplicationSelector []interface{}
+// QosGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type QosGroup []interface{}
 
-// GetPath implements sophos.RestObject and returns the QosApplicationSelector GET path
-// Returns all available qos/application_selector objects
-func (*QosApplicationSelector) GetPath() string { return "/api/objects/qos/application_selector/" }
+// GetPath implements sophos.RestObject and returns the QosGroup GET path
+// Returns all available qos/group objects
+func (*QosGroup) GetPath() string { return "/api/objects/qos/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*QosApplicationSelector) RefRequired() (string, bool) { return "", false }
+func (*QosGroup) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the QosApplicationSelector DELETE path
-// Creates or updates the complete object application_selector
-func (*QosApplicationSelector) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
+// DeletePath implements sophos.RestObject and returns the QosGroup DELETE path
+// Creates or updates the complete object group
+func (*QosGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the QosApplicationSelector PATCH path
-// Changes to parts of the object application_selector types
-func (*QosApplicationSelector) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
+// PatchPath implements sophos.RestObject and returns the QosGroup PATCH path
+// Changes to parts of the object group types
+func (*QosGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the QosApplicationSelector POST path
-// Create a new qos/application_selector object
-func (*QosApplicationSelector) PostPath() string {
-	return "/api/objects/qos/application_selector/"
+// PostPath implements sophos.RestObject and returns the QosGroup POST path
+// Create a new qos/group object
+func (*QosGroup) PostPath() string {
+	return "/api/objects/qos/group/"
 }
 
-// PutPath implements sophos.RestObject and returns the QosApplicationSelector PUT path
-// Creates or updates the complete object application_selector
-func (*QosApplicationSelector) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
+// PutPath implements sophos.RestObject and returns the QosGroup PUT path
+// Creates or updates the complete object group
+func (*QosGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
 // QosInterface is an Sophos Endpoint subType and implements sophos.RestObject
@@ -284,40 +284,6 @@ func (*QosInterface) PutPath(ref string) string {
 // Type implements sophos.Object
 func (q *QosInterface) GetType() string { return q._type }
 
-// QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
-type QosIngressRule []interface{}
-
-// GetPath implements sophos.RestObject and returns the QosIngressRule GET path
-// Returns all available qos/ingress_rule objects
-func (*QosIngressRule) GetPath() string { return "/api/objects/qos/ingress_rule/" }
-
-// RefRequired implements sophos.RestObject
-func (*QosIngressRule) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the QosIngressRule DELETE path
-// Creates or updates the complete object ingress_rule
-func (*QosIngressRule) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the QosIngressRule PATCH path
-// Changes to parts of the object ingress_rule types
-func (*QosIngressRule) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the QosIngressRule POST path
-// Create a new qos/ingress_rule object
-func (*QosIngressRule) PostPath() string {
-	return "/api/objects/qos/ingress_rule/"
-}
-
-// PutPath implements sophos.RestObject and returns the QosIngressRule PUT path
-// Creates or updates the complete object ingress_rule
-func (*QosIngressRule) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
-}
-
 // QosRule is an Sophos Endpoint subType and implements sophos.RestObject
 type QosRule []interface{}
 
@@ -350,4 +316,38 @@ func (*QosRule) PostPath() string {
 // Creates or updates the complete object rule
 func (*QosRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/rule/%s", ref)
+}
+
+// QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
+type QosTrafficSelector []interface{}
+
+// GetPath implements sophos.RestObject and returns the QosTrafficSelector GET path
+// Returns all available qos/traffic_selector objects
+func (*QosTrafficSelector) GetPath() string { return "/api/objects/qos/traffic_selector/" }
+
+// RefRequired implements sophos.RestObject
+func (*QosTrafficSelector) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the QosTrafficSelector DELETE path
+// Creates or updates the complete object traffic_selector
+func (*QosTrafficSelector) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the QosTrafficSelector PATCH path
+// Changes to parts of the object traffic_selector types
+func (*QosTrafficSelector) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the QosTrafficSelector POST path
+// Create a new qos/traffic_selector object
+func (*QosTrafficSelector) PostPath() string {
+	return "/api/objects/qos/traffic_selector/"
+}
+
+// PutPath implements sophos.RestObject and returns the QosTrafficSelector PUT path
+// Creates or updates the complete object traffic_selector
+func (*QosTrafficSelector) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
 }

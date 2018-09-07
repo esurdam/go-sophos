@@ -12,13 +12,13 @@ import (
 // Condition is a generated struct representing the Sophos Condition Endpoint
 // GET /api/nodes/condition
 type Condition struct {
-	ConditionGroup  ConditionGroup  `json:"condition_group"`
 	ConditionObjref ConditionObjref `json:"condition_objref"`
+	ConditionGroup  ConditionGroup  `json:"condition_group"`
 }
 
 var defsCondition = map[string]sophos.RestObject{
-	"ConditionGroup":  &ConditionGroup{},
 	"ConditionObjref": &ConditionObjref{},
+	"ConditionGroup":  &ConditionGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Condition's Objects
@@ -32,7 +32,7 @@ func (*Condition) GetPath() string { return "/api/nodes/condition" }
 // RefRequired implements sophos.RestGetter
 func (*Condition) RefRequired() (string, bool) { return "", false }
 
-var defCondition = &sophos.Definition{Description: "condition", Name: "condition", Link: "/api/definitions/condition", Swag: map[string]sophos.MethodMap{"/objects/condition/objref/": {"get": sophos.MethodDescriptions{Description: "Returns all available condition/objref objects", Parameters: []sophos.Parameter(nil), Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new condition/objref object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/objref that will be created", Type: "", Required: true}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/condition/objref/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object objref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available objref types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object objref types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/objref that will be changes", Type: "", Required: true}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object objref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/objref that will be updated", Type: "", Required: true}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/condition/objref/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"condition/objref"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/condition/group/": {"post": sophos.MethodDescriptions{Description: "Create a new condition/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/group that will be created", Type: "", Required: true}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available condition/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/condition/group/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/group that will be updated", Type: "", Required: true}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "condition/group that will be changes", Type: "", Required: true}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/condition/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"condition/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}}}
+var defCondition = &sophos.Definition{Description: "condition", Name: "condition", Link: "/api/definitions/condition"}
 
 // Definition returns the /api/definitions struct of Condition
 func (Condition) Definition() sophos.Definition { return *defCondition }
@@ -56,40 +56,6 @@ func (Condition) References() []string {
 		"REF_ConditionGroup",
 		"REF_ConditionObjref",
 	}
-}
-
-// ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ConditionGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ConditionGroup GET path
-// Returns all available condition/group objects
-func (*ConditionGroup) GetPath() string { return "/api/objects/condition/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ConditionGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ConditionGroup DELETE path
-// Creates or updates the complete object group
-func (*ConditionGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ConditionGroup PATCH path
-// Changes to parts of the object group types
-func (*ConditionGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ConditionGroup POST path
-// Create a new condition/group object
-func (*ConditionGroup) PostPath() string {
-	return "/api/objects/condition/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ConditionGroup PUT path
-// Creates or updates the complete object group
-func (*ConditionGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
 }
 
 // ConditionObjref is an Sophos Endpoint subType and implements sophos.RestObject
@@ -148,3 +114,37 @@ func (*ConditionObjref) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (c *ConditionObjref) GetType() string { return c._type }
+
+// ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ConditionGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ConditionGroup GET path
+// Returns all available condition/group objects
+func (*ConditionGroup) GetPath() string { return "/api/objects/condition/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ConditionGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ConditionGroup DELETE path
+// Creates or updates the complete object group
+func (*ConditionGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ConditionGroup PATCH path
+// Changes to parts of the object group types
+func (*ConditionGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ConditionGroup POST path
+// Create a new condition/group object
+func (*ConditionGroup) PostPath() string {
+	return "/api/objects/condition/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ConditionGroup PUT path
+// Creates or updates the complete object group
+func (*ConditionGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
+}

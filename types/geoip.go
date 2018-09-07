@@ -20,10 +20,10 @@ type Geoip struct {
 }
 
 var defsGeoip = map[string]sophos.RestObject{
-	"GeoipGeoipgroup":   &GeoipGeoipgroup{},
-	"GeoipSrcexception": &GeoipSrcexception{},
 	"GeoipDstexception": &GeoipDstexception{},
+	"GeoipGeoipgroup":   &GeoipGeoipgroup{},
 	"GeoipGroup":        &GeoipGroup{},
+	"GeoipSrcexception": &GeoipSrcexception{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Geoip's Objects
@@ -37,7 +37,7 @@ func (*Geoip) GetPath() string { return "/api/nodes/geoip" }
 // RefRequired implements sophos.RestGetter
 func (*Geoip) RefRequired() (string, bool) { return "", false }
 
-var defGeoip = &sophos.Definition{Description: "geoip", Name: "geoip", Link: "/api/definitions/geoip", Swag: map[string]sophos.MethodMap{"/objects/geoip/dstexception/": {"get": sophos.MethodDescriptions{Description: "Returns all available geoip/dstexception objects", Parameters: []sophos.Parameter(nil), Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new geoip/dstexception object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/dstexception that will be created", Type: "", Required: true}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/geoip/dstexception/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object dstexception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/dstexception that will be updated", Type: "", Required: true}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object dstexception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available dstexception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object dstexception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/dstexception that will be changes", Type: "", Required: true}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/geoip/geoipgroup/": {"get": sophos.MethodDescriptions{Description: "Returns all available geoip/geoipgroup objects", Parameters: []sophos.Parameter(nil), Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new geoip/geoipgroup object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/geoipgroup that will be created", Type: "", Required: true}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/geoip/geoipgroup/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/geoip/srcexception/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object srcexception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/srcexception that will be changes", Type: "", Required: true}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object srcexception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/srcexception that will be updated", Type: "", Required: true}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object srcexception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available srcexception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/geoip/dstexception/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/dstexception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/geoip/geoipgroup/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object geoipgroup", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available geoipgroup types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object geoipgroup types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/geoipgroup that will be changes", Type: "", Required: true}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object geoipgroup", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/geoipgroup that will be updated", Type: "", Required: true}}, Tags: []string{"geoip/geoipgroup"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/geoip/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available geoip/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new geoip/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/group that will be created", Type: "", Required: true}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/geoip/group/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/group that will be updated", Type: "", Required: true}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/group that will be changes", Type: "", Required: true}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/geoip/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/geoip/srcexception/": {"get": sophos.MethodDescriptions{Description: "Returns all available geoip/srcexception objects", Parameters: []sophos.Parameter(nil), Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new geoip/srcexception object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "geoip/srcexception that will be created", Type: "", Required: true}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/geoip/srcexception/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"geoip/srcexception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}}}
+var defGeoip = &sophos.Definition{Description: "geoip", Name: "geoip", Link: "/api/definitions/geoip"}
 
 // Definition returns the /api/definitions struct of Geoip
 func (Geoip) Definition() sophos.Definition { return *defGeoip }
@@ -69,6 +69,40 @@ func (Geoip) References() []string {
 		"REF_GeoipGroup",
 		"REF_GeoipSrcexception",
 	}
+}
+
+// GeoipDstexception is an Sophos Endpoint subType and implements sophos.RestObject
+type GeoipDstexception []interface{}
+
+// GetPath implements sophos.RestObject and returns the GeoipDstexception GET path
+// Returns all available geoip/dstexception objects
+func (*GeoipDstexception) GetPath() string { return "/api/objects/geoip/dstexception/" }
+
+// RefRequired implements sophos.RestObject
+func (*GeoipDstexception) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the GeoipDstexception DELETE path
+// Creates or updates the complete object dstexception
+func (*GeoipDstexception) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the GeoipDstexception PATCH path
+// Changes to parts of the object dstexception types
+func (*GeoipDstexception) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the GeoipDstexception POST path
+// Create a new geoip/dstexception object
+func (*GeoipDstexception) PostPath() string {
+	return "/api/objects/geoip/dstexception/"
+}
+
+// PutPath implements sophos.RestObject and returns the GeoipDstexception PUT path
+// Creates or updates the complete object dstexception
+func (*GeoipDstexception) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
 }
 
 // GeoipGeoipgroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -125,74 +159,6 @@ func (*GeoipGeoipgroup) PutPath(ref string) string {
 // Type implements sophos.Object
 func (g *GeoipGeoipgroup) GetType() string { return g._type }
 
-// GeoipSrcexception is an Sophos Endpoint subType and implements sophos.RestObject
-type GeoipSrcexception []interface{}
-
-// GetPath implements sophos.RestObject and returns the GeoipSrcexception GET path
-// Returns all available geoip/srcexception objects
-func (*GeoipSrcexception) GetPath() string { return "/api/objects/geoip/srcexception/" }
-
-// RefRequired implements sophos.RestObject
-func (*GeoipSrcexception) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the GeoipSrcexception DELETE path
-// Creates or updates the complete object srcexception
-func (*GeoipSrcexception) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the GeoipSrcexception PATCH path
-// Changes to parts of the object srcexception types
-func (*GeoipSrcexception) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the GeoipSrcexception POST path
-// Create a new geoip/srcexception object
-func (*GeoipSrcexception) PostPath() string {
-	return "/api/objects/geoip/srcexception/"
-}
-
-// PutPath implements sophos.RestObject and returns the GeoipSrcexception PUT path
-// Creates or updates the complete object srcexception
-func (*GeoipSrcexception) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
-}
-
-// GeoipDstexception is an Sophos Endpoint subType and implements sophos.RestObject
-type GeoipDstexception []interface{}
-
-// GetPath implements sophos.RestObject and returns the GeoipDstexception GET path
-// Returns all available geoip/dstexception objects
-func (*GeoipDstexception) GetPath() string { return "/api/objects/geoip/dstexception/" }
-
-// RefRequired implements sophos.RestObject
-func (*GeoipDstexception) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the GeoipDstexception DELETE path
-// Creates or updates the complete object dstexception
-func (*GeoipDstexception) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the GeoipDstexception PATCH path
-// Changes to parts of the object dstexception types
-func (*GeoipDstexception) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the GeoipDstexception POST path
-// Create a new geoip/dstexception object
-func (*GeoipDstexception) PostPath() string {
-	return "/api/objects/geoip/dstexception/"
-}
-
-// PutPath implements sophos.RestObject and returns the GeoipDstexception PUT path
-// Creates or updates the complete object dstexception
-func (*GeoipDstexception) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
-}
-
 // GeoipGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipGroup []interface{}
 
@@ -225,4 +191,38 @@ func (*GeoipGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*GeoipGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s", ref)
+}
+
+// GeoipSrcexception is an Sophos Endpoint subType and implements sophos.RestObject
+type GeoipSrcexception []interface{}
+
+// GetPath implements sophos.RestObject and returns the GeoipSrcexception GET path
+// Returns all available geoip/srcexception objects
+func (*GeoipSrcexception) GetPath() string { return "/api/objects/geoip/srcexception/" }
+
+// RefRequired implements sophos.RestObject
+func (*GeoipSrcexception) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the GeoipSrcexception DELETE path
+// Creates or updates the complete object srcexception
+func (*GeoipSrcexception) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the GeoipSrcexception PATCH path
+// Changes to parts of the object srcexception types
+func (*GeoipSrcexception) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the GeoipSrcexception POST path
+// Create a new geoip/srcexception object
+func (*GeoipSrcexception) PostPath() string {
+	return "/api/objects/geoip/srcexception/"
+}
+
+// PutPath implements sophos.RestObject and returns the GeoipSrcexception PUT path
+// Creates or updates the complete object srcexception
+func (*GeoipSrcexception) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
 }

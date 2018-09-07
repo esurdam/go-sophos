@@ -13,14 +13,14 @@ import (
 // GET /api/nodes/scheduler
 type Scheduler struct {
 	SchedulerLoadbalance SchedulerLoadbalance `json:"scheduler_loadbalance"`
-	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 	SchedulerGroup       SchedulerGroup       `json:"scheduler_group"`
+	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 }
 
 var defsScheduler = map[string]sophos.RestObject{
 	"SchedulerLoadbalance": &SchedulerLoadbalance{},
-	"SchedulerRule":        &SchedulerRule{},
 	"SchedulerGroup":       &SchedulerGroup{},
+	"SchedulerRule":        &SchedulerRule{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Scheduler's Objects
@@ -34,7 +34,7 @@ func (*Scheduler) GetPath() string { return "/api/nodes/scheduler" }
 // RefRequired implements sophos.RestGetter
 func (*Scheduler) RefRequired() (string, bool) { return "", false }
 
-var defScheduler = &sophos.Definition{Description: "scheduler", Name: "scheduler", Link: "/api/definitions/scheduler", Swag: map[string]sophos.MethodMap{"/objects/scheduler/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available scheduler/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new scheduler/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/group that will be created", Type: "", Required: true}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/scheduler/group/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/group that will be updated", Type: "", Required: true}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/group that will be changes", Type: "", Required: true}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/scheduler/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/scheduler/loadbalance/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/scheduler/rule/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/rule that will be updated", Type: "", Required: true}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/rule that will be changes", Type: "", Required: true}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/scheduler/rule/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/scheduler/loadbalance/": {"get": sophos.MethodDescriptions{Description: "Returns all available scheduler/loadbalance objects", Parameters: []sophos.Parameter(nil), Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new scheduler/loadbalance object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/loadbalance that will be created", Type: "", Required: true}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/scheduler/loadbalance/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object loadbalance", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/loadbalance that will be updated", Type: "", Required: true}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object loadbalance", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available loadbalance types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object loadbalance types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/loadbalance that will be changes", Type: "", Required: true}}, Tags: []string{"scheduler/loadbalance"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/scheduler/rule/": {"get": sophos.MethodDescriptions{Description: "Returns all available scheduler/rule objects", Parameters: []sophos.Parameter(nil), Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new scheduler/rule object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "scheduler/rule that will be created", Type: "", Required: true}}, Tags: []string{"scheduler/rule"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}}}
+var defScheduler = &sophos.Definition{Description: "scheduler", Name: "scheduler", Link: "/api/definitions/scheduler"}
 
 // Definition returns the /api/definitions struct of Scheduler
 func (Scheduler) Definition() sophos.Definition { return *defScheduler }
@@ -129,6 +129,40 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 // Type implements sophos.Object
 func (s *SchedulerLoadbalance) GetType() string { return s._type }
 
+// SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type SchedulerGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the SchedulerGroup GET path
+// Returns all available scheduler/group objects
+func (*SchedulerGroup) GetPath() string { return "/api/objects/scheduler/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*SchedulerGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the SchedulerGroup DELETE path
+// Creates or updates the complete object group
+func (*SchedulerGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the SchedulerGroup PATCH path
+// Changes to parts of the object group types
+func (*SchedulerGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the SchedulerGroup POST path
+// Create a new scheduler/group object
+func (*SchedulerGroup) PostPath() string {
+	return "/api/objects/scheduler/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the SchedulerGroup PUT path
+// Creates or updates the complete object group
+func (*SchedulerGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
+}
+
 // SchedulerRule is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerRules []SchedulerRule
 type SchedulerRule struct {
@@ -190,37 +224,3 @@ func (*SchedulerRule) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (s *SchedulerRule) GetType() string { return s._type }
-
-// SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SchedulerGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the SchedulerGroup GET path
-// Returns all available scheduler/group objects
-func (*SchedulerGroup) GetPath() string { return "/api/objects/scheduler/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*SchedulerGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the SchedulerGroup DELETE path
-// Creates or updates the complete object group
-func (*SchedulerGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the SchedulerGroup PATCH path
-// Changes to parts of the object group types
-func (*SchedulerGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the SchedulerGroup POST path
-// Create a new scheduler/group object
-func (*SchedulerGroup) PostPath() string {
-	return "/api/objects/scheduler/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the SchedulerGroup PUT path
-// Creates or updates the complete object group
-func (*SchedulerGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
-}

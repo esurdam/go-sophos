@@ -49,10 +49,10 @@ type Ips struct {
 }
 
 var defsIps = map[string]sophos.RestObject{
-	"IpsException":    &IpsException{},
+	"IpsGroup":        &IpsGroup{},
 	"IpsRule":         &IpsRule{},
 	"IpsRuleModifier": &IpsRuleModifier{},
-	"IpsGroup":        &IpsGroup{},
+	"IpsException":    &IpsException{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ips's Objects
@@ -66,7 +66,7 @@ func (*Ips) GetPath() string { return "/api/nodes/ips" }
 // RefRequired implements sophos.RestGetter
 func (*Ips) RefRequired() (string, bool) { return "", false }
 
-var defIps = &sophos.Definition{Description: "ips", Name: "ips", Link: "/api/definitions/ips", Swag: map[string]sophos.MethodMap{"/objects/ips/rule_modifier/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/exception/": {"get": sophos.MethodDescriptions{Description: "Returns all available ips/exception objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ips/exception object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/exception that will be created", Type: "", Required: true}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/ips/exception/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/rule/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule that will be updated", Type: "", Required: true}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object rule types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule that will be changes", Type: "", Required: true}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/ips/rule/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/rule/": {"get": sophos.MethodDescriptions{Description: "Returns all available ips/rule objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ips/rule object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule that will be created", Type: "", Required: true}}, Tags: []string{"ips/rule"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/rule_modifier/": {"get": sophos.MethodDescriptions{Description: "Returns all available ips/rule_modifier objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ips/rule_modifier object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule_modifier that will be created", Type: "", Required: true}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/rule_modifier/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule_modifier", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available rule_modifier types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object rule_modifier types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule_modifier that will be changes", Type: "", Required: true}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object rule_modifier", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/rule_modifier that will be updated", Type: "", Required: true}}, Tags: []string{"ips/rule_modifier"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/ips/exception/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/exception that will be changes", Type: "", Required: true}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/exception that will be updated", Type: "", Required: true}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ips/exception"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available ips/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ips/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/group that will be created", Type: "", Required: true}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ips/group/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/group that will be changes", Type: "", Required: true}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ips/group that will be updated", Type: "", Required: true}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/ips/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ips/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defIps = &sophos.Definition{Description: "ips", Name: "ips", Link: "/api/definitions/ips"}
 
 // Definition returns the /api/definitions struct of Ips
 func (Ips) Definition() sophos.Definition { return *defIps }
@@ -100,64 +100,63 @@ func (Ips) References() []string {
 	}
 }
 
-// IpsException is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsExceptions []IpsException
-type IpsException struct {
-	Locked              string   `json:"_locked"`
-	Reference           string   `json:"_ref"`
-	_type               string   `json:"_type"`
-	Comment             string   `json:"comment"`
-	DestinationNetworks []string `json:"destination_networks"`
-	Name                string   `json:"name"`
-	Operator            string   `json:"operator"`
-	Services            []string `json:"services"`
-	Skiplist            []string `json:"skiplist"`
-	SourceNetworks      []string `json:"source_networks"`
-	Status              bool     `json:"status"`
+// IpsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsGroups []IpsGroup
+type IpsGroup struct {
+	Locked       string   `json:"_locked"`
+	Reference    string   `json:"_ref"`
+	_type        string   `json:"_type"`
+	Action       string   `json:"action"`
+	Age          int64    `json:"age"`
+	Comment      string   `json:"comment"`
+	ID           string   `json:"id"`
+	Name         string   `json:"name"`
+	Notification bool     `json:"notification"`
+	Status       bool     `json:"status"`
+	Subgroups    []string `json:"subgroups"`
+	Warnings     bool     `json:"warnings"`
 }
 
-// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
-// Returns all available ips/exception objects
-func (*IpsExceptions) GetPath() string { return "/api/objects/ips/exception/" }
+// GetPath implements sophos.RestObject and returns the IpsGroups GET path
+// Returns all available ips/group objects
+func (*IpsGroups) GetPath() string { return "/api/objects/ips/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsExceptions) RefRequired() (string, bool) { return "", false }
+func (*IpsGroups) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
-// Returns all available exception types
-func (i *IpsException) GetPath() string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", i.Reference)
-}
+// GetPath implements sophos.RestObject and returns the IpsGroups GET path
+// Returns all available group types
+func (i *IpsGroup) GetPath() string { return fmt.Sprintf("/api/objects/ips/group/%s", i.Reference) }
 
 // RefRequired implements sophos.RestObject
-func (i *IpsException) RefRequired() (string, bool) { return i.Reference, true }
+func (i *IpsGroup) RefRequired() (string, bool) { return i.Reference, true }
 
-// DeletePath implements sophos.RestObject and returns the IpsException DELETE path
-// Creates or updates the complete object exception
-func (*IpsException) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+// DeletePath implements sophos.RestObject and returns the IpsGroup DELETE path
+// Creates or updates the complete object group
+func (*IpsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the IpsException PATCH path
-// Changes to parts of the object exception types
-func (*IpsException) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+// PatchPath implements sophos.RestObject and returns the IpsGroup PATCH path
+// Changes to parts of the object group types
+func (*IpsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the IpsException POST path
-// Create a new ips/exception object
-func (*IpsException) PostPath() string {
-	return "/api/objects/ips/exception/"
+// PostPath implements sophos.RestObject and returns the IpsGroup POST path
+// Create a new ips/group object
+func (*IpsGroup) PostPath() string {
+	return "/api/objects/ips/group/"
 }
 
-// PutPath implements sophos.RestObject and returns the IpsException PUT path
-// Creates or updates the complete object exception
-func (*IpsException) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+// PutPath implements sophos.RestObject and returns the IpsGroup PUT path
+// Creates or updates the complete object group
+func (*IpsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
 // Type implements sophos.Object
-func (i *IpsException) GetType() string { return i._type }
+func (i *IpsGroup) GetType() string { return i._type }
 
 // IpsRule is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsRule []interface{}
@@ -227,60 +226,61 @@ func (*IpsRuleModifier) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s", ref)
 }
 
-// IpsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsGroups []IpsGroup
-type IpsGroup struct {
-	Locked       string   `json:"_locked"`
-	Reference    string   `json:"_ref"`
-	_type        string   `json:"_type"`
-	Action       string   `json:"action"`
-	Age          int64    `json:"age"`
-	Comment      string   `json:"comment"`
-	ID           string   `json:"id"`
-	Name         string   `json:"name"`
-	Notification bool     `json:"notification"`
-	Status       bool     `json:"status"`
-	Subgroups    []string `json:"subgroups"`
-	Warnings     bool     `json:"warnings"`
+// IpsException is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsExceptions []IpsException
+type IpsException struct {
+	Locked              string   `json:"_locked"`
+	Reference           string   `json:"_ref"`
+	_type               string   `json:"_type"`
+	Comment             string   `json:"comment"`
+	DestinationNetworks []string `json:"destination_networks"`
+	Name                string   `json:"name"`
+	Operator            string   `json:"operator"`
+	Services            []string `json:"services"`
+	Skiplist            []string `json:"skiplist"`
+	SourceNetworks      []string `json:"source_networks"`
+	Status              bool     `json:"status"`
 }
 
-// GetPath implements sophos.RestObject and returns the IpsGroups GET path
-// Returns all available ips/group objects
-func (*IpsGroups) GetPath() string { return "/api/objects/ips/group/" }
+// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
+// Returns all available ips/exception objects
+func (*IpsExceptions) GetPath() string { return "/api/objects/ips/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsGroups) RefRequired() (string, bool) { return "", false }
+func (*IpsExceptions) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the IpsGroups GET path
-// Returns all available group types
-func (i *IpsGroup) GetPath() string { return fmt.Sprintf("/api/objects/ips/group/%s", i.Reference) }
+// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
+// Returns all available exception types
+func (i *IpsException) GetPath() string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", i.Reference)
+}
 
 // RefRequired implements sophos.RestObject
-func (i *IpsGroup) RefRequired() (string, bool) { return i.Reference, true }
+func (i *IpsException) RefRequired() (string, bool) { return i.Reference, true }
 
-// DeletePath implements sophos.RestObject and returns the IpsGroup DELETE path
-// Creates or updates the complete object group
-func (*IpsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the IpsException DELETE path
+// Creates or updates the complete object exception
+func (*IpsException) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the IpsGroup PATCH path
-// Changes to parts of the object group types
-func (*IpsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the IpsException PATCH path
+// Changes to parts of the object exception types
+func (*IpsException) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the IpsGroup POST path
-// Create a new ips/group object
-func (*IpsGroup) PostPath() string {
-	return "/api/objects/ips/group/"
+// PostPath implements sophos.RestObject and returns the IpsException POST path
+// Create a new ips/exception object
+func (*IpsException) PostPath() string {
+	return "/api/objects/ips/exception/"
 }
 
-// PutPath implements sophos.RestObject and returns the IpsGroup PUT path
-// Creates or updates the complete object group
-func (*IpsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
+// PutPath implements sophos.RestObject and returns the IpsException PUT path
+// Creates or updates the complete object exception
+func (*IpsException) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
 // Type implements sophos.Object
-func (i *IpsGroup) GetType() string { return i._type }
+func (i *IpsException) GetType() string { return i._type }

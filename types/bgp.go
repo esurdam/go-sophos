@@ -12,21 +12,21 @@ import (
 // Bgp is a generated struct representing the Sophos Bgp Endpoint
 // GET /api/nodes/bgp
 type Bgp struct {
-	BgpFilter    BgpFilter    `json:"bgp_filter"`
-	BgpNeighbor  BgpNeighbor  `json:"bgp_neighbor"`
 	BgpRouteMap  BgpRouteMap  `json:"bgp_route_map"`
+	BgpFilter    BgpFilter    `json:"bgp_filter"`
+	BgpGroup     BgpGroup     `json:"bgp_group"`
 	BgpSystem    BgpSystem    `json:"bgp_system"`
 	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
-	BgpGroup     BgpGroup     `json:"bgp_group"`
+	BgpNeighbor  BgpNeighbor  `json:"bgp_neighbor"`
 }
 
 var defsBgp = map[string]sophos.RestObject{
-	"BgpFilter":    &BgpFilter{},
-	"BgpNeighbor":  &BgpNeighbor{},
 	"BgpRouteMap":  &BgpRouteMap{},
+	"BgpFilter":    &BgpFilter{},
+	"BgpGroup":     &BgpGroup{},
 	"BgpSystem":    &BgpSystem{},
 	"BgpAmazonVpc": &BgpAmazonVpc{},
-	"BgpGroup":     &BgpGroup{},
+	"BgpNeighbor":  &BgpNeighbor{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Bgp's Objects
@@ -40,7 +40,7 @@ func (*Bgp) GetPath() string { return "/api/nodes/bgp" }
 // RefRequired implements sophos.RestGetter
 func (*Bgp) RefRequired() (string, bool) { return "", false }
 
-var defBgp = &sophos.Definition{Description: "bgp", Name: "bgp", Link: "/api/definitions/bgp", Swag: map[string]sophos.MethodMap{"/objects/bgp/neighbor/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/bgp/route_map/": {"post": sophos.MethodDescriptions{Description: "Create a new bgp/route_map object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/route_map that will be created", Type: "", Required: true}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available bgp/route_map objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/bgp/route_map/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/bgp/system/": {"get": sophos.MethodDescriptions{Description: "Returns all available bgp/system objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new bgp/system object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/system that will be created", Type: "", Required: true}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/system/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object system types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/system that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object system", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/system that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object system", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available system types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/bgp/system/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/system"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/bgp/amazon_vpc/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/bgp/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available bgp/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new bgp/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/group that will be created", Type: "", Required: true}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/neighbor/": {"get": sophos.MethodDescriptions{Description: "Returns all available bgp/neighbor objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new bgp/neighbor object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/neighbor that will be created", Type: "", Required: true}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/filter/": {"get": sophos.MethodDescriptions{Description: "Returns all available bgp/filter objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new bgp/filter object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/filter that will be created", Type: "", Required: true}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/group that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/group that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/bgp/amazon_vpc/": {"get": sophos.MethodDescriptions{Description: "Returns all available bgp/amazon_vpc objects", Parameters: []sophos.Parameter(nil), Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new bgp/amazon_vpc object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/amazon_vpc that will be created", Type: "", Required: true}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/amazon_vpc/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object amazon_vpc", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available amazon_vpc types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object amazon_vpc types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/amazon_vpc that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object amazon_vpc", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/amazon_vpc that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/amazon_vpc"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/bgp/neighbor/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available neighbor types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object neighbor types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/neighbor that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object neighbor", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/neighbor that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object neighbor", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/neighbor"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/bgp/route_map/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object route_map", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available route_map types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object route_map types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/route_map that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object route_map", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/route_map that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/route_map"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/bgp/filter/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/filter that will be changes", Type: "", Required: true}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "bgp/filter that will be updated", Type: "", Required: true}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/bgp/filter/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"bgp/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defBgp = &sophos.Definition{Description: "bgp", Name: "bgp", Link: "/api/definitions/bgp"}
 
 // Definition returns the /api/definitions struct of Bgp
 func (Bgp) Definition() sophos.Definition { return *defBgp }
@@ -82,6 +82,40 @@ func (Bgp) References() []string {
 	}
 }
 
+// BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpRouteMap []interface{}
+
+// GetPath implements sophos.RestObject and returns the BgpRouteMap GET path
+// Returns all available bgp/route_map objects
+func (*BgpRouteMap) GetPath() string { return "/api/objects/bgp/route_map/" }
+
+// RefRequired implements sophos.RestObject
+func (*BgpRouteMap) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the BgpRouteMap DELETE path
+// Creates or updates the complete object route_map
+func (*BgpRouteMap) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the BgpRouteMap PATCH path
+// Changes to parts of the object route_map types
+func (*BgpRouteMap) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the BgpRouteMap POST path
+// Create a new bgp/route_map object
+func (*BgpRouteMap) PostPath() string {
+	return "/api/objects/bgp/route_map/"
+}
+
+// PutPath implements sophos.RestObject and returns the BgpRouteMap PUT path
+// Creates or updates the complete object route_map
+func (*BgpRouteMap) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+}
+
 // BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpFilter []interface{}
 
@@ -116,72 +150,38 @@ func (*BgpFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
 }
 
-// BgpNeighbor is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpNeighbor []interface{}
+// BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpGroup []interface{}
 
-// GetPath implements sophos.RestObject and returns the BgpNeighbor GET path
-// Returns all available bgp/neighbor objects
-func (*BgpNeighbor) GetPath() string { return "/api/objects/bgp/neighbor/" }
-
-// RefRequired implements sophos.RestObject
-func (*BgpNeighbor) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the BgpNeighbor DELETE path
-// Creates or updates the complete object neighbor
-func (*BgpNeighbor) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the BgpNeighbor PATCH path
-// Changes to parts of the object neighbor types
-func (*BgpNeighbor) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the BgpNeighbor POST path
-// Create a new bgp/neighbor object
-func (*BgpNeighbor) PostPath() string {
-	return "/api/objects/bgp/neighbor/"
-}
-
-// PutPath implements sophos.RestObject and returns the BgpNeighbor PUT path
-// Creates or updates the complete object neighbor
-func (*BgpNeighbor) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}
-
-// BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpRouteMap []interface{}
-
-// GetPath implements sophos.RestObject and returns the BgpRouteMap GET path
-// Returns all available bgp/route_map objects
-func (*BgpRouteMap) GetPath() string { return "/api/objects/bgp/route_map/" }
+// GetPath implements sophos.RestObject and returns the BgpGroup GET path
+// Returns all available bgp/group objects
+func (*BgpGroup) GetPath() string { return "/api/objects/bgp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*BgpRouteMap) RefRequired() (string, bool) { return "", false }
+func (*BgpGroup) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the BgpRouteMap DELETE path
-// Creates or updates the complete object route_map
-func (*BgpRouteMap) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// DeletePath implements sophos.RestObject and returns the BgpGroup DELETE path
+// Creates or updates the complete object group
+func (*BgpGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the BgpRouteMap PATCH path
-// Changes to parts of the object route_map types
-func (*BgpRouteMap) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// PatchPath implements sophos.RestObject and returns the BgpGroup PATCH path
+// Changes to parts of the object group types
+func (*BgpGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the BgpRouteMap POST path
-// Create a new bgp/route_map object
-func (*BgpRouteMap) PostPath() string {
-	return "/api/objects/bgp/route_map/"
+// PostPath implements sophos.RestObject and returns the BgpGroup POST path
+// Create a new bgp/group object
+func (*BgpGroup) PostPath() string {
+	return "/api/objects/bgp/group/"
 }
 
-// PutPath implements sophos.RestObject and returns the BgpRouteMap PUT path
-// Creates or updates the complete object route_map
-func (*BgpRouteMap) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// PutPath implements sophos.RestObject and returns the BgpGroup PUT path
+// Creates or updates the complete object group
+func (*BgpGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
 // BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
@@ -278,36 +278,36 @@ func (*BgpAmazonVpc) PutPath(ref string) string {
 // Type implements sophos.Object
 func (b *BgpAmazonVpc) GetType() string { return b._type }
 
-// BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpGroup []interface{}
+// BgpNeighbor is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpNeighbor []interface{}
 
-// GetPath implements sophos.RestObject and returns the BgpGroup GET path
-// Returns all available bgp/group objects
-func (*BgpGroup) GetPath() string { return "/api/objects/bgp/group/" }
+// GetPath implements sophos.RestObject and returns the BgpNeighbor GET path
+// Returns all available bgp/neighbor objects
+func (*BgpNeighbor) GetPath() string { return "/api/objects/bgp/neighbor/" }
 
 // RefRequired implements sophos.RestObject
-func (*BgpGroup) RefRequired() (string, bool) { return "", false }
+func (*BgpNeighbor) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the BgpGroup DELETE path
-// Creates or updates the complete object group
-func (*BgpGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the BgpNeighbor DELETE path
+// Creates or updates the complete object neighbor
+func (*BgpNeighbor) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the BgpGroup PATCH path
-// Changes to parts of the object group types
-func (*BgpGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the BgpNeighbor PATCH path
+// Changes to parts of the object neighbor types
+func (*BgpNeighbor) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the BgpGroup POST path
-// Create a new bgp/group object
-func (*BgpGroup) PostPath() string {
-	return "/api/objects/bgp/group/"
+// PostPath implements sophos.RestObject and returns the BgpNeighbor POST path
+// Create a new bgp/neighbor object
+func (*BgpNeighbor) PostPath() string {
+	return "/api/objects/bgp/neighbor/"
 }
 
-// PutPath implements sophos.RestObject and returns the BgpGroup PUT path
-// Creates or updates the complete object group
-func (*BgpGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
+// PutPath implements sophos.RestObject and returns the BgpNeighbor PUT path
+// Creates or updates the complete object neighbor
+func (*BgpNeighbor) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }

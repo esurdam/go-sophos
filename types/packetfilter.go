@@ -55,15 +55,15 @@ type Packetfilter struct {
 }
 
 var defsPacketfilter = map[string]sophos.RestObject{
-	"PacketfilterPacketfilter": &PacketfilterPacketfilter{},
-	"PacketfilterGenericProxy": &PacketfilterGenericProxy{},
 	"PacketfilterLoadbalance":  &PacketfilterLoadbalance{},
-	"PacketfilterRuleset":      &PacketfilterRuleset{},
-	"PacketfilterNat":          &PacketfilterNat{},
-	"PacketfilterMangle":       &PacketfilterMangle{},
-	"PacketfilterMasq":         &PacketfilterMasq{},
-	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
+	"PacketfilterPacketfilter": &PacketfilterPacketfilter{},
 	"PacketfilterGroup":        &PacketfilterGroup{},
+	"PacketfilterGenericProxy": &PacketfilterGenericProxy{},
+	"PacketfilterMasq":         &PacketfilterMasq{},
+	"PacketfilterRuleset":      &PacketfilterRuleset{},
+	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
+	"PacketfilterMangle":       &PacketfilterMangle{},
+	"PacketfilterNat":          &PacketfilterNat{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Packetfilter's Objects
@@ -77,7 +77,7 @@ func (*Packetfilter) GetPath() string { return "/api/nodes/packetfilter" }
 // RefRequired implements sophos.RestGetter
 func (*Packetfilter) RefRequired() (string, bool) { return "", false }
 
-var defPacketfilter = &sophos.Definition{Description: "packetfilter", Name: "packetfilter", Link: "/api/definitions/packetfilter", Swag: map[string]sophos.MethodMap{"/objects/packetfilter/masq/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/masq objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/masq object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/masq that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/ruleset/": {"post": sophos.MethodDescriptions{Description: "Create a new packetfilter/ruleset object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/ruleset that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/ruleset objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/mangle/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object mangle", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available mangle types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object mangle types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/mangle that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object mangle", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/mangle that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/mangle/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/mangle objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/mangle object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/mangle that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/masq/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object masq", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/masq that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object masq", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available masq types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object masq types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/masq that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/packetfilter/masq/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/masq"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/nat/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object nat", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available nat types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object nat types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/nat that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object nat", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/nat that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/packetfilter/packetfilter/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/packetfilter/1to1nat/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/packetfilter/ruleset/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/generic_proxy/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object generic_proxy", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/generic_proxy that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object generic_proxy", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available generic_proxy types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object generic_proxy types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/generic_proxy that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/packetfilter/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/group that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/group that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/packetfilter/loadbalance/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object loadbalance", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/loadbalance that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object loadbalance", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available loadbalance types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object loadbalance types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/loadbalance that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/packetfilter/nat/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/nat objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/nat object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/nat that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/1to1nat/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object 1to1nat", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available 1to1nat types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object 1to1nat types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/1to1nat that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object 1to1nat", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/1to1nat that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/packetfilter/loadbalance/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/packetfilter/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object packetfilter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available packetfilter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object packetfilter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/packetfilter that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object packetfilter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/packetfilter that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/1to1nat/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/1to1nat objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/1to1nat object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/1to1nat that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/1to1nat"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/packetfilter/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/group that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/mangle/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/mangle"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/loadbalance/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/loadbalance objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/loadbalance object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/loadbalance that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/loadbalance"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/packetfilter/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/packetfilter objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/packetfilter object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/packetfilter that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/packetfilter"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/packetfilter/generic_proxy/": {"get": sophos.MethodDescriptions{Description: "Returns all available packetfilter/generic_proxy objects", Parameters: []sophos.Parameter(nil), Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new packetfilter/generic_proxy object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/generic_proxy that will be created", Type: "", Required: true}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/ruleset/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object ruleset", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available ruleset types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object ruleset types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/ruleset that will be changes", Type: "", Required: true}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object ruleset", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "packetfilter/ruleset that will be updated", Type: "", Required: true}}, Tags: []string{"packetfilter/ruleset"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/packetfilter/generic_proxy/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/generic_proxy"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/packetfilter/nat/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"packetfilter/nat"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}}}
+var defPacketfilter = &sophos.Definition{Description: "packetfilter", Name: "packetfilter", Link: "/api/definitions/packetfilter"}
 
 // Definition returns the /api/definitions struct of Packetfilter
 func (Packetfilter) Definition() sophos.Definition { return *defPacketfilter }
@@ -129,6 +129,40 @@ func (Packetfilter) References() []string {
 		"REF_PacketfilterPacketfilter",
 		"REF_PacketfilterRuleset",
 	}
+}
+
+// PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterLoadbalance []interface{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
+// Returns all available packetfilter/loadbalance objects
+func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
+
+// RefRequired implements sophos.RestObject
+func (*PacketfilterLoadbalance) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the PacketfilterLoadbalance DELETE path
+// Creates or updates the complete object loadbalance
+func (*PacketfilterLoadbalance) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PacketfilterLoadbalance PATCH path
+// Changes to parts of the object loadbalance types
+func (*PacketfilterLoadbalance) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PacketfilterLoadbalance POST path
+// Create a new packetfilter/loadbalance object
+func (*PacketfilterLoadbalance) PostPath() string {
+	return "/api/objects/packetfilter/loadbalance/"
+}
+
+// PutPath implements sophos.RestObject and returns the PacketfilterLoadbalance PUT path
+// Creates or updates the complete object loadbalance
+func (*PacketfilterLoadbalance) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
 // PacketfilterPacketfilter is an Sophos Endpoint subType and implements sophos.RestObject
@@ -197,6 +231,40 @@ func (*PacketfilterPacketfilter) PutPath(ref string) string {
 // Type implements sophos.Object
 func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
+// PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
+// Returns all available packetfilter/group objects
+func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*PacketfilterGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the PacketfilterGroup DELETE path
+// Creates or updates the complete object group
+func (*PacketfilterGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PacketfilterGroup PATCH path
+// Changes to parts of the object group types
+func (*PacketfilterGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PacketfilterGroup POST path
+// Create a new packetfilter/group object
+func (*PacketfilterGroup) PostPath() string {
+	return "/api/objects/packetfilter/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the PacketfilterGroup PUT path
+// Creates or updates the complete object group
+func (*PacketfilterGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
+}
+
 // PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGenericProxy []interface{}
 
@@ -231,39 +299,63 @@ func (*PacketfilterGenericProxy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
 }
 
-// PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterLoadbalance []interface{}
+// PacketfilterMasq is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterMasqs []PacketfilterMasq
+type PacketfilterMasq struct {
+	Locked                   string `json:"_locked"`
+	Reference                string `json:"_ref"`
+	_type                    string `json:"_type"`
+	AdditionalAddress        string `json:"additional_address"`
+	AdditionalAddressRestore string `json:"additional_address_restore"`
+	Comment                  string `json:"comment"`
+	Name                     string `json:"name"`
+	Source                   string `json:"source"`
+	SourceNatInterface       string `json:"source_nat_interface"`
+	Status                   bool   `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
-// Returns all available packetfilter/loadbalance objects
-func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
+// GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
+// Returns all available packetfilter/masq objects
+func (*PacketfilterMasqs) GetPath() string { return "/api/objects/packetfilter/masq/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterLoadbalance) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterMasqs) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the PacketfilterLoadbalance DELETE path
-// Creates or updates the complete object loadbalance
-func (*PacketfilterLoadbalance) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
+// Returns all available masq types
+func (p *PacketfilterMasq) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", p.Reference)
 }
 
-// PatchPath implements sophos.RestObject and returns the PacketfilterLoadbalance PATCH path
-// Changes to parts of the object loadbalance types
-func (*PacketfilterLoadbalance) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterMasq) RefRequired() (string, bool) { return p.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the PacketfilterMasq DELETE path
+// Creates or updates the complete object masq
+func (*PacketfilterMasq) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the PacketfilterLoadbalance POST path
-// Create a new packetfilter/loadbalance object
-func (*PacketfilterLoadbalance) PostPath() string {
-	return "/api/objects/packetfilter/loadbalance/"
+// PatchPath implements sophos.RestObject and returns the PacketfilterMasq PATCH path
+// Changes to parts of the object masq types
+func (*PacketfilterMasq) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
 }
 
-// PutPath implements sophos.RestObject and returns the PacketfilterLoadbalance PUT path
-// Creates or updates the complete object loadbalance
-func (*PacketfilterLoadbalance) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// PostPath implements sophos.RestObject and returns the PacketfilterMasq POST path
+// Create a new packetfilter/masq object
+func (*PacketfilterMasq) PostPath() string {
+	return "/api/objects/packetfilter/masq/"
 }
+
+// PutPath implements sophos.RestObject and returns the PacketfilterMasq PUT path
+// Creates or updates the complete object masq
+func (*PacketfilterMasq) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
+}
+
+// Type implements sophos.Object
+func (p *PacketfilterMasq) GetType() string { return p._type }
 
 // PacketfilterRuleset is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterRuleset []interface{}
@@ -297,6 +389,74 @@ func (*PacketfilterRuleset) PostPath() string {
 // Creates or updates the complete object ruleset
 func (*PacketfilterRuleset) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s", ref)
+}
+
+// Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
+type Packetfilter1to1Nat []interface{}
+
+// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
+// Returns all available packetfilter/1to1nat objects
+func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
+
+// RefRequired implements sophos.RestObject
+func (*Packetfilter1to1Nat) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the Packetfilter1to1Nat DELETE path
+// Creates or updates the complete object 1to1nat
+func (*Packetfilter1to1Nat) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the Packetfilter1to1Nat PATCH path
+// Changes to parts of the object 1to1nat types
+func (*Packetfilter1to1Nat) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the Packetfilter1to1Nat POST path
+// Create a new packetfilter/1to1nat object
+func (*Packetfilter1to1Nat) PostPath() string {
+	return "/api/objects/packetfilter/1to1nat/"
+}
+
+// PutPath implements sophos.RestObject and returns the Packetfilter1to1Nat PUT path
+// Creates or updates the complete object 1to1nat
+func (*Packetfilter1to1Nat) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
+}
+
+// PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterMangle []interface{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
+// Returns all available packetfilter/mangle objects
+func (*PacketfilterMangle) GetPath() string { return "/api/objects/packetfilter/mangle/" }
+
+// RefRequired implements sophos.RestObject
+func (*PacketfilterMangle) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the PacketfilterMangle DELETE path
+// Creates or updates the complete object mangle
+func (*PacketfilterMangle) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PacketfilterMangle PATCH path
+// Changes to parts of the object mangle types
+func (*PacketfilterMangle) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PacketfilterMangle POST path
+// Create a new packetfilter/mangle object
+func (*PacketfilterMangle) PostPath() string {
+	return "/api/objects/packetfilter/mangle/"
+}
+
+// PutPath implements sophos.RestObject and returns the PacketfilterMangle PUT path
+// Creates or updates the complete object mangle
+func (*PacketfilterMangle) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
 }
 
 // PacketfilterNat is an Sophos Endpoint subType and implements sophos.RestObject
@@ -365,163 +525,3 @@ func (*PacketfilterNat) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (p *PacketfilterNat) GetType() string { return p._type }
-
-// PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterMangle []interface{}
-
-// GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
-// Returns all available packetfilter/mangle objects
-func (*PacketfilterMangle) GetPath() string { return "/api/objects/packetfilter/mangle/" }
-
-// RefRequired implements sophos.RestObject
-func (*PacketfilterMangle) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the PacketfilterMangle DELETE path
-// Creates or updates the complete object mangle
-func (*PacketfilterMangle) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PacketfilterMangle PATCH path
-// Changes to parts of the object mangle types
-func (*PacketfilterMangle) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PacketfilterMangle POST path
-// Create a new packetfilter/mangle object
-func (*PacketfilterMangle) PostPath() string {
-	return "/api/objects/packetfilter/mangle/"
-}
-
-// PutPath implements sophos.RestObject and returns the PacketfilterMangle PUT path
-// Creates or updates the complete object mangle
-func (*PacketfilterMangle) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
-}
-
-// PacketfilterMasq is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterMasqs []PacketfilterMasq
-type PacketfilterMasq struct {
-	Locked                   string `json:"_locked"`
-	Reference                string `json:"_ref"`
-	_type                    string `json:"_type"`
-	AdditionalAddress        string `json:"additional_address"`
-	AdditionalAddressRestore string `json:"additional_address_restore"`
-	Comment                  string `json:"comment"`
-	Name                     string `json:"name"`
-	Source                   string `json:"source"`
-	SourceNatInterface       string `json:"source_nat_interface"`
-	Status                   bool   `json:"status"`
-}
-
-// GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
-// Returns all available packetfilter/masq objects
-func (*PacketfilterMasqs) GetPath() string { return "/api/objects/packetfilter/masq/" }
-
-// RefRequired implements sophos.RestObject
-func (*PacketfilterMasqs) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
-// Returns all available masq types
-func (p *PacketfilterMasq) GetPath() string {
-	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", p.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (p *PacketfilterMasq) RefRequired() (string, bool) { return p.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the PacketfilterMasq DELETE path
-// Creates or updates the complete object masq
-func (*PacketfilterMasq) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PacketfilterMasq PATCH path
-// Changes to parts of the object masq types
-func (*PacketfilterMasq) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PacketfilterMasq POST path
-// Create a new packetfilter/masq object
-func (*PacketfilterMasq) PostPath() string {
-	return "/api/objects/packetfilter/masq/"
-}
-
-// PutPath implements sophos.RestObject and returns the PacketfilterMasq PUT path
-// Creates or updates the complete object masq
-func (*PacketfilterMasq) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
-}
-
-// Type implements sophos.Object
-func (p *PacketfilterMasq) GetType() string { return p._type }
-
-// Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
-type Packetfilter1to1Nat []interface{}
-
-// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
-// Returns all available packetfilter/1to1nat objects
-func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
-
-// RefRequired implements sophos.RestObject
-func (*Packetfilter1to1Nat) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the Packetfilter1to1Nat DELETE path
-// Creates or updates the complete object 1to1nat
-func (*Packetfilter1to1Nat) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the Packetfilter1to1Nat PATCH path
-// Changes to parts of the object 1to1nat types
-func (*Packetfilter1to1Nat) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the Packetfilter1to1Nat POST path
-// Create a new packetfilter/1to1nat object
-func (*Packetfilter1to1Nat) PostPath() string {
-	return "/api/objects/packetfilter/1to1nat/"
-}
-
-// PutPath implements sophos.RestObject and returns the Packetfilter1to1Nat PUT path
-// Creates or updates the complete object 1to1nat
-func (*Packetfilter1to1Nat) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
-// Returns all available packetfilter/group objects
-func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*PacketfilterGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the PacketfilterGroup DELETE path
-// Creates or updates the complete object group
-func (*PacketfilterGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PacketfilterGroup PATCH path
-// Changes to parts of the object group types
-func (*PacketfilterGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PacketfilterGroup POST path
-// Create a new packetfilter/group object
-func (*PacketfilterGroup) PostPath() string {
-	return "/api/objects/packetfilter/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the PacketfilterGroup PUT path
-// Creates or updates the complete object group
-func (*PacketfilterGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}

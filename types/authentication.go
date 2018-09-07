@@ -12,23 +12,23 @@ import (
 // Authentication is a generated struct representing the Sophos Authentication Endpoint
 // GET /api/nodes/authentication
 type Authentication struct {
-	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
-	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
-	AuthenticationAdirectory AuthenticationAdirectory `json:"authentication_adirectory"`
 	AuthenticationEdirectory AuthenticationEdirectory `json:"authentication_edirectory"`
 	AuthenticationGroup      AuthenticationGroup      `json:"authentication_group"`
-	AuthenticationLdap       AuthenticationLdap       `json:"authentication_ldap"`
+	AuthenticationOtpToken   AuthenticationOtpToken   `json:"authentication_otp_token"`
 	AuthenticationRadius     AuthenticationRadius     `json:"authentication_radius"`
+	AuthenticationAdirectory AuthenticationAdirectory `json:"authentication_adirectory"`
+	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
+	AuthenticationLdap       AuthenticationLdap       `json:"authentication_ldap"`
 }
 
 var defsAuthentication = map[string]sophos.RestObject{
-	"AuthenticationOtpToken":   &AuthenticationOtpToken{},
-	"AuthenticationTacacs":     &AuthenticationTacacs{},
-	"AuthenticationAdirectory": &AuthenticationAdirectory{},
 	"AuthenticationEdirectory": &AuthenticationEdirectory{},
 	"AuthenticationGroup":      &AuthenticationGroup{},
-	"AuthenticationLdap":       &AuthenticationLdap{},
+	"AuthenticationOtpToken":   &AuthenticationOtpToken{},
 	"AuthenticationRadius":     &AuthenticationRadius{},
+	"AuthenticationAdirectory": &AuthenticationAdirectory{},
+	"AuthenticationTacacs":     &AuthenticationTacacs{},
+	"AuthenticationLdap":       &AuthenticationLdap{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Authentication's Objects
@@ -42,7 +42,7 @@ func (*Authentication) GetPath() string { return "/api/nodes/authentication" }
 // RefRequired implements sophos.RestGetter
 func (*Authentication) RefRequired() (string, bool) { return "", false }
 
-var defAuthentication = &sophos.Definition{Description: "authentication", Name: "authentication", Link: "/api/definitions/authentication", Swag: map[string]sophos.MethodMap{"/objects/authentication/ldap/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object ldap", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/ldap that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object ldap", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available ldap types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object ldap types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/ldap that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/authentication/radius/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/authentication/tacacs/": {"get": sophos.MethodDescriptions{Description: "Returns all available authentication/tacacs objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new authentication/tacacs object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/tacacs that will be created", Type: "", Required: true}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/authentication/adirectory/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/edirectory/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available edirectory types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object edirectory types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/edirectory that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object edirectory", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/edirectory that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object edirectory", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/authentication/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/group that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/group that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/authentication/otp_token/": {"post": sophos.MethodDescriptions{Description: "Create a new authentication/otp_token object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/otp_token that will be created", Type: "", Required: true}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available authentication/otp_token objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/otp_token/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object otp_token", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available otp_token types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object otp_token types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/otp_token that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object otp_token", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/otp_token that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/tacacs/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/edirectory/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/ldap/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/authentication/radius/": {"get": sophos.MethodDescriptions{Description: "Returns all available authentication/radius objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new authentication/radius object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/radius that will be created", Type: "", Required: true}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/radius/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object radius", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available radius types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object radius types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/radius that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object radius", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/radius that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/radius"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/authentication/adirectory/": {"get": sophos.MethodDescriptions{Description: "Returns all available authentication/adirectory objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new authentication/adirectory object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/adirectory that will be created", Type: "", Required: true}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/adirectory/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available adirectory types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object adirectory types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/adirectory that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object adirectory", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/adirectory that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object adirectory", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/adirectory"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/edirectory/": {"get": sophos.MethodDescriptions{Description: "Returns all available authentication/edirectory objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new authentication/edirectory object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/edirectory that will be created", Type: "", Required: true}}, Tags: []string{"authentication/edirectory"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available authentication/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new authentication/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/group that will be created", Type: "", Required: true}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/ldap/": {"post": sophos.MethodDescriptions{Description: "Create a new authentication/ldap object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/ldap that will be created", Type: "", Required: true}}, Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available authentication/ldap objects", Parameters: []sophos.Parameter(nil), Tags: []string{"authentication/ldap"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/otp_token/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/otp_token"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/authentication/tacacs/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object tacacs", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available tacacs types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object tacacs types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/tacacs that will be changes", Type: "", Required: true}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object tacacs", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "authentication/tacacs that will be updated", Type: "", Required: true}}, Tags: []string{"authentication/tacacs"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}}}
+var defAuthentication = &sophos.Definition{Description: "authentication", Name: "authentication", Link: "/api/definitions/authentication"}
 
 // Definition returns the /api/definitions struct of Authentication
 func (Authentication) Definition() sophos.Definition { return *defAuthentication }
@@ -86,108 +86,6 @@ func (Authentication) References() []string {
 		"REF_AuthenticationRadius",
 		"REF_AuthenticationTacacs",
 	}
-}
-
-// AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationOtpToken []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
-// Returns all available authentication/otp_token objects
-func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationOtpToken) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationOtpToken DELETE path
-// Creates or updates the complete object otp_token
-func (*AuthenticationOtpToken) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationOtpToken PATCH path
-// Changes to parts of the object otp_token types
-func (*AuthenticationOtpToken) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationOtpToken POST path
-// Create a new authentication/otp_token object
-func (*AuthenticationOtpToken) PostPath() string {
-	return "/api/objects/authentication/otp_token/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationOtpToken PUT path
-// Creates or updates the complete object otp_token
-func (*AuthenticationOtpToken) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
-}
-
-// AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationTacacs []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
-// Returns all available authentication/tacacs objects
-func (*AuthenticationTacacs) GetPath() string { return "/api/objects/authentication/tacacs/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationTacacs) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationTacacs DELETE path
-// Creates or updates the complete object tacacs
-func (*AuthenticationTacacs) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationTacacs PATCH path
-// Changes to parts of the object tacacs types
-func (*AuthenticationTacacs) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationTacacs POST path
-// Create a new authentication/tacacs object
-func (*AuthenticationTacacs) PostPath() string {
-	return "/api/objects/authentication/tacacs/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationTacacs PUT path
-// Creates or updates the complete object tacacs
-func (*AuthenticationTacacs) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
-}
-
-// AuthenticationAdirectory is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationAdirectory []interface{}
-
-// GetPath implements sophos.RestObject and returns the AuthenticationAdirectory GET path
-// Returns all available authentication/adirectory objects
-func (*AuthenticationAdirectory) GetPath() string { return "/api/objects/authentication/adirectory/" }
-
-// RefRequired implements sophos.RestObject
-func (*AuthenticationAdirectory) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AuthenticationAdirectory DELETE path
-// Creates or updates the complete object adirectory
-func (*AuthenticationAdirectory) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AuthenticationAdirectory PATCH path
-// Changes to parts of the object adirectory types
-func (*AuthenticationAdirectory) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AuthenticationAdirectory POST path
-// Create a new authentication/adirectory object
-func (*AuthenticationAdirectory) PostPath() string {
-	return "/api/objects/authentication/adirectory/"
-}
-
-// PutPath implements sophos.RestObject and returns the AuthenticationAdirectory PUT path
-// Creates or updates the complete object adirectory
-func (*AuthenticationAdirectory) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
 }
 
 // AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
@@ -258,38 +156,38 @@ func (*AuthenticationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/group/%s", ref)
 }
 
-// AuthenticationLdap is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationLdap []interface{}
+// AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationOtpToken []interface{}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationLdap GET path
-// Returns all available authentication/ldap objects
-func (*AuthenticationLdap) GetPath() string { return "/api/objects/authentication/ldap/" }
+// GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
+// Returns all available authentication/otp_token objects
+func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationLdap) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationOtpToken) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the AuthenticationLdap DELETE path
-// Creates or updates the complete object ldap
-func (*AuthenticationLdap) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+// DeletePath implements sophos.RestObject and returns the AuthenticationOtpToken DELETE path
+// Creates or updates the complete object otp_token
+func (*AuthenticationOtpToken) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the AuthenticationLdap PATCH path
-// Changes to parts of the object ldap types
-func (*AuthenticationLdap) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+// PatchPath implements sophos.RestObject and returns the AuthenticationOtpToken PATCH path
+// Changes to parts of the object otp_token types
+func (*AuthenticationOtpToken) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the AuthenticationLdap POST path
-// Create a new authentication/ldap object
-func (*AuthenticationLdap) PostPath() string {
-	return "/api/objects/authentication/ldap/"
+// PostPath implements sophos.RestObject and returns the AuthenticationOtpToken POST path
+// Create a new authentication/otp_token object
+func (*AuthenticationOtpToken) PostPath() string {
+	return "/api/objects/authentication/otp_token/"
 }
 
-// PutPath implements sophos.RestObject and returns the AuthenticationLdap PUT path
-// Creates or updates the complete object ldap
-func (*AuthenticationLdap) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+// PutPath implements sophos.RestObject and returns the AuthenticationOtpToken PUT path
+// Creates or updates the complete object otp_token
+func (*AuthenticationOtpToken) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
 }
 
 // AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
@@ -324,4 +222,106 @@ func (*AuthenticationRadius) PostPath() string {
 // Creates or updates the complete object radius
 func (*AuthenticationRadius) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
+}
+
+// AuthenticationAdirectory is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationAdirectory []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationAdirectory GET path
+// Returns all available authentication/adirectory objects
+func (*AuthenticationAdirectory) GetPath() string { return "/api/objects/authentication/adirectory/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationAdirectory) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationAdirectory DELETE path
+// Creates or updates the complete object adirectory
+func (*AuthenticationAdirectory) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationAdirectory PATCH path
+// Changes to parts of the object adirectory types
+func (*AuthenticationAdirectory) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationAdirectory POST path
+// Create a new authentication/adirectory object
+func (*AuthenticationAdirectory) PostPath() string {
+	return "/api/objects/authentication/adirectory/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationAdirectory PUT path
+// Creates or updates the complete object adirectory
+func (*AuthenticationAdirectory) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
+}
+
+// AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationTacacs []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
+// Returns all available authentication/tacacs objects
+func (*AuthenticationTacacs) GetPath() string { return "/api/objects/authentication/tacacs/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationTacacs) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationTacacs DELETE path
+// Creates or updates the complete object tacacs
+func (*AuthenticationTacacs) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationTacacs PATCH path
+// Changes to parts of the object tacacs types
+func (*AuthenticationTacacs) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationTacacs POST path
+// Create a new authentication/tacacs object
+func (*AuthenticationTacacs) PostPath() string {
+	return "/api/objects/authentication/tacacs/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationTacacs PUT path
+// Creates or updates the complete object tacacs
+func (*AuthenticationTacacs) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
+}
+
+// AuthenticationLdap is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationLdap []interface{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationLdap GET path
+// Returns all available authentication/ldap objects
+func (*AuthenticationLdap) GetPath() string { return "/api/objects/authentication/ldap/" }
+
+// RefRequired implements sophos.RestObject
+func (*AuthenticationLdap) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AuthenticationLdap DELETE path
+// Creates or updates the complete object ldap
+func (*AuthenticationLdap) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AuthenticationLdap PATCH path
+// Changes to parts of the object ldap types
+func (*AuthenticationLdap) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AuthenticationLdap POST path
+// Create a new authentication/ldap object
+func (*AuthenticationLdap) PostPath() string {
+	return "/api/objects/authentication/ldap/"
+}
+
+// PutPath implements sophos.RestObject and returns the AuthenticationLdap PUT path
+// Creates or updates the complete object ldap
+func (*AuthenticationLdap) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
 }

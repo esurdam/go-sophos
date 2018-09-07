@@ -30,7 +30,7 @@ func (*Status) GetPath() string { return "/api/nodes/status" }
 // RefRequired implements sophos.RestGetter
 func (*Status) RefRequired() (string, bool) { return "", false }
 
-var defStatus = &sophos.Definition{Description: "Status", Name: "Status", Link: "/api/definitions/status", Swag: map[string]sophos.MethodMap{"/status/version": {"get": sophos.MethodDescriptions{Description: "Returns some version numbers of the UTM software", Parameters: []sophos.Parameter(nil), Tags: []string{"Status"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defStatus = &sophos.Definition{Description: "Status", Name: "Status", Link: "/api/definitions/status"}
 
 // Definition returns the /api/definitions struct of Status
 func (Status) Definition() sophos.Definition { return *defStatus }

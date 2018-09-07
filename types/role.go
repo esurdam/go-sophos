@@ -12,13 +12,13 @@ import (
 // Role is a generated struct representing the Sophos Role Endpoint
 // GET /api/nodes/role
 type Role struct {
-	RoleGroup RoleGroup `json:"role_group"`
 	RoleRole  RoleRole  `json:"role_role"`
+	RoleGroup RoleGroup `json:"role_group"`
 }
 
 var defsRole = map[string]sophos.RestObject{
-	"RoleGroup": &RoleGroup{},
 	"RoleRole":  &RoleRole{},
+	"RoleGroup": &RoleGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Role's Objects
@@ -32,7 +32,7 @@ func (*Role) GetPath() string { return "/api/nodes/role" }
 // RefRequired implements sophos.RestGetter
 func (*Role) RefRequired() (string, bool) { return "", false }
 
-var defRole = &sophos.Definition{Description: "role", Name: "role", Link: "/api/definitions/role", Swag: map[string]sophos.MethodMap{"/objects/role/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/role/role/": {"get": sophos.MethodDescriptions{Description: "Returns all available role/role objects", Parameters: []sophos.Parameter(nil), Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new role/role object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/role that will be created", Type: "", Required: true}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/role/role/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object role", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/role that will be updated", Type: "", Required: true}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object role", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available role types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object role types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/role that will be changes", Type: "", Required: true}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/role/role/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"role/role"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/role/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available role/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new role/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/group that will be created", Type: "", Required: true}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/role/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/group that will be changes", Type: "", Required: true}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "role/group that will be updated", Type: "", Required: true}}, Tags: []string{"role/group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defRole = &sophos.Definition{Description: "role", Name: "role", Link: "/api/definitions/role"}
 
 // Definition returns the /api/definitions struct of Role
 func (Role) Definition() sophos.Definition { return *defRole }
@@ -56,40 +56,6 @@ func (Role) References() []string {
 		"REF_RoleGroup",
 		"REF_RoleRole",
 	}
-}
-
-// RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RoleGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the RoleGroup GET path
-// Returns all available role/group objects
-func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*RoleGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the RoleGroup DELETE path
-// Creates or updates the complete object group
-func (*RoleGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the RoleGroup PATCH path
-// Changes to parts of the object group types
-func (*RoleGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the RoleGroup POST path
-// Create a new role/group object
-func (*RoleGroup) PostPath() string {
-	return "/api/objects/role/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the RoleGroup PUT path
-// Creates or updates the complete object group
-func (*RoleGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
 // RoleRole is an Sophos Endpoint subType and implements sophos.RestObject
@@ -145,3 +111,37 @@ func (*RoleRole) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (r *RoleRole) GetType() string { return r._type }
+
+// RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type RoleGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the RoleGroup GET path
+// Returns all available role/group objects
+func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*RoleGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the RoleGroup DELETE path
+// Creates or updates the complete object group
+func (*RoleGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the RoleGroup PATCH path
+// Changes to parts of the object group types
+func (*RoleGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the RoleGroup POST path
+// Create a new role/group object
+func (*RoleGroup) PostPath() string {
+	return "/api/objects/role/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the RoleGroup PUT path
+// Creates or updates the complete object group
+func (*RoleGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
+}

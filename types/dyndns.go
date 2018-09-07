@@ -16,8 +16,8 @@ type Dyndns struct {
 }
 
 var defsDyndns = map[string]sophos.RestObject{
-	"DyndnsGroup":  &DyndnsGroup{},
 	"DyndnsDyndns": &DyndnsDyndns{},
+	"DyndnsGroup":  &DyndnsGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dyndns's Objects
@@ -31,7 +31,7 @@ func (*Dyndns) GetPath() string { return "/api/nodes/dyndns" }
 // RefRequired implements sophos.RestGetter
 func (*Dyndns) RefRequired() (string, bool) { return "", false }
 
-var defDyndns = &sophos.Definition{Description: "dyndns", Name: "dyndns", Link: "/api/definitions/dyndns", Swag: map[string]sophos.MethodMap{"/objects/dyndns/dyndns/": {"get": sophos.MethodDescriptions{Description: "Returns all available dyndns/dyndns objects", Parameters: []sophos.Parameter(nil), Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new dyndns/dyndns object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/dyndns that will be created", Type: "", Required: true}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/dyndns/dyndns/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available dyndns types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object dyndns types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/dyndns that will be changes", Type: "", Required: true}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object dyndns", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/dyndns that will be updated", Type: "", Required: true}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object dyndns", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}}, "/objects/dyndns/dyndns/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"dyndns/dyndns"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/dyndns/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available dyndns/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new dyndns/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/group that will be created", Type: "", Required: true}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/dyndns/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/group that will be changes", Type: "", Required: true}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "dyndns/group that will be updated", Type: "", Required: true}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/dyndns/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"dyndns/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defDyndns = &sophos.Definition{Description: "dyndns", Name: "dyndns", Link: "/api/definitions/dyndns"}
 
 // Definition returns the /api/definitions struct of Dyndns
 func (Dyndns) Definition() sophos.Definition { return *defDyndns }
@@ -55,40 +55,6 @@ func (Dyndns) References() []string {
 		"REF_DyndnsDyndns",
 		"REF_DyndnsGroup",
 	}
-}
-
-// DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DyndnsGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the DyndnsGroup GET path
-// Returns all available dyndns/group objects
-func (*DyndnsGroup) GetPath() string { return "/api/objects/dyndns/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*DyndnsGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the DyndnsGroup DELETE path
-// Creates or updates the complete object group
-func (*DyndnsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the DyndnsGroup PATCH path
-// Changes to parts of the object group types
-func (*DyndnsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the DyndnsGroup POST path
-// Create a new dyndns/group object
-func (*DyndnsGroup) PostPath() string {
-	return "/api/objects/dyndns/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the DyndnsGroup PUT path
-// Creates or updates the complete object group
-func (*DyndnsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
 }
 
 // DyndnsDyndns is an Sophos Endpoint subType and implements sophos.RestObject
@@ -123,4 +89,38 @@ func (*DyndnsDyndns) PostPath() string {
 // Creates or updates the complete object dyndns
 func (*DyndnsDyndns) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
+}
+
+// DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type DyndnsGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the DyndnsGroup GET path
+// Returns all available dyndns/group objects
+func (*DyndnsGroup) GetPath() string { return "/api/objects/dyndns/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*DyndnsGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the DyndnsGroup DELETE path
+// Creates or updates the complete object group
+func (*DyndnsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the DyndnsGroup PATCH path
+// Changes to parts of the object group types
+func (*DyndnsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the DyndnsGroup POST path
+// Create a new dyndns/group object
+func (*DyndnsGroup) PostPath() string {
+	return "/api/objects/dyndns/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the DyndnsGroup PUT path
+// Creates or updates the complete object group
+func (*DyndnsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
 }

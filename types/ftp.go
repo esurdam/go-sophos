@@ -28,8 +28,8 @@ type Ftp struct {
 }
 
 var defsFtp = map[string]sophos.RestObject{
-	"FtpGroup":     &FtpGroup{},
 	"FtpException": &FtpException{},
+	"FtpGroup":     &FtpGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ftp's Objects
@@ -43,7 +43,7 @@ func (*Ftp) GetPath() string { return "/api/nodes/ftp" }
 // RefRequired implements sophos.RestGetter
 func (*Ftp) RefRequired() (string, bool) { return "", false }
 
-var defFtp = &sophos.Definition{Description: "ftp", Name: "ftp", Link: "/api/definitions/ftp", Swag: map[string]sophos.MethodMap{"/objects/ftp/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ftp/exception/": {"get": sophos.MethodDescriptions{Description: "Returns all available ftp/exception objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ftp/exception object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/exception that will be created", Type: "", Required: true}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/ftp/exception/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/exception that will be updated", Type: "", Required: true}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/exception that will be changes", Type: "", Required: true}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/ftp/exception/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ftp/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ftp/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available ftp/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new ftp/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/group that will be created", Type: "", Required: true}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/ftp/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/group that will be changes", Type: "", Required: true}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "ftp/group that will be updated", Type: "", Required: true}}, Tags: []string{"ftp/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}}}
+var defFtp = &sophos.Definition{Description: "ftp", Name: "ftp", Link: "/api/definitions/ftp"}
 
 // Definition returns the /api/definitions struct of Ftp
 func (Ftp) Definition() sophos.Definition { return *defFtp }
@@ -67,40 +67,6 @@ func (Ftp) References() []string {
 		"REF_FtpException",
 		"REF_FtpGroup",
 	}
-}
-
-// FtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type FtpGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the FtpGroup GET path
-// Returns all available ftp/group objects
-func (*FtpGroup) GetPath() string { return "/api/objects/ftp/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*FtpGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the FtpGroup DELETE path
-// Creates or updates the complete object group
-func (*FtpGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the FtpGroup PATCH path
-// Changes to parts of the object group types
-func (*FtpGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the FtpGroup POST path
-// Create a new ftp/group object
-func (*FtpGroup) PostPath() string {
-	return "/api/objects/ftp/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the FtpGroup PUT path
-// Creates or updates the complete object group
-func (*FtpGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
 }
 
 // FtpException is an Sophos Endpoint subType and implements sophos.RestObject
@@ -135,4 +101,38 @@ func (*FtpException) PostPath() string {
 // Creates or updates the complete object exception
 func (*FtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s", ref)
+}
+
+// FtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type FtpGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the FtpGroup GET path
+// Returns all available ftp/group objects
+func (*FtpGroup) GetPath() string { return "/api/objects/ftp/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*FtpGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the FtpGroup DELETE path
+// Creates or updates the complete object group
+func (*FtpGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the FtpGroup PATCH path
+// Changes to parts of the object group types
+func (*FtpGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the FtpGroup POST path
+// Create a new ftp/group object
+func (*FtpGroup) PostPath() string {
+	return "/api/objects/ftp/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the FtpGroup PUT path
+// Creates or updates the complete object group
+func (*FtpGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
 }

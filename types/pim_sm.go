@@ -23,10 +23,10 @@ type PimSm struct {
 }
 
 var defsPimSm = map[string]sophos.RestObject{
-	"PimSmRoute":     &PimSmRoute{},
-	"PimSmRpRouter":  &PimSmRpRouter{},
 	"PimSmGroup":     &PimSmGroup{},
 	"PimSmInterface": &PimSmInterface{},
+	"PimSmRoute":     &PimSmRoute{},
+	"PimSmRpRouter":  &PimSmRpRouter{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of PimSm's Objects
@@ -40,7 +40,7 @@ func (*PimSm) GetPath() string { return "/api/nodes/pim_sm" }
 // RefRequired implements sophos.RestGetter
 func (*PimSm) RefRequired() (string, bool) { return "", false }
 
-var defPimSm = &sophos.Definition{Description: "pim_sm", Name: "pim_sm", Link: "/api/definitions/pim_sm", Swag: map[string]sophos.MethodMap{"/objects/pim_sm/interface/": {"get": sophos.MethodDescriptions{Description: "Returns all available pim_sm/interface objects", Parameters: []sophos.Parameter(nil), Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new pim_sm/interface object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/interface that will be created", Type: "", Required: true}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/pim_sm/rp_router/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object rp_router", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available rp_router types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object rp_router types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/rp_router that will be changes", Type: "", Required: true}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object rp_router", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/rp_router that will be updated", Type: "", Required: true}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/pim_sm/rp_router/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/pim_sm/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/pim_sm/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/group that will be changes", Type: "", Required: true}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/group that will be updated", Type: "", Required: true}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/pim_sm/interface/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available interface types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object interface types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/interface that will be changes", Type: "", Required: true}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/interface that will be updated", Type: "", Required: true}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/pim_sm/interface/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/interface"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/pim_sm/route/": {"get": sophos.MethodDescriptions{Description: "Returns all available pim_sm/route objects", Parameters: []sophos.Parameter(nil), Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new pim_sm/route object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/route that will be created", Type: "", Required: true}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/pim_sm/route/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object route types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/route that will be changes", Type: "", Required: true}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object route", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/route that will be updated", Type: "", Required: true}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object route", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available route types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/pim_sm/route/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"pim_sm/route"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/pim_sm/rp_router/": {"get": sophos.MethodDescriptions{Description: "Returns all available pim_sm/rp_router objects", Parameters: []sophos.Parameter(nil), Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new pim_sm/rp_router object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/rp_router that will be created", Type: "", Required: true}}, Tags: []string{"pim_sm/rp_router"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/pim_sm/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available pim_sm/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new pim_sm/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "pim_sm/group that will be created", Type: "", Required: true}}, Tags: []string{"pim_sm/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}}}
+var defPimSm = &sophos.Definition{Description: "pim_sm", Name: "pim_sm", Link: "/api/definitions/pim_sm"}
 
 // Definition returns the /api/definitions struct of PimSm
 func (PimSm) Definition() sophos.Definition { return *defPimSm }
@@ -72,74 +72,6 @@ func (PimSm) References() []string {
 		"REF_PimSmRoute",
 		"REF_PimSmRpRouter",
 	}
-}
-
-// PimSmRoute is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmRoute []interface{}
-
-// GetPath implements sophos.RestObject and returns the PimSmRoute GET path
-// Returns all available pim_sm/route objects
-func (*PimSmRoute) GetPath() string { return "/api/objects/pim_sm/route/" }
-
-// RefRequired implements sophos.RestObject
-func (*PimSmRoute) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the PimSmRoute DELETE path
-// Creates or updates the complete object route
-func (*PimSmRoute) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PimSmRoute PATCH path
-// Changes to parts of the object route types
-func (*PimSmRoute) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PimSmRoute POST path
-// Create a new pim_sm/route object
-func (*PimSmRoute) PostPath() string {
-	return "/api/objects/pim_sm/route/"
-}
-
-// PutPath implements sophos.RestObject and returns the PimSmRoute PUT path
-// Creates or updates the complete object route
-func (*PimSmRoute) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
-}
-
-// PimSmRpRouter is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmRpRouter []interface{}
-
-// GetPath implements sophos.RestObject and returns the PimSmRpRouter GET path
-// Returns all available pim_sm/rp_router objects
-func (*PimSmRpRouter) GetPath() string { return "/api/objects/pim_sm/rp_router/" }
-
-// RefRequired implements sophos.RestObject
-func (*PimSmRpRouter) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the PimSmRpRouter DELETE path
-// Creates or updates the complete object rp_router
-func (*PimSmRpRouter) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PimSmRpRouter PATCH path
-// Changes to parts of the object rp_router types
-func (*PimSmRpRouter) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PimSmRpRouter POST path
-// Create a new pim_sm/rp_router object
-func (*PimSmRpRouter) PostPath() string {
-	return "/api/objects/pim_sm/rp_router/"
-}
-
-// PutPath implements sophos.RestObject and returns the PimSmRpRouter PUT path
-// Creates or updates the complete object rp_router
-func (*PimSmRpRouter) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
 }
 
 // PimSmGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -208,4 +140,72 @@ func (*PimSmInterface) PostPath() string {
 // Creates or updates the complete object interface
 func (*PimSmInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/interface/%s", ref)
+}
+
+// PimSmRoute is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmRoute []interface{}
+
+// GetPath implements sophos.RestObject and returns the PimSmRoute GET path
+// Returns all available pim_sm/route objects
+func (*PimSmRoute) GetPath() string { return "/api/objects/pim_sm/route/" }
+
+// RefRequired implements sophos.RestObject
+func (*PimSmRoute) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the PimSmRoute DELETE path
+// Creates or updates the complete object route
+func (*PimSmRoute) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PimSmRoute PATCH path
+// Changes to parts of the object route types
+func (*PimSmRoute) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PimSmRoute POST path
+// Create a new pim_sm/route object
+func (*PimSmRoute) PostPath() string {
+	return "/api/objects/pim_sm/route/"
+}
+
+// PutPath implements sophos.RestObject and returns the PimSmRoute PUT path
+// Creates or updates the complete object route
+func (*PimSmRoute) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
+}
+
+// PimSmRpRouter is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmRpRouter []interface{}
+
+// GetPath implements sophos.RestObject and returns the PimSmRpRouter GET path
+// Returns all available pim_sm/rp_router objects
+func (*PimSmRpRouter) GetPath() string { return "/api/objects/pim_sm/rp_router/" }
+
+// RefRequired implements sophos.RestObject
+func (*PimSmRpRouter) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the PimSmRpRouter DELETE path
+// Creates or updates the complete object rp_router
+func (*PimSmRpRouter) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PimSmRpRouter PATCH path
+// Changes to parts of the object rp_router types
+func (*PimSmRpRouter) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PimSmRpRouter POST path
+// Create a new pim_sm/rp_router object
+func (*PimSmRpRouter) PostPath() string {
+	return "/api/objects/pim_sm/rp_router/"
+}
+
+// PutPath implements sophos.RestObject and returns the PimSmRpRouter PUT path
+// Creates or updates the complete object rp_router
+func (*PimSmRpRouter) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
 }

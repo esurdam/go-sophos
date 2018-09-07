@@ -53,17 +53,17 @@ type ReverseProxy struct {
 }
 
 var defsReverseProxy = map[string]sophos.RestObject{
-	"ReverseProxyFormTemplate":  &ReverseProxyFormTemplate{},
-	"ReverseProxyFrontend":      &ReverseProxyFrontend{},
 	"ReverseProxyProfile":       &ReverseProxyProfile{},
 	"ReverseProxyRedirection":   &ReverseProxyRedirection{},
+	"ReverseProxyBackend":       &ReverseProxyBackend{},
+	"ReverseProxyGroup":         &ReverseProxyGroup{},
+	"ReverseProxyLocation":      &ReverseProxyLocation{},
+	"ReverseProxyFormTemplate":  &ReverseProxyFormTemplate{},
+	"ReverseProxyFrontend":      &ReverseProxyFrontend{},
 	"ReverseProxyThreatsFilter": &ReverseProxyThreatsFilter{},
 	"ReverseProxyAuthProfile":   &ReverseProxyAuthProfile{},
-	"ReverseProxyException":     &ReverseProxyException{},
-	"ReverseProxyGroup":         &ReverseProxyGroup{},
-	"ReverseProxyBackend":       &ReverseProxyBackend{},
 	"ReverseProxyFilter":        &ReverseProxyFilter{},
-	"ReverseProxyLocation":      &ReverseProxyLocation{},
+	"ReverseProxyException":     &ReverseProxyException{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ReverseProxy's Objects
@@ -77,7 +77,7 @@ func (*ReverseProxy) GetPath() string { return "/api/nodes/reverse_proxy" }
 // RefRequired implements sophos.RestGetter
 func (*ReverseProxy) RefRequired() (string, bool) { return "", false }
 
-var defReverseProxy = &sophos.Definition{Description: "reverse_proxy", Name: "reverse_proxy", Link: "/api/definitions/reverse_proxy", Swag: map[string]sophos.MethodMap{"/objects/reverse_proxy/backend/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object backend", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/backend that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object backend", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available backend types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object backend types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/backend that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/reverse_proxy/filter/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/filter that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/filter that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/reverse_proxy/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/group that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/location/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object location", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/location that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object location", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available location types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object location types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/location that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/reverse_proxy/profile/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/auth_profile/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/auth_profile objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/auth_profile object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/auth_profile that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/backend/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/filter/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/reverse_proxy/location/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/location objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/location object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/location that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/reverse_proxy/location/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/location"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/threats_filter/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/threats_filter objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/threats_filter object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/threats_filter that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/exception/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/exception objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/exception object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/exception that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/form_template/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object form_template", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available form_template types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object form_template types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/form_template that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object form_template", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/form_template that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/reverse_proxy/form_template/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/frontend/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object frontend", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available frontend types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object frontend types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/frontend that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object frontend", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/frontend that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/reverse_proxy/profile/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/profile objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/profile object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/profile that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/reverse_proxy/redirection/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/threats_filter/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/auth_profile/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object auth_profile", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available auth_profile types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object auth_profile types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/auth_profile that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object auth_profile", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/auth_profile that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/auth_profile/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/auth_profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/exception/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/exception that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/exception that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object exception", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available exception types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/reverse_proxy/exception/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/exception"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/frontend/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/frontend objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/frontend object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/frontend that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/reverse_proxy/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/group that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/group that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/reverse_proxy/redirection/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object redirection", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available redirection types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object redirection types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/redirection that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object redirection", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/redirection that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/backend/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/backend objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/backend object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/backend that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/backend"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/form_template/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/form_template objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/form_template object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/form_template that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/form_template"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/profile/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object profile", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available profile types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object profile types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/profile that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object profile", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/profile that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/profile"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/filter/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/filter objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/filter object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/filter that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/filter"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/frontend/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/frontend"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/reverse_proxy/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/reverse_proxy/redirection/": {"get": sophos.MethodDescriptions{Description: "Returns all available reverse_proxy/redirection objects", Parameters: []sophos.Parameter(nil), Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new reverse_proxy/redirection object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/redirection that will be created", Type: "", Required: true}}, Tags: []string{"reverse_proxy/redirection"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/reverse_proxy/threats_filter/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object threats_filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available threats_filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object threats_filter types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/threats_filter that will be changes", Type: "", Required: true}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object threats_filter", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "reverse_proxy/threats_filter that will be updated", Type: "", Required: true}}, Tags: []string{"reverse_proxy/threats_filter"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}}}
+var defReverseProxy = &sophos.Definition{Description: "reverse_proxy", Name: "reverse_proxy", Link: "/api/definitions/reverse_proxy"}
 
 // Definition returns the /api/definitions struct of ReverseProxy
 func (ReverseProxy) Definition() sophos.Definition { return *defReverseProxy }
@@ -138,6 +138,285 @@ func (ReverseProxy) References() []string {
 		"REF_ReverseProxyThreatsFilter",
 	}
 }
+
+// ReverseProxyProfile is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyProfiles []ReverseProxyProfile
+type ReverseProxyProfile struct {
+	Locked                       string        `json:"_locked"`
+	Reference                    string        `json:"_ref"`
+	_type                        string        `json:"_type"`
+	Av                           bool          `json:"av"`
+	AvBlockUnscannable           bool          `json:"av_block_unscannable"`
+	AvDirections                 string        `json:"av_directions"`
+	AvEngines                    string        `json:"av_engines"`
+	AvSizeLimit                  int64         `json:"av_size_limit"`
+	AvTimeout                    int64         `json:"av_timeout"`
+	BadClients                   bool          `json:"bad_clients"`
+	BadClientsNoDnslookup        bool          `json:"bad_clients_no_dnslookup"`
+	Comment                      string        `json:"comment"`
+	Cookiesign                   bool          `json:"cookiesign"`
+	CookiesignDropUnsigned       bool          `json:"cookiesign_drop_unsigned"`
+	CustomThreatsFilters         []interface{} `json:"custom_threats_filters"`
+	Extensions                   []interface{} `json:"extensions"`
+	Filter                       []interface{} `json:"filter"`
+	FilterMode                   string        `json:"filter_mode"`
+	Formhardening                bool          `json:"formhardening"`
+	Name                         string        `json:"name"`
+	Outlookanywhere              bool          `json:"outlookanywhere"`
+	SecRequestBodyNoFilesLimit   int64         `json:"sec_request_body_no_files_limit"`
+	Skipwafrules                 []int64       `json:"skipwafrules"`
+	Tft                          bool          `json:"tft"`
+	TftBlockUnscannable          bool          `json:"tft_block_unscannable"`
+	TftBlockedMimeTypes          []interface{} `json:"tft_blocked_mime_types"`
+	ThreatsFilter                bool          `json:"threats_filter"`
+	ThreatsFilterCategories      []string      `json:"threats_filter_categories"`
+	ThreatsFilterRigid           bool          `json:"threats_filter_rigid"`
+	Urlhardening                 bool          `json:"urlhardening"`
+	UrlhardeningEntrypages       []string      `json:"urlhardening_entrypages"`
+	UrlhardeningEntrypagesSource string        `json:"urlhardening_entrypages_source"`
+	UrlhardeningSitemapUpdate    int64         `json:"urlhardening_sitemap_update"`
+	UrlhardeningSitemapURL       string        `json:"urlhardening_sitemap_url"`
+	Waf                          bool          `json:"waf"`
+	Wafmode                      string        `json:"wafmode"`
+	Wafparanoia                  bool          `json:"wafparanoia"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyProfiles GET path
+// Returns all available reverse_proxy/profile objects
+func (*ReverseProxyProfiles) GetPath() string { return "/api/objects/reverse_proxy/profile/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyProfiles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyProfiles GET path
+// Returns all available profile types
+func (r *ReverseProxyProfile) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyProfile) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyProfile DELETE path
+// Creates or updates the complete object profile
+func (*ReverseProxyProfile) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyProfile PATCH path
+// Changes to parts of the object profile types
+func (*ReverseProxyProfile) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyProfile POST path
+// Create a new reverse_proxy/profile object
+func (*ReverseProxyProfile) PostPath() string {
+	return "/api/objects/reverse_proxy/profile/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyProfile PUT path
+// Creates or updates the complete object profile
+func (*ReverseProxyProfile) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyProfile) GetType() string { return r._type }
+
+// ReverseProxyRedirection is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyRedirection []interface{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyRedirection GET path
+// Returns all available reverse_proxy/redirection objects
+func (*ReverseProxyRedirection) GetPath() string { return "/api/objects/reverse_proxy/redirection/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyRedirection) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyRedirection DELETE path
+// Creates or updates the complete object redirection
+func (*ReverseProxyRedirection) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyRedirection PATCH path
+// Changes to parts of the object redirection types
+func (*ReverseProxyRedirection) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyRedirection POST path
+// Create a new reverse_proxy/redirection object
+func (*ReverseProxyRedirection) PostPath() string {
+	return "/api/objects/reverse_proxy/redirection/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyRedirection PUT path
+// Creates or updates the complete object redirection
+func (*ReverseProxyRedirection) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
+}
+
+// ReverseProxyBackend is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyBackends []ReverseProxyBackend
+type ReverseProxyBackend struct {
+	Locked                          string `json:"_locked"`
+	Reference                       string `json:"_ref"`
+	_type                           string `json:"_type"`
+	Comment                         string `json:"comment"`
+	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
+	Host                            string `json:"host"`
+	Keepalive                       bool   `json:"keepalive"`
+	Name                            string `json:"name"`
+	Path                            string `json:"path"`
+	Port                            int64  `json:"port"`
+	Ssl                             bool   `json:"ssl"`
+	Status                          bool   `json:"status"`
+	Timeout                         int64  `json:"timeout"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
+// Returns all available reverse_proxy/backend objects
+func (*ReverseProxyBackends) GetPath() string { return "/api/objects/reverse_proxy/backend/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyBackends) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
+// Returns all available backend types
+func (r *ReverseProxyBackend) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyBackend) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyBackend DELETE path
+// Creates or updates the complete object backend
+func (*ReverseProxyBackend) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyBackend PATCH path
+// Changes to parts of the object backend types
+func (*ReverseProxyBackend) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyBackend POST path
+// Create a new reverse_proxy/backend object
+func (*ReverseProxyBackend) PostPath() string {
+	return "/api/objects/reverse_proxy/backend/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyBackend PUT path
+// Creates or updates the complete object backend
+func (*ReverseProxyBackend) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyBackend) GetType() string { return r._type }
+
+// ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
+// Returns all available reverse_proxy/group objects
+func (*ReverseProxyGroup) GetPath() string { return "/api/objects/reverse_proxy/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyGroup DELETE path
+// Creates or updates the complete object group
+func (*ReverseProxyGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyGroup PATCH path
+// Changes to parts of the object group types
+func (*ReverseProxyGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyGroup POST path
+// Create a new reverse_proxy/group object
+func (*ReverseProxyGroup) PostPath() string {
+	return "/api/objects/reverse_proxy/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyGroup PUT path
+// Creates or updates the complete object group
+func (*ReverseProxyGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
+}
+
+// ReverseProxyLocation is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyLocations []ReverseProxyLocation
+type ReverseProxyLocation struct {
+	Locked               string        `json:"_locked"`
+	Reference            string        `json:"_ref"`
+	_type                string        `json:"_type"`
+	AccessControl        string        `json:"access_control"`
+	AllowedNetworks      []string      `json:"allowed_networks"`
+	AuthProfile          string        `json:"auth_profile"`
+	Backend              []string      `json:"backend"`
+	BePath               string        `json:"be_path"`
+	Comment              string        `json:"comment"`
+	DeniedNetworks       []interface{} `json:"denied_networks"`
+	HotStandby           bool          `json:"hot_standby"`
+	Name                 string        `json:"name"`
+	Path                 string        `json:"path"`
+	Status               bool          `json:"status"`
+	StickysessionID      string        `json:"stickysession_id"`
+	StickysessionStatus  bool          `json:"stickysession_status"`
+	WebsocketPassthrough bool          `json:"websocket_passthrough"`
+}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
+// Returns all available reverse_proxy/location objects
+func (*ReverseProxyLocations) GetPath() string { return "/api/objects/reverse_proxy/location/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReverseProxyLocations) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
+// Returns all available location types
+func (r *ReverseProxyLocation) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyLocation) RefRequired() (string, bool) { return r.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ReverseProxyLocation DELETE path
+// Creates or updates the complete object location
+func (*ReverseProxyLocation) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReverseProxyLocation PATCH path
+// Changes to parts of the object location types
+func (*ReverseProxyLocation) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReverseProxyLocation POST path
+// Create a new reverse_proxy/location object
+func (*ReverseProxyLocation) PostPath() string {
+	return "/api/objects/reverse_proxy/location/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReverseProxyLocation PUT path
+// Creates or updates the complete object location
+func (*ReverseProxyLocation) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+}
+
+// Type implements sophos.Object
+func (r *ReverseProxyLocation) GetType() string { return r._type }
 
 // ReverseProxyFormTemplate is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFormTemplates []ReverseProxyFormTemplate
@@ -268,125 +547,6 @@ func (*ReverseProxyFrontend) PutPath(ref string) string {
 // Type implements sophos.Object
 func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
-// ReverseProxyProfile is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyProfiles []ReverseProxyProfile
-type ReverseProxyProfile struct {
-	Locked                       string        `json:"_locked"`
-	Reference                    string        `json:"_ref"`
-	_type                        string        `json:"_type"`
-	Av                           bool          `json:"av"`
-	AvBlockUnscannable           bool          `json:"av_block_unscannable"`
-	AvDirections                 string        `json:"av_directions"`
-	AvEngines                    string        `json:"av_engines"`
-	AvSizeLimit                  int64         `json:"av_size_limit"`
-	AvTimeout                    int64         `json:"av_timeout"`
-	BadClients                   bool          `json:"bad_clients"`
-	BadClientsNoDnslookup        bool          `json:"bad_clients_no_dnslookup"`
-	Comment                      string        `json:"comment"`
-	Cookiesign                   bool          `json:"cookiesign"`
-	CookiesignDropUnsigned       bool          `json:"cookiesign_drop_unsigned"`
-	CustomThreatsFilters         []interface{} `json:"custom_threats_filters"`
-	Extensions                   []interface{} `json:"extensions"`
-	Filter                       []interface{} `json:"filter"`
-	FilterMode                   string        `json:"filter_mode"`
-	Formhardening                bool          `json:"formhardening"`
-	Name                         string        `json:"name"`
-	Outlookanywhere              bool          `json:"outlookanywhere"`
-	SecRequestBodyNoFilesLimit   int64         `json:"sec_request_body_no_files_limit"`
-	Skipwafrules                 []int64       `json:"skipwafrules"`
-	Tft                          bool          `json:"tft"`
-	TftBlockUnscannable          bool          `json:"tft_block_unscannable"`
-	TftBlockedMimeTypes          []interface{} `json:"tft_blocked_mime_types"`
-	ThreatsFilter                bool          `json:"threats_filter"`
-	ThreatsFilterCategories      []string      `json:"threats_filter_categories"`
-	ThreatsFilterRigid           bool          `json:"threats_filter_rigid"`
-	Urlhardening                 bool          `json:"urlhardening"`
-	UrlhardeningEntrypages       []string      `json:"urlhardening_entrypages"`
-	UrlhardeningEntrypagesSource string        `json:"urlhardening_entrypages_source"`
-	UrlhardeningSitemapUpdate    int64         `json:"urlhardening_sitemap_update"`
-	UrlhardeningSitemapURL       string        `json:"urlhardening_sitemap_url"`
-	Waf                          bool          `json:"waf"`
-	Wafmode                      string        `json:"wafmode"`
-	Wafparanoia                  bool          `json:"wafparanoia"`
-}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyProfiles GET path
-// Returns all available reverse_proxy/profile objects
-func (*ReverseProxyProfiles) GetPath() string { return "/api/objects/reverse_proxy/profile/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyProfiles) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyProfiles GET path
-// Returns all available profile types
-func (r *ReverseProxyProfile) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", r.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyProfile) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyProfile DELETE path
-// Creates or updates the complete object profile
-func (*ReverseProxyProfile) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyProfile PATCH path
-// Changes to parts of the object profile types
-func (*ReverseProxyProfile) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyProfile POST path
-// Create a new reverse_proxy/profile object
-func (*ReverseProxyProfile) PostPath() string {
-	return "/api/objects/reverse_proxy/profile/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyProfile PUT path
-// Creates or updates the complete object profile
-func (*ReverseProxyProfile) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyProfile) GetType() string { return r._type }
-
-// ReverseProxyRedirection is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyRedirection []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyRedirection GET path
-// Returns all available reverse_proxy/redirection objects
-func (*ReverseProxyRedirection) GetPath() string { return "/api/objects/reverse_proxy/redirection/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyRedirection) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyRedirection DELETE path
-// Creates or updates the complete object redirection
-func (*ReverseProxyRedirection) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyRedirection PATCH path
-// Changes to parts of the object redirection types
-func (*ReverseProxyRedirection) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyRedirection POST path
-// Create a new reverse_proxy/redirection object
-func (*ReverseProxyRedirection) PostPath() string {
-	return "/api/objects/reverse_proxy/redirection/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyRedirection PUT path
-// Creates or updates the complete object redirection
-func (*ReverseProxyRedirection) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
-}
-
 // ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyThreatsFilter []interface{}
 
@@ -500,135 +660,6 @@ func (*ReverseProxyAuthProfile) PutPath(ref string) string {
 // Type implements sophos.Object
 func (r *ReverseProxyAuthProfile) GetType() string { return r._type }
 
-// ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyException []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyException GET path
-// Returns all available reverse_proxy/exception objects
-func (*ReverseProxyException) GetPath() string { return "/api/objects/reverse_proxy/exception/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyException) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyException DELETE path
-// Creates or updates the complete object exception
-func (*ReverseProxyException) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyException PATCH path
-// Changes to parts of the object exception types
-func (*ReverseProxyException) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyException POST path
-// Create a new reverse_proxy/exception object
-func (*ReverseProxyException) PostPath() string {
-	return "/api/objects/reverse_proxy/exception/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyException PUT path
-// Creates or updates the complete object exception
-func (*ReverseProxyException) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
-}
-
-// ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
-// Returns all available reverse_proxy/group objects
-func (*ReverseProxyGroup) GetPath() string { return "/api/objects/reverse_proxy/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyGroup DELETE path
-// Creates or updates the complete object group
-func (*ReverseProxyGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyGroup PATCH path
-// Changes to parts of the object group types
-func (*ReverseProxyGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyGroup POST path
-// Create a new reverse_proxy/group object
-func (*ReverseProxyGroup) PostPath() string {
-	return "/api/objects/reverse_proxy/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyGroup PUT path
-// Creates or updates the complete object group
-func (*ReverseProxyGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
-}
-
-// ReverseProxyBackend is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyBackends []ReverseProxyBackend
-type ReverseProxyBackend struct {
-	Locked                          string `json:"_locked"`
-	Reference                       string `json:"_ref"`
-	_type                           string `json:"_type"`
-	Comment                         string `json:"comment"`
-	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
-	Host                            string `json:"host"`
-	Keepalive                       bool   `json:"keepalive"`
-	Name                            string `json:"name"`
-	Path                            string `json:"path"`
-	Port                            int64  `json:"port"`
-	Ssl                             bool   `json:"ssl"`
-	Status                          bool   `json:"status"`
-	Timeout                         int64  `json:"timeout"`
-}
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
-// Returns all available reverse_proxy/backend objects
-func (*ReverseProxyBackends) GetPath() string { return "/api/objects/reverse_proxy/backend/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReverseProxyBackends) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
-// Returns all available backend types
-func (r *ReverseProxyBackend) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", r.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyBackend) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyBackend DELETE path
-// Creates or updates the complete object backend
-func (*ReverseProxyBackend) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReverseProxyBackend PATCH path
-// Changes to parts of the object backend types
-func (*ReverseProxyBackend) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReverseProxyBackend POST path
-// Create a new reverse_proxy/backend object
-func (*ReverseProxyBackend) PostPath() string {
-	return "/api/objects/reverse_proxy/backend/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyBackend PUT path
-// Creates or updates the complete object backend
-func (*ReverseProxyBackend) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyBackend) GetType() string { return r._type }
-
 // ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFilter []interface{}
 
@@ -663,67 +694,36 @@ func (*ReverseProxyFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
 }
 
-// ReverseProxyLocation is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyLocations []ReverseProxyLocation
-type ReverseProxyLocation struct {
-	Locked               string        `json:"_locked"`
-	Reference            string        `json:"_ref"`
-	_type                string        `json:"_type"`
-	AccessControl        string        `json:"access_control"`
-	AllowedNetworks      []string      `json:"allowed_networks"`
-	AuthProfile          string        `json:"auth_profile"`
-	Backend              []string      `json:"backend"`
-	BePath               string        `json:"be_path"`
-	Comment              string        `json:"comment"`
-	DeniedNetworks       []interface{} `json:"denied_networks"`
-	HotStandby           bool          `json:"hot_standby"`
-	Name                 string        `json:"name"`
-	Path                 string        `json:"path"`
-	Status               bool          `json:"status"`
-	StickysessionID      string        `json:"stickysession_id"`
-	StickysessionStatus  bool          `json:"stickysession_status"`
-	WebsocketPassthrough bool          `json:"websocket_passthrough"`
-}
+// ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyException []interface{}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
-// Returns all available reverse_proxy/location objects
-func (*ReverseProxyLocations) GetPath() string { return "/api/objects/reverse_proxy/location/" }
+// GetPath implements sophos.RestObject and returns the ReverseProxyException GET path
+// Returns all available reverse_proxy/exception objects
+func (*ReverseProxyException) GetPath() string { return "/api/objects/reverse_proxy/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyLocations) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyException) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
-// Returns all available location types
-func (r *ReverseProxyLocation) GetPath() string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", r.Reference)
+// DeletePath implements sophos.RestObject and returns the ReverseProxyException DELETE path
+// Creates or updates the complete object exception
+func (*ReverseProxyException) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (r *ReverseProxyLocation) RefRequired() (string, bool) { return r.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ReverseProxyLocation DELETE path
-// Creates or updates the complete object location
-func (*ReverseProxyLocation) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ReverseProxyException PATCH path
+// Changes to parts of the object exception types
+func (*ReverseProxyException) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ReverseProxyLocation PATCH path
-// Changes to parts of the object location types
-func (*ReverseProxyLocation) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
+// PostPath implements sophos.RestObject and returns the ReverseProxyException POST path
+// Create a new reverse_proxy/exception object
+func (*ReverseProxyException) PostPath() string {
+	return "/api/objects/reverse_proxy/exception/"
 }
 
-// PostPath implements sophos.RestObject and returns the ReverseProxyLocation POST path
-// Create a new reverse_proxy/location object
-func (*ReverseProxyLocation) PostPath() string {
-	return "/api/objects/reverse_proxy/location/"
+// PutPath implements sophos.RestObject and returns the ReverseProxyException PUT path
+// Creates or updates the complete object exception
+func (*ReverseProxyException) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
-
-// PutPath implements sophos.RestObject and returns the ReverseProxyLocation PUT path
-// Creates or updates the complete object location
-func (*ReverseProxyLocation) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
-}
-
-// Type implements sophos.Object
-func (r *ReverseProxyLocation) GetType() string { return r._type }

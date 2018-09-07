@@ -12,35 +12,35 @@ import (
 // Network is a generated struct representing the Sophos Network Endpoint
 // GET /api/nodes/network
 type Network struct {
-	NetworkRange              NetworkRange              `json:"network_range"`
-	NetworkAaa                NetworkAaa                `json:"network_aaa"`
 	NetworkAvailabilityGroup  NetworkAvailabilityGroup  `json:"network_availability_group"`
-	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
-	NetworkGroup              NetworkGroup              `json:"network_group"`
-	NetworkInterfaceAddress   NetworkInterfaceAddress   `json:"network_interface_address"`
 	NetworkMulticast          NetworkMulticast          `json:"network_multicast"`
 	NetworkNetwork            NetworkNetwork            `json:"network_network"`
+	NetworkRange              NetworkRange              `json:"network_range"`
 	NetworkAny                NetworkAny                `json:"network_any"`
+	NetworkInterfaceAddress   NetworkInterfaceAddress   `json:"network_interface_address"`
+	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
+	NetworkInterfaceNetwork   NetworkInterfaceNetwork   `json:"network_interface_network"`
 	NetworkDnsGroup           NetworkDnsGroup           `json:"network_dns_group"`
 	NetworkDnsHost            NetworkDnsHost            `json:"network_dns_host"`
 	NetworkHost               NetworkHost               `json:"network_host"`
-	NetworkInterfaceBroadcast NetworkInterfaceBroadcast `json:"network_interface_broadcast"`
+	NetworkGroup              NetworkGroup              `json:"network_group"`
+	NetworkAaa                NetworkAaa                `json:"network_aaa"`
 }
 
 var defsNetwork = map[string]sophos.RestObject{
-	"NetworkRange":              &NetworkRange{},
-	"NetworkAaa":                &NetworkAaa{},
 	"NetworkAvailabilityGroup":  &NetworkAvailabilityGroup{},
-	"NetworkInterfaceNetwork":   &NetworkInterfaceNetwork{},
-	"NetworkGroup":              &NetworkGroup{},
-	"NetworkInterfaceAddress":   &NetworkInterfaceAddress{},
 	"NetworkMulticast":          &NetworkMulticast{},
 	"NetworkNetwork":            &NetworkNetwork{},
+	"NetworkRange":              &NetworkRange{},
 	"NetworkAny":                &NetworkAny{},
+	"NetworkInterfaceAddress":   &NetworkInterfaceAddress{},
+	"NetworkInterfaceBroadcast": &NetworkInterfaceBroadcast{},
+	"NetworkInterfaceNetwork":   &NetworkInterfaceNetwork{},
 	"NetworkDnsGroup":           &NetworkDnsGroup{},
 	"NetworkDnsHost":            &NetworkDnsHost{},
 	"NetworkHost":               &NetworkHost{},
-	"NetworkInterfaceBroadcast": &NetworkInterfaceBroadcast{},
+	"NetworkGroup":              &NetworkGroup{},
+	"NetworkAaa":                &NetworkAaa{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Network's Objects
@@ -54,7 +54,7 @@ func (*Network) GetPath() string { return "/api/nodes/network" }
 // RefRequired implements sophos.RestGetter
 func (*Network) RefRequired() (string, bool) { return "", false }
 
-var defNetwork = &sophos.Definition{Description: "network", Name: "network", Link: "/api/definitions/network", Swag: map[string]sophos.MethodMap{"/objects/network/aaa/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/network/any/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/availability_group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object availability_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available availability_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object availability_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/availability_group that will be changes", Type: "", Required: true}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object availability_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/availability_group that will be updated", Type: "", Required: true}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/dns_host/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/group that will be created", Type: "", Required: true}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/host/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object host", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available host types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object host types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/host that will be changes", Type: "", Required: true}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object host", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/host that will be updated", Type: "", Required: true}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/multicast/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/multicast objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/multicast object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/multicast that will be created", Type: "", Required: true}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/aaa/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object aaa", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available aaa types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object aaa types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/aaa that will be changes", Type: "", Required: true}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object aaa", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/aaa that will be updated", Type: "", Required: true}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}, "/objects/network/availability_group/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/availability_group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/availability_group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/availability_group that will be created", Type: "", Required: true}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/interface_network/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/interface_network objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/interface_network object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_network that will be created", Type: "", Required: true}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/network/range/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object range", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available range types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object range types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/range that will be changes", Type: "", Required: true}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object range", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/range that will be updated", Type: "", Required: true}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/network/any/": {"post": sophos.MethodDescriptions{Description: "Create a new network/any object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/any that will be created", Type: "", Required: true}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available network/any objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/dns_group/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/dns_group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/dns_group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_group that will be created", Type: "", Required: true}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/dns_group/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object dns_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_group that will be updated", Type: "", Required: true}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object dns_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available dns_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object dns_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_group that will be changes", Type: "", Required: true}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/interface_address/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/network/multicast/{ref}": {"get": sophos.MethodDescriptions{Description: "Returns all available multicast types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object multicast types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/multicast that will be changes", Type: "", Required: true}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object multicast", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/multicast that will be updated", Type: "", Required: true}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object multicast", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/network/": {"post": sophos.MethodDescriptions{Description: "Create a new network/network object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/network that will be created", Type: "", Required: true}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available network/network objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/dns_host/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/dns_host objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/dns_host object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_host that will be created", Type: "", Required: true}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/group/{ref}": {"put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/group that will be updated", Type: "", Required: true}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/group that will be changes", Type: "", Required: true}}, Tags: []string{"network/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/network/host/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/host objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/host object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/host that will be created", Type: "", Required: true}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/range/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/any/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object any types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/any that will be changes", Type: "", Required: true}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object any", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/any that will be updated", Type: "", Required: true}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object any", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available any types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/any"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/network/availability_group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/availability_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/dns_group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/dns_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/interface_address/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object interface_address types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_address that will be changes", Type: "", Required: true}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_address", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_address that will be updated", Type: "", Required: true}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_address", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available interface_address types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/network/aaa/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/aaa objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/aaa object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/aaa that will be created", Type: "", Required: true}}, Tags: []string{"network/aaa"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/network/host/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/host"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/interface_broadcast/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_broadcast", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available interface_broadcast types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object interface_broadcast types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_broadcast that will be changes", Type: "", Required: true}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_broadcast", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_broadcast that will be updated", Type: "", Required: true}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/network/interface_network/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/range/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/range objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/range object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/range that will be created", Type: "", Required: true}}, Tags: []string{"network/range"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/dns_host/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object dns_host", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available dns_host types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object dns_host types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_host that will be changes", Type: "", Required: true}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object dns_host", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/dns_host that will be updated", Type: "", Required: true}}, Tags: []string{"network/dns_host"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/network/interface_address/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/interface_address objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/interface_address object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_address that will be created", Type: "", Required: true}}, Tags: []string{"network/interface_address"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/network/interface_broadcast/": {"get": sophos.MethodDescriptions{Description: "Returns all available network/interface_broadcast objects", Parameters: []sophos.Parameter(nil), Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new network/interface_broadcast object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_broadcast that will be created", Type: "", Required: true}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/interface_broadcast/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_broadcast"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/multicast/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/multicast"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/network/network/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/network/interface_network/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available interface_network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object interface_network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_network that will be changes", Type: "", Required: true}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object interface_network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/interface_network that will be updated", Type: "", Required: true}}, Tags: []string{"network/interface_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/network/network/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/network that will be changes", Type: "", Required: true}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "network/network that will be updated", Type: "", Required: true}}, Tags: []string{"network/network"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}}}
+var defNetwork = &sophos.Definition{Description: "network", Name: "network", Link: "/api/definitions/network"}
 
 // Definition returns the /api/definitions struct of Network
 func (Network) Definition() sophos.Definition { return *defNetwork }
@@ -124,121 +124,6 @@ func (Network) References() []string {
 	}
 }
 
-// NetworkRange is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkRanges []NetworkRange
-type NetworkRange struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	From      string `json:"from"`
-	From6     string `json:"from6"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-	To        string `json:"to"`
-	To6       string `json:"to6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkRanges GET path
-// Returns all available network/range objects
-func (*NetworkRanges) GetPath() string { return "/api/objects/network/range/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkRanges) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkRanges GET path
-// Returns all available range types
-func (n *NetworkRange) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/range/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkRange) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkRange DELETE path
-// Creates or updates the complete object range
-func (*NetworkRange) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/range/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkRange PATCH path
-// Changes to parts of the object range types
-func (*NetworkRange) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/range/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkRange POST path
-// Create a new network/range object
-func (*NetworkRange) PostPath() string {
-	return "/api/objects/network/range/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkRange PUT path
-// Creates or updates the complete object range
-func (*NetworkRange) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/range/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkRange) GetType() string { return n._type }
-
-// NetworkAaa is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkAaas []NetworkAaa
-type NetworkAaa struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
-	Addresses  []interface{} `json:"addresses"`
-	Addresses6 []interface{} `json:"addresses6"`
-	Comment    string        `json:"comment"`
-	Name       string        `json:"name"`
-	Resolved   bool          `json:"resolved"`
-	Resolved6  bool          `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
-// Returns all available network/aaa objects
-func (*NetworkAaas) GetPath() string { return "/api/objects/network/aaa/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkAaas) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
-// Returns all available aaa types
-func (n *NetworkAaa) GetPath() string { return fmt.Sprintf("/api/objects/network/aaa/%s", n.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkAaa) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkAaa DELETE path
-// Creates or updates the complete object aaa
-func (*NetworkAaa) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkAaa PATCH path
-// Changes to parts of the object aaa types
-func (*NetworkAaa) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkAaa POST path
-// Create a new network/aaa object
-func (*NetworkAaa) PostPath() string {
-	return "/api/objects/network/aaa/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkAaa PUT path
-// Creates or updates the complete object aaa
-func (*NetworkAaa) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkAaa) GetType() string { return n._type }
-
 // NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkAvailabilityGroup []interface{}
 
@@ -272,177 +157,6 @@ func (*NetworkAvailabilityGroup) PostPath() string {
 func (*NetworkAvailabilityGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/availability_group/%s", ref)
 }
-
-// NetworkInterfaceNetwork is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkInterfaceNetworks []NetworkInterfaceNetwork
-type NetworkInterfaceNetwork struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceNetworks GET path
-// Returns all available network/interface_network objects
-func (*NetworkInterfaceNetworks) GetPath() string { return "/api/objects/network/interface_network/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkInterfaceNetworks) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceNetworks GET path
-// Returns all available interface_network types
-func (n *NetworkInterfaceNetwork) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/interface_network/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkInterfaceNetwork) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkInterfaceNetwork DELETE path
-// Creates or updates the complete object interface_network
-func (*NetworkInterfaceNetwork) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkInterfaceNetwork PATCH path
-// Changes to parts of the object interface_network types
-func (*NetworkInterfaceNetwork) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkInterfaceNetwork POST path
-// Create a new network/interface_network object
-func (*NetworkInterfaceNetwork) PostPath() string {
-	return "/api/objects/network/interface_network/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkInterfaceNetwork PUT path
-// Creates or updates the complete object interface_network
-func (*NetworkInterfaceNetwork) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
-
-// NetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkGroups []NetworkGroup
-type NetworkGroup struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Members   []string `json:"members"`
-	Name      string   `json:"name"`
-	Types     []string `json:"types"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
-// Returns all available network/group objects
-func (*NetworkGroups) GetPath() string { return "/api/objects/network/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkGroups) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
-// Returns all available group types
-func (n *NetworkGroup) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/group/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkGroup) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkGroup DELETE path
-// Creates or updates the complete object group
-func (*NetworkGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkGroup PATCH path
-// Changes to parts of the object group types
-func (*NetworkGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkGroup POST path
-// Create a new network/group object
-func (*NetworkGroup) PostPath() string {
-	return "/api/objects/network/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkGroup PUT path
-// Creates or updates the complete object group
-func (*NetworkGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/group/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkGroup) GetType() string { return n._type }
-
-// NetworkInterfaceAddress is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkInterfaceAddresss []NetworkInterfaceAddress
-type NetworkInterfaceAddress struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-}
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
-// Returns all available network/interface_address objects
-func (*NetworkInterfaceAddresss) GetPath() string { return "/api/objects/network/interface_address/" }
-
-// RefRequired implements sophos.RestObject
-func (*NetworkInterfaceAddresss) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
-// Returns all available interface_address types
-func (n *NetworkInterfaceAddress) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", n.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (n *NetworkInterfaceAddress) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkInterfaceAddress DELETE path
-// Creates or updates the complete object interface_address
-func (*NetworkInterfaceAddress) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NetworkInterfaceAddress PATCH path
-// Changes to parts of the object interface_address types
-func (*NetworkInterfaceAddress) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NetworkInterfaceAddress POST path
-// Create a new network/interface_address object
-func (*NetworkInterfaceAddress) PostPath() string {
-	return "/api/objects/network/interface_address/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkInterfaceAddress PUT path
-// Creates or updates the complete object interface_address
-func (*NetworkInterfaceAddress) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
-}
-
-// Type implements sophos.Object
-func (n *NetworkInterfaceAddress) GetType() string { return n._type }
 
 // NetworkMulticast is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkMulticast []interface{}
@@ -538,6 +252,66 @@ func (*NetworkNetwork) PutPath(ref string) string {
 // Type implements sophos.Object
 func (n *NetworkNetwork) GetType() string { return n._type }
 
+// NetworkRange is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkRanges []NetworkRange
+type NetworkRange struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	From      string `json:"from"`
+	From6     string `json:"from6"`
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+	To        string `json:"to"`
+	To6       string `json:"to6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkRanges GET path
+// Returns all available network/range objects
+func (*NetworkRanges) GetPath() string { return "/api/objects/network/range/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkRanges) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkRanges GET path
+// Returns all available range types
+func (n *NetworkRange) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/range/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkRange) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkRange DELETE path
+// Creates or updates the complete object range
+func (*NetworkRange) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/range/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkRange PATCH path
+// Changes to parts of the object range types
+func (*NetworkRange) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/range/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkRange POST path
+// Create a new network/range object
+func (*NetworkRange) PostPath() string {
+	return "/api/objects/network/range/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkRange PUT path
+// Creates or updates the complete object range
+func (*NetworkRange) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/range/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkRange) GetType() string { return n._type }
+
 // NetworkAny is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkAnys []NetworkAny
 type NetworkAny struct {
@@ -595,6 +369,179 @@ func (*NetworkAny) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (n *NetworkAny) GetType() string { return n._type }
+
+// NetworkInterfaceAddress is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkInterfaceAddresss []NetworkInterfaceAddress
+type NetworkInterfaceAddress struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
+// Returns all available network/interface_address objects
+func (*NetworkInterfaceAddresss) GetPath() string { return "/api/objects/network/interface_address/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkInterfaceAddresss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
+// Returns all available interface_address types
+func (n *NetworkInterfaceAddress) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkInterfaceAddress) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkInterfaceAddress DELETE path
+// Creates or updates the complete object interface_address
+func (*NetworkInterfaceAddress) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkInterfaceAddress PATCH path
+// Changes to parts of the object interface_address types
+func (*NetworkInterfaceAddress) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkInterfaceAddress POST path
+// Create a new network/interface_address object
+func (*NetworkInterfaceAddress) PostPath() string {
+	return "/api/objects/network/interface_address/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkInterfaceAddress PUT path
+// Creates or updates the complete object interface_address
+func (*NetworkInterfaceAddress) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkInterfaceAddress) GetType() string { return n._type }
+
+// NetworkInterfaceBroadcast is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkInterfaceBroadcasts []NetworkInterfaceBroadcast
+type NetworkInterfaceBroadcast struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Resolved  bool   `json:"resolved"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
+// Returns all available network/interface_broadcast objects
+func (*NetworkInterfaceBroadcasts) GetPath() string {
+	return "/api/objects/network/interface_broadcast/"
+}
+
+// RefRequired implements sophos.RestObject
+func (*NetworkInterfaceBroadcasts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
+// Returns all available interface_broadcast types
+func (n *NetworkInterfaceBroadcast) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkInterfaceBroadcast) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkInterfaceBroadcast DELETE path
+// Creates or updates the complete object interface_broadcast
+func (*NetworkInterfaceBroadcast) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PATCH path
+// Changes to parts of the object interface_broadcast types
+func (*NetworkInterfaceBroadcast) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast POST path
+// Create a new network/interface_broadcast object
+func (*NetworkInterfaceBroadcast) PostPath() string {
+	return "/api/objects/network/interface_broadcast/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PUT path
+// Creates or updates the complete object interface_broadcast
+func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
+
+// NetworkInterfaceNetwork is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkInterfaceNetworks []NetworkInterfaceNetwork
+type NetworkInterfaceNetwork struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Address6  string `json:"address6"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Netmask   int64  `json:"netmask"`
+	Netmask6  int64  `json:"netmask6"`
+	Resolved  bool   `json:"resolved"`
+	Resolved6 bool   `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceNetworks GET path
+// Returns all available network/interface_network objects
+func (*NetworkInterfaceNetworks) GetPath() string { return "/api/objects/network/interface_network/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkInterfaceNetworks) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkInterfaceNetworks GET path
+// Returns all available interface_network types
+func (n *NetworkInterfaceNetwork) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/interface_network/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkInterfaceNetwork) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkInterfaceNetwork DELETE path
+// Creates or updates the complete object interface_network
+func (*NetworkInterfaceNetwork) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkInterfaceNetwork PATCH path
+// Changes to parts of the object interface_network types
+func (*NetworkInterfaceNetwork) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkInterfaceNetwork POST path
+// Create a new network/interface_network object
+func (*NetworkInterfaceNetwork) PostPath() string {
+	return "/api/objects/network/interface_network/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkInterfaceNetwork PUT path
+// Creates or updates the complete object interface_network
+func (*NetworkInterfaceNetwork) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
 
 // NetworkDnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkDnsGroups []NetworkDnsGroup
@@ -778,59 +725,112 @@ func (*NetworkHost) PutPath(ref string) string {
 // Type implements sophos.Object
 func (n *NetworkHost) GetType() string { return n._type }
 
-// NetworkInterfaceBroadcast is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkInterfaceBroadcasts []NetworkInterfaceBroadcast
-type NetworkInterfaceBroadcast struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
+// NetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkGroups []NetworkGroup
+type NetworkGroup struct {
+	Locked    string   `json:"_locked"`
+	Reference string   `json:"_ref"`
+	_type     string   `json:"_type"`
+	Comment   string   `json:"comment"`
+	Members   []string `json:"members"`
+	Name      string   `json:"name"`
+	Types     []string `json:"types"`
 }
 
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
-// Returns all available network/interface_broadcast objects
-func (*NetworkInterfaceBroadcasts) GetPath() string {
-	return "/api/objects/network/interface_broadcast/"
+// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
+// Returns all available network/group objects
+func (*NetworkGroups) GetPath() string { return "/api/objects/network/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkGroups GET path
+// Returns all available group types
+func (n *NetworkGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/group/%s", n.Reference)
 }
 
 // RefRequired implements sophos.RestObject
-func (*NetworkInterfaceBroadcasts) RefRequired() (string, bool) { return "", false }
+func (n *NetworkGroup) RefRequired() (string, bool) { return n.Reference, true }
 
-// GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
-// Returns all available interface_broadcast types
-func (n *NetworkInterfaceBroadcast) GetPath() string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", n.Reference)
+// DeletePath implements sophos.RestObject and returns the NetworkGroup DELETE path
+// Creates or updates the complete object group
+func (*NetworkGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (n *NetworkInterfaceBroadcast) RefRequired() (string, bool) { return n.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the NetworkInterfaceBroadcast DELETE path
-// Creates or updates the complete object interface_broadcast
-func (*NetworkInterfaceBroadcast) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+// PatchPath implements sophos.RestObject and returns the NetworkGroup PATCH path
+// Changes to parts of the object group types
+func (*NetworkGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PATCH path
-// Changes to parts of the object interface_broadcast types
-func (*NetworkInterfaceBroadcast) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+// PostPath implements sophos.RestObject and returns the NetworkGroup POST path
+// Create a new network/group object
+func (*NetworkGroup) PostPath() string {
+	return "/api/objects/network/group/"
 }
 
-// PostPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast POST path
-// Create a new network/interface_broadcast object
-func (*NetworkInterfaceBroadcast) PostPath() string {
-	return "/api/objects/network/interface_broadcast/"
-}
-
-// PutPath implements sophos.RestObject and returns the NetworkInterfaceBroadcast PUT path
-// Creates or updates the complete object interface_broadcast
-func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
+// PutPath implements sophos.RestObject and returns the NetworkGroup PUT path
+// Creates or updates the complete object group
+func (*NetworkGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/group/%s", ref)
 }
 
 // Type implements sophos.Object
-func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
+func (n *NetworkGroup) GetType() string { return n._type }
+
+// NetworkAaa is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkAaas []NetworkAaa
+type NetworkAaa struct {
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	_type      string        `json:"_type"`
+	Addresses  []interface{} `json:"addresses"`
+	Addresses6 []interface{} `json:"addresses6"`
+	Comment    string        `json:"comment"`
+	Name       string        `json:"name"`
+	Resolved   bool          `json:"resolved"`
+	Resolved6  bool          `json:"resolved6"`
+}
+
+// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
+// Returns all available network/aaa objects
+func (*NetworkAaas) GetPath() string { return "/api/objects/network/aaa/" }
+
+// RefRequired implements sophos.RestObject
+func (*NetworkAaas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkAaas GET path
+// Returns all available aaa types
+func (n *NetworkAaa) GetPath() string { return fmt.Sprintf("/api/objects/network/aaa/%s", n.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkAaa) RefRequired() (string, bool) { return n.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the NetworkAaa DELETE path
+// Creates or updates the complete object aaa
+func (*NetworkAaa) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NetworkAaa PATCH path
+// Changes to parts of the object aaa types
+func (*NetworkAaa) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NetworkAaa POST path
+// Create a new network/aaa object
+func (*NetworkAaa) PostPath() string {
+	return "/api/objects/network/aaa/"
+}
+
+// PutPath implements sophos.RestObject and returns the NetworkAaa PUT path
+// Creates or updates the complete object aaa
+func (*NetworkAaa) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
+}
+
+// Type implements sophos.Object
+func (n *NetworkAaa) GetType() string { return n._type }

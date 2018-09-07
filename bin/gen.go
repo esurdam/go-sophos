@@ -523,7 +523,7 @@ func(*{{.Title}}) GetPath() string { return "{{.Path}}" }
 // RefRequired implements sophos.RestGetter
 func(*{{.Title}}) RefRequired() (string, bool) { return "", false }
 
-var def{{.Title}} = &sophos.Definition{Description: "{{.Definition.Description}}",Name: "{{.Definition.Name}}",Link: "{{.Definition.Link}}",Swag: {{asSwag .Definition.Swag}}}
+var def{{.Title}} = &sophos.Definition{Description: "{{.Definition.Description}}",Name: "{{.Definition.Name}}",Link: "{{.Definition.Link}}"}
 
 // Definition returns the /api/definitions struct of {{.Title}}
 func({{.Title}}) Definition() sophos.Definition { return *def{{.Title}} }

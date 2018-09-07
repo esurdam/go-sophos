@@ -13,30 +13,30 @@ import (
 // GET /api/nodes/itfhw
 type Itfhw struct {
 	ItfhwAweNetwork      ItfhwAweNetwork      `json:"itfhw_awe_network"`
-	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
-	ItfhwLag             ItfhwLag             `json:"itfhw_lag"`
 	ItfhwRedServer       ItfhwRedServer       `json:"itfhw_red_server"`
-	ItfhwSerial          ItfhwSerial          `json:"itfhw_serial"`
+	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
+	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
 	ItfhwAweNetworkGroup ItfhwAweNetworkGroup `json:"itfhw_awe_network_group"`
 	ItfhwEthernet        ItfhwEthernet        `json:"itfhw_ethernet"`
-	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
-	ItfhwRedClient       ItfhwRedClient       `json:"itfhw_red_client"`
-	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
+	ItfhwSerial          ItfhwSerial          `json:"itfhw_serial"`
 	ItfhwBridge          ItfhwBridge          `json:"itfhw_bridge"`
+	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
+	ItfhwRedClient       ItfhwRedClient       `json:"itfhw_red_client"`
+	ItfhwLag             ItfhwLag             `json:"itfhw_lag"`
 }
 
 var defsItfhw = map[string]sophos.RestObject{
 	"ItfhwAweNetwork":      &ItfhwAweNetwork{},
-	"ItfhwGroup":           &ItfhwGroup{},
-	"ItfhwLag":             &ItfhwLag{},
 	"ItfhwRedServer":       &ItfhwRedServer{},
-	"ItfhwSerial":          &ItfhwSerial{},
+	"ItfhwUsbserial":       &ItfhwUsbserial{},
+	"ItfhwVirtual":         &ItfhwVirtual{},
 	"ItfhwAweNetworkGroup": &ItfhwAweNetworkGroup{},
 	"ItfhwEthernet":        &ItfhwEthernet{},
-	"ItfhwVirtual":         &ItfhwVirtual{},
-	"ItfhwRedClient":       &ItfhwRedClient{},
-	"ItfhwUsbserial":       &ItfhwUsbserial{},
+	"ItfhwSerial":          &ItfhwSerial{},
 	"ItfhwBridge":          &ItfhwBridge{},
+	"ItfhwGroup":           &ItfhwGroup{},
+	"ItfhwRedClient":       &ItfhwRedClient{},
+	"ItfhwLag":             &ItfhwLag{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Itfhw's Objects
@@ -50,7 +50,7 @@ func (*Itfhw) GetPath() string { return "/api/nodes/itfhw" }
 // RefRequired implements sophos.RestGetter
 func (*Itfhw) RefRequired() (string, bool) { return "", false }
 
-var defItfhw = &sophos.Definition{Description: "itfhw", Name: "itfhw", Link: "/api/definitions/itfhw", Swag: map[string]sophos.MethodMap{"/objects/itfhw/serial/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/virtual/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 401: {Description: "Unauthorized"}}}}, "/objects/itfhw/red_client/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/virtual/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object virtual", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available virtual types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object virtual types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/virtual that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object virtual", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/virtual that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/awe_network_group/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/awe_network_group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/awe_network_group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network_group that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/group/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/group objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/group object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/group that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/red_client/": {"post": sophos.MethodDescriptions{Description: "Create a new itfhw/red_client object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_client that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available itfhw/red_client objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/usbserial/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/virtual/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/virtual objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/virtual object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/virtual that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/virtual"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/itfhw/usbserial/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object usbserial", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available usbserial types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object usbserial types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/usbserial that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object usbserial", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/usbserial that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/awe_network/": {"post": sophos.MethodDescriptions{Description: "Create a new itfhw/awe_network object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available itfhw/awe_network objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/awe_network/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/bridge/{ref}": {"patch": sophos.MethodDescriptions{Description: "Changes to parts of the object bridge types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/bridge that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object bridge", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/bridge that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object bridge", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available bridge types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}}, "/objects/itfhw/bridge/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/red_client/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object red_client", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available red_client types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object red_client types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_client that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object red_client", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_client that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/red_client"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/itfhw/red_server/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object red_server", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available red_server types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object red_server types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_server that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object red_server", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_server that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/usbserial/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/usbserial objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/usbserial object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/usbserial that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/usbserial"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/ethernet/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/ethernet objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/ethernet object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/ethernet that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}, 400: {Description: "BadRequest"}}}}, "/objects/itfhw/ethernet/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 200: {Description: "OK"}}}}, "/objects/itfhw/group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/group that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/group that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/lag/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/red_server/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/awe_network_group/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object awe_network_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available awe_network_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object awe_network_group types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network_group that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object awe_network_group", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network_group that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/bridge/": {"post": sophos.MethodDescriptions{Description: "Create a new itfhw/bridge object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/bridge that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available itfhw/bridge objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/bridge"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/lag/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object lag", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 204: {Description: "OK"}, 400: {Description: "BadRequest"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available lag types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object lag types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/lag that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object lag", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/lag that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/awe_network/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object awe_network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available awe_network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object awe_network types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object awe_network", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/awe_network that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/awe_network"}, Responses: map[int]struct{ Description string }{404: {Description: "NotFound"}, 200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/lag/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/lag objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/lag object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/lag that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/lag"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/red_server/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/red_server objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/red_server object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/red_server that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/red_server"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 201: {Description: "OK"}}}}, "/objects/itfhw/serial/": {"get": sophos.MethodDescriptions{Description: "Returns all available itfhw/serial objects", Parameters: []sophos.Parameter(nil), Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "post": sophos.MethodDescriptions{Description: "Create a new itfhw/serial object", Parameters: []sophos.Parameter{{Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/serial that will be created", Type: "", Required: true}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{201: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/awe_network_group/{ref}/usedby": {"get": sophos.MethodDescriptions{Description: "Returns the objects and the nodes that use the object with the given ref", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/awe_network_group"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}}, "/objects/itfhw/ethernet/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object ethernet", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available ethernet types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object ethernet types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/ethernet that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object ethernet", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/ethernet that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/ethernet"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}}, "/objects/itfhw/serial/{ref}": {"delete": sophos.MethodDescriptions{Description: "Creates or updates the complete object serial", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{204: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}}}, "get": sophos.MethodDescriptions{Description: "Returns all available serial types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "patch": sophos.MethodDescriptions{Description: "Changes to parts of the object serial types", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/serial that will be changes", Type: "", Required: true}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{200: {Description: "OK"}, 400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}}}, "put": sophos.MethodDescriptions{Description: "Creates or updates the complete object serial", Parameters: []sophos.Parameter{{Name: "ref", In: "path", Description: "id of the object", Type: "string", Required: true}, {Name: "X-Restd-Err-Ack", In: "header", Description: "Acknowledge confd errors (required for DELETE calls).", Type: "string", Required: false}, {Name: "X-Restd-Lock-Override", In: "header", Description: "Override confd lock (required to perform action on {'_locked': 'user'} objects).", Type: "string", Required: false}, {Name: "X-Restd-Insert", In: "header", Description: "Path and position (optional for arrays, required for hashes, not used for strings) of a node, where to insert the newly created object, format 'node-path [index]', e.g. array: 'packetfilter.rules 2', string: 'ha.aws.cloudwatch.profile', hash: 'auth.api_tokens myToken123'", Type: "string", Required: false}, {Name: "body", In: "body", Description: "itfhw/serial that will be updated", Type: "", Required: true}}, Tags: []string{"itfhw/serial"}, Responses: map[int]struct{ Description string }{400: {Description: "BadRequest"}, 401: {Description: "Unauthorized"}, 403: {Description: "Forbidden"}, 404: {Description: "NotFound"}, 200: {Description: "OK"}}}}}}
+var defItfhw = &sophos.Definition{Description: "itfhw", Name: "itfhw", Link: "/api/definitions/itfhw"}
 
 // Definition returns the /api/definitions struct of Itfhw
 func (Itfhw) Definition() sophos.Definition { return *defItfhw }
@@ -197,95 +197,6 @@ func (*ItfhwAweNetwork) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfhwAweNetwork) GetType() string { return i._type }
 
-// ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
-// Returns all available itfhw/group objects
-func (*ItfhwGroup) GetPath() string { return "/api/objects/itfhw/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwGroup DELETE path
-// Creates or updates the complete object group
-func (*ItfhwGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwGroup PATCH path
-// Changes to parts of the object group types
-func (*ItfhwGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwGroup POST path
-// Create a new itfhw/group object
-func (*ItfhwGroup) PostPath() string {
-	return "/api/objects/itfhw/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwGroup PUT path
-// Creates or updates the complete object group
-func (*ItfhwGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
-}
-
-// ItfhwLag is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwLags []ItfhwLag
-type ItfhwLag struct {
-	Locked         string `json:"_locked"`
-	Reference      string `json:"_ref"`
-	_type          string `json:"_type"`
-	Comment        string `json:"comment"`
-	Description    string `json:"description"`
-	Hardware       string `json:"hardware"`
-	LinkMonitoring bool   `json:"link_monitoring"`
-	Mac            string `json:"mac"`
-	Name           string `json:"name"`
-}
-
-// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
-// Returns all available itfhw/lag objects
-func (*ItfhwLags) GetPath() string { return "/api/objects/itfhw/lag/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwLags) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
-// Returns all available lag types
-func (i *ItfhwLag) GetPath() string { return fmt.Sprintf("/api/objects/itfhw/lag/%s", i.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (i *ItfhwLag) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwLag DELETE path
-// Creates or updates the complete object lag
-func (*ItfhwLag) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwLag PATCH path
-// Changes to parts of the object lag types
-func (*ItfhwLag) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwLag POST path
-// Create a new itfhw/lag object
-func (*ItfhwLag) PostPath() string {
-	return "/api/objects/itfhw/lag/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwLag PUT path
-// Creates or updates the complete object lag
-func (*ItfhwLag) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *ItfhwLag) GetType() string { return i._type }
-
 // ItfhwRedServer is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwRedServer []interface{}
 
@@ -320,38 +231,72 @@ func (*ItfhwRedServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
 }
 
-// ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwSerial []interface{}
+// ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwUsbserial []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
-// Returns all available itfhw/serial objects
-func (*ItfhwSerial) GetPath() string { return "/api/objects/itfhw/serial/" }
+// GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
+// Returns all available itfhw/usbserial objects
+func (*ItfhwUsbserial) GetPath() string { return "/api/objects/itfhw/usbserial/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwSerial) RefRequired() (string, bool) { return "", false }
+func (*ItfhwUsbserial) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwSerial DELETE path
-// Creates or updates the complete object serial
-func (*ItfhwSerial) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwUsbserial DELETE path
+// Creates or updates the complete object usbserial
+func (*ItfhwUsbserial) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwSerial PATCH path
-// Changes to parts of the object serial types
-func (*ItfhwSerial) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwUsbserial PATCH path
+// Changes to parts of the object usbserial types
+func (*ItfhwUsbserial) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwSerial POST path
-// Create a new itfhw/serial object
-func (*ItfhwSerial) PostPath() string {
-	return "/api/objects/itfhw/serial/"
+// PostPath implements sophos.RestObject and returns the ItfhwUsbserial POST path
+// Create a new itfhw/usbserial object
+func (*ItfhwUsbserial) PostPath() string {
+	return "/api/objects/itfhw/usbserial/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwSerial PUT path
-// Creates or updates the complete object serial
-func (*ItfhwSerial) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwUsbserial PUT path
+// Creates or updates the complete object usbserial
+func (*ItfhwUsbserial) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
+}
+
+// ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwVirtual []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
+// Returns all available itfhw/virtual objects
+func (*ItfhwVirtual) GetPath() string { return "/api/objects/itfhw/virtual/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwVirtual) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwVirtual DELETE path
+// Creates or updates the complete object virtual
+func (*ItfhwVirtual) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwVirtual PATCH path
+// Changes to parts of the object virtual types
+func (*ItfhwVirtual) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwVirtual POST path
+// Create a new itfhw/virtual object
+func (*ItfhwVirtual) PostPath() string {
+	return "/api/objects/itfhw/virtual/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwVirtual PUT path
+// Creates or updates the complete object virtual
+func (*ItfhwVirtual) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
 
 // ItfhwAweNetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -457,38 +402,106 @@ func (*ItfhwEthernet) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfhwEthernet) GetType() string { return i._type }
 
-// ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwVirtual []interface{}
+// ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwSerial []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
-// Returns all available itfhw/virtual objects
-func (*ItfhwVirtual) GetPath() string { return "/api/objects/itfhw/virtual/" }
+// GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
+// Returns all available itfhw/serial objects
+func (*ItfhwSerial) GetPath() string { return "/api/objects/itfhw/serial/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwVirtual) RefRequired() (string, bool) { return "", false }
+func (*ItfhwSerial) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwVirtual DELETE path
-// Creates or updates the complete object virtual
-func (*ItfhwVirtual) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwSerial DELETE path
+// Creates or updates the complete object serial
+func (*ItfhwSerial) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwVirtual PATCH path
-// Changes to parts of the object virtual types
-func (*ItfhwVirtual) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwSerial PATCH path
+// Changes to parts of the object serial types
+func (*ItfhwSerial) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwVirtual POST path
-// Create a new itfhw/virtual object
-func (*ItfhwVirtual) PostPath() string {
-	return "/api/objects/itfhw/virtual/"
+// PostPath implements sophos.RestObject and returns the ItfhwSerial POST path
+// Create a new itfhw/serial object
+func (*ItfhwSerial) PostPath() string {
+	return "/api/objects/itfhw/serial/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwVirtual PUT path
-// Creates or updates the complete object virtual
-func (*ItfhwVirtual) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwSerial PUT path
+// Creates or updates the complete object serial
+func (*ItfhwSerial) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+}
+
+// ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwBridge []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
+// Returns all available itfhw/bridge objects
+func (*ItfhwBridge) GetPath() string { return "/api/objects/itfhw/bridge/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwBridge) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwBridge DELETE path
+// Creates or updates the complete object bridge
+func (*ItfhwBridge) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwBridge PATCH path
+// Changes to parts of the object bridge types
+func (*ItfhwBridge) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwBridge POST path
+// Create a new itfhw/bridge object
+func (*ItfhwBridge) PostPath() string {
+	return "/api/objects/itfhw/bridge/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwBridge PUT path
+// Creates or updates the complete object bridge
+func (*ItfhwBridge) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+}
+
+// ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
+// Returns all available itfhw/group objects
+func (*ItfhwGroup) GetPath() string { return "/api/objects/itfhw/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwGroup DELETE path
+// Creates or updates the complete object group
+func (*ItfhwGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwGroup PATCH path
+// Changes to parts of the object group types
+func (*ItfhwGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwGroup POST path
+// Create a new itfhw/group object
+func (*ItfhwGroup) PostPath() string {
+	return "/api/objects/itfhw/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwGroup PUT path
+// Creates or updates the complete object group
+func (*ItfhwGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
 }
 
 // ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject
@@ -525,70 +538,57 @@ func (*ItfhwRedClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
 }
 
-// ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwUsbserial []interface{}
+// ItfhwLag is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwLags []ItfhwLag
+type ItfhwLag struct {
+	Locked         string `json:"_locked"`
+	Reference      string `json:"_ref"`
+	_type          string `json:"_type"`
+	Comment        string `json:"comment"`
+	Description    string `json:"description"`
+	Hardware       string `json:"hardware"`
+	LinkMonitoring bool   `json:"link_monitoring"`
+	Mac            string `json:"mac"`
+	Name           string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
-// Returns all available itfhw/usbserial objects
-func (*ItfhwUsbserial) GetPath() string { return "/api/objects/itfhw/usbserial/" }
+// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
+// Returns all available itfhw/lag objects
+func (*ItfhwLags) GetPath() string { return "/api/objects/itfhw/lag/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwUsbserial) RefRequired() (string, bool) { return "", false }
+func (*ItfhwLags) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwUsbserial DELETE path
-// Creates or updates the complete object usbserial
-func (*ItfhwUsbserial) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwUsbserial PATCH path
-// Changes to parts of the object usbserial types
-func (*ItfhwUsbserial) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwUsbserial POST path
-// Create a new itfhw/usbserial object
-func (*ItfhwUsbserial) PostPath() string {
-	return "/api/objects/itfhw/usbserial/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwUsbserial PUT path
-// Creates or updates the complete object usbserial
-func (*ItfhwUsbserial) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
-}
-
-// ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwBridge []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
-// Returns all available itfhw/bridge objects
-func (*ItfhwBridge) GetPath() string { return "/api/objects/itfhw/bridge/" }
+// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
+// Returns all available lag types
+func (i *ItfhwLag) GetPath() string { return fmt.Sprintf("/api/objects/itfhw/lag/%s", i.Reference) }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwBridge) RefRequired() (string, bool) { return "", false }
+func (i *ItfhwLag) RefRequired() (string, bool) { return i.Reference, true }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwBridge DELETE path
-// Creates or updates the complete object bridge
-func (*ItfhwBridge) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwLag DELETE path
+// Creates or updates the complete object lag
+func (*ItfhwLag) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwBridge PATCH path
-// Changes to parts of the object bridge types
-func (*ItfhwBridge) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwLag PATCH path
+// Changes to parts of the object lag types
+func (*ItfhwLag) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwBridge POST path
-// Create a new itfhw/bridge object
-func (*ItfhwBridge) PostPath() string {
-	return "/api/objects/itfhw/bridge/"
+// PostPath implements sophos.RestObject and returns the ItfhwLag POST path
+// Create a new itfhw/lag object
+func (*ItfhwLag) PostPath() string {
+	return "/api/objects/itfhw/lag/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwBridge PUT path
-// Creates or updates the complete object bridge
-func (*ItfhwBridge) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwLag PUT path
+// Creates or updates the complete object lag
+func (*ItfhwLag) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
+
+// Type implements sophos.Object
+func (i *ItfhwLag) GetType() string { return i._type }
