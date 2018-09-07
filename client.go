@@ -34,7 +34,7 @@ var _ ClientInterface = Client{}
 // The endpoint provided should point to the Sophos Gateway.
 func New(endpoint string, opts ...Option) (*Client, error) {
 	if endpoint == "" {
-		return nil, errors.New("endpoint and api key required")
+		return nil, errors.New("endpoint is required")
 	}
 
 	if !strings.HasPrefix(endpoint, "http:") && !strings.HasPrefix(endpoint, "https:") {
