@@ -1,6 +1,7 @@
 package sophos_test
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -216,6 +217,41 @@ func TestWithApiToken(t *testing.T) {
 
 			if header := r.Header.Get(sophos.Authorization); header != tt.want {
 				t.Errorf("TestWithApiToken() = %v, want %v", header, tt.want)
+			}
+		})
+	}
+}
+
+func TestWithContext(t *testing.T) {
+	type args struct {
+		ctx context.Context
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{"withContext", args{ctx: context.WithValue(context.Background(), "boo", "ok")}, "ok", false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			r := httptest.NewRequest("GET", "/api", nil)
+			opt := sophos.WithContext(tt.args.ctx)
+			err := opt(r)
+			if err == nil && tt.wantErr {
+				t.Errorf("TestWithContext() = should error, want %v", tt.wantErr)
+			}
+			if err != nil && !tt.wantErr {
+				t.Errorf("TestWithContext() = should not error, want %v", tt.wantErr)
+			}
+
+			if err != nil && tt.wantErr {
+				return
+			}
+
+			if v := r.Context().Value("boo"); v != tt.want {
+				t.Errorf("TestWithContext() = %v, want %v", v, tt.want)
 			}
 		})
 	}

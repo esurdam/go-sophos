@@ -1,8 +1,8 @@
 package sophos
 
 import (
+	"context"
 	"encoding/base64"
-	"errors"
 	"fmt"
 	"net/http"
 )
@@ -24,14 +24,6 @@ func CancelResolveErrsMode(r *http.Request) error {
 	return nil
 }
 
-// WithBasicAuth is an Option which sets the Authorization header to the provided username and password
-func WithBasicAuth(username, password string) Option {
-	return func(r *http.Request) error {
-		r.Header.Set(Authorization, "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
-		return nil
-	}
-}
-
 // WithAPIToken is an Option which sets the Authorization header to the provided token
 func WithAPIToken(token string) Option {
 	return func(r *http.Request) error {
@@ -40,18 +32,28 @@ func WithAPIToken(token string) Option {
 	}
 }
 
-// WithRestdLockOverride is an Option which sets the X-Restd-Lock-Override to yes
-func WithRestdLockOverride(r *http.Request) error {
-	r.Header.Set(http.CanonicalHeaderKey(XRestdLockOverride), "yes")
-	return nil
+// WithBasicAuth is an Option which sets the Authorization header to the provided username and password.
+func WithBasicAuth(username, password string) Option {
+	return func(r *http.Request) error {
+		r.Header.Set(Authorization, "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
+		return nil
+	}
 }
 
-// WithRestdInsert is an Option which adds the XRestdInsert header to insert a reference at the given position inside the node
+// WithContext is an Option which sets the provided context to the the client's request.
+func WithContext(ctx context.Context) Option {
+	return func(r *http.Request) error {
+		*r = *r.WithContext(ctx)
+		return nil
+	}
+}
+
+// WithRestdInsert is an Option which adds the XRestdInsert header to insert a reference at the given position inside the node.
 // X-Restd-Insert: packetfilter.rules 4
 func WithRestdInsert(rule string, position int) Option {
 	return func(r *http.Request) error {
 		if rule == "" {
-			return errors.New("invalid rule name for X-Restd-Insert header")
+			return fmt.Errorf("invalid rule name for X-Restd-Insert header: %s", rule)
 		}
 		if position == 0 {
 			r.Header.Set(http.CanonicalHeaderKey(XRestdInsert), fmt.Sprintf("%s", rule))
@@ -60,6 +62,12 @@ func WithRestdInsert(rule string, position int) Option {
 		}
 		return nil
 	}
+}
+
+// WithRestdLockOverride is an Option which sets the X-Restd-Lock-Override to yes.
+func WithRestdLockOverride(r *http.Request) error {
+	r.Header.Set(http.CanonicalHeaderKey(XRestdLockOverride), "yes")
+	return nil
 }
 
 // WithSessionClose is an Option which sets the X-Restd-Session to close, be sure to only send this command with the last request.
