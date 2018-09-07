@@ -77,6 +77,19 @@ pf := types.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
 err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
 ```
 
+Requesting a Definition:
+
+```go
+import "github.com/esurdam/go-sophos/types"
+
+var nodes types.Nodes
+d := nodes.Definition()
+
+_ := d.GetSwag(client)
+fmt.Printf("%v", d.Swag)
+```
+
+
 ## Generating Types
 
 Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](types/generated.go) file which contains structs corresponding to UTM API definitions.
@@ -88,6 +101,8 @@ export TOKEN=abcde1234
 
 make
 ```
+
+
 
 ## Testing
 
