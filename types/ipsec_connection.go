@@ -12,25 +12,25 @@ import (
 // IpsecConnection is a generated struct representing the Sophos IpsecConnection Endpoint
 // GET /api/nodes/ipsec_connection
 type IpsecConnection struct {
+	IpsecConnectionAmazonVpc        IpsecConnectionAmazonVpc        `json:"ipsec_connection_amazon_vpc"`
 	IpsecConnectionGroup            IpsecConnectionGroup            `json:"ipsec_connection_group"`
-	IpsecConnectionL2Tp             IpsecConnectionL2Tp             `json:"ipsec_connection_l2tp"`
 	IpsecConnectionRoadwarriorCa    IpsecConnectionRoadwarriorCa    `json:"ipsec_connection_roadwarrior_ca"`
+	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
+	IpsecConnectionRoadwarriorCisco IpsecConnectionRoadwarriorCisco `json:"ipsec_connection_roadwarrior_cisco"`
 	IpsecConnectionRoadwarriorPsk   IpsecConnectionRoadwarriorPsk   `json:"ipsec_connection_roadwarrior_psk"`
 	IpsecConnectionRoadwarriorX509  IpsecConnectionRoadwarriorX509  `json:"ipsec_connection_roadwarrior_x509"`
-	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
-	IpsecConnectionAmazonVpc        IpsecConnectionAmazonVpc        `json:"ipsec_connection_amazon_vpc"`
-	IpsecConnectionRoadwarriorCisco IpsecConnectionRoadwarriorCisco `json:"ipsec_connection_roadwarrior_cisco"`
+	IpsecConnectionL2Tp             IpsecConnectionL2Tp             `json:"ipsec_connection_l2tp"`
 }
 
 var defsIpsecConnection = map[string]sophos.RestObject{
+	"IpsecConnectionAmazonVpc":        &IpsecConnectionAmazonVpc{},
 	"IpsecConnectionGroup":            &IpsecConnectionGroup{},
-	"IpsecConnectionL2Tp":             &IpsecConnectionL2Tp{},
 	"IpsecConnectionRoadwarriorCa":    &IpsecConnectionRoadwarriorCa{},
+	"IpsecConnectionSiteToSite":       &IpsecConnectionSiteToSite{},
+	"IpsecConnectionRoadwarriorCisco": &IpsecConnectionRoadwarriorCisco{},
 	"IpsecConnectionRoadwarriorPsk":   &IpsecConnectionRoadwarriorPsk{},
 	"IpsecConnectionRoadwarriorX509":  &IpsecConnectionRoadwarriorX509{},
-	"IpsecConnectionSiteToSite":       &IpsecConnectionSiteToSite{},
-	"IpsecConnectionAmazonVpc":        &IpsecConnectionAmazonVpc{},
-	"IpsecConnectionRoadwarriorCisco": &IpsecConnectionRoadwarriorCisco{},
+	"IpsecConnectionL2Tp":             &IpsecConnectionL2Tp{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpsecConnection's Objects
@@ -94,6 +94,63 @@ func (IpsecConnection) References() []string {
 	}
 }
 
+// IpsecConnectionAmazonVpc is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionAmazonVpcs []IpsecConnectionAmazonVpc
+type IpsecConnectionAmazonVpc struct {
+	Locked         string `json:"_locked"`
+	Reference      string `json:"_ref"`
+	_type          string `json:"_type"`
+	Authentication string `json:"authentication"`
+	Comment        string `json:"comment"`
+	Interface      string `json:"interface"`
+	Name           string `json:"name"`
+	Policy         string `json:"policy"`
+	Remote         string `json:"remote"`
+}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
+// Returns all available ipsec_connection/amazon_vpc objects
+func (*IpsecConnectionAmazonVpcs) GetPath() string { return "/api/objects/ipsec_connection/amazon_vpc/" }
+
+// RefRequired implements sophos.RestObject
+func (*IpsecConnectionAmazonVpcs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
+// Returns all available amazon_vpc types
+func (i *IpsecConnectionAmazonVpc) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionAmazonVpc) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc DELETE path
+// Creates or updates the complete object amazon_vpc
+func (*IpsecConnectionAmazonVpc) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc PATCH path
+// Changes to parts of the object amazon_vpc types
+func (*IpsecConnectionAmazonVpc) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc POST path
+// Create a new ipsec_connection/amazon_vpc object
+func (*IpsecConnectionAmazonVpc) PostPath() string {
+	return "/api/objects/ipsec_connection/amazon_vpc/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc PUT path
+// Creates or updates the complete object amazon_vpc
+func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
+
 // IpsecConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionGroup []interface{}
 
@@ -127,74 +184,6 @@ func (*IpsecConnectionGroup) PostPath() string {
 func (*IpsecConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s", ref)
 }
-
-// IpsecConnectionL2Tp is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionL2Tps []IpsecConnectionL2Tp
-type IpsecConnectionL2Tp struct {
-	Locked                    string   `json:"_locked"`
-	Reference                 string   `json:"_ref"`
-	_type                     string   `json:"_type"`
-	AuthenticationType        string   `json:"authentication_type"`
-	Certificate               string   `json:"certificate"`
-	Comment                   string   `json:"comment"`
-	Debug                     bool     `json:"debug"`
-	Interface                 string   `json:"interface"`
-	IPAssignmentDhcp          string   `json:"ip_assignment_dhcp"`
-	IPAssignmentDhcpInterface string   `json:"ip_assignment_dhcp_interface"`
-	IPAssignmentMode          string   `json:"ip_assignment_mode"`
-	IPAssignmentPool          string   `json:"ip_assignment_pool"`
-	IphoneConnectionName      string   `json:"iphone_connection_name"`
-	IphoneHostname            string   `json:"iphone_hostname"`
-	IphoneStatus              bool     `json:"iphone_status"`
-	Name                      string   `json:"name"`
-	Policy                    string   `json:"policy"`
-	Psk                       string   `json:"psk"`
-	Status                    bool     `json:"status"`
-	Users                     []string `json:"users"`
-}
-
-// GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
-// Returns all available ipsec_connection/l2tp objects
-func (*IpsecConnectionL2Tps) GetPath() string { return "/api/objects/ipsec_connection/l2tp/" }
-
-// RefRequired implements sophos.RestObject
-func (*IpsecConnectionL2Tps) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
-// Returns all available l2tp types
-func (i *IpsecConnectionL2Tp) GetPath() string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *IpsecConnectionL2Tp) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the IpsecConnectionL2Tp DELETE path
-// Creates or updates the complete object l2tp
-func (*IpsecConnectionL2Tp) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpsecConnectionL2Tp PATCH path
-// Changes to parts of the object l2tp types
-func (*IpsecConnectionL2Tp) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsecConnectionL2Tp POST path
-// Create a new ipsec_connection/l2tp object
-func (*IpsecConnectionL2Tp) PostPath() string {
-	return "/api/objects/ipsec_connection/l2tp/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecConnectionL2Tp PUT path
-// Creates or updates the complete object l2tp
-func (*IpsecConnectionL2Tp) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 
 // IpsecConnectionRoadwarriorCa is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCa []interface{}
@@ -230,6 +219,107 @@ func (*IpsecConnectionRoadwarriorCa) PostPath() string {
 // Creates or updates the complete object roadwarrior_ca
 func (*IpsecConnectionRoadwarriorCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s", ref)
+}
+
+// IpsecConnectionSiteToSite is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionSiteToSites []IpsecConnectionSiteToSite
+type IpsecConnectionSiteToSite struct {
+	Locked        string   `json:"_locked"`
+	Reference     string   `json:"_ref"`
+	_type         string   `json:"_type"`
+	AutoPfIn      string   `json:"auto_pf_in"`
+	AutoPfOut     string   `json:"auto_pf_out"`
+	AutoPfrule    bool     `json:"auto_pfrule"`
+	Bind          bool     `json:"bind"`
+	Comment       string   `json:"comment"`
+	Interface     string   `json:"interface"`
+	Name          string   `json:"name"`
+	Networks      []string `json:"networks"`
+	Policy        string   `json:"policy"`
+	RemoteGateway string   `json:"remote_gateway"`
+	Status        bool     `json:"status"`
+	StrictRouting bool     `json:"strict_routing"`
+}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
+// Returns all available ipsec_connection/site_to_site objects
+func (*IpsecConnectionSiteToSites) GetPath() string {
+	return "/api/objects/ipsec_connection/site_to_site/"
+}
+
+// RefRequired implements sophos.RestObject
+func (*IpsecConnectionSiteToSites) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
+// Returns all available site_to_site types
+func (i *IpsecConnectionSiteToSite) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionSiteToSite) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the IpsecConnectionSiteToSite DELETE path
+// Creates or updates the complete object site_to_site
+func (*IpsecConnectionSiteToSite) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite PATCH path
+// Changes to parts of the object site_to_site types
+func (*IpsecConnectionSiteToSite) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite POST path
+// Create a new ipsec_connection/site_to_site object
+func (*IpsecConnectionSiteToSite) PostPath() string {
+	return "/api/objects/ipsec_connection/site_to_site/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite PUT path
+// Creates or updates the complete object site_to_site
+func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *IpsecConnectionSiteToSite) GetType() string { return i._type }
+
+// IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionRoadwarriorCisco []interface{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
+// Returns all available ipsec_connection/roadwarrior_cisco objects
+func (*IpsecConnectionRoadwarriorCisco) GetPath() string {
+	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
+}
+
+// RefRequired implements sophos.RestObject
+func (*IpsecConnectionRoadwarriorCisco) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco DELETE path
+// Creates or updates the complete object roadwarrior_cisco
+func (*IpsecConnectionRoadwarriorCisco) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco PATCH path
+// Changes to parts of the object roadwarrior_cisco types
+func (*IpsecConnectionRoadwarriorCisco) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco POST path
+// Create a new ipsec_connection/roadwarrior_cisco object
+func (*IpsecConnectionRoadwarriorCisco) PostPath() string {
+	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco PUT path
+// Creates or updates the complete object roadwarrior_cisco
+func (*IpsecConnectionRoadwarriorCisco) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
 }
 
 // IpsecConnectionRoadwarriorPsk is an Sophos Endpoint subType and implements sophos.RestObject
@@ -304,160 +394,70 @@ func (*IpsecConnectionRoadwarriorX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s", ref)
 }
 
-// IpsecConnectionSiteToSite is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionSiteToSites []IpsecConnectionSiteToSite
-type IpsecConnectionSiteToSite struct {
-	Locked        string   `json:"_locked"`
-	Reference     string   `json:"_ref"`
-	_type         string   `json:"_type"`
-	AutoPfIn      string   `json:"auto_pf_in"`
-	AutoPfOut     string   `json:"auto_pf_out"`
-	AutoPfrule    bool     `json:"auto_pfrule"`
-	Bind          bool     `json:"bind"`
-	Comment       string   `json:"comment"`
-	Interface     string   `json:"interface"`
-	Name          string   `json:"name"`
-	Networks      []string `json:"networks"`
-	Policy        string   `json:"policy"`
-	RemoteGateway string   `json:"remote_gateway"`
-	Status        bool     `json:"status"`
-	StrictRouting bool     `json:"strict_routing"`
+// IpsecConnectionL2Tp is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionL2Tps []IpsecConnectionL2Tp
+type IpsecConnectionL2Tp struct {
+	Locked                    string   `json:"_locked"`
+	Reference                 string   `json:"_ref"`
+	_type                     string   `json:"_type"`
+	AuthenticationType        string   `json:"authentication_type"`
+	Certificate               string   `json:"certificate"`
+	Comment                   string   `json:"comment"`
+	Debug                     bool     `json:"debug"`
+	Interface                 string   `json:"interface"`
+	IPAssignmentDhcp          string   `json:"ip_assignment_dhcp"`
+	IPAssignmentDhcpInterface string   `json:"ip_assignment_dhcp_interface"`
+	IPAssignmentMode          string   `json:"ip_assignment_mode"`
+	IPAssignmentPool          string   `json:"ip_assignment_pool"`
+	IphoneConnectionName      string   `json:"iphone_connection_name"`
+	IphoneHostname            string   `json:"iphone_hostname"`
+	IphoneStatus              bool     `json:"iphone_status"`
+	Name                      string   `json:"name"`
+	Policy                    string   `json:"policy"`
+	Psk                       string   `json:"psk"`
+	Status                    bool     `json:"status"`
+	Users                     []string `json:"users"`
 }
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
-// Returns all available ipsec_connection/site_to_site objects
-func (*IpsecConnectionSiteToSites) GetPath() string {
-	return "/api/objects/ipsec_connection/site_to_site/"
+// GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
+// Returns all available ipsec_connection/l2tp objects
+func (*IpsecConnectionL2Tps) GetPath() string { return "/api/objects/ipsec_connection/l2tp/" }
+
+// RefRequired implements sophos.RestObject
+func (*IpsecConnectionL2Tps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
+// Returns all available l2tp types
+func (i *IpsecConnectionL2Tp) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", i.Reference)
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionSiteToSites) RefRequired() (string, bool) { return "", false }
+func (i *IpsecConnectionL2Tp) RefRequired() (string, bool) { return i.Reference, true }
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
-// Returns all available site_to_site types
-func (i *IpsecConnectionSiteToSite) GetPath() string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", i.Reference)
+// DeletePath implements sophos.RestObject and returns the IpsecConnectionL2Tp DELETE path
+// Creates or updates the complete object l2tp
+func (*IpsecConnectionL2Tp) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (i *IpsecConnectionSiteToSite) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the IpsecConnectionSiteToSite DELETE path
-// Creates or updates the complete object site_to_site
-func (*IpsecConnectionSiteToSite) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+// PatchPath implements sophos.RestObject and returns the IpsecConnectionL2Tp PATCH path
+// Changes to parts of the object l2tp types
+func (*IpsecConnectionL2Tp) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite PATCH path
-// Changes to parts of the object site_to_site types
-func (*IpsecConnectionSiteToSite) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+// PostPath implements sophos.RestObject and returns the IpsecConnectionL2Tp POST path
+// Create a new ipsec_connection/l2tp object
+func (*IpsecConnectionL2Tp) PostPath() string {
+	return "/api/objects/ipsec_connection/l2tp/"
 }
 
-// PostPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite POST path
-// Create a new ipsec_connection/site_to_site object
-func (*IpsecConnectionSiteToSite) PostPath() string {
-	return "/api/objects/ipsec_connection/site_to_site/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecConnectionSiteToSite PUT path
-// Creates or updates the complete object site_to_site
-func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
+// PutPath implements sophos.RestObject and returns the IpsecConnectionL2Tp PUT path
+// Creates or updates the complete object l2tp
+func (*IpsecConnectionL2Tp) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
 // Type implements sophos.Object
-func (i *IpsecConnectionSiteToSite) GetType() string { return i._type }
-
-// IpsecConnectionAmazonVpc is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionAmazonVpcs []IpsecConnectionAmazonVpc
-type IpsecConnectionAmazonVpc struct {
-	Locked         string `json:"_locked"`
-	Reference      string `json:"_ref"`
-	_type          string `json:"_type"`
-	Authentication string `json:"authentication"`
-	Comment        string `json:"comment"`
-	Interface      string `json:"interface"`
-	Name           string `json:"name"`
-	Policy         string `json:"policy"`
-	Remote         string `json:"remote"`
-}
-
-// GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
-// Returns all available ipsec_connection/amazon_vpc objects
-func (*IpsecConnectionAmazonVpcs) GetPath() string { return "/api/objects/ipsec_connection/amazon_vpc/" }
-
-// RefRequired implements sophos.RestObject
-func (*IpsecConnectionAmazonVpcs) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
-// Returns all available amazon_vpc types
-func (i *IpsecConnectionAmazonVpc) GetPath() string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *IpsecConnectionAmazonVpc) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc DELETE path
-// Creates or updates the complete object amazon_vpc
-func (*IpsecConnectionAmazonVpc) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc PATCH path
-// Changes to parts of the object amazon_vpc types
-func (*IpsecConnectionAmazonVpc) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc POST path
-// Create a new ipsec_connection/amazon_vpc object
-func (*IpsecConnectionAmazonVpc) PostPath() string {
-	return "/api/objects/ipsec_connection/amazon_vpc/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpc PUT path
-// Creates or updates the complete object amazon_vpc
-func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
-
-// IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionRoadwarriorCisco []interface{}
-
-// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
-// Returns all available ipsec_connection/roadwarrior_cisco objects
-func (*IpsecConnectionRoadwarriorCisco) GetPath() string {
-	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
-}
-
-// RefRequired implements sophos.RestObject
-func (*IpsecConnectionRoadwarriorCisco) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco DELETE path
-// Creates or updates the complete object roadwarrior_cisco
-func (*IpsecConnectionRoadwarriorCisco) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco PATCH path
-// Changes to parts of the object roadwarrior_cisco types
-func (*IpsecConnectionRoadwarriorCisco) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco POST path
-// Create a new ipsec_connection/roadwarrior_cisco object
-func (*IpsecConnectionRoadwarriorCisco) PostPath() string {
-	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco PUT path
-// Creates or updates the complete object roadwarrior_cisco
-func (*IpsecConnectionRoadwarriorCisco) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
-}
+func (i *IpsecConnectionL2Tp) GetType() string { return i._type }

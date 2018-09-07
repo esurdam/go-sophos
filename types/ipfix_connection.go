@@ -12,13 +12,13 @@ import (
 // IpfixConnection is a generated struct representing the Sophos IpfixConnection Endpoint
 // GET /api/nodes/ipfix_connection
 type IpfixConnection struct {
-	IpfixConnectionIpfixConnection IpfixConnectionIpfixConnection `json:"ipfix_connection_ipfix_connection"`
 	IpfixConnectionGroup           IpfixConnectionGroup           `json:"ipfix_connection_group"`
+	IpfixConnectionIpfixConnection IpfixConnectionIpfixConnection `json:"ipfix_connection_ipfix_connection"`
 }
 
 var defsIpfixConnection = map[string]sophos.RestObject{
-	"IpfixConnectionIpfixConnection": &IpfixConnectionIpfixConnection{},
 	"IpfixConnectionGroup":           &IpfixConnectionGroup{},
+	"IpfixConnectionIpfixConnection": &IpfixConnectionIpfixConnection{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpfixConnection's Objects
@@ -58,6 +58,40 @@ func (IpfixConnection) References() []string {
 	}
 }
 
+// IpfixConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type IpfixConnectionGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the IpfixConnectionGroup GET path
+// Returns all available ipfix_connection/group objects
+func (*IpfixConnectionGroup) GetPath() string { return "/api/objects/ipfix_connection/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*IpfixConnectionGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the IpfixConnectionGroup DELETE path
+// Creates or updates the complete object group
+func (*IpfixConnectionGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpfixConnectionGroup PATCH path
+// Changes to parts of the object group types
+func (*IpfixConnectionGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpfixConnectionGroup POST path
+// Create a new ipfix_connection/group object
+func (*IpfixConnectionGroup) PostPath() string {
+	return "/api/objects/ipfix_connection/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpfixConnectionGroup PUT path
+// Creates or updates the complete object group
+func (*IpfixConnectionGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
+}
+
 // IpfixConnectionIpfixConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type IpfixConnectionIpfixConnection []interface{}
 
@@ -92,38 +126,4 @@ func (*IpfixConnectionIpfixConnection) PostPath() string {
 // Creates or updates the complete object ipfix_connection
 func (*IpfixConnectionIpfixConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s", ref)
-}
-
-// IpfixConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpfixConnectionGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the IpfixConnectionGroup GET path
-// Returns all available ipfix_connection/group objects
-func (*IpfixConnectionGroup) GetPath() string { return "/api/objects/ipfix_connection/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*IpfixConnectionGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the IpfixConnectionGroup DELETE path
-// Creates or updates the complete object group
-func (*IpfixConnectionGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpfixConnectionGroup PATCH path
-// Changes to parts of the object group types
-func (*IpfixConnectionGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpfixConnectionGroup POST path
-// Create a new ipfix_connection/group object
-func (*IpfixConnectionGroup) PostPath() string {
-	return "/api/objects/ipfix_connection/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpfixConnectionGroup PUT path
-// Creates or updates the complete object group
-func (*IpfixConnectionGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
 }

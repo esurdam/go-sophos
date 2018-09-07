@@ -12,15 +12,15 @@ import (
 // Aws is a generated struct representing the Sophos Aws Endpoint
 // GET /api/nodes/aws
 type Aws struct {
+	AwsGroup        AwsGroup        `json:"aws_group"`
 	AwsInstanceType AwsInstanceType `json:"aws_instance_type"`
 	AwsRegion       AwsRegion       `json:"aws_region"`
-	AwsGroup        AwsGroup        `json:"aws_group"`
 }
 
 var defsAws = map[string]sophos.RestObject{
+	"AwsGroup":        &AwsGroup{},
 	"AwsInstanceType": &AwsInstanceType{},
 	"AwsRegion":       &AwsRegion{},
-	"AwsGroup":        &AwsGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Aws's Objects
@@ -62,6 +62,40 @@ func (Aws) References() []string {
 		"REF_AwsInstanceType",
 		"REF_AwsRegion",
 	}
+}
+
+// AwsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type AwsGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the AwsGroup GET path
+// Returns all available aws/group objects
+func (*AwsGroup) GetPath() string { return "/api/objects/aws/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*AwsGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the AwsGroup DELETE path
+// Creates or updates the complete object group
+func (*AwsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AwsGroup PATCH path
+// Changes to parts of the object group types
+func (*AwsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AwsGroup POST path
+// Create a new aws/group object
+func (*AwsGroup) PostPath() string {
+	return "/api/objects/aws/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the AwsGroup PUT path
+// Creates or updates the complete object group
+func (*AwsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
 }
 
 // AwsInstanceType is an Sophos Endpoint subType and implements sophos.RestObject
@@ -176,37 +210,3 @@ func (*AwsRegion) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (a *AwsRegion) GetType() string { return a._type }
-
-// AwsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AwsGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the AwsGroup GET path
-// Returns all available aws/group objects
-func (*AwsGroup) GetPath() string { return "/api/objects/aws/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*AwsGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the AwsGroup DELETE path
-// Creates or updates the complete object group
-func (*AwsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AwsGroup PATCH path
-// Changes to parts of the object group types
-func (*AwsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AwsGroup POST path
-// Create a new aws/group object
-func (*AwsGroup) PostPath() string {
-	return "/api/objects/aws/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the AwsGroup PUT path
-// Creates or updates the complete object group
-func (*AwsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
-}

@@ -85,8 +85,8 @@ import "github.com/esurdam/go-sophos/types"
 var nodes types.Nodes
 d := nodes.Definition()
 
-_ := d.GetSwag(client)
-fmt.Printf("%v", d.Swag)
+swag, _ := d.GetSwag(client)
+fmt.Printf("%v", swag)
 ```
 
 

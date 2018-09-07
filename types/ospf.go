@@ -12,16 +12,16 @@ import (
 // Ospf is a generated struct representing the Sophos Ospf Endpoint
 // GET /api/nodes/ospf
 type Ospf struct {
-	OspfGroup            OspfGroup            `json:"ospf_group"`
 	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
 	OspfArea             OspfArea             `json:"ospf_area"`
+	OspfGroup            OspfGroup            `json:"ospf_group"`
 	OspfInterface        OspfInterface        `json:"ospf_interface"`
 }
 
 var defsOspf = map[string]sophos.RestObject{
-	"OspfGroup":            &OspfGroup{},
 	"OspfMessageDigestKey": &OspfMessageDigestKey{},
 	"OspfArea":             &OspfArea{},
+	"OspfGroup":            &OspfGroup{},
 	"OspfInterface":        &OspfInterface{},
 }
 
@@ -68,40 +68,6 @@ func (Ospf) References() []string {
 		"REF_OspfInterface",
 		"REF_OspfMessageDigestKey",
 	}
-}
-
-// OspfGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the OspfGroup GET path
-// Returns all available ospf/group objects
-func (*OspfGroup) GetPath() string { return "/api/objects/ospf/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*OspfGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the OspfGroup DELETE path
-// Creates or updates the complete object group
-func (*OspfGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the OspfGroup PATCH path
-// Changes to parts of the object group types
-func (*OspfGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the OspfGroup POST path
-// Create a new ospf/group object
-func (*OspfGroup) PostPath() string {
-	return "/api/objects/ospf/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the OspfGroup PUT path
-// Creates or updates the complete object group
-func (*OspfGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
 }
 
 // OspfMessageDigestKey is an Sophos Endpoint subType and implements sophos.RestObject
@@ -170,6 +136,40 @@ func (*OspfArea) PostPath() string {
 // Creates or updates the complete object area
 func (*OspfArea) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/area/%s", ref)
+}
+
+// OspfGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the OspfGroup GET path
+// Returns all available ospf/group objects
+func (*OspfGroup) GetPath() string { return "/api/objects/ospf/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*OspfGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the OspfGroup DELETE path
+// Creates or updates the complete object group
+func (*OspfGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the OspfGroup PATCH path
+// Changes to parts of the object group types
+func (*OspfGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the OspfGroup POST path
+// Create a new ospf/group object
+func (*OspfGroup) PostPath() string {
+	return "/api/objects/ospf/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the OspfGroup PUT path
+// Creates or updates the complete object group
+func (*OspfGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
 }
 
 // OspfInterface is an Sophos Endpoint subType and implements sophos.RestObject

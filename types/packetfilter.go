@@ -55,15 +55,15 @@ type Packetfilter struct {
 }
 
 var defsPacketfilter = map[string]sophos.RestObject{
-	"PacketfilterLoadbalance":  &PacketfilterLoadbalance{},
-	"PacketfilterPacketfilter": &PacketfilterPacketfilter{},
-	"PacketfilterGroup":        &PacketfilterGroup{},
 	"PacketfilterGenericProxy": &PacketfilterGenericProxy{},
+	"PacketfilterNat":          &PacketfilterNat{},
+	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
+	"PacketfilterPacketfilter": &PacketfilterPacketfilter{},
+	"PacketfilterMangle":       &PacketfilterMangle{},
 	"PacketfilterMasq":         &PacketfilterMasq{},
 	"PacketfilterRuleset":      &PacketfilterRuleset{},
-	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
-	"PacketfilterMangle":       &PacketfilterMangle{},
-	"PacketfilterNat":          &PacketfilterNat{},
+	"PacketfilterLoadbalance":  &PacketfilterLoadbalance{},
+	"PacketfilterGroup":        &PacketfilterGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Packetfilter's Objects
@@ -131,38 +131,139 @@ func (Packetfilter) References() []string {
 	}
 }
 
-// PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterLoadbalance []interface{}
+// PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterGenericProxy []interface{}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
-// Returns all available packetfilter/loadbalance objects
-func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
+// GetPath implements sophos.RestObject and returns the PacketfilterGenericProxy GET path
+// Returns all available packetfilter/generic_proxy objects
+func (*PacketfilterGenericProxy) GetPath() string { return "/api/objects/packetfilter/generic_proxy/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterLoadbalance) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterGenericProxy) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the PacketfilterLoadbalance DELETE path
-// Creates or updates the complete object loadbalance
-func (*PacketfilterLoadbalance) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// DeletePath implements sophos.RestObject and returns the PacketfilterGenericProxy DELETE path
+// Creates or updates the complete object generic_proxy
+func (*PacketfilterGenericProxy) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the PacketfilterLoadbalance PATCH path
-// Changes to parts of the object loadbalance types
-func (*PacketfilterLoadbalance) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// PatchPath implements sophos.RestObject and returns the PacketfilterGenericProxy PATCH path
+// Changes to parts of the object generic_proxy types
+func (*PacketfilterGenericProxy) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the PacketfilterLoadbalance POST path
-// Create a new packetfilter/loadbalance object
-func (*PacketfilterLoadbalance) PostPath() string {
-	return "/api/objects/packetfilter/loadbalance/"
+// PostPath implements sophos.RestObject and returns the PacketfilterGenericProxy POST path
+// Create a new packetfilter/generic_proxy object
+func (*PacketfilterGenericProxy) PostPath() string {
+	return "/api/objects/packetfilter/generic_proxy/"
 }
 
-// PutPath implements sophos.RestObject and returns the PacketfilterLoadbalance PUT path
-// Creates or updates the complete object loadbalance
-func (*PacketfilterLoadbalance) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
+// PutPath implements sophos.RestObject and returns the PacketfilterGenericProxy PUT path
+// Creates or updates the complete object generic_proxy
+func (*PacketfilterGenericProxy) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
+}
+
+// PacketfilterNat is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterNats []PacketfilterNat
+type PacketfilterNat struct {
+	Locked                string `json:"_locked"`
+	Reference             string `json:"_ref"`
+	_type                 string `json:"_type"`
+	AutoPfIn              string `json:"auto_pf_in"`
+	AutoPfrule            bool   `json:"auto_pfrule"`
+	Comment               string `json:"comment"`
+	Destination           string `json:"destination"`
+	DestinationNatAddress string `json:"destination_nat_address"`
+	DestinationNatService string `json:"destination_nat_service"`
+	Group                 string `json:"group"`
+	Ipsec                 bool   `json:"ipsec"`
+	Log                   bool   `json:"log"`
+	Mode                  string `json:"mode"`
+	Name                  string `json:"name"`
+	Service               string `json:"service"`
+	Source                string `json:"source"`
+	SourceNatAddress      string `json:"source_nat_address"`
+	SourceNatService      string `json:"source_nat_service"`
+	Status                bool   `json:"status"`
+}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
+// Returns all available packetfilter/nat objects
+func (*PacketfilterNats) GetPath() string { return "/api/objects/packetfilter/nat/" }
+
+// RefRequired implements sophos.RestObject
+func (*PacketfilterNats) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
+// Returns all available nat types
+func (p *PacketfilterNat) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterNat) RefRequired() (string, bool) { return p.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the PacketfilterNat DELETE path
+// Creates or updates the complete object nat
+func (*PacketfilterNat) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the PacketfilterNat PATCH path
+// Changes to parts of the object nat types
+func (*PacketfilterNat) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the PacketfilterNat POST path
+// Create a new packetfilter/nat object
+func (*PacketfilterNat) PostPath() string {
+	return "/api/objects/packetfilter/nat/"
+}
+
+// PutPath implements sophos.RestObject and returns the PacketfilterNat PUT path
+// Creates or updates the complete object nat
+func (*PacketfilterNat) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
+}
+
+// Type implements sophos.Object
+func (p *PacketfilterNat) GetType() string { return p._type }
+
+// Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
+type Packetfilter1to1Nat []interface{}
+
+// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
+// Returns all available packetfilter/1to1nat objects
+func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
+
+// RefRequired implements sophos.RestObject
+func (*Packetfilter1to1Nat) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the Packetfilter1to1Nat DELETE path
+// Creates or updates the complete object 1to1nat
+func (*Packetfilter1to1Nat) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the Packetfilter1to1Nat PATCH path
+// Changes to parts of the object 1to1nat types
+func (*Packetfilter1to1Nat) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the Packetfilter1to1Nat POST path
+// Create a new packetfilter/1to1nat object
+func (*Packetfilter1to1Nat) PostPath() string {
+	return "/api/objects/packetfilter/1to1nat/"
+}
+
+// PutPath implements sophos.RestObject and returns the Packetfilter1to1Nat PUT path
+// Creates or updates the complete object 1to1nat
+func (*Packetfilter1to1Nat) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
 }
 
 // PacketfilterPacketfilter is an Sophos Endpoint subType and implements sophos.RestObject
@@ -231,72 +332,38 @@ func (*PacketfilterPacketfilter) PutPath(ref string) string {
 // Type implements sophos.Object
 func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
-// PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterGroup []interface{}
+// PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterMangle []interface{}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
-// Returns all available packetfilter/group objects
-func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*PacketfilterGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the PacketfilterGroup DELETE path
-// Creates or updates the complete object group
-func (*PacketfilterGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the PacketfilterGroup PATCH path
-// Changes to parts of the object group types
-func (*PacketfilterGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the PacketfilterGroup POST path
-// Create a new packetfilter/group object
-func (*PacketfilterGroup) PostPath() string {
-	return "/api/objects/packetfilter/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the PacketfilterGroup PUT path
-// Creates or updates the complete object group
-func (*PacketfilterGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
-}
-
-// PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterGenericProxy []interface{}
-
-// GetPath implements sophos.RestObject and returns the PacketfilterGenericProxy GET path
-// Returns all available packetfilter/generic_proxy objects
-func (*PacketfilterGenericProxy) GetPath() string { return "/api/objects/packetfilter/generic_proxy/" }
+// GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
+// Returns all available packetfilter/mangle objects
+func (*PacketfilterMangle) GetPath() string { return "/api/objects/packetfilter/mangle/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterGenericProxy) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterMangle) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the PacketfilterGenericProxy DELETE path
-// Creates or updates the complete object generic_proxy
-func (*PacketfilterGenericProxy) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
+// DeletePath implements sophos.RestObject and returns the PacketfilterMangle DELETE path
+// Creates or updates the complete object mangle
+func (*PacketfilterMangle) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the PacketfilterGenericProxy PATCH path
-// Changes to parts of the object generic_proxy types
-func (*PacketfilterGenericProxy) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
+// PatchPath implements sophos.RestObject and returns the PacketfilterMangle PATCH path
+// Changes to parts of the object mangle types
+func (*PacketfilterMangle) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the PacketfilterGenericProxy POST path
-// Create a new packetfilter/generic_proxy object
-func (*PacketfilterGenericProxy) PostPath() string {
-	return "/api/objects/packetfilter/generic_proxy/"
+// PostPath implements sophos.RestObject and returns the PacketfilterMangle POST path
+// Create a new packetfilter/mangle object
+func (*PacketfilterMangle) PostPath() string {
+	return "/api/objects/packetfilter/mangle/"
 }
 
-// PutPath implements sophos.RestObject and returns the PacketfilterGenericProxy PUT path
-// Creates or updates the complete object generic_proxy
-func (*PacketfilterGenericProxy) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
+// PutPath implements sophos.RestObject and returns the PacketfilterMangle PUT path
+// Creates or updates the complete object mangle
+func (*PacketfilterMangle) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
 }
 
 // PacketfilterMasq is an Sophos Endpoint subType and implements sophos.RestObject
@@ -391,137 +458,70 @@ func (*PacketfilterRuleset) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s", ref)
 }
 
-// Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
-type Packetfilter1to1Nat []interface{}
+// PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterLoadbalance []interface{}
 
-// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
-// Returns all available packetfilter/1to1nat objects
-func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
-
-// RefRequired implements sophos.RestObject
-func (*Packetfilter1to1Nat) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the Packetfilter1to1Nat DELETE path
-// Creates or updates the complete object 1to1nat
-func (*Packetfilter1to1Nat) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the Packetfilter1to1Nat PATCH path
-// Changes to parts of the object 1to1nat types
-func (*Packetfilter1to1Nat) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the Packetfilter1to1Nat POST path
-// Create a new packetfilter/1to1nat object
-func (*Packetfilter1to1Nat) PostPath() string {
-	return "/api/objects/packetfilter/1to1nat/"
-}
-
-// PutPath implements sophos.RestObject and returns the Packetfilter1to1Nat PUT path
-// Creates or updates the complete object 1to1nat
-func (*Packetfilter1to1Nat) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
-}
-
-// PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterMangle []interface{}
-
-// GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
-// Returns all available packetfilter/mangle objects
-func (*PacketfilterMangle) GetPath() string { return "/api/objects/packetfilter/mangle/" }
+// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
+// Returns all available packetfilter/loadbalance objects
+func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterMangle) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterLoadbalance) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the PacketfilterMangle DELETE path
-// Creates or updates the complete object mangle
-func (*PacketfilterMangle) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+// DeletePath implements sophos.RestObject and returns the PacketfilterLoadbalance DELETE path
+// Creates or updates the complete object loadbalance
+func (*PacketfilterLoadbalance) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the PacketfilterMangle PATCH path
-// Changes to parts of the object mangle types
-func (*PacketfilterMangle) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+// PatchPath implements sophos.RestObject and returns the PacketfilterLoadbalance PATCH path
+// Changes to parts of the object loadbalance types
+func (*PacketfilterLoadbalance) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the PacketfilterMangle POST path
-// Create a new packetfilter/mangle object
-func (*PacketfilterMangle) PostPath() string {
-	return "/api/objects/packetfilter/mangle/"
+// PostPath implements sophos.RestObject and returns the PacketfilterLoadbalance POST path
+// Create a new packetfilter/loadbalance object
+func (*PacketfilterLoadbalance) PostPath() string {
+	return "/api/objects/packetfilter/loadbalance/"
 }
 
-// PutPath implements sophos.RestObject and returns the PacketfilterMangle PUT path
-// Creates or updates the complete object mangle
-func (*PacketfilterMangle) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
+// PutPath implements sophos.RestObject and returns the PacketfilterLoadbalance PUT path
+// Creates or updates the complete object loadbalance
+func (*PacketfilterLoadbalance) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
-// PacketfilterNat is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterNats []PacketfilterNat
-type PacketfilterNat struct {
-	Locked                string `json:"_locked"`
-	Reference             string `json:"_ref"`
-	_type                 string `json:"_type"`
-	AutoPfIn              string `json:"auto_pf_in"`
-	AutoPfrule            bool   `json:"auto_pfrule"`
-	Comment               string `json:"comment"`
-	Destination           string `json:"destination"`
-	DestinationNatAddress string `json:"destination_nat_address"`
-	DestinationNatService string `json:"destination_nat_service"`
-	Group                 string `json:"group"`
-	Ipsec                 bool   `json:"ipsec"`
-	Log                   bool   `json:"log"`
-	Mode                  string `json:"mode"`
-	Name                  string `json:"name"`
-	Service               string `json:"service"`
-	Source                string `json:"source"`
-	SourceNatAddress      string `json:"source_nat_address"`
-	SourceNatService      string `json:"source_nat_service"`
-	Status                bool   `json:"status"`
-}
+// PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterGroup []interface{}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
-// Returns all available packetfilter/nat objects
-func (*PacketfilterNats) GetPath() string { return "/api/objects/packetfilter/nat/" }
+// GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
+// Returns all available packetfilter/group objects
+func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterNats) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterGroup) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
-// Returns all available nat types
-func (p *PacketfilterNat) GetPath() string {
-	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", p.Reference)
+// DeletePath implements sophos.RestObject and returns the PacketfilterGroup DELETE path
+// Creates or updates the complete object group
+func (*PacketfilterGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (p *PacketfilterNat) RefRequired() (string, bool) { return p.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the PacketfilterNat DELETE path
-// Creates or updates the complete object nat
-func (*PacketfilterNat) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
+// PatchPath implements sophos.RestObject and returns the PacketfilterGroup PATCH path
+// Changes to parts of the object group types
+func (*PacketfilterGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the PacketfilterNat PATCH path
-// Changes to parts of the object nat types
-func (*PacketfilterNat) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
+// PostPath implements sophos.RestObject and returns the PacketfilterGroup POST path
+// Create a new packetfilter/group object
+func (*PacketfilterGroup) PostPath() string {
+	return "/api/objects/packetfilter/group/"
 }
 
-// PostPath implements sophos.RestObject and returns the PacketfilterNat POST path
-// Create a new packetfilter/nat object
-func (*PacketfilterNat) PostPath() string {
-	return "/api/objects/packetfilter/nat/"
+// PutPath implements sophos.RestObject and returns the PacketfilterGroup PUT path
+// Creates or updates the complete object group
+func (*PacketfilterGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
 }
-
-// PutPath implements sophos.RestObject and returns the PacketfilterNat PUT path
-// Creates or updates the complete object nat
-func (*PacketfilterNat) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
-}
-
-// Type implements sophos.Object
-func (p *PacketfilterNat) GetType() string { return p._type }

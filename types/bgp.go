@@ -12,21 +12,21 @@ import (
 // Bgp is a generated struct representing the Sophos Bgp Endpoint
 // GET /api/nodes/bgp
 type Bgp struct {
-	BgpRouteMap  BgpRouteMap  `json:"bgp_route_map"`
-	BgpFilter    BgpFilter    `json:"bgp_filter"`
 	BgpGroup     BgpGroup     `json:"bgp_group"`
-	BgpSystem    BgpSystem    `json:"bgp_system"`
-	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
 	BgpNeighbor  BgpNeighbor  `json:"bgp_neighbor"`
+	BgpSystem    BgpSystem    `json:"bgp_system"`
+	BgpFilter    BgpFilter    `json:"bgp_filter"`
+	BgpRouteMap  BgpRouteMap  `json:"bgp_route_map"`
+	BgpAmazonVpc BgpAmazonVpc `json:"bgp_amazon_vpc"`
 }
 
 var defsBgp = map[string]sophos.RestObject{
-	"BgpRouteMap":  &BgpRouteMap{},
-	"BgpFilter":    &BgpFilter{},
 	"BgpGroup":     &BgpGroup{},
-	"BgpSystem":    &BgpSystem{},
-	"BgpAmazonVpc": &BgpAmazonVpc{},
 	"BgpNeighbor":  &BgpNeighbor{},
+	"BgpSystem":    &BgpSystem{},
+	"BgpFilter":    &BgpFilter{},
+	"BgpRouteMap":  &BgpRouteMap{},
+	"BgpAmazonVpc": &BgpAmazonVpc{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Bgp's Objects
@@ -82,38 +82,106 @@ func (Bgp) References() []string {
 	}
 }
 
-// BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpRouteMap []interface{}
+// BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpGroup []interface{}
 
-// GetPath implements sophos.RestObject and returns the BgpRouteMap GET path
-// Returns all available bgp/route_map objects
-func (*BgpRouteMap) GetPath() string { return "/api/objects/bgp/route_map/" }
+// GetPath implements sophos.RestObject and returns the BgpGroup GET path
+// Returns all available bgp/group objects
+func (*BgpGroup) GetPath() string { return "/api/objects/bgp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*BgpRouteMap) RefRequired() (string, bool) { return "", false }
+func (*BgpGroup) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the BgpRouteMap DELETE path
-// Creates or updates the complete object route_map
-func (*BgpRouteMap) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// DeletePath implements sophos.RestObject and returns the BgpGroup DELETE path
+// Creates or updates the complete object group
+func (*BgpGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the BgpRouteMap PATCH path
-// Changes to parts of the object route_map types
-func (*BgpRouteMap) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// PatchPath implements sophos.RestObject and returns the BgpGroup PATCH path
+// Changes to parts of the object group types
+func (*BgpGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the BgpRouteMap POST path
-// Create a new bgp/route_map object
-func (*BgpRouteMap) PostPath() string {
-	return "/api/objects/bgp/route_map/"
+// PostPath implements sophos.RestObject and returns the BgpGroup POST path
+// Create a new bgp/group object
+func (*BgpGroup) PostPath() string {
+	return "/api/objects/bgp/group/"
 }
 
-// PutPath implements sophos.RestObject and returns the BgpRouteMap PUT path
-// Creates or updates the complete object route_map
-func (*BgpRouteMap) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
+// PutPath implements sophos.RestObject and returns the BgpGroup PUT path
+// Creates or updates the complete object group
+func (*BgpGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
+}
+
+// BgpNeighbor is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpNeighbor []interface{}
+
+// GetPath implements sophos.RestObject and returns the BgpNeighbor GET path
+// Returns all available bgp/neighbor objects
+func (*BgpNeighbor) GetPath() string { return "/api/objects/bgp/neighbor/" }
+
+// RefRequired implements sophos.RestObject
+func (*BgpNeighbor) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the BgpNeighbor DELETE path
+// Creates or updates the complete object neighbor
+func (*BgpNeighbor) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the BgpNeighbor PATCH path
+// Changes to parts of the object neighbor types
+func (*BgpNeighbor) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the BgpNeighbor POST path
+// Create a new bgp/neighbor object
+func (*BgpNeighbor) PostPath() string {
+	return "/api/objects/bgp/neighbor/"
+}
+
+// PutPath implements sophos.RestObject and returns the BgpNeighbor PUT path
+// Creates or updates the complete object neighbor
+func (*BgpNeighbor) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
+}
+
+// BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpSystem []interface{}
+
+// GetPath implements sophos.RestObject and returns the BgpSystem GET path
+// Returns all available bgp/system objects
+func (*BgpSystem) GetPath() string { return "/api/objects/bgp/system/" }
+
+// RefRequired implements sophos.RestObject
+func (*BgpSystem) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the BgpSystem DELETE path
+// Creates or updates the complete object system
+func (*BgpSystem) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the BgpSystem PATCH path
+// Changes to parts of the object system types
+func (*BgpSystem) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the BgpSystem POST path
+// Create a new bgp/system object
+func (*BgpSystem) PostPath() string {
+	return "/api/objects/bgp/system/"
+}
+
+// PutPath implements sophos.RestObject and returns the BgpSystem PUT path
+// Creates or updates the complete object system
+func (*BgpSystem) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
 
 // BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject
@@ -150,72 +218,38 @@ func (*BgpFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
 }
 
-// BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpGroup []interface{}
+// BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
+type BgpRouteMap []interface{}
 
-// GetPath implements sophos.RestObject and returns the BgpGroup GET path
-// Returns all available bgp/group objects
-func (*BgpGroup) GetPath() string { return "/api/objects/bgp/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*BgpGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the BgpGroup DELETE path
-// Creates or updates the complete object group
-func (*BgpGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the BgpGroup PATCH path
-// Changes to parts of the object group types
-func (*BgpGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the BgpGroup POST path
-// Create a new bgp/group object
-func (*BgpGroup) PostPath() string {
-	return "/api/objects/bgp/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the BgpGroup PUT path
-// Creates or updates the complete object group
-func (*BgpGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
-}
-
-// BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpSystem []interface{}
-
-// GetPath implements sophos.RestObject and returns the BgpSystem GET path
-// Returns all available bgp/system objects
-func (*BgpSystem) GetPath() string { return "/api/objects/bgp/system/" }
+// GetPath implements sophos.RestObject and returns the BgpRouteMap GET path
+// Returns all available bgp/route_map objects
+func (*BgpRouteMap) GetPath() string { return "/api/objects/bgp/route_map/" }
 
 // RefRequired implements sophos.RestObject
-func (*BgpSystem) RefRequired() (string, bool) { return "", false }
+func (*BgpRouteMap) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the BgpSystem DELETE path
-// Creates or updates the complete object system
-func (*BgpSystem) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
+// DeletePath implements sophos.RestObject and returns the BgpRouteMap DELETE path
+// Creates or updates the complete object route_map
+func (*BgpRouteMap) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the BgpSystem PATCH path
-// Changes to parts of the object system types
-func (*BgpSystem) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
+// PatchPath implements sophos.RestObject and returns the BgpRouteMap PATCH path
+// Changes to parts of the object route_map types
+func (*BgpRouteMap) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the BgpSystem POST path
-// Create a new bgp/system object
-func (*BgpSystem) PostPath() string {
-	return "/api/objects/bgp/system/"
+// PostPath implements sophos.RestObject and returns the BgpRouteMap POST path
+// Create a new bgp/route_map object
+func (*BgpRouteMap) PostPath() string {
+	return "/api/objects/bgp/route_map/"
 }
 
-// PutPath implements sophos.RestObject and returns the BgpSystem PUT path
-// Creates or updates the complete object system
-func (*BgpSystem) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
+// PutPath implements sophos.RestObject and returns the BgpRouteMap PUT path
+// Creates or updates the complete object route_map
+func (*BgpRouteMap) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
 // BgpAmazonVpc is an Sophos Endpoint subType and implements sophos.RestObject
@@ -277,37 +311,3 @@ func (*BgpAmazonVpc) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (b *BgpAmazonVpc) GetType() string { return b._type }
-
-// BgpNeighbor is an Sophos Endpoint subType and implements sophos.RestObject
-type BgpNeighbor []interface{}
-
-// GetPath implements sophos.RestObject and returns the BgpNeighbor GET path
-// Returns all available bgp/neighbor objects
-func (*BgpNeighbor) GetPath() string { return "/api/objects/bgp/neighbor/" }
-
-// RefRequired implements sophos.RestObject
-func (*BgpNeighbor) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the BgpNeighbor DELETE path
-// Creates or updates the complete object neighbor
-func (*BgpNeighbor) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the BgpNeighbor PATCH path
-// Changes to parts of the object neighbor types
-func (*BgpNeighbor) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the BgpNeighbor POST path
-// Create a new bgp/neighbor object
-func (*BgpNeighbor) PostPath() string {
-	return "/api/objects/bgp/neighbor/"
-}
-
-// PutPath implements sophos.RestObject and returns the BgpNeighbor PUT path
-// Creates or updates the complete object neighbor
-func (*BgpNeighbor) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
-}

@@ -53,10 +53,10 @@ type Reporting struct {
 }
 
 var defsReporting = map[string]sophos.RestObject{
+	"ReportingDepartment": &ReportingDepartment{},
 	"ReportingFilter":     &ReportingFilter{},
 	"ReportingGroup":      &ReportingGroup{},
 	"ReportingMail":       &ReportingMail{},
-	"ReportingDepartment": &ReportingDepartment{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Reporting's Objects
@@ -102,6 +102,40 @@ func (Reporting) References() []string {
 		"REF_ReportingGroup",
 		"REF_ReportingMail",
 	}
+}
+
+// ReportingDepartment is an Sophos Endpoint subType and implements sophos.RestObject
+type ReportingDepartment []interface{}
+
+// GetPath implements sophos.RestObject and returns the ReportingDepartment GET path
+// Returns all available reporting/department objects
+func (*ReportingDepartment) GetPath() string { return "/api/objects/reporting/department/" }
+
+// RefRequired implements sophos.RestObject
+func (*ReportingDepartment) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ReportingDepartment DELETE path
+// Creates or updates the complete object department
+func (*ReportingDepartment) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ReportingDepartment PATCH path
+// Changes to parts of the object department types
+func (*ReportingDepartment) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ReportingDepartment POST path
+// Create a new reporting/department object
+func (*ReportingDepartment) PostPath() string {
+	return "/api/objects/reporting/department/"
+}
+
+// PutPath implements sophos.RestObject and returns the ReportingDepartment PUT path
+// Creates or updates the complete object department
+func (*ReportingDepartment) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
 }
 
 // ReportingFilter is an Sophos Endpoint subType and implements sophos.RestObject
@@ -234,38 +268,4 @@ func (*ReportingMail) PostPath() string {
 // Creates or updates the complete object mail
 func (*ReportingMail) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/mail/%s", ref)
-}
-
-// ReportingDepartment is an Sophos Endpoint subType and implements sophos.RestObject
-type ReportingDepartment []interface{}
-
-// GetPath implements sophos.RestObject and returns the ReportingDepartment GET path
-// Returns all available reporting/department objects
-func (*ReportingDepartment) GetPath() string { return "/api/objects/reporting/department/" }
-
-// RefRequired implements sophos.RestObject
-func (*ReportingDepartment) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ReportingDepartment DELETE path
-// Creates or updates the complete object department
-func (*ReportingDepartment) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ReportingDepartment PATCH path
-// Changes to parts of the object department types
-func (*ReportingDepartment) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ReportingDepartment POST path
-// Create a new reporting/department object
-func (*ReportingDepartment) PostPath() string {
-	return "/api/objects/reporting/department/"
-}
-
-// PutPath implements sophos.RestObject and returns the ReportingDepartment PUT path
-// Creates or updates the complete object department
-func (*ReportingDepartment) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/reporting/department/%s", ref)
 }

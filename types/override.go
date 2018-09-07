@@ -12,13 +12,13 @@ import (
 // Override is a generated struct representing the Sophos Override Endpoint
 // GET /api/nodes/override
 type Override struct {
-	OverrideObjref OverrideObjref `json:"override_objref"`
 	OverrideGroup  OverrideGroup  `json:"override_group"`
+	OverrideObjref OverrideObjref `json:"override_objref"`
 }
 
 var defsOverride = map[string]sophos.RestObject{
-	"OverrideObjref": &OverrideObjref{},
 	"OverrideGroup":  &OverrideGroup{},
+	"OverrideObjref": &OverrideObjref{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Override's Objects
@@ -58,40 +58,6 @@ func (Override) References() []string {
 	}
 }
 
-// OverrideObjref is an Sophos Endpoint subType and implements sophos.RestObject
-type OverrideObjref []interface{}
-
-// GetPath implements sophos.RestObject and returns the OverrideObjref GET path
-// Returns all available override/objref objects
-func (*OverrideObjref) GetPath() string { return "/api/objects/override/objref/" }
-
-// RefRequired implements sophos.RestObject
-func (*OverrideObjref) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the OverrideObjref DELETE path
-// Creates or updates the complete object objref
-func (*OverrideObjref) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the OverrideObjref PATCH path
-// Changes to parts of the object objref types
-func (*OverrideObjref) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the OverrideObjref POST path
-// Create a new override/objref object
-func (*OverrideObjref) PostPath() string {
-	return "/api/objects/override/objref/"
-}
-
-// PutPath implements sophos.RestObject and returns the OverrideObjref PUT path
-// Creates or updates the complete object objref
-func (*OverrideObjref) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
-}
-
 // OverrideGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type OverrideGroup []interface{}
 
@@ -124,4 +90,38 @@ func (*OverrideGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*OverrideGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/group/%s", ref)
+}
+
+// OverrideObjref is an Sophos Endpoint subType and implements sophos.RestObject
+type OverrideObjref []interface{}
+
+// GetPath implements sophos.RestObject and returns the OverrideObjref GET path
+// Returns all available override/objref objects
+func (*OverrideObjref) GetPath() string { return "/api/objects/override/objref/" }
+
+// RefRequired implements sophos.RestObject
+func (*OverrideObjref) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the OverrideObjref DELETE path
+// Creates or updates the complete object objref
+func (*OverrideObjref) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the OverrideObjref PATCH path
+// Changes to parts of the object objref types
+func (*OverrideObjref) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the OverrideObjref POST path
+// Create a new override/objref object
+func (*OverrideObjref) PostPath() string {
+	return "/api/objects/override/objref/"
+}
+
+// PutPath implements sophos.RestObject and returns the OverrideObjref PUT path
+// Creates or updates the complete object objref
+func (*OverrideObjref) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
 }

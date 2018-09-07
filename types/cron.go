@@ -12,13 +12,13 @@ import (
 // Cron is a generated struct representing the Sophos Cron Endpoint
 // GET /api/nodes/cron
 type Cron struct {
-	CronAt    CronAt    `json:"cron_at"`
 	CronGroup CronGroup `json:"cron_group"`
+	CronAt    CronAt    `json:"cron_at"`
 }
 
 var defsCron = map[string]sophos.RestObject{
-	"CronAt":    &CronAt{},
 	"CronGroup": &CronGroup{},
+	"CronAt":    &CronAt{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Cron's Objects
@@ -58,40 +58,6 @@ func (Cron) References() []string {
 	}
 }
 
-// CronAt is an Sophos Endpoint subType and implements sophos.RestObject
-type CronAt []interface{}
-
-// GetPath implements sophos.RestObject and returns the CronAt GET path
-// Returns all available cron/at objects
-func (*CronAt) GetPath() string { return "/api/objects/cron/at/" }
-
-// RefRequired implements sophos.RestObject
-func (*CronAt) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the CronAt DELETE path
-// Creates or updates the complete object at
-func (*CronAt) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the CronAt PATCH path
-// Changes to parts of the object at types
-func (*CronAt) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the CronAt POST path
-// Create a new cron/at object
-func (*CronAt) PostPath() string {
-	return "/api/objects/cron/at/"
-}
-
-// PutPath implements sophos.RestObject and returns the CronAt PUT path
-// Creates or updates the complete object at
-func (*CronAt) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
-}
-
 // CronGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type CronGroup []interface{}
 
@@ -124,4 +90,38 @@ func (*CronGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*CronGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/group/%s", ref)
+}
+
+// CronAt is an Sophos Endpoint subType and implements sophos.RestObject
+type CronAt []interface{}
+
+// GetPath implements sophos.RestObject and returns the CronAt GET path
+// Returns all available cron/at objects
+func (*CronAt) GetPath() string { return "/api/objects/cron/at/" }
+
+// RefRequired implements sophos.RestObject
+func (*CronAt) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the CronAt DELETE path
+// Creates or updates the complete object at
+func (*CronAt) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the CronAt PATCH path
+// Changes to parts of the object at types
+func (*CronAt) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the CronAt POST path
+// Create a new cron/at object
+func (*CronAt) PostPath() string {
+	return "/api/objects/cron/at/"
+}
+
+// PutPath implements sophos.RestObject and returns the CronAt PUT path
+// Creates or updates the complete object at
+func (*CronAt) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
 }

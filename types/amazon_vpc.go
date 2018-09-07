@@ -19,9 +19,9 @@ type AmazonVpc struct {
 }
 
 var defsAmazonVpc = map[string]sophos.RestObject{
+	"AmazonVpcTunnel":     &AmazonVpcTunnel{},
 	"AmazonVpcConnection": &AmazonVpcConnection{},
 	"AmazonVpcGroup":      &AmazonVpcGroup{},
-	"AmazonVpcTunnel":     &AmazonVpcTunnel{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of AmazonVpc's Objects
@@ -64,6 +64,63 @@ func (AmazonVpc) References() []string {
 		"REF_AmazonVpcTunnel",
 	}
 }
+
+// AmazonVpcTunnel is an Sophos Endpoint subType and implements sophos.RestObject
+type AmazonVpcTunnels []AmazonVpcTunnel
+type AmazonVpcTunnel struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Address   string `json:"address"`
+	Bgp       string `json:"bgp"`
+	Comment   string `json:"comment"`
+	Ipsec     string `json:"ipsec"`
+	Name      string `json:"name"`
+	Netmask   int64  `json:"netmask"`
+}
+
+// GetPath implements sophos.RestObject and returns the AmazonVpcTunnels GET path
+// Returns all available amazon_vpc/tunnel objects
+func (*AmazonVpcTunnels) GetPath() string { return "/api/objects/amazon_vpc/tunnel/" }
+
+// RefRequired implements sophos.RestObject
+func (*AmazonVpcTunnels) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AmazonVpcTunnels GET path
+// Returns all available tunnel types
+func (a *AmazonVpcTunnel) GetPath() string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AmazonVpcTunnel) RefRequired() (string, bool) { return a.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the AmazonVpcTunnel DELETE path
+// Creates or updates the complete object tunnel
+func (*AmazonVpcTunnel) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the AmazonVpcTunnel PATCH path
+// Changes to parts of the object tunnel types
+func (*AmazonVpcTunnel) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the AmazonVpcTunnel POST path
+// Create a new amazon_vpc/tunnel object
+func (*AmazonVpcTunnel) PostPath() string {
+	return "/api/objects/amazon_vpc/tunnel/"
+}
+
+// PutPath implements sophos.RestObject and returns the AmazonVpcTunnel PUT path
+// Creates or updates the complete object tunnel
+func (*AmazonVpcTunnel) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
+}
+
+// Type implements sophos.Object
+func (a *AmazonVpcTunnel) GetType() string { return a._type }
 
 // AmazonVpcConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type AmazonVpcConnections []AmazonVpcConnection
@@ -160,60 +217,3 @@ func (*AmazonVpcGroup) PostPath() string {
 func (*AmazonVpcGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s", ref)
 }
-
-// AmazonVpcTunnel is an Sophos Endpoint subType and implements sophos.RestObject
-type AmazonVpcTunnels []AmazonVpcTunnel
-type AmazonVpcTunnel struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Bgp       string `json:"bgp"`
-	Comment   string `json:"comment"`
-	Ipsec     string `json:"ipsec"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-}
-
-// GetPath implements sophos.RestObject and returns the AmazonVpcTunnels GET path
-// Returns all available amazon_vpc/tunnel objects
-func (*AmazonVpcTunnels) GetPath() string { return "/api/objects/amazon_vpc/tunnel/" }
-
-// RefRequired implements sophos.RestObject
-func (*AmazonVpcTunnels) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the AmazonVpcTunnels GET path
-// Returns all available tunnel types
-func (a *AmazonVpcTunnel) GetPath() string {
-	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", a.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (a *AmazonVpcTunnel) RefRequired() (string, bool) { return a.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the AmazonVpcTunnel DELETE path
-// Creates or updates the complete object tunnel
-func (*AmazonVpcTunnel) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the AmazonVpcTunnel PATCH path
-// Changes to parts of the object tunnel types
-func (*AmazonVpcTunnel) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the AmazonVpcTunnel POST path
-// Create a new amazon_vpc/tunnel object
-func (*AmazonVpcTunnel) PostPath() string {
-	return "/api/objects/amazon_vpc/tunnel/"
-}
-
-// PutPath implements sophos.RestObject and returns the AmazonVpcTunnel PUT path
-// Creates or updates the complete object tunnel
-func (*AmazonVpcTunnel) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
-}
-
-// Type implements sophos.Object
-func (a *AmazonVpcTunnel) GetType() string { return a._type }

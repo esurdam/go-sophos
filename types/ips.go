@@ -49,10 +49,10 @@ type Ips struct {
 }
 
 var defsIps = map[string]sophos.RestObject{
+	"IpsException":    &IpsException{},
 	"IpsGroup":        &IpsGroup{},
 	"IpsRule":         &IpsRule{},
 	"IpsRuleModifier": &IpsRuleModifier{},
-	"IpsException":    &IpsException{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ips's Objects
@@ -99,6 +99,65 @@ func (Ips) References() []string {
 		"REF_IpsRuleModifier",
 	}
 }
+
+// IpsException is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsExceptions []IpsException
+type IpsException struct {
+	Locked              string   `json:"_locked"`
+	Reference           string   `json:"_ref"`
+	_type               string   `json:"_type"`
+	Comment             string   `json:"comment"`
+	DestinationNetworks []string `json:"destination_networks"`
+	Name                string   `json:"name"`
+	Operator            string   `json:"operator"`
+	Services            []string `json:"services"`
+	Skiplist            []string `json:"skiplist"`
+	SourceNetworks      []string `json:"source_networks"`
+	Status              bool     `json:"status"`
+}
+
+// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
+// Returns all available ips/exception objects
+func (*IpsExceptions) GetPath() string { return "/api/objects/ips/exception/" }
+
+// RefRequired implements sophos.RestObject
+func (*IpsExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
+// Returns all available exception types
+func (i *IpsException) GetPath() string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsException) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the IpsException DELETE path
+// Creates or updates the complete object exception
+func (*IpsException) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the IpsException PATCH path
+// Changes to parts of the object exception types
+func (*IpsException) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsException POST path
+// Create a new ips/exception object
+func (*IpsException) PostPath() string {
+	return "/api/objects/ips/exception/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsException PUT path
+// Creates or updates the complete object exception
+func (*IpsException) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *IpsException) GetType() string { return i._type }
 
 // IpsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsGroups []IpsGroup
@@ -225,62 +284,3 @@ func (*IpsRuleModifier) PostPath() string {
 func (*IpsRuleModifier) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s", ref)
 }
-
-// IpsException is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsExceptions []IpsException
-type IpsException struct {
-	Locked              string   `json:"_locked"`
-	Reference           string   `json:"_ref"`
-	_type               string   `json:"_type"`
-	Comment             string   `json:"comment"`
-	DestinationNetworks []string `json:"destination_networks"`
-	Name                string   `json:"name"`
-	Operator            string   `json:"operator"`
-	Services            []string `json:"services"`
-	Skiplist            []string `json:"skiplist"`
-	SourceNetworks      []string `json:"source_networks"`
-	Status              bool     `json:"status"`
-}
-
-// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
-// Returns all available ips/exception objects
-func (*IpsExceptions) GetPath() string { return "/api/objects/ips/exception/" }
-
-// RefRequired implements sophos.RestObject
-func (*IpsExceptions) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the IpsExceptions GET path
-// Returns all available exception types
-func (i *IpsException) GetPath() string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *IpsException) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the IpsException DELETE path
-// Creates or updates the complete object exception
-func (*IpsException) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the IpsException PATCH path
-// Changes to parts of the object exception types
-func (*IpsException) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsException POST path
-// Create a new ips/exception object
-func (*IpsException) PostPath() string {
-	return "/api/objects/ips/exception/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsException PUT path
-// Creates or updates the complete object exception
-func (*IpsException) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *IpsException) GetType() string { return i._type }

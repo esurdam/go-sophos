@@ -109,19 +109,19 @@ type Http struct {
 }
 
 var defsHttp = map[string]sophos.RestObject{
+	"HttpDomainRegex": &HttpDomainRegex{},
+	"HttpLslTag":      &HttpLslTag{},
+	"HttpProfile":     &HttpProfile{},
+	"HttpSpCategory":  &HttpSpCategory{},
+	"HttpSpSubcat":    &HttpSpSubcat{},
+	"HttpCffProfile":  &HttpCffProfile{},
+	"HttpDeviceAuth":  &HttpDeviceAuth{},
 	"HttpGroup":       &HttpGroup{},
 	"HttpLocalSite":   &HttpLocalSite{},
 	"HttpPacFile":     &HttpPacFile{},
-	"HttpProfile":     &HttpProfile{},
-	"HttpCffProfile":  &HttpCffProfile{},
-	"HttpDeviceAuth":  &HttpDeviceAuth{},
 	"HttpException":   &HttpException{},
-	"HttpLslTag":      &HttpLslTag{},
-	"HttpParentProxy": &HttpParentProxy{},
 	"HttpCffAction":   &HttpCffAction{},
-	"HttpSpSubcat":    &HttpSpSubcat{},
-	"HttpDomainRegex": &HttpDomainRegex{},
-	"HttpSpCategory":  &HttpSpCategory{},
+	"HttpParentProxy": &HttpParentProxy{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Http's Objects
@@ -203,6 +203,351 @@ func (Http) References() []string {
 		"REF_HttpSpCategory",
 		"REF_HttpSpSubcat",
 	}
+}
+
+// HttpDomainRegex is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpDomainRegex []interface{}
+
+// GetPath implements sophos.RestObject and returns the HttpDomainRegex GET path
+// Returns all available http/domain_regex objects
+func (*HttpDomainRegex) GetPath() string { return "/api/objects/http/domain_regex/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpDomainRegex) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the HttpDomainRegex DELETE path
+// Creates or updates the complete object domain_regex
+func (*HttpDomainRegex) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpDomainRegex PATCH path
+// Changes to parts of the object domain_regex types
+func (*HttpDomainRegex) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpDomainRegex POST path
+// Create a new http/domain_regex object
+func (*HttpDomainRegex) PostPath() string {
+	return "/api/objects/http/domain_regex/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpDomainRegex PUT path
+// Creates or updates the complete object domain_regex
+func (*HttpDomainRegex) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
+}
+
+// HttpLslTag is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpLslTag []interface{}
+
+// GetPath implements sophos.RestObject and returns the HttpLslTag GET path
+// Returns all available http/lsl_tag objects
+func (*HttpLslTag) GetPath() string { return "/api/objects/http/lsl_tag/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpLslTag) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the HttpLslTag DELETE path
+// Creates or updates the complete object lsl_tag
+func (*HttpLslTag) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpLslTag PATCH path
+// Changes to parts of the object lsl_tag types
+func (*HttpLslTag) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpLslTag POST path
+// Create a new http/lsl_tag object
+func (*HttpLslTag) PostPath() string {
+	return "/api/objects/http/lsl_tag/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpLslTag PUT path
+// Creates or updates the complete object lsl_tag
+func (*HttpLslTag) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
+}
+
+// HttpProfile is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpProfiles []HttpProfile
+type HttpProfile struct {
+	Locked             string        `json:"_locked"`
+	Reference          string        `json:"_ref"`
+	_type              string        `json:"_type"`
+	Aua                bool          `json:"aua"`
+	BlockOnAuthFailed  bool          `json:"block_on_auth_failed"`
+	CffProfiles        []string      `json:"cff_profiles"`
+	Comment            string        `json:"comment"`
+	DefaultCffAction   string        `json:"default_cff_action"`
+	DeviceAuth         []interface{} `json:"device_auth"`
+	EdirSso            bool          `json:"edir_sso"`
+	EnableDeviceAuth   bool          `json:"enable_device_auth"`
+	EndpointsGroups    []interface{} `json:"endpoints_groups"`
+	FullTransparent    bool          `json:"full_transparent"`
+	InProgress         bool          `json:"in_progress"`
+	Name               string        `json:"name"`
+	Networks           []interface{} `json:"networks"`
+	Ntlm               bool          `json:"ntlm"`
+	OpendirectoryAuth  bool          `json:"opendirectory_auth"`
+	OrderedCffProfiles []string      `json:"ordered_cff_profiles"`
+	OutInterface       string        `json:"out_interface"`
+	ScanSslOpt         string        `json:"scan_ssl_opt"`
+	SelectiveScanCat   []string      `json:"selective_scan_cat"`
+	SelectiveScanTags  []interface{} `json:"selective_scan_tags"`
+	Status             bool          `json:"status"`
+	Transparent        bool          `json:"transparent"`
+	TransparentAac     bool          `json:"transparent_aac"`
+	TransparentAuth    bool          `json:"transparent_auth"`
+}
+
+// GetPath implements sophos.RestObject and returns the HttpProfiles GET path
+// Returns all available http/profile objects
+func (*HttpProfiles) GetPath() string { return "/api/objects/http/profile/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpProfiles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpProfiles GET path
+// Returns all available profile types
+func (h *HttpProfile) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/profile/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpProfile) RefRequired() (string, bool) { return h.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the HttpProfile DELETE path
+// Creates or updates the complete object profile
+func (*HttpProfile) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpProfile PATCH path
+// Changes to parts of the object profile types
+func (*HttpProfile) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpProfile POST path
+// Create a new http/profile object
+func (*HttpProfile) PostPath() string {
+	return "/api/objects/http/profile/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpProfile PUT path
+// Creates or updates the complete object profile
+func (*HttpProfile) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
+}
+
+// Type implements sophos.Object
+func (h *HttpProfile) GetType() string { return h._type }
+
+// HttpSpCategory is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpSpCategorys []HttpSpCategory
+type HttpSpCategory struct {
+	Locked    string   `json:"_locked"`
+	Reference string   `json:"_ref"`
+	_type     string   `json:"_type"`
+	Comment   string   `json:"comment"`
+	ID        string   `json:"id"`
+	Name      string   `json:"name"`
+	Subcats   []string `json:"subcats"`
+}
+
+// GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
+// Returns all available http/sp_category objects
+func (*HttpSpCategorys) GetPath() string { return "/api/objects/http/sp_category/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpSpCategorys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
+// Returns all available sp_category types
+func (h *HttpSpCategory) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/sp_category/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpSpCategory) RefRequired() (string, bool) { return h.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the HttpSpCategory DELETE path
+// Creates or updates the complete object sp_category
+func (*HttpSpCategory) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpSpCategory PATCH path
+// Changes to parts of the object sp_category types
+func (*HttpSpCategory) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpSpCategory POST path
+// Create a new http/sp_category object
+func (*HttpSpCategory) PostPath() string {
+	return "/api/objects/http/sp_category/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpSpCategory PUT path
+// Creates or updates the complete object sp_category
+func (*HttpSpCategory) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
+}
+
+// Type implements sophos.Object
+func (h *HttpSpCategory) GetType() string { return h._type }
+
+// HttpSpSubcat is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpSpSubcats []HttpSpSubcat
+type HttpSpSubcat struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+}
+
+// GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
+// Returns all available http/sp_subcat objects
+func (*HttpSpSubcats) GetPath() string { return "/api/objects/http/sp_subcat/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpSpSubcats) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
+// Returns all available sp_subcat types
+func (h *HttpSpSubcat) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpSpSubcat) RefRequired() (string, bool) { return h.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the HttpSpSubcat DELETE path
+// Creates or updates the complete object sp_subcat
+func (*HttpSpSubcat) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpSpSubcat PATCH path
+// Changes to parts of the object sp_subcat types
+func (*HttpSpSubcat) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpSpSubcat POST path
+// Create a new http/sp_subcat object
+func (*HttpSpSubcat) PostPath() string {
+	return "/api/objects/http/sp_subcat/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpSpSubcat PUT path
+// Creates or updates the complete object sp_subcat
+func (*HttpSpSubcat) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
+}
+
+// Type implements sophos.Object
+func (h *HttpSpSubcat) GetType() string { return h._type }
+
+// HttpCffProfile is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpCffProfiles []HttpCffProfile
+type HttpCffProfile struct {
+	Locked         string   `json:"_locked"`
+	Reference      string   `json:"_ref"`
+	_type          string   `json:"_type"`
+	Aaa            []string `json:"aaa"`
+	Action         string   `json:"action"`
+	CffProfileName string   `json:"cff_profile_name"`
+	Comment        string   `json:"comment"`
+	InProgress     string   `json:"in_progress"`
+	Name           string   `json:"name"`
+	SkipAuth       bool     `json:"skip_auth"`
+	TimeEvent      string   `json:"time_event"`
+}
+
+// GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
+// Returns all available http/cff_profile objects
+func (*HttpCffProfiles) GetPath() string { return "/api/objects/http/cff_profile/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpCffProfiles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
+// Returns all available cff_profile types
+func (h *HttpCffProfile) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/cff_profile/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpCffProfile) RefRequired() (string, bool) { return h.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the HttpCffProfile DELETE path
+// Creates or updates the complete object cff_profile
+func (*HttpCffProfile) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpCffProfile PATCH path
+// Changes to parts of the object cff_profile types
+func (*HttpCffProfile) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpCffProfile POST path
+// Create a new http/cff_profile object
+func (*HttpCffProfile) PostPath() string {
+	return "/api/objects/http/cff_profile/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpCffProfile PUT path
+// Creates or updates the complete object cff_profile
+func (*HttpCffProfile) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
+}
+
+// Type implements sophos.Object
+func (h *HttpCffProfile) GetType() string { return h._type }
+
+// HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpDeviceAuth []interface{}
+
+// GetPath implements sophos.RestObject and returns the HttpDeviceAuth GET path
+// Returns all available http/device_auth objects
+func (*HttpDeviceAuth) GetPath() string { return "/api/objects/http/device_auth/" }
+
+// RefRequired implements sophos.RestObject
+func (*HttpDeviceAuth) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the HttpDeviceAuth DELETE path
+// Creates or updates the complete object device_auth
+func (*HttpDeviceAuth) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the HttpDeviceAuth PATCH path
+// Changes to parts of the object device_auth types
+func (*HttpDeviceAuth) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the HttpDeviceAuth POST path
+// Create a new http/device_auth object
+func (*HttpDeviceAuth) PostPath() string {
+	return "/api/objects/http/device_auth/"
+}
+
+// PutPath implements sophos.RestObject and returns the HttpDeviceAuth PUT path
+// Creates or updates the complete object device_auth
+func (*HttpDeviceAuth) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
 }
 
 // HttpGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -328,174 +673,6 @@ func (*HttpPacFile) PutPath(ref string) string {
 // Type implements sophos.Object
 func (h *HttpPacFile) GetType() string { return h._type }
 
-// HttpProfile is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpProfiles []HttpProfile
-type HttpProfile struct {
-	Locked             string        `json:"_locked"`
-	Reference          string        `json:"_ref"`
-	_type              string        `json:"_type"`
-	Aua                bool          `json:"aua"`
-	BlockOnAuthFailed  bool          `json:"block_on_auth_failed"`
-	CffProfiles        []string      `json:"cff_profiles"`
-	Comment            string        `json:"comment"`
-	DefaultCffAction   string        `json:"default_cff_action"`
-	DeviceAuth         []interface{} `json:"device_auth"`
-	EdirSso            bool          `json:"edir_sso"`
-	EnableDeviceAuth   bool          `json:"enable_device_auth"`
-	EndpointsGroups    []interface{} `json:"endpoints_groups"`
-	FullTransparent    bool          `json:"full_transparent"`
-	InProgress         bool          `json:"in_progress"`
-	Name               string        `json:"name"`
-	Networks           []interface{} `json:"networks"`
-	Ntlm               bool          `json:"ntlm"`
-	OpendirectoryAuth  bool          `json:"opendirectory_auth"`
-	OrderedCffProfiles []string      `json:"ordered_cff_profiles"`
-	OutInterface       string        `json:"out_interface"`
-	ScanSslOpt         string        `json:"scan_ssl_opt"`
-	SelectiveScanCat   []string      `json:"selective_scan_cat"`
-	SelectiveScanTags  []interface{} `json:"selective_scan_tags"`
-	Status             bool          `json:"status"`
-	Transparent        bool          `json:"transparent"`
-	TransparentAac     bool          `json:"transparent_aac"`
-	TransparentAuth    bool          `json:"transparent_auth"`
-}
-
-// GetPath implements sophos.RestObject and returns the HttpProfiles GET path
-// Returns all available http/profile objects
-func (*HttpProfiles) GetPath() string { return "/api/objects/http/profile/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpProfiles) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the HttpProfiles GET path
-// Returns all available profile types
-func (h *HttpProfile) GetPath() string {
-	return fmt.Sprintf("/api/objects/http/profile/%s", h.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (h *HttpProfile) RefRequired() (string, bool) { return h.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the HttpProfile DELETE path
-// Creates or updates the complete object profile
-func (*HttpProfile) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpProfile PATCH path
-// Changes to parts of the object profile types
-func (*HttpProfile) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpProfile POST path
-// Create a new http/profile object
-func (*HttpProfile) PostPath() string {
-	return "/api/objects/http/profile/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpProfile PUT path
-// Creates or updates the complete object profile
-func (*HttpProfile) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
-}
-
-// Type implements sophos.Object
-func (h *HttpProfile) GetType() string { return h._type }
-
-// HttpCffProfile is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpCffProfiles []HttpCffProfile
-type HttpCffProfile struct {
-	Locked         string   `json:"_locked"`
-	Reference      string   `json:"_ref"`
-	_type          string   `json:"_type"`
-	Aaa            []string `json:"aaa"`
-	Action         string   `json:"action"`
-	CffProfileName string   `json:"cff_profile_name"`
-	Comment        string   `json:"comment"`
-	InProgress     string   `json:"in_progress"`
-	Name           string   `json:"name"`
-	SkipAuth       bool     `json:"skip_auth"`
-	TimeEvent      string   `json:"time_event"`
-}
-
-// GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
-// Returns all available http/cff_profile objects
-func (*HttpCffProfiles) GetPath() string { return "/api/objects/http/cff_profile/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpCffProfiles) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
-// Returns all available cff_profile types
-func (h *HttpCffProfile) GetPath() string {
-	return fmt.Sprintf("/api/objects/http/cff_profile/%s", h.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (h *HttpCffProfile) RefRequired() (string, bool) { return h.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the HttpCffProfile DELETE path
-// Creates or updates the complete object cff_profile
-func (*HttpCffProfile) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpCffProfile PATCH path
-// Changes to parts of the object cff_profile types
-func (*HttpCffProfile) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpCffProfile POST path
-// Create a new http/cff_profile object
-func (*HttpCffProfile) PostPath() string {
-	return "/api/objects/http/cff_profile/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpCffProfile PUT path
-// Creates or updates the complete object cff_profile
-func (*HttpCffProfile) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
-}
-
-// Type implements sophos.Object
-func (h *HttpCffProfile) GetType() string { return h._type }
-
-// HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpDeviceAuth []interface{}
-
-// GetPath implements sophos.RestObject and returns the HttpDeviceAuth GET path
-// Returns all available http/device_auth objects
-func (*HttpDeviceAuth) GetPath() string { return "/api/objects/http/device_auth/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpDeviceAuth) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the HttpDeviceAuth DELETE path
-// Creates or updates the complete object device_auth
-func (*HttpDeviceAuth) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpDeviceAuth PATCH path
-// Changes to parts of the object device_auth types
-func (*HttpDeviceAuth) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpDeviceAuth POST path
-// Create a new http/device_auth object
-func (*HttpDeviceAuth) PostPath() string {
-	return "/api/objects/http/device_auth/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpDeviceAuth PUT path
-// Creates or updates the complete object device_auth
-func (*HttpDeviceAuth) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
-}
-
 // HttpException is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpExceptions []HttpException
 type HttpException struct {
@@ -558,74 +735,6 @@ func (*HttpException) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (h *HttpException) GetType() string { return h._type }
-
-// HttpLslTag is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpLslTag []interface{}
-
-// GetPath implements sophos.RestObject and returns the HttpLslTag GET path
-// Returns all available http/lsl_tag objects
-func (*HttpLslTag) GetPath() string { return "/api/objects/http/lsl_tag/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpLslTag) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the HttpLslTag DELETE path
-// Creates or updates the complete object lsl_tag
-func (*HttpLslTag) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpLslTag PATCH path
-// Changes to parts of the object lsl_tag types
-func (*HttpLslTag) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpLslTag POST path
-// Create a new http/lsl_tag object
-func (*HttpLslTag) PostPath() string {
-	return "/api/objects/http/lsl_tag/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpLslTag PUT path
-// Creates or updates the complete object lsl_tag
-func (*HttpLslTag) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
-}
-
-// HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpParentProxy []interface{}
-
-// GetPath implements sophos.RestObject and returns the HttpParentProxy GET path
-// Returns all available http/parent_proxy objects
-func (*HttpParentProxy) GetPath() string { return "/api/objects/http/parent_proxy/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpParentProxy) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the HttpParentProxy DELETE path
-// Creates or updates the complete object parent_proxy
-func (*HttpParentProxy) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpParentProxy PATCH path
-// Changes to parts of the object parent_proxy types
-func (*HttpParentProxy) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpParentProxy POST path
-// Create a new http/parent_proxy object
-func (*HttpParentProxy) PostPath() string {
-	return "/api/objects/http/parent_proxy/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpParentProxy PUT path
-// Creates or updates the complete object parent_proxy
-func (*HttpParentProxy) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
-}
 
 // HttpCffAction is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpCffActions []HttpCffAction
@@ -716,145 +825,36 @@ func (*HttpCffAction) PutPath(ref string) string {
 // Type implements sophos.Object
 func (h *HttpCffAction) GetType() string { return h._type }
 
-// HttpSpSubcat is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpSpSubcats []HttpSpSubcat
-type HttpSpSubcat struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-}
+// HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpParentProxy []interface{}
 
-// GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
-// Returns all available http/sp_subcat objects
-func (*HttpSpSubcats) GetPath() string { return "/api/objects/http/sp_subcat/" }
+// GetPath implements sophos.RestObject and returns the HttpParentProxy GET path
+// Returns all available http/parent_proxy objects
+func (*HttpParentProxy) GetPath() string { return "/api/objects/http/parent_proxy/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpSpSubcats) RefRequired() (string, bool) { return "", false }
+func (*HttpParentProxy) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
-// Returns all available sp_subcat types
-func (h *HttpSpSubcat) GetPath() string {
-	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", h.Reference)
+// DeletePath implements sophos.RestObject and returns the HttpParentProxy DELETE path
+// Creates or updates the complete object parent_proxy
+func (*HttpParentProxy) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
 }
 
-// RefRequired implements sophos.RestObject
-func (h *HttpSpSubcat) RefRequired() (string, bool) { return h.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the HttpSpSubcat DELETE path
-// Creates or updates the complete object sp_subcat
-func (*HttpSpSubcat) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
+// PatchPath implements sophos.RestObject and returns the HttpParentProxy PATCH path
+// Changes to parts of the object parent_proxy types
+func (*HttpParentProxy) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the HttpSpSubcat PATCH path
-// Changes to parts of the object sp_subcat types
-func (*HttpSpSubcat) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
+// PostPath implements sophos.RestObject and returns the HttpParentProxy POST path
+// Create a new http/parent_proxy object
+func (*HttpParentProxy) PostPath() string {
+	return "/api/objects/http/parent_proxy/"
 }
 
-// PostPath implements sophos.RestObject and returns the HttpSpSubcat POST path
-// Create a new http/sp_subcat object
-func (*HttpSpSubcat) PostPath() string {
-	return "/api/objects/http/sp_subcat/"
+// PutPath implements sophos.RestObject and returns the HttpParentProxy PUT path
+// Creates or updates the complete object parent_proxy
+func (*HttpParentProxy) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
 }
-
-// PutPath implements sophos.RestObject and returns the HttpSpSubcat PUT path
-// Creates or updates the complete object sp_subcat
-func (*HttpSpSubcat) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
-}
-
-// Type implements sophos.Object
-func (h *HttpSpSubcat) GetType() string { return h._type }
-
-// HttpDomainRegex is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpDomainRegex []interface{}
-
-// GetPath implements sophos.RestObject and returns the HttpDomainRegex GET path
-// Returns all available http/domain_regex objects
-func (*HttpDomainRegex) GetPath() string { return "/api/objects/http/domain_regex/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpDomainRegex) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the HttpDomainRegex DELETE path
-// Creates or updates the complete object domain_regex
-func (*HttpDomainRegex) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpDomainRegex PATCH path
-// Changes to parts of the object domain_regex types
-func (*HttpDomainRegex) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpDomainRegex POST path
-// Create a new http/domain_regex object
-func (*HttpDomainRegex) PostPath() string {
-	return "/api/objects/http/domain_regex/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpDomainRegex PUT path
-// Creates or updates the complete object domain_regex
-func (*HttpDomainRegex) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
-}
-
-// HttpSpCategory is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpSpCategorys []HttpSpCategory
-type HttpSpCategory struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	ID        string   `json:"id"`
-	Name      string   `json:"name"`
-	Subcats   []string `json:"subcats"`
-}
-
-// GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
-// Returns all available http/sp_category objects
-func (*HttpSpCategorys) GetPath() string { return "/api/objects/http/sp_category/" }
-
-// RefRequired implements sophos.RestObject
-func (*HttpSpCategorys) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
-// Returns all available sp_category types
-func (h *HttpSpCategory) GetPath() string {
-	return fmt.Sprintf("/api/objects/http/sp_category/%s", h.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (h *HttpSpCategory) RefRequired() (string, bool) { return h.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the HttpSpCategory DELETE path
-// Creates or updates the complete object sp_category
-func (*HttpSpCategory) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the HttpSpCategory PATCH path
-// Changes to parts of the object sp_category types
-func (*HttpSpCategory) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the HttpSpCategory POST path
-// Create a new http/sp_category object
-func (*HttpSpCategory) PostPath() string {
-	return "/api/objects/http/sp_category/"
-}
-
-// PutPath implements sophos.RestObject and returns the HttpSpCategory PUT path
-// Creates or updates the complete object sp_category
-func (*HttpSpCategory) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
-}
-
-// Type implements sophos.Object
-func (h *HttpSpCategory) GetType() string { return h._type }

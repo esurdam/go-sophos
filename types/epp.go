@@ -52,14 +52,14 @@ type Epp struct {
 }
 
 var defsEpp = map[string]sophos.RestObject{
+	"EppDcPolicy":       &EppDcPolicy{},
 	"EppGroup":          &EppGroup{},
 	"EppAvException":    &EppAvException{},
-	"EppAvPolicy":       &EppAvPolicy{},
 	"EppDcException":    &EppDcException{},
-	"EppDcPolicy":       &EppDcPolicy{},
-	"EppEndpointsGroup": &EppEndpointsGroup{},
 	"EppDevice":         &EppDevice{},
 	"EppEndpoint":       &EppEndpoint{},
+	"EppAvPolicy":       &EppAvPolicy{},
+	"EppEndpointsGroup": &EppEndpointsGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Epp's Objects
@@ -122,6 +122,67 @@ func (Epp) References() []string {
 		"REF_EppGroup",
 	}
 }
+
+// EppDcPolicy is an Sophos Endpoint subType and implements sophos.RestObject
+type EppDcPolicys []EppDcPolicy
+type EppDcPolicy struct {
+	Locked           string `json:"_locked"`
+	Reference        string `json:"_ref"`
+	_type            string `json:"_type"`
+	Bluetooth        string `json:"bluetooth"`
+	Comment          string `json:"comment"`
+	EncryptedStorage string `json:"encrypted_storage"`
+	FloppyDrive      string `json:"floppy_drive"`
+	Infrared         string `json:"infrared"`
+	Modem            string `json:"modem"`
+	Name             string `json:"name"`
+	OpticalDrive     string `json:"optical_drive"`
+	RemovableStorage string `json:"removable_storage"`
+	Wireless         string `json:"wireless"`
+}
+
+// GetPath implements sophos.RestObject and returns the EppDcPolicys GET path
+// Returns all available epp/dc_policy objects
+func (*EppDcPolicys) GetPath() string { return "/api/objects/epp/dc_policy/" }
+
+// RefRequired implements sophos.RestObject
+func (*EppDcPolicys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppDcPolicys GET path
+// Returns all available dc_policy types
+func (e *EppDcPolicy) GetPath() string {
+	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EppDcPolicy) RefRequired() (string, bool) { return e.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the EppDcPolicy DELETE path
+// Creates or updates the complete object dc_policy
+func (*EppDcPolicy) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the EppDcPolicy PATCH path
+// Changes to parts of the object dc_policy types
+func (*EppDcPolicy) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the EppDcPolicy POST path
+// Create a new epp/dc_policy object
+func (*EppDcPolicy) PostPath() string {
+	return "/api/objects/epp/dc_policy/"
+}
+
+// PutPath implements sophos.RestObject and returns the EppDcPolicy PUT path
+// Creates or updates the complete object dc_policy
+func (*EppDcPolicy) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
+}
+
+// Type implements sophos.Object
+func (e *EppDcPolicy) GetType() string { return e._type }
 
 // EppGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type EppGroup []interface{}
@@ -189,6 +250,108 @@ func (*EppAvException) PostPath() string {
 // Creates or updates the complete object av_exception
 func (*EppAvException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s", ref)
+}
+
+// EppDcException is an Sophos Endpoint subType and implements sophos.RestObject
+type EppDcException []interface{}
+
+// GetPath implements sophos.RestObject and returns the EppDcException GET path
+// Returns all available epp/dc_exception objects
+func (*EppDcException) GetPath() string { return "/api/objects/epp/dc_exception/" }
+
+// RefRequired implements sophos.RestObject
+func (*EppDcException) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the EppDcException DELETE path
+// Creates or updates the complete object dc_exception
+func (*EppDcException) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the EppDcException PATCH path
+// Changes to parts of the object dc_exception types
+func (*EppDcException) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the EppDcException POST path
+// Create a new epp/dc_exception object
+func (*EppDcException) PostPath() string {
+	return "/api/objects/epp/dc_exception/"
+}
+
+// PutPath implements sophos.RestObject and returns the EppDcException PUT path
+// Creates or updates the complete object dc_exception
+func (*EppDcException) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
+}
+
+// EppDevice is an Sophos Endpoint subType and implements sophos.RestObject
+type EppDevice []interface{}
+
+// GetPath implements sophos.RestObject and returns the EppDevice GET path
+// Returns all available epp/device objects
+func (*EppDevice) GetPath() string { return "/api/objects/epp/device/" }
+
+// RefRequired implements sophos.RestObject
+func (*EppDevice) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the EppDevice DELETE path
+// Creates or updates the complete object device
+func (*EppDevice) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the EppDevice PATCH path
+// Changes to parts of the object device types
+func (*EppDevice) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the EppDevice POST path
+// Create a new epp/device object
+func (*EppDevice) PostPath() string {
+	return "/api/objects/epp/device/"
+}
+
+// PutPath implements sophos.RestObject and returns the EppDevice PUT path
+// Creates or updates the complete object device
+func (*EppDevice) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
+}
+
+// EppEndpoint is an Sophos Endpoint subType and implements sophos.RestObject
+type EppEndpoint []interface{}
+
+// GetPath implements sophos.RestObject and returns the EppEndpoint GET path
+// Returns all available epp/endpoint objects
+func (*EppEndpoint) GetPath() string { return "/api/objects/epp/endpoint/" }
+
+// RefRequired implements sophos.RestObject
+func (*EppEndpoint) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the EppEndpoint DELETE path
+// Creates or updates the complete object endpoint
+func (*EppEndpoint) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the EppEndpoint PATCH path
+// Changes to parts of the object endpoint types
+func (*EppEndpoint) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the EppEndpoint POST path
+// Create a new epp/endpoint object
+func (*EppEndpoint) PostPath() string {
+	return "/api/objects/epp/endpoint/"
+}
+
+// PutPath implements sophos.RestObject and returns the EppEndpoint PUT path
+// Creates or updates the complete object endpoint
+func (*EppEndpoint) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
 }
 
 // EppAvPolicy is an Sophos Endpoint subType and implements sophos.RestObject
@@ -267,101 +430,6 @@ func (*EppAvPolicy) PutPath(ref string) string {
 // Type implements sophos.Object
 func (e *EppAvPolicy) GetType() string { return e._type }
 
-// EppDcException is an Sophos Endpoint subType and implements sophos.RestObject
-type EppDcException []interface{}
-
-// GetPath implements sophos.RestObject and returns the EppDcException GET path
-// Returns all available epp/dc_exception objects
-func (*EppDcException) GetPath() string { return "/api/objects/epp/dc_exception/" }
-
-// RefRequired implements sophos.RestObject
-func (*EppDcException) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the EppDcException DELETE path
-// Creates or updates the complete object dc_exception
-func (*EppDcException) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the EppDcException PATCH path
-// Changes to parts of the object dc_exception types
-func (*EppDcException) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the EppDcException POST path
-// Create a new epp/dc_exception object
-func (*EppDcException) PostPath() string {
-	return "/api/objects/epp/dc_exception/"
-}
-
-// PutPath implements sophos.RestObject and returns the EppDcException PUT path
-// Creates or updates the complete object dc_exception
-func (*EppDcException) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
-}
-
-// EppDcPolicy is an Sophos Endpoint subType and implements sophos.RestObject
-type EppDcPolicys []EppDcPolicy
-type EppDcPolicy struct {
-	Locked           string `json:"_locked"`
-	Reference        string `json:"_ref"`
-	_type            string `json:"_type"`
-	Bluetooth        string `json:"bluetooth"`
-	Comment          string `json:"comment"`
-	EncryptedStorage string `json:"encrypted_storage"`
-	FloppyDrive      string `json:"floppy_drive"`
-	Infrared         string `json:"infrared"`
-	Modem            string `json:"modem"`
-	Name             string `json:"name"`
-	OpticalDrive     string `json:"optical_drive"`
-	RemovableStorage string `json:"removable_storage"`
-	Wireless         string `json:"wireless"`
-}
-
-// GetPath implements sophos.RestObject and returns the EppDcPolicys GET path
-// Returns all available epp/dc_policy objects
-func (*EppDcPolicys) GetPath() string { return "/api/objects/epp/dc_policy/" }
-
-// RefRequired implements sophos.RestObject
-func (*EppDcPolicys) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the EppDcPolicys GET path
-// Returns all available dc_policy types
-func (e *EppDcPolicy) GetPath() string {
-	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", e.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (e *EppDcPolicy) RefRequired() (string, bool) { return e.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the EppDcPolicy DELETE path
-// Creates or updates the complete object dc_policy
-func (*EppDcPolicy) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the EppDcPolicy PATCH path
-// Changes to parts of the object dc_policy types
-func (*EppDcPolicy) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the EppDcPolicy POST path
-// Create a new epp/dc_policy object
-func (*EppDcPolicy) PostPath() string {
-	return "/api/objects/epp/dc_policy/"
-}
-
-// PutPath implements sophos.RestObject and returns the EppDcPolicy PUT path
-// Creates or updates the complete object dc_policy
-func (*EppDcPolicy) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
-}
-
-// Type implements sophos.Object
-func (e *EppDcPolicy) GetType() string { return e._type }
-
 // EppEndpointsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type EppEndpointsGroups []EppEndpointsGroup
 type EppEndpointsGroup struct {
@@ -424,71 +492,3 @@ func (*EppEndpointsGroup) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (e *EppEndpointsGroup) GetType() string { return e._type }
-
-// EppDevice is an Sophos Endpoint subType and implements sophos.RestObject
-type EppDevice []interface{}
-
-// GetPath implements sophos.RestObject and returns the EppDevice GET path
-// Returns all available epp/device objects
-func (*EppDevice) GetPath() string { return "/api/objects/epp/device/" }
-
-// RefRequired implements sophos.RestObject
-func (*EppDevice) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the EppDevice DELETE path
-// Creates or updates the complete object device
-func (*EppDevice) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the EppDevice PATCH path
-// Changes to parts of the object device types
-func (*EppDevice) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the EppDevice POST path
-// Create a new epp/device object
-func (*EppDevice) PostPath() string {
-	return "/api/objects/epp/device/"
-}
-
-// PutPath implements sophos.RestObject and returns the EppDevice PUT path
-// Creates or updates the complete object device
-func (*EppDevice) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
-}
-
-// EppEndpoint is an Sophos Endpoint subType and implements sophos.RestObject
-type EppEndpoint []interface{}
-
-// GetPath implements sophos.RestObject and returns the EppEndpoint GET path
-// Returns all available epp/endpoint objects
-func (*EppEndpoint) GetPath() string { return "/api/objects/epp/endpoint/" }
-
-// RefRequired implements sophos.RestObject
-func (*EppEndpoint) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the EppEndpoint DELETE path
-// Creates or updates the complete object endpoint
-func (*EppEndpoint) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the EppEndpoint PATCH path
-// Changes to parts of the object endpoint types
-func (*EppEndpoint) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the EppEndpoint POST path
-// Create a new epp/endpoint object
-func (*EppEndpoint) PostPath() string {
-	return "/api/objects/epp/endpoint/"
-}
-
-// PutPath implements sophos.RestObject and returns the EppEndpoint PUT path
-// Creates or updates the complete object endpoint
-func (*EppEndpoint) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
-}

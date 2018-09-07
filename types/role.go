@@ -12,13 +12,13 @@ import (
 // Role is a generated struct representing the Sophos Role Endpoint
 // GET /api/nodes/role
 type Role struct {
-	RoleRole  RoleRole  `json:"role_role"`
 	RoleGroup RoleGroup `json:"role_group"`
+	RoleRole  RoleRole  `json:"role_role"`
 }
 
 var defsRole = map[string]sophos.RestObject{
-	"RoleRole":  &RoleRole{},
 	"RoleGroup": &RoleGroup{},
+	"RoleRole":  &RoleRole{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Role's Objects
@@ -56,6 +56,40 @@ func (Role) References() []string {
 		"REF_RoleGroup",
 		"REF_RoleRole",
 	}
+}
+
+// RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type RoleGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the RoleGroup GET path
+// Returns all available role/group objects
+func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*RoleGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the RoleGroup DELETE path
+// Creates or updates the complete object group
+func (*RoleGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the RoleGroup PATCH path
+// Changes to parts of the object group types
+func (*RoleGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the RoleGroup POST path
+// Create a new role/group object
+func (*RoleGroup) PostPath() string {
+	return "/api/objects/role/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the RoleGroup PUT path
+// Creates or updates the complete object group
+func (*RoleGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
 // RoleRole is an Sophos Endpoint subType and implements sophos.RestObject
@@ -111,37 +145,3 @@ func (*RoleRole) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (r *RoleRole) GetType() string { return r._type }
-
-// RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RoleGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the RoleGroup GET path
-// Returns all available role/group objects
-func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*RoleGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the RoleGroup DELETE path
-// Creates or updates the complete object group
-func (*RoleGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the RoleGroup PATCH path
-// Changes to parts of the object group types
-func (*RoleGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the RoleGroup POST path
-// Create a new role/group object
-func (*RoleGroup) PostPath() string {
-	return "/api/objects/role/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the RoleGroup PUT path
-// Creates or updates the complete object group
-func (*RoleGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/role/group/%s", ref)
-}

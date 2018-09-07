@@ -12,15 +12,15 @@ import (
 // Route is a generated struct representing the Sophos Route Endpoint
 // GET /api/nodes/route
 type Route struct {
-	RouteGroup  RouteGroup  `json:"route_group"`
-	RoutePolicy RoutePolicy `json:"route_policy"`
 	RouteStatic RouteStatic `json:"route_static"`
+	RoutePolicy RoutePolicy `json:"route_policy"`
+	RouteGroup  RouteGroup  `json:"route_group"`
 }
 
 var defsRoute = map[string]sophos.RestObject{
-	"RouteGroup":  &RouteGroup{},
-	"RoutePolicy": &RoutePolicy{},
 	"RouteStatic": &RouteStatic{},
+	"RoutePolicy": &RoutePolicy{},
+	"RouteGroup":  &RouteGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Route's Objects
@@ -62,74 +62,6 @@ func (Route) References() []string {
 		"REF_RoutePolicy",
 		"REF_RouteStatic",
 	}
-}
-
-// RouteGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RouteGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the RouteGroup GET path
-// Returns all available route/group objects
-func (*RouteGroup) GetPath() string { return "/api/objects/route/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*RouteGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the RouteGroup DELETE path
-// Creates or updates the complete object group
-func (*RouteGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the RouteGroup PATCH path
-// Changes to parts of the object group types
-func (*RouteGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the RouteGroup POST path
-// Create a new route/group object
-func (*RouteGroup) PostPath() string {
-	return "/api/objects/route/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the RouteGroup PUT path
-// Creates or updates the complete object group
-func (*RouteGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/group/%s", ref)
-}
-
-// RoutePolicy is an Sophos Endpoint subType and implements sophos.RestObject
-type RoutePolicy []interface{}
-
-// GetPath implements sophos.RestObject and returns the RoutePolicy GET path
-// Returns all available route/policy objects
-func (*RoutePolicy) GetPath() string { return "/api/objects/route/policy/" }
-
-// RefRequired implements sophos.RestObject
-func (*RoutePolicy) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the RoutePolicy DELETE path
-// Creates or updates the complete object policy
-func (*RoutePolicy) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the RoutePolicy PATCH path
-// Changes to parts of the object policy types
-func (*RoutePolicy) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the RoutePolicy POST path
-// Create a new route/policy object
-func (*RoutePolicy) PostPath() string {
-	return "/api/objects/route/policy/"
-}
-
-// PutPath implements sophos.RestObject and returns the RoutePolicy PUT path
-// Creates or updates the complete object policy
-func (*RoutePolicy) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
 }
 
 // RouteStatic is an Sophos Endpoint subType and implements sophos.RestObject
@@ -189,3 +121,71 @@ func (*RouteStatic) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (r *RouteStatic) GetType() string { return r._type }
+
+// RoutePolicy is an Sophos Endpoint subType and implements sophos.RestObject
+type RoutePolicy []interface{}
+
+// GetPath implements sophos.RestObject and returns the RoutePolicy GET path
+// Returns all available route/policy objects
+func (*RoutePolicy) GetPath() string { return "/api/objects/route/policy/" }
+
+// RefRequired implements sophos.RestObject
+func (*RoutePolicy) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the RoutePolicy DELETE path
+// Creates or updates the complete object policy
+func (*RoutePolicy) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the RoutePolicy PATCH path
+// Changes to parts of the object policy types
+func (*RoutePolicy) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the RoutePolicy POST path
+// Create a new route/policy object
+func (*RoutePolicy) PostPath() string {
+	return "/api/objects/route/policy/"
+}
+
+// PutPath implements sophos.RestObject and returns the RoutePolicy PUT path
+// Creates or updates the complete object policy
+func (*RoutePolicy) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
+}
+
+// RouteGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type RouteGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the RouteGroup GET path
+// Returns all available route/group objects
+func (*RouteGroup) GetPath() string { return "/api/objects/route/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*RouteGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the RouteGroup DELETE path
+// Creates or updates the complete object group
+func (*RouteGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the RouteGroup PATCH path
+// Changes to parts of the object group types
+func (*RouteGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the RouteGroup POST path
+// Create a new route/group object
+func (*RouteGroup) PostPath() string {
+	return "/api/objects/route/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the RouteGroup PUT path
+// Creates or updates the complete object group
+func (*RouteGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/route/group/%s", ref)
+}

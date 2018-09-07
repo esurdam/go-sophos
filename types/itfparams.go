@@ -12,19 +12,19 @@ import (
 // Itfparams is a generated struct representing the Sophos Itfparams Endpoint
 // GET /api/nodes/itfparams
 type Itfparams struct {
-	ItfparamsBridgePort           ItfparamsBridgePort           `json:"itfparams_bridge_port"`
 	ItfparamsSecondary            ItfparamsSecondary            `json:"itfparams_secondary"`
 	ItfparamsLinkAggregationGroup ItfparamsLinkAggregationGroup `json:"itfparams_link_aggregation_group"`
-	ItfparamsPrimary              ItfparamsPrimary              `json:"itfparams_primary"`
 	ItfparamsGroup                ItfparamsGroup                `json:"itfparams_group"`
+	ItfparamsPrimary              ItfparamsPrimary              `json:"itfparams_primary"`
+	ItfparamsBridgePort           ItfparamsBridgePort           `json:"itfparams_bridge_port"`
 }
 
 var defsItfparams = map[string]sophos.RestObject{
-	"ItfparamsBridgePort":           &ItfparamsBridgePort{},
 	"ItfparamsSecondary":            &ItfparamsSecondary{},
 	"ItfparamsLinkAggregationGroup": &ItfparamsLinkAggregationGroup{},
-	"ItfparamsPrimary":              &ItfparamsPrimary{},
 	"ItfparamsGroup":                &ItfparamsGroup{},
+	"ItfparamsPrimary":              &ItfparamsPrimary{},
+	"ItfparamsBridgePort":           &ItfparamsBridgePort{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Itfparams's Objects
@@ -74,40 +74,6 @@ func (Itfparams) References() []string {
 		"REF_ItfparamsPrimary",
 		"REF_ItfparamsSecondary",
 	}
-}
-
-// ItfparamsBridgePort is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfparamsBridgePort []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfparamsBridgePort GET path
-// Returns all available itfparams/bridge_port objects
-func (*ItfparamsBridgePort) GetPath() string { return "/api/objects/itfparams/bridge_port/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfparamsBridgePort) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ItfparamsBridgePort DELETE path
-// Creates or updates the complete object bridge_port
-func (*ItfparamsBridgePort) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfparamsBridgePort PATCH path
-// Changes to parts of the object bridge_port types
-func (*ItfparamsBridgePort) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfparamsBridgePort POST path
-// Create a new itfparams/bridge_port object
-func (*ItfparamsBridgePort) PostPath() string {
-	return "/api/objects/itfparams/bridge_port/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfparamsBridgePort PUT path
-// Creates or updates the complete object bridge_port
-func (*ItfparamsBridgePort) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }
 
 // ItfparamsSecondary is an Sophos Endpoint subType and implements sophos.RestObject
@@ -216,6 +182,40 @@ func (*ItfparamsLinkAggregationGroup) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfparamsLinkAggregationGroup) GetType() string { return i._type }
 
+// ItfparamsGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfparamsGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfparamsGroup GET path
+// Returns all available itfparams/group objects
+func (*ItfparamsGroup) GetPath() string { return "/api/objects/itfparams/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfparamsGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfparamsGroup DELETE path
+// Creates or updates the complete object group
+func (*ItfparamsGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfparamsGroup PATCH path
+// Changes to parts of the object group types
+func (*ItfparamsGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfparamsGroup POST path
+// Create a new itfparams/group object
+func (*ItfparamsGroup) PostPath() string {
+	return "/api/objects/itfparams/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfparamsGroup PUT path
+// Creates or updates the complete object group
+func (*ItfparamsGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+}
+
 // ItfparamsPrimary is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfparamsPrimarys []ItfparamsPrimary
 type ItfparamsPrimary struct {
@@ -296,36 +296,36 @@ func (*ItfparamsPrimary) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfparamsPrimary) GetType() string { return i._type }
 
-// ItfparamsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfparamsGroup []interface{}
+// ItfparamsBridgePort is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfparamsBridgePort []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfparamsGroup GET path
-// Returns all available itfparams/group objects
-func (*ItfparamsGroup) GetPath() string { return "/api/objects/itfparams/group/" }
+// GetPath implements sophos.RestObject and returns the ItfparamsBridgePort GET path
+// Returns all available itfparams/bridge_port objects
+func (*ItfparamsBridgePort) GetPath() string { return "/api/objects/itfparams/bridge_port/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfparamsGroup) RefRequired() (string, bool) { return "", false }
+func (*ItfparamsBridgePort) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfparamsGroup DELETE path
-// Creates or updates the complete object group
-func (*ItfparamsGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfparamsBridgePort DELETE path
+// Creates or updates the complete object bridge_port
+func (*ItfparamsBridgePort) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfparamsGroup PATCH path
-// Changes to parts of the object group types
-func (*ItfparamsGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfparamsBridgePort PATCH path
+// Changes to parts of the object bridge_port types
+func (*ItfparamsBridgePort) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfparamsGroup POST path
-// Create a new itfparams/group object
-func (*ItfparamsGroup) PostPath() string {
-	return "/api/objects/itfparams/group/"
+// PostPath implements sophos.RestObject and returns the ItfparamsBridgePort POST path
+// Create a new itfparams/bridge_port object
+func (*ItfparamsBridgePort) PostPath() string {
+	return "/api/objects/itfparams/bridge_port/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfparamsGroup PUT path
-// Creates or updates the complete object group
-func (*ItfparamsGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfparamsBridgePort PUT path
+// Creates or updates the complete object bridge_port
+func (*ItfparamsBridgePort) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }

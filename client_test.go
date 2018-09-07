@@ -74,12 +74,12 @@ func TestDefinition_Get(t *testing.T) {
 	defer td(t)
 
 	d := types.Nodes{}.Definition()
-	err := d.GetSwag(client)
+	_, err := d.GetSwag(client)
 	if err != nil {
 		t.Error(err)
 	}
 
-	err = d.GetSwag(client, errOption)
+	_, err = d.GetSwag(client, errOption)
 	if err == nil {
 		t.Error(err)
 	}

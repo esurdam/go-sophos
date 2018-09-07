@@ -12,13 +12,13 @@ import (
 // Right is a generated struct representing the Sophos Right Endpoint
 // GET /api/nodes/right
 type Right struct {
-	RightRight RightRight `json:"right_right"`
 	RightGroup RightGroup `json:"right_group"`
+	RightRight RightRight `json:"right_right"`
 }
 
 var defsRight = map[string]sophos.RestObject{
-	"RightRight": &RightRight{},
 	"RightGroup": &RightGroup{},
+	"RightRight": &RightRight{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Right's Objects
@@ -56,6 +56,40 @@ func (Right) References() []string {
 		"REF_RightGroup",
 		"REF_RightRight",
 	}
+}
+
+// RightGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type RightGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the RightGroup GET path
+// Returns all available right/group objects
+func (*RightGroup) GetPath() string { return "/api/objects/right/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*RightGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the RightGroup DELETE path
+// Creates or updates the complete object group
+func (*RightGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/right/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the RightGroup PATCH path
+// Changes to parts of the object group types
+func (*RightGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/right/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the RightGroup POST path
+// Create a new right/group object
+func (*RightGroup) PostPath() string {
+	return "/api/objects/right/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the RightGroup PUT path
+// Creates or updates the complete object group
+func (*RightGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/right/group/%s", ref)
 }
 
 // RightRight is an Sophos Endpoint subType and implements sophos.RestObject
@@ -108,37 +142,3 @@ func (*RightRight) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (r *RightRight) GetType() string { return r._type }
-
-// RightGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RightGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the RightGroup GET path
-// Returns all available right/group objects
-func (*RightGroup) GetPath() string { return "/api/objects/right/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*RightGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the RightGroup DELETE path
-// Creates or updates the complete object group
-func (*RightGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/right/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the RightGroup PATCH path
-// Changes to parts of the object group types
-func (*RightGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/right/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the RightGroup POST path
-// Create a new right/group object
-func (*RightGroup) PostPath() string {
-	return "/api/objects/right/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the RightGroup PUT path
-// Creates or updates the complete object group
-func (*RightGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/right/group/%s", ref)
-}

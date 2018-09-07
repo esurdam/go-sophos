@@ -71,10 +71,10 @@ type Smtp struct {
 }
 
 var defsSmtp = map[string]sophos.RestObject{
+	"SmtpProfile":         &SmtpProfile{},
 	"SmtpException":       &SmtpException{},
 	"SmtpGroup":           &SmtpGroup{},
 	"SmtpHeaderOperation": &SmtpHeaderOperation{},
-	"SmtpProfile":         &SmtpProfile{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Smtp's Objects
@@ -121,6 +121,104 @@ func (Smtp) References() []string {
 		"REF_SmtpProfile",
 	}
 }
+
+// SmtpProfile is an Sophos Endpoint subType and implements sophos.RestObject
+type SmtpProfiles []SmtpProfile
+type SmtpProfile struct {
+	Locked                      string        `json:"_locked"`
+	Reference                   string        `json:"_ref"`
+	_type                       string        `json:"_type"`
+	AdBaseDn                    string        `json:"ad_base_dn"`
+	Batv                        bool          `json:"batv"`
+	CffAv                       string        `json:"cff_av"`
+	CffAvEngines                string        `json:"cff_av_engines"`
+	CffFileExtensions           []string      `json:"cff_file_extensions"`
+	Comment                     string        `json:"comment"`
+	ConfidentialFooter          string        `json:"confidential_footer"`
+	ConfidentialFooterStatus    bool          `json:"confidential_footer_status"`
+	DlpAction                   string        `json:"dlp_action"`
+	DlpCclRules                 []interface{} `json:"dlp_ccl_rules"`
+	DlpCustomExpressions        []interface{} `json:"dlp_custom_expressions"`
+	DlpNotificationAdmin        bool          `json:"dlp_notification_admin"`
+	DlpNotificationOther        bool          `json:"dlp_notification_other"`
+	DlpNotificationOtherAddress string        `json:"dlp_notification_other_address"`
+	DlpNotificationSender       bool          `json:"dlp_notification_sender"`
+	DlpScanAttachments          bool          `json:"dlp_scan_attachments"`
+	Domains                     []interface{} `json:"domains"`
+	GlobalAdd                   []interface{} `json:"global_add"`
+	GlobalCopy                  []interface{} `json:"global_copy"`
+	Greylisting                 bool          `json:"greylisting"`
+	HeaderModification          []interface{} `json:"header_modification"`
+	MimeAudio                   bool          `json:"mime_audio"`
+	MimeBlacklist               []interface{} `json:"mime_blacklist"`
+	MimeExecutable              bool          `json:"mime_executable"`
+	MimeVideo                   bool          `json:"mime_video"`
+	MimeWhitelist               []interface{} `json:"mime_whitelist"`
+	Name                        string        `json:"name"`
+	Rbl                         bool          `json:"rbl"`
+	RblExtra                    []interface{} `json:"rbl_extra"`
+	RcptAdServer                string        `json:"rcpt_ad_server"`
+	RcptVerify                  string        `json:"rcpt_verify"`
+	RdnsReject                  bool          `json:"rdns_reject"`
+	RdnsRejectStrict            bool          `json:"rdns_reject_strict"`
+	RouteList                   []interface{} `json:"route_list"`
+	RouteTarget                 string        `json:"route_target"`
+	RouteTargetPort             int64         `json:"route_target_port"`
+	RouteTargetType             string        `json:"route_target_type"`
+	SandboxMaxFilesizeMb        int64         `json:"sandbox_max_filesize_mb"`
+	SandboxScanStatus           bool          `json:"sandbox_scan_status"`
+	SenderBlacklist             []interface{} `json:"sender_blacklist"`
+	Spam                        string        `json:"spam"`
+	SpamExpressions             []interface{} `json:"spam_expressions"`
+	Spamplus                    string        `json:"spamplus"`
+	Spf                         bool          `json:"spf"`
+	SpxTemplate                 string        `json:"spx_template"`
+	Status                      bool          `json:"status"`
+	Unscannable                 string        `json:"unscannable"`
+}
+
+// GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
+// Returns all available smtp/profile objects
+func (*SmtpProfiles) GetPath() string { return "/api/objects/smtp/profile/" }
+
+// RefRequired implements sophos.RestObject
+func (*SmtpProfiles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
+// Returns all available profile types
+func (s *SmtpProfile) GetPath() string {
+	return fmt.Sprintf("/api/objects/smtp/profile/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SmtpProfile) RefRequired() (string, bool) { return s.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the SmtpProfile DELETE path
+// Creates or updates the complete object profile
+func (*SmtpProfile) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the SmtpProfile PATCH path
+// Changes to parts of the object profile types
+func (*SmtpProfile) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the SmtpProfile POST path
+// Create a new smtp/profile object
+func (*SmtpProfile) PostPath() string {
+	return "/api/objects/smtp/profile/"
+}
+
+// PutPath implements sophos.RestObject and returns the SmtpProfile PUT path
+// Creates or updates the complete object profile
+func (*SmtpProfile) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
+}
+
+// Type implements sophos.Object
+func (s *SmtpProfile) GetType() string { return s._type }
 
 // SmtpException is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpException []interface{}
@@ -223,101 +321,3 @@ func (*SmtpHeaderOperation) PostPath() string {
 func (*SmtpHeaderOperation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s", ref)
 }
-
-// SmtpProfile is an Sophos Endpoint subType and implements sophos.RestObject
-type SmtpProfiles []SmtpProfile
-type SmtpProfile struct {
-	Locked                      string        `json:"_locked"`
-	Reference                   string        `json:"_ref"`
-	_type                       string        `json:"_type"`
-	AdBaseDn                    string        `json:"ad_base_dn"`
-	Batv                        bool          `json:"batv"`
-	CffAv                       string        `json:"cff_av"`
-	CffAvEngines                string        `json:"cff_av_engines"`
-	CffFileExtensions           []string      `json:"cff_file_extensions"`
-	Comment                     string        `json:"comment"`
-	ConfidentialFooter          string        `json:"confidential_footer"`
-	ConfidentialFooterStatus    bool          `json:"confidential_footer_status"`
-	DlpAction                   string        `json:"dlp_action"`
-	DlpCclRules                 []interface{} `json:"dlp_ccl_rules"`
-	DlpCustomExpressions        []interface{} `json:"dlp_custom_expressions"`
-	DlpNotificationAdmin        bool          `json:"dlp_notification_admin"`
-	DlpNotificationOther        bool          `json:"dlp_notification_other"`
-	DlpNotificationOtherAddress string        `json:"dlp_notification_other_address"`
-	DlpNotificationSender       bool          `json:"dlp_notification_sender"`
-	DlpScanAttachments          bool          `json:"dlp_scan_attachments"`
-	Domains                     []interface{} `json:"domains"`
-	GlobalAdd                   []interface{} `json:"global_add"`
-	GlobalCopy                  []interface{} `json:"global_copy"`
-	Greylisting                 bool          `json:"greylisting"`
-	HeaderModification          []interface{} `json:"header_modification"`
-	MimeAudio                   bool          `json:"mime_audio"`
-	MimeBlacklist               []interface{} `json:"mime_blacklist"`
-	MimeExecutable              bool          `json:"mime_executable"`
-	MimeVideo                   bool          `json:"mime_video"`
-	MimeWhitelist               []interface{} `json:"mime_whitelist"`
-	Name                        string        `json:"name"`
-	Rbl                         bool          `json:"rbl"`
-	RblExtra                    []interface{} `json:"rbl_extra"`
-	RcptAdServer                string        `json:"rcpt_ad_server"`
-	RcptVerify                  string        `json:"rcpt_verify"`
-	RdnsReject                  bool          `json:"rdns_reject"`
-	RdnsRejectStrict            bool          `json:"rdns_reject_strict"`
-	RouteList                   []interface{} `json:"route_list"`
-	RouteTarget                 string        `json:"route_target"`
-	RouteTargetPort             int64         `json:"route_target_port"`
-	RouteTargetType             string        `json:"route_target_type"`
-	SandboxMaxFilesizeMb        int64         `json:"sandbox_max_filesize_mb"`
-	SandboxScanStatus           bool          `json:"sandbox_scan_status"`
-	SenderBlacklist             []interface{} `json:"sender_blacklist"`
-	Spam                        string        `json:"spam"`
-	SpamExpressions             []interface{} `json:"spam_expressions"`
-	Spamplus                    string        `json:"spamplus"`
-	Spf                         bool          `json:"spf"`
-	SpxTemplate                 string        `json:"spx_template"`
-	Status                      bool          `json:"status"`
-	Unscannable                 string        `json:"unscannable"`
-}
-
-// GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
-// Returns all available smtp/profile objects
-func (*SmtpProfiles) GetPath() string { return "/api/objects/smtp/profile/" }
-
-// RefRequired implements sophos.RestObject
-func (*SmtpProfiles) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
-// Returns all available profile types
-func (s *SmtpProfile) GetPath() string {
-	return fmt.Sprintf("/api/objects/smtp/profile/%s", s.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (s *SmtpProfile) RefRequired() (string, bool) { return s.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the SmtpProfile DELETE path
-// Creates or updates the complete object profile
-func (*SmtpProfile) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the SmtpProfile PATCH path
-// Changes to parts of the object profile types
-func (*SmtpProfile) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the SmtpProfile POST path
-// Create a new smtp/profile object
-func (*SmtpProfile) PostPath() string {
-	return "/api/objects/smtp/profile/"
-}
-
-// PutPath implements sophos.RestObject and returns the SmtpProfile PUT path
-// Creates or updates the complete object profile
-func (*SmtpProfile) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
-}
-
-// Type implements sophos.Object
-func (s *SmtpProfile) GetType() string { return s._type }

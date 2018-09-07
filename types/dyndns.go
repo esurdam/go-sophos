@@ -16,8 +16,8 @@ type Dyndns struct {
 }
 
 var defsDyndns = map[string]sophos.RestObject{
-	"DyndnsDyndns": &DyndnsDyndns{},
 	"DyndnsGroup":  &DyndnsGroup{},
+	"DyndnsDyndns": &DyndnsDyndns{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dyndns's Objects
@@ -57,40 +57,6 @@ func (Dyndns) References() []string {
 	}
 }
 
-// DyndnsDyndns is an Sophos Endpoint subType and implements sophos.RestObject
-type DyndnsDyndns []interface{}
-
-// GetPath implements sophos.RestObject and returns the DyndnsDyndns GET path
-// Returns all available dyndns/dyndns objects
-func (*DyndnsDyndns) GetPath() string { return "/api/objects/dyndns/dyndns/" }
-
-// RefRequired implements sophos.RestObject
-func (*DyndnsDyndns) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the DyndnsDyndns DELETE path
-// Creates or updates the complete object dyndns
-func (*DyndnsDyndns) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the DyndnsDyndns PATCH path
-// Changes to parts of the object dyndns types
-func (*DyndnsDyndns) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the DyndnsDyndns POST path
-// Create a new dyndns/dyndns object
-func (*DyndnsDyndns) PostPath() string {
-	return "/api/objects/dyndns/dyndns/"
-}
-
-// PutPath implements sophos.RestObject and returns the DyndnsDyndns PUT path
-// Creates or updates the complete object dyndns
-func (*DyndnsDyndns) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
-}
-
 // DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DyndnsGroup []interface{}
 
@@ -123,4 +89,38 @@ func (*DyndnsGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*DyndnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
+}
+
+// DyndnsDyndns is an Sophos Endpoint subType and implements sophos.RestObject
+type DyndnsDyndns []interface{}
+
+// GetPath implements sophos.RestObject and returns the DyndnsDyndns GET path
+// Returns all available dyndns/dyndns objects
+func (*DyndnsDyndns) GetPath() string { return "/api/objects/dyndns/dyndns/" }
+
+// RefRequired implements sophos.RestObject
+func (*DyndnsDyndns) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the DyndnsDyndns DELETE path
+// Creates or updates the complete object dyndns
+func (*DyndnsDyndns) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the DyndnsDyndns PATCH path
+// Changes to parts of the object dyndns types
+func (*DyndnsDyndns) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the DyndnsDyndns POST path
+// Create a new dyndns/dyndns object
+func (*DyndnsDyndns) PostPath() string {
+	return "/api/objects/dyndns/dyndns/"
+}
+
+// PutPath implements sophos.RestObject and returns the DyndnsDyndns PUT path
+// Creates or updates the complete object dyndns
+func (*DyndnsDyndns) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
 }

@@ -12,13 +12,13 @@ import (
 // Notification is a generated struct representing the Sophos Notification Endpoint
 // GET /api/nodes/notification
 type Notification struct {
-	NotificationNotification NotificationNotification `json:"notification_notification"`
 	NotificationGroup        NotificationGroup        `json:"notification_group"`
+	NotificationNotification NotificationNotification `json:"notification_notification"`
 }
 
 var defsNotification = map[string]sophos.RestObject{
-	"NotificationNotification": &NotificationNotification{},
 	"NotificationGroup":        &NotificationGroup{},
+	"NotificationNotification": &NotificationNotification{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Notification's Objects
@@ -58,40 +58,6 @@ func (Notification) References() []string {
 	}
 }
 
-// NotificationNotification is an Sophos Endpoint subType and implements sophos.RestObject
-type NotificationNotification []interface{}
-
-// GetPath implements sophos.RestObject and returns the NotificationNotification GET path
-// Returns all available notification/notification objects
-func (*NotificationNotification) GetPath() string { return "/api/objects/notification/notification/" }
-
-// RefRequired implements sophos.RestObject
-func (*NotificationNotification) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the NotificationNotification DELETE path
-// Creates or updates the complete object notification
-func (*NotificationNotification) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the NotificationNotification PATCH path
-// Changes to parts of the object notification types
-func (*NotificationNotification) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the NotificationNotification POST path
-// Create a new notification/notification object
-func (*NotificationNotification) PostPath() string {
-	return "/api/objects/notification/notification/"
-}
-
-// PutPath implements sophos.RestObject and returns the NotificationNotification PUT path
-// Creates or updates the complete object notification
-func (*NotificationNotification) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
-}
-
 // NotificationGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type NotificationGroup []interface{}
 
@@ -124,4 +90,38 @@ func (*NotificationGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*NotificationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s", ref)
+}
+
+// NotificationNotification is an Sophos Endpoint subType and implements sophos.RestObject
+type NotificationNotification []interface{}
+
+// GetPath implements sophos.RestObject and returns the NotificationNotification GET path
+// Returns all available notification/notification objects
+func (*NotificationNotification) GetPath() string { return "/api/objects/notification/notification/" }
+
+// RefRequired implements sophos.RestObject
+func (*NotificationNotification) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the NotificationNotification DELETE path
+// Creates or updates the complete object notification
+func (*NotificationNotification) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the NotificationNotification PATCH path
+// Changes to parts of the object notification types
+func (*NotificationNotification) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the NotificationNotification POST path
+// Create a new notification/notification object
+func (*NotificationNotification) PostPath() string {
+	return "/api/objects/notification/notification/"
+}
+
+// PutPath implements sophos.RestObject and returns the NotificationNotification PUT path
+// Creates or updates the complete object notification
+func (*NotificationNotification) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
 }

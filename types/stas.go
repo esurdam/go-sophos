@@ -12,13 +12,13 @@ import (
 // Stas is a generated struct representing the Sophos Stas Endpoint
 // GET /api/nodes/stas
 type Stas struct {
-	StasCollector StasCollector `json:"stas_collector"`
 	StasGroup     StasGroup     `json:"stas_group"`
+	StasCollector StasCollector `json:"stas_collector"`
 }
 
 var defsStas = map[string]sophos.RestObject{
-	"StasCollector": &StasCollector{},
 	"StasGroup":     &StasGroup{},
+	"StasCollector": &StasCollector{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Stas's Objects
@@ -58,40 +58,6 @@ func (Stas) References() []string {
 	}
 }
 
-// StasCollector is an Sophos Endpoint subType and implements sophos.RestObject
-type StasCollector []interface{}
-
-// GetPath implements sophos.RestObject and returns the StasCollector GET path
-// Returns all available stas/collector objects
-func (*StasCollector) GetPath() string { return "/api/objects/stas/collector/" }
-
-// RefRequired implements sophos.RestObject
-func (*StasCollector) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the StasCollector DELETE path
-// Creates or updates the complete object collector
-func (*StasCollector) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the StasCollector PATCH path
-// Changes to parts of the object collector types
-func (*StasCollector) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the StasCollector POST path
-// Create a new stas/collector object
-func (*StasCollector) PostPath() string {
-	return "/api/objects/stas/collector/"
-}
-
-// PutPath implements sophos.RestObject and returns the StasCollector PUT path
-// Creates or updates the complete object collector
-func (*StasCollector) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
-}
-
 // StasGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type StasGroup []interface{}
 
@@ -124,4 +90,38 @@ func (*StasGroup) PostPath() string {
 // Creates or updates the complete object group
 func (*StasGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/stas/group/%s", ref)
+}
+
+// StasCollector is an Sophos Endpoint subType and implements sophos.RestObject
+type StasCollector []interface{}
+
+// GetPath implements sophos.RestObject and returns the StasCollector GET path
+// Returns all available stas/collector objects
+func (*StasCollector) GetPath() string { return "/api/objects/stas/collector/" }
+
+// RefRequired implements sophos.RestObject
+func (*StasCollector) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the StasCollector DELETE path
+// Creates or updates the complete object collector
+func (*StasCollector) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the StasCollector PATCH path
+// Changes to parts of the object collector types
+func (*StasCollector) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the StasCollector POST path
+// Create a new stas/collector object
+func (*StasCollector) PostPath() string {
+	return "/api/objects/stas/collector/"
+}
+
+// PutPath implements sophos.RestObject and returns the StasCollector PUT path
+// Creates or updates the complete object collector
+func (*StasCollector) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/stas/collector/%s", ref)
 }

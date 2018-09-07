@@ -12,27 +12,27 @@ import (
 // Interface is a generated struct representing the Sophos Interface Endpoint
 // GET /api/nodes/interface
 type Interface struct {
-	InterfaceBridge   InterfaceBridge   `json:"interface_bridge"`
-	InterfacePpp3G    InterfacePpp3G    `json:"interface_ppp3g"`
-	InterfacePppoa    InterfacePppoa    `json:"interface_pppoa"`
-	InterfacePppoe    InterfacePppoe    `json:"interface_pppoe"`
 	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
-	InterfaceEthernet InterfaceEthernet `json:"interface_ethernet"`
+	InterfaceBridge   InterfaceBridge   `json:"interface_bridge"`
 	InterfaceGroup    InterfaceGroup    `json:"interface_group"`
-	InterfacePppmodem InterfacePppmodem `json:"interface_pppmodem"`
 	InterfaceTunnel   InterfaceTunnel   `json:"interface_tunnel"`
+	InterfacePppoe    InterfacePppoe    `json:"interface_pppoe"`
+	InterfacePpp3G    InterfacePpp3G    `json:"interface_ppp3g"`
+	InterfacePppmodem InterfacePppmodem `json:"interface_pppmodem"`
+	InterfacePppoa    InterfacePppoa    `json:"interface_pppoa"`
+	InterfaceEthernet InterfaceEthernet `json:"interface_ethernet"`
 }
 
 var defsInterface = map[string]sophos.RestObject{
-	"InterfaceBridge":   &InterfaceBridge{},
-	"InterfacePpp3G":    &InterfacePpp3G{},
-	"InterfacePppoa":    &InterfacePppoa{},
-	"InterfacePppoe":    &InterfacePppoe{},
 	"InterfaceVlan":     &InterfaceVlan{},
-	"InterfaceEthernet": &InterfaceEthernet{},
+	"InterfaceBridge":   &InterfaceBridge{},
 	"InterfaceGroup":    &InterfaceGroup{},
-	"InterfacePppmodem": &InterfacePppmodem{},
 	"InterfaceTunnel":   &InterfaceTunnel{},
+	"InterfacePppoe":    &InterfacePppoe{},
+	"InterfacePpp3G":    &InterfacePpp3G{},
+	"InterfacePppmodem": &InterfacePppmodem{},
+	"InterfacePppoa":    &InterfacePppoa{},
+	"InterfaceEthernet": &InterfaceEthernet{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Interface's Objects
@@ -98,142 +98,6 @@ func (Interface) References() []string {
 		"REF_InterfaceTunnel",
 		"REF_InterfaceVlan",
 	}
-}
-
-// InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceBridge []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfaceBridge GET path
-// Returns all available interface/bridge objects
-func (*InterfaceBridge) GetPath() string { return "/api/objects/interface/bridge/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfaceBridge) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfaceBridge DELETE path
-// Creates or updates the complete object bridge
-func (*InterfaceBridge) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfaceBridge PATCH path
-// Changes to parts of the object bridge types
-func (*InterfaceBridge) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfaceBridge POST path
-// Create a new interface/bridge object
-func (*InterfaceBridge) PostPath() string {
-	return "/api/objects/interface/bridge/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfaceBridge PUT path
-// Creates or updates the complete object bridge
-func (*InterfaceBridge) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
-}
-
-// InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePpp3G []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfacePpp3G GET path
-// Returns all available interface/ppp3g objects
-func (*InterfacePpp3G) GetPath() string { return "/api/objects/interface/ppp3g/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfacePpp3G) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfacePpp3G DELETE path
-// Creates or updates the complete object ppp3g
-func (*InterfacePpp3G) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfacePpp3G PATCH path
-// Changes to parts of the object ppp3g types
-func (*InterfacePpp3G) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfacePpp3G POST path
-// Create a new interface/ppp3g object
-func (*InterfacePpp3G) PostPath() string {
-	return "/api/objects/interface/ppp3g/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfacePpp3G PUT path
-// Creates or updates the complete object ppp3g
-func (*InterfacePpp3G) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
-}
-
-// InterfacePppoa is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppoa []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfacePppoa GET path
-// Returns all available interface/pppoa objects
-func (*InterfacePppoa) GetPath() string { return "/api/objects/interface/pppoa/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfacePppoa) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfacePppoa DELETE path
-// Creates or updates the complete object pppoa
-func (*InterfacePppoa) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfacePppoa PATCH path
-// Changes to parts of the object pppoa types
-func (*InterfacePppoa) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfacePppoa POST path
-// Create a new interface/pppoa object
-func (*InterfacePppoa) PostPath() string {
-	return "/api/objects/interface/pppoa/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfacePppoa PUT path
-// Creates or updates the complete object pppoa
-func (*InterfacePppoa) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
-}
-
-// InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppoe []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
-// Returns all available interface/pppoe objects
-func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfacePppoe) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfacePppoe DELETE path
-// Creates or updates the complete object pppoe
-func (*InterfacePppoe) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfacePppoe PATCH path
-// Changes to parts of the object pppoe types
-func (*InterfacePppoe) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfacePppoe POST path
-// Create a new interface/pppoe object
-func (*InterfacePppoe) PostPath() string {
-	return "/api/objects/interface/pppoe/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfacePppoe PUT path
-// Creates or updates the complete object pppoe
-func (*InterfacePppoe) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
 }
 
 // InterfaceVlan is an Sophos Endpoint subType and implements sophos.RestObject
@@ -303,6 +167,266 @@ func (*InterfaceVlan) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *InterfaceVlan) GetType() string { return i._type }
 
+// InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceBridge []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfaceBridge GET path
+// Returns all available interface/bridge objects
+func (*InterfaceBridge) GetPath() string { return "/api/objects/interface/bridge/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfaceBridge) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfaceBridge DELETE path
+// Creates or updates the complete object bridge
+func (*InterfaceBridge) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfaceBridge PATCH path
+// Changes to parts of the object bridge types
+func (*InterfaceBridge) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfaceBridge POST path
+// Create a new interface/bridge object
+func (*InterfaceBridge) PostPath() string {
+	return "/api/objects/interface/bridge/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfaceBridge PUT path
+// Creates or updates the complete object bridge
+func (*InterfaceBridge) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
+}
+
+// InterfaceGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceGroups []InterfaceGroup
+type InterfaceGroup struct {
+	Locked           string        `json:"_locked"`
+	Reference        string        `json:"_ref"`
+	_type            string        `json:"_type"`
+	Comment          string        `json:"comment"`
+	Link             bool          `json:"link"`
+	Members          []interface{} `json:"members"`
+	Name             string        `json:"name"`
+	PrimaryAddresses string        `json:"primary_addresses"`
+}
+
+// GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
+// Returns all available interface/group objects
+func (*InterfaceGroups) GetPath() string { return "/api/objects/interface/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfaceGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
+// Returns all available group types
+func (i *InterfaceGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfaceGroup) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the InterfaceGroup DELETE path
+// Creates or updates the complete object group
+func (*InterfaceGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfaceGroup PATCH path
+// Changes to parts of the object group types
+func (*InterfaceGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfaceGroup POST path
+// Create a new interface/group object
+func (*InterfaceGroup) PostPath() string {
+	return "/api/objects/interface/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfaceGroup PUT path
+// Creates or updates the complete object group
+func (*InterfaceGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *InterfaceGroup) GetType() string { return i._type }
+
+// InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceTunnel []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
+// Returns all available interface/tunnel objects
+func (*InterfaceTunnel) GetPath() string { return "/api/objects/interface/tunnel/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfaceTunnel) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfaceTunnel DELETE path
+// Creates or updates the complete object tunnel
+func (*InterfaceTunnel) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfaceTunnel PATCH path
+// Changes to parts of the object tunnel types
+func (*InterfaceTunnel) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfaceTunnel POST path
+// Create a new interface/tunnel object
+func (*InterfaceTunnel) PostPath() string {
+	return "/api/objects/interface/tunnel/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfaceTunnel PUT path
+// Creates or updates the complete object tunnel
+func (*InterfaceTunnel) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
+}
+
+// InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppoe []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
+// Returns all available interface/pppoe objects
+func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfacePppoe) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfacePppoe DELETE path
+// Creates or updates the complete object pppoe
+func (*InterfacePppoe) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfacePppoe PATCH path
+// Changes to parts of the object pppoe types
+func (*InterfacePppoe) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfacePppoe POST path
+// Create a new interface/pppoe object
+func (*InterfacePppoe) PostPath() string {
+	return "/api/objects/interface/pppoe/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfacePppoe PUT path
+// Creates or updates the complete object pppoe
+func (*InterfacePppoe) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
+}
+
+// InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePpp3G []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePpp3G GET path
+// Returns all available interface/ppp3g objects
+func (*InterfacePpp3G) GetPath() string { return "/api/objects/interface/ppp3g/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfacePpp3G) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfacePpp3G DELETE path
+// Creates or updates the complete object ppp3g
+func (*InterfacePpp3G) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfacePpp3G PATCH path
+// Changes to parts of the object ppp3g types
+func (*InterfacePpp3G) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfacePpp3G POST path
+// Create a new interface/ppp3g object
+func (*InterfacePpp3G) PostPath() string {
+	return "/api/objects/interface/ppp3g/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfacePpp3G PUT path
+// Creates or updates the complete object ppp3g
+func (*InterfacePpp3G) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
+}
+
+// InterfacePppmodem is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppmodem []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppmodem GET path
+// Returns all available interface/pppmodem objects
+func (*InterfacePppmodem) GetPath() string { return "/api/objects/interface/pppmodem/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfacePppmodem) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfacePppmodem DELETE path
+// Creates or updates the complete object pppmodem
+func (*InterfacePppmodem) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfacePppmodem PATCH path
+// Changes to parts of the object pppmodem types
+func (*InterfacePppmodem) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfacePppmodem POST path
+// Create a new interface/pppmodem object
+func (*InterfacePppmodem) PostPath() string {
+	return "/api/objects/interface/pppmodem/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfacePppmodem PUT path
+// Creates or updates the complete object pppmodem
+func (*InterfacePppmodem) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
+}
+
+// InterfacePppoa is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppoa []interface{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoa GET path
+// Returns all available interface/pppoa objects
+func (*InterfacePppoa) GetPath() string { return "/api/objects/interface/pppoa/" }
+
+// RefRequired implements sophos.RestObject
+func (*InterfacePppoa) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the InterfacePppoa DELETE path
+// Creates or updates the complete object pppoa
+func (*InterfacePppoa) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the InterfacePppoa PATCH path
+// Changes to parts of the object pppoa types
+func (*InterfacePppoa) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the InterfacePppoa POST path
+// Create a new interface/pppoa object
+func (*InterfacePppoa) PostPath() string {
+	return "/api/objects/interface/pppoa/"
+}
+
+// PutPath implements sophos.RestObject and returns the InterfacePppoa PUT path
+// Creates or updates the complete object pppoa
+func (*InterfacePppoa) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
+}
+
 // InterfaceEthernet is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceEthernets []InterfaceEthernet
 type InterfaceEthernet struct {
@@ -367,127 +491,3 @@ func (*InterfaceEthernet) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (i *InterfaceEthernet) GetType() string { return i._type }
-
-// InterfaceGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceGroups []InterfaceGroup
-type InterfaceGroup struct {
-	Locked           string        `json:"_locked"`
-	Reference        string        `json:"_ref"`
-	_type            string        `json:"_type"`
-	Comment          string        `json:"comment"`
-	Link             bool          `json:"link"`
-	Members          []interface{} `json:"members"`
-	Name             string        `json:"name"`
-	PrimaryAddresses string        `json:"primary_addresses"`
-}
-
-// GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
-// Returns all available interface/group objects
-func (*InterfaceGroups) GetPath() string { return "/api/objects/interface/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfaceGroups) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
-// Returns all available group types
-func (i *InterfaceGroup) GetPath() string {
-	return fmt.Sprintf("/api/objects/interface/group/%s", i.Reference)
-}
-
-// RefRequired implements sophos.RestObject
-func (i *InterfaceGroup) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the InterfaceGroup DELETE path
-// Creates or updates the complete object group
-func (*InterfaceGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfaceGroup PATCH path
-// Changes to parts of the object group types
-func (*InterfaceGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfaceGroup POST path
-// Create a new interface/group object
-func (*InterfaceGroup) PostPath() string {
-	return "/api/objects/interface/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfaceGroup PUT path
-// Creates or updates the complete object group
-func (*InterfaceGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *InterfaceGroup) GetType() string { return i._type }
-
-// InterfacePppmodem is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppmodem []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfacePppmodem GET path
-// Returns all available interface/pppmodem objects
-func (*InterfacePppmodem) GetPath() string { return "/api/objects/interface/pppmodem/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfacePppmodem) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfacePppmodem DELETE path
-// Creates or updates the complete object pppmodem
-func (*InterfacePppmodem) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfacePppmodem PATCH path
-// Changes to parts of the object pppmodem types
-func (*InterfacePppmodem) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfacePppmodem POST path
-// Create a new interface/pppmodem object
-func (*InterfacePppmodem) PostPath() string {
-	return "/api/objects/interface/pppmodem/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfacePppmodem PUT path
-// Creates or updates the complete object pppmodem
-func (*InterfacePppmodem) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
-}
-
-// InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceTunnel []interface{}
-
-// GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
-// Returns all available interface/tunnel objects
-func (*InterfaceTunnel) GetPath() string { return "/api/objects/interface/tunnel/" }
-
-// RefRequired implements sophos.RestObject
-func (*InterfaceTunnel) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the InterfaceTunnel DELETE path
-// Creates or updates the complete object tunnel
-func (*InterfaceTunnel) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the InterfaceTunnel PATCH path
-// Changes to parts of the object tunnel types
-func (*InterfaceTunnel) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the InterfaceTunnel POST path
-// Create a new interface/tunnel object
-func (*InterfaceTunnel) PostPath() string {
-	return "/api/objects/interface/tunnel/"
-}
-
-// PutPath implements sophos.RestObject and returns the InterfaceTunnel PUT path
-// Creates or updates the complete object tunnel
-func (*InterfaceTunnel) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
-}

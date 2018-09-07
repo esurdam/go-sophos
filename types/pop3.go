@@ -46,10 +46,10 @@ type Pop3 struct {
 }
 
 var defsPop3 = map[string]sophos.RestObject{
-	"Pop3Exception": &Pop3Exception{},
 	"Pop3Group":     &Pop3Group{},
 	"Pop3Server":    &Pop3Server{},
 	"Pop3Account":   &Pop3Account{},
+	"Pop3Exception": &Pop3Exception{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Pop3's Objects
@@ -95,40 +95,6 @@ func (Pop3) References() []string {
 		"REF_Pop3Group",
 		"REF_Pop3Server",
 	}
-}
-
-// Pop3Exception is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Exception []interface{}
-
-// GetPath implements sophos.RestObject and returns the Pop3Exception GET path
-// Returns all available pop3/exception objects
-func (*Pop3Exception) GetPath() string { return "/api/objects/pop3/exception/" }
-
-// RefRequired implements sophos.RestObject
-func (*Pop3Exception) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the Pop3Exception DELETE path
-// Creates or updates the complete object exception
-func (*Pop3Exception) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the Pop3Exception PATCH path
-// Changes to parts of the object exception types
-func (*Pop3Exception) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the Pop3Exception POST path
-// Create a new pop3/exception object
-func (*Pop3Exception) PostPath() string {
-	return "/api/objects/pop3/exception/"
-}
-
-// PutPath implements sophos.RestObject and returns the Pop3Exception PUT path
-// Creates or updates the complete object exception
-func (*Pop3Exception) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
 }
 
 // Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
@@ -231,4 +197,38 @@ func (*Pop3Account) PostPath() string {
 // Creates or updates the complete object account
 func (*Pop3Account) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/account/%s", ref)
+}
+
+// Pop3Exception is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Exception []interface{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Exception GET path
+// Returns all available pop3/exception objects
+func (*Pop3Exception) GetPath() string { return "/api/objects/pop3/exception/" }
+
+// RefRequired implements sophos.RestObject
+func (*Pop3Exception) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the Pop3Exception DELETE path
+// Creates or updates the complete object exception
+func (*Pop3Exception) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the Pop3Exception PATCH path
+// Changes to parts of the object exception types
+func (*Pop3Exception) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the Pop3Exception POST path
+// Create a new pop3/exception object
+func (*Pop3Exception) PostPath() string {
+	return "/api/objects/pop3/exception/"
+}
+
+// PutPath implements sophos.RestObject and returns the Pop3Exception PUT path
+// Creates or updates the complete object exception
+func (*Pop3Exception) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/pop3/exception/%s", ref)
 }

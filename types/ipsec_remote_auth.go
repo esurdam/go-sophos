@@ -12,19 +12,19 @@ import (
 // IpsecRemoteAuth is a generated struct representing the Sophos IpsecRemoteAuth Endpoint
 // GET /api/nodes/ipsec_remote_auth
 type IpsecRemoteAuth struct {
-	IpsecRemoteAuthGroup IpsecRemoteAuthGroup `json:"ipsec_remote_auth_group"`
-	IpsecRemoteAuthRsa   IpsecRemoteAuthRsa   `json:"ipsec_remote_auth_rsa"`
+	IpsecRemoteAuthX509  IpsecRemoteAuthX509  `json:"ipsec_remote_auth_x509"`
 	IpsecRemoteAuthCa    IpsecRemoteAuthCa    `json:"ipsec_remote_auth_ca"`
 	IpsecRemoteAuthPsk   IpsecRemoteAuthPsk   `json:"ipsec_remote_auth_psk"`
-	IpsecRemoteAuthX509  IpsecRemoteAuthX509  `json:"ipsec_remote_auth_x509"`
+	IpsecRemoteAuthRsa   IpsecRemoteAuthRsa   `json:"ipsec_remote_auth_rsa"`
+	IpsecRemoteAuthGroup IpsecRemoteAuthGroup `json:"ipsec_remote_auth_group"`
 }
 
 var defsIpsecRemoteAuth = map[string]sophos.RestObject{
-	"IpsecRemoteAuthGroup": &IpsecRemoteAuthGroup{},
-	"IpsecRemoteAuthRsa":   &IpsecRemoteAuthRsa{},
+	"IpsecRemoteAuthX509":  &IpsecRemoteAuthX509{},
 	"IpsecRemoteAuthCa":    &IpsecRemoteAuthCa{},
 	"IpsecRemoteAuthPsk":   &IpsecRemoteAuthPsk{},
-	"IpsecRemoteAuthX509":  &IpsecRemoteAuthX509{},
+	"IpsecRemoteAuthRsa":   &IpsecRemoteAuthRsa{},
+	"IpsecRemoteAuthGroup": &IpsecRemoteAuthGroup{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpsecRemoteAuth's Objects
@@ -76,73 +76,61 @@ func (IpsecRemoteAuth) References() []string {
 	}
 }
 
-// IpsecRemoteAuthGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthGroup []interface{}
+// IpsecRemoteAuthX509 is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthX509s []IpsecRemoteAuthX509
+type IpsecRemoteAuthX509 struct {
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	_type       string `json:"_type"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+	Name        string `json:"name"`
+	VpnID       string `json:"vpn_id"`
+	VpnIDType   string `json:"vpn_id_type"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup GET path
-// Returns all available ipsec_remote_auth/group objects
-func (*IpsecRemoteAuthGroup) GetPath() string { return "/api/objects/ipsec_remote_auth/group/" }
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthX509s GET path
+// Returns all available ipsec_remote_auth/x509 objects
+func (*IpsecRemoteAuthX509s) GetPath() string { return "/api/objects/ipsec_remote_auth/x509/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthGroup) RefRequired() (string, bool) { return "", false }
+func (*IpsecRemoteAuthX509s) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthGroup DELETE path
-// Creates or updates the complete object group
-func (*IpsecRemoteAuthGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthX509s GET path
+// Returns all available x509 types
+func (i *IpsecRemoteAuthX509) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", i.Reference)
 }
-
-// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup PATCH path
-// Changes to parts of the object group types
-func (*IpsecRemoteAuthGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup POST path
-// Create a new ipsec_remote_auth/group object
-func (*IpsecRemoteAuthGroup) PostPath() string {
-	return "/api/objects/ipsec_remote_auth/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup PUT path
-// Creates or updates the complete object group
-func (*IpsecRemoteAuthGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
-}
-
-// IpsecRemoteAuthRsa is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthRsa []interface{}
-
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa GET path
-// Returns all available ipsec_remote_auth/rsa objects
-func (*IpsecRemoteAuthRsa) GetPath() string { return "/api/objects/ipsec_remote_auth/rsa/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthRsa) RefRequired() (string, bool) { return "", false }
+func (i *IpsecRemoteAuthX509) RefRequired() (string, bool) { return i.Reference, true }
 
-// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthRsa DELETE path
-// Creates or updates the complete object rsa
-func (*IpsecRemoteAuthRsa) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthX509 DELETE path
+// Creates or updates the complete object x509
+func (*IpsecRemoteAuthX509) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa PATCH path
-// Changes to parts of the object rsa types
-func (*IpsecRemoteAuthRsa) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 PATCH path
+// Changes to parts of the object x509 types
+func (*IpsecRemoteAuthX509) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa POST path
-// Create a new ipsec_remote_auth/rsa object
-func (*IpsecRemoteAuthRsa) PostPath() string {
-	return "/api/objects/ipsec_remote_auth/rsa/"
+// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 POST path
+// Create a new ipsec_remote_auth/x509 object
+func (*IpsecRemoteAuthX509) PostPath() string {
+	return "/api/objects/ipsec_remote_auth/x509/"
 }
 
-// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa PUT path
-// Creates or updates the complete object rsa
-func (*IpsecRemoteAuthRsa) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 PUT path
+// Creates or updates the complete object x509
+func (*IpsecRemoteAuthX509) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
 }
+
+// Type implements sophos.Object
+func (i *IpsecRemoteAuthX509) GetType() string { return i._type }
 
 // IpsecRemoteAuthCa is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecRemoteAuthCa []interface{}
@@ -234,58 +222,70 @@ func (*IpsecRemoteAuthPsk) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *IpsecRemoteAuthPsk) GetType() string { return i._type }
 
-// IpsecRemoteAuthX509 is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthX509s []IpsecRemoteAuthX509
-type IpsecRemoteAuthX509 struct {
-	Locked      string `json:"_locked"`
-	Reference   string `json:"_ref"`
-	_type       string `json:"_type"`
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
-	Name        string `json:"name"`
-	VpnID       string `json:"vpn_id"`
-	VpnIDType   string `json:"vpn_id_type"`
-}
+// IpsecRemoteAuthRsa is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthRsa []interface{}
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthX509s GET path
-// Returns all available ipsec_remote_auth/x509 objects
-func (*IpsecRemoteAuthX509s) GetPath() string { return "/api/objects/ipsec_remote_auth/x509/" }
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa GET path
+// Returns all available ipsec_remote_auth/rsa objects
+func (*IpsecRemoteAuthRsa) GetPath() string { return "/api/objects/ipsec_remote_auth/rsa/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthX509s) RefRequired() (string, bool) { return "", false }
+func (*IpsecRemoteAuthRsa) RefRequired() (string, bool) { return "", false }
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthX509s GET path
-// Returns all available x509 types
-func (i *IpsecRemoteAuthX509) GetPath() string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", i.Reference)
+// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthRsa DELETE path
+// Creates or updates the complete object rsa
+func (*IpsecRemoteAuthRsa) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
 }
+
+// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa PATCH path
+// Changes to parts of the object rsa types
+func (*IpsecRemoteAuthRsa) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa POST path
+// Create a new ipsec_remote_auth/rsa object
+func (*IpsecRemoteAuthRsa) PostPath() string {
+	return "/api/objects/ipsec_remote_auth/rsa/"
+}
+
+// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa PUT path
+// Creates or updates the complete object rsa
+func (*IpsecRemoteAuthRsa) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", ref)
+}
+
+// IpsecRemoteAuthGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup GET path
+// Returns all available ipsec_remote_auth/group objects
+func (*IpsecRemoteAuthGroup) GetPath() string { return "/api/objects/ipsec_remote_auth/group/" }
 
 // RefRequired implements sophos.RestObject
-func (i *IpsecRemoteAuthX509) RefRequired() (string, bool) { return i.Reference, true }
+func (*IpsecRemoteAuthGroup) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthX509 DELETE path
-// Creates or updates the complete object x509
-func (*IpsecRemoteAuthX509) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
+// DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthGroup DELETE path
+// Creates or updates the complete object group
+func (*IpsecRemoteAuthGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 PATCH path
-// Changes to parts of the object x509 types
-func (*IpsecRemoteAuthX509) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
+// PatchPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup PATCH path
+// Changes to parts of the object group types
+func (*IpsecRemoteAuthGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 POST path
-// Create a new ipsec_remote_auth/x509 object
-func (*IpsecRemoteAuthX509) PostPath() string {
-	return "/api/objects/ipsec_remote_auth/x509/"
+// PostPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup POST path
+// Create a new ipsec_remote_auth/group object
+func (*IpsecRemoteAuthGroup) PostPath() string {
+	return "/api/objects/ipsec_remote_auth/group/"
 }
 
-// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthX509 PUT path
-// Creates or updates the complete object x509
-func (*IpsecRemoteAuthX509) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
+// PutPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup PUT path
+// Creates or updates the complete object group
+func (*IpsecRemoteAuthGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", ref)
 }
-
-// Type implements sophos.Object
-func (i *IpsecRemoteAuthX509) GetType() string { return i._type }

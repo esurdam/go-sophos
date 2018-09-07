@@ -12,31 +12,31 @@ import (
 // Itfhw is a generated struct representing the Sophos Itfhw Endpoint
 // GET /api/nodes/itfhw
 type Itfhw struct {
-	ItfhwAweNetwork      ItfhwAweNetwork      `json:"itfhw_awe_network"`
 	ItfhwRedServer       ItfhwRedServer       `json:"itfhw_red_server"`
-	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
-	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
-	ItfhwAweNetworkGroup ItfhwAweNetworkGroup `json:"itfhw_awe_network_group"`
-	ItfhwEthernet        ItfhwEthernet        `json:"itfhw_ethernet"`
 	ItfhwSerial          ItfhwSerial          `json:"itfhw_serial"`
+	ItfhwAweNetwork      ItfhwAweNetwork      `json:"itfhw_awe_network"`
 	ItfhwBridge          ItfhwBridge          `json:"itfhw_bridge"`
-	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
 	ItfhwRedClient       ItfhwRedClient       `json:"itfhw_red_client"`
 	ItfhwLag             ItfhwLag             `json:"itfhw_lag"`
+	ItfhwGroup           ItfhwGroup           `json:"itfhw_group"`
+	ItfhwAweNetworkGroup ItfhwAweNetworkGroup `json:"itfhw_awe_network_group"`
+	ItfhwEthernet        ItfhwEthernet        `json:"itfhw_ethernet"`
+	ItfhwUsbserial       ItfhwUsbserial       `json:"itfhw_usbserial"`
+	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
 }
 
 var defsItfhw = map[string]sophos.RestObject{
-	"ItfhwAweNetwork":      &ItfhwAweNetwork{},
 	"ItfhwRedServer":       &ItfhwRedServer{},
-	"ItfhwUsbserial":       &ItfhwUsbserial{},
-	"ItfhwVirtual":         &ItfhwVirtual{},
-	"ItfhwAweNetworkGroup": &ItfhwAweNetworkGroup{},
-	"ItfhwEthernet":        &ItfhwEthernet{},
 	"ItfhwSerial":          &ItfhwSerial{},
+	"ItfhwAweNetwork":      &ItfhwAweNetwork{},
 	"ItfhwBridge":          &ItfhwBridge{},
-	"ItfhwGroup":           &ItfhwGroup{},
 	"ItfhwRedClient":       &ItfhwRedClient{},
 	"ItfhwLag":             &ItfhwLag{},
+	"ItfhwGroup":           &ItfhwGroup{},
+	"ItfhwAweNetworkGroup": &ItfhwAweNetworkGroup{},
+	"ItfhwEthernet":        &ItfhwEthernet{},
+	"ItfhwUsbserial":       &ItfhwUsbserial{},
+	"ItfhwVirtual":         &ItfhwVirtual{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Itfhw's Objects
@@ -110,6 +110,74 @@ func (Itfhw) References() []string {
 		"REF_ItfhwUsbserial",
 		"REF_ItfhwVirtual",
 	}
+}
+
+// ItfhwRedServer is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwRedServer []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwRedServer GET path
+// Returns all available itfhw/red_server objects
+func (*ItfhwRedServer) GetPath() string { return "/api/objects/itfhw/red_server/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwRedServer) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwRedServer DELETE path
+// Creates or updates the complete object red_server
+func (*ItfhwRedServer) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwRedServer PATCH path
+// Changes to parts of the object red_server types
+func (*ItfhwRedServer) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwRedServer POST path
+// Create a new itfhw/red_server object
+func (*ItfhwRedServer) PostPath() string {
+	return "/api/objects/itfhw/red_server/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwRedServer PUT path
+// Creates or updates the complete object red_server
+func (*ItfhwRedServer) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
+}
+
+// ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwSerial []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
+// Returns all available itfhw/serial objects
+func (*ItfhwSerial) GetPath() string { return "/api/objects/itfhw/serial/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwSerial) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwSerial DELETE path
+// Creates or updates the complete object serial
+func (*ItfhwSerial) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwSerial PATCH path
+// Changes to parts of the object serial types
+func (*ItfhwSerial) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwSerial POST path
+// Create a new itfhw/serial object
+func (*ItfhwSerial) PostPath() string {
+	return "/api/objects/itfhw/serial/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwSerial PUT path
+// Creates or updates the complete object serial
+func (*ItfhwSerial) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
 }
 
 // ItfhwAweNetwork is an Sophos Endpoint subType and implements sophos.RestObject
@@ -197,106 +265,161 @@ func (*ItfhwAweNetwork) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfhwAweNetwork) GetType() string { return i._type }
 
-// ItfhwRedServer is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwRedServer []interface{}
+// ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwBridge []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwRedServer GET path
-// Returns all available itfhw/red_server objects
-func (*ItfhwRedServer) GetPath() string { return "/api/objects/itfhw/red_server/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwRedServer) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwRedServer DELETE path
-// Creates or updates the complete object red_server
-func (*ItfhwRedServer) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwRedServer PATCH path
-// Changes to parts of the object red_server types
-func (*ItfhwRedServer) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwRedServer POST path
-// Create a new itfhw/red_server object
-func (*ItfhwRedServer) PostPath() string {
-	return "/api/objects/itfhw/red_server/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwRedServer PUT path
-// Creates or updates the complete object red_server
-func (*ItfhwRedServer) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
-}
-
-// ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwUsbserial []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
-// Returns all available itfhw/usbserial objects
-func (*ItfhwUsbserial) GetPath() string { return "/api/objects/itfhw/usbserial/" }
+// GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
+// Returns all available itfhw/bridge objects
+func (*ItfhwBridge) GetPath() string { return "/api/objects/itfhw/bridge/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwUsbserial) RefRequired() (string, bool) { return "", false }
+func (*ItfhwBridge) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwUsbserial DELETE path
-// Creates or updates the complete object usbserial
-func (*ItfhwUsbserial) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwBridge DELETE path
+// Creates or updates the complete object bridge
+func (*ItfhwBridge) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwUsbserial PATCH path
-// Changes to parts of the object usbserial types
-func (*ItfhwUsbserial) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwBridge PATCH path
+// Changes to parts of the object bridge types
+func (*ItfhwBridge) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwUsbserial POST path
-// Create a new itfhw/usbserial object
-func (*ItfhwUsbserial) PostPath() string {
-	return "/api/objects/itfhw/usbserial/"
+// PostPath implements sophos.RestObject and returns the ItfhwBridge POST path
+// Create a new itfhw/bridge object
+func (*ItfhwBridge) PostPath() string {
+	return "/api/objects/itfhw/bridge/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwUsbserial PUT path
-// Creates or updates the complete object usbserial
-func (*ItfhwUsbserial) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwBridge PUT path
+// Creates or updates the complete object bridge
+func (*ItfhwBridge) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
 }
 
-// ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwVirtual []interface{}
+// ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwRedClient []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
-// Returns all available itfhw/virtual objects
-func (*ItfhwVirtual) GetPath() string { return "/api/objects/itfhw/virtual/" }
+// GetPath implements sophos.RestObject and returns the ItfhwRedClient GET path
+// Returns all available itfhw/red_client objects
+func (*ItfhwRedClient) GetPath() string { return "/api/objects/itfhw/red_client/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwVirtual) RefRequired() (string, bool) { return "", false }
+func (*ItfhwRedClient) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwVirtual DELETE path
-// Creates or updates the complete object virtual
-func (*ItfhwVirtual) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwRedClient DELETE path
+// Creates or updates the complete object red_client
+func (*ItfhwRedClient) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwVirtual PATCH path
-// Changes to parts of the object virtual types
-func (*ItfhwVirtual) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwRedClient PATCH path
+// Changes to parts of the object red_client types
+func (*ItfhwRedClient) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwVirtual POST path
-// Create a new itfhw/virtual object
-func (*ItfhwVirtual) PostPath() string {
-	return "/api/objects/itfhw/virtual/"
+// PostPath implements sophos.RestObject and returns the ItfhwRedClient POST path
+// Create a new itfhw/red_client object
+func (*ItfhwRedClient) PostPath() string {
+	return "/api/objects/itfhw/red_client/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwVirtual PUT path
-// Creates or updates the complete object virtual
-func (*ItfhwVirtual) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwRedClient PUT path
+// Creates or updates the complete object red_client
+func (*ItfhwRedClient) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
+}
+
+// ItfhwLag is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwLags []ItfhwLag
+type ItfhwLag struct {
+	Locked         string `json:"_locked"`
+	Reference      string `json:"_ref"`
+	_type          string `json:"_type"`
+	Comment        string `json:"comment"`
+	Description    string `json:"description"`
+	Hardware       string `json:"hardware"`
+	LinkMonitoring bool   `json:"link_monitoring"`
+	Mac            string `json:"mac"`
+	Name           string `json:"name"`
+}
+
+// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
+// Returns all available itfhw/lag objects
+func (*ItfhwLags) GetPath() string { return "/api/objects/itfhw/lag/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwLags) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
+// Returns all available lag types
+func (i *ItfhwLag) GetPath() string { return fmt.Sprintf("/api/objects/itfhw/lag/%s", i.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwLag) RefRequired() (string, bool) { return i.Reference, true }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwLag DELETE path
+// Creates or updates the complete object lag
+func (*ItfhwLag) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwLag PATCH path
+// Changes to parts of the object lag types
+func (*ItfhwLag) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwLag POST path
+// Create a new itfhw/lag object
+func (*ItfhwLag) PostPath() string {
+	return "/api/objects/itfhw/lag/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwLag PUT path
+// Creates or updates the complete object lag
+func (*ItfhwLag) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
+}
+
+// Type implements sophos.Object
+func (i *ItfhwLag) GetType() string { return i._type }
+
+// ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
+// Returns all available itfhw/group objects
+func (*ItfhwGroup) GetPath() string { return "/api/objects/itfhw/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*ItfhwGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the ItfhwGroup DELETE path
+// Creates or updates the complete object group
+func (*ItfhwGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the ItfhwGroup PATCH path
+// Changes to parts of the object group types
+func (*ItfhwGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the ItfhwGroup POST path
+// Create a new itfhw/group object
+func (*ItfhwGroup) PostPath() string {
+	return "/api/objects/itfhw/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the ItfhwGroup PUT path
+// Creates or updates the complete object group
+func (*ItfhwGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
 }
 
 // ItfhwAweNetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -402,193 +525,70 @@ func (*ItfhwEthernet) PutPath(ref string) string {
 // Type implements sophos.Object
 func (i *ItfhwEthernet) GetType() string { return i._type }
 
-// ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwSerial []interface{}
+// ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwUsbserial []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
-// Returns all available itfhw/serial objects
-func (*ItfhwSerial) GetPath() string { return "/api/objects/itfhw/serial/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwSerial) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwSerial DELETE path
-// Creates or updates the complete object serial
-func (*ItfhwSerial) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwSerial PATCH path
-// Changes to parts of the object serial types
-func (*ItfhwSerial) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwSerial POST path
-// Create a new itfhw/serial object
-func (*ItfhwSerial) PostPath() string {
-	return "/api/objects/itfhw/serial/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwSerial PUT path
-// Creates or updates the complete object serial
-func (*ItfhwSerial) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
-}
-
-// ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwBridge []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
-// Returns all available itfhw/bridge objects
-func (*ItfhwBridge) GetPath() string { return "/api/objects/itfhw/bridge/" }
+// GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
+// Returns all available itfhw/usbserial objects
+func (*ItfhwUsbserial) GetPath() string { return "/api/objects/itfhw/usbserial/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwBridge) RefRequired() (string, bool) { return "", false }
+func (*ItfhwUsbserial) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwBridge DELETE path
-// Creates or updates the complete object bridge
-func (*ItfhwBridge) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwUsbserial DELETE path
+// Creates or updates the complete object usbserial
+func (*ItfhwUsbserial) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwBridge PATCH path
-// Changes to parts of the object bridge types
-func (*ItfhwBridge) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwUsbserial PATCH path
+// Changes to parts of the object usbserial types
+func (*ItfhwUsbserial) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwBridge POST path
-// Create a new itfhw/bridge object
-func (*ItfhwBridge) PostPath() string {
-	return "/api/objects/itfhw/bridge/"
+// PostPath implements sophos.RestObject and returns the ItfhwUsbserial POST path
+// Create a new itfhw/usbserial object
+func (*ItfhwUsbserial) PostPath() string {
+	return "/api/objects/itfhw/usbserial/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwBridge PUT path
-// Creates or updates the complete object bridge
-func (*ItfhwBridge) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwUsbserial PUT path
+// Creates or updates the complete object usbserial
+func (*ItfhwUsbserial) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwGroup []interface{}
+// ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwVirtual []interface{}
 
-// GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
-// Returns all available itfhw/group objects
-func (*ItfhwGroup) GetPath() string { return "/api/objects/itfhw/group/" }
+// GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
+// Returns all available itfhw/virtual objects
+func (*ItfhwVirtual) GetPath() string { return "/api/objects/itfhw/virtual/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwGroup) RefRequired() (string, bool) { return "", false }
+func (*ItfhwVirtual) RefRequired() (string, bool) { return "", false }
 
-// DeletePath implements sophos.RestObject and returns the ItfhwGroup DELETE path
-// Creates or updates the complete object group
-func (*ItfhwGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+// DeletePath implements sophos.RestObject and returns the ItfhwVirtual DELETE path
+// Creates or updates the complete object virtual
+func (*ItfhwVirtual) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
 
-// PatchPath implements sophos.RestObject and returns the ItfhwGroup PATCH path
-// Changes to parts of the object group types
-func (*ItfhwGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+// PatchPath implements sophos.RestObject and returns the ItfhwVirtual PATCH path
+// Changes to parts of the object virtual types
+func (*ItfhwVirtual) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
 
-// PostPath implements sophos.RestObject and returns the ItfhwGroup POST path
-// Create a new itfhw/group object
-func (*ItfhwGroup) PostPath() string {
-	return "/api/objects/itfhw/group/"
+// PostPath implements sophos.RestObject and returns the ItfhwVirtual POST path
+// Create a new itfhw/virtual object
+func (*ItfhwVirtual) PostPath() string {
+	return "/api/objects/itfhw/virtual/"
 }
 
-// PutPath implements sophos.RestObject and returns the ItfhwGroup PUT path
-// Creates or updates the complete object group
-func (*ItfhwGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
+// PutPath implements sophos.RestObject and returns the ItfhwVirtual PUT path
+// Creates or updates the complete object virtual
+func (*ItfhwVirtual) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
-
-// ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwRedClient []interface{}
-
-// GetPath implements sophos.RestObject and returns the ItfhwRedClient GET path
-// Returns all available itfhw/red_client objects
-func (*ItfhwRedClient) GetPath() string { return "/api/objects/itfhw/red_client/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwRedClient) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwRedClient DELETE path
-// Creates or updates the complete object red_client
-func (*ItfhwRedClient) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwRedClient PATCH path
-// Changes to parts of the object red_client types
-func (*ItfhwRedClient) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwRedClient POST path
-// Create a new itfhw/red_client object
-func (*ItfhwRedClient) PostPath() string {
-	return "/api/objects/itfhw/red_client/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwRedClient PUT path
-// Creates or updates the complete object red_client
-func (*ItfhwRedClient) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
-}
-
-// ItfhwLag is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwLags []ItfhwLag
-type ItfhwLag struct {
-	Locked         string `json:"_locked"`
-	Reference      string `json:"_ref"`
-	_type          string `json:"_type"`
-	Comment        string `json:"comment"`
-	Description    string `json:"description"`
-	Hardware       string `json:"hardware"`
-	LinkMonitoring bool   `json:"link_monitoring"`
-	Mac            string `json:"mac"`
-	Name           string `json:"name"`
-}
-
-// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
-// Returns all available itfhw/lag objects
-func (*ItfhwLags) GetPath() string { return "/api/objects/itfhw/lag/" }
-
-// RefRequired implements sophos.RestObject
-func (*ItfhwLags) RefRequired() (string, bool) { return "", false }
-
-// GetPath implements sophos.RestObject and returns the ItfhwLags GET path
-// Returns all available lag types
-func (i *ItfhwLag) GetPath() string { return fmt.Sprintf("/api/objects/itfhw/lag/%s", i.Reference) }
-
-// RefRequired implements sophos.RestObject
-func (i *ItfhwLag) RefRequired() (string, bool) { return i.Reference, true }
-
-// DeletePath implements sophos.RestObject and returns the ItfhwLag DELETE path
-// Creates or updates the complete object lag
-func (*ItfhwLag) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the ItfhwLag PATCH path
-// Changes to parts of the object lag types
-func (*ItfhwLag) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the ItfhwLag POST path
-// Create a new itfhw/lag object
-func (*ItfhwLag) PostPath() string {
-	return "/api/objects/itfhw/lag/"
-}
-
-// PutPath implements sophos.RestObject and returns the ItfhwLag PUT path
-// Creates or updates the complete object lag
-func (*ItfhwLag) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
-}
-
-// Type implements sophos.Object
-func (i *ItfhwLag) GetType() string { return i._type }

@@ -12,13 +12,13 @@ import (
 // UserPreferences is a generated struct representing the Sophos UserPreferences Endpoint
 // GET /api/nodes/user_preferences
 type UserPreferences struct {
-	UserPreferencesWebadmin UserPreferencesWebadmin `json:"user_preferences_webadmin"`
 	UserPreferencesGroup    UserPreferencesGroup    `json:"user_preferences_group"`
+	UserPreferencesWebadmin UserPreferencesWebadmin `json:"user_preferences_webadmin"`
 }
 
 var defsUserPreferences = map[string]sophos.RestObject{
-	"UserPreferencesWebadmin": &UserPreferencesWebadmin{},
 	"UserPreferencesGroup":    &UserPreferencesGroup{},
+	"UserPreferencesWebadmin": &UserPreferencesWebadmin{},
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of UserPreferences's Objects
@@ -56,6 +56,40 @@ func (UserPreferences) References() []string {
 		"REF_UserPreferencesGroup",
 		"REF_UserPreferencesWebadmin",
 	}
+}
+
+// UserPreferencesGroup is an Sophos Endpoint subType and implements sophos.RestObject
+type UserPreferencesGroup []interface{}
+
+// GetPath implements sophos.RestObject and returns the UserPreferencesGroup GET path
+// Returns all available user_preferences/group objects
+func (*UserPreferencesGroup) GetPath() string { return "/api/objects/user_preferences/group/" }
+
+// RefRequired implements sophos.RestObject
+func (*UserPreferencesGroup) RefRequired() (string, bool) { return "", false }
+
+// DeletePath implements sophos.RestObject and returns the UserPreferencesGroup DELETE path
+// Creates or updates the complete object group
+func (*UserPreferencesGroup) DeletePath(ref string) string {
+	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
+}
+
+// PatchPath implements sophos.RestObject and returns the UserPreferencesGroup PATCH path
+// Changes to parts of the object group types
+func (*UserPreferencesGroup) PatchPath(ref string) string {
+	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
+}
+
+// PostPath implements sophos.RestObject and returns the UserPreferencesGroup POST path
+// Create a new user_preferences/group object
+func (*UserPreferencesGroup) PostPath() string {
+	return "/api/objects/user_preferences/group/"
+}
+
+// PutPath implements sophos.RestObject and returns the UserPreferencesGroup PUT path
+// Creates or updates the complete object group
+func (*UserPreferencesGroup) PutPath(ref string) string {
+	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
 }
 
 // UserPreferencesWebadmin is an Sophos Endpoint subType and implements sophos.RestObject
@@ -126,37 +160,3 @@ func (*UserPreferencesWebadmin) PutPath(ref string) string {
 
 // Type implements sophos.Object
 func (u *UserPreferencesWebadmin) GetType() string { return u._type }
-
-// UserPreferencesGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type UserPreferencesGroup []interface{}
-
-// GetPath implements sophos.RestObject and returns the UserPreferencesGroup GET path
-// Returns all available user_preferences/group objects
-func (*UserPreferencesGroup) GetPath() string { return "/api/objects/user_preferences/group/" }
-
-// RefRequired implements sophos.RestObject
-func (*UserPreferencesGroup) RefRequired() (string, bool) { return "", false }
-
-// DeletePath implements sophos.RestObject and returns the UserPreferencesGroup DELETE path
-// Creates or updates the complete object group
-func (*UserPreferencesGroup) DeletePath(ref string) string {
-	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
-}
-
-// PatchPath implements sophos.RestObject and returns the UserPreferencesGroup PATCH path
-// Changes to parts of the object group types
-func (*UserPreferencesGroup) PatchPath(ref string) string {
-	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
-}
-
-// PostPath implements sophos.RestObject and returns the UserPreferencesGroup POST path
-// Create a new user_preferences/group object
-func (*UserPreferencesGroup) PostPath() string {
-	return "/api/objects/user_preferences/group/"
-}
-
-// PutPath implements sophos.RestObject and returns the UserPreferencesGroup PUT path
-// Creates or updates the complete object group
-func (*UserPreferencesGroup) PutPath(ref string) string {
-	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
-}
