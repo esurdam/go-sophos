@@ -238,10 +238,11 @@ func TestNew(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    *sophos.Client
+		want    string
 		wantErr bool
 	}{
-		{"testNewNoEndpoint", args{endpoint: ""}, nil, true},
+		{"testNewNoEndpoint", args{endpoint: ""}, "", true},
+		{"testNewEndpointNoHttp", args{endpoint: "boom.org"}, "https://boom.org", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -250,8 +251,11 @@ func TestNew(t *testing.T) {
 				t.Errorf("New() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("New() = %v, want %v", got, tt.want)
+			if tt.want == "" {
+				return
+			}
+			if !reflect.DeepEqual(got.Endpoint(), tt.want) {
+				t.Errorf("New() = %v, want %v", got.Endpoint(), tt.want)
 			}
 		})
 	}
