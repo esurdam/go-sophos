@@ -1,12 +1,15 @@
 package sophos_test
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
-	"os"
+	"net/http/httptest"
 	"reflect"
 	"testing"
+
+	"github.com/esurdam/go-sophos/types"
 
 	"github.com/esurdam/go-sophos"
 )
@@ -17,20 +20,22 @@ var errOption = func(r *http.Request) error {
 	return fmt.Errorf("this is a fake error")
 }
 
-func init() {
-	token := os.Getenv("TOKEN")
-	clientF, err := sophos.New("httpbin.org", sophos.WithAPIToken(token))
+func setupTestCase(t *testing.T) func(t *testing.T) {
+	t.Log("setup test case")
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(types.Dns{})
+	}))
+	sophos.DefaultHTTPClient = ts.Client()
+	clientF, err := sophos.New(ts.URL, sophos.WithAPIToken("abc"))
 	if err == nil {
 		client = clientF
 	}
-}
-
-func setupTestCase(t *testing.T) func(t *testing.T) {
-	t.Log("setup test case")
 	if client == nil {
 		t.Error("errror setting up client, client is nil")
 	}
 	return func(t *testing.T) {
+		ts.Close()
 		t.Log("teardown test case")
 	}
 }
@@ -63,15 +68,12 @@ func TestClient_Ping(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	if _, err := client.Ping(func(r *http.Request) error {
-		r.URL.Path = "/json"
-		return nil
-	}); err != nil {
-		t.Error(err)
-	}
-
 	if _, err := client.Ping(errOption); err == nil {
 		t.Error("error should not be nil with errOption")
+	}
+
+	if _, err := client.Ping(); err != nil {
+		t.Error(err)
 	}
 }
 
@@ -86,6 +88,89 @@ func TestClient_Delete(t *testing.T) {
 
 	if r.Request.Method != http.MethodDelete {
 		t.Error("method should be DELETE")
+	}
+}
+
+func TestClient_GetObject(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var dns types.Dns
+	err := client.GetObject(&dns)
+	if err != nil {
+		t.Error("error should be nil", err.Error())
+	}
+
+	if err := client.GetObject(&dns, errOption); err == nil {
+		t.Error("error should not be nil with errOption")
+	}
+
+	var d types.DhcpServer
+	err = client.GetObject(&d)
+	if err == nil {
+		t.Error("type should require ref")
+	}
+}
+
+func TestClient_PostObject(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var d = types.DhcpServer{Reference: "abc"}
+	err := client.PostObject(&d)
+	if err != nil {
+		t.Error("error should be nil", err.Error())
+	}
+}
+
+func TestClient_DeleteObject(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var d = types.DhcpServer{Reference: "abc"}
+	err := client.DeleteObject(&d)
+	if err != nil {
+		t.Error("error should be nil", err.Error())
+	}
+
+	d = types.DhcpServer{Reference: ""}
+	err = client.DeleteObject(&d)
+	if err == nil {
+		t.Error("type should require ref")
+	}
+}
+
+func TestClient_PatchObject(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var d = types.DhcpServer{Reference: "abc"}
+	err := client.PatchObject(&d)
+	if err != nil {
+		t.Error("error should be nil", err.Error())
+	}
+
+	d = types.DhcpServer{}
+	err = client.PatchObject(&d)
+	if err == nil {
+		t.Error("type should require ref")
+	}
+}
+
+func TestClient_PutObject(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var d = types.DhcpServer{Reference: "abc"}
+	err := client.PutObject(&d)
+	if err != nil {
+		t.Error("error should be nil", err.Error())
+	}
+
+	d = types.DhcpServer{}
+	err = client.PutObject(&d)
+	if err == nil {
+		t.Error("type should require ref")
 	}
 }
 

@@ -1,6 +1,8 @@
 package sophos
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -9,17 +11,24 @@ import (
 )
 
 // DefaultHTTPClient is the default http.Client used. Caller can modify Client (e.g. to allow SkipInsecure)
-var DefaultHTTPClient = http.Client{}
+var DefaultHTTPClient = &http.Client{}
 
 // ClientInterface represents a Sophos 9 REST API client
 type ClientInterface interface {
-	Endpoint() string
 	Get(path string, options ...Option) (*Response, error)
 	Put(path string, body io.Reader, options ...Option) (*Response, error)
 	Post(path string, body io.Reader, options ...Option) (*Response, error)
 	Patch(path string, body io.Reader, options ...Option) (*Response, error)
 	Delete(path string, options ...Option) (*Response, error)
-	Do(method, path string, body io.Reader, options ...Option) (*Response, error)
+}
+
+// TypeClient acts on RestObjects
+type TypeClient interface {
+	GetObject(o RestGetter, options ...Option) error
+	PutObject(o RestObject, options ...Option) error
+	PatchObject(o RestObject, options ...Option) error
+	PostObject(o RestObject, options ...Option) error
+	DeleteObject(o RestObject, options ...Option) error
 }
 
 // Client implements ClientInterface to provide a REST client
@@ -28,6 +37,8 @@ type Client struct {
 	apiKey   string
 	opts     []Option
 }
+
+var ErrRefRequired = errors.New("client: Reference is required")
 
 var _ ClientInterface = Client{}
 
@@ -159,4 +170,56 @@ func (c *Client) Request(method, path string, body io.Reader, options ...Option)
 	}
 
 	return req, nil
+}
+
+// GetObject implements TypeClient
+func (c Client) GetObject(o RestGetter, options ...Option) error {
+	if ref, required := o.RefRequired(); required && ref == "" {
+		return ErrRefRequired
+	}
+	res, err := c.Get(o.GetPath(), options...)
+	if err != nil {
+		return err
+	}
+	err = res.MarshalTo(o)
+	return err
+}
+
+// PostObject implements TypeClient
+func (c Client) PostObject(o RestObject, options ...Option) error {
+	byt, _ := json.Marshal(o)
+	_, err := c.Post(o.PostPath(), bytes.NewReader(byt))
+	return err
+}
+
+// PatchObject implements TypeClient
+func (c Client) PatchObject(o RestObject, options ...Option) error {
+	ref, required := o.RefRequired()
+	if required && ref == "" {
+		return ErrRefRequired
+	}
+	byt, _ := json.Marshal(o)
+	_, err := c.Patch(o.PatchPath(ref), bytes.NewReader(byt), options...)
+	return err
+}
+
+// PutObject implements TypeClient
+func (c Client) PutObject(o RestObject, options ...Option) error {
+	ref, required := o.RefRequired()
+	if required && ref == "" {
+		return ErrRefRequired
+	}
+	byt, _ := json.Marshal(o)
+	_, err := c.Put(o.PutPath(ref), bytes.NewReader(byt), options...)
+	return err
+}
+
+// DeleteObject implements TypeClient
+func (c Client) DeleteObject(o RestObject, options ...Option) error {
+	ref, required := o.RefRequired()
+	if required && ref == "" {
+		return ErrRefRequired
+	}
+	_, err := c.Delete(o.DeletePath(ref), options...)
+	return err
 }
