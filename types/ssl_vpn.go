@@ -162,7 +162,7 @@ func (*SslVpnClientConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/client_connection/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SslVpnClientConnection) GetType() string { return s._type }
 
 // SslVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -258,7 +258,7 @@ func (*SslVpnRemoteAccessProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/remote_access_profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
 
 // SslVpnServerConnection is an Sophos Endpoint subType and implements sophos.RestObject

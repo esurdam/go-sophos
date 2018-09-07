@@ -142,5 +142,5 @@ func (*RightRight) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/right/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *RightRight) GetType() string { return r._type }

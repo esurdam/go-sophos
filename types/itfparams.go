@@ -215,7 +215,7 @@ func (*ItfparamsLinkAggregationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/link_aggregation_group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *ItfparamsLinkAggregationGroup) GetType() string { return i._type }
 
 // ItfparamsPrimarys is an Sophos Endpoint subType and implements sophos.RestObject
@@ -297,7 +297,7 @@ func (*ItfparamsPrimary) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/primary/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *ItfparamsPrimary) GetType() string { return i._type }
 
 // ItfparamsSecondary is an Sophos Endpoint subType and implements sophos.RestObject

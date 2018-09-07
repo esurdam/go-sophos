@@ -162,7 +162,7 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SchedulerLoadbalance) GetType() string { return s._type }
 
 // SchedulerRules is an Sophos Endpoint subType and implements sophos.RestObject
@@ -226,5 +226,5 @@ func (*SchedulerRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SchedulerRule) GetType() string { return s._type }

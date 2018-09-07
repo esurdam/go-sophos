@@ -155,7 +155,7 @@ func (*AwsInstanceType) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AwsInstanceType) GetType() string { return a._type }
 
 // AwsRegions is an Sophos Endpoint subType and implements sophos.RestObject
@@ -212,5 +212,5 @@ func (*AwsRegion) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AwsRegion) GetType() string { return a._type }

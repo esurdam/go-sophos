@@ -126,7 +126,7 @@ func (*AmazonVpcConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/connection/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AmazonVpcConnection) GetType() string { return a._type }
 
 // AmazonVpcGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -219,5 +219,5 @@ func (*AmazonVpcTunnel) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AmazonVpcTunnel) GetType() string { return a._type }

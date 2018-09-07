@@ -178,7 +178,7 @@ func (*NetworkAaa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/aaa/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkAaa) GetType() string { return n._type }
 
 // NetworkAnys is an Sophos Endpoint subType and implements sophos.RestObject
@@ -238,7 +238,7 @@ func (*NetworkAny) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/any/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkAny) GetType() string { return n._type }
 
 // NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -334,7 +334,7 @@ func (*NetworkDnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/dns_group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkDnsGroup) GetType() string { return n._type }
 
 // NetworkDnsHosts is an Sophos Endpoint subType and implements sophos.RestObject
@@ -396,7 +396,7 @@ func (*NetworkDnsHost) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/dns_host/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkDnsHost) GetType() string { return n._type }
 
 // NetworkGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -453,7 +453,7 @@ func (*NetworkGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkGroup) GetType() string { return n._type }
 
 // NetworkHosts is an Sophos Endpoint subType and implements sophos.RestObject
@@ -517,7 +517,7 @@ func (*NetworkHost) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/host/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkHost) GetType() string { return n._type }
 
 // NetworkInterfaceAddresss is an Sophos Endpoint subType and implements sophos.RestObject
@@ -576,7 +576,7 @@ func (*NetworkInterfaceAddress) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_address/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkInterfaceAddress) GetType() string { return n._type }
 
 // NetworkInterfaceBroadcasts is an Sophos Endpoint subType and implements sophos.RestObject
@@ -635,7 +635,7 @@ func (*NetworkInterfaceBroadcast) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_broadcast/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
 
 // NetworkInterfaceNetworks is an Sophos Endpoint subType and implements sophos.RestObject
@@ -696,7 +696,7 @@ func (*NetworkInterfaceNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/interface_network/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
 
 // NetworkMulticast is an Sophos Endpoint subType and implements sophos.RestObject
@@ -792,7 +792,7 @@ func (*NetworkNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/network/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkNetwork) GetType() string { return n._type }
 
 // NetworkRanges is an Sophos Endpoint subType and implements sophos.RestObject
@@ -854,5 +854,5 @@ func (*NetworkRange) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/network/range/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (n *NetworkRange) GetType() string { return n._type }

@@ -196,7 +196,7 @@ func (*ItfhwAweNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *ItfhwAweNetwork) GetType() string { return i._type }
 
 // ItfhwAweNetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -335,7 +335,7 @@ func (*ItfhwEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/ethernet/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *ItfhwEthernet) GetType() string { return i._type }
 
 // ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -426,7 +426,7 @@ func (*ItfhwLag) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *ItfhwLag) GetType() string { return i._type }
 
 // ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject

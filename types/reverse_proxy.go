@@ -215,7 +215,7 @@ func (*ReverseProxyAuthProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/auth_profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyAuthProfile) GetType() string { return r._type }
 
 // ReverseProxyBackends is an Sophos Endpoint subType and implements sophos.RestObject
@@ -278,7 +278,7 @@ func (*ReverseProxyBackend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyBackend) GetType() string { return r._type }
 
 // ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
@@ -406,7 +406,7 @@ func (*ReverseProxyFormTemplate) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyFormTemplate) GetType() string { return r._type }
 
 // ReverseProxyFrontends is an Sophos Endpoint subType and implements sophos.RestObject
@@ -479,7 +479,7 @@ func (*ReverseProxyFrontend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/frontend/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
 // ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -580,7 +580,7 @@ func (*ReverseProxyLocation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyLocation) GetType() string { return r._type }
 
 // ReverseProxyProfiles is an Sophos Endpoint subType and implements sophos.RestObject
@@ -667,7 +667,7 @@ func (*ReverseProxyProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReverseProxyProfile) GetType() string { return r._type }
 
 // ReverseProxyRedirection is an Sophos Endpoint subType and implements sophos.RestObject

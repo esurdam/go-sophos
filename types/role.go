@@ -145,5 +145,5 @@ func (*RoleRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *RoleRole) GetType() string { return r._type }

@@ -150,7 +150,7 @@ func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
 
 // IpsecConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -254,7 +254,7 @@ func (*IpsecConnectionL2Tp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 
 // IpsecConnectionRoadwarriorCa is an Sophos Endpoint subType and implements sophos.RestObject
@@ -465,5 +465,5 @@ func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecConnectionSiteToSite) GetType() string { return i._type }

@@ -126,7 +126,7 @@ func (*ClientlessVpnConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/connection/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *ClientlessVpnConnection) GetType() string { return c._type }
 
 // ClientlessVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject

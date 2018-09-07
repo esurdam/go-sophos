@@ -190,7 +190,7 @@ func (*ServiceAny) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/any/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceAny) GetType() string { return s._type }
 
 // ServiceEsp is an Sophos Endpoint subType and implements sophos.RestObject
@@ -281,7 +281,7 @@ func (*ServiceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceGroup) GetType() string { return s._type }
 
 // ServiceIcmps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -338,7 +338,7 @@ func (*ServiceIcmp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceIcmp) GetType() string { return s._type }
 
 // ServiceIcmpv6 is an Sophos Endpoint subType and implements sophos.RestObject
@@ -426,7 +426,7 @@ func (*ServiceIp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceIp) GetType() string { return s._type }
 
 // ServiceTcps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -485,7 +485,7 @@ func (*ServiceTcp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcp/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceTcp) GetType() string { return s._type }
 
 // ServiceTcpudps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -546,7 +546,7 @@ func (*ServiceTcpudp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcpudp/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceTcpudp) GetType() string { return s._type }
 
 // ServiceUdps is an Sophos Endpoint subType and implements sophos.RestObject
@@ -605,5 +605,5 @@ func (*ServiceUdp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/udp/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *ServiceUdp) GetType() string { return s._type }

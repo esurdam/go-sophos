@@ -232,7 +232,7 @@ func (*EppAvPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (e *EppAvPolicy) GetType() string { return e._type }
 
 // EppDcException is an Sophos Endpoint subType and implements sophos.RestObject
@@ -329,7 +329,7 @@ func (*EppDcPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (e *EppDcPolicy) GetType() string { return e._type }
 
 // EppDevice is an Sophos Endpoint subType and implements sophos.RestObject
@@ -462,7 +462,7 @@ func (*EppEndpointsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (e *EppEndpointsGroup) GetType() string { return e._type }
 
 // EppGroup is an Sophos Endpoint subType and implements sophos.RestObject

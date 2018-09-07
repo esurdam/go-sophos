@@ -174,7 +174,7 @@ func (*IpsecPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecPolicy) GetType() string { return i._type }
 
 // IpsecRemoteGateways is an Sophos Endpoint subType and implements sophos.RestObject
@@ -237,5 +237,5 @@ func (*IpsecRemoteGateway) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecRemoteGateway) GetType() string { return i._type }

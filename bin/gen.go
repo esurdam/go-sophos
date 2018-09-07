@@ -593,7 +593,7 @@ func(*{{.Name}}) PutPath(ref string) string {
 }
 
 {{if .IsType}}
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func({{firstLetter .Name}} *{{.Name}}) GetType() string { return {{firstLetter .Name}}._type }
 {{end}}
 

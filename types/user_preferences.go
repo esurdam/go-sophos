@@ -160,5 +160,5 @@ func (*UserPreferencesWebadmin) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/webadmin/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (u *UserPreferencesWebadmin) GetType() string { return u._type }

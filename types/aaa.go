@@ -120,7 +120,7 @@ func (*AaaGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AaaGroup) GetType() string { return a._type }
 
 // AaaUsers is an Sophos Endpoint subType and implements sophos.RestObject
@@ -198,5 +198,5 @@ func (*AaaUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/user/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *AaaUser) GetType() string { return a._type }

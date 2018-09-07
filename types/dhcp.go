@@ -188,7 +188,7 @@ func (*DhcpOption) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (d *DhcpOption) GetType() string { return d._type }
 
 // DhcpOption6 is an Sophos Endpoint subType and implements sophos.RestObject
@@ -293,7 +293,7 @@ func (*DhcpServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (d *DhcpServer) GetType() string { return d._type }
 
 // DhcpServer6 is an Sophos Endpoint subType and implements sophos.RestObject

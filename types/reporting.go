@@ -201,7 +201,7 @@ func (*ReportingFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/filter/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *ReportingFilter) GetType() string { return r._type }
 
 // ReportingGroup is an Sophos Endpoint subType and implements sophos.RestObject

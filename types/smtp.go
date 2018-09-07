@@ -321,5 +321,5 @@ func (*SmtpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SmtpProfile) GetType() string { return s._type }

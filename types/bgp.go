@@ -141,7 +141,7 @@ func (*BgpAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (b *BgpAmazonVpc) GetType() string { return b._type }
 
 // BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject

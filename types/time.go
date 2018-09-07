@@ -153,7 +153,7 @@ func (*TimeRecurring) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/recurring/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (t *TimeRecurring) GetType() string { return t._type }
 
 // TimeSingle is an Sophos Endpoint subType and implements sophos.RestObject

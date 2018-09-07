@@ -189,5 +189,5 @@ func (*RouteStatic) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (r *RouteStatic) GetType() string { return r._type }

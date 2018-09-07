@@ -191,5 +191,5 @@ func (*DnsRoute) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/route/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (d *DnsRoute) GetType() string { return d._type }

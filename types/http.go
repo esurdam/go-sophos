@@ -293,7 +293,7 @@ func (*HttpCffAction) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_action/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpCffAction) GetType() string { return h._type }
 
 // HttpCffProfiles is an Sophos Endpoint subType and implements sophos.RestObject
@@ -354,7 +354,7 @@ func (*HttpCffProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpCffProfile) GetType() string { return h._type }
 
 // HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
@@ -487,7 +487,7 @@ func (*HttpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/exception/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpException) GetType() string { return h._type }
 
 // HttpGroup is an Sophos Endpoint subType and implements sophos.RestObject
@@ -646,7 +646,7 @@ func (*HttpPacFile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/pac_file/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpPacFile) GetType() string { return h._type }
 
 // HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
@@ -757,7 +757,7 @@ func (*HttpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpProfile) GetType() string { return h._type }
 
 // HttpSpCategorys is an Sophos Endpoint subType and implements sophos.RestObject
@@ -814,7 +814,7 @@ func (*HttpSpCategory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpSpCategory) GetType() string { return h._type }
 
 // HttpSpSubcats is an Sophos Endpoint subType and implements sophos.RestObject
@@ -870,5 +870,5 @@ func (*HttpSpSubcat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (h *HttpSpSubcat) GetType() string { return h._type }

@@ -148,5 +148,5 @@ func (*ConditionObjref) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/objref/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *ConditionObjref) GetType() string { return c._type }

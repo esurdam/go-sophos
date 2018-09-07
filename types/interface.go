@@ -198,7 +198,7 @@ func (*InterfaceEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *InterfaceEthernet) GetType() string { return i._type }
 
 // InterfaceGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -256,7 +256,7 @@ func (*InterfaceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *InterfaceGroup) GetType() string { return i._type }
 
 // InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
@@ -495,5 +495,5 @@ func (*InterfaceVlan) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *InterfaceVlan) GetType() string { return i._type }

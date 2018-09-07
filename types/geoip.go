@@ -158,7 +158,7 @@ func (*GeoipGeoipgroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/geoipgroup/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (g *GeoipGeoipgroup) GetType() string { return g._type }
 
 // GeoipGroup is an Sophos Endpoint subType and implements sophos.RestObject

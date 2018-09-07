@@ -249,7 +249,7 @@ func (*QosInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (q *QosInterface) GetType() string { return q._type }
 
 // QosRule is an Sophos Endpoint subType and implements sophos.RestObject

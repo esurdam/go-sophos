@@ -199,7 +199,7 @@ func (*IpsecRemoteAuthPsk) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/psk/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecRemoteAuthPsk) GetType() string { return i._type }
 
 // IpsecRemoteAuthRsa is an Sophos Endpoint subType and implements sophos.RestObject
@@ -291,5 +291,5 @@ func (*IpsecRemoteAuthX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/x509/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsecRemoteAuthX509) GetType() string { return i._type }

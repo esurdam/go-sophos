@@ -233,7 +233,7 @@ func (*CaHostCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_cert/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *CaHostCert) GetType() string { return c._type }
 
 // CaHostKeyCerts is an Sophos Endpoint subType and implements sophos.RestObject
@@ -293,7 +293,7 @@ func (*CaHostKeyCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_key_cert/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *CaHostKeyCert) GetType() string { return c._type }
 
 // CaHttpVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject
@@ -426,7 +426,7 @@ func (*CaMetaX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_x509/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *CaMetaX509) GetType() string { return c._type }
 
 // CaRsas is an Sophos Endpoint subType and implements sophos.RestObject
@@ -484,7 +484,7 @@ func (*CaRsa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/rsa/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *CaRsa) GetType() string { return c._type }
 
 // CaSigningCas is an Sophos Endpoint subType and implements sophos.RestObject
@@ -546,7 +546,7 @@ func (*CaSigningCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/signing_ca/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (c *CaSigningCa) GetType() string { return c._type }
 
 // CaVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject

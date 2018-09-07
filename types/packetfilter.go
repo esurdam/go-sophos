@@ -358,7 +358,7 @@ func (*PacketfilterMasq) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (p *PacketfilterMasq) GetType() string { return p._type }
 
 // PacketfilterNats is an Sophos Endpoint subType and implements sophos.RestObject
@@ -427,7 +427,7 @@ func (*PacketfilterNat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (p *PacketfilterNat) GetType() string { return p._type }
 
 // PacketfilterPacketfilters is an Sophos Endpoint subType and implements sophos.RestObject
@@ -495,7 +495,7 @@ func (*PacketfilterPacketfilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/packetfilter/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
 // PacketfilterRuleset is an Sophos Endpoint subType and implements sophos.RestObject

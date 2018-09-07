@@ -154,5 +154,5 @@ func (*ApplicationControlRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/rule/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (a *ApplicationControlRule) GetType() string { return a._type }

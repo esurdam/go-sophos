@@ -211,5 +211,5 @@ func (*SpxTemplate) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/template/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (s *SpxTemplate) GetType() string { return s._type }

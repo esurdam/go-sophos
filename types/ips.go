@@ -158,7 +158,7 @@ func (*IpsException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsException) GetType() string { return i._type }
 
 // IpsGroups is an Sophos Endpoint subType and implements sophos.RestObject
@@ -218,7 +218,7 @@ func (*IpsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
-// Type implements sophos.Object
+// GetType implements sophos.Object
 func (i *IpsGroup) GetType() string { return i._type }
 
 // IpsRule is an Sophos Endpoint subType and implements sophos.RestObject
