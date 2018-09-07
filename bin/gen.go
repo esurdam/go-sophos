@@ -126,18 +126,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	f, err := os.Create("types/generated.go")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	f.Write([]byte(header))
-
 	for _, def := range dd {
 		err := def.process()
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		f, err := os.Create("types/" + strings.ToLower(def.Name) + ".go")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		f.Write([]byte(header))
 
 		// enc := json.NewEncoder(os.Stdout)
 		// enc.SetIndent("", "    ")
@@ -374,6 +374,14 @@ func (e *node) AddSubType(s subtype) {
 
 			if s.Bytes != "" {
 				e.SubTypes[idx].Bytes = s.Bytes
+			}
+
+			if !se.IsPlural && s.IsPlural {
+				e.SubTypes[idx].IsPlural = s.IsPlural
+			}
+
+			if !se.IsType && s.IsType {
+				e.SubTypes[idx].IsType = s.IsType
 			}
 			return
 		}
