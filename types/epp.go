@@ -63,9 +63,7 @@ var defsEpp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Epp's Objects
-func (Epp) RestObjects() map[string]sophos.RestObject {
-	return defsEpp
-}
+func (Epp) RestObjects() map[string]sophos.RestObject { return defsEpp }
 
 // GetPath implements sophos.RestGetter
 func (*Epp) GetPath() string { return "/api/nodes/epp" }

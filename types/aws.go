@@ -24,9 +24,7 @@ var defsAws = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Aws's Objects
-func (Aws) RestObjects() map[string]sophos.RestObject {
-	return defsAws
-}
+func (Aws) RestObjects() map[string]sophos.RestObject { return defsAws }
 
 // GetPath implements sophos.RestGetter
 func (*Aws) GetPath() string { return "/api/nodes/aws" }

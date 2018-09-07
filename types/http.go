@@ -125,9 +125,7 @@ var defsHttp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Http's Objects
-func (Http) RestObjects() map[string]sophos.RestObject {
-	return defsHttp
-}
+func (Http) RestObjects() map[string]sophos.RestObject { return defsHttp }
 
 // GetPath implements sophos.RestGetter
 func (*Http) GetPath() string { return "/api/nodes/http" }

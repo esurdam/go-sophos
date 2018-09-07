@@ -40,9 +40,7 @@ var defsItfhw = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Itfhw's Objects
-func (Itfhw) RestObjects() map[string]sophos.RestObject {
-	return defsItfhw
-}
+func (Itfhw) RestObjects() map[string]sophos.RestObject { return defsItfhw }
 
 // GetPath implements sophos.RestGetter
 func (*Itfhw) GetPath() string { return "/api/nodes/itfhw" }

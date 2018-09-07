@@ -26,9 +26,7 @@ var defsOspf = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ospf's Objects
-func (Ospf) RestObjects() map[string]sophos.RestObject {
-	return defsOspf
-}
+func (Ospf) RestObjects() map[string]sophos.RestObject { return defsOspf }
 
 // GetPath implements sophos.RestGetter
 func (*Ospf) GetPath() string { return "/api/nodes/ospf" }

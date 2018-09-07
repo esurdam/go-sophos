@@ -34,9 +34,7 @@ var defsSnmp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Snmp's Objects
-func (Snmp) RestObjects() map[string]sophos.RestObject {
-	return defsSnmp
-}
+func (Snmp) RestObjects() map[string]sophos.RestObject { return defsSnmp }
 
 // GetPath implements sophos.RestGetter
 func (*Snmp) GetPath() string { return "/api/nodes/snmp" }

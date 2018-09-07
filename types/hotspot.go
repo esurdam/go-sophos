@@ -26,9 +26,7 @@ var defsHotspot = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Hotspot's Objects
-func (Hotspot) RestObjects() map[string]sophos.RestObject {
-	return defsHotspot
-}
+func (Hotspot) RestObjects() map[string]sophos.RestObject { return defsHotspot }
 
 // GetPath implements sophos.RestGetter
 func (*Hotspot) GetPath() string { return "/api/nodes/hotspot" }

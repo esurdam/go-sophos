@@ -55,9 +55,7 @@ var defsEmailpki = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Emailpki's Objects
-func (Emailpki) RestObjects() map[string]sophos.RestObject {
-	return defsEmailpki
-}
+func (Emailpki) RestObjects() map[string]sophos.RestObject { return defsEmailpki }
 
 // GetPath implements sophos.RestGetter
 func (*Emailpki) GetPath() string { return "/api/nodes/emailpki" }

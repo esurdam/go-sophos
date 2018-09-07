@@ -39,9 +39,7 @@ var defsDhcp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dhcp's Objects
-func (Dhcp) RestObjects() map[string]sophos.RestObject {
-	return defsDhcp
-}
+func (Dhcp) RestObjects() map[string]sophos.RestObject { return defsDhcp }
 
 // GetPath implements sophos.RestGetter
 func (*Dhcp) GetPath() string { return "/api/nodes/dhcp" }

@@ -24,9 +24,7 @@ var defsScheduler = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Scheduler's Objects
-func (Scheduler) RestObjects() map[string]sophos.RestObject {
-	return defsScheduler
-}
+func (Scheduler) RestObjects() map[string]sophos.RestObject { return defsScheduler }
 
 // GetPath implements sophos.RestGetter
 func (*Scheduler) GetPath() string { return "/api/nodes/scheduler" }

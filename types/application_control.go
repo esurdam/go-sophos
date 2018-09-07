@@ -22,9 +22,7 @@ var defsApplicationControl = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ApplicationControl's Objects
-func (ApplicationControl) RestObjects() map[string]sophos.RestObject {
-	return defsApplicationControl
-}
+func (ApplicationControl) RestObjects() map[string]sophos.RestObject { return defsApplicationControl }
 
 // GetPath implements sophos.RestGetter
 func (*ApplicationControl) GetPath() string { return "/api/nodes/application_control" }

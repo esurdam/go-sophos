@@ -67,9 +67,7 @@ var defsReverseProxy = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ReverseProxy's Objects
-func (ReverseProxy) RestObjects() map[string]sophos.RestObject {
-	return defsReverseProxy
-}
+func (ReverseProxy) RestObjects() map[string]sophos.RestObject { return defsReverseProxy }
 
 // GetPath implements sophos.RestGetter
 func (*ReverseProxy) GetPath() string { return "/api/nodes/reverse_proxy" }

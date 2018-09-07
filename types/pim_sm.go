@@ -30,9 +30,7 @@ var defsPimSm = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of PimSm's Objects
-func (PimSm) RestObjects() map[string]sophos.RestObject {
-	return defsPimSm
-}
+func (PimSm) RestObjects() map[string]sophos.RestObject { return defsPimSm }
 
 // GetPath implements sophos.RestGetter
 func (*PimSm) GetPath() string { return "/api/nodes/pim_sm" }

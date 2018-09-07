@@ -32,9 +32,7 @@ var defsAuthentication = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Authentication's Objects
-func (Authentication) RestObjects() map[string]sophos.RestObject {
-	return defsAuthentication
-}
+func (Authentication) RestObjects() map[string]sophos.RestObject { return defsAuthentication }
 
 // GetPath implements sophos.RestGetter
 func (*Authentication) GetPath() string { return "/api/nodes/authentication" }

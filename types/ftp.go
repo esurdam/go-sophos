@@ -33,9 +33,7 @@ var defsFtp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ftp's Objects
-func (Ftp) RestObjects() map[string]sophos.RestObject {
-	return defsFtp
-}
+func (Ftp) RestObjects() map[string]sophos.RestObject { return defsFtp }
 
 // GetPath implements sophos.RestGetter
 func (*Ftp) GetPath() string { return "/api/nodes/ftp" }

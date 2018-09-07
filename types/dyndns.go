@@ -21,9 +21,7 @@ var defsDyndns = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dyndns's Objects
-func (Dyndns) RestObjects() map[string]sophos.RestObject {
-	return defsDyndns
-}
+func (Dyndns) RestObjects() map[string]sophos.RestObject { return defsDyndns }
 
 // GetPath implements sophos.RestGetter
 func (*Dyndns) GetPath() string { return "/api/nodes/dyndns" }

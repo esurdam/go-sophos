@@ -24,9 +24,7 @@ var defsRemoteSyslog = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of RemoteSyslog's Objects
-func (RemoteSyslog) RestObjects() map[string]sophos.RestObject {
-	return defsRemoteSyslog
-}
+func (RemoteSyslog) RestObjects() map[string]sophos.RestObject { return defsRemoteSyslog }
 
 // GetPath implements sophos.RestGetter
 func (*RemoteSyslog) GetPath() string { return "/api/nodes/remote_syslog" }

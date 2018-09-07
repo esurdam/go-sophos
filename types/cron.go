@@ -22,9 +22,7 @@ var defsCron = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Cron's Objects
-func (Cron) RestObjects() map[string]sophos.RestObject {
-	return defsCron
-}
+func (Cron) RestObjects() map[string]sophos.RestObject { return defsCron }
 
 // GetPath implements sophos.RestGetter
 func (*Cron) GetPath() string { return "/api/nodes/cron" }

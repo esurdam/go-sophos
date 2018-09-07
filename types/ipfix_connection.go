@@ -22,9 +22,7 @@ var defsIpfixConnection = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpfixConnection's Objects
-func (IpfixConnection) RestObjects() map[string]sophos.RestObject {
-	return defsIpfixConnection
-}
+func (IpfixConnection) RestObjects() map[string]sophos.RestObject { return defsIpfixConnection }
 
 // GetPath implements sophos.RestGetter
 func (*IpfixConnection) GetPath() string { return "/api/nodes/ipfix_connection" }

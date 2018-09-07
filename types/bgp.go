@@ -30,9 +30,7 @@ var defsBgp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Bgp's Objects
-func (Bgp) RestObjects() map[string]sophos.RestObject {
-	return defsBgp
-}
+func (Bgp) RestObjects() map[string]sophos.RestObject { return defsBgp }
 
 // GetPath implements sophos.RestGetter
 func (*Bgp) GetPath() string { return "/api/nodes/bgp" }

@@ -34,9 +34,7 @@ var defsIpsecConnection = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpsecConnection's Objects
-func (IpsecConnection) RestObjects() map[string]sophos.RestObject {
-	return defsIpsecConnection
-}
+func (IpsecConnection) RestObjects() map[string]sophos.RestObject { return defsIpsecConnection }
 
 // GetPath implements sophos.RestGetter
 func (*IpsecConnection) GetPath() string { return "/api/nodes/ipsec_connection" }

@@ -22,9 +22,7 @@ var defsUserPreferences = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of UserPreferences's Objects
-func (UserPreferences) RestObjects() map[string]sophos.RestObject {
-	return defsUserPreferences
-}
+func (UserPreferences) RestObjects() map[string]sophos.RestObject { return defsUserPreferences }
 
 // GetPath implements sophos.RestGetter
 func (*UserPreferences) GetPath() string { return "/api/nodes/user_preferences" }

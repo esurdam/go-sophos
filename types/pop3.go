@@ -53,9 +53,7 @@ var defsPop3 = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Pop3's Objects
-func (Pop3) RestObjects() map[string]sophos.RestObject {
-	return defsPop3
-}
+func (Pop3) RestObjects() map[string]sophos.RestObject { return defsPop3 }
 
 // GetPath implements sophos.RestGetter
 func (*Pop3) GetPath() string { return "/api/nodes/pop3" }

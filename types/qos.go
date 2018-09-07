@@ -30,9 +30,7 @@ var defsQos = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Qos's Objects
-func (Qos) RestObjects() map[string]sophos.RestObject {
-	return defsQos
-}
+func (Qos) RestObjects() map[string]sophos.RestObject { return defsQos }
 
 // GetPath implements sophos.RestGetter
 func (*Qos) GetPath() string { return "/api/nodes/qos" }

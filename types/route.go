@@ -24,9 +24,7 @@ var defsRoute = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Route's Objects
-func (Route) RestObjects() map[string]sophos.RestObject {
-	return defsRoute
-}
+func (Route) RestObjects() map[string]sophos.RestObject { return defsRoute }
 
 // GetPath implements sophos.RestGetter
 func (*Route) GetPath() string { return "/api/nodes/route" }

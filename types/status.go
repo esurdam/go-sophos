@@ -20,9 +20,7 @@ var defsStatus = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Status's Objects
-func (Status) RestObjects() map[string]sophos.RestObject {
-	return defsStatus
-}
+func (Status) RestObjects() map[string]sophos.RestObject { return defsStatus }
 
 // GetPath implements sophos.RestGetter
 func (*Status) GetPath() string { return "/api/nodes/status" }

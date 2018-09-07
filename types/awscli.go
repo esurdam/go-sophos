@@ -21,9 +21,7 @@ var defsAwscli = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Awscli's Objects
-func (Awscli) RestObjects() map[string]sophos.RestObject {
-	return defsAwscli
-}
+func (Awscli) RestObjects() map[string]sophos.RestObject { return defsAwscli }
 
 // GetPath implements sophos.RestGetter
 func (*Awscli) GetPath() string { return "/api/nodes/awscli" }

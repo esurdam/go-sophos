@@ -25,9 +25,7 @@ var defsAmazonVpc = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of AmazonVpc's Objects
-func (AmazonVpc) RestObjects() map[string]sophos.RestObject {
-	return defsAmazonVpc
-}
+func (AmazonVpc) RestObjects() map[string]sophos.RestObject { return defsAmazonVpc }
 
 // GetPath implements sophos.RestGetter
 func (*AmazonVpc) GetPath() string { return "/api/nodes/amazon_vpc" }

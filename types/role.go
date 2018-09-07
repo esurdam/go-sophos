@@ -22,9 +22,7 @@ var defsRole = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Role's Objects
-func (Role) RestObjects() map[string]sophos.RestObject {
-	return defsRole
-}
+func (Role) RestObjects() map[string]sophos.RestObject { return defsRole }
 
 // GetPath implements sophos.RestGetter
 func (*Role) GetPath() string { return "/api/nodes/role" }

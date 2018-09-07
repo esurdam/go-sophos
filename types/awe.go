@@ -45,9 +45,7 @@ var defsAwe = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Awe's Objects
-func (Awe) RestObjects() map[string]sophos.RestObject {
-	return defsAwe
-}
+func (Awe) RestObjects() map[string]sophos.RestObject { return defsAwe }
 
 // GetPath implements sophos.RestGetter
 func (*Awe) GetPath() string { return "/api/nodes/awe" }

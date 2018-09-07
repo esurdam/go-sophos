@@ -24,9 +24,7 @@ var defsTime = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Time's Objects
-func (Time) RestObjects() map[string]sophos.RestObject {
-	return defsTime
-}
+func (Time) RestObjects() map[string]sophos.RestObject { return defsTime }
 
 // GetPath implements sophos.RestGetter
 func (*Time) GetPath() string { return "/api/nodes/time" }

@@ -22,9 +22,7 @@ var defsOverride = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Override's Objects
-func (Override) RestObjects() map[string]sophos.RestObject {
-	return defsOverride
-}
+func (Override) RestObjects() map[string]sophos.RestObject { return defsOverride }
 
 // GetPath implements sophos.RestGetter
 func (*Override) GetPath() string { return "/api/nodes/override" }

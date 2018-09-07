@@ -22,9 +22,7 @@ var defsStas = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Stas's Objects
-func (Stas) RestObjects() map[string]sophos.RestObject {
-	return defsStas
-}
+func (Stas) RestObjects() map[string]sophos.RestObject { return defsStas }
 
 // GetPath implements sophos.RestGetter
 func (*Stas) GetPath() string { return "/api/nodes/stas" }

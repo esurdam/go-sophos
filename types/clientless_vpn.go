@@ -22,9 +22,7 @@ var defsClientlessVpn = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of ClientlessVpn's Objects
-func (ClientlessVpn) RestObjects() map[string]sophos.RestObject {
-	return defsClientlessVpn
-}
+func (ClientlessVpn) RestObjects() map[string]sophos.RestObject { return defsClientlessVpn }
 
 // GetPath implements sophos.RestGetter
 func (*ClientlessVpn) GetPath() string { return "/api/nodes/clientless_vpn" }

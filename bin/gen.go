@@ -516,9 +516,7 @@ var defs{{.Title}} =  map[string]sophos.RestObject{
 	}
 
 // RestObjects implements the sophos.Node interface and returns a map of {{.Title}}'s Objects
-func({{.Title}}) RestObjects() map[string]sophos.RestObject {
-	return defs{{.Title}}
-}
+func({{.Title}}) RestObjects() map[string]sophos.RestObject { return defs{{.Title}} }
 
 // GetPath implements sophos.RestGetter
 func(*{{.Title}}) GetPath() string { return "{{.Path}}" }

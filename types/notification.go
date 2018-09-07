@@ -22,9 +22,7 @@ var defsNotification = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Notification's Objects
-func (Notification) RestObjects() map[string]sophos.RestObject {
-	return defsNotification
-}
+func (Notification) RestObjects() map[string]sophos.RestObject { return defsNotification }
 
 // GetPath implements sophos.RestGetter
 func (*Notification) GetPath() string { return "/api/nodes/notification" }

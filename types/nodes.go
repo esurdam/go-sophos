@@ -1193,9 +1193,7 @@ type Nodes struct {
 var defsNodes = map[string]sophos.RestObject{}
 
 // RestObjects implements the sophos.Node interface and returns a map of Nodes's Objects
-func (Nodes) RestObjects() map[string]sophos.RestObject {
-	return defsNodes
-}
+func (Nodes) RestObjects() map[string]sophos.RestObject { return defsNodes }
 
 // GetPath implements sophos.RestGetter
 func (*Nodes) GetPath() string { return "/api/nodes" }

@@ -22,9 +22,7 @@ var defsMacList = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of MacList's Objects
-func (MacList) RestObjects() map[string]sophos.RestObject {
-	return defsMacList
-}
+func (MacList) RestObjects() map[string]sophos.RestObject { return defsMacList }
 
 // GetPath implements sophos.RestGetter
 func (*MacList) GetPath() string { return "/api/nodes/mac_list" }

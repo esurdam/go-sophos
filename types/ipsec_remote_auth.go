@@ -28,9 +28,7 @@ var defsIpsecRemoteAuth = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of IpsecRemoteAuth's Objects
-func (IpsecRemoteAuth) RestObjects() map[string]sophos.RestObject {
-	return defsIpsecRemoteAuth
-}
+func (IpsecRemoteAuth) RestObjects() map[string]sophos.RestObject { return defsIpsecRemoteAuth }
 
 // GetPath implements sophos.RestGetter
 func (*IpsecRemoteAuth) GetPath() string { return "/api/nodes/ipsec_remote_auth" }

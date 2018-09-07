@@ -67,9 +67,7 @@ var defsPacketfilter = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Packetfilter's Objects
-func (Packetfilter) RestObjects() map[string]sophos.RestObject {
-	return defsPacketfilter
-}
+func (Packetfilter) RestObjects() map[string]sophos.RestObject { return defsPacketfilter }
 
 // GetPath implements sophos.RestGetter
 func (*Packetfilter) GetPath() string { return "/api/nodes/packetfilter" }

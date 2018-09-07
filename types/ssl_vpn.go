@@ -37,9 +37,7 @@ var defsSslVpn = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of SslVpn's Objects
-func (SslVpn) RestObjects() map[string]sophos.RestObject {
-	return defsSslVpn
-}
+func (SslVpn) RestObjects() map[string]sophos.RestObject { return defsSslVpn }
 
 // GetPath implements sophos.RestGetter
 func (*SslVpn) GetPath() string { return "/api/nodes/ssl_vpn" }

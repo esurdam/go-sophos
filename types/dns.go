@@ -30,9 +30,7 @@ var defsDns = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Dns's Objects
-func (Dns) RestObjects() map[string]sophos.RestObject {
-	return defsDns
-}
+func (Dns) RestObjects() map[string]sophos.RestObject { return defsDns }
 
 // GetPath implements sophos.RestGetter
 func (*Dns) GetPath() string { return "/api/nodes/dns" }

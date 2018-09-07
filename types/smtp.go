@@ -78,9 +78,7 @@ var defsSmtp = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Smtp's Objects
-func (Smtp) RestObjects() map[string]sophos.RestObject {
-	return defsSmtp
-}
+func (Smtp) RestObjects() map[string]sophos.RestObject { return defsSmtp }
 
 // GetPath implements sophos.RestGetter
 func (*Smtp) GetPath() string { return "/api/nodes/smtp" }

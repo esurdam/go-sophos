@@ -27,9 +27,7 @@ var defsGeoip = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Geoip's Objects
-func (Geoip) RestObjects() map[string]sophos.RestObject {
-	return defsGeoip
-}
+func (Geoip) RestObjects() map[string]sophos.RestObject { return defsGeoip }
 
 // GetPath implements sophos.RestGetter
 func (*Geoip) GetPath() string { return "/api/nodes/geoip" }

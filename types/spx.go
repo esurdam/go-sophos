@@ -49,9 +49,7 @@ var defsSpx = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Spx's Objects
-func (Spx) RestObjects() map[string]sophos.RestObject {
-	return defsSpx
-}
+func (Spx) RestObjects() map[string]sophos.RestObject { return defsSpx }
 
 // GetPath implements sophos.RestGetter
 func (*Spx) GetPath() string { return "/api/nodes/spx" }

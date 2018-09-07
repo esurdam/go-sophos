@@ -45,9 +45,7 @@ var defsCa = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Ca's Objects
-func (Ca) RestObjects() map[string]sophos.RestObject {
-	return defsCa
-}
+func (Ca) RestObjects() map[string]sophos.RestObject { return defsCa }
 
 // GetPath implements sophos.RestGetter
 func (*Ca) GetPath() string { return "/api/nodes/ca" }

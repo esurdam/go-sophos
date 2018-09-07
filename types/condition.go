@@ -22,9 +22,7 @@ var defsCondition = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Condition's Objects
-func (Condition) RestObjects() map[string]sophos.RestObject {
-	return defsCondition
-}
+func (Condition) RestObjects() map[string]sophos.RestObject { return defsCondition }
 
 // GetPath implements sophos.RestGetter
 func (*Condition) GetPath() string { return "/api/nodes/condition" }

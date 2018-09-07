@@ -28,9 +28,7 @@ var defsItfparams = map[string]sophos.RestObject{
 }
 
 // RestObjects implements the sophos.Node interface and returns a map of Itfparams's Objects
-func (Itfparams) RestObjects() map[string]sophos.RestObject {
-	return defsItfparams
-}
+func (Itfparams) RestObjects() map[string]sophos.RestObject { return defsItfparams }
 
 // GetPath implements sophos.RestGetter
 func (*Itfparams) GetPath() string { return "/api/nodes/itfparams" }
