@@ -2,6 +2,7 @@ package sophos
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -129,7 +130,7 @@ type Version struct {
 func (c Client) Ping(options ...Option) (v *Version, err error) {
 	r, err := c.Get("/api/status/version", options...)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("ping: error retrieving version from gateway: %s", err.Error())
 	}
 
 	v = &Version{}
@@ -143,18 +144,19 @@ func (c Client) Endpoint() string {
 	return c.endpoint
 }
 
+
 // Request generates a new *http.Request that is modified with the Client's Options (set on New)
 // and with the provided Options.
 func (c *Client) Request(method, path string, body io.Reader, options ...Option) (*http.Request, error) {
 	req, err := http.NewRequest(method, c.endpoint+"/", body)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("request: error generating new http.Request: %s", err.Error())
 	}
 	req.URL.Path = path
 
 	opts := append(c.opts, options...)
 	if err := evaluateOpts(req, opts); err != nil {
-		return req, err
+		return req, fmt.Errorf("request: error evaluation Options: %s", err.Error())
 	}
 
 	return req, nil
