@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/esurdam/go-sophos/types"
@@ -24,6 +25,10 @@ func setupTestCase(t *testing.T) func(t *testing.T) {
 	t.Log("setup test case")
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		if strings.HasPrefix(r.URL.Path, "/api/definitions/") {
+			json.NewEncoder(w).Encode(map[string]sophos.MethodMap{})
+			return
+		}
 		json.NewEncoder(w).Encode(types.Dns{})
 	}))
 	sophos.DefaultHTTPClient = ts.Client()
@@ -61,6 +66,22 @@ func TestClient_Request(t *testing.T) {
 	r, err = client.Request("é", "/api/status/version", nil)
 	if err == nil {
 		t.Error(fmt.Errorf("request should have errored"))
+	}
+}
+
+func TestDefinition_Get(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	d := types.Nodes{}.Definition()
+	err := d.GetSwag(client)
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = d.GetSwag(client, errOption)
+	if err == nil {
+		t.Error(err)
 	}
 }
 
