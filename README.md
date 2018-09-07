@@ -55,12 +55,11 @@ Requesting a REST type:
 import "github.com/esurdam/go-sophos/types"
 
 var nodes types.Nodes
-res, _ := client.Get(nodes.GetPath()) 
-_ = res.MarshalTo(&nodes) 
+_ := client.GetObject(&nodes)
 
-nodes.LicensingActiveIps // active Ips
+// active Ips
+nodes.LicensingActiveIps 
 ```
-
 
 Deleting a packet filter rule with reference `REF_PacPacXYZ`.
 
@@ -71,6 +70,11 @@ _, err := client.Delete(
     sophos.WithSessionClose,
     sophos.AutoResolveErrsMode,
 )
+
+// OR as a RestObject
+
+pf := types.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
+err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
 ```
 
 ## Generating Types
