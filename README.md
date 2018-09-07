@@ -92,7 +92,7 @@ fmt.Printf("%v", swag)
 
 ## Generating Types
 
-Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate the [generated.go](types/generated.go) file which contains structs corresponding to UTM API definitions.
+Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in [types](types) which contain structs corresponding to UTM API definitions.
 
 
 ```bash
