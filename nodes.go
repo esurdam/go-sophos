@@ -9,7 +9,10 @@ package sophos
 // a dot “.” to separate different nodes. Nodes reference objects, for example “Shell Access” and have a
 // leaf node of allowed_networks which is an array of references to network objects.
 type Node interface {
-	Object
+	// Definition returns the endpoint Definition
+	Definition() Definition
+	// Objects returns a map of the Node's editable Objects
+	RestObjects() map[string]RestObject
 	// ApiRoutes returns all known Node paths
 	ApiRoutes() []string
 }
@@ -23,8 +26,8 @@ type Node interface {
 // (e.g. 192.168.0.1) or “network” for subnets (e.g. 192.168.0.0/24). The collection of objects is always expressed
 // with a class and a type, e.g. “network/host” or “network/network”.
 type Object interface {
-	// Definitions returns a map of the Node's editable Objects
-	Definitions() map[string]RestObject
+	// GetType returns the objects Type
+	GetType() string
 }
 
 // A Reference is the connections between nodes and objects as well as between one object and another object.
@@ -36,6 +39,57 @@ type Reference string
 
 // RestObject is an interface for REST objects
 type RestObject interface {
-	// GetPath returns the GET path of the Object
-	GetPath() string
+	RestGetter
+	DeletePath(ref string) string // DeletePath returns the DELETE path of the Object
+	PatchPath(ref string) string  // PatchPath returns the PATCH path of the Object
+	PostPath() string             // PostPath returns the POST path of the Object
+	PutPath(ref string) string    // GetPath returns the PUT path of the Object
+}
+
+// RestGetter is an interface ensuring a Reference is passed when required
+type RestGetter interface {
+	GetPath() string             // GetPath returns the GET path of the Object, will sometimes require Reference
+	RefRequired() (string, bool) // RefRequired returns true if Ref required
+}
+
+// Definition represents a Swagger API endpoint
+// You can use the Swagger API Documents to identify all the different RESTful API end
+// points with descriptions for each object and node.
+// GET /api/definitions
+//
+// This returns a list of possible Swagger API definitions and you can define the call so
+// the results are specific to different objects or nodes:
+// GET /api/definitions/network
+type Definition struct {
+	Description string
+	Name        string
+	Link        string
+	// The Swagger API document contains API endpoints along with parameters and object
+	// definitions for those endpoints. When objects have references to other objects the
+	// type is a regular string (REF_ string). Since not all references are allowed, each object
+	// has a description that states which subset of an object can be used as a reference. For
+	// example, the string REF(network/*) means that all network objects can be used as ref
+	// erences while REF(network/host) means that only network host objects can be used.
+	Swag map[string]MethodMap
+}
+
+// MethodMap is a map of Methods -> MethodDescriptions
+// e.g. get: MethodDescriptions{}
+type MethodMap map[string]MethodDescriptions
+
+// MethodDescriptions describes the endpoint
+type MethodDescriptions struct {
+	Description string
+	Parameters  []Parameter
+	Tags        []string
+	Responses   map[int]struct{ Description string }
+}
+
+// A Parameter defines the arguments that can be passed to the endpoint
+type Parameter struct {
+	Name        string
+	In          string
+	Description string
+	Type        string
+	Required    bool
 }
