@@ -144,7 +144,6 @@ func (c Client) Endpoint() string {
 	return c.endpoint
 }
 
-
 // Request generates a new *http.Request that is modified with the Client's Options (set on New)
 // and with the provided Options.
 func (c *Client) Request(method, path string, body io.Reader, options ...Option) (*http.Request, error) {
