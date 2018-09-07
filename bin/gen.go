@@ -14,11 +14,11 @@ import (
 	"github.com/esurdam/go-sophos"
 )
 
-type Definition struct {
+type definition struct {
 	Description, Name, Link string
 }
 
-type Swag struct {
+type swagDef struct {
 	Paths map[string]map[string]interface{}
 }
 
@@ -167,7 +167,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var res []Definition
+	var res []definition
 	r, err := client.Get("/api/definitions")
 	if err != nil {
 		log.Fatal(err)
@@ -194,11 +194,6 @@ package types
 
 import "github.com/esurdam/go-sophos"
 
-// Resource is an interface representing an endpoint (Sophos Definition) 
-type Resource interface {
-	// Definitions returns the Resource's sophos.Object
-	Definitions() map[string]sophos.Object
-}
 `))
 
 	for _, def := range res {
@@ -226,7 +221,7 @@ type Resource interface {
 			log.Fatal("could not get definition path")
 		}
 
-		var swag Swag
+		var swag swagDef
 		if err = resp.MarshalTo(&swag); err != nil {
 			log.Fatal("could not unmarshal swag")
 		}
