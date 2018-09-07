@@ -44,6 +44,13 @@ func main() {
 		log.Fatal(err)
 	}
 
+	d := types.Nodes{}.Definition()
+	swag, err := d.GetSwag(client)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(swag.Paths)
+
 	// Use any ref as a sample
 	var sampleRef string
 	for _, ds := range dss {

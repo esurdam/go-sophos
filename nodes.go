@@ -73,11 +73,13 @@ type Definition struct {
 // has a description that states which subset of an object can be used as a reference. For
 // example, the string REF(network/*) means that all network objects can be used as ref
 // erences while REF(network/host) means that only network host objects can be used.
-type Swag map[string]MethodMap
+type Swag struct {
+	Paths map[string]MethodMap
+}
 
 // GetSwag will use the Client to request its Swag
 func (d *Definition) GetSwag(c *Client, options ...Option) (Swag, error) {
-	var swag map[string]MethodMap
+	var swag Swag
 	r, err := c.Get(d.Link, options...)
 	if err != nil {
 		return swag, err
