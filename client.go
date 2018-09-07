@@ -15,20 +15,17 @@ var DefaultHTTPClient = &http.Client{}
 
 // ClientInterface represents a Sophos 9 REST API client
 type ClientInterface interface {
-	Get(path string, options ...Option) (*Response, error)
-	Put(path string, body io.Reader, options ...Option) (*Response, error)
-	Post(path string, body io.Reader, options ...Option) (*Response, error)
-	Patch(path string, body io.Reader, options ...Option) (*Response, error)
-	Delete(path string, options ...Option) (*Response, error)
-}
-
-// TypeClient acts on RestObjects
-type TypeClient interface {
 	GetObject(o RestGetter, options ...Option) error
 	PutObject(o RestObject, options ...Option) error
 	PatchObject(o RestObject, options ...Option) error
 	PostObject(o RestObject, options ...Option) error
 	DeleteObject(o RestObject, options ...Option) error
+
+	Get(path string, options ...Option) (*Response, error)
+	Put(path string, body io.Reader, options ...Option) (*Response, error)
+	Post(path string, body io.Reader, options ...Option) (*Response, error)
+	Patch(path string, body io.Reader, options ...Option) (*Response, error)
+	Delete(path string, options ...Option) (*Response, error)
 }
 
 // Client implements ClientInterface to provide a REST client
@@ -38,9 +35,10 @@ type Client struct {
 	opts     []Option
 }
 
-var ErrRefRequired = errors.New("client: Reference is required")
-
 var _ ClientInterface = Client{}
+
+// ErrRefRequired is an error that is returned when the resource requires a Referencee to fetch data
+var ErrRefRequired = errors.New("client: Reference is required")
 
 // New returns a new Client.
 // The endpoint provided should point to the Sophos Gateway.
@@ -185,14 +183,14 @@ func (c Client) GetObject(o RestGetter, options ...Option) error {
 	return err
 }
 
-// PostObject implements TypeClient
+// PostObject POSTs the RestObject
 func (c Client) PostObject(o RestObject, options ...Option) error {
 	byt, _ := json.Marshal(o)
 	_, err := c.Post(o.PostPath(), bytes.NewReader(byt))
 	return err
 }
 
-// PatchObject implements TypeClient
+// PatchObject PATCHes the RestObject
 func (c Client) PatchObject(o RestObject, options ...Option) error {
 	ref, required := o.RefRequired()
 	if required && ref == "" {
@@ -203,7 +201,7 @@ func (c Client) PatchObject(o RestObject, options ...Option) error {
 	return err
 }
 
-// PutObject implements TypeClient
+// PatchObject PUTs the RestObject
 func (c Client) PutObject(o RestObject, options ...Option) error {
 	ref, required := o.RefRequired()
 	if required && ref == "" {
@@ -214,7 +212,7 @@ func (c Client) PutObject(o RestObject, options ...Option) error {
 	return err
 }
 
-// DeleteObject implements TypeClient
+// DeleteObject DELETEs the RestObject
 func (c Client) DeleteObject(o RestObject, options ...Option) error {
 	ref, required := o.RefRequired()
 	if required && ref == "" {
