@@ -65,7 +65,15 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Res
 	}
 
 	res, err := DefaultHTTPClient.Do(req)
-	return &Response{res}, err
+	if err != nil {
+		return &Response{&http.Response{Request: req}}, err
+	}
+
+	if !(res.StatusCode >= 200 && res.StatusCode <= 204) {
+		return &Response{res}, fmt.Errorf("client do: error from server: %s", res.Status)
+	}
+
+	return &Response{res}, nil
 }
 
 // Delete executes a DELETE call
@@ -103,7 +111,12 @@ func (c Client) Get(path string, options ...Option) (*Response, error) {
 // POST /api/objects/packetfilter/packetfilter
 // PUT /api/objects/packetfilter/packetfilter/REF_PacPacAllowAnyFTPOut
 func (c Client) Put(path string, body io.Reader, options ...Option) (*Response, error) {
-	return c.Do(http.MethodPut, path, body, options...)
+	r, err := c.Do(http.MethodPut, path, body, options...)
+	if err != nil {
+		return r, err
+	}
+
+	return r, nil
 }
 
 // Post executes a POST call
@@ -160,6 +173,7 @@ func (c *Client) Request(method, path string, body io.Reader, options ...Option)
 	if err != nil {
 		return nil, fmt.Errorf("request: error generating new http.Request: %s", err.Error())
 	}
+	req.Header.Set("Content-Type", "application/json")
 	req.URL.Path = path
 
 	opts := append(c.opts, options...)
