@@ -322,9 +322,7 @@ func (def *definition) process() error {
 	def.Node.fetch()
 	ep.Paths = def.Swag.Paths
 	if def.Name == "Nodes" {
-		if err := handleNodesNode(); err != nil {
-			log.Fatal(err)
-		}
+		return handleNodesNode()
 	}
 
 	// Swag.Paths contains a mapping of path -> map[method]methodDescription
