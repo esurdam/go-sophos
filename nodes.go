@@ -1,5 +1,7 @@
 package sophos
 
+import "strings"
+
 // An Endpoint represents a UTM endpoint which is defined by its definitions endpoint
 // GET /api/definitions/aws
 type Endpoint interface {
@@ -49,6 +51,11 @@ type UsedObject interface {
 // in scenarios where nodes and objects are designed to be connected. Technically, references are strings that
 // always start with the prefix “REF_”.
 type Reference string
+
+const ref = "REF_"
+
+// IsReference returns true if the string has the prefex "REF_"
+func (r Reference) IsReference() bool { return strings.HasPrefix(string(r), ref) }
 
 // RestObject is an interface for REST objects
 type RestObject interface {
