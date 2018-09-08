@@ -111,7 +111,7 @@ make test
 ```
 
 ## Todo
-
+- [ ] Add [nodes](nodes) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
 - [x] Create a wrapper Client for REST objects `client.Get(&nodes)` 
 
