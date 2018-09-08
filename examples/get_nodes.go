@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/esurdam/go-sophos/nodes"
+
 	"github.com/esurdam/go-sophos"
 	"github.com/esurdam/go-sophos/types"
 )
@@ -37,12 +39,24 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println(`
+	DHCP SERVERS:
+	`)
 	// Get all the DHCP Servers
 	var dss types.DhcpServers
 	err = client.GetObject(&dss)
 	if err != nil {
 		log.Fatal(err)
 	}
+	for _, ds := range dss {
+		fmt.Println(ds.Name)
+		fmt.Println(ds.Reference)
+		fmt.Println(ds.Status)
+	}
+
+	fmt.Println(`
+	Nodes Definition:
+	`)
 
 	d := types.Nodes{}.Definition()
 	swag, err := d.GetSwag(client)
@@ -50,6 +64,30 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(swag.Paths)
+
+	fmt.Println(`
+	Node Getters:
+	`)
+
+	var ll nodes.LicensingLicense
+	ll.Get(client)
+	fmt.Println(ll.Value)
+
+	v, err := nodes.GetWebadminPort(client)
+	fmt.Println(v)
+
+	err = nodes.UpdateWebadminPort(client, 4444)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	var wa nodes.WebadminPort
+	wa.Get(client)
+	fmt.Println(wa.Value)
+
+	fmt.Println(`
+	AmazonVpcConnections:
+	`)
 
 	var cc types.AmazonVpcConnections
 	err = client.GetObject(&cc)
@@ -68,9 +106,8 @@ func main() {
 	// Use any ref as a sample
 	var sampleRef string
 	for _, ds := range dss {
-		fmt.Println(ds.Name)
-		fmt.Println(ds.Reference)
 		sampleRef = ds.Reference
+		break
 	}
 
 	// Use the ref to fetch a single Server, as Reference is required
@@ -85,8 +122,18 @@ func main() {
 	ds = types.DhcpServer{}
 	err = client.GetObject(&ds)
 	if err == sophos.ErrRefRequired {
-		fmt.Printf("This will fail since ref is required: %s", err.Error())
+		fmt.Printf("This will fail since ref is required: %s\n", err.Error())
 	} else {
 		panic("should not have gotten here")
 	}
+}
+
+func convertKeysToStrings(obj map[interface{}]interface{}) map[string]interface{} {
+	res := make(map[string]interface{})
+
+	for k, v := range obj {
+		res[fmt.Sprintf("%v", k)] = v
+	}
+
+	return res
 }

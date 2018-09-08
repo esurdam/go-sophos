@@ -19,7 +19,10 @@ type Endpoint interface {
 // Unlike filesystems which use a slash “/” to separate the different nodes, Sophos UTM RESTful API uses
 // a dot “.” to separate different nodes. Nodes reference objects, for example “Shell Access” and have a
 // leaf node of allowed_networks which is an array of references to network objects.
-type Node string
+type Node interface {
+	Get(c ClientInterface) error
+	Update(c ClientInterface) error
+}
 
 // An Object resides in collections, which you can create, change, or delete. The collections of objects are
 // predefined into classes and types. A class describes the general purpose of the objects whereas the type
