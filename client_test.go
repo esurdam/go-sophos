@@ -28,11 +28,30 @@ func setupTestCase(t *testing.T) func(t *testing.T) {
 			return
 		}
 
-		w.Header().Set("Content-Type", "application/json")
+		if r.URL.Path == "/api/errorjson" {
+			w.WriteHeader(http.StatusNotFound)
+			byt, _ := json.Marshal(sophos.Errors{{
+				Oattrs: []string{
+					"class",
+					"type",
+				},
+				Class:     "packetfilter",
+				Fatal:     1,
+				Format:    "The %_O object requires %_d for the %_A attribute.",
+				Msgtype:   "DATATYPE_OBJECT_ATTRIBUTE",
+				Name:      "The group object requires a Perl array for the members list attribute.",
+				NeverHide: 0,
+				Type:      "group",
+			}})
+
+			w.Write(byt)
+			return
+		}
 		if r.URL.Path == "/api/error" {
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
+
 		json.NewEncoder(w).Encode(dnsMock{})
 	}))
 	sophos.DefaultHTTPClient = ts.Client()

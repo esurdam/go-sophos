@@ -36,24 +36,8 @@ func TestResponse_Errors(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	r := httptest.NewRecorder()
-	byt, _ := json.Marshal(sophos.Errors{{
-		Oattrs: []string{
-			"class",
-			"type",
-		},
-		Class:     "packetfilter",
-		Fatal:     1,
-		Format:    "The %_O object requires %_d for the %_A attribute.",
-		Msgtype:   "DATATYPE_OBJECT_ATTRIBUTE",
-		Name:      "The group object requires a Perl array for the members list attribute.",
-		NeverHide: 0,
-		Type:      "group",
-	}})
-
-	r.Body.Write(byt)
-	res := sophos.Response{r.Result()}
-	errs := res.Errors()
+	res, _ := client.Get("/api/errorjson")
+	errs := res.Errors
 	if len(errs) != 1 {
 		t.Error("TestResponse_Errors should have returned Error")
 		return

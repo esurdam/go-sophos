@@ -75,19 +75,30 @@ func New(endpoint string, opts ...Option) (*Client, error) {
 func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Response, error) {
 	req, err := c.Request(method, path, body, options...)
 	if err != nil {
-		return &Response{&http.Response{Request: req}}, err
+		return &Response{&http.Response{Request: req}, nil}, err
 	}
 
 	res, err := DefaultHTTPClient.Do(req)
 	if err != nil {
-		return &Response{&http.Response{Request: req}}, err
+		return &Response{&http.Response{Request: req}, nil}, err
+	}
+
+	resp := &Response{res, Errors{}}
+
+	if res.StatusCode >= 400 && res.StatusCode <= 422 {
+		_ = resp.MarshalTo(&resp.Errors)
+		for _, err := range resp.Errors {
+			return resp, fmt.Errorf("client do: error from server: [%d] %s", res.StatusCode, err.Name)
+		}
+		// catch in case of no error in body
+		return resp, fmt.Errorf("client do: error from server: %s", res.Status)
 	}
 
 	if !(res.StatusCode >= 200 && res.StatusCode <= 204) {
-		return &Response{res}, fmt.Errorf("client do: error from server: %s", res.Status)
+		return resp, fmt.Errorf("client do: error from server: %s", res.Status)
 	}
 
-	return &Response{res}, nil
+	return resp, nil
 }
 
 // Delete executes a DELETE call
@@ -214,7 +225,14 @@ func (c Client) GetObject(o RestGetter, options ...Option) error {
 // PostObject POSTs the RestObject
 func (c Client) PostObject(o RestObject, options ...Option) error {
 	byt, _ := json.Marshal(o)
-	_, err := c.Post(o.PostPath(), bytes.NewReader(byt))
+	res, err := c.Post(o.PostPath(), bytes.NewReader(byt))
+	// Operation successful and created a new resource. The newly created
+	// resource and its path and REF_ string are returned in the
+	// Location header
+	if res.StatusCode == http.StatusCreated {
+		err = res.MarshalTo(o)
+	}
+
 	return err
 }
 

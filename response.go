@@ -8,13 +8,7 @@ import (
 // Response contains the http.Response from the API
 type Response struct {
 	*http.Response
-}
-
-// Errors returns any errors returned
-func (r *Response) Errors() Errors {
-	var errs Errors
-	_ = r.MarshalTo(&errs)
-	return errs
+	Errors Errors
 }
 
 // MarshalTo marshals the response's body to the provided interface
