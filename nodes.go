@@ -1,7 +1,5 @@
 package sophos
 
-import "strings"
-
 // An Endpoint represents a UTM endpoint which is defined by its definitions endpoint
 // GET /api/definitions/aws
 type Endpoint interface {
@@ -51,21 +49,6 @@ type UsedObject interface {
 	// UsedByPath returns the usedby URL path to query for UsedBy data
 	UsedByPath(ref string) string
 }
-
-// A Reference is the connections between nodes and objects as well as between one object and another object.
-// Each confd node and object has a list of attributes with pre defined types, where one of the types can be a
-// reference. Please note however that you can’t create a reference in all cases. You can only make a reference
-// in scenarios where nodes and objects are designed to be connected. Technically, references are strings that
-// always start with the prefix “REF_”.
-type Reference string
-
-const refPrefix = "REF_"
-
-// IsReference returns true if the string has the prefex "REF_"
-func IsReference(ref string) bool { return strings.HasPrefix(ref, refPrefix) }
-
-// IsReference returns true if the string has the prefex "REF_"
-func (r Reference) IsReference() bool { return IsReference(string(r)) }
 
 // RestObject is an interface for REST objects
 type RestObject interface {

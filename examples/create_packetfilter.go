@@ -39,11 +39,11 @@ func main() {
 
 	p := types.PacketfilterPacketfilter{
 		Action:       "accept",
-		Destinations: []string{"REF_NetworkAny"},
+		Destinations: []string{sophos.RefNetworkAny},
 		Direction:    "in",
 		Log:          true,
-		Services:     []string{"REF_ServiceAny"},
-		Sources:      []string{"REF_NetworkAny"},
+		Services:     []string{sophos.RefServiceAny},
+		Sources:      []string{sophos.RefNetworkAny},
 		Status:       true,
 	}
 
