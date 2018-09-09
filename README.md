@@ -168,7 +168,7 @@ Creating a PacketFilter (from [Sophos docs](https://www.sophos.com/en-us/mediali
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
-pf := types.PacketfilterPacketfilter{
+pf := objects.PacketfilterPacketfilter{
     Action:       "accept",
     Destinations: []string{sophos.RefNetworkAny},
     Direction:    "in",
