@@ -91,6 +91,7 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (resp
 			err = fmt.Errorf("client do: error from server: [%d] %s", res.StatusCode, e.Name)
 			break
 		}
+		err = fmt.Errorf("client do: error from server: %s", res.Status)
 		return
 	}
 
