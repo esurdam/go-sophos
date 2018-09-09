@@ -289,6 +289,11 @@ func TestClient_Do(t *testing.T) {
 	if err == nil {
 		t.Error("should have error since bad errOption")
 	}
+	
+	_, err = client.Do("GET", "/api/error", nil)
+	if err == nil {
+		t.Error("should have error since bad client")
+	}
 
 	sophos.DefaultHTTPClient = faceClient{}
 	_, err = client.Do("GET", "/api/error", nil)
