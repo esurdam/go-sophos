@@ -56,7 +56,7 @@ This example uses the `X-Restd-Err-Ack: all` header to automatically approve the
 ```go
 _, err := client.Delete(
     "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
-    sophos.WithSessionClose,
+    sophos.WithSessionClose, 
     sophos.AutoResolveErrsMode,
 )
 
@@ -110,7 +110,7 @@ nodes.LicensingActiveIps
 
 Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go#L7) generated from a [Definition](definition.go) and contains its generated Objects.
 
-Objects implement the [RestObject](nodes.go#L71) and sometimes [UsedObject](nodes.go#L42) interfaces:
+Objects implement the [RestObject](nodes.go) and sometimes [UsedObject](nodes.go) interfaces:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -119,7 +119,7 @@ var dns objects.Dns
 err := client.GetObject(&dns)
 ```
 
-Notice that some objects are pluralized and only implement the [RestGetter](nodes.go#L80) interface:
+Notice that some objects are pluralized and only implement the [RestGetter](nodes.go) interface:
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
@@ -169,16 +169,19 @@ Creating a PacketFilter (from [Sophos docs](https://www.sophos.com/en-us/mediali
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
 pf := types.PacketfilterPacketfilter{
-    Action: 			"accept",
-    Destinations:       []string{"REF_NetworkAny"},
-    Direction:          "in",
-    Log:                true,
-    Services:           []string{"REF_ServiceAny"},
-    Sources:             []string{"REF_NetworkAny"},
-    Status:             true,
+    Action:       "accept",
+    Destinations: []string{sophos.RefNetworkAny},
+    Direction:    "in",
+    Log:          true,
+    Services:     []string{sophos.RefServiceAny},
+    Sources:      []string{sophos.RefNetworkAny},
+    Status:       true,
 }
 
-err := client.PostObject(&pf, sophos.WithRestdInsert("packetfilter.rules", 0), sophos.WithSessionClose)
+err := client.PostObject(&pf, 
+	sophos.WithRestdInsert("packetfilter.rules", 0), 
+	sophos.WithSessionClose,
+)
 ```
 ## Generating Types
 
