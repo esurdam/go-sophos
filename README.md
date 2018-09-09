@@ -109,7 +109,7 @@ nodes.LicensingActiveIps
 
 ### Objects
 
-Each file in the objects dir represents an [Endpoint](nodes.go) and contains its generated Objects.
+Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go) generated from a [Definition](definition.go) and contains its generated Objects.
 
 Objects implement the `RestObject` and sometimes `UsedObject` interfaces:
 
