@@ -91,7 +91,7 @@ func (*NotificationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*NotificationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s/usedby", ref)
@@ -133,7 +133,7 @@ func (*NotificationNotification) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*NotificationNotification) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/notification/%s/usedby", ref)

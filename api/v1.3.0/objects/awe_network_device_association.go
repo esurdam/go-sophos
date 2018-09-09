@@ -99,7 +99,7 @@ func (*AweNetworkDeviceAssociationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweNetworkDeviceAssociationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s/usedby", ref)
@@ -143,7 +143,7 @@ func (*AweNetworkDeviceAssociationMeshRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweNetworkDeviceAssociationMeshRole) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s/usedby", ref)

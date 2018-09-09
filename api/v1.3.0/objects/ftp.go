@@ -102,7 +102,7 @@ func (*FtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*FtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s/usedby", ref)
@@ -144,7 +144,7 @@ func (*FtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*FtpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/group/%s/usedby", ref)

@@ -111,7 +111,7 @@ func (*IpsecGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s/usedby", ref)
@@ -181,7 +181,7 @@ func (*IpsecPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s/usedby", ref)
@@ -252,7 +252,7 @@ func (*IpsecRemoteGateway) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecRemoteGateway) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s/usedby", ref)

@@ -214,7 +214,7 @@ func (*ReverseProxyAuthProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/auth_profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyAuthProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/auth_profile/%s/usedby", ref)
@@ -285,7 +285,7 @@ func (*ReverseProxyBackend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyBackend) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/backend/%s/usedby", ref)
@@ -330,7 +330,7 @@ func (*ReverseProxyException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s/usedby", ref)
@@ -372,7 +372,7 @@ func (*ReverseProxyFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyFilter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s/usedby", ref)
@@ -437,7 +437,7 @@ func (*ReverseProxyFormTemplate) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyFormTemplate) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/form_template/%s/usedby", ref)
@@ -518,7 +518,7 @@ func (*ReverseProxyFrontend) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/frontend/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyFrontend) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/frontend/%s/usedby", ref)
@@ -563,7 +563,7 @@ func (*ReverseProxyGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s/usedby", ref)
@@ -635,7 +635,7 @@ func (*ReverseProxyLocation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyLocation) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/location/%s/usedby", ref)
@@ -730,7 +730,7 @@ func (*ReverseProxyProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/profile/%s/usedby", ref)
@@ -775,7 +775,7 @@ func (*ReverseProxyRedirection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyRedirection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s/usedby", ref)
@@ -819,7 +819,7 @@ func (*ReverseProxyThreatsFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ReverseProxyThreatsFilter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s/usedby", ref)

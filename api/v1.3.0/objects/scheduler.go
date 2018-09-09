@@ -97,7 +97,7 @@ func (*SchedulerGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s/usedby", ref)
@@ -169,7 +169,7 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerLoadbalance) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s/usedby", ref)
@@ -241,7 +241,7 @@ func (*SchedulerRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s/usedby", ref)

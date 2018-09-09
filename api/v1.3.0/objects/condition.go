@@ -91,7 +91,7 @@ func (*ConditionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ConditionGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/group/%s/usedby", ref)
@@ -155,7 +155,7 @@ func (*ConditionObjref) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/objref/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ConditionObjref) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/condition/objref/%s/usedby", ref)

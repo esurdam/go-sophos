@@ -149,7 +149,7 @@ func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionAmazonVpc) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s/usedby", ref)
@@ -194,7 +194,7 @@ func (*IpsecConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s/usedby", ref)
@@ -269,7 +269,7 @@ func (*IpsecConnectionL2Tp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionL2Tp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s/usedby", ref)
@@ -316,7 +316,7 @@ func (*IpsecConnectionRoadwarriorCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s/usedby", ref)
@@ -360,7 +360,7 @@ func (*IpsecConnectionRoadwarriorCisco) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s/usedby", ref)
@@ -404,7 +404,7 @@ func (*IpsecConnectionRoadwarriorPsk) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s/usedby", ref)
@@ -448,7 +448,7 @@ func (*IpsecConnectionRoadwarriorX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorX509) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s/usedby", ref)
@@ -520,7 +520,7 @@ func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionSiteToSite) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s/usedby", ref)

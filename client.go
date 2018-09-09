@@ -36,7 +36,7 @@ type ObjectClient interface {
 	PatchObject(o RestObject, options ...Option) error
 	PostObject(o RestObject, options ...Option) error
 	DeleteObject(o RestObject, options ...Option) error
-	GetUsedBy(o UsedObject, options ...Option) (*UsedBy, error)
+	GetUsedBy(o RestObject, options ...Option) (*UsedBy, error)
 	GetEndpointSwag(e Endpoint, options ...Option) (Swag, error)
 }
 
@@ -257,7 +257,7 @@ func (c Client) GetEndpointSwag(e Endpoint, options ...Option) (Swag, error) {
 }
 
 // GetUsedBy GETs the Objects UsedBy data
-func (c Client) GetUsedBy(o UsedObject, options ...Option) (*UsedBy, error) {
+func (c Client) GetUsedBy(o RestObject, options ...Option) (*UsedBy, error) {
 	ref, required := o.RefRequired()
 	if required && ref == "" {
 		return nil, ErrRefRequired

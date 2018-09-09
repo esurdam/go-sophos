@@ -91,7 +91,7 @@ func (*CronAt) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CronAt) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/at/%s/usedby", ref)
@@ -133,7 +133,7 @@ func (*CronGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CronGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/group/%s/usedby", ref)

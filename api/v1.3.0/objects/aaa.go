@@ -119,7 +119,7 @@ func (*AaaGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AaaGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/group/%s/usedby", ref)
@@ -205,7 +205,7 @@ func (*AaaUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/user/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AaaUser) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/user/%s/usedby", ref)

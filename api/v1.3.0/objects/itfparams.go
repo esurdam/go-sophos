@@ -109,7 +109,7 @@ func (*ItfparamsBridgePort) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsBridgePort) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s/usedby", ref)
@@ -151,7 +151,7 @@ func (*ItfparamsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/group/%s/usedby", ref)
@@ -230,7 +230,7 @@ func (*ItfparamsLinkAggregationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/link_aggregation_group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsLinkAggregationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/link_aggregation_group/%s/usedby", ref)
@@ -320,7 +320,7 @@ func (*ItfparamsPrimary) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/primary/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsPrimary) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/primary/%s/usedby", ref)
@@ -365,7 +365,7 @@ func (*ItfparamsSecondary) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/secondary/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsSecondary) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/secondary/%s/usedby", ref)

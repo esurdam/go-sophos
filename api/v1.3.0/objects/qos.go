@@ -119,7 +119,7 @@ func (*QosApplicationSelector) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/application_selector/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosApplicationSelector) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/application_selector/%s/usedby", ref)
@@ -161,7 +161,7 @@ func (*QosGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/group/%s/usedby", ref)
@@ -203,7 +203,7 @@ func (*QosIngressRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosIngressRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/ingress_rule/%s/usedby", ref)
@@ -272,7 +272,7 @@ func (*QosInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/interface/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosInterface) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/interface/%s/usedby", ref)
@@ -317,7 +317,7 @@ func (*QosRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/rule/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/rule/%s/usedby", ref)
@@ -359,7 +359,7 @@ func (*QosTrafficSelector) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosTrafficSelector) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector/%s/usedby", ref)
@@ -401,7 +401,7 @@ func (*QosTrafficSelectorGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*QosTrafficSelectorGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/qos/traffic_selector_group/%s/usedby", ref)

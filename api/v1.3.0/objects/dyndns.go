@@ -90,7 +90,7 @@ func (*DyndnsDyndns) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DyndnsDyndns) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s/usedby", ref)
@@ -132,7 +132,7 @@ func (*DyndnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DyndnsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s/usedby", ref)

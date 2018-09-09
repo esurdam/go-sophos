@@ -355,7 +355,7 @@ func put(c sophos.ClientInterface, path string, val interface{}, options ...soph
 		// f.Write([]byte(fmt.Sprintf(" %sValue %s\n", toCamelInitCase(strKey, true), valueType)))
 	}
 	f.Close()
-	ft.Close()
+	// ft.Close()
 
 	f3, err := os.Create(subDir + "/directory.go")
 	if err != nil {
@@ -818,7 +818,7 @@ func(*{{.Name}}) PutPath(ref string) string {
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}", ref)
 }
 
-// UsedByPath implements sophos.UsedObject{{getUsedBy .}}
+// UsedByPath implements sophos.RestObject{{getUsedBy .}}
 func(*{{.Name}}) UsedByPath(ref string) string { 
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}/usedby", ref)
 }

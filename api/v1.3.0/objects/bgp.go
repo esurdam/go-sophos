@@ -140,7 +140,7 @@ func (*BgpAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpAmazonVpc) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s/usedby", ref)
@@ -185,7 +185,7 @@ func (*BgpFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpFilter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s/usedby", ref)
@@ -227,7 +227,7 @@ func (*BgpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/group/%s/usedby", ref)
@@ -269,7 +269,7 @@ func (*BgpNeighbor) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpNeighbor) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/neighbor/%s/usedby", ref)
@@ -311,7 +311,7 @@ func (*BgpRouteMap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpRouteMap) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/route_map/%s/usedby", ref)
@@ -353,7 +353,7 @@ func (*BgpSystem) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpSystem) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/system/%s/usedby", ref)

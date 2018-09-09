@@ -103,7 +103,7 @@ func (*OspfArea) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/area/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OspfArea) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/area/%s/usedby", ref)
@@ -145,7 +145,7 @@ func (*OspfGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OspfGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/group/%s/usedby", ref)
@@ -187,7 +187,7 @@ func (*OspfInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/interface/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OspfInterface) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/interface/%s/usedby", ref)
@@ -229,7 +229,7 @@ func (*OspfMessageDigestKey) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OspfMessageDigestKey) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s/usedby", ref)

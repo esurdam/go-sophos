@@ -156,7 +156,7 @@ func (*SmtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s/usedby", ref)
@@ -198,7 +198,7 @@ func (*SmtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s/usedby", ref)
@@ -240,7 +240,7 @@ func (*SmtpHeaderOperation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpHeaderOperation) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s/usedby", ref)
@@ -345,7 +345,7 @@ func (*SmtpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s/usedby", ref)

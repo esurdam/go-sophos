@@ -97,7 +97,7 @@ func (*RouteGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RouteGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s/usedby", ref)
@@ -139,7 +139,7 @@ func (*RoutePolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoutePolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/policy/%s/usedby", ref)
@@ -204,7 +204,7 @@ func (*RouteStatic) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RouteStatic) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s/usedby", ref)

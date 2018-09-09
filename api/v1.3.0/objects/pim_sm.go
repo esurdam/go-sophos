@@ -107,7 +107,7 @@ func (*PimSmGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PimSmGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/group/%s/usedby", ref)
@@ -149,7 +149,7 @@ func (*PimSmInterface) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/interface/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PimSmInterface) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/interface/%s/usedby", ref)
@@ -191,7 +191,7 @@ func (*PimSmRoute) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/route/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PimSmRoute) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/route/%s/usedby", ref)
@@ -233,7 +233,7 @@ func (*PimSmRpRouter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PimSmRpRouter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s/usedby", ref)

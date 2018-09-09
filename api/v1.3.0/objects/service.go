@@ -139,7 +139,7 @@ func (*ServiceAh) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ah/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceAh) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ah/%s/usedby", ref)
@@ -197,7 +197,7 @@ func (*ServiceAny) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/any/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceAny) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/any/%s/usedby", ref)
@@ -242,7 +242,7 @@ func (*ServiceEsp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/esp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceEsp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/esp/%s/usedby", ref)
@@ -304,7 +304,7 @@ func (*ServiceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/group/%s/usedby", ref)
@@ -369,7 +369,7 @@ func (*ServiceIcmp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceIcmp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmp/%s/usedby", ref)
@@ -414,7 +414,7 @@ func (*ServiceIcmpv6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmpv6/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceIcmpv6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/icmpv6/%s/usedby", ref)
@@ -473,7 +473,7 @@ func (*ServiceIp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ip/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceIp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/ip/%s/usedby", ref)
@@ -540,7 +540,7 @@ func (*ServiceTcp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceTcp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcp/%s/usedby", ref)
@@ -609,7 +609,7 @@ func (*ServiceTcpudp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcpudp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceTcpudp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/tcpudp/%s/usedby", ref)
@@ -676,7 +676,7 @@ func (*ServiceUdp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/udp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ServiceUdp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/service/udp/%s/usedby", ref)

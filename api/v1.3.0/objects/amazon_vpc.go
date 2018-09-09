@@ -125,7 +125,7 @@ func (*AmazonVpcConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/connection/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AmazonVpcConnection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/connection/%s/usedby", ref)
@@ -170,7 +170,7 @@ func (*AmazonVpcGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AmazonVpcGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s/usedby", ref)
@@ -234,7 +234,7 @@ func (*AmazonVpcTunnel) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AmazonVpcTunnel) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/amazon_vpc/tunnel/%s/usedby", ref)

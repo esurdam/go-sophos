@@ -124,7 +124,7 @@ func (*DhcpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/group/%s/usedby", ref)
@@ -195,7 +195,7 @@ func (*DhcpOption) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpOption) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option/%s/usedby", ref)
@@ -240,7 +240,7 @@ func (*DhcpOption6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option6/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpOption6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option6/%s/usedby", ref)
@@ -316,7 +316,7 @@ func (*DhcpServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpServer) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server/%s/usedby", ref)
@@ -361,7 +361,7 @@ func (*DhcpServer6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server6/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpServer6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server6/%s/usedby", ref)
@@ -403,7 +403,7 @@ func (*DhcpStateless) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/stateless/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpStateless) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/stateless/%s/usedby", ref)

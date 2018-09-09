@@ -43,13 +43,6 @@ type UsedBy struct {
 	Objects []Reference
 }
 
-// UsedObject is an interface for Objects that can be used by other Objects and Nodes.
-type UsedObject interface {
-	RestGetter
-	// UsedByPath returns the usedby URL path to query for UsedBy data
-	UsedByPath(ref string) string
-}
-
 // RestObject is an interface for REST objects
 type RestObject interface {
 	RestGetter
@@ -57,6 +50,7 @@ type RestObject interface {
 	PatchPath(ref string) string  // PatchPath returns the PATCH path of the Object
 	PostPath() string             // PostPath returns the POST path of the Object
 	PutPath(ref string) string    // GetPath returns the PUT path of the Object
+	UsedByPath(ref string) string // UsedByPath returns the usedby URL path to query for UsedBy data
 }
 
 // RestGetter is an interface ensuring a Reference is passed when required
