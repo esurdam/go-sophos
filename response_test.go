@@ -67,4 +67,8 @@ func TestResponse_Errors(t *testing.T) {
 	if errs[0].Msgtype != "DATATYPE_OBJECT_ATTRIBUTE" {
 		t.Error("TestResponse_Errors should have MsgType DATATYPE_OBJECT_ATTRIBUTE")
 	}
+	errs[0].Fatal = 0
+	if errs.IsFatal() {
+		t.Error("TestResponse_Errors should not be fatal")
+	}
 }
