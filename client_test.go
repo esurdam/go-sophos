@@ -48,7 +48,7 @@ func setupTestCase(t *testing.T) func(t *testing.T) {
 			return
 		}
 		if r.URL.Path == "/api/error" {
-			w.WriteHeader(http.StatusNotFound)
+			w.WriteHeader(http.StatusBadGateway)
 			return
 		}
 

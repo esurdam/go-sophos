@@ -218,6 +218,8 @@ err := client.PostObject(&pf,
 	sophos.WithRestdInsert("packetfilter.rules", 0), 
 	sophos.WithSessionClose,
 )
+
+pf.Reference // successful creation will have unmarshalleed the Response 
 ```
 
 ## Generating Types

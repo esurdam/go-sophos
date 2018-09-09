@@ -72,33 +72,33 @@ func New(endpoint string, opts ...Option) (*Client, error) {
 }
 
 // Do executes the call and returns a *Response
-func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Response, error) {
-	req, err := c.Request(method, path, body, options...)
+func (c Client) Do(method, path string, body io.Reader, options ...Option) (resp *Response, err error) {
+	resp = &Response{Response: &http.Response{}}
+	resp.Request, err = c.Request(method, path, body, options...)
 	if err != nil {
-		return &Response{&http.Response{Request: req}, nil}, err
+		return
 	}
 
-	res, err := DefaultHTTPClient.Do(req)
+	res, err := DefaultHTTPClient.Do(resp.Request)
 	if err != nil {
-		return &Response{&http.Response{Request: req}, nil}, err
+		return
 	}
 
-	resp := &Response{res, Errors{}}
-
+	resp.Response = res
 	if res.StatusCode >= 400 && res.StatusCode <= 422 {
 		_ = resp.MarshalTo(&resp.Errors)
-		for _, err := range resp.Errors {
-			return resp, fmt.Errorf("client do: error from server: [%d] %s", res.StatusCode, err.Name)
+		for _, e := range resp.Errors {
+			err = fmt.Errorf("client do: error from server: [%d] %s", res.StatusCode, e.Name)
+			break
 		}
-		// catch in case of no error in body
-		return resp, fmt.Errorf("client do: error from server: %s", res.Status)
+		return
 	}
 
 	if !(res.StatusCode >= 200 && res.StatusCode <= 204) {
-		return resp, fmt.Errorf("client do: error from server: %s", res.Status)
+		err = fmt.Errorf("client do: error from server: %s", res.Status)
 	}
 
-	return resp, nil
+	return
 }
 
 // Delete executes a DELETE call
@@ -181,7 +181,7 @@ func (c Client) Ping(options ...Option) (v *Version, err error) {
 	}
 
 	v = &Version{}
-	err = r.MarshalTo(&v)
+	err = r.MarshalTo(v)
 
 	return
 }
