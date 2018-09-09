@@ -62,7 +62,7 @@ _, err := client.Delete(
 
 // OR as a RestObject
 
-pf := types.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
+pf := objects.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
 err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
 ```
 
@@ -92,42 +92,40 @@ fmt.Println(wap.Value)
 
 wap.Value = 4444
 err = wap.Update(client)
+
 ```
 
-You can get the whole UTM node tree as well:
+You can get the whole UTM node tree as an object as well:
 
 ```go
-import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
-var wap nodes.WebadminPort
-err := wap.Get(client)
-fmt.Println(wap.Value)
-// Output: 4848
-
-wap.Value = 4444
-err = wap.Update(client)
-```
-### Objects
-
-Requesting a REST object:
-
-```go
-import "github.com/esurdam/go-sophos/api/v1.3.0/types"
-
-var nodes types.Nodes
+var nodes objects.Nodes
 _ := client.GetObject(&nodes)
 
 // active Ips
 nodes.LicensingActiveIps 
 ```
 
-Requesting a Definition:
+### Objects
+
+Objects implement the `RestObject` interface:
 
 ```go
-import "github.com/esurdam/go-sophos/api/v1.3.0/types"
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
-var nodes types.Nodes
-d := nodes.Definition()
+var dns objects.Dns
+err := client.GetObject(&dns)
+fmt.Printf("%v", dns)
+```
+
+Requesting an Object Definition:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+var dns objects.Dns
+d := dns.Definition()
 
 swag, _ := d.GetSwag(client)
 fmt.Printf("%v", swag)

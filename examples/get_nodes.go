@@ -54,15 +54,27 @@ func main() {
 	}
 
 	fmt.Println(`
-	Nodes Definition:
+	DNS Definition:
 	`)
 
-	d := types.Nodes{}.Definition()
+	d := types.Dns{}.Definition()
 	swag, err := d.GetSwag(client)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(swag.Paths)
+
+
+	fmt.Println(`
+	DNS Get:
+	`)
+
+	var dns types.Dns
+	err = client.GetObject(&dns)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%v", dns)
 
 	fmt.Println(`
 	Node Getters:
