@@ -15,6 +15,8 @@ type RemoteSyslog struct {
 	Target []interface{} `json:"target"`
 }
 
+var _ sophos.Endpoint = &RemoteSyslog{}
+
 var defsRemoteSyslog = map[string]sophos.RestObject{
 	"RemoteSyslogGroup":  &RemoteSyslogGroup{},
 	"RemoteSyslogServer": &RemoteSyslogServer{},
@@ -58,6 +60,8 @@ func (RemoteSyslog) References() []string {
 // RemoteSyslogGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type RemoteSyslogGroup []interface{}
 
+var _ sophos.RestObject = &RemoteSyslogGroup{}
+
 // GetPath implements sophos.RestObject and returns the RemoteSyslogGroup GET path
 // Returns all available remote_syslog/group objects
 func (*RemoteSyslogGroup) GetPath() string { return "/api/objects/remote_syslog/group/" }
@@ -97,6 +101,8 @@ func (*RemoteSyslogGroup) UsedByPath(ref string) string {
 
 // RemoteSyslogServer is an Sophos Endpoint subType and implements sophos.RestObject
 type RemoteSyslogServer []interface{}
+
+var _ sophos.RestObject = &RemoteSyslogServer{}
 
 // GetPath implements sophos.RestObject and returns the RemoteSyslogServer GET path
 // Returns all available remote_syslog/server objects

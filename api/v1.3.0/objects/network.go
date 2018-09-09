@@ -24,6 +24,8 @@ type Network struct {
 	NetworkRange              NetworkRange              `json:"network_range"`
 }
 
+var _ sophos.Endpoint = &Network{}
+
 var defsNetwork = map[string]sophos.RestObject{
 	"NetworkAaa":                &NetworkAaa{},
 	"NetworkAny":                &NetworkAny{},
@@ -135,6 +137,8 @@ type NetworkAaa struct {
 	Resolved6  bool          `json:"resolved6"`
 }
 
+var _ sophos.RestGetter = &NetworkAaa{}
+
 // GetPath implements sophos.RestObject and returns the NetworkAaas GET path
 // Returns all available network/aaa objects
 func (*NetworkAaas) GetPath() string { return "/api/objects/network/aaa/" }
@@ -201,6 +205,8 @@ type NetworkAny struct {
 	Resolved6 bool   `json:"resolved6"`
 }
 
+var _ sophos.RestGetter = &NetworkAny{}
+
 // GetPath implements sophos.RestObject and returns the NetworkAnys GET path
 // Returns all available network/any objects
 func (*NetworkAnys) GetPath() string { return "/api/objects/network/any/" }
@@ -250,6 +256,8 @@ func (n *NetworkAny) GetType() string { return n._type }
 
 // NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkAvailabilityGroup []interface{}
+
+var _ sophos.RestObject = &NetworkAvailabilityGroup{}
 
 // GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroup GET path
 // Returns all available network/availability_group objects
@@ -306,6 +314,8 @@ type NetworkDnsGroup struct {
 	Resolved6  bool          `json:"resolved6"`
 	Timeout    int64         `json:"timeout"`
 }
+
+var _ sophos.RestGetter = &NetworkDnsGroup{}
 
 // GetPath implements sophos.RestObject and returns the NetworkDnsGroups GET path
 // Returns all available network/dns_group objects
@@ -375,6 +385,8 @@ type NetworkDnsHost struct {
 	Timeout   int64  `json:"timeout"`
 }
 
+var _ sophos.RestGetter = &NetworkDnsHost{}
+
 // GetPath implements sophos.RestObject and returns the NetworkDnsHosts GET path
 // Returns all available network/dns_host objects
 func (*NetworkDnsHosts) GetPath() string { return "/api/objects/network/dns_host/" }
@@ -437,6 +449,8 @@ type NetworkGroup struct {
 	Name      string   `json:"name"`
 	Types     []string `json:"types"`
 }
+
+var _ sophos.RestGetter = &NetworkGroup{}
 
 // GetPath implements sophos.RestObject and returns the NetworkGroups GET path
 // Returns all available network/group objects
@@ -508,6 +522,8 @@ type NetworkHost struct {
 	ReverseDNS bool          `json:"reverse_dns"`
 }
 
+var _ sophos.RestGetter = &NetworkHost{}
+
 // GetPath implements sophos.RestObject and returns the NetworkHosts GET path
 // Returns all available network/host objects
 func (*NetworkHosts) GetPath() string { return "/api/objects/network/host/" }
@@ -573,6 +589,8 @@ type NetworkInterfaceAddress struct {
 	Resolved6 bool   `json:"resolved6"`
 }
 
+var _ sophos.RestGetter = &NetworkInterfaceAddress{}
+
 // GetPath implements sophos.RestObject and returns the NetworkInterfaceAddresss GET path
 // Returns all available network/interface_address objects
 func (*NetworkInterfaceAddresss) GetPath() string { return "/api/objects/network/interface_address/" }
@@ -635,6 +653,8 @@ type NetworkInterfaceBroadcast struct {
 	Name      string `json:"name"`
 	Resolved  bool   `json:"resolved"`
 }
+
+var _ sophos.RestGetter = &NetworkInterfaceBroadcast{}
 
 // GetPath implements sophos.RestObject and returns the NetworkInterfaceBroadcasts GET path
 // Returns all available network/interface_broadcast objects
@@ -705,6 +725,8 @@ type NetworkInterfaceNetwork struct {
 	Resolved6 bool   `json:"resolved6"`
 }
 
+var _ sophos.RestGetter = &NetworkInterfaceNetwork{}
+
 // GetPath implements sophos.RestObject and returns the NetworkInterfaceNetworks GET path
 // Returns all available network/interface_network objects
 func (*NetworkInterfaceNetworks) GetPath() string { return "/api/objects/network/interface_network/" }
@@ -756,6 +778,8 @@ func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
 
 // NetworkMulticast is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkMulticast []interface{}
+
+var _ sophos.RestObject = &NetworkMulticast{}
 
 // GetPath implements sophos.RestObject and returns the NetworkMulticast GET path
 // Returns all available network/multicast objects
@@ -812,6 +836,8 @@ type NetworkNetwork struct {
 	Resolved  bool   `json:"resolved"`
 	Resolved6 bool   `json:"resolved6"`
 }
+
+var _ sophos.RestGetter = &NetworkNetwork{}
 
 // GetPath implements sophos.RestObject and returns the NetworkNetworks GET path
 // Returns all available network/network objects
@@ -880,6 +906,8 @@ type NetworkRange struct {
 	To        string `json:"to"`
 	To6       string `json:"to6"`
 }
+
+var _ sophos.RestGetter = &NetworkRange{}
 
 // GetPath implements sophos.RestObject and returns the NetworkRanges GET path
 // Returns all available network/range objects

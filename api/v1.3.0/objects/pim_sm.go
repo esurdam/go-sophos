@@ -19,6 +19,8 @@ type PimSm struct {
 	Status          int64         `json:"status"`
 }
 
+var _ sophos.Endpoint = &PimSm{}
+
 var defsPimSm = map[string]sophos.RestObject{
 	"PimSmGroup":     &PimSmGroup{},
 	"PimSmInterface": &PimSmInterface{},
@@ -72,6 +74,8 @@ func (PimSm) References() []string {
 // PimSmGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmGroup []interface{}
 
+var _ sophos.RestObject = &PimSmGroup{}
+
 // GetPath implements sophos.RestObject and returns the PimSmGroup GET path
 // Returns all available pim_sm/group objects
 func (*PimSmGroup) GetPath() string { return "/api/objects/pim_sm/group/" }
@@ -111,6 +115,8 @@ func (*PimSmGroup) UsedByPath(ref string) string {
 
 // PimSmInterface is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmInterface []interface{}
+
+var _ sophos.RestObject = &PimSmInterface{}
 
 // GetPath implements sophos.RestObject and returns the PimSmInterface GET path
 // Returns all available pim_sm/interface objects
@@ -152,6 +158,8 @@ func (*PimSmInterface) UsedByPath(ref string) string {
 // PimSmRoute is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmRoute []interface{}
 
+var _ sophos.RestObject = &PimSmRoute{}
+
 // GetPath implements sophos.RestObject and returns the PimSmRoute GET path
 // Returns all available pim_sm/route objects
 func (*PimSmRoute) GetPath() string { return "/api/objects/pim_sm/route/" }
@@ -191,6 +199,8 @@ func (*PimSmRoute) UsedByPath(ref string) string {
 
 // PimSmRpRouter is an Sophos Endpoint subType and implements sophos.RestObject
 type PimSmRpRouter []interface{}
+
+var _ sophos.RestObject = &PimSmRpRouter{}
 
 // GetPath implements sophos.RestObject and returns the PimSmRpRouter GET path
 // Returns all available pim_sm/rp_router objects

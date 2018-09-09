@@ -49,6 +49,8 @@ type Reporting struct {
 	WebsecurityStatus      int64         `json:"websecurity_status"`
 }
 
+var _ sophos.Endpoint = &Reporting{}
+
 var defsReporting = map[string]sophos.RestObject{
 	"ReportingDepartment": &ReportingDepartment{},
 	"ReportingFilter":     &ReportingFilter{},
@@ -101,6 +103,8 @@ func (Reporting) References() []string {
 
 // ReportingDepartment is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingDepartment []interface{}
+
+var _ sophos.RestObject = &ReportingDepartment{}
 
 // GetPath implements sophos.RestObject and returns the ReportingDepartment GET path
 // Returns all available reporting/department objects
@@ -162,6 +166,8 @@ type ReportingFilter struct {
 	Top       int64  `json:"top"`
 }
 
+var _ sophos.RestGetter = &ReportingFilter{}
+
 // GetPath implements sophos.RestObject and returns the ReportingFilters GET path
 // Returns all available reporting/filter objects
 func (*ReportingFilters) GetPath() string { return "/api/objects/reporting/filter/" }
@@ -214,6 +220,8 @@ func (r *ReportingFilter) GetType() string { return r._type }
 // ReportingGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingGroup []interface{}
 
+var _ sophos.RestObject = &ReportingGroup{}
+
 // GetPath implements sophos.RestObject and returns the ReportingGroup GET path
 // Returns all available reporting/group objects
 func (*ReportingGroup) GetPath() string { return "/api/objects/reporting/group/" }
@@ -253,6 +261,8 @@ func (*ReportingGroup) UsedByPath(ref string) string {
 
 // ReportingMail is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingMail []interface{}
+
+var _ sophos.RestObject = &ReportingMail{}
 
 // GetPath implements sophos.RestObject and returns the ReportingMail GET path
 // Returns all available reporting/mail objects

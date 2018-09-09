@@ -12,6 +12,8 @@ type Awscli struct {
 	Profiles []interface{} `json:"profiles"`
 }
 
+var _ sophos.Endpoint = &Awscli{}
+
 var defsAwscli = map[string]sophos.RestObject{
 	"AwscliGroup":   &AwscliGroup{},
 	"AwscliProfile": &AwscliProfile{},
@@ -55,6 +57,8 @@ func (Awscli) References() []string {
 // AwscliGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AwscliGroup []interface{}
 
+var _ sophos.RestObject = &AwscliGroup{}
+
 // GetPath implements sophos.RestObject and returns the AwscliGroup GET path
 // Returns all available awscli/group objects
 func (*AwscliGroup) GetPath() string { return "/api/objects/awscli/group/" }
@@ -94,6 +98,8 @@ func (*AwscliGroup) UsedByPath(ref string) string {
 
 // AwscliProfile is an Sophos Endpoint subType and implements sophos.RestObject
 type AwscliProfile []interface{}
+
+var _ sophos.RestObject = &AwscliProfile{}
 
 // GetPath implements sophos.RestObject and returns the AwscliProfile GET path
 // Returns all available awscli/profile objects

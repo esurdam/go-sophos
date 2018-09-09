@@ -13,6 +13,8 @@ type Role struct {
 	RoleRole  RoleRole  `json:"role_role"`
 }
 
+var _ sophos.Endpoint = &Role{}
+
 var defsRole = map[string]sophos.RestObject{
 	"RoleGroup": &RoleGroup{},
 	"RoleRole":  &RoleRole{},
@@ -55,6 +57,8 @@ func (Role) References() []string {
 
 // RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type RoleGroup []interface{}
+
+var _ sophos.RestObject = &RoleGroup{}
 
 // GetPath implements sophos.RestObject and returns the RoleGroup GET path
 // Returns all available role/group objects
@@ -107,6 +111,8 @@ type RoleRole struct {
 	Rights         []string `json:"rights"`
 	WebadminAccess bool     `json:"webadmin_access"`
 }
+
+var _ sophos.RestGetter = &RoleRole{}
 
 // GetPath implements sophos.RestObject and returns the RoleRoles GET path
 // Returns all available role/role objects

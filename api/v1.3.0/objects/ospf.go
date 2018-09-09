@@ -15,6 +15,8 @@ type Ospf struct {
 	OspfMessageDigestKey OspfMessageDigestKey `json:"ospf_message_digest_key"`
 }
 
+var _ sophos.Endpoint = &Ospf{}
+
 var defsOspf = map[string]sophos.RestObject{
 	"OspfArea":             &OspfArea{},
 	"OspfGroup":            &OspfGroup{},
@@ -68,6 +70,8 @@ func (Ospf) References() []string {
 // OspfArea is an Sophos Endpoint subType and implements sophos.RestObject
 type OspfArea []interface{}
 
+var _ sophos.RestObject = &OspfArea{}
+
 // GetPath implements sophos.RestObject and returns the OspfArea GET path
 // Returns all available ospf/area objects
 func (*OspfArea) GetPath() string { return "/api/objects/ospf/area/" }
@@ -107,6 +111,8 @@ func (*OspfArea) UsedByPath(ref string) string {
 
 // OspfGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type OspfGroup []interface{}
+
+var _ sophos.RestObject = &OspfGroup{}
 
 // GetPath implements sophos.RestObject and returns the OspfGroup GET path
 // Returns all available ospf/group objects
@@ -148,6 +154,8 @@ func (*OspfGroup) UsedByPath(ref string) string {
 // OspfInterface is an Sophos Endpoint subType and implements sophos.RestObject
 type OspfInterface []interface{}
 
+var _ sophos.RestObject = &OspfInterface{}
+
 // GetPath implements sophos.RestObject and returns the OspfInterface GET path
 // Returns all available ospf/interface objects
 func (*OspfInterface) GetPath() string { return "/api/objects/ospf/interface/" }
@@ -187,6 +195,8 @@ func (*OspfInterface) UsedByPath(ref string) string {
 
 // OspfMessageDigestKey is an Sophos Endpoint subType and implements sophos.RestObject
 type OspfMessageDigestKey []interface{}
+
+var _ sophos.RestObject = &OspfMessageDigestKey{}
 
 // GetPath implements sophos.RestObject and returns the OspfMessageDigestKey GET path
 // Returns all available ospf/message_digest_key objects

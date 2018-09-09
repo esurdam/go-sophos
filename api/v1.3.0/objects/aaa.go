@@ -13,6 +13,8 @@ type Aaa struct {
 	AaaUser  AaaUser  `json:"aaa_user"`
 }
 
+var _ sophos.Endpoint = &Aaa{}
+
 var defsAaa = map[string]sophos.RestObject{
 	"AaaGroup": &AaaGroup{},
 	"AaaUser":  &AaaUser{},
@@ -76,6 +78,8 @@ type AaaGroup struct {
 	RadiusGroups         []interface{} `json:"radius_groups"`
 	TacacsGroups         []interface{} `json:"tacacs_groups"`
 }
+
+var _ sophos.RestGetter = &AaaGroup{}
 
 // GetPath implements sophos.RestObject and returns the AaaGroups GET path
 // Returns all available aaa/group objects
@@ -160,6 +164,8 @@ type AaaUser struct {
 	X509Cert         string        `json:"x509_cert"`
 	X509CertGost     string        `json:"x509_cert_gost"`
 }
+
+var _ sophos.RestGetter = &AaaUser{}
 
 // GetPath implements sophos.RestObject and returns the AaaUsers GET path
 // Returns all available aaa/user objects

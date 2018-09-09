@@ -68,6 +68,8 @@ type Smtp struct {
 	UpstreamHostsOnly          int64         `json:"upstream_hosts_only"`
 }
 
+var _ sophos.Endpoint = &Smtp{}
+
 var defsSmtp = map[string]sophos.RestObject{
 	"SmtpException":       &SmtpException{},
 	"SmtpGroup":           &SmtpGroup{},
@@ -121,6 +123,8 @@ func (Smtp) References() []string {
 // SmtpException is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpException []interface{}
 
+var _ sophos.RestObject = &SmtpException{}
+
 // GetPath implements sophos.RestObject and returns the SmtpException GET path
 // Returns all available smtp/exception objects
 func (*SmtpException) GetPath() string { return "/api/objects/smtp/exception/" }
@@ -161,6 +165,8 @@ func (*SmtpException) UsedByPath(ref string) string {
 // SmtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpGroup []interface{}
 
+var _ sophos.RestObject = &SmtpGroup{}
+
 // GetPath implements sophos.RestObject and returns the SmtpGroup GET path
 // Returns all available smtp/group objects
 func (*SmtpGroup) GetPath() string { return "/api/objects/smtp/group/" }
@@ -200,6 +206,8 @@ func (*SmtpGroup) UsedByPath(ref string) string {
 
 // SmtpHeaderOperation is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpHeaderOperation []interface{}
+
+var _ sophos.RestObject = &SmtpHeaderOperation{}
 
 // GetPath implements sophos.RestObject and returns the SmtpHeaderOperation GET path
 // Returns all available smtp/header_operation objects
@@ -294,6 +302,8 @@ type SmtpProfile struct {
 	Status                      bool          `json:"status"`
 	Unscannable                 string        `json:"unscannable"`
 }
+
+var _ sophos.RestGetter = &SmtpProfile{}
 
 // GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
 // Returns all available smtp/profile objects

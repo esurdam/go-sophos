@@ -13,6 +13,8 @@ type Stas struct {
 	StasGroup     StasGroup     `json:"stas_group"`
 }
 
+var _ sophos.Endpoint = &Stas{}
+
 var defsStas = map[string]sophos.RestObject{
 	"StasCollector": &StasCollector{},
 	"StasGroup":     &StasGroup{},
@@ -56,6 +58,8 @@ func (Stas) References() []string {
 // StasCollector is an Sophos Endpoint subType and implements sophos.RestObject
 type StasCollector []interface{}
 
+var _ sophos.RestObject = &StasCollector{}
+
 // GetPath implements sophos.RestObject and returns the StasCollector GET path
 // Returns all available stas/collector objects
 func (*StasCollector) GetPath() string { return "/api/objects/stas/collector/" }
@@ -95,6 +99,8 @@ func (*StasCollector) UsedByPath(ref string) string {
 
 // StasGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type StasGroup []interface{}
+
+var _ sophos.RestObject = &StasGroup{}
 
 // GetPath implements sophos.RestObject and returns the StasGroup GET path
 // Returns all available stas/group objects

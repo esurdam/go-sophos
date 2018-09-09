@@ -13,6 +13,8 @@ type IpfixConnection struct {
 	IpfixConnectionIpfixConnection IpfixConnectionIpfixConnection `json:"ipfix_connection_ipfix_connection"`
 }
 
+var _ sophos.Endpoint = &IpfixConnection{}
+
 var defsIpfixConnection = map[string]sophos.RestObject{
 	"IpfixConnectionGroup":           &IpfixConnectionGroup{},
 	"IpfixConnectionIpfixConnection": &IpfixConnectionIpfixConnection{},
@@ -56,6 +58,8 @@ func (IpfixConnection) References() []string {
 // IpfixConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpfixConnectionGroup []interface{}
 
+var _ sophos.RestObject = &IpfixConnectionGroup{}
+
 // GetPath implements sophos.RestObject and returns the IpfixConnectionGroup GET path
 // Returns all available ipfix_connection/group objects
 func (*IpfixConnectionGroup) GetPath() string { return "/api/objects/ipfix_connection/group/" }
@@ -95,6 +99,8 @@ func (*IpfixConnectionGroup) UsedByPath(ref string) string {
 
 // IpfixConnectionIpfixConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type IpfixConnectionIpfixConnection []interface{}
+
+var _ sophos.RestObject = &IpfixConnectionIpfixConnection{}
 
 // GetPath implements sophos.RestObject and returns the IpfixConnectionIpfixConnection GET path
 // Returns all available ipfix_connection/ipfix_connection objects

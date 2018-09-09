@@ -13,6 +13,8 @@ type Condition struct {
 	ConditionObjref ConditionObjref `json:"condition_objref"`
 }
 
+var _ sophos.Endpoint = &Condition{}
+
 var defsCondition = map[string]sophos.RestObject{
 	"ConditionGroup":  &ConditionGroup{},
 	"ConditionObjref": &ConditionObjref{},
@@ -55,6 +57,8 @@ func (Condition) References() []string {
 
 // ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ConditionGroup []interface{}
+
+var _ sophos.RestObject = &ConditionGroup{}
 
 // GetPath implements sophos.RestObject and returns the ConditionGroup GET path
 // Returns all available condition/group objects
@@ -108,6 +112,8 @@ type ConditionObjref struct {
 	Ref       string `json:"ref"`
 	Value     string `json:"value"`
 }
+
+var _ sophos.RestGetter = &ConditionObjref{}
 
 // GetPath implements sophos.RestObject and returns the ConditionObjrefs GET path
 // Returns all available condition/objref objects

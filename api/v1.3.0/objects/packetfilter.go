@@ -51,6 +51,8 @@ type Packetfilter struct {
 	} `json:"timeouts"`
 }
 
+var _ sophos.Endpoint = &Packetfilter{}
+
 var defsPacketfilter = map[string]sophos.RestObject{
 	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
 	"PacketfilterGenericProxy": &PacketfilterGenericProxy{},
@@ -129,6 +131,8 @@ func (Packetfilter) References() []string {
 // Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
 type Packetfilter1to1Nat []interface{}
 
+var _ sophos.RestObject = &Packetfilter1to1Nat{}
+
 // GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
 // Returns all available packetfilter/1to1nat objects
 func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
@@ -168,6 +172,8 @@ func (*Packetfilter1to1Nat) UsedByPath(ref string) string {
 
 // PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGenericProxy []interface{}
+
+var _ sophos.RestObject = &PacketfilterGenericProxy{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterGenericProxy GET path
 // Returns all available packetfilter/generic_proxy objects
@@ -209,6 +215,8 @@ func (*PacketfilterGenericProxy) UsedByPath(ref string) string {
 // PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGroup []interface{}
 
+var _ sophos.RestObject = &PacketfilterGroup{}
+
 // GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
 // Returns all available packetfilter/group objects
 func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
@@ -249,6 +257,8 @@ func (*PacketfilterGroup) UsedByPath(ref string) string {
 // PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterLoadbalance []interface{}
 
+var _ sophos.RestObject = &PacketfilterLoadbalance{}
+
 // GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
 // Returns all available packetfilter/loadbalance objects
 func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
@@ -288,6 +298,8 @@ func (*PacketfilterLoadbalance) UsedByPath(ref string) string {
 
 // PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterMangle []interface{}
+
+var _ sophos.RestObject = &PacketfilterMangle{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
 // Returns all available packetfilter/mangle objects
@@ -342,6 +354,8 @@ type PacketfilterMasq struct {
 	SourceNatInterface       string `json:"source_nat_interface"`
 	Status                   bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &PacketfilterMasq{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
 // Returns all available packetfilter/masq objects
@@ -418,6 +432,8 @@ type PacketfilterNat struct {
 	Status                bool   `json:"status"`
 }
 
+var _ sophos.RestGetter = &PacketfilterNat{}
+
 // GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
 // Returns all available packetfilter/nat objects
 func (*PacketfilterNats) GetPath() string { return "/api/objects/packetfilter/nat/" }
@@ -492,6 +508,8 @@ type PacketfilterPacketfilter struct {
 	Time               string   `json:"time"`
 }
 
+var _ sophos.RestGetter = &PacketfilterPacketfilter{}
+
 // GetPath implements sophos.RestObject and returns the PacketfilterPacketfilters GET path
 // Returns all available packetfilter/packetfilter objects
 func (*PacketfilterPacketfilters) GetPath() string { return "/api/objects/packetfilter/packetfilter/" }
@@ -543,6 +561,8 @@ func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
 // PacketfilterRuleset is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterRuleset []interface{}
+
+var _ sophos.RestObject = &PacketfilterRuleset{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterRuleset GET path
 // Returns all available packetfilter/ruleset objects

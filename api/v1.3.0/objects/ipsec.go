@@ -28,6 +28,8 @@ type Ipsec struct {
 	Status      int64    `json:"status"`
 }
 
+var _ sophos.Endpoint = &Ipsec{}
+
 var defsIpsec = map[string]sophos.RestObject{
 	"IpsecGroup":         &IpsecGroup{},
 	"IpsecPolicy":        &IpsecPolicy{},
@@ -75,6 +77,8 @@ func (Ipsec) References() []string {
 
 // IpsecGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecGroup []interface{}
+
+var _ sophos.RestObject = &IpsecGroup{}
 
 // GetPath implements sophos.RestObject and returns the IpsecGroup GET path
 // Returns all available ipsec/group objects
@@ -134,6 +138,8 @@ type IpsecPolicy struct {
 	IpsecStrictPolicy bool   `json:"ipsec_strict_policy"`
 	Name              string `json:"name"`
 }
+
+var _ sophos.RestGetter = &IpsecPolicy{}
 
 // GetPath implements sophos.RestObject and returns the IpsecPolicys GET path
 // Returns all available ipsec/policy objects
@@ -203,6 +209,8 @@ type IpsecRemoteGateway struct {
 	XauthPassword  string   `json:"xauth_password"`
 	XauthUsername  string   `json:"xauth_username"`
 }
+
+var _ sophos.RestGetter = &IpsecRemoteGateway{}
 
 // GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
 // Returns all available ipsec/remote_gateway objects

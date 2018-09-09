@@ -26,6 +26,8 @@ type SslVpn struct {
 	UserAuthOptional        int64  `json:"user_auth_optional"`
 }
 
+var _ sophos.Endpoint = &SslVpn{}
+
 var defsSslVpn = map[string]sophos.RestObject{
 	"SslVpnClientConnection":    &SslVpnClientConnection{},
 	"SslVpnGroup":               &SslVpnGroup{},
@@ -117,6 +119,8 @@ type SslVpnClientConnection struct {
 	Username                string   `json:"username"`
 }
 
+var _ sophos.RestGetter = &SslVpnClientConnection{}
+
 // GetPath implements sophos.RestObject and returns the SslVpnClientConnections GET path
 // Returns all available ssl_vpn/client_connection objects
 func (*SslVpnClientConnections) GetPath() string { return "/api/objects/ssl_vpn/client_connection/" }
@@ -168,6 +172,8 @@ func (s *SslVpnClientConnection) GetType() string { return s._type }
 
 // SslVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnGroup []interface{}
+
+var _ sophos.RestObject = &SslVpnGroup{}
 
 // GetPath implements sophos.RestObject and returns the SslVpnGroup GET path
 // Returns all available ssl_vpn/group objects
@@ -223,6 +229,8 @@ type SslVpnRemoteAccessProfile struct {
 	Status     bool     `json:"status"`
 }
 
+var _ sophos.RestGetter = &SslVpnRemoteAccessProfile{}
+
 // GetPath implements sophos.RestObject and returns the SslVpnRemoteAccessProfiles GET path
 // Returns all available ssl_vpn/remote_access_profile objects
 func (*SslVpnRemoteAccessProfiles) GetPath() string {
@@ -276,6 +284,8 @@ func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
 
 // SslVpnServerConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnServerConnection []interface{}
+
+var _ sophos.RestObject = &SslVpnServerConnection{}
 
 // GetPath implements sophos.RestObject and returns the SslVpnServerConnection GET path
 // Returns all available ssl_vpn/server_connection objects

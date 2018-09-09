@@ -16,6 +16,8 @@ type Qos struct {
 	Interfaces []string `json:"interfaces"`
 }
 
+var _ sophos.Endpoint = &Qos{}
+
 var defsQos = map[string]sophos.RestObject{
 	"QosApplicationSelector":  &QosApplicationSelector{},
 	"QosGroup":                &QosGroup{},
@@ -84,6 +86,8 @@ func (Qos) References() []string {
 // QosApplicationSelector is an Sophos Endpoint subType and implements sophos.RestObject
 type QosApplicationSelector []interface{}
 
+var _ sophos.RestObject = &QosApplicationSelector{}
+
 // GetPath implements sophos.RestObject and returns the QosApplicationSelector GET path
 // Returns all available qos/application_selector objects
 func (*QosApplicationSelector) GetPath() string { return "/api/objects/qos/application_selector/" }
@@ -124,6 +128,8 @@ func (*QosApplicationSelector) UsedByPath(ref string) string {
 // QosGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type QosGroup []interface{}
 
+var _ sophos.RestObject = &QosGroup{}
+
 // GetPath implements sophos.RestObject and returns the QosGroup GET path
 // Returns all available qos/group objects
 func (*QosGroup) GetPath() string { return "/api/objects/qos/group/" }
@@ -163,6 +169,8 @@ func (*QosGroup) UsedByPath(ref string) string {
 
 // QosIngressRule is an Sophos Endpoint subType and implements sophos.RestObject
 type QosIngressRule []interface{}
+
+var _ sophos.RestObject = &QosIngressRule{}
 
 // GetPath implements sophos.RestObject and returns the QosIngressRule GET path
 // Returns all available qos/ingress_rule objects
@@ -222,6 +230,8 @@ type QosInterface struct {
 	UplinkOptimizer   bool          `json:"uplink_optimizer"`
 }
 
+var _ sophos.RestGetter = &QosInterface{}
+
 // GetPath implements sophos.RestObject and returns the QosInterfaces GET path
 // Returns all available qos/interface objects
 func (*QosInterfaces) GetPath() string { return "/api/objects/qos/interface/" }
@@ -274,6 +284,8 @@ func (q *QosInterface) GetType() string { return q._type }
 // QosRule is an Sophos Endpoint subType and implements sophos.RestObject
 type QosRule []interface{}
 
+var _ sophos.RestObject = &QosRule{}
+
 // GetPath implements sophos.RestObject and returns the QosRule GET path
 // Returns all available qos/rule objects
 func (*QosRule) GetPath() string { return "/api/objects/qos/rule/" }
@@ -314,6 +326,8 @@ func (*QosRule) UsedByPath(ref string) string {
 // QosTrafficSelector is an Sophos Endpoint subType and implements sophos.RestObject
 type QosTrafficSelector []interface{}
 
+var _ sophos.RestObject = &QosTrafficSelector{}
+
 // GetPath implements sophos.RestObject and returns the QosTrafficSelector GET path
 // Returns all available qos/traffic_selector objects
 func (*QosTrafficSelector) GetPath() string { return "/api/objects/qos/traffic_selector/" }
@@ -353,6 +367,8 @@ func (*QosTrafficSelector) UsedByPath(ref string) string {
 
 // QosTrafficSelectorGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type QosTrafficSelectorGroup []interface{}
+
+var _ sophos.RestObject = &QosTrafficSelectorGroup{}
 
 // GetPath implements sophos.RestObject and returns the QosTrafficSelectorGroup GET path
 // Returns all available qos/traffic_selector_group objects

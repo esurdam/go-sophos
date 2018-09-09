@@ -106,6 +106,8 @@ type Http struct {
 	UseSxlUrid                            int64         `json:"use_sxl_urid"`
 }
 
+var _ sophos.Endpoint = &Http{}
+
 var defsHttp = map[string]sophos.RestObject{
 	"HttpCffAction":   &HttpCffAction{},
 	"HttpCffProfile":  &HttpCffProfile{},
@@ -249,6 +251,8 @@ type HttpCffAction struct {
 	YahooSafesearch          string        `json:"yahoo_safesearch"`
 }
 
+var _ sophos.RestGetter = &HttpCffAction{}
+
 // GetPath implements sophos.RestObject and returns the HttpCffActions GET path
 // Returns all available http/cff_action objects
 func (*HttpCffActions) GetPath() string { return "/api/objects/http/cff_action/" }
@@ -316,6 +320,8 @@ type HttpCffProfile struct {
 	TimeEvent      string   `json:"time_event"`
 }
 
+var _ sophos.RestGetter = &HttpCffProfile{}
+
 // GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
 // Returns all available http/cff_profile objects
 func (*HttpCffProfiles) GetPath() string { return "/api/objects/http/cff_profile/" }
@@ -368,6 +374,8 @@ func (h *HttpCffProfile) GetType() string { return h._type }
 // HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpDeviceAuth []interface{}
 
+var _ sophos.RestObject = &HttpDeviceAuth{}
+
 // GetPath implements sophos.RestObject and returns the HttpDeviceAuth GET path
 // Returns all available http/device_auth objects
 func (*HttpDeviceAuth) GetPath() string { return "/api/objects/http/device_auth/" }
@@ -407,6 +415,8 @@ func (*HttpDeviceAuth) UsedByPath(ref string) string {
 
 // HttpDomainRegex is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpDomainRegex []interface{}
+
+var _ sophos.RestObject = &HttpDomainRegex{}
 
 // GetPath implements sophos.RestObject and returns the HttpDomainRegex GET path
 // Returns all available http/domain_regex objects
@@ -467,6 +477,8 @@ type HttpException struct {
 	UserAgents      []interface{} `json:"user_agents"`
 }
 
+var _ sophos.RestGetter = &HttpException{}
+
 // GetPath implements sophos.RestObject and returns the HttpExceptions GET path
 // Returns all available http/exception objects
 func (*HttpExceptions) GetPath() string { return "/api/objects/http/exception/" }
@@ -519,6 +531,8 @@ func (h *HttpException) GetType() string { return h._type }
 // HttpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpGroup []interface{}
 
+var _ sophos.RestObject = &HttpGroup{}
+
 // GetPath implements sophos.RestObject and returns the HttpGroup GET path
 // Returns all available http/group objects
 func (*HttpGroup) GetPath() string { return "/api/objects/http/group/" }
@@ -559,6 +573,8 @@ func (*HttpGroup) UsedByPath(ref string) string {
 // HttpLocalSite is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpLocalSite []interface{}
 
+var _ sophos.RestObject = &HttpLocalSite{}
+
 // GetPath implements sophos.RestObject and returns the HttpLocalSite GET path
 // Returns all available http/local_site objects
 func (*HttpLocalSite) GetPath() string { return "/api/objects/http/local_site/" }
@@ -598,6 +614,8 @@ func (*HttpLocalSite) UsedByPath(ref string) string {
 
 // HttpLslTag is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpLslTag []interface{}
+
+var _ sophos.RestObject = &HttpLslTag{}
 
 // GetPath implements sophos.RestObject and returns the HttpLslTag GET path
 // Returns all available http/lsl_tag objects
@@ -650,6 +668,8 @@ type HttpPacFile struct {
 	Status    bool   `json:"status"`
 }
 
+var _ sophos.RestGetter = &HttpPacFile{}
+
 // GetPath implements sophos.RestObject and returns the HttpPacFiles GET path
 // Returns all available http/pac_file objects
 func (*HttpPacFiles) GetPath() string { return "/api/objects/http/pac_file/" }
@@ -701,6 +721,8 @@ func (h *HttpPacFile) GetType() string { return h._type }
 
 // HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpParentProxy []interface{}
+
+var _ sophos.RestObject = &HttpParentProxy{}
 
 // GetPath implements sophos.RestObject and returns the HttpParentProxy GET path
 // Returns all available http/parent_proxy objects
@@ -773,6 +795,8 @@ type HttpProfile struct {
 	TransparentAuth    bool          `json:"transparent_auth"`
 }
 
+var _ sophos.RestGetter = &HttpProfile{}
+
 // GetPath implements sophos.RestObject and returns the HttpProfiles GET path
 // Returns all available http/profile objects
 func (*HttpProfiles) GetPath() string { return "/api/objects/http/profile/" }
@@ -836,6 +860,8 @@ type HttpSpCategory struct {
 	Subcats   []string `json:"subcats"`
 }
 
+var _ sophos.RestGetter = &HttpSpCategory{}
+
 // GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
 // Returns all available http/sp_category objects
 func (*HttpSpCategorys) GetPath() string { return "/api/objects/http/sp_category/" }
@@ -897,6 +923,8 @@ type HttpSpSubcat struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
 }
+
+var _ sophos.RestGetter = &HttpSpSubcat{}
 
 // GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
 // Returns all available http/sp_subcat objects

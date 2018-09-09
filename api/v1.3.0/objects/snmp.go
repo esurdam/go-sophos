@@ -25,6 +25,8 @@ type Snmp struct {
 	Version         string        `json:"version"`
 }
 
+var _ sophos.Endpoint = &Snmp{}
+
 var defsSnmp = map[string]sophos.RestObject{
 	"SnmpGroup": &SnmpGroup{},
 	"SnmpTrap":  &SnmpTrap{},
@@ -68,6 +70,8 @@ func (Snmp) References() []string {
 // SnmpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SnmpGroup []interface{}
 
+var _ sophos.RestObject = &SnmpGroup{}
+
 // GetPath implements sophos.RestObject and returns the SnmpGroup GET path
 // Returns all available snmp/group objects
 func (*SnmpGroup) GetPath() string { return "/api/objects/snmp/group/" }
@@ -107,6 +111,8 @@ func (*SnmpGroup) UsedByPath(ref string) string {
 
 // SnmpTrap is an Sophos Endpoint subType and implements sophos.RestObject
 type SnmpTrap []interface{}
+
+var _ sophos.RestObject = &SnmpTrap{}
 
 // GetPath implements sophos.RestObject and returns the SnmpTrap GET path
 // Returns all available snmp/trap objects

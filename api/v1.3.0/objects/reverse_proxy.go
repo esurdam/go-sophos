@@ -49,6 +49,8 @@ type ReverseProxy struct {
 	Whatkilledus                        int64         `json:"whatkilledus"`
 }
 
+var _ sophos.Endpoint = &ReverseProxy{}
+
 var defsReverseProxy = map[string]sophos.RestObject{
 	"ReverseProxyAuthProfile":   &ReverseProxyAuthProfile{},
 	"ReverseProxyBackend":       &ReverseProxyBackend{},
@@ -170,6 +172,8 @@ type ReverseProxyAuthProfile struct {
 	RedirectToRequestedURL          bool          `json:"redirect_to_requested_url"`
 }
 
+var _ sophos.RestGetter = &ReverseProxyAuthProfile{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyAuthProfiles GET path
 // Returns all available reverse_proxy/auth_profile objects
 func (*ReverseProxyAuthProfiles) GetPath() string { return "/api/objects/reverse_proxy/auth_profile/" }
@@ -239,6 +243,8 @@ type ReverseProxyBackend struct {
 	Timeout                         int64  `json:"timeout"`
 }
 
+var _ sophos.RestGetter = &ReverseProxyBackend{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyBackends GET path
 // Returns all available reverse_proxy/backend objects
 func (*ReverseProxyBackends) GetPath() string { return "/api/objects/reverse_proxy/backend/" }
@@ -291,6 +297,8 @@ func (r *ReverseProxyBackend) GetType() string { return r._type }
 // ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyException []interface{}
 
+var _ sophos.RestObject = &ReverseProxyException{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyException GET path
 // Returns all available reverse_proxy/exception objects
 func (*ReverseProxyException) GetPath() string { return "/api/objects/reverse_proxy/exception/" }
@@ -330,6 +338,8 @@ func (*ReverseProxyException) UsedByPath(ref string) string {
 
 // ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFilter []interface{}
+
+var _ sophos.RestObject = &ReverseProxyFilter{}
 
 // GetPath implements sophos.RestObject and returns the ReverseProxyFilter GET path
 // Returns all available reverse_proxy/filter objects
@@ -384,6 +394,8 @@ type ReverseProxyFormTemplate struct {
 	Name     string `json:"name"`
 	Template string `json:"template"`
 }
+
+var _ sophos.RestGetter = &ReverseProxyFormTemplate{}
 
 // GetPath implements sophos.RestObject and returns the ReverseProxyFormTemplates GET path
 // Returns all available reverse_proxy/form_template objects
@@ -464,6 +476,8 @@ type ReverseProxyFrontend struct {
 	Xheaders             bool          `json:"xheaders"`
 }
 
+var _ sophos.RestGetter = &ReverseProxyFrontend{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyFrontends GET path
 // Returns all available reverse_proxy/frontend objects
 func (*ReverseProxyFrontends) GetPath() string { return "/api/objects/reverse_proxy/frontend/" }
@@ -515,6 +529,8 @@ func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
 // ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyGroup []interface{}
+
+var _ sophos.RestObject = &ReverseProxyGroup{}
 
 // GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
 // Returns all available reverse_proxy/group objects
@@ -576,6 +592,8 @@ type ReverseProxyLocation struct {
 	StickysessionStatus  bool          `json:"stickysession_status"`
 	WebsocketPassthrough bool          `json:"websocket_passthrough"`
 }
+
+var _ sophos.RestGetter = &ReverseProxyLocation{}
 
 // GetPath implements sophos.RestObject and returns the ReverseProxyLocations GET path
 // Returns all available reverse_proxy/location objects
@@ -670,6 +688,8 @@ type ReverseProxyProfile struct {
 	Wafparanoia                  bool          `json:"wafparanoia"`
 }
 
+var _ sophos.RestGetter = &ReverseProxyProfile{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyProfiles GET path
 // Returns all available reverse_proxy/profile objects
 func (*ReverseProxyProfiles) GetPath() string { return "/api/objects/reverse_proxy/profile/" }
@@ -722,6 +742,8 @@ func (r *ReverseProxyProfile) GetType() string { return r._type }
 // ReverseProxyRedirection is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyRedirection []interface{}
 
+var _ sophos.RestObject = &ReverseProxyRedirection{}
+
 // GetPath implements sophos.RestObject and returns the ReverseProxyRedirection GET path
 // Returns all available reverse_proxy/redirection objects
 func (*ReverseProxyRedirection) GetPath() string { return "/api/objects/reverse_proxy/redirection/" }
@@ -761,6 +783,8 @@ func (*ReverseProxyRedirection) UsedByPath(ref string) string {
 
 // ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyThreatsFilter []interface{}
+
+var _ sophos.RestObject = &ReverseProxyThreatsFilter{}
 
 // GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter GET path
 // Returns all available reverse_proxy/threats_filter objects

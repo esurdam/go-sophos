@@ -15,6 +15,8 @@ type AmazonVpc struct {
 	Status      int64    `json:"status"`
 }
 
+var _ sophos.Endpoint = &AmazonVpc{}
+
 var defsAmazonVpc = map[string]sophos.RestObject{
 	"AmazonVpcConnection": &AmazonVpcConnection{},
 	"AmazonVpcGroup":      &AmazonVpcGroup{},
@@ -81,6 +83,8 @@ type AmazonVpcConnection struct {
 	VpcNetwork string   `json:"vpc_network"`
 }
 
+var _ sophos.RestGetter = &AmazonVpcConnection{}
+
 // GetPath implements sophos.RestObject and returns the AmazonVpcConnections GET path
 // Returns all available amazon_vpc/connection objects
 func (*AmazonVpcConnections) GetPath() string { return "/api/objects/amazon_vpc/connection/" }
@@ -132,6 +136,8 @@ func (a *AmazonVpcConnection) GetType() string { return a._type }
 
 // AmazonVpcGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AmazonVpcGroup []interface{}
+
+var _ sophos.RestObject = &AmazonVpcGroup{}
 
 // GetPath implements sophos.RestObject and returns the AmazonVpcGroup GET path
 // Returns all available amazon_vpc/group objects
@@ -185,6 +191,8 @@ type AmazonVpcTunnel struct {
 	Name      string `json:"name"`
 	Netmask   int64  `json:"netmask"`
 }
+
+var _ sophos.RestGetter = &AmazonVpcTunnel{}
 
 // GetPath implements sophos.RestObject and returns the AmazonVpcTunnels GET path
 // Returns all available amazon_vpc/tunnel objects

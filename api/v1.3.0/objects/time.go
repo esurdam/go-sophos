@@ -14,6 +14,8 @@ type Time struct {
 	TimeSingle    TimeSingle    `json:"time_single"`
 }
 
+var _ sophos.Endpoint = &Time{}
+
 var defsTime = map[string]sophos.RestObject{
 	"TimeGroup":     &TimeGroup{},
 	"TimeRecurring": &TimeRecurring{},
@@ -61,6 +63,8 @@ func (Time) References() []string {
 
 // TimeGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeGroup []interface{}
+
+var _ sophos.RestObject = &TimeGroup{}
 
 // GetPath implements sophos.RestObject and returns the TimeGroup GET path
 // Returns all available time/group objects
@@ -114,6 +118,8 @@ type TimeRecurring struct {
 	Weekdays  []string `json:"weekdays"`
 }
 
+var _ sophos.RestGetter = &TimeRecurring{}
+
 // GetPath implements sophos.RestObject and returns the TimeRecurrings GET path
 // Returns all available time/recurring objects
 func (*TimeRecurrings) GetPath() string { return "/api/objects/time/recurring/" }
@@ -165,6 +171,8 @@ func (t *TimeRecurring) GetType() string { return t._type }
 
 // TimeSingle is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeSingle []interface{}
+
+var _ sophos.RestObject = &TimeSingle{}
 
 // GetPath implements sophos.RestObject and returns the TimeSingle GET path
 // Returns all available time/single objects

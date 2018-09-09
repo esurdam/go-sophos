@@ -14,6 +14,8 @@ type Aws struct {
 	AwsRegion       AwsRegion       `json:"aws_region"`
 }
 
+var _ sophos.Endpoint = &Aws{}
+
 var defsAws = map[string]sophos.RestObject{
 	"AwsGroup":        &AwsGroup{},
 	"AwsInstanceType": &AwsInstanceType{},
@@ -61,6 +63,8 @@ func (Aws) References() []string {
 
 // AwsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsGroup []interface{}
+
+var _ sophos.RestObject = &AwsGroup{}
 
 // GetPath implements sophos.RestObject and returns the AwsGroup GET path
 // Returns all available aws/group objects
@@ -115,6 +119,8 @@ type AwsInstanceType struct {
 	Name               string      `json:"name"`
 	NetworkPerformance string      `json:"network_performance"`
 }
+
+var _ sophos.RestGetter = &AwsInstanceType{}
 
 // GetPath implements sophos.RestObject and returns the AwsInstanceTypes GET path
 // Returns all available aws/instance_type objects
@@ -180,6 +186,8 @@ type AwsRegion struct {
 	Name              string   `json:"name"`
 	Partition         string   `json:"partition"`
 }
+
+var _ sophos.RestGetter = &AwsRegion{}
 
 // GetPath implements sophos.RestObject and returns the AwsRegions GET path
 // Returns all available aws/region objects

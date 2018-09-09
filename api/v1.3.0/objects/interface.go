@@ -20,6 +20,8 @@ type Interface struct {
 	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
 }
 
+var _ sophos.Endpoint = &Interface{}
+
 var defsInterface = map[string]sophos.RestObject{
 	"InterfaceBridge":   &InterfaceBridge{},
 	"InterfaceEthernet": &InterfaceEthernet{},
@@ -98,6 +100,8 @@ func (Interface) References() []string {
 // InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceBridge []interface{}
 
+var _ sophos.RestObject = &InterfaceBridge{}
+
 // GetPath implements sophos.RestObject and returns the InterfaceBridge GET path
 // Returns all available interface/bridge objects
 func (*InterfaceBridge) GetPath() string { return "/api/objects/interface/bridge/" }
@@ -158,6 +162,8 @@ type InterfaceEthernet struct {
 	Proxyndp            bool          `json:"proxyndp"`
 	Status              bool          `json:"status"`
 }
+
+var _ sophos.RestGetter = &InterfaceEthernet{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
 // Returns all available interface/ethernet objects
@@ -223,6 +229,8 @@ type InterfaceGroup struct {
 	PrimaryAddresses string        `json:"primary_addresses"`
 }
 
+var _ sophos.RestGetter = &InterfaceGroup{}
+
 // GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
 // Returns all available interface/group objects
 func (*InterfaceGroups) GetPath() string { return "/api/objects/interface/group/" }
@@ -275,6 +283,8 @@ func (i *InterfaceGroup) GetType() string { return i._type }
 // InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePpp3G []interface{}
 
+var _ sophos.RestObject = &InterfacePpp3G{}
+
 // GetPath implements sophos.RestObject and returns the InterfacePpp3G GET path
 // Returns all available interface/ppp3g objects
 func (*InterfacePpp3G) GetPath() string { return "/api/objects/interface/ppp3g/" }
@@ -314,6 +324,8 @@ func (*InterfacePpp3G) UsedByPath(ref string) string {
 
 // InterfacePppmodem is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppmodem []interface{}
+
+var _ sophos.RestObject = &InterfacePppmodem{}
 
 // GetPath implements sophos.RestObject and returns the InterfacePppmodem GET path
 // Returns all available interface/pppmodem objects
@@ -355,6 +367,8 @@ func (*InterfacePppmodem) UsedByPath(ref string) string {
 // InterfacePppoa is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppoa []interface{}
 
+var _ sophos.RestObject = &InterfacePppoa{}
+
 // GetPath implements sophos.RestObject and returns the InterfacePppoa GET path
 // Returns all available interface/pppoa objects
 func (*InterfacePppoa) GetPath() string { return "/api/objects/interface/pppoa/" }
@@ -395,6 +409,8 @@ func (*InterfacePppoa) UsedByPath(ref string) string {
 // InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppoe []interface{}
 
+var _ sophos.RestObject = &InterfacePppoe{}
+
 // GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
 // Returns all available interface/pppoe objects
 func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
@@ -434,6 +450,8 @@ func (*InterfacePppoe) UsedByPath(ref string) string {
 
 // InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceTunnel []interface{}
+
+var _ sophos.RestObject = &InterfaceTunnel{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
 // Returns all available interface/tunnel objects
@@ -497,6 +515,8 @@ type InterfaceVlan struct {
 	Status              bool          `json:"status"`
 	Vlantag             int64         `json:"vlantag"`
 }
+
+var _ sophos.RestGetter = &InterfaceVlan{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
 // Returns all available interface/vlan objects

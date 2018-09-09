@@ -19,6 +19,8 @@ type IpsecConnection struct {
 	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
 }
 
+var _ sophos.Endpoint = &IpsecConnection{}
+
 var defsIpsecConnection = map[string]sophos.RestObject{
 	"IpsecConnectionAmazonVpc":        &IpsecConnectionAmazonVpc{},
 	"IpsecConnectionGroup":            &IpsecConnectionGroup{},
@@ -105,6 +107,8 @@ type IpsecConnectionAmazonVpc struct {
 	Remote         string `json:"remote"`
 }
 
+var _ sophos.RestGetter = &IpsecConnectionAmazonVpc{}
+
 // GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
 // Returns all available ipsec_connection/amazon_vpc objects
 func (*IpsecConnectionAmazonVpcs) GetPath() string { return "/api/objects/ipsec_connection/amazon_vpc/" }
@@ -156,6 +160,8 @@ func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
 
 // IpsecConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionGroup []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionGroup{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionGroup GET path
 // Returns all available ipsec_connection/group objects
@@ -221,6 +227,8 @@ type IpsecConnectionL2Tp struct {
 	Users                     []string `json:"users"`
 }
 
+var _ sophos.RestGetter = &IpsecConnectionL2Tp{}
+
 // GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
 // Returns all available ipsec_connection/l2tp objects
 func (*IpsecConnectionL2Tps) GetPath() string { return "/api/objects/ipsec_connection/l2tp/" }
@@ -273,6 +281,8 @@ func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 // IpsecConnectionRoadwarriorCa is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCa []interface{}
 
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorCa{}
+
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCa GET path
 // Returns all available ipsec_connection/roadwarrior_ca objects
 func (*IpsecConnectionRoadwarriorCa) GetPath() string {
@@ -314,6 +324,8 @@ func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
 
 // IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCisco []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorCisco{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
 // Returns all available ipsec_connection/roadwarrior_cisco objects
@@ -357,6 +369,8 @@ func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
 // IpsecConnectionRoadwarriorPsk is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorPsk []interface{}
 
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorPsk{}
+
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsk GET path
 // Returns all available ipsec_connection/roadwarrior_psk objects
 func (*IpsecConnectionRoadwarriorPsk) GetPath() string {
@@ -398,6 +412,8 @@ func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
 
 // IpsecConnectionRoadwarriorX509 is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorX509 []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorX509{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509 GET path
 // Returns all available ipsec_connection/roadwarrior_x509 objects
@@ -459,6 +475,8 @@ type IpsecConnectionSiteToSite struct {
 	Status        bool     `json:"status"`
 	StrictRouting bool     `json:"strict_routing"`
 }
+
+var _ sophos.RestGetter = &IpsecConnectionSiteToSite{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
 // Returns all available ipsec_connection/site_to_site objects

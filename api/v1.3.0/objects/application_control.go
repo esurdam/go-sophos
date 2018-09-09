@@ -13,6 +13,8 @@ type ApplicationControl struct {
 	ApplicationControlRule  ApplicationControlRule  `json:"application_control_rule"`
 }
 
+var _ sophos.Endpoint = &ApplicationControl{}
+
 var defsApplicationControl = map[string]sophos.RestObject{
 	"ApplicationControlGroup": &ApplicationControlGroup{},
 	"ApplicationControlRule":  &ApplicationControlRule{},
@@ -55,6 +57,8 @@ func (ApplicationControl) References() []string {
 
 // ApplicationControlGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ApplicationControlGroup []interface{}
+
+var _ sophos.RestObject = &ApplicationControlGroup{}
 
 // GetPath implements sophos.RestObject and returns the ApplicationControlGroup GET path
 // Returns all available application_control/group objects
@@ -114,6 +118,8 @@ type ApplicationControlRule struct {
 	SourceNetworks          []string      `json:"source_networks"`
 	Status                  bool          `json:"status"`
 }
+
+var _ sophos.RestGetter = &ApplicationControlRule{}
 
 // GetPath implements sophos.RestObject and returns the ApplicationControlRules GET path
 // Returns all available application_control/rule objects

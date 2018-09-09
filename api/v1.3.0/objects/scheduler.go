@@ -14,6 +14,8 @@ type Scheduler struct {
 	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 }
 
+var _ sophos.Endpoint = &Scheduler{}
+
 var defsScheduler = map[string]sophos.RestObject{
 	"SchedulerGroup":       &SchedulerGroup{},
 	"SchedulerLoadbalance": &SchedulerLoadbalance{},
@@ -61,6 +63,8 @@ func (Scheduler) References() []string {
 
 // SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerGroup []interface{}
+
+var _ sophos.RestObject = &SchedulerGroup{}
 
 // GetPath implements sophos.RestObject and returns the SchedulerGroup GET path
 // Returns all available scheduler/group objects
@@ -122,6 +126,8 @@ type SchedulerLoadbalance struct {
 	PersistenceTime int64         `json:"persistence_time"`
 	Weight          struct{}      `json:"weight"`
 }
+
+var _ sophos.RestGetter = &SchedulerLoadbalance{}
 
 // GetPath implements sophos.RestObject and returns the SchedulerLoadbalances GET path
 // Returns all available scheduler/loadbalance objects
@@ -192,6 +198,8 @@ type SchedulerRule struct {
 	Source          string `json:"source"`
 	Status          bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &SchedulerRule{}
 
 // GetPath implements sophos.RestObject and returns the SchedulerRules GET path
 // Returns all available scheduler/rule objects

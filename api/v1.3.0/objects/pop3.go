@@ -42,6 +42,8 @@ type Pop3 struct {
 	UserCharset           string        `json:"user_charset"`
 }
 
+var _ sophos.Endpoint = &Pop3{}
+
 var defsPop3 = map[string]sophos.RestObject{
 	"Pop3Account":   &Pop3Account{},
 	"Pop3Exception": &Pop3Exception{},
@@ -95,6 +97,8 @@ func (Pop3) References() []string {
 // Pop3Account is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Account []interface{}
 
+var _ sophos.RestObject = &Pop3Account{}
+
 // GetPath implements sophos.RestObject and returns the Pop3Account GET path
 // Returns all available pop3/account objects
 func (*Pop3Account) GetPath() string { return "/api/objects/pop3/account/" }
@@ -134,6 +138,8 @@ func (*Pop3Account) UsedByPath(ref string) string {
 
 // Pop3Exception is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Exception []interface{}
+
+var _ sophos.RestObject = &Pop3Exception{}
 
 // GetPath implements sophos.RestObject and returns the Pop3Exception GET path
 // Returns all available pop3/exception objects
@@ -175,6 +181,8 @@ func (*Pop3Exception) UsedByPath(ref string) string {
 // Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Group []interface{}
 
+var _ sophos.RestObject = &Pop3Group{}
+
 // GetPath implements sophos.RestObject and returns the Pop3Group GET path
 // Returns all available pop3/group objects
 func (*Pop3Group) GetPath() string { return "/api/objects/pop3/group/" }
@@ -214,6 +222,8 @@ func (*Pop3Group) UsedByPath(ref string) string {
 
 // Pop3Server is an Sophos Endpoint subType and implements sophos.RestObject
 type Pop3Server []interface{}
+
+var _ sophos.RestObject = &Pop3Server{}
 
 // GetPath implements sophos.RestObject and returns the Pop3Server GET path
 // Returns all available pop3/server objects

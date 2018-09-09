@@ -40,6 +40,8 @@ type Spx struct {
 	Templates []string `json:"templates"`
 }
 
+var _ sophos.Endpoint = &Spx{}
+
 var defsSpx = map[string]sophos.RestObject{
 	"SpxGroup":    &SpxGroup{},
 	"SpxTemplate": &SpxTemplate{},
@@ -82,6 +84,8 @@ func (Spx) References() []string {
 
 // SpxGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SpxGroup []interface{}
+
+var _ sophos.RestObject = &SpxGroup{}
 
 // GetPath implements sophos.RestObject and returns the SpxGroup GET path
 // Returns all available spx/group objects
@@ -171,6 +175,8 @@ type SpxTemplate struct {
 	RcptInstructions               string `json:"rcpt_instructions"`
 	RemoveSophosLogo               bool   `json:"remove_sophos_logo"`
 }
+
+var _ sophos.RestGetter = &SpxTemplate{}
 
 // GetPath implements sophos.RestObject and returns the SpxTemplates GET path
 // Returns all available spx/template objects

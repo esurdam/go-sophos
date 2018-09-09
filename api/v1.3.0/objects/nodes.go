@@ -1192,6 +1192,8 @@ type Nodes struct {
 	WebadminTlsProtocols                                 string        `json:"webadmin.tls_protocols"`
 }
 
+var _ sophos.Endpoint = &Nodes{}
+
 var defsNodes = map[string]sophos.RestObject{}
 
 // RestObjects implements the sophos.Node interface and returns a map of Nodes's Objects

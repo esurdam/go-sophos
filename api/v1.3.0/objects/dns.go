@@ -20,6 +20,8 @@ type Dns struct {
 	Routes          []string      `json:"routes"`
 }
 
+var _ sophos.Endpoint = &Dns{}
+
 var defsDns = map[string]sophos.RestObject{
 	"DnsAxfr":  &DnsAxfr{},
 	"DnsGroup": &DnsGroup{},
@@ -68,6 +70,8 @@ func (Dns) References() []string {
 // DnsAxfr is an Sophos Endpoint subType and implements sophos.RestObject
 type DnsAxfr []interface{}
 
+var _ sophos.RestObject = &DnsAxfr{}
+
 // GetPath implements sophos.RestObject and returns the DnsAxfr GET path
 // Returns all available dns/axfr objects
 func (*DnsAxfr) GetPath() string { return "/api/objects/dns/axfr/" }
@@ -107,6 +111,8 @@ func (*DnsAxfr) UsedByPath(ref string) string {
 
 // DnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DnsGroup []interface{}
+
+var _ sophos.RestObject = &DnsGroup{}
 
 // GetPath implements sophos.RestObject and returns the DnsGroup GET path
 // Returns all available dns/group objects
@@ -159,6 +165,8 @@ type DnsRoute struct {
 	Status    bool     `json:"status"`
 	Targets   []string `json:"targets"`
 }
+
+var _ sophos.RestGetter = &DnsRoute{}
 
 // GetPath implements sophos.RestObject and returns the DnsRoutes GET path
 // Returns all available dns/route objects

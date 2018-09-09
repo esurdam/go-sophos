@@ -13,6 +13,8 @@ type UserPreferences struct {
 	UserPreferencesWebadmin UserPreferencesWebadmin `json:"user_preferences_webadmin"`
 }
 
+var _ sophos.Endpoint = &UserPreferences{}
+
 var defsUserPreferences = map[string]sophos.RestObject{
 	"UserPreferencesGroup":    &UserPreferencesGroup{},
 	"UserPreferencesWebadmin": &UserPreferencesWebadmin{},
@@ -55,6 +57,8 @@ func (UserPreferences) References() []string {
 
 // UserPreferencesGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type UserPreferencesGroup []interface{}
+
+var _ sophos.RestObject = &UserPreferencesGroup{}
 
 // GetPath implements sophos.RestObject and returns the UserPreferencesGroup GET path
 // Returns all available user_preferences/group objects
@@ -120,6 +124,8 @@ type UserPreferencesWebadmin struct {
 	} `json:"shortcuts"`
 	SkipTermsOfUse bool `json:"skip_terms_of_use"`
 }
+
+var _ sophos.RestGetter = &UserPreferencesWebadmin{}
 
 // GetPath implements sophos.RestObject and returns the UserPreferencesWebadmins GET path
 // Returns all available user_preferences/webadmin objects

@@ -28,6 +28,8 @@ type Ca struct {
 	} `json:"global_cas"`
 }
 
+var _ sophos.Endpoint = &Ca{}
+
 var defsCa = map[string]sophos.RestObject{
 	"CaCrl":                &CaCrl{},
 	"CaGroup":              &CaGroup{},
@@ -111,6 +113,8 @@ func (Ca) References() []string {
 // CaCrl is an Sophos Endpoint subType and implements sophos.RestObject
 type CaCrl []interface{}
 
+var _ sophos.RestObject = &CaCrl{}
+
 // GetPath implements sophos.RestObject and returns the CaCrl GET path
 // Returns all available ca/crl objects
 func (*CaCrl) GetPath() string { return "/api/objects/ca/crl/" }
@@ -150,6 +154,8 @@ func (*CaCrl) UsedByPath(ref string) string {
 
 // CaGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type CaGroup []interface{}
+
+var _ sophos.RestObject = &CaGroup{}
 
 // GetPath implements sophos.RestObject and returns the CaGroup GET path
 // Returns all available ca/group objects
@@ -201,6 +207,8 @@ type CaHostCert struct {
 	Meta        string `json:"meta"`
 	Name        string `json:"name"`
 }
+
+var _ sophos.RestGetter = &CaHostCert{}
 
 // GetPath implements sophos.RestObject and returns the CaHostCerts GET path
 // Returns all available ca/host_cert objects
@@ -266,6 +274,8 @@ type CaHostKeyCert struct {
 	Name        string `json:"name"`
 }
 
+var _ sophos.RestGetter = &CaHostKeyCert{}
+
 // GetPath implements sophos.RestObject and returns the CaHostKeyCerts GET path
 // Returns all available ca/host_key_cert objects
 func (*CaHostKeyCerts) GetPath() string { return "/api/objects/ca/host_key_cert/" }
@@ -318,6 +328,8 @@ func (c *CaHostKeyCert) GetType() string { return c._type }
 // CaHttpVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject
 type CaHttpVerificationCa []interface{}
 
+var _ sophos.RestObject = &CaHttpVerificationCa{}
+
 // GetPath implements sophos.RestObject and returns the CaHttpVerificationCa GET path
 // Returns all available ca/http_verification_ca objects
 func (*CaHttpVerificationCa) GetPath() string { return "/api/objects/ca/http_verification_ca/" }
@@ -357,6 +369,8 @@ func (*CaHttpVerificationCa) UsedByPath(ref string) string {
 
 // CaMetaCrl is an Sophos Endpoint subType and implements sophos.RestObject
 type CaMetaCrl []interface{}
+
+var _ sophos.RestObject = &CaMetaCrl{}
 
 // GetPath implements sophos.RestObject and returns the CaMetaCrl GET path
 // Returns all available ca/meta_crl objects
@@ -418,6 +432,8 @@ type CaMetaX509 struct {
 	VpnID              string   `json:"vpn_id"`
 	VpnIDType          string   `json:"vpn_id_type"`
 }
+
+var _ sophos.RestGetter = &CaMetaX509{}
 
 // GetPath implements sophos.RestObject and returns the CaMetaX509s GET path
 // Returns all available ca/meta_x509 objects
@@ -482,6 +498,8 @@ type CaRsa struct {
 	VpnID     string `json:"vpn_id"`
 	VpnIDType string `json:"vpn_id_type"`
 }
+
+var _ sophos.RestGetter = &CaRsa{}
 
 // GetPath implements sophos.RestObject and returns the CaRsas GET path
 // Returns all available ca/rsa objects
@@ -549,6 +567,8 @@ type CaSigningCa struct {
 	Serial      string `json:"serial"`
 }
 
+var _ sophos.RestGetter = &CaSigningCa{}
+
 // GetPath implements sophos.RestObject and returns the CaSigningCas GET path
 // Returns all available ca/signing_ca objects
 func (*CaSigningCas) GetPath() string { return "/api/objects/ca/signing_ca/" }
@@ -600,6 +620,8 @@ func (c *CaSigningCa) GetType() string { return c._type }
 
 // CaVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject
 type CaVerificationCa []interface{}
+
+var _ sophos.RestObject = &CaVerificationCa{}
 
 // GetPath implements sophos.RestObject and returns the CaVerificationCa GET path
 // Returns all available ca/verification_ca objects

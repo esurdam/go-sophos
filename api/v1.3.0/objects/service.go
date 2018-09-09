@@ -21,6 +21,8 @@ type Service struct {
 	ServiceUdp    ServiceUdp    `json:"service_udp"`
 }
 
+var _ sophos.Endpoint = &Service{}
+
 var defsService = map[string]sophos.RestObject{
 	"ServiceAh":     &ServiceAh{},
 	"ServiceAny":    &ServiceAny{},
@@ -104,6 +106,8 @@ func (Service) References() []string {
 // ServiceAh is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceAh []interface{}
 
+var _ sophos.RestObject = &ServiceAh{}
+
 // GetPath implements sophos.RestObject and returns the ServiceAh GET path
 // Returns all available service/ah objects
 func (*ServiceAh) GetPath() string { return "/api/objects/service/ah/" }
@@ -152,6 +156,8 @@ type ServiceAny struct {
 	Comment   string `json:"comment"`
 	Name      string `json:"name"`
 }
+
+var _ sophos.RestGetter = &ServiceAny{}
 
 // GetPath implements sophos.RestObject and returns the ServiceAnys GET path
 // Returns all available service/any objects
@@ -203,6 +209,8 @@ func (s *ServiceAny) GetType() string { return s._type }
 // ServiceEsp is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceEsp []interface{}
 
+var _ sophos.RestObject = &ServiceEsp{}
+
 // GetPath implements sophos.RestObject and returns the ServiceEsp GET path
 // Returns all available service/esp objects
 func (*ServiceEsp) GetPath() string { return "/api/objects/service/esp/" }
@@ -253,6 +261,8 @@ type ServiceGroup struct {
 	Name      string   `json:"name"`
 	Types     []string `json:"types"`
 }
+
+var _ sophos.RestGetter = &ServiceGroup{}
 
 // GetPath implements sophos.RestObject and returns the ServiceGroups GET path
 // Returns all available service/group objects
@@ -317,6 +327,8 @@ type ServiceIcmp struct {
 	Type      int64  `json:"type"`
 }
 
+var _ sophos.RestGetter = &ServiceIcmp{}
+
 // GetPath implements sophos.RestObject and returns the ServiceIcmps GET path
 // Returns all available service/icmp objects
 func (*ServiceIcmps) GetPath() string { return "/api/objects/service/icmp/" }
@@ -369,6 +381,8 @@ func (s *ServiceIcmp) GetType() string { return s._type }
 // ServiceIcmpv6 is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceIcmpv6 []interface{}
 
+var _ sophos.RestObject = &ServiceIcmpv6{}
+
 // GetPath implements sophos.RestObject and returns the ServiceIcmpv6 GET path
 // Returns all available service/icmpv6 objects
 func (*ServiceIcmpv6) GetPath() string { return "/api/objects/service/icmpv6/" }
@@ -418,6 +432,8 @@ type ServiceIp struct {
 	Name      string `json:"name"`
 	Proto     int64  `json:"proto"`
 }
+
+var _ sophos.RestGetter = &ServiceIp{}
 
 // GetPath implements sophos.RestObject and returns the ServiceIps GET path
 // Returns all available service/ip objects
@@ -484,6 +500,8 @@ type ServiceTcp struct {
 	SrcLow       int64  `json:"src_low"`
 }
 
+var _ sophos.RestGetter = &ServiceTcp{}
+
 // GetPath implements sophos.RestObject and returns the ServiceTcps GET path
 // Returns all available service/tcp objects
 func (*ServiceTcps) GetPath() string { return "/api/objects/service/tcp/" }
@@ -548,6 +566,8 @@ type ServiceTcpudp struct {
 	SrcHigh      int64  `json:"src_high"`
 	SrcLow       int64  `json:"src_low"`
 }
+
+var _ sophos.RestGetter = &ServiceTcpudp{}
 
 // GetPath implements sophos.RestObject and returns the ServiceTcpudps GET path
 // Returns all available service/tcpudp objects
@@ -615,6 +635,8 @@ type ServiceUdp struct {
 	SrcHigh      int64  `json:"src_high"`
 	SrcLow       int64  `json:"src_low"`
 }
+
+var _ sophos.RestGetter = &ServiceUdp{}
 
 // GetPath implements sophos.RestObject and returns the ServiceUdps GET path
 // Returns all available service/udp objects

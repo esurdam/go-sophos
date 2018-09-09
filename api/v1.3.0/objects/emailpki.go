@@ -44,6 +44,8 @@ type Emailpki struct {
 	} `json:"options"`
 }
 
+var _ sophos.Endpoint = &Emailpki{}
+
 var defsEmailpki = map[string]sophos.RestObject{
 	"EmailpkiGroup":   &EmailpkiGroup{},
 	"EmailpkiOpenpgp": &EmailpkiOpenpgp{},
@@ -97,6 +99,8 @@ func (Emailpki) References() []string {
 // EmailpkiGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiGroup []interface{}
 
+var _ sophos.RestObject = &EmailpkiGroup{}
+
 // GetPath implements sophos.RestObject and returns the EmailpkiGroup GET path
 // Returns all available emailpki/group objects
 func (*EmailpkiGroup) GetPath() string { return "/api/objects/emailpki/group/" }
@@ -136,6 +140,8 @@ func (*EmailpkiGroup) UsedByPath(ref string) string {
 
 // EmailpkiOpenpgp is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiOpenpgp []interface{}
+
+var _ sophos.RestObject = &EmailpkiOpenpgp{}
 
 // GetPath implements sophos.RestObject and returns the EmailpkiOpenpgp GET path
 // Returns all available emailpki/openpgp objects
@@ -177,6 +183,8 @@ func (*EmailpkiOpenpgp) UsedByPath(ref string) string {
 // EmailpkiSmime is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiSmime []interface{}
 
+var _ sophos.RestObject = &EmailpkiSmime{}
+
 // GetPath implements sophos.RestObject and returns the EmailpkiSmime GET path
 // Returns all available emailpki/smime objects
 func (*EmailpkiSmime) GetPath() string { return "/api/objects/emailpki/smime/" }
@@ -216,6 +224,8 @@ func (*EmailpkiSmime) UsedByPath(ref string) string {
 
 // EmailpkiUser is an Sophos Endpoint subType and implements sophos.RestObject
 type EmailpkiUser []interface{}
+
+var _ sophos.RestObject = &EmailpkiUser{}
 
 // GetPath implements sophos.RestObject and returns the EmailpkiUser GET path
 // Returns all available emailpki/user objects

@@ -18,6 +18,8 @@ type Authentication struct {
 	AuthenticationTacacs     AuthenticationTacacs     `json:"authentication_tacacs"`
 }
 
+var _ sophos.Endpoint = &Authentication{}
+
 var defsAuthentication = map[string]sophos.RestObject{
 	"AuthenticationAdirectory": &AuthenticationAdirectory{},
 	"AuthenticationEdirectory": &AuthenticationEdirectory{},
@@ -86,6 +88,8 @@ func (Authentication) References() []string {
 // AuthenticationAdirectory is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationAdirectory []interface{}
 
+var _ sophos.RestObject = &AuthenticationAdirectory{}
+
 // GetPath implements sophos.RestObject and returns the AuthenticationAdirectory GET path
 // Returns all available authentication/adirectory objects
 func (*AuthenticationAdirectory) GetPath() string { return "/api/objects/authentication/adirectory/" }
@@ -125,6 +129,8 @@ func (*AuthenticationAdirectory) UsedByPath(ref string) string {
 
 // AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationEdirectory []interface{}
+
+var _ sophos.RestObject = &AuthenticationEdirectory{}
 
 // GetPath implements sophos.RestObject and returns the AuthenticationEdirectory GET path
 // Returns all available authentication/edirectory objects
@@ -166,6 +172,8 @@ func (*AuthenticationEdirectory) UsedByPath(ref string) string {
 // AuthenticationGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationGroup []interface{}
 
+var _ sophos.RestObject = &AuthenticationGroup{}
+
 // GetPath implements sophos.RestObject and returns the AuthenticationGroup GET path
 // Returns all available authentication/group objects
 func (*AuthenticationGroup) GetPath() string { return "/api/objects/authentication/group/" }
@@ -205,6 +213,8 @@ func (*AuthenticationGroup) UsedByPath(ref string) string {
 
 // AuthenticationLdap is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationLdap []interface{}
+
+var _ sophos.RestObject = &AuthenticationLdap{}
 
 // GetPath implements sophos.RestObject and returns the AuthenticationLdap GET path
 // Returns all available authentication/ldap objects
@@ -246,6 +256,8 @@ func (*AuthenticationLdap) UsedByPath(ref string) string {
 // AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationOtpToken []interface{}
 
+var _ sophos.RestObject = &AuthenticationOtpToken{}
+
 // GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
 // Returns all available authentication/otp_token objects
 func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
@@ -286,6 +298,8 @@ func (*AuthenticationOtpToken) UsedByPath(ref string) string {
 // AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationRadius []interface{}
 
+var _ sophos.RestObject = &AuthenticationRadius{}
+
 // GetPath implements sophos.RestObject and returns the AuthenticationRadius GET path
 // Returns all available authentication/radius objects
 func (*AuthenticationRadius) GetPath() string { return "/api/objects/authentication/radius/" }
@@ -325,6 +339,8 @@ func (*AuthenticationRadius) UsedByPath(ref string) string {
 
 // AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
 type AuthenticationTacacs []interface{}
+
+var _ sophos.RestObject = &AuthenticationTacacs{}
 
 // GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
 // Returns all available authentication/tacacs objects

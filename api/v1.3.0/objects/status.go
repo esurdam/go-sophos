@@ -12,6 +12,8 @@ type Status struct {
 	StatusVersion StatusVersion `json:"Status_status"`
 }
 
+var _ sophos.Endpoint = &Status{}
+
 var defsStatus = map[string]sophos.RestObject{
 	"StatusVersion": &StatusVersion{},
 }
@@ -48,6 +50,8 @@ type StatusVersion struct {
 	Restd string `json:"restd"`
 	Utm   string `json:"utm"`
 }
+
+var _ sophos.RestObject = &StatusVersion{}
 
 // GetPath implements sophos.RestObject and returns the StatusVersion GET path
 // Returns some version numbers of the UTM software
