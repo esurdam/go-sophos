@@ -5,7 +5,7 @@ package sophos
 type Endpoint interface {
 	// Definition returns the endpoint Definition
 	Definition() Definition
-	// Objects returns a map of the Node's editable Objects
+	// RestObjects returns a map of the Node's editable Objects
 	RestObjects() map[string]RestObject
 	// ApiRoutes returns all known Node paths
 	ApiRoutes() []string
