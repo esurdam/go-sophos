@@ -34,7 +34,7 @@ client, _ := sophos.New(
 )
 ```
 
-Requesting the current port of the WebAdmin (see Nodes for more usage):
+Requesting the current port of the WebAdmin (see [Nodes](#nodes) for more usage):
 ```go
 import "github.com/esurdam/go-sophos"
 
@@ -50,7 +50,7 @@ fmt.Println(port)
 // Output: 4848
 ```
 
-Deleting a packet filter rule with reference `REF_PacPacXYZ`.
+Deleting a packet filter rule with reference `REF_PacPacXYZ`. (from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)):
 
 This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object:
 ```go
@@ -61,7 +61,6 @@ _, err := client.Delete(
 )
 
 // OR as a RestObject
-
 pf := objects.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
 err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
 ```
@@ -137,7 +136,7 @@ for _, s := range ss {
 }
 ```
 
-Note that Endpoint types contain their [Definition](definition.go):
+Note that [Endpoint](nodes.go#L5) types contain their [Definition](definition.go#L3):
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -150,7 +149,7 @@ fmt.Printf("%#v", objects.Dns{}.Definition())
 // }
 ```
 
-Requesting an Endpoint's Swag:
+Requesting an Endpoint's [Swag](definition.go#L29):
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -164,6 +163,23 @@ d := objects.Dns{}.Definition()
 swag, _ := d.GetSwag(client)
 ```
 
+Creating a PacketFilter (from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)):
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+pf := types.PacketfilterPacketfilter{
+    Action: 			"accept",
+    Destinations:       []string{"REF_NetworkAny"},
+    Direction:          "in",
+    Log:                true,
+    Services:           []string{"REF_ServiceAny"},
+    Sources:             []string{"REF_NetworkAny"},
+    Status:             true,
+}
+
+err := client.PostObject(&pf, sophos.WithRestdInsert("packetfilter.rules", 0), sophos.WithSessionClose)
+```
 ## Generating Types
 
 Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in the [api](api/v1.3.0) which contain structs and helper functions corresponding to UTM API definitions.
@@ -184,6 +200,7 @@ make test
 ```
 
 ## Todo
+- [x] Finish adding all example from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
 - [x] Add [nodes](nodes.go) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
 - [x] Create a wrapper Client for REST objects `client.Get(&nodes)` 
