@@ -39,8 +39,16 @@ type Object interface {
 	GetType() string
 }
 
+// UsedBy represents which Objects and Nodes use this UsedObject
+type UsedBy struct {
+	Nodes   []Reference
+	Objects []Reference
+	d       UsedObject
+}
+
 // UsedObject is an interface for Objects that can be used by other Objects and Nodes.
 type UsedObject interface {
+	RestGetter
 	// UsedByPath returns the usedby URL path to query for UsedBy data
 	UsedByPath(ref string) string
 }

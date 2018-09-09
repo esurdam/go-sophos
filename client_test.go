@@ -302,6 +302,29 @@ func TestClient_Do(t *testing.T) {
 	}
 }
 
+func TestClient_GetUsedBy(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var dhcp dhcpServerMock
+	_, err := client.GetUsedBy(&dhcp)
+	if err == nil {
+		t.Error("should have error since no REF")
+	}
+
+	dhcp.Reference = "REF_abc"
+	_, err = client.GetUsedBy(&dhcp)
+	if err != nil {
+		t.Error("should not have error since has REF")
+	}
+
+	dhcp.Reference = "REF_abc"
+	_, err = client.GetUsedBy(&dhcp, errOption)
+	if err == nil {
+		t.Error("should have error since errOption")
+	}
+}
+
 // dnsMock is a generated struct representing the Sophos dnsMock Endpoint
 // GET /api/nodes/dns
 type dnsMock struct {

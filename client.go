@@ -242,3 +242,18 @@ func (c Client) DeleteObject(o RestObject, options ...Option) error {
 	_, err := c.Delete(o.DeletePath(ref), options...)
 	return err
 }
+
+// GetUsedBy GETs the Objects UsedBy data
+func (c Client) GetUsedBy(o UsedObject, options ...Option) (*UsedBy, error) {
+	ref, required := o.RefRequired()
+	if required && ref == "" {
+		return nil, ErrRefRequired
+	}
+	var usedBy UsedBy
+	resp, err := c.Get(o.UsedByPath(ref), options...)
+	if err != nil {
+		return nil, err
+	}
+	err = resp.MarshalTo(&usedBy)
+	return &usedBy, err
+}
