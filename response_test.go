@@ -31,3 +31,40 @@ func TestResponse_MarshalTo(t *testing.T) {
 		t.Errorf("wanted test@test.com, got %s", dns.Email)
 	}
 }
+
+func TestResponse_Errors(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	r := httptest.NewRecorder()
+	byt, _ := json.Marshal(sophos.Errors{{
+		Oattrs: []string{
+			"class",
+			"type",
+		},
+		Class:     "packetfilter",
+		Fatal:     1,
+		Format:    "The %_O object requires %_d for the %_A attribute.",
+		Msgtype:   "DATATYPE_OBJECT_ATTRIBUTE",
+		Name:      "The group object requires a Perl array for the members list attribute.",
+		NeverHide: 0,
+		Type:      "group",
+	}})
+
+	r.Body.Write(byt)
+	res := sophos.Response{r.Result()}
+	errs := res.Errors()
+	if len(errs) != 1 {
+		t.Error("TestResponse_Errors should have returned Error")
+		return
+	}
+	if !errs.IsFatal() {
+		t.Error("TestResponse_Errors should be fatal")
+	}
+	if !errs[0].IsFatal() {
+		t.Error("TestResponse_Errors should be fatal")
+	}
+	if errs[0].Msgtype != "DATATYPE_OBJECT_ATTRIBUTE" {
+		t.Error("TestResponse_Errors should have MsgType DATATYPE_OBJECT_ATTRIBUTE")
+	}
+}

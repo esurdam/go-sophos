@@ -240,6 +240,7 @@ make test
 ```
 
 ## Todo
+- [ ] Respond with Errors to ObjectClient functions for caller inspection
 - [x] Finish adding all example from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
 - [x] Add [nodes](nodes.go) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
