@@ -292,7 +292,7 @@ func TestClient_Do(t *testing.T) {
 
 	_, err = client.Do("GET", "/api/error", nil)
 	if err == nil {
-		t.Error("should have error since bad client")
+		t.Error("should have error due to bad response code")
 	}
 
 	sophos.DefaultHTTPClient = faceClient{}
