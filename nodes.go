@@ -20,8 +20,8 @@ type Endpoint interface {
 // a dot “.” to separate different nodes. Nodes reference objects, for example “Shell Access” and have a
 // leaf node of allowed_networks which is an array of references to network objects.
 type Node interface {
-	Get(c ClientInterface) error
-	Update(c ClientInterface) error
+	Get(c ClientInterface, oo ...Option) error
+	Update(c ClientInterface, oo ...Option) error
 }
 
 // An Object resides in collections, which you can create, change, or delete. The collections of objects are

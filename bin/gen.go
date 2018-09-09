@@ -188,32 +188,27 @@ var nodeTypeFuncsTemplate = `
 // {{.Name}} represents the {{.Path}} node and implements sophos.Node
 type {{.Name}} struct {	Value {{.Val}} }
 
-// Get is syntactic sugar for Get{{.Name}}
-func({{firstLetter .Name}} *{{.Name}})Get(client sophos.ClientInterface)(err error) {
-	{{firstLetter .Name}}.Value, err = Get{{.Name}}(client)
-	return
+// Get gets the {{.Path}} value from the UTM
+func({{firstLetter .Name}} *{{.Name}})Get(client sophos.ClientInterface, options ...sophos.Option)(err error) {
+	return get(client, "/api/nodes/{{.Path}}", &{{firstLetter .Name}}.Value, options...)
 }
 
 // Update is syntactic sugar for Update{{.Name}}
-func({{firstLetter .Name}} *{{.Name}})Update(client sophos.ClientInterface)(err error) {
-	return Update{{.Name}}(client, {{firstLetter .Name}}.Value)
+func({{firstLetter .Name}} *{{.Name}})Update(client sophos.ClientInterface, options ...sophos.Option)(err error) {
+	return put(client, "/api/nodes/{{.Path}}", {{firstLetter .Name}}.Value, options...)
 }
 `
 
 var nodeFuncsTemplate = `
 // Get{{.Name}} gets the {{.Path}} value from the UTM
-func Get{{.Name}}(c sophos.ClientInterface) (val {{.Val}}, err error) { 
-	res, err := c.Get("/api/nodes/{{.Path}}")
-	if err != nil { return val, err }
-	err = res.MarshalTo(&val)
+func Get{{.Name}}(client sophos.ClientInterface, options ...sophos.Option) (val {{.Val}}, err error) { 
+	err = get(client, "/api/nodes/{{.Path}}", &val, options...)
 	return
 }
 
 // Update{{.Name}} PUTs the {{.Path}} value to the UTM
-func Update{{.Name}}(c sophos.ClientInterface, val {{.Val}}) (err error) { 
-	byt, _ := json.Marshal(val)
-	_, err = c.Put("/api/nodes/{{.Path}}", bytes.NewReader(byt))
-	return
+func Update{{.Name}}(client sophos.ClientInterface, val {{.Val}}, options ...sophos.Option) (err error) { 
+	return put(client, "/api/nodes/{{.Path}}", val, options...)
 }
 `
 
@@ -284,6 +279,22 @@ func handleNodesNode() error {
 	}
 
 	f.Write([]byte(nodesHeader))
+	f.Write([]byte(`
+func get(c sophos.ClientInterface, path string, val interface{}, options ...sophos.Option) (err error) {
+	res, err := c.Get(path, options...)
+	if err != nil {
+		return err
+	}
+	err = res.MarshalTo(val)
+	return
+}
+
+func put(c sophos.ClientInterface, path string, val interface{}, options ...sophos.Option) (err error) {
+	byt, _ := json.Marshal(val)
+	_, err = c.Put(path, bytes.NewReader(byt), options...)
+	return
+}
+`))
 
 	for _, key := range keys {
 		value := nodes[key]

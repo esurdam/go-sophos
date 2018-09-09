@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.com/esurdam/go-sophos.svg?branch=master)](https://travis-ci.com/esurdam/go-sophos)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/esurdam/go-sophos/blob/master/LICENSE)
 
-A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go. 
+A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go with zero dependencies. 
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ The Sophos UTM REST API must be enabled in Administrator settings.
 
 Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en).
 
-Api types and functions are [generated](#generating-types) and versioned against UTM's declared Restd version.
+API types and functions are [generated](#generating-types) and versioned against UTM's declared Restd version.
 
 ## Usage
 
