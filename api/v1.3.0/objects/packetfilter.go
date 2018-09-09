@@ -51,6 +51,8 @@ type Packetfilter struct {
 	} `json:"timeouts"`
 }
 
+var _ sophos.Endpoint = &Packetfilter{}
+
 var defsPacketfilter = map[string]sophos.RestObject{
 	"Packetfilter1to1Nat":      &Packetfilter1to1Nat{},
 	"PacketfilterGenericProxy": &PacketfilterGenericProxy{},
@@ -129,6 +131,8 @@ func (Packetfilter) References() []string {
 // Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
 type Packetfilter1to1Nat []interface{}
 
+var _ sophos.RestObject = &Packetfilter1to1Nat{}
+
 // GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
 // Returns all available packetfilter/1to1nat objects
 func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
@@ -160,7 +164,7 @@ func (*Packetfilter1to1Nat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*Packetfilter1to1Nat) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s/usedby", ref)
@@ -168,6 +172,8 @@ func (*Packetfilter1to1Nat) UsedByPath(ref string) string {
 
 // PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGenericProxy []interface{}
+
+var _ sophos.RestObject = &PacketfilterGenericProxy{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterGenericProxy GET path
 // Returns all available packetfilter/generic_proxy objects
@@ -200,7 +206,7 @@ func (*PacketfilterGenericProxy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterGenericProxy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s/usedby", ref)
@@ -208,6 +214,8 @@ func (*PacketfilterGenericProxy) UsedByPath(ref string) string {
 
 // PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterGroup []interface{}
+
+var _ sophos.RestObject = &PacketfilterGroup{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
 // Returns all available packetfilter/group objects
@@ -240,7 +248,7 @@ func (*PacketfilterGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/group/%s/usedby", ref)
@@ -248,6 +256,8 @@ func (*PacketfilterGroup) UsedByPath(ref string) string {
 
 // PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterLoadbalance []interface{}
+
+var _ sophos.RestObject = &PacketfilterLoadbalance{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
 // Returns all available packetfilter/loadbalance objects
@@ -280,7 +290,7 @@ func (*PacketfilterLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterLoadbalance) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s/usedby", ref)
@@ -288,6 +298,8 @@ func (*PacketfilterLoadbalance) UsedByPath(ref string) string {
 
 // PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterMangle []interface{}
+
+var _ sophos.RestObject = &PacketfilterMangle{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
 // Returns all available packetfilter/mangle objects
@@ -320,7 +332,7 @@ func (*PacketfilterMangle) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterMangle) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s/usedby", ref)
@@ -342,6 +354,8 @@ type PacketfilterMasq struct {
 	SourceNatInterface       string `json:"source_nat_interface"`
 	Status                   bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &PacketfilterMasq{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterMasqs GET path
 // Returns all available packetfilter/masq objects
@@ -383,7 +397,7 @@ func (*PacketfilterMasq) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/masq/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterMasq) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/masq/%s/usedby", ref)
@@ -417,6 +431,8 @@ type PacketfilterNat struct {
 	SourceNatService      string `json:"source_nat_service"`
 	Status                bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &PacketfilterNat{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterNats GET path
 // Returns all available packetfilter/nat objects
@@ -458,7 +474,7 @@ func (*PacketfilterNat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/nat/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterNat) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/nat/%s/usedby", ref)
@@ -491,6 +507,8 @@ type PacketfilterPacketfilter struct {
 	Status             bool     `json:"status"`
 	Time               string   `json:"time"`
 }
+
+var _ sophos.RestGetter = &PacketfilterPacketfilter{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterPacketfilters GET path
 // Returns all available packetfilter/packetfilter objects
@@ -532,7 +550,7 @@ func (*PacketfilterPacketfilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/packetfilter/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterPacketfilter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/packetfilter/%s/usedby", ref)
@@ -543,6 +561,8 @@ func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
 // PacketfilterRuleset is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterRuleset []interface{}
+
+var _ sophos.RestObject = &PacketfilterRuleset{}
 
 // GetPath implements sophos.RestObject and returns the PacketfilterRuleset GET path
 // Returns all available packetfilter/ruleset objects
@@ -575,7 +595,7 @@ func (*PacketfilterRuleset) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*PacketfilterRuleset) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s/usedby", ref)

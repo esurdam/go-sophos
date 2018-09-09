@@ -14,6 +14,8 @@ type Scheduler struct {
 	SchedulerRule        SchedulerRule        `json:"scheduler_rule"`
 }
 
+var _ sophos.Endpoint = &Scheduler{}
+
 var defsScheduler = map[string]sophos.RestObject{
 	"SchedulerGroup":       &SchedulerGroup{},
 	"SchedulerLoadbalance": &SchedulerLoadbalance{},
@@ -62,6 +64,8 @@ func (Scheduler) References() []string {
 // SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerGroup []interface{}
 
+var _ sophos.RestObject = &SchedulerGroup{}
+
 // GetPath implements sophos.RestObject and returns the SchedulerGroup GET path
 // Returns all available scheduler/group objects
 func (*SchedulerGroup) GetPath() string { return "/api/objects/scheduler/group/" }
@@ -93,7 +97,7 @@ func (*SchedulerGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/group/%s/usedby", ref)
@@ -122,6 +126,8 @@ type SchedulerLoadbalance struct {
 	PersistenceTime int64         `json:"persistence_time"`
 	Weight          struct{}      `json:"weight"`
 }
+
+var _ sophos.RestGetter = &SchedulerLoadbalance{}
 
 // GetPath implements sophos.RestObject and returns the SchedulerLoadbalances GET path
 // Returns all available scheduler/loadbalance objects
@@ -163,7 +169,7 @@ func (*SchedulerLoadbalance) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerLoadbalance) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/loadbalance/%s/usedby", ref)
@@ -192,6 +198,8 @@ type SchedulerRule struct {
 	Source          string `json:"source"`
 	Status          bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &SchedulerRule{}
 
 // GetPath implements sophos.RestObject and returns the SchedulerRules GET path
 // Returns all available scheduler/rule objects
@@ -233,7 +241,7 @@ func (*SchedulerRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SchedulerRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/scheduler/rule/%s/usedby", ref)

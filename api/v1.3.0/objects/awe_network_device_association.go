@@ -13,6 +13,8 @@ type AweNetworkDeviceAssociation struct {
 	AweNetworkDeviceAssociationMeshRole AweNetworkDeviceAssociationMeshRole `json:"awe_network_device_association_mesh_role"`
 }
 
+var _ sophos.Endpoint = &AweNetworkDeviceAssociation{}
+
 var defsAweNetworkDeviceAssociation = map[string]sophos.RestObject{
 	"AweNetworkDeviceAssociationGroup":    &AweNetworkDeviceAssociationGroup{},
 	"AweNetworkDeviceAssociationMeshRole": &AweNetworkDeviceAssociationMeshRole{},
@@ -62,6 +64,8 @@ func (AweNetworkDeviceAssociation) References() []string {
 // AweNetworkDeviceAssociationGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AweNetworkDeviceAssociationGroup []interface{}
 
+var _ sophos.RestObject = &AweNetworkDeviceAssociationGroup{}
+
 // GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationGroup GET path
 // Returns all available awe_network_device_association/group objects
 func (*AweNetworkDeviceAssociationGroup) GetPath() string {
@@ -95,7 +99,7 @@ func (*AweNetworkDeviceAssociationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweNetworkDeviceAssociationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s/usedby", ref)
@@ -103,6 +107,8 @@ func (*AweNetworkDeviceAssociationGroup) UsedByPath(ref string) string {
 
 // AweNetworkDeviceAssociationMeshRole is an Sophos Endpoint subType and implements sophos.RestObject
 type AweNetworkDeviceAssociationMeshRole []interface{}
+
+var _ sophos.RestObject = &AweNetworkDeviceAssociationMeshRole{}
 
 // GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationMeshRole GET path
 // Returns all available awe_network_device_association/mesh_role objects
@@ -137,7 +143,7 @@ func (*AweNetworkDeviceAssociationMeshRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweNetworkDeviceAssociationMeshRole) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s/usedby", ref)

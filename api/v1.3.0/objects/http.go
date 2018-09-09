@@ -106,6 +106,8 @@ type Http struct {
 	UseSxlUrid                            int64         `json:"use_sxl_urid"`
 }
 
+var _ sophos.Endpoint = &Http{}
+
 var defsHttp = map[string]sophos.RestObject{
 	"HttpCffAction":   &HttpCffAction{},
 	"HttpCffProfile":  &HttpCffProfile{},
@@ -249,6 +251,8 @@ type HttpCffAction struct {
 	YahooSafesearch          string        `json:"yahoo_safesearch"`
 }
 
+var _ sophos.RestGetter = &HttpCffAction{}
+
 // GetPath implements sophos.RestObject and returns the HttpCffActions GET path
 // Returns all available http/cff_action objects
 func (*HttpCffActions) GetPath() string { return "/api/objects/http/cff_action/" }
@@ -289,7 +293,7 @@ func (*HttpCffAction) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_action/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpCffAction) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_action/%s/usedby", ref)
@@ -315,6 +319,8 @@ type HttpCffProfile struct {
 	SkipAuth       bool     `json:"skip_auth"`
 	TimeEvent      string   `json:"time_event"`
 }
+
+var _ sophos.RestGetter = &HttpCffProfile{}
 
 // GetPath implements sophos.RestObject and returns the HttpCffProfiles GET path
 // Returns all available http/cff_profile objects
@@ -356,7 +362,7 @@ func (*HttpCffProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpCffProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/cff_profile/%s/usedby", ref)
@@ -367,6 +373,8 @@ func (h *HttpCffProfile) GetType() string { return h._type }
 
 // HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpDeviceAuth []interface{}
+
+var _ sophos.RestObject = &HttpDeviceAuth{}
 
 // GetPath implements sophos.RestObject and returns the HttpDeviceAuth GET path
 // Returns all available http/device_auth objects
@@ -399,7 +407,7 @@ func (*HttpDeviceAuth) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/device_auth/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpDeviceAuth) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/device_auth/%s/usedby", ref)
@@ -407,6 +415,8 @@ func (*HttpDeviceAuth) UsedByPath(ref string) string {
 
 // HttpDomainRegex is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpDomainRegex []interface{}
+
+var _ sophos.RestObject = &HttpDomainRegex{}
 
 // GetPath implements sophos.RestObject and returns the HttpDomainRegex GET path
 // Returns all available http/domain_regex objects
@@ -439,7 +449,7 @@ func (*HttpDomainRegex) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/domain_regex/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpDomainRegex) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/domain_regex/%s/usedby", ref)
@@ -466,6 +476,8 @@ type HttpException struct {
 	Tags            []interface{} `json:"tags"`
 	UserAgents      []interface{} `json:"user_agents"`
 }
+
+var _ sophos.RestGetter = &HttpException{}
 
 // GetPath implements sophos.RestObject and returns the HttpExceptions GET path
 // Returns all available http/exception objects
@@ -507,7 +519,7 @@ func (*HttpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/exception/%s/usedby", ref)
@@ -518,6 +530,8 @@ func (h *HttpException) GetType() string { return h._type }
 
 // HttpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpGroup []interface{}
+
+var _ sophos.RestObject = &HttpGroup{}
 
 // GetPath implements sophos.RestObject and returns the HttpGroup GET path
 // Returns all available http/group objects
@@ -550,7 +564,7 @@ func (*HttpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/group/%s/usedby", ref)
@@ -558,6 +572,8 @@ func (*HttpGroup) UsedByPath(ref string) string {
 
 // HttpLocalSite is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpLocalSite []interface{}
+
+var _ sophos.RestObject = &HttpLocalSite{}
 
 // GetPath implements sophos.RestObject and returns the HttpLocalSite GET path
 // Returns all available http/local_site objects
@@ -590,7 +606,7 @@ func (*HttpLocalSite) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/local_site/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpLocalSite) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/local_site/%s/usedby", ref)
@@ -598,6 +614,8 @@ func (*HttpLocalSite) UsedByPath(ref string) string {
 
 // HttpLslTag is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpLslTag []interface{}
+
+var _ sophos.RestObject = &HttpLslTag{}
 
 // GetPath implements sophos.RestObject and returns the HttpLslTag GET path
 // Returns all available http/lsl_tag objects
@@ -630,7 +648,7 @@ func (*HttpLslTag) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/lsl_tag/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpLslTag) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/lsl_tag/%s/usedby", ref)
@@ -649,6 +667,8 @@ type HttpPacFile struct {
 	Name      string `json:"name"`
 	Status    bool   `json:"status"`
 }
+
+var _ sophos.RestGetter = &HttpPacFile{}
 
 // GetPath implements sophos.RestObject and returns the HttpPacFiles GET path
 // Returns all available http/pac_file objects
@@ -690,7 +710,7 @@ func (*HttpPacFile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/pac_file/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpPacFile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/pac_file/%s/usedby", ref)
@@ -701,6 +721,8 @@ func (h *HttpPacFile) GetType() string { return h._type }
 
 // HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpParentProxy []interface{}
+
+var _ sophos.RestObject = &HttpParentProxy{}
 
 // GetPath implements sophos.RestObject and returns the HttpParentProxy GET path
 // Returns all available http/parent_proxy objects
@@ -733,7 +755,7 @@ func (*HttpParentProxy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpParentProxy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/parent_proxy/%s/usedby", ref)
@@ -772,6 +794,8 @@ type HttpProfile struct {
 	TransparentAac     bool          `json:"transparent_aac"`
 	TransparentAuth    bool          `json:"transparent_auth"`
 }
+
+var _ sophos.RestGetter = &HttpProfile{}
 
 // GetPath implements sophos.RestObject and returns the HttpProfiles GET path
 // Returns all available http/profile objects
@@ -813,7 +837,7 @@ func (*HttpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/profile/%s/usedby", ref)
@@ -835,6 +859,8 @@ type HttpSpCategory struct {
 	Name      string   `json:"name"`
 	Subcats   []string `json:"subcats"`
 }
+
+var _ sophos.RestGetter = &HttpSpCategory{}
 
 // GetPath implements sophos.RestObject and returns the HttpSpCategorys GET path
 // Returns all available http/sp_category objects
@@ -876,7 +902,7 @@ func (*HttpSpCategory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_category/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpSpCategory) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_category/%s/usedby", ref)
@@ -897,6 +923,8 @@ type HttpSpSubcat struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
 }
+
+var _ sophos.RestGetter = &HttpSpSubcat{}
 
 // GetPath implements sophos.RestObject and returns the HttpSpSubcats GET path
 // Returns all available http/sp_subcat objects
@@ -938,7 +966,7 @@ func (*HttpSpSubcat) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_subcat/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HttpSpSubcat) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/sp_subcat/%s/usedby", ref)

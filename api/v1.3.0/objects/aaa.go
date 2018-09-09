@@ -13,6 +13,8 @@ type Aaa struct {
 	AaaUser  AaaUser  `json:"aaa_user"`
 }
 
+var _ sophos.Endpoint = &Aaa{}
+
 var defsAaa = map[string]sophos.RestObject{
 	"AaaGroup": &AaaGroup{},
 	"AaaUser":  &AaaUser{},
@@ -77,6 +79,8 @@ type AaaGroup struct {
 	TacacsGroups         []interface{} `json:"tacacs_groups"`
 }
 
+var _ sophos.RestGetter = &AaaGroup{}
+
 // GetPath implements sophos.RestObject and returns the AaaGroups GET path
 // Returns all available aaa/group objects
 func (*AaaGroups) GetPath() string { return "/api/objects/aaa/group/" }
@@ -115,7 +119,7 @@ func (*AaaGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AaaGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/group/%s/usedby", ref)
@@ -161,6 +165,8 @@ type AaaUser struct {
 	X509CertGost     string        `json:"x509_cert_gost"`
 }
 
+var _ sophos.RestGetter = &AaaUser{}
+
 // GetPath implements sophos.RestObject and returns the AaaUsers GET path
 // Returns all available aaa/user objects
 func (*AaaUsers) GetPath() string { return "/api/objects/aaa/user/" }
@@ -199,7 +205,7 @@ func (*AaaUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/user/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AaaUser) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aaa/user/%s/usedby", ref)

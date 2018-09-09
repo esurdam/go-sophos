@@ -26,6 +26,8 @@ type SslVpn struct {
 	UserAuthOptional        int64  `json:"user_auth_optional"`
 }
 
+var _ sophos.Endpoint = &SslVpn{}
+
 var defsSslVpn = map[string]sophos.RestObject{
 	"SslVpnClientConnection":    &SslVpnClientConnection{},
 	"SslVpnGroup":               &SslVpnGroup{},
@@ -117,6 +119,8 @@ type SslVpnClientConnection struct {
 	Username                string   `json:"username"`
 }
 
+var _ sophos.RestGetter = &SslVpnClientConnection{}
+
 // GetPath implements sophos.RestObject and returns the SslVpnClientConnections GET path
 // Returns all available ssl_vpn/client_connection objects
 func (*SslVpnClientConnections) GetPath() string { return "/api/objects/ssl_vpn/client_connection/" }
@@ -157,7 +161,7 @@ func (*SslVpnClientConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/client_connection/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SslVpnClientConnection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/client_connection/%s/usedby", ref)
@@ -168,6 +172,8 @@ func (s *SslVpnClientConnection) GetType() string { return s._type }
 
 // SslVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnGroup []interface{}
+
+var _ sophos.RestObject = &SslVpnGroup{}
 
 // GetPath implements sophos.RestObject and returns the SslVpnGroup GET path
 // Returns all available ssl_vpn/group objects
@@ -200,7 +206,7 @@ func (*SslVpnGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SslVpnGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s/usedby", ref)
@@ -222,6 +228,8 @@ type SslVpnRemoteAccessProfile struct {
 	Networks   []string `json:"networks"`
 	Status     bool     `json:"status"`
 }
+
+var _ sophos.RestGetter = &SslVpnRemoteAccessProfile{}
 
 // GetPath implements sophos.RestObject and returns the SslVpnRemoteAccessProfiles GET path
 // Returns all available ssl_vpn/remote_access_profile objects
@@ -265,7 +273,7 @@ func (*SslVpnRemoteAccessProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/remote_access_profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SslVpnRemoteAccessProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/remote_access_profile/%s/usedby", ref)
@@ -276,6 +284,8 @@ func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
 
 // SslVpnServerConnection is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnServerConnection []interface{}
+
+var _ sophos.RestObject = &SslVpnServerConnection{}
 
 // GetPath implements sophos.RestObject and returns the SslVpnServerConnection GET path
 // Returns all available ssl_vpn/server_connection objects
@@ -308,7 +318,7 @@ func (*SslVpnServerConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/server_connection/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SslVpnServerConnection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ssl_vpn/server_connection/%s/usedby", ref)

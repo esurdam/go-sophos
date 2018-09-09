@@ -45,6 +45,8 @@ type Ips struct {
 	Status     int64         `json:"status"`
 }
 
+var _ sophos.Endpoint = &Ips{}
+
 var defsIps = map[string]sophos.RestObject{
 	"IpsException":    &IpsException{},
 	"IpsGroup":        &IpsGroup{},
@@ -113,6 +115,8 @@ type IpsException struct {
 	Status              bool     `json:"status"`
 }
 
+var _ sophos.RestGetter = &IpsException{}
+
 // GetPath implements sophos.RestObject and returns the IpsExceptions GET path
 // Returns all available ips/exception objects
 func (*IpsExceptions) GetPath() string { return "/api/objects/ips/exception/" }
@@ -153,7 +157,7 @@ func (*IpsException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/exception/%s/usedby", ref)
@@ -180,6 +184,8 @@ type IpsGroup struct {
 	Subgroups    []string `json:"subgroups"`
 	Warnings     bool     `json:"warnings"`
 }
+
+var _ sophos.RestGetter = &IpsGroup{}
 
 // GetPath implements sophos.RestObject and returns the IpsGroups GET path
 // Returns all available ips/group objects
@@ -219,7 +225,7 @@ func (*IpsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/group/%s/usedby", ref)
@@ -230,6 +236,8 @@ func (i *IpsGroup) GetType() string { return i._type }
 
 // IpsRule is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsRule []interface{}
+
+var _ sophos.RestObject = &IpsRule{}
 
 // GetPath implements sophos.RestObject and returns the IpsRule GET path
 // Returns all available ips/rule objects
@@ -262,7 +270,7 @@ func (*IpsRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule/%s/usedby", ref)
@@ -270,6 +278,8 @@ func (*IpsRule) UsedByPath(ref string) string {
 
 // IpsRuleModifier is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsRuleModifier []interface{}
+
+var _ sophos.RestObject = &IpsRuleModifier{}
 
 // GetPath implements sophos.RestObject and returns the IpsRuleModifier GET path
 // Returns all available ips/rule_modifier objects
@@ -302,7 +312,7 @@ func (*IpsRuleModifier) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsRuleModifier) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s/usedby", ref)

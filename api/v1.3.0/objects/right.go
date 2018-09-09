@@ -13,6 +13,8 @@ type Right struct {
 	RightRight RightRight `json:"right_right"`
 }
 
+var _ sophos.Endpoint = &Right{}
+
 var defsRight = map[string]sophos.RestObject{
 	"RightGroup": &RightGroup{},
 	"RightRight": &RightRight{},
@@ -56,6 +58,8 @@ func (Right) References() []string {
 // RightGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type RightGroup []interface{}
 
+var _ sophos.RestObject = &RightGroup{}
+
 // GetPath implements sophos.RestObject and returns the RightGroup GET path
 // Returns all available right/group objects
 func (*RightGroup) GetPath() string { return "/api/objects/right/group/" }
@@ -87,7 +91,7 @@ func (*RightGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RightGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/group/%s/usedby", ref)
@@ -104,6 +108,8 @@ type RightRight struct {
 	Comment   string `json:"comment"`
 	Name      string `json:"name"`
 }
+
+var _ sophos.RestGetter = &RightRight{}
 
 // GetPath implements sophos.RestObject and returns the RightRights GET path
 // Returns all available right/right objects
@@ -143,7 +149,7 @@ func (*RightRight) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/right/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RightRight) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/right/right/%s/usedby", ref)

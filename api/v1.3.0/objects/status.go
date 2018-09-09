@@ -12,6 +12,8 @@ type Status struct {
 	StatusVersion StatusVersion `json:"Status_status"`
 }
 
+var _ sophos.Endpoint = &Status{}
+
 var defsStatus = map[string]sophos.RestObject{
 	"StatusVersion": &StatusVersion{},
 }
@@ -49,6 +51,8 @@ type StatusVersion struct {
 	Utm   string `json:"utm"`
 }
 
+var _ sophos.RestObject = &StatusVersion{}
+
 // GetPath implements sophos.RestObject and returns the StatusVersion GET path
 // Returns some version numbers of the UTM software
 func (*StatusVersion) GetPath() string { return "/api/status/version" }
@@ -76,7 +80,7 @@ func (*StatusVersion) PutPath(ref string) string {
 	return fmt.Sprintf("/api", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 func (*StatusVersion) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/usedby", ref)
 }

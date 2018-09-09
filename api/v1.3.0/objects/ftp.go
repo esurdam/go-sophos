@@ -24,6 +24,8 @@ type Ftp struct {
 	TransparentSkipAutoPf int64         `json:"transparent_skip_auto_pf"`
 }
 
+var _ sophos.Endpoint = &Ftp{}
+
 var defsFtp = map[string]sophos.RestObject{
 	"FtpException": &FtpException{},
 	"FtpGroup":     &FtpGroup{},
@@ -67,6 +69,8 @@ func (Ftp) References() []string {
 // FtpException is an Sophos Endpoint subType and implements sophos.RestObject
 type FtpException []interface{}
 
+var _ sophos.RestObject = &FtpException{}
+
 // GetPath implements sophos.RestObject and returns the FtpException GET path
 // Returns all available ftp/exception objects
 func (*FtpException) GetPath() string { return "/api/objects/ftp/exception/" }
@@ -98,7 +102,7 @@ func (*FtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*FtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s/usedby", ref)
@@ -106,6 +110,8 @@ func (*FtpException) UsedByPath(ref string) string {
 
 // FtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type FtpGroup []interface{}
+
+var _ sophos.RestObject = &FtpGroup{}
 
 // GetPath implements sophos.RestObject and returns the FtpGroup GET path
 // Returns all available ftp/group objects
@@ -138,7 +144,7 @@ func (*FtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*FtpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/group/%s/usedby", ref)

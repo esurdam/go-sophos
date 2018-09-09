@@ -33,6 +33,8 @@ type Awe struct {
 	Networks []string `json:"networks"`
 }
 
+var _ sophos.Endpoint = &Awe{}
+
 var defsAwe = map[string]sophos.RestObject{
 	"AweClient": &AweClient{},
 	"AweDevice": &AweDevice{},
@@ -91,6 +93,8 @@ func (Awe) References() []string {
 // AweClient is an Sophos Endpoint subType and implements sophos.RestObject
 type AweClient []interface{}
 
+var _ sophos.RestObject = &AweClient{}
+
 // GetPath implements sophos.RestObject and returns the AweClient GET path
 // Returns all available awe/client objects
 func (*AweClient) GetPath() string { return "/api/objects/awe/client/" }
@@ -122,7 +126,7 @@ func (*AweClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/client/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweClient) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/client/%s/usedby", ref)
@@ -130,6 +134,8 @@ func (*AweClient) UsedByPath(ref string) string {
 
 // AweDevice is an Sophos Endpoint subType and implements sophos.RestObject
 type AweDevice []interface{}
+
+var _ sophos.RestObject = &AweDevice{}
 
 // GetPath implements sophos.RestObject and returns the AweDevice GET path
 // Returns all available awe/device objects
@@ -162,7 +168,7 @@ func (*AweDevice) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/device/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweDevice) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/device/%s/usedby", ref)
@@ -170,6 +176,8 @@ func (*AweDevice) UsedByPath(ref string) string {
 
 // AweGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AweGroup []interface{}
+
+var _ sophos.RestObject = &AweGroup{}
 
 // GetPath implements sophos.RestObject and returns the AweGroup GET path
 // Returns all available awe/group objects
@@ -202,7 +210,7 @@ func (*AweGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/group/%s/usedby", ref)
@@ -210,6 +218,8 @@ func (*AweGroup) UsedByPath(ref string) string {
 
 // AweLocal is an Sophos Endpoint subType and implements sophos.RestObject
 type AweLocal []interface{}
+
+var _ sophos.RestObject = &AweLocal{}
 
 // GetPath implements sophos.RestObject and returns the AweLocal GET path
 // Returns all available awe/local objects
@@ -242,7 +252,7 @@ func (*AweLocal) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/local/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweLocal) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/local/%s/usedby", ref)
@@ -250,6 +260,8 @@ func (*AweLocal) UsedByPath(ref string) string {
 
 // AweRed is an Sophos Endpoint subType and implements sophos.RestObject
 type AweRed []interface{}
+
+var _ sophos.RestObject = &AweRed{}
 
 // GetPath implements sophos.RestObject and returns the AweRed GET path
 // Returns all available awe/red objects
@@ -282,7 +294,7 @@ func (*AweRed) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/red/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AweRed) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/red/%s/usedby", ref)

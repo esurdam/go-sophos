@@ -19,6 +19,8 @@ type IpsecConnection struct {
 	IpsecConnectionSiteToSite       IpsecConnectionSiteToSite       `json:"ipsec_connection_site_to_site"`
 }
 
+var _ sophos.Endpoint = &IpsecConnection{}
+
 var defsIpsecConnection = map[string]sophos.RestObject{
 	"IpsecConnectionAmazonVpc":        &IpsecConnectionAmazonVpc{},
 	"IpsecConnectionGroup":            &IpsecConnectionGroup{},
@@ -105,6 +107,8 @@ type IpsecConnectionAmazonVpc struct {
 	Remote         string `json:"remote"`
 }
 
+var _ sophos.RestGetter = &IpsecConnectionAmazonVpc{}
+
 // GetPath implements sophos.RestObject and returns the IpsecConnectionAmazonVpcs GET path
 // Returns all available ipsec_connection/amazon_vpc objects
 func (*IpsecConnectionAmazonVpcs) GetPath() string { return "/api/objects/ipsec_connection/amazon_vpc/" }
@@ -145,7 +149,7 @@ func (*IpsecConnectionAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionAmazonVpc) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/amazon_vpc/%s/usedby", ref)
@@ -156,6 +160,8 @@ func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
 
 // IpsecConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionGroup []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionGroup{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionGroup GET path
 // Returns all available ipsec_connection/group objects
@@ -188,7 +194,7 @@ func (*IpsecConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s/usedby", ref)
@@ -220,6 +226,8 @@ type IpsecConnectionL2Tp struct {
 	Status                    bool     `json:"status"`
 	Users                     []string `json:"users"`
 }
+
+var _ sophos.RestGetter = &IpsecConnectionL2Tp{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionL2Tps GET path
 // Returns all available ipsec_connection/l2tp objects
@@ -261,7 +269,7 @@ func (*IpsecConnectionL2Tp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionL2Tp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/l2tp/%s/usedby", ref)
@@ -272,6 +280,8 @@ func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 
 // IpsecConnectionRoadwarriorCa is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCa []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorCa{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCa GET path
 // Returns all available ipsec_connection/roadwarrior_ca objects
@@ -306,7 +316,7 @@ func (*IpsecConnectionRoadwarriorCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s/usedby", ref)
@@ -314,6 +324,8 @@ func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
 
 // IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorCisco []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorCisco{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
 // Returns all available ipsec_connection/roadwarrior_cisco objects
@@ -348,7 +360,7 @@ func (*IpsecConnectionRoadwarriorCisco) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s/usedby", ref)
@@ -356,6 +368,8 @@ func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
 
 // IpsecConnectionRoadwarriorPsk is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorPsk []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorPsk{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsk GET path
 // Returns all available ipsec_connection/roadwarrior_psk objects
@@ -390,7 +404,7 @@ func (*IpsecConnectionRoadwarriorPsk) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s/usedby", ref)
@@ -398,6 +412,8 @@ func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
 
 // IpsecConnectionRoadwarriorX509 is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecConnectionRoadwarriorX509 []interface{}
+
+var _ sophos.RestObject = &IpsecConnectionRoadwarriorX509{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509 GET path
 // Returns all available ipsec_connection/roadwarrior_x509 objects
@@ -432,7 +448,7 @@ func (*IpsecConnectionRoadwarriorX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionRoadwarriorX509) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s/usedby", ref)
@@ -459,6 +475,8 @@ type IpsecConnectionSiteToSite struct {
 	Status        bool     `json:"status"`
 	StrictRouting bool     `json:"strict_routing"`
 }
+
+var _ sophos.RestGetter = &IpsecConnectionSiteToSite{}
 
 // GetPath implements sophos.RestObject and returns the IpsecConnectionSiteToSites GET path
 // Returns all available ipsec_connection/site_to_site objects
@@ -502,7 +520,7 @@ func (*IpsecConnectionSiteToSite) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecConnectionSiteToSite) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/site_to_site/%s/usedby", ref)

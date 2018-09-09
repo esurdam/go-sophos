@@ -17,6 +17,8 @@ type Bgp struct {
 	BgpSystem    BgpSystem    `json:"bgp_system"`
 }
 
+var _ sophos.Endpoint = &Bgp{}
+
 var defsBgp = map[string]sophos.RestObject{
 	"BgpAmazonVpc": &BgpAmazonVpc{},
 	"BgpFilter":    &BgpFilter{},
@@ -96,6 +98,8 @@ type BgpAmazonVpc struct {
 	RemoteAsn    int64    `json:"remote_asn"`
 }
 
+var _ sophos.RestGetter = &BgpAmazonVpc{}
+
 // GetPath implements sophos.RestObject and returns the BgpAmazonVpcs GET path
 // Returns all available bgp/amazon_vpc objects
 func (*BgpAmazonVpcs) GetPath() string { return "/api/objects/bgp/amazon_vpc/" }
@@ -136,7 +140,7 @@ func (*BgpAmazonVpc) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpAmazonVpc) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/amazon_vpc/%s/usedby", ref)
@@ -147,6 +151,8 @@ func (b *BgpAmazonVpc) GetType() string { return b._type }
 
 // BgpFilter is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpFilter []interface{}
+
+var _ sophos.RestObject = &BgpFilter{}
 
 // GetPath implements sophos.RestObject and returns the BgpFilter GET path
 // Returns all available bgp/filter objects
@@ -179,7 +185,7 @@ func (*BgpFilter) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpFilter) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/filter/%s/usedby", ref)
@@ -187,6 +193,8 @@ func (*BgpFilter) UsedByPath(ref string) string {
 
 // BgpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpGroup []interface{}
+
+var _ sophos.RestObject = &BgpGroup{}
 
 // GetPath implements sophos.RestObject and returns the BgpGroup GET path
 // Returns all available bgp/group objects
@@ -219,7 +227,7 @@ func (*BgpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/group/%s/usedby", ref)
@@ -227,6 +235,8 @@ func (*BgpGroup) UsedByPath(ref string) string {
 
 // BgpNeighbor is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpNeighbor []interface{}
+
+var _ sophos.RestObject = &BgpNeighbor{}
 
 // GetPath implements sophos.RestObject and returns the BgpNeighbor GET path
 // Returns all available bgp/neighbor objects
@@ -259,7 +269,7 @@ func (*BgpNeighbor) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/neighbor/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpNeighbor) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/neighbor/%s/usedby", ref)
@@ -267,6 +277,8 @@ func (*BgpNeighbor) UsedByPath(ref string) string {
 
 // BgpRouteMap is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpRouteMap []interface{}
+
+var _ sophos.RestObject = &BgpRouteMap{}
 
 // GetPath implements sophos.RestObject and returns the BgpRouteMap GET path
 // Returns all available bgp/route_map objects
@@ -299,7 +311,7 @@ func (*BgpRouteMap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/route_map/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpRouteMap) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/route_map/%s/usedby", ref)
@@ -307,6 +319,8 @@ func (*BgpRouteMap) UsedByPath(ref string) string {
 
 // BgpSystem is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpSystem []interface{}
+
+var _ sophos.RestObject = &BgpSystem{}
 
 // GetPath implements sophos.RestObject and returns the BgpSystem GET path
 // Returns all available bgp/system objects
@@ -339,7 +353,7 @@ func (*BgpSystem) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/system/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*BgpSystem) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/bgp/system/%s/usedby", ref)

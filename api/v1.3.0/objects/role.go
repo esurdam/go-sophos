@@ -13,6 +13,8 @@ type Role struct {
 	RoleRole  RoleRole  `json:"role_role"`
 }
 
+var _ sophos.Endpoint = &Role{}
+
 var defsRole = map[string]sophos.RestObject{
 	"RoleGroup": &RoleGroup{},
 	"RoleRole":  &RoleRole{},
@@ -56,6 +58,8 @@ func (Role) References() []string {
 // RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type RoleGroup []interface{}
 
+var _ sophos.RestObject = &RoleGroup{}
+
 // GetPath implements sophos.RestObject and returns the RoleGroup GET path
 // Returns all available role/group objects
 func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
@@ -87,7 +91,7 @@ func (*RoleGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoleGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s/usedby", ref)
@@ -107,6 +111,8 @@ type RoleRole struct {
 	Rights         []string `json:"rights"`
 	WebadminAccess bool     `json:"webadmin_access"`
 }
+
+var _ sophos.RestGetter = &RoleRole{}
 
 // GetPath implements sophos.RestObject and returns the RoleRoles GET path
 // Returns all available role/role objects
@@ -146,7 +152,7 @@ func (*RoleRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoleRole) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s/usedby", ref)

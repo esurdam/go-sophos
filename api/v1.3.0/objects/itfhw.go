@@ -22,6 +22,8 @@ type Itfhw struct {
 	ItfhwVirtual         ItfhwVirtual         `json:"itfhw_virtual"`
 }
 
+var _ sophos.Endpoint = &Itfhw{}
+
 var defsItfhw = map[string]sophos.RestObject{
 	"ItfhwAweNetwork":      &ItfhwAweNetwork{},
 	"ItfhwAweNetworkGroup": &ItfhwAweNetworkGroup{},
@@ -151,6 +153,8 @@ type ItfhwAweNetwork struct {
 	WepAuthentication string        `json:"wep_authentication"`
 }
 
+var _ sophos.RestGetter = &ItfhwAweNetwork{}
+
 // GetPath implements sophos.RestObject and returns the ItfhwAweNetworks GET path
 // Returns all available itfhw/awe_network objects
 func (*ItfhwAweNetworks) GetPath() string { return "/api/objects/itfhw/awe_network/" }
@@ -191,7 +195,7 @@ func (*ItfhwAweNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwAweNetwork) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network/%s/usedby", ref)
@@ -202,6 +206,8 @@ func (i *ItfhwAweNetwork) GetType() string { return i._type }
 
 // ItfhwAweNetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwAweNetworkGroup []interface{}
+
+var _ sophos.RestObject = &ItfhwAweNetworkGroup{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwAweNetworkGroup GET path
 // Returns all available itfhw/awe_network_group objects
@@ -234,7 +240,7 @@ func (*ItfhwAweNetworkGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwAweNetworkGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s/usedby", ref)
@@ -242,6 +248,8 @@ func (*ItfhwAweNetworkGroup) UsedByPath(ref string) string {
 
 // ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwBridge []interface{}
+
+var _ sophos.RestObject = &ItfhwBridge{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
 // Returns all available itfhw/bridge objects
@@ -274,7 +282,7 @@ func (*ItfhwBridge) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwBridge) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/bridge/%s/usedby", ref)
@@ -307,6 +315,8 @@ type ItfhwEthernet struct {
 	SupportedLinkModes    string `json:"supported_link_modes"`
 	VirtualMac            string `json:"virtual_mac"`
 }
+
+var _ sophos.RestGetter = &ItfhwEthernet{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwEthernets GET path
 // Returns all available itfhw/ethernet objects
@@ -348,7 +358,7 @@ func (*ItfhwEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/ethernet/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwEthernet) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/ethernet/%s/usedby", ref)
@@ -359,6 +369,8 @@ func (i *ItfhwEthernet) GetType() string { return i._type }
 
 // ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwGroup []interface{}
+
+var _ sophos.RestObject = &ItfhwGroup{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
 // Returns all available itfhw/group objects
@@ -391,7 +403,7 @@ func (*ItfhwGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/group/%s/usedby", ref)
@@ -412,6 +424,8 @@ type ItfhwLag struct {
 	Mac            string `json:"mac"`
 	Name           string `json:"name"`
 }
+
+var _ sophos.RestGetter = &ItfhwLag{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwLags GET path
 // Returns all available itfhw/lag objects
@@ -451,7 +465,7 @@ func (*ItfhwLag) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwLag) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/lag/%s/usedby", ref)
@@ -462,6 +476,8 @@ func (i *ItfhwLag) GetType() string { return i._type }
 
 // ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwRedClient []interface{}
+
+var _ sophos.RestObject = &ItfhwRedClient{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwRedClient GET path
 // Returns all available itfhw/red_client objects
@@ -494,7 +510,7 @@ func (*ItfhwRedClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwRedClient) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s/usedby", ref)
@@ -502,6 +518,8 @@ func (*ItfhwRedClient) UsedByPath(ref string) string {
 
 // ItfhwRedServer is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwRedServer []interface{}
+
+var _ sophos.RestObject = &ItfhwRedServer{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwRedServer GET path
 // Returns all available itfhw/red_server objects
@@ -534,7 +552,7 @@ func (*ItfhwRedServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwRedServer) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s/usedby", ref)
@@ -542,6 +560,8 @@ func (*ItfhwRedServer) UsedByPath(ref string) string {
 
 // ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwSerial []interface{}
+
+var _ sophos.RestObject = &ItfhwSerial{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
 // Returns all available itfhw/serial objects
@@ -574,7 +594,7 @@ func (*ItfhwSerial) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwSerial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/serial/%s/usedby", ref)
@@ -582,6 +602,8 @@ func (*ItfhwSerial) UsedByPath(ref string) string {
 
 // ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwUsbserial []interface{}
+
+var _ sophos.RestObject = &ItfhwUsbserial{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
 // Returns all available itfhw/usbserial objects
@@ -614,7 +636,7 @@ func (*ItfhwUsbserial) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwUsbserial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s/usedby", ref)
@@ -622,6 +644,8 @@ func (*ItfhwUsbserial) UsedByPath(ref string) string {
 
 // ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwVirtual []interface{}
+
+var _ sophos.RestObject = &ItfhwVirtual{}
 
 // GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
 // Returns all available itfhw/virtual objects
@@ -654,7 +678,7 @@ func (*ItfhwVirtual) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwVirtual) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/virtual/%s/usedby", ref)

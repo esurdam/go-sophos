@@ -13,6 +13,8 @@ type Notification struct {
 	NotificationNotification NotificationNotification `json:"notification_notification"`
 }
 
+var _ sophos.Endpoint = &Notification{}
+
 var defsNotification = map[string]sophos.RestObject{
 	"NotificationGroup":        &NotificationGroup{},
 	"NotificationNotification": &NotificationNotification{},
@@ -56,6 +58,8 @@ func (Notification) References() []string {
 // NotificationGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type NotificationGroup []interface{}
 
+var _ sophos.RestObject = &NotificationGroup{}
+
 // GetPath implements sophos.RestObject and returns the NotificationGroup GET path
 // Returns all available notification/group objects
 func (*NotificationGroup) GetPath() string { return "/api/objects/notification/group/" }
@@ -87,7 +91,7 @@ func (*NotificationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*NotificationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s/usedby", ref)
@@ -95,6 +99,8 @@ func (*NotificationGroup) UsedByPath(ref string) string {
 
 // NotificationNotification is an Sophos Endpoint subType and implements sophos.RestObject
 type NotificationNotification []interface{}
+
+var _ sophos.RestObject = &NotificationNotification{}
 
 // GetPath implements sophos.RestObject and returns the NotificationNotification GET path
 // Returns all available notification/notification objects
@@ -127,7 +133,7 @@ func (*NotificationNotification) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/notification/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*NotificationNotification) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/notification/%s/usedby", ref)

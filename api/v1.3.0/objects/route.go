@@ -14,6 +14,8 @@ type Route struct {
 	RouteStatic RouteStatic `json:"route_static"`
 }
 
+var _ sophos.Endpoint = &Route{}
+
 var defsRoute = map[string]sophos.RestObject{
 	"RouteGroup":  &RouteGroup{},
 	"RoutePolicy": &RoutePolicy{},
@@ -62,6 +64,8 @@ func (Route) References() []string {
 // RouteGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type RouteGroup []interface{}
 
+var _ sophos.RestObject = &RouteGroup{}
+
 // GetPath implements sophos.RestObject and returns the RouteGroup GET path
 // Returns all available route/group objects
 func (*RouteGroup) GetPath() string { return "/api/objects/route/group/" }
@@ -93,7 +97,7 @@ func (*RouteGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RouteGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s/usedby", ref)
@@ -101,6 +105,8 @@ func (*RouteGroup) UsedByPath(ref string) string {
 
 // RoutePolicy is an Sophos Endpoint subType and implements sophos.RestObject
 type RoutePolicy []interface{}
+
+var _ sophos.RestObject = &RoutePolicy{}
 
 // GetPath implements sophos.RestObject and returns the RoutePolicy GET path
 // Returns all available route/policy objects
@@ -133,7 +139,7 @@ func (*RoutePolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoutePolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/policy/%s/usedby", ref)
@@ -155,6 +161,8 @@ type RouteStatic struct {
 	Target    string `json:"target"`
 	Type      string `json:"type"`
 }
+
+var _ sophos.RestGetter = &RouteStatic{}
 
 // GetPath implements sophos.RestObject and returns the RouteStatics GET path
 // Returns all available route/static objects
@@ -196,7 +204,7 @@ func (*RouteStatic) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RouteStatic) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/static/%s/usedby", ref)

@@ -14,6 +14,8 @@ type Time struct {
 	TimeSingle    TimeSingle    `json:"time_single"`
 }
 
+var _ sophos.Endpoint = &Time{}
+
 var defsTime = map[string]sophos.RestObject{
 	"TimeGroup":     &TimeGroup{},
 	"TimeRecurring": &TimeRecurring{},
@@ -62,6 +64,8 @@ func (Time) References() []string {
 // TimeGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeGroup []interface{}
 
+var _ sophos.RestObject = &TimeGroup{}
+
 // GetPath implements sophos.RestObject and returns the TimeGroup GET path
 // Returns all available time/group objects
 func (*TimeGroup) GetPath() string { return "/api/objects/time/group/" }
@@ -93,7 +97,7 @@ func (*TimeGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*TimeGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/group/%s/usedby", ref)
@@ -113,6 +117,8 @@ type TimeRecurring struct {
 	StartTime string   `json:"start_time"`
 	Weekdays  []string `json:"weekdays"`
 }
+
+var _ sophos.RestGetter = &TimeRecurring{}
 
 // GetPath implements sophos.RestObject and returns the TimeRecurrings GET path
 // Returns all available time/recurring objects
@@ -154,7 +160,7 @@ func (*TimeRecurring) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/recurring/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*TimeRecurring) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/recurring/%s/usedby", ref)
@@ -165,6 +171,8 @@ func (t *TimeRecurring) GetType() string { return t._type }
 
 // TimeSingle is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeSingle []interface{}
+
+var _ sophos.RestObject = &TimeSingle{}
 
 // GetPath implements sophos.RestObject and returns the TimeSingle GET path
 // Returns all available time/single objects
@@ -197,7 +205,7 @@ func (*TimeSingle) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/single/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*TimeSingle) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/time/single/%s/usedby", ref)

@@ -20,6 +20,8 @@ type Interface struct {
 	InterfaceVlan     InterfaceVlan     `json:"interface_vlan"`
 }
 
+var _ sophos.Endpoint = &Interface{}
+
 var defsInterface = map[string]sophos.RestObject{
 	"InterfaceBridge":   &InterfaceBridge{},
 	"InterfaceEthernet": &InterfaceEthernet{},
@@ -98,6 +100,8 @@ func (Interface) References() []string {
 // InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceBridge []interface{}
 
+var _ sophos.RestObject = &InterfaceBridge{}
+
 // GetPath implements sophos.RestObject and returns the InterfaceBridge GET path
 // Returns all available interface/bridge objects
 func (*InterfaceBridge) GetPath() string { return "/api/objects/interface/bridge/" }
@@ -129,7 +133,7 @@ func (*InterfaceBridge) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceBridge) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/bridge/%s/usedby", ref)
@@ -158,6 +162,8 @@ type InterfaceEthernet struct {
 	Proxyndp            bool          `json:"proxyndp"`
 	Status              bool          `json:"status"`
 }
+
+var _ sophos.RestGetter = &InterfaceEthernet{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceEthernets GET path
 // Returns all available interface/ethernet objects
@@ -199,7 +205,7 @@ func (*InterfaceEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceEthernet) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ethernet/%s/usedby", ref)
@@ -222,6 +228,8 @@ type InterfaceGroup struct {
 	Name             string        `json:"name"`
 	PrimaryAddresses string        `json:"primary_addresses"`
 }
+
+var _ sophos.RestGetter = &InterfaceGroup{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceGroups GET path
 // Returns all available interface/group objects
@@ -263,7 +271,7 @@ func (*InterfaceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/group/%s/usedby", ref)
@@ -274,6 +282,8 @@ func (i *InterfaceGroup) GetType() string { return i._type }
 
 // InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePpp3G []interface{}
+
+var _ sophos.RestObject = &InterfacePpp3G{}
 
 // GetPath implements sophos.RestObject and returns the InterfacePpp3G GET path
 // Returns all available interface/ppp3g objects
@@ -306,7 +316,7 @@ func (*InterfacePpp3G) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePpp3G) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ppp3g/%s/usedby", ref)
@@ -314,6 +324,8 @@ func (*InterfacePpp3G) UsedByPath(ref string) string {
 
 // InterfacePppmodem is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppmodem []interface{}
+
+var _ sophos.RestObject = &InterfacePppmodem{}
 
 // GetPath implements sophos.RestObject and returns the InterfacePppmodem GET path
 // Returns all available interface/pppmodem objects
@@ -346,7 +358,7 @@ func (*InterfacePppmodem) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppmodem) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppmodem/%s/usedby", ref)
@@ -354,6 +366,8 @@ func (*InterfacePppmodem) UsedByPath(ref string) string {
 
 // InterfacePppoa is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppoa []interface{}
+
+var _ sophos.RestObject = &InterfacePppoa{}
 
 // GetPath implements sophos.RestObject and returns the InterfacePppoa GET path
 // Returns all available interface/pppoa objects
@@ -386,7 +400,7 @@ func (*InterfacePppoa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppoa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s/usedby", ref)
@@ -394,6 +408,8 @@ func (*InterfacePppoa) UsedByPath(ref string) string {
 
 // InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePppoe []interface{}
+
+var _ sophos.RestObject = &InterfacePppoe{}
 
 // GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
 // Returns all available interface/pppoe objects
@@ -426,7 +442,7 @@ func (*InterfacePppoe) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppoe) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoe/%s/usedby", ref)
@@ -434,6 +450,8 @@ func (*InterfacePppoe) UsedByPath(ref string) string {
 
 // InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceTunnel []interface{}
+
+var _ sophos.RestObject = &InterfaceTunnel{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
 // Returns all available interface/tunnel objects
@@ -466,7 +484,7 @@ func (*InterfaceTunnel) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceTunnel) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/tunnel/%s/usedby", ref)
@@ -497,6 +515,8 @@ type InterfaceVlan struct {
 	Status              bool          `json:"status"`
 	Vlantag             int64         `json:"vlantag"`
 }
+
+var _ sophos.RestGetter = &InterfaceVlan{}
 
 // GetPath implements sophos.RestObject and returns the InterfaceVlans GET path
 // Returns all available interface/vlan objects
@@ -538,7 +558,7 @@ func (*InterfaceVlan) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceVlan) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/vlan/%s/usedby", ref)

@@ -14,6 +14,8 @@ type Aws struct {
 	AwsRegion       AwsRegion       `json:"aws_region"`
 }
 
+var _ sophos.Endpoint = &Aws{}
+
 var defsAws = map[string]sophos.RestObject{
 	"AwsGroup":        &AwsGroup{},
 	"AwsInstanceType": &AwsInstanceType{},
@@ -62,6 +64,8 @@ func (Aws) References() []string {
 // AwsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsGroup []interface{}
 
+var _ sophos.RestObject = &AwsGroup{}
+
 // GetPath implements sophos.RestObject and returns the AwsGroup GET path
 // Returns all available aws/group objects
 func (*AwsGroup) GetPath() string { return "/api/objects/aws/group/" }
@@ -93,7 +97,7 @@ func (*AwsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s/usedby", ref)
@@ -115,6 +119,8 @@ type AwsInstanceType struct {
 	Name               string      `json:"name"`
 	NetworkPerformance string      `json:"network_performance"`
 }
+
+var _ sophos.RestGetter = &AwsInstanceType{}
 
 // GetPath implements sophos.RestObject and returns the AwsInstanceTypes GET path
 // Returns all available aws/instance_type objects
@@ -156,7 +162,7 @@ func (*AwsInstanceType) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsInstanceType) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s/usedby", ref)
@@ -180,6 +186,8 @@ type AwsRegion struct {
 	Name              string   `json:"name"`
 	Partition         string   `json:"partition"`
 }
+
+var _ sophos.RestGetter = &AwsRegion{}
 
 // GetPath implements sophos.RestObject and returns the AwsRegions GET path
 // Returns all available aws/region objects
@@ -219,7 +227,7 @@ func (*AwsRegion) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsRegion) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s/usedby", ref)

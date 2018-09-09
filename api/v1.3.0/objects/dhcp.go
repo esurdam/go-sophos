@@ -26,6 +26,8 @@ type Dhcp struct {
 	} `json:"server"`
 }
 
+var _ sophos.Endpoint = &Dhcp{}
+
 var defsDhcp = map[string]sophos.RestObject{
 	"DhcpGroup":     &DhcpGroup{},
 	"DhcpOption":    &DhcpOption{},
@@ -89,6 +91,8 @@ func (Dhcp) References() []string {
 // DhcpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpGroup []interface{}
 
+var _ sophos.RestObject = &DhcpGroup{}
+
 // GetPath implements sophos.RestObject and returns the DhcpGroup GET path
 // Returns all available dhcp/group objects
 func (*DhcpGroup) GetPath() string { return "/api/objects/dhcp/group/" }
@@ -120,7 +124,7 @@ func (*DhcpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/group/%s/usedby", ref)
@@ -150,6 +154,8 @@ type DhcpOption struct {
 	Type      string        `json:"type"`
 	Vendor    string        `json:"vendor"`
 }
+
+var _ sophos.RestGetter = &DhcpOption{}
 
 // GetPath implements sophos.RestObject and returns the DhcpOptions GET path
 // Returns all available dhcp/option objects
@@ -189,7 +195,7 @@ func (*DhcpOption) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpOption) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option/%s/usedby", ref)
@@ -200,6 +206,8 @@ func (d *DhcpOption) GetType() string { return d._type }
 
 // DhcpOption6 is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpOption6 []interface{}
+
+var _ sophos.RestObject = &DhcpOption6{}
 
 // GetPath implements sophos.RestObject and returns the DhcpOption6 GET path
 // Returns all available dhcp/option6 objects
@@ -232,7 +240,7 @@ func (*DhcpOption6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option6/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpOption6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/option6/%s/usedby", ref)
@@ -267,6 +275,8 @@ type DhcpServer struct {
 	Wins            string   `json:"wins"`
 	WinsNodeType    string   `json:"wins_node_type"`
 }
+
+var _ sophos.RestGetter = &DhcpServer{}
 
 // GetPath implements sophos.RestObject and returns the DhcpServers GET path
 // Returns all available dhcp/server objects
@@ -306,7 +316,7 @@ func (*DhcpServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpServer) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server/%s/usedby", ref)
@@ -317,6 +327,8 @@ func (d *DhcpServer) GetType() string { return d._type }
 
 // DhcpServer6 is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpServer6 []interface{}
+
+var _ sophos.RestObject = &DhcpServer6{}
 
 // GetPath implements sophos.RestObject and returns the DhcpServer6 GET path
 // Returns all available dhcp/server6 objects
@@ -349,7 +361,7 @@ func (*DhcpServer6) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server6/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpServer6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server6/%s/usedby", ref)
@@ -357,6 +369,8 @@ func (*DhcpServer6) UsedByPath(ref string) string {
 
 // DhcpStateless is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpStateless []interface{}
+
+var _ sophos.RestObject = &DhcpStateless{}
 
 // GetPath implements sophos.RestObject and returns the DhcpStateless GET path
 // Returns all available dhcp/stateless objects
@@ -389,7 +403,7 @@ func (*DhcpStateless) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/stateless/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DhcpStateless) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/stateless/%s/usedby", ref)

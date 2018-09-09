@@ -13,6 +13,8 @@ type ClientlessVpn struct {
 	ClientlessVpnGroup      ClientlessVpnGroup      `json:"clientless_vpn_group"`
 }
 
+var _ sophos.Endpoint = &ClientlessVpn{}
+
 var defsClientlessVpn = map[string]sophos.RestObject{
 	"ClientlessVpnConnection": &ClientlessVpnConnection{},
 	"ClientlessVpnGroup":      &ClientlessVpnGroup{},
@@ -81,6 +83,8 @@ type ClientlessVpnConnection struct {
 	WebPath       string        `json:"web_path"`
 }
 
+var _ sophos.RestGetter = &ClientlessVpnConnection{}
+
 // GetPath implements sophos.RestObject and returns the ClientlessVpnConnections GET path
 // Returns all available clientless_vpn/connection objects
 func (*ClientlessVpnConnections) GetPath() string { return "/api/objects/clientless_vpn/connection/" }
@@ -121,7 +125,7 @@ func (*ClientlessVpnConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/connection/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ClientlessVpnConnection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/connection/%s/usedby", ref)
@@ -132,6 +136,8 @@ func (c *ClientlessVpnConnection) GetType() string { return c._type }
 
 // ClientlessVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ClientlessVpnGroup []interface{}
+
+var _ sophos.RestObject = &ClientlessVpnGroup{}
 
 // GetPath implements sophos.RestObject and returns the ClientlessVpnGroup GET path
 // Returns all available clientless_vpn/group objects
@@ -164,7 +170,7 @@ func (*ClientlessVpnGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ClientlessVpnGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s/usedby", ref)

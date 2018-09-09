@@ -68,6 +68,8 @@ type Smtp struct {
 	UpstreamHostsOnly          int64         `json:"upstream_hosts_only"`
 }
 
+var _ sophos.Endpoint = &Smtp{}
+
 var defsSmtp = map[string]sophos.RestObject{
 	"SmtpException":       &SmtpException{},
 	"SmtpGroup":           &SmtpGroup{},
@@ -121,6 +123,8 @@ func (Smtp) References() []string {
 // SmtpException is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpException []interface{}
 
+var _ sophos.RestObject = &SmtpException{}
+
 // GetPath implements sophos.RestObject and returns the SmtpException GET path
 // Returns all available smtp/exception objects
 func (*SmtpException) GetPath() string { return "/api/objects/smtp/exception/" }
@@ -152,7 +156,7 @@ func (*SmtpException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s/usedby", ref)
@@ -160,6 +164,8 @@ func (*SmtpException) UsedByPath(ref string) string {
 
 // SmtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpGroup []interface{}
+
+var _ sophos.RestObject = &SmtpGroup{}
 
 // GetPath implements sophos.RestObject and returns the SmtpGroup GET path
 // Returns all available smtp/group objects
@@ -192,7 +198,7 @@ func (*SmtpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s/usedby", ref)
@@ -200,6 +206,8 @@ func (*SmtpGroup) UsedByPath(ref string) string {
 
 // SmtpHeaderOperation is an Sophos Endpoint subType and implements sophos.RestObject
 type SmtpHeaderOperation []interface{}
+
+var _ sophos.RestObject = &SmtpHeaderOperation{}
 
 // GetPath implements sophos.RestObject and returns the SmtpHeaderOperation GET path
 // Returns all available smtp/header_operation objects
@@ -232,7 +240,7 @@ func (*SmtpHeaderOperation) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpHeaderOperation) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/header_operation/%s/usedby", ref)
@@ -295,6 +303,8 @@ type SmtpProfile struct {
 	Unscannable                 string        `json:"unscannable"`
 }
 
+var _ sophos.RestGetter = &SmtpProfile{}
+
 // GetPath implements sophos.RestObject and returns the SmtpProfiles GET path
 // Returns all available smtp/profile objects
 func (*SmtpProfiles) GetPath() string { return "/api/objects/smtp/profile/" }
@@ -335,7 +345,7 @@ func (*SmtpProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SmtpProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/profile/%s/usedby", ref)

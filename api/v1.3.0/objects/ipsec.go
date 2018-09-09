@@ -28,6 +28,8 @@ type Ipsec struct {
 	Status      int64    `json:"status"`
 }
 
+var _ sophos.Endpoint = &Ipsec{}
+
 var defsIpsec = map[string]sophos.RestObject{
 	"IpsecGroup":         &IpsecGroup{},
 	"IpsecPolicy":        &IpsecPolicy{},
@@ -76,6 +78,8 @@ func (Ipsec) References() []string {
 // IpsecGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecGroup []interface{}
 
+var _ sophos.RestObject = &IpsecGroup{}
+
 // GetPath implements sophos.RestObject and returns the IpsecGroup GET path
 // Returns all available ipsec/group objects
 func (*IpsecGroup) GetPath() string { return "/api/objects/ipsec/group/" }
@@ -107,7 +111,7 @@ func (*IpsecGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/group/%s/usedby", ref)
@@ -134,6 +138,8 @@ type IpsecPolicy struct {
 	IpsecStrictPolicy bool   `json:"ipsec_strict_policy"`
 	Name              string `json:"name"`
 }
+
+var _ sophos.RestGetter = &IpsecPolicy{}
 
 // GetPath implements sophos.RestObject and returns the IpsecPolicys GET path
 // Returns all available ipsec/policy objects
@@ -175,7 +181,7 @@ func (*IpsecPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/policy/%s/usedby", ref)
@@ -203,6 +209,8 @@ type IpsecRemoteGateway struct {
 	XauthPassword  string   `json:"xauth_password"`
 	XauthUsername  string   `json:"xauth_username"`
 }
+
+var _ sophos.RestGetter = &IpsecRemoteGateway{}
 
 // GetPath implements sophos.RestObject and returns the IpsecRemoteGateways GET path
 // Returns all available ipsec/remote_gateway objects
@@ -244,7 +252,7 @@ func (*IpsecRemoteGateway) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpsecRemoteGateway) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec/remote_gateway/%s/usedby", ref)

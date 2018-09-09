@@ -16,6 +16,8 @@ type Geoip struct {
 	Status       int64         `json:"status"`
 }
 
+var _ sophos.Endpoint = &Geoip{}
+
 var defsGeoip = map[string]sophos.RestObject{
 	"GeoipDstexception": &GeoipDstexception{},
 	"GeoipGeoipgroup":   &GeoipGeoipgroup{},
@@ -69,6 +71,8 @@ func (Geoip) References() []string {
 // GeoipDstexception is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipDstexception []interface{}
 
+var _ sophos.RestObject = &GeoipDstexception{}
+
 // GetPath implements sophos.RestObject and returns the GeoipDstexception GET path
 // Returns all available geoip/dstexception objects
 func (*GeoipDstexception) GetPath() string { return "/api/objects/geoip/dstexception/" }
@@ -100,7 +104,7 @@ func (*GeoipDstexception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipDstexception) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/dstexception/%s/usedby", ref)
@@ -118,6 +122,8 @@ type GeoipGeoipgroup struct {
 	Countries []string `json:"countries"`
 	Name      string   `json:"name"`
 }
+
+var _ sophos.RestGetter = &GeoipGeoipgroup{}
 
 // GetPath implements sophos.RestObject and returns the GeoipGeoipgroups GET path
 // Returns all available geoip/geoipgroup objects
@@ -159,7 +165,7 @@ func (*GeoipGeoipgroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/geoipgroup/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipGeoipgroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/geoipgroup/%s/usedby", ref)
@@ -170,6 +176,8 @@ func (g *GeoipGeoipgroup) GetType() string { return g._type }
 
 // GeoipGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipGroup []interface{}
+
+var _ sophos.RestObject = &GeoipGroup{}
 
 // GetPath implements sophos.RestObject and returns the GeoipGroup GET path
 // Returns all available geoip/group objects
@@ -202,7 +210,7 @@ func (*GeoipGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s/usedby", ref)
@@ -210,6 +218,8 @@ func (*GeoipGroup) UsedByPath(ref string) string {
 
 // GeoipSrcexception is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipSrcexception []interface{}
+
+var _ sophos.RestObject = &GeoipSrcexception{}
 
 // GetPath implements sophos.RestObject and returns the GeoipSrcexception GET path
 // Returns all available geoip/srcexception objects
@@ -242,7 +252,7 @@ func (*GeoipSrcexception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipSrcexception) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/srcexception/%s/usedby", ref)

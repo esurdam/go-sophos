@@ -212,6 +212,40 @@ func Update{{.Name}}(client sophos.ClientInterface, val {{.Val}}, options ...sop
 }
 `
 
+var nodeFuncsTestTemplate = `
+func TestGet{{.Name}}(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	_, err := Get{{.Name}}(client)
+	if err != nil {
+		t.Errorf("TestGet{{.Name}} should not have error: %s", err.Error())
+	}
+}
+
+func TestUpdate{{.Name}}(t *testing.T) {
+	td := setupTestCase(t)
+	defer td(t)
+
+	var v {{.Val}}
+	err := Update{{.Name}}(client, v)
+	if err != nil {
+		t.Error(err.Error())
+	}
+}
+`
+
+func executeTmpl(f io.Writer, v string, data interface{}) {
+	tmpl, err := template.New("").Parse(v)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	err = tmpl.Execute(f, data)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+}
+
 var nodesHeader = `package nodes
 
 import "github.com/esurdam/go-sophos"
@@ -277,6 +311,11 @@ func handleNodesNode() error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// ft, err := os.Create(subDir + "/handlers_test.go")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// ft.Write([]byte(nodesTestTemp))
 
 	f.Write([]byte(nodesHeader))
 	f.Write([]byte(`
@@ -300,21 +339,23 @@ func put(c sophos.ClientInterface, path string, val interface{}, options ...soph
 		value := nodes[key]
 		valueType := typeForValue(value)
 		strKey := strings.Replace(key, ".", "_", -1)
-		tmpl, err := template.New("").Parse(nodeFuncsTemplate)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
-		err = tmpl.Execute(f, &nftd{
+
+		executeTmpl(f, nodeFuncsTemplate, &nftd{
 			Name: toCamelInitCase(strKey, true),
 			Val:  valueType,
 			Path: key,
 		})
-		if err != nil {
-			log.Fatal(err.Error())
-		}
+
+		// executeTmpl(ft, nodeFuncsTestTemplate, &nftd{
+		// 	Name: toCamelInitCase(strKey, true),
+		// 	Val:  valueType,
+		// 	Path: key,
+		// })
+
 		// f.Write([]byte(fmt.Sprintf(" %sValue %s\n", toCamelInitCase(strKey, true), valueType)))
 	}
 	f.Close()
+	// ft.Close()
 
 	f3, err := os.Create(subDir + "/directory.go")
 	if err != nil {
@@ -694,6 +735,8 @@ var nodeTemplate = `
 	{{end}}
 }{{else}}{{.Bytes}}{{end}}
 
+var _ sophos.Endpoint = &{{.Title}}{}
+
 var defs{{.Title}} =  map[string]sophos.RestObject{
 		{{range .SubTypes}}"{{.Name}}": &{{.Name}}{},
 		{{end}}
@@ -734,7 +777,7 @@ func({{.Title}}) References() []string {
 {{.Bytes}}
 
 {{if .IsPlural}}
-
+var _ sophos.RestGetter = &{{.Name}}{}
 // GetPath implements sophos.RestObject and returns the {{.Name}}s GET path{{getDesc . .GetPath "get"}}
 func(*{{.Name}}s) GetPath() string { return "/api{{.GetPath}}" }
 // RefRequired implements sophos.RestObject
@@ -747,6 +790,7 @@ func({{firstLetter .Name}} *{{.Name}}) RefRequired() (string, bool) { return {{f
 
 {{else}}
 
+var _ sophos.RestObject = &{{.Name}}{}
 // GetPath implements sophos.RestObject and returns the {{.Name}} GET path{{getDesc . .GetPath "get"}}
 func(*{{.Name}}) GetPath() string {	return "/api{{.GetPath}}" }
 // RefRequired implements sophos.RestObject
@@ -774,7 +818,7 @@ func(*{{.Name}}) PutPath(ref string) string {
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}", ref)
 }
 
-// UsedByPath implements sophos.UsedObject{{getUsedBy .}}
+// UsedByPath implements sophos.RestObject{{getUsedBy .}}
 func(*{{.Name}}) UsedByPath(ref string) string { 
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}/usedby", ref)
 }
@@ -925,3 +969,51 @@ func mergeObjects(o1, o2 interface{}) interface{} {
 		return i
 	}
 }
+
+var nodesTestTemp = `
+package nodes
+
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"reflect"
+	"strings"
+	"testing"
+
+	"github.com/esurdam/go-sophos"
+)
+
+var client *sophos.Client
+
+var errOption = func(r *http.Request) error {
+	return fmt.Errorf("this is a fake error")
+}
+
+func setupTestCase(t *testing.T) func(t *testing.T) {
+	t.Log("setup test case")
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if r.URL.Path == "/api/error" {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		var v interface{}
+		json.NewEncoder(w).Encode(&v)
+	}))
+	sophos.DefaultHTTPClient = ts.Client()
+	clientF, err := sophos.New(ts.URL, sophos.WithAPIToken("abc"))
+	if err == nil {
+		client = clientF
+	}
+	if client == nil {
+		t.Error("errror setting up client, client is nil")
+	}
+	return func(t *testing.T) {
+		ts.Close()
+		t.Log("teardown test case")
+	}
+}
+`

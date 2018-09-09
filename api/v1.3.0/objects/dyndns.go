@@ -12,6 +12,8 @@ type Dyndns struct {
 	Rules []interface{} `json:"rules"`
 }
 
+var _ sophos.Endpoint = &Dyndns{}
+
 var defsDyndns = map[string]sophos.RestObject{
 	"DyndnsDyndns": &DyndnsDyndns{},
 	"DyndnsGroup":  &DyndnsGroup{},
@@ -55,6 +57,8 @@ func (Dyndns) References() []string {
 // DyndnsDyndns is an Sophos Endpoint subType and implements sophos.RestObject
 type DyndnsDyndns []interface{}
 
+var _ sophos.RestObject = &DyndnsDyndns{}
+
 // GetPath implements sophos.RestObject and returns the DyndnsDyndns GET path
 // Returns all available dyndns/dyndns objects
 func (*DyndnsDyndns) GetPath() string { return "/api/objects/dyndns/dyndns/" }
@@ -86,7 +90,7 @@ func (*DyndnsDyndns) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DyndnsDyndns) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s/usedby", ref)
@@ -94,6 +98,8 @@ func (*DyndnsDyndns) UsedByPath(ref string) string {
 
 // DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type DyndnsGroup []interface{}
+
+var _ sophos.RestObject = &DyndnsGroup{}
 
 // GetPath implements sophos.RestObject and returns the DyndnsGroup GET path
 // Returns all available dyndns/group objects
@@ -126,7 +132,7 @@ func (*DyndnsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*DyndnsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/group/%s/usedby", ref)

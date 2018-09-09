@@ -16,6 +16,8 @@ type Itfparams struct {
 	ItfparamsSecondary            ItfparamsSecondary            `json:"itfparams_secondary"`
 }
 
+var _ sophos.Endpoint = &Itfparams{}
+
 var defsItfparams = map[string]sophos.RestObject{
 	"ItfparamsBridgePort":           &ItfparamsBridgePort{},
 	"ItfparamsGroup":                &ItfparamsGroup{},
@@ -74,6 +76,8 @@ func (Itfparams) References() []string {
 // ItfparamsBridgePort is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfparamsBridgePort []interface{}
 
+var _ sophos.RestObject = &ItfparamsBridgePort{}
+
 // GetPath implements sophos.RestObject and returns the ItfparamsBridgePort GET path
 // Returns all available itfparams/bridge_port objects
 func (*ItfparamsBridgePort) GetPath() string { return "/api/objects/itfparams/bridge_port/" }
@@ -105,7 +109,7 @@ func (*ItfparamsBridgePort) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsBridgePort) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s/usedby", ref)
@@ -113,6 +117,8 @@ func (*ItfparamsBridgePort) UsedByPath(ref string) string {
 
 // ItfparamsGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfparamsGroup []interface{}
+
+var _ sophos.RestObject = &ItfparamsGroup{}
 
 // GetPath implements sophos.RestObject and returns the ItfparamsGroup GET path
 // Returns all available itfparams/group objects
@@ -145,7 +151,7 @@ func (*ItfparamsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/group/%s/usedby", ref)
@@ -179,6 +185,8 @@ type ItfparamsLinkAggregationGroup struct {
 	VirtualMac     string   `json:"virtual_mac"`
 	XmitHashPolicy string   `json:"xmit_hash_policy"`
 }
+
+var _ sophos.RestGetter = &ItfparamsLinkAggregationGroup{}
 
 // GetPath implements sophos.RestObject and returns the ItfparamsLinkAggregationGroups GET path
 // Returns all available itfparams/link_aggregation_group objects
@@ -222,7 +230,7 @@ func (*ItfparamsLinkAggregationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/link_aggregation_group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsLinkAggregationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/link_aggregation_group/%s/usedby", ref)
@@ -270,6 +278,8 @@ type ItfparamsPrimary struct {
 	Type6                  string `json:"type6"`
 }
 
+var _ sophos.RestGetter = &ItfparamsPrimary{}
+
 // GetPath implements sophos.RestObject and returns the ItfparamsPrimarys GET path
 // Returns all available itfparams/primary objects
 func (*ItfparamsPrimarys) GetPath() string { return "/api/objects/itfparams/primary/" }
@@ -310,7 +320,7 @@ func (*ItfparamsPrimary) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/primary/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsPrimary) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/primary/%s/usedby", ref)
@@ -321,6 +331,8 @@ func (i *ItfparamsPrimary) GetType() string { return i._type }
 
 // ItfparamsSecondary is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfparamsSecondary []interface{}
+
+var _ sophos.RestObject = &ItfparamsSecondary{}
 
 // GetPath implements sophos.RestObject and returns the ItfparamsSecondary GET path
 // Returns all available itfparams/secondary objects
@@ -353,7 +365,7 @@ func (*ItfparamsSecondary) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/secondary/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfparamsSecondary) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/secondary/%s/usedby", ref)

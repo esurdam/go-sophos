@@ -13,6 +13,8 @@ type MacList struct {
 	MacListMacList MacListMacList `json:"mac_list_mac_list"`
 }
 
+var _ sophos.Endpoint = &MacList{}
+
 var defsMacList = map[string]sophos.RestObject{
 	"MacListGroup":   &MacListGroup{},
 	"MacListMacList": &MacListMacList{},
@@ -56,6 +58,8 @@ func (MacList) References() []string {
 // MacListGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type MacListGroup []interface{}
 
+var _ sophos.RestObject = &MacListGroup{}
+
 // GetPath implements sophos.RestObject and returns the MacListGroup GET path
 // Returns all available mac_list/group objects
 func (*MacListGroup) GetPath() string { return "/api/objects/mac_list/group/" }
@@ -87,7 +91,7 @@ func (*MacListGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*MacListGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/group/%s/usedby", ref)
@@ -95,6 +99,8 @@ func (*MacListGroup) UsedByPath(ref string) string {
 
 // MacListMacList is an Sophos Endpoint subType and implements sophos.RestObject
 type MacListMacList []interface{}
+
+var _ sophos.RestObject = &MacListMacList{}
 
 // GetPath implements sophos.RestObject and returns the MacListMacList GET path
 // Returns all available mac_list/mac_list objects
@@ -127,7 +133,7 @@ func (*MacListMacList) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*MacListMacList) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s/usedby", ref)

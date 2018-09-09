@@ -48,6 +48,8 @@ type Epp struct {
 	WdxToken       string `json:"wdx_token"`
 }
 
+var _ sophos.Endpoint = &Epp{}
+
 var defsEpp = map[string]sophos.RestObject{
 	"EppAvException":    &EppAvException{},
 	"EppAvPolicy":       &EppAvPolicy{},
@@ -121,6 +123,8 @@ func (Epp) References() []string {
 // EppAvException is an Sophos Endpoint subType and implements sophos.RestObject
 type EppAvException []interface{}
 
+var _ sophos.RestObject = &EppAvException{}
+
 // GetPath implements sophos.RestObject and returns the EppAvException GET path
 // Returns all available epp/av_exception objects
 func (*EppAvException) GetPath() string { return "/api/objects/epp/av_exception/" }
@@ -152,7 +156,7 @@ func (*EppAvException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppAvException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s/usedby", ref)
@@ -192,6 +196,8 @@ type EppAvPolicy struct {
 	TimeEvent                 string `json:"time_event"`
 	WebProtection             bool   `json:"web_protection"`
 }
+
+var _ sophos.RestGetter = &EppAvPolicy{}
 
 // GetPath implements sophos.RestObject and returns the EppAvPolicys GET path
 // Returns all available epp/av_policy objects
@@ -233,7 +239,7 @@ func (*EppAvPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppAvPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s/usedby", ref)
@@ -244,6 +250,8 @@ func (e *EppAvPolicy) GetType() string { return e._type }
 
 // EppDcException is an Sophos Endpoint subType and implements sophos.RestObject
 type EppDcException []interface{}
+
+var _ sophos.RestObject = &EppDcException{}
 
 // GetPath implements sophos.RestObject and returns the EppDcException GET path
 // Returns all available epp/dc_exception objects
@@ -276,7 +284,7 @@ func (*EppDcException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDcException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_exception/%s/usedby", ref)
@@ -301,6 +309,8 @@ type EppDcPolicy struct {
 	RemovableStorage string `json:"removable_storage"`
 	Wireless         string `json:"wireless"`
 }
+
+var _ sophos.RestGetter = &EppDcPolicy{}
 
 // GetPath implements sophos.RestObject and returns the EppDcPolicys GET path
 // Returns all available epp/dc_policy objects
@@ -342,7 +352,7 @@ func (*EppDcPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDcPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s/usedby", ref)
@@ -353,6 +363,8 @@ func (e *EppDcPolicy) GetType() string { return e._type }
 
 // EppDevice is an Sophos Endpoint subType and implements sophos.RestObject
 type EppDevice []interface{}
+
+var _ sophos.RestObject = &EppDevice{}
 
 // GetPath implements sophos.RestObject and returns the EppDevice GET path
 // Returns all available epp/device objects
@@ -385,7 +397,7 @@ func (*EppDevice) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDevice) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s/usedby", ref)
@@ -393,6 +405,8 @@ func (*EppDevice) UsedByPath(ref string) string {
 
 // EppEndpoint is an Sophos Endpoint subType and implements sophos.RestObject
 type EppEndpoint []interface{}
+
+var _ sophos.RestObject = &EppEndpoint{}
 
 // GetPath implements sophos.RestObject and returns the EppEndpoint GET path
 // Returns all available epp/endpoint objects
@@ -425,7 +439,7 @@ func (*EppEndpoint) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppEndpoint) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoint/%s/usedby", ref)
@@ -452,6 +466,8 @@ type EppEndpointsGroup struct {
 	TamperProtection bool          `json:"tamper_protection"`
 	WebControl       bool          `json:"web_control"`
 }
+
+var _ sophos.RestGetter = &EppEndpointsGroup{}
 
 // GetPath implements sophos.RestObject and returns the EppEndpointsGroups GET path
 // Returns all available epp/endpoints_group objects
@@ -493,7 +509,7 @@ func (*EppEndpointsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppEndpointsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s/usedby", ref)
@@ -504,6 +520,8 @@ func (e *EppEndpointsGroup) GetType() string { return e._type }
 
 // EppGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type EppGroup []interface{}
+
+var _ sophos.RestObject = &EppGroup{}
 
 // GetPath implements sophos.RestObject and returns the EppGroup GET path
 // Returns all available epp/group objects
@@ -536,7 +554,7 @@ func (*EppGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/group/%s/usedby", ref)

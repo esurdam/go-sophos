@@ -13,6 +13,8 @@ type Cron struct {
 	CronGroup CronGroup `json:"cron_group"`
 }
 
+var _ sophos.Endpoint = &Cron{}
+
 var defsCron = map[string]sophos.RestObject{
 	"CronAt":    &CronAt{},
 	"CronGroup": &CronGroup{},
@@ -56,6 +58,8 @@ func (Cron) References() []string {
 // CronAt is an Sophos Endpoint subType and implements sophos.RestObject
 type CronAt []interface{}
 
+var _ sophos.RestObject = &CronAt{}
+
 // GetPath implements sophos.RestObject and returns the CronAt GET path
 // Returns all available cron/at objects
 func (*CronAt) GetPath() string { return "/api/objects/cron/at/" }
@@ -87,7 +91,7 @@ func (*CronAt) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/at/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CronAt) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/at/%s/usedby", ref)
@@ -95,6 +99,8 @@ func (*CronAt) UsedByPath(ref string) string {
 
 // CronGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type CronGroup []interface{}
+
+var _ sophos.RestObject = &CronGroup{}
 
 // GetPath implements sophos.RestObject and returns the CronGroup GET path
 // Returns all available cron/group objects
@@ -127,7 +133,7 @@ func (*CronGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CronGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/group/%s/usedby", ref)

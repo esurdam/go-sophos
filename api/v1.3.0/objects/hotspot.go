@@ -16,6 +16,8 @@ type Hotspot struct {
 	TransparentSkip []interface{} `json:"transparent_skip"`
 }
 
+var _ sophos.Endpoint = &Hotspot{}
+
 var defsHotspot = map[string]sophos.RestObject{
 	"HotspotGroup":   &HotspotGroup{},
 	"HotspotPortal":  &HotspotPortal{},
@@ -64,6 +66,8 @@ func (Hotspot) References() []string {
 // HotspotGroup is an Sophos Endpoint subType and implements sophos.RestObject
 type HotspotGroup []interface{}
 
+var _ sophos.RestObject = &HotspotGroup{}
+
 // GetPath implements sophos.RestObject and returns the HotspotGroup GET path
 // Returns all available hotspot/group objects
 func (*HotspotGroup) GetPath() string { return "/api/objects/hotspot/group/" }
@@ -95,7 +99,7 @@ func (*HotspotGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s/usedby", ref)
@@ -103,6 +107,8 @@ func (*HotspotGroup) UsedByPath(ref string) string {
 
 // HotspotPortal is an Sophos Endpoint subType and implements sophos.RestObject
 type HotspotPortal []interface{}
+
+var _ sophos.RestObject = &HotspotPortal{}
 
 // GetPath implements sophos.RestObject and returns the HotspotPortal GET path
 // Returns all available hotspot/portal objects
@@ -135,7 +141,7 @@ func (*HotspotPortal) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotPortal) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s/usedby", ref)
@@ -143,6 +149,8 @@ func (*HotspotPortal) UsedByPath(ref string) string {
 
 // HotspotVoucher is an Sophos Endpoint subType and implements sophos.RestObject
 type HotspotVoucher []interface{}
+
+var _ sophos.RestObject = &HotspotVoucher{}
 
 // GetPath implements sophos.RestObject and returns the HotspotVoucher GET path
 // Returns all available hotspot/voucher objects
@@ -175,7 +183,7 @@ func (*HotspotVoucher) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/voucher/%s", ref)
 }
 
-// UsedByPath implements sophos.UsedObject
+// UsedByPath implements sophos.RestObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotVoucher) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/voucher/%s/usedby", ref)
