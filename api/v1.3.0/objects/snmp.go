@@ -99,7 +99,7 @@ func (*SnmpGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SnmpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/group/%s/usedby", ref)
@@ -139,7 +139,7 @@ func (*SnmpTrap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/trap/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SnmpTrap) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/trap/%s/usedby", ref)

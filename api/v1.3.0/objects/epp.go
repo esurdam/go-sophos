@@ -152,7 +152,7 @@ func (*EppAvException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppAvException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_exception/%s/usedby", ref)
@@ -233,7 +233,7 @@ func (*EppAvPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppAvPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/av_policy/%s/usedby", ref)
@@ -276,7 +276,7 @@ func (*EppDcException) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDcException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_exception/%s/usedby", ref)
@@ -342,7 +342,7 @@ func (*EppDcPolicy) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDcPolicy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/dc_policy/%s/usedby", ref)
@@ -385,7 +385,7 @@ func (*EppDevice) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppDevice) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s/usedby", ref)
@@ -425,7 +425,7 @@ func (*EppEndpoint) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoint/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppEndpoint) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoint/%s/usedby", ref)
@@ -493,7 +493,7 @@ func (*EppEndpointsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppEndpointsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/endpoints_group/%s/usedby", ref)
@@ -536,7 +536,7 @@ func (*EppGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EppGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/group/%s/usedby", ref)

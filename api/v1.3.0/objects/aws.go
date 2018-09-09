@@ -93,7 +93,7 @@ func (*AwsGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/group/%s/usedby", ref)
@@ -156,7 +156,7 @@ func (*AwsInstanceType) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsInstanceType) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/instance_type/%s/usedby", ref)
@@ -219,7 +219,7 @@ func (*AwsRegion) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwsRegion) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/aws/region/%s/usedby", ref)

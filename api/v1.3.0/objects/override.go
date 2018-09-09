@@ -87,7 +87,7 @@ func (*OverrideGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OverrideGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/group/%s/usedby", ref)
@@ -127,7 +127,7 @@ func (*OverrideObjref) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/objref/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*OverrideObjref) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/objref/%s/usedby", ref)

@@ -87,7 +87,7 @@ func (*ApplicationControlGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ApplicationControlGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/group/%s/usedby", ref)
@@ -155,7 +155,7 @@ func (*ApplicationControlRule) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/rule/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ApplicationControlRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/application_control/rule/%s/usedby", ref)

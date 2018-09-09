@@ -87,7 +87,7 @@ func (*UserPreferencesGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*UserPreferencesGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/group/%s/usedby", ref)
@@ -161,7 +161,7 @@ func (*UserPreferencesWebadmin) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/webadmin/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*UserPreferencesWebadmin) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/user_preferences/webadmin/%s/usedby", ref)

@@ -114,7 +114,7 @@ func (*SpxGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SpxGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/group/%s/usedby", ref)
@@ -212,7 +212,7 @@ func (*SpxTemplate) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/template/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*SpxTemplate) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/spx/template/%s/usedby", ref)

@@ -128,7 +128,7 @@ func (*EmailpkiGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EmailpkiGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/group/%s/usedby", ref)
@@ -168,7 +168,7 @@ func (*EmailpkiOpenpgp) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EmailpkiOpenpgp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s/usedby", ref)
@@ -208,7 +208,7 @@ func (*EmailpkiSmime) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/smime/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EmailpkiSmime) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/smime/%s/usedby", ref)
@@ -248,7 +248,7 @@ func (*EmailpkiUser) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/user/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*EmailpkiUser) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/user/%s/usedby", ref)

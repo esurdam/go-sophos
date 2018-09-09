@@ -763,7 +763,7 @@ func(*{{.Name}}) PutPath(ref string) string {
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}", ref)
 }
 
-// UsedByPath implements sophos.Object{{getUsedBy .}}
+// UsedByPath implements sophos.UsedObject{{getUsedBy .}}
 func(*{{.Name}}) UsedByPath(ref string) string { 
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}/usedby", ref)
 }

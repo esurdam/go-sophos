@@ -117,7 +117,7 @@ func (*AuthenticationAdirectory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationAdirectory) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/adirectory/%s/usedby", ref)
@@ -157,7 +157,7 @@ func (*AuthenticationEdirectory) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationEdirectory) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/edirectory/%s/usedby", ref)
@@ -197,7 +197,7 @@ func (*AuthenticationGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/group/%s/usedby", ref)
@@ -237,7 +237,7 @@ func (*AuthenticationLdap) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/ldap/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationLdap) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/ldap/%s/usedby", ref)
@@ -277,7 +277,7 @@ func (*AuthenticationOtpToken) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationOtpToken) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/otp_token/%s/usedby", ref)
@@ -317,7 +317,7 @@ func (*AuthenticationRadius) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/radius/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationRadius) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/radius/%s/usedby", ref)
@@ -357,7 +357,7 @@ func (*AuthenticationTacacs) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AuthenticationTacacs) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/tacacs/%s/usedby", ref)

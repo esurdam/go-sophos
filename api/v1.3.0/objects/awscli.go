@@ -86,7 +86,7 @@ func (*AwscliGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awscli/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwscliGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awscli/group/%s/usedby", ref)
@@ -126,7 +126,7 @@ func (*AwscliProfile) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awscli/profile/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*AwscliProfile) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awscli/profile/%s/usedby", ref)

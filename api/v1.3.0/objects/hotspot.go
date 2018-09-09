@@ -95,7 +95,7 @@ func (*HotspotGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s/usedby", ref)
@@ -135,7 +135,7 @@ func (*HotspotPortal) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotPortal) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s/usedby", ref)
@@ -175,7 +175,7 @@ func (*HotspotVoucher) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/voucher/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*HotspotVoucher) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/voucher/%s/usedby", ref)

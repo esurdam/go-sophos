@@ -191,7 +191,7 @@ func (*ItfhwAweNetwork) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwAweNetwork) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network/%s/usedby", ref)
@@ -234,7 +234,7 @@ func (*ItfhwAweNetworkGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwAweNetworkGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s/usedby", ref)
@@ -274,7 +274,7 @@ func (*ItfhwBridge) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwBridge) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/bridge/%s/usedby", ref)
@@ -348,7 +348,7 @@ func (*ItfhwEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/ethernet/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwEthernet) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/ethernet/%s/usedby", ref)
@@ -391,7 +391,7 @@ func (*ItfhwGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/group/%s/usedby", ref)
@@ -451,7 +451,7 @@ func (*ItfhwLag) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/lag/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwLag) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/lag/%s/usedby", ref)
@@ -494,7 +494,7 @@ func (*ItfhwRedClient) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwRedClient) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s/usedby", ref)
@@ -534,7 +534,7 @@ func (*ItfhwRedServer) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwRedServer) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s/usedby", ref)
@@ -574,7 +574,7 @@ func (*ItfhwSerial) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/serial/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwSerial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/serial/%s/usedby", ref)
@@ -614,7 +614,7 @@ func (*ItfhwUsbserial) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwUsbserial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s/usedby", ref)
@@ -654,7 +654,7 @@ func (*ItfhwVirtual) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*ItfhwVirtual) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/virtual/%s/usedby", ref)

@@ -100,7 +100,7 @@ func (*GeoipDstexception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipDstexception) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/dstexception/%s/usedby", ref)
@@ -159,7 +159,7 @@ func (*GeoipGeoipgroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/geoipgroup/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipGeoipgroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/geoipgroup/%s/usedby", ref)
@@ -202,7 +202,7 @@ func (*GeoipGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s/usedby", ref)
@@ -242,7 +242,7 @@ func (*GeoipSrcexception) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*GeoipSrcexception) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/srcexception/%s/usedby", ref)

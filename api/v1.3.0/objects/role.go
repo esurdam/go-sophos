@@ -87,7 +87,7 @@ func (*RoleGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoleGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/group/%s/usedby", ref)
@@ -146,7 +146,7 @@ func (*RoleRole) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*RoleRole) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/role/role/%s/usedby", ref)

@@ -87,7 +87,7 @@ func (*IpfixConnectionGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpfixConnectionGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s/usedby", ref)
@@ -129,7 +129,7 @@ func (*IpfixConnectionIpfixConnection) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*IpfixConnectionIpfixConnection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s/usedby", ref)

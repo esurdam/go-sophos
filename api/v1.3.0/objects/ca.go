@@ -142,7 +142,7 @@ func (*CaCrl) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/crl/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaCrl) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/crl/%s/usedby", ref)
@@ -182,7 +182,7 @@ func (*CaGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/group/%s/usedby", ref)
@@ -240,7 +240,7 @@ func (*CaHostCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_cert/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaHostCert) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_cert/%s/usedby", ref)
@@ -306,7 +306,7 @@ func (*CaHostKeyCert) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_key_cert/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaHostKeyCert) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/host_key_cert/%s/usedby", ref)
@@ -349,7 +349,7 @@ func (*CaHttpVerificationCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaHttpVerificationCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s/usedby", ref)
@@ -389,7 +389,7 @@ func (*CaMetaCrl) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_crl/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaMetaCrl) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_crl/%s/usedby", ref)
@@ -457,7 +457,7 @@ func (*CaMetaX509) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_x509/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaMetaX509) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/meta_x509/%s/usedby", ref)
@@ -521,7 +521,7 @@ func (*CaRsa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/rsa/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaRsa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/rsa/%s/usedby", ref)
@@ -589,7 +589,7 @@ func (*CaSigningCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/signing_ca/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaSigningCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/signing_ca/%s/usedby", ref)
@@ -632,7 +632,7 @@ func (*CaVerificationCa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/verification_ca/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*CaVerificationCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/verification_ca/%s/usedby", ref)

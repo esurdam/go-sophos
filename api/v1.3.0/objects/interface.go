@@ -129,7 +129,7 @@ func (*InterfaceBridge) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/bridge/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceBridge) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/bridge/%s/usedby", ref)
@@ -199,7 +199,7 @@ func (*InterfaceEthernet) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ethernet/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceEthernet) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ethernet/%s/usedby", ref)
@@ -263,7 +263,7 @@ func (*InterfaceGroup) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/group/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/group/%s/usedby", ref)
@@ -306,7 +306,7 @@ func (*InterfacePpp3G) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePpp3G) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ppp3g/%s/usedby", ref)
@@ -346,7 +346,7 @@ func (*InterfacePppmodem) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppmodem) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppmodem/%s/usedby", ref)
@@ -386,7 +386,7 @@ func (*InterfacePppoa) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppoa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s/usedby", ref)
@@ -426,7 +426,7 @@ func (*InterfacePppoe) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoe/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfacePppoe) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoe/%s/usedby", ref)
@@ -466,7 +466,7 @@ func (*InterfaceTunnel) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/tunnel/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceTunnel) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/tunnel/%s/usedby", ref)
@@ -538,7 +538,7 @@ func (*InterfaceVlan) PutPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/vlan/%s", ref)
 }
 
-// UsedByPath implements sophos.Object
+// UsedByPath implements sophos.UsedObject
 // Returns the objects and the nodes that use the object with the given ref
 func (*InterfaceVlan) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/vlan/%s/usedby", ref)
