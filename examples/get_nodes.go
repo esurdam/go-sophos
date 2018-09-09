@@ -64,7 +64,6 @@ func main() {
 	}
 	fmt.Println(swag.Paths)
 
-
 	fmt.Println(`
 	DNS Get:
 	`)

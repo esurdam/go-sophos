@@ -1,6 +1,5 @@
 package sophos
 
-
 // Definition represents a Swagger API endpoint
 // You can use the Swagger API Documents to identify all the different RESTful API end
 // points with descriptions for each object and node.

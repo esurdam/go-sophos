@@ -270,6 +270,12 @@ func TestNew(t *testing.T) {
 	}
 }
 
+type faceClient struct{}
+
+func (faceClient) Do(req *http.Request) (resp *http.Response, err error) {
+	return nil, errors.New("should error")
+}
+
 func TestClient_Do(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
@@ -284,9 +290,10 @@ func TestClient_Do(t *testing.T) {
 		t.Error("should have error since bad errOption")
 	}
 
+	sophos.DefaultHTTPClient = faceClient{}
 	_, err = client.Do("GET", "/api/error", nil)
 	if err == nil {
-		t.Error("should have error since bad errOption")
+		t.Error("should have error since bad client")
 	}
 }
 

@@ -1,8 +1,9 @@
 package sophos_test
 
 import (
-	"github.com/esurdam/go-sophos"
 	"testing"
+
+	"github.com/esurdam/go-sophos"
 )
 
 func TestIsReference(t *testing.T) {

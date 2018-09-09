@@ -11,7 +11,14 @@ import (
 )
 
 // DefaultHTTPClient is the default http.Client used. Caller can modify Client (e.g. to allow SkipInsecure)
-var DefaultHTTPClient = &http.Client{}
+var DefaultHTTPClient HTTPClient
+
+// HttpClient is an interface which represents an http.Client
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
+func init() { DefaultHTTPClient = &http.Client{} }
 
 // ClientInterface represents a Sophos 9 REST API client
 type ClientInterface interface {
@@ -65,10 +72,12 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Res
 	}
 
 	res, err := DefaultHTTPClient.Do(req)
-	if err != nil || !(res.StatusCode >= 200 && res.StatusCode <= 204) {
-		var status string
-		if res != nil { status = res.Status }
-		return &Response{res}, fmt.Errorf("client do: error from server: %s", status)
+	if err != nil {
+		return &Response{&http.Response{Request: req}}, err
+	}
+
+	if !(res.StatusCode >= 200 && res.StatusCode <= 204) {
+		return &Response{res}, fmt.Errorf("client do: error from server: %s", res.Status)
 	}
 
 	return &Response{res}, nil
