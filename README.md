@@ -8,7 +8,7 @@
 
 A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go. 
 
-### Prerequisites
+## Prerequisites
 
 The Sophos UTM REST API must be enabled in Administrator settings.
 
@@ -16,7 +16,7 @@ Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDF
 
 Api types and functions are generated and versioned against UTM's declared Restd version.
 
-### Usage
+## Usage
 
 ```bash
 go get github.com/esurdam/go-sophos
