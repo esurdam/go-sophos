@@ -14,7 +14,7 @@ The Sophos UTM REST API must be enabled in Administrator settings.
 
 Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en).
 
-Api types and functions are generated and versioned against UTM's declared Restd version.
+Api types and functions are [generated](#generating-types) and versioned against UTM's declared Restd version.
 
 ## Usage
 
@@ -95,7 +95,7 @@ err = wap.Update(client)
 
 ```
 
-You can get the whole UTM node tree as an object as well:
+You can get the whole UTM node tree as an [object](#objects) as well:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -151,7 +151,7 @@ make test
 ```
 
 ## Todo
-- [x] Add [nodes](nodes) examples in README
+- [x] Add [nodes](nodes.go) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
 - [x] Create a wrapper Client for REST objects `client.Get(&nodes)` 
 
