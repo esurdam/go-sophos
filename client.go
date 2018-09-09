@@ -65,12 +65,10 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (*Res
 	}
 
 	res, err := DefaultHTTPClient.Do(req)
-	if err != nil {
-		return &Response{&http.Response{Request: req}}, err
-	}
-
-	if !(res.StatusCode >= 200 && res.StatusCode <= 204) {
-		return &Response{res}, fmt.Errorf("client do: error from server: %s", res.Status)
+	if err != nil || !(res.StatusCode >= 200 && res.StatusCode <= 204) {
+		var status string
+		if res != nil { status = res.Status }
+		return &Response{res}, fmt.Errorf("client do: error from server: %s", status)
 	}
 
 	return &Response{res}, nil

@@ -27,6 +27,12 @@ func setupTestCase(t *testing.T) func(t *testing.T) {
 			json.NewEncoder(w).Encode(map[string]sophos.MethodMap{})
 			return
 		}
+
+		w.Header().Set("Content-Type", "application/json")
+		if r.URL.Path == "/api/error" {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
 		json.NewEncoder(w).Encode(dnsMock{})
 	}))
 	sophos.DefaultHTTPClient = ts.Client()
@@ -274,6 +280,11 @@ func TestClient_Do(t *testing.T) {
 	}
 
 	_, err = client.Do("GET", "/api", nil, errOption)
+	if err == nil {
+		t.Error("should have error since bad errOption")
+	}
+
+	_, err = client.Do("GET", "/api/error", nil)
 	if err == nil {
 		t.Error("should have error since bad errOption")
 	}
