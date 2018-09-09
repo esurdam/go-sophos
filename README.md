@@ -68,7 +68,7 @@ err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsM
 
 ### Nodes
 
-Nodes are represented as pacakage level functions:
+Nodes are interacted with using pacakage level functions:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
@@ -80,7 +80,7 @@ fmt.Println(v)
 err = nodes.UpdateWebadminPort(client, 4444)
 ```
 
-Also as types with syntactic sugar:
+Or as struct types with syntactic sugar around the functions, as represented by the [Node](nodes.go#L24) interface:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
@@ -109,9 +109,9 @@ nodes.LicensingActiveIps
 
 ### Objects
 
-Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go) generated from a [Definition](definition.go) and contains its generated Objects.
+Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go#L7) generated from a [Definition](definition.go) and contains its generated Objects.
 
-Objects implement the `RestObject` and sometimes `UsedObject` interfaces:
+Objects implement the [RestObject](nodes.go#L71) and sometimes [UsedObject](nodes.go#L42) interfaces:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -120,7 +120,7 @@ var dns objects.Dns
 err := client.GetObject(&dns)
 ```
 
-Notice that some objects are pluralized and only implement the `RestGetter` interface:
+Notice that some objects are pluralized and only implement the [RestGetter](nodes.go#L80) interface:
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
