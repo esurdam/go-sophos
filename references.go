@@ -11,27 +11,27 @@ type Reference string
 
 const (
 	// RefServiceAny is a well-known Reference referring to any UTM Service
-	RefServiceAny Reference = "REF_ServiceAny"
+	RefServiceAny = "REF_ServiceAny"
 	// RefNetworkAny is a well-known Reference referring to any UTM Network
-	RefNetworkAny Reference = "REF_NetworkAny"
+	RefNetworkAny = "REF_NetworkAny"
 	// RefNtpPool is a well-known Reference referring to the NTP Pool
-	RefNtpPool Reference = "REF_NtpPool"
+	RefNtpPool = "REF_NtpPool"
 	// RefDefaultSuperAdminGroup is a Reference to the UTM's Default Super Admin Group
-	RefDefaultSuperAdminGroup Reference = "REF_DefaultSuperAdminGroup"
+	RefDefaultSuperAdminGroup = "REF_DefaultSuperAdminGroup"
 	// RefDefaultServiceWebAdmin is a well-known Reference
-	RefDefaultServiceWebAdmin Reference = "REF_DefaultServiceWebadmin"
+	RefDefaultServiceWebAdmin = "REF_DefaultServiceWebadmin"
 	// RefDefaultServiceSpamrelease is a well-known Reference
-	RefDefaultServiceSpamrelease Reference = "REF_DefaultServiceSpamrelease"
+	RefDefaultServiceSpamrelease = "REF_DefaultServiceSpamrelease"
 	// RefDefaultHTTPCFFBlockAction is a well-known Reference
-	RefDefaultHTTPCFFBlockAction Reference = "REF_DefaultHTTPCFFBlockAction"
+	RefDefaultHTTPCFFBlockAction = "REF_DefaultHTTPCFFBlockAction"
 	// RefDefaultHTTPPACFile is a well-known Reference
-	RefDefaultHTTPPACFile Reference = "REF_DefaultHTTPPACFile"
+	RefDefaultHTTPPACFile = "REF_DefaultHTTPPACFile"
 	// RefDefaultHTTPProfile is a well-known Reference
-	RefDefaultHTTPProfile Reference = "REF_DefaultHTTPProfile"
+	RefDefaultHTTPProfile = "REF_DefaultHTTPProfile"
 	// RefDefaultPPTPPool is a well-known Reference
-	RefDefaultPPTPPool Reference = "REF_DefaultPPTPPool"
+	RefDefaultPPTPPool = "REF_DefaultPPTPPool"
 	// RefDefaultSSLPool is a well-known Reference
-	RefDefaultSSLPool Reference = "REF_DefaultSSLPool"
+	RefDefaultSSLPool = "REF_DefaultSSLPool"
 )
 
 const refPrefix = "REF_"
