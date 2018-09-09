@@ -50,21 +50,6 @@ fmt.Println(port)
 // Output: 4848
 ```
 
-Deleting a packet filter rule with reference `REF_PacPacXYZ`. (from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)):
-
-This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object:
-```go
-_, err := client.Delete(
-    "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
-    sophos.WithSessionClose, 
-    sophos.AutoResolveErrsMode,
-)
-
-// OR as a RestObject
-pf := objects.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
-err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
-```
-
 ### Nodes
 
 Nodes are interacted with using pacakage level functions:
@@ -163,10 +148,61 @@ d := objects.Dns{}.Definition()
 swag, _ := d.GetSwag(client)
 ```
 
-Creating a PacketFilter (from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)):
+
+## Examples
+
+Examples from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en).
+
+Deleting a packet filter rule with reference `REF_PacPacXYZ`:
+
+This example uses the `X-Restd-Err-Ack: all` header to automatically approve the deletion of the object:
+```go
+import "github.com/esurdam/go-sophos"
+
+client, _ := sophos.New(
+    "192.168.0.1:4848", 
+    sophos.WithBasicAuth("user", "pass"),
+)
+
+_, err := client.Delete(
+    "api/objects/packetfilter/packetfilter/REF_PacPacXYZ", 
+    sophos.WithSessionClose, 
+    sophos.AutoResolveErrsMode,
+)
+```
+
+The same as above but using objects: [[example](examples/delete_packetfilter.go)]
 
 ```go
+import "github.com/esurdam/go-sophos"
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+client, _ := sophos.New(
+    "192.168.0.1:4848", 
+    sophos.WithBasicAuth("user", "pass"),
+)
+
+// object knows api route
+pf := objects.PacketfilterPacketfilter{
+	Reference: "REF_PacPacXYZ"
+}
+
+err := client.DeleteObject(&pf, 
+	sophos.WithSessionClose, 
+	sophos.AutoResolveErrsMode
+)
+```
+
+Creating a PacketFilter: [[example](examples/create_packetfilter.go)]
+
+```go
+import "github.com/esurdam/go-sophos"
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+client, _ := sophos.New(
+    "192.168.0.1:4848", 
+    sophos.WithBasicAuth("user", "pass"),
+)
 
 pf := objects.PacketfilterPacketfilter{
     Action:       "accept",
@@ -183,6 +219,7 @@ err := client.PostObject(&pf,
 	sophos.WithSessionClose,
 )
 ```
+
 ## Generating Types
 
 Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in the [api](api/v1.3.0) which contain structs and helper functions corresponding to UTM API definitions.
