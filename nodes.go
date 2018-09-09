@@ -43,7 +43,6 @@ type Object interface {
 type UsedBy struct {
 	Nodes   []Reference
 	Objects []Reference
-	d       UsedObject
 }
 
 // UsedObject is an interface for Objects that can be used by other Objects and Nodes.
