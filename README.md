@@ -109,7 +109,9 @@ nodes.LicensingActiveIps
 
 ### Objects
 
-Objects implement the `RestObject` interface:
+Each file in the objects dir represents an [Endpoint](nodes.go) and contains its generated Objects.
+
+Objects implement the `RestObject` and sometimes `UsedObject` interfaces:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -119,7 +121,21 @@ err := client.GetObject(&dns)
 fmt.Printf("%v", dns)
 ```
 
-Requesting an Object Definition:
+Notice that some objects are pluralized and only implement the `RestGetter` interface:
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+var ss objects.DnsRoutes
+_ = client.GetObject(&ss)
+
+// Each individual DnsRoute is therefore a RestObject and UsedObject
+for _, s := range ss {
+    ub, _ := client.GetUsedBy(&s)
+    fmt.Printf("DNS ROUTE: %s [%s]\n  Used By Nodes: %v\n  Used by Objects: %v\n",s.Name, s.Reference, ub.Nodes, ub.Objects)
+}
+```
+
+Requesting an Endpoint Definition:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -129,6 +145,9 @@ d := dns.Definition()
 
 swag, _ := d.GetSwag(client)
 fmt.Printf("%v", swag)
+
+// or with sugar
+swag, _ := client.GetEndpointSwag(dns)
 ```
 
 ## Generating Types

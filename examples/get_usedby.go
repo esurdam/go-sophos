@@ -51,6 +51,4 @@ func main() {
 		}
 		fmt.Printf("DNS ROUTE: %s [%s]\n  Used By Nodes: %v\n  Used by Objects: %v\n",s.Name, s.Reference, ub.Nodes, ub.Objects)
 	}
-
-
 }
