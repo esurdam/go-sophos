@@ -194,20 +194,24 @@ func (c Client) Endpoint() string {
 
 // Request generates a new *http.Request that is modified with the Client's Options (set on New)
 // and with the provided Options.
-func (c *Client) Request(method, path string, body io.Reader, options ...Option) (*http.Request, error) {
-	req, err := http.NewRequest(method, c.endpoint+"/", body)
+func Request(method, path string, body io.Reader, options ...Option) (*http.Request, error) {
+	req, err := http.NewRequest(method, path, body)
 	if err != nil {
 		return nil, fmt.Errorf("request: error generating new http.Request: %s", err.Error())
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.URL.Path = path
 
-	opts := append(c.opts, options...)
-	if err := evaluateOpts(req, opts); err != nil {
+	if err := evaluateOpts(req, options); err != nil {
 		return req, fmt.Errorf("request: error evaluation Options: %s", err.Error())
 	}
 
 	return req, nil
+}
+
+// Request generates a new *http.Request that is modified with the Client's Options (set on New)
+// and with the provided Options.
+func (c *Client) Request(method, path string, body io.Reader, options ...Option) (*http.Request, error) {
+	return Request(method, c.endpoint+path, body, append(c.opts, options...)...)
 }
 
 // GetObject implements TypeClient
