@@ -6,8 +6,6 @@ import (
 	"testing"
 
 	"github.com/esurdam/go-sophos"
-
-	"github.com/esurdam/go-sophos/types"
 )
 
 func TestResponse_MarshalTo(t *testing.T) {
@@ -15,13 +13,13 @@ func TestResponse_MarshalTo(t *testing.T) {
 	defer td(t)
 
 	r := httptest.NewRecorder()
-	byt, _ := json.Marshal(types.Dns{
+	byt, _ := json.Marshal(dnsMock{
 		Email: "test@test.com",
 	})
 	r.Body.Write(byt)
 
 	var res sophos.Response
-	var dns types.Dns
+	var dns dnsMock
 
 	res.Response = r.Result()
 	err := res.MarshalTo(&dns)

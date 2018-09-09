@@ -8,8 +8,6 @@ GENOUTPUT="types/generated.go"
 all: gen test
 gen: build fmt
 build:
-	(rm types/*.go || echo "")
-	(rm nodes/*.go || echo "")
 	$(GOCMD) run bin/gen.go
 fmt:
 	$(GOFMT) -s -w .

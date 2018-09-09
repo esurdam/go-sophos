@@ -14,6 +14,8 @@ The Sophos UTM REST API must be enabled in Administrator settings.
 
 Familiarity with the [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en).
 
+Api types and functions are generated and versioned against UTM's declared Restd version.
+
 ### Usage
 
 ```bash
@@ -32,8 +34,7 @@ client, _ := sophos.New(
 )
 ```
 
-Requesting the current port of the WebAdmin:
-
+Requesting the current port of the WebAdmin (see Nodes for more usage):
 ```go
 import "github.com/esurdam/go-sophos"
 
@@ -47,18 +48,6 @@ var port int
 res.MarshalTo(&port)
 fmt.Println(port)
 // Output: 4848
-```
-
-Requesting a REST type:
-
-```go
-import "github.com/esurdam/go-sophos/types"
-
-var nodes types.Nodes
-_ := client.GetObject(&nodes)
-
-// active Ips
-nodes.LicensingActiveIps 
 ```
 
 Deleting a packet filter rule with reference `REF_PacPacXYZ`.
@@ -77,10 +66,65 @@ pf := types.PacketfilterPacketfilter{Reference: "REF_PacPacXYZ"}
 err := client.DeleteObject(&pf, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
 ```
 
+### Nodes
+
+Nodes are represented as pacakage level functions:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
+
+v, err := nodes.GetWebadminPort(client)
+fmt.Println(v)
+// Output: 4848
+
+err = nodes.UpdateWebadminPort(client, 4444)
+```
+
+Also as types with syntactic sugar:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
+
+var wap nodes.WebadminPort
+err := wap.Get(client)
+fmt.Println(wap.Value)
+// Output: 4848
+
+wap.Value = 4444
+err = wap.Update(client)
+```
+
+You can get the whole UTM node tree as well:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/nodes"
+
+var wap nodes.WebadminPort
+err := wap.Get(client)
+fmt.Println(wap.Value)
+// Output: 4848
+
+wap.Value = 4444
+err = wap.Update(client)
+```
+### Objects
+
+Requesting a REST object:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/types"
+
+var nodes types.Nodes
+_ := client.GetObject(&nodes)
+
+// active Ips
+nodes.LicensingActiveIps 
+```
+
 Requesting a Definition:
 
 ```go
-import "github.com/esurdam/go-sophos/types"
+import "github.com/esurdam/go-sophos/api/v1.3.0/types"
 
 var nodes types.Nodes
 d := nodes.Definition()
@@ -89,11 +133,11 @@ swag, _ := d.GetSwag(client)
 fmt.Printf("%v", swag)
 ```
 
-
 ## Generating Types
 
 Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in [types](types) which contain structs corresponding to UTM API definitions.
 
+Generated pacakages are versioned, feel free to generate against an older version and submit.
 
 ```bash
 export ENDPOINT=192.168.0.1:4848
@@ -102,8 +146,6 @@ export TOKEN=abcde1234
 make
 ```
 
-
-
 ## Testing
 
 ```bash
@@ -111,7 +153,7 @@ make test
 ```
 
 ## Todo
-- [ ] Add [nodes](nodes) examples in README
+- [x] Add [nodes](nodes) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
 - [x] Create a wrapper Client for REST objects `client.Get(&nodes)` 
 
