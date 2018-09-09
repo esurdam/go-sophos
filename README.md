@@ -118,7 +118,6 @@ import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
 var dns objects.Dns
 err := client.GetObject(&dns)
-fmt.Printf("%v", dns)
 ```
 
 Notice that some objects are pluralized and only implement the `RestGetter` interface:
@@ -132,22 +131,37 @@ _ = client.GetObject(&ss)
 for _, s := range ss {
     ub, _ := client.GetUsedBy(&s)
     fmt.Printf("DNS ROUTE: %s [%s]\n  Used By Nodes: %v\n  Used by Objects: %v\n",s.Name, s.Reference, ub.Nodes, ub.Objects)
+    // OUTPUT: DNS ROUTE: sophos.boom.local [REF_DnsRouBoomloca]
+    //             Used By Nodes: [dns.routes]
+    //             Used by Objects: []
 }
 ```
 
-Requesting an Endpoint Definition:
+Note that Endpoint types contain their [Definition](definition.go):
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
+fmt.Printf("%#v", objects.Dns{}.Definition())
+// Output: sophos.Definition{
+//  Description:"dns", 
+//  Name:"dns", 
+//  Link:"/api/definitions/dns"
+// }
+```
+
+Requesting an Endpoint's Swag:
+
+```go
+import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
+
+// with sugar
 var dns objects.Dns
-d := dns.Definition()
-
-swag, _ := d.GetSwag(client)
-fmt.Printf("%v", swag)
-
-// or with sugar
 swag, _ := client.GetEndpointSwag(dns)
+
+// without sweets
+d := objects.Dns{}.Definition()
+swag, _ := d.GetSwag(client)
 ```
 
 ## Generating Types
