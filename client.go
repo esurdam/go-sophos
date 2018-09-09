@@ -22,17 +22,22 @@ func init() { DefaultHTTPClient = &http.Client{} }
 
 // ClientInterface represents a Sophos 9 REST API client
 type ClientInterface interface {
-	GetObject(o RestGetter, options ...Option) error
-	PutObject(o RestObject, options ...Option) error
-	PatchObject(o RestObject, options ...Option) error
-	PostObject(o RestObject, options ...Option) error
-	DeleteObject(o RestObject, options ...Option) error
-
 	Get(path string, options ...Option) (*Response, error)
 	Put(path string, body io.Reader, options ...Option) (*Response, error)
 	Post(path string, body io.Reader, options ...Option) (*Response, error)
 	Patch(path string, body io.Reader, options ...Option) (*Response, error)
 	Delete(path string, options ...Option) (*Response, error)
+}
+
+// ObjectClient is an interface with syntactic sugar dealing with Objects
+type ObjectClient interface {
+	GetObject(o RestGetter, options ...Option) error
+	PutObject(o RestObject, options ...Option) error
+	PatchObject(o RestObject, options ...Option) error
+	PostObject(o RestObject, options ...Option) error
+	DeleteObject(o RestObject, options ...Option) error
+	GetUsedBy(o UsedObject, options ...Option) (*UsedBy, error)
+	GetEndpointSwag(e Endpoint, options ...Option) (Swag, error)
 }
 
 // Client implements ClientInterface to provide a REST client
@@ -42,7 +47,9 @@ type Client struct {
 	opts     []Option
 }
 
-var _ ClientInterface = Client{}
+var ensureInterface Client
+var _ ClientInterface = ensureInterface
+var _ ObjectClient = ensureInterface
 
 // ErrRefRequired is an error that is returned when the resource requires a Referencee to fetch data
 var ErrRefRequired = errors.New("client: Reference is required")
@@ -241,6 +248,12 @@ func (c Client) DeleteObject(o RestObject, options ...Option) error {
 	}
 	_, err := c.Delete(o.DeletePath(ref), options...)
 	return err
+}
+
+// GetEndpointSwag is syntactic sugar around an Endpoint Definition's GetSwag method.
+func (c Client) GetEndpointSwag(e Endpoint, options ...Option) (Swag, error) {
+	def := e.Definition()
+	return def.GetSwag(&c)
 }
 
 // GetUsedBy GETs the Objects UsedBy data
