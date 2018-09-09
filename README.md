@@ -152,7 +152,7 @@ swag, _ := client.GetEndpointSwag(dns)
 
 ## Generating Types
 
-Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in [types](types) which contain structs corresponding to UTM API definitions.
+Sophos types are automatically generated using [bin/gen.go](bin/gen.go) which queries the UTM `api/definitions` path to generate all the files in the [api](api/v1.3.0) which contain structs and helper functions corresponding to UTM API definitions.
 
 Generated pacakages are versioned, feel free to generate against an older version and submit.
 
