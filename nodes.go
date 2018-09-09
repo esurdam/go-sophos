@@ -54,6 +54,7 @@ type RestObject interface {
 }
 
 // RestGetter is an interface ensuring a Reference is passed when required
+// Additionally used to GET pluralized Objects like objects.AmazonVpcConnections
 type RestGetter interface {
 	GetPath() string             // GetPath returns the GET path of the Object, will sometimes require Reference
 	RefRequired() (string, bool) // RefRequired returns true if Ref required
