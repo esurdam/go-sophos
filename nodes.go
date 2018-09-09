@@ -37,7 +37,7 @@ type Object interface {
 	GetType() string
 }
 
-// UsedBy represents which Objects and Nodes use this UsedObject
+// UsedBy represents which Objects and Nodes use this RestObject
 type UsedBy struct {
 	Nodes   []Reference
 	Objects []Reference
