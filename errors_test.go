@@ -90,4 +90,16 @@ func TestIsFatalErr(t *testing.T) {
 			}
 		})
 	}
+
+	// what an error is demo
+	var err error
+	err = &sophos.Errors{{Fatal: 1, Name: "boom boom"}}
+	for _, e := range *err.(*sophos.Errors) {
+		if !e.IsFatal() {
+			t.Error("error should be fatal")
+		}
+		if e.Name != "boom boom" {
+			t.Error("error should be boom boom")
+		}
+	}
 }

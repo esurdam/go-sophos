@@ -81,11 +81,11 @@ func (ee Errors) IsFatal() bool {
 func (ee Errors) Error() string {
 	if len(ee) == 0 {
 		// we should not get here since we will only return Errors when len(Errors) > 0
-		// bu in the event we do
+		// but in the event we do
 		return fmt.Sprintf("error accessing UTM interface: check status code. No Errors were retuned in response body.")
 	}
 	for _, e := range ee {
-		// return the first Fatal error since its most important
+		// return the first Fatal error message since it is most relevant
 		if e.IsFatal() {
 			return e.Error()
 		}
