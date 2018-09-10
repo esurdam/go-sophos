@@ -95,7 +95,7 @@ nodes.LicensingActiveIps
 
 Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go#L7) generated from a [Definition](definition.go) and contains its generated Objects.
 
-Objects implement the [RestObject](nodes.go) and sometimes [UsedObject](nodes.go) interfaces:
+Objects implement the [RestObject](nodes.go) interface:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -111,7 +111,7 @@ import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 var ss objects.DnsRoutes
 _ = client.GetObject(&ss)
 
-// Each individual DnsRoute is therefore a RestObject and UsedObject
+// Each individual DnsRoute is therefore a RestObject
 for _, s := range ss {
     ub, _ := client.GetUsedBy(&s)
     fmt.Printf("DNS ROUTE: %s [%s]\n  Used By Nodes: %v\n  Used by Objects: %v\n",s.Name, s.Reference, ub.Nodes, ub.Objects)
@@ -242,7 +242,7 @@ make test
 ```
 
 ## Todo
-- [ ] Respond with Errors to ObjectClient functions for caller inspection
+- [x] Respond with Errors to ObjectClient functions for caller inspection
 - [x] Finish adding all example from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
 - [x] Add [nodes](nodes.go) examples in README
 - [x] Add PUT, POST, PATCH and DELETE methods to generated objects
