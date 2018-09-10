@@ -18,6 +18,8 @@ API types and functions are [generated](#generating-types) and versioned against
 
 ## Usage
 
+API is stable as of 0.1.0
+
 ```bash
 go get github.com/esurdam/go-sophos
 ```
