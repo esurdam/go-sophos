@@ -67,8 +67,8 @@ type AweNetworkDeviceAssociationGroups []AweNetworkDeviceAssociationGroup
 // AweNetworkDeviceAssociationGroup represents a UTM group
 type AweNetworkDeviceAssociationGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -129,8 +129,8 @@ type AweNetworkDeviceAssociationMeshRoles []AweNetworkDeviceAssociationMeshRole
 // AweNetworkDeviceAssociationMeshRole represents a UTM assign device to mesh network
 type AweNetworkDeviceAssociationMeshRole struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	// Role can be one of: []string{"point", "portal"}
 	// Role default value is "portal"
 	Role    string `json:"role"`

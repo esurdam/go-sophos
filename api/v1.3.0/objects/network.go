@@ -259,35 +259,35 @@ type NetworkAvailabilityGroups []NetworkAvailabilityGroup
 
 // NetworkAvailabilityGroup represents a UTM availability group
 type NetworkAvailabilityGroup struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	ObjectType string        `json:"_type"`
-	CheckPort  int           `json:"check_port"`
-	Comment    string        `json:"comment"`
-	Members    []interface{} `json:"members"`
-	// Resolved default value is false
-	Resolved bool `json:"resolved"`
-	Timeout2 int  `json:"timeout2"`
-	// Interface description: REF(interface/*)
-	// Interface default value is ""
-	Interface string `json:"interface"`
-	// Resolved6 default value is false
-	Resolved6 bool `json:"resolved6"`
+	Locked     string `json:"_locked"`
+	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	// CheckType can be one of: []string{"icmp", "udp", "tcp", "http", "https"}
+	// CheckType default value is "icmp"
+	CheckType string `json:"check_type"`
+	Comment   string `json:"comment"`
 	// Address description: (IPADDR)
 	// Address default value is "0.0.0.0"
 	Address string `json:"address"`
 	// Address6 description: (IP6ADDR)
 	// Address6 default value is "::"
 	Address6 string `json:"address6"`
+	// Resolved default value is false
+	Resolved bool          `json:"resolved"`
+	Timeout2 int           `json:"timeout2"`
+	Members  []interface{} `json:"members"`
+	// Sticky default value is true
+	Sticky bool `json:"sticky"`
 	// CheckData default value is ""
 	CheckData string `json:"check_data"`
-	// CheckType can be one of: []string{"icmp", "udp", "tcp", "http", "https"}
-	// CheckType default value is "icmp"
-	CheckType string `json:"check_type"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// Resolved6 default value is false
+	Resolved6 bool   `json:"resolved6"`
+	Timeout   int    `json:"timeout"`
+	CheckPort int    `json:"check_port"`
 	Name      string `json:"name"`
-	// Sticky default value is true
-	Sticky  bool `json:"sticky"`
-	Timeout int  `json:"timeout"`
 }
 
 var _ sophos.RestGetter = &NetworkAvailabilityGroup{}
@@ -824,8 +824,10 @@ type NetworkMulticasts []NetworkMulticast
 // NetworkMulticast represents a UTM multicast group
 type NetworkMulticast struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Name       string `json:"name"`
+	Netmask    int    `json:"netmask"`
 	// Resolved default value is true
 	Resolved bool `json:"resolved"`
 	// Address description: (IPADDR)
@@ -834,8 +836,6 @@ type NetworkMulticast struct {
 	// Interface description: REF(interface/*)
 	// Interface default value is ""
 	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Netmask   int    `json:"netmask"`
 }
 
 var _ sophos.RestGetter = &NetworkMulticast{}

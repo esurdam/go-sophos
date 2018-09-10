@@ -61,15 +61,15 @@ type CronAts []CronAt
 // CronAt represents a UTM scheduled job
 type CronAt struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// Time description: (TIME)
-	Time    string `json:"time"`
-	Command string `json:"command"`
-	Comment string `json:"comment"`
+	Reference  string `json:"_ref"`
+	Command    string `json:"command"`
+	Comment    string `json:"comment"`
 	// Date description: (DATE)
 	Date string `json:"date"`
 	Name string `json:"name"`
+	// Time description: (TIME)
+	Time string `json:"time"`
 }
 
 var _ sophos.RestGetter = &CronAt{}
@@ -124,8 +124,8 @@ type CronGroups []CronGroup
 // CronGroup represents a UTM group
 type CronGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }

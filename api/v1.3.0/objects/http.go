@@ -377,14 +377,14 @@ type HttpDeviceAuths []HttpDeviceAuth
 // HttpDeviceAuth represents a UTM device-specific authentication
 type HttpDeviceAuth struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
+	// AuthMode can be one of: []string{"none", "aua", "edir_sso", "ntlm", "opendirectory_auth", "browser", "agent"}
+	AuthMode string `json:"auth_mode"`
+	Comment  string `json:"comment"`
 	// DeviceType can be one of: []string{"Windows", "Mac OS X", "Linux", "iOS", "Android", "Kindle", "Blackberry"}
 	DeviceType string `json:"device_type"`
 	Name       string `json:"name"`
-	// AuthMode can be one of: []string{"none", "aua", "edir_sso", "ntlm", "opendirectory_auth", "browser", "agent"}
-	AuthMode string `json:"auth_mode"`
 }
 
 var _ sophos.RestGetter = &HttpDeviceAuth{}
@@ -441,8 +441,8 @@ type HttpDomainRegexs []HttpDomainRegex
 // HttpDomainRegex represents a UTM whitelist/blacklist
 type HttpDomainRegex struct {
 	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
 	ObjectType string        `json:"_type"`
+	Reference  string        `json:"_ref"`
 	Comment    string        `json:"comment"`
 	Domain     []interface{} `json:"domain"`
 	// IncludeSubdomains default value is false
@@ -582,8 +582,8 @@ type HttpGroups []HttpGroup
 // HttpGroup represents a UTM group
 type HttpGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -640,8 +640,9 @@ type HttpLocalSites []HttpLocalSite
 // HttpLocalSite represents a UTM local site list entry
 type HttpLocalSite struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	// IncludeSubdomains default value is false
 	IncludeSubdomains bool   `json:"include_subdomains"`
 	Name              string `json:"name"`
@@ -653,7 +654,6 @@ type HttpLocalSite struct {
 	// Category description: REF(http/sp_subcat)
 	// Category default value is ""
 	Category string `json:"category"`
-	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &HttpLocalSite{}
@@ -710,8 +710,8 @@ type HttpLslTags []HttpLslTag
 // HttpLslTag represents a UTM tags
 type HttpLslTag struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -832,17 +832,17 @@ type HttpParentProxys []HttpParentProxy
 
 // HttpParentProxy represents a UTM parent web proxy
 type HttpParentProxy struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	ObjectType string        `json:"_type"`
-	Comment    string        `json:"comment"`
-	Match      []interface{} `json:"match"`
-	Name       string        `json:"name"`
-	Pass       string        `json:"pass"`
-	Port       int           `json:"port"`
+	Locked     string `json:"_locked"`
+	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	// Target description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
-	Target string `json:"target"`
-	User   string `json:"user"`
+	Target  string        `json:"target"`
+	User    string        `json:"user"`
+	Comment string        `json:"comment"`
+	Match   []interface{} `json:"match"`
+	Name    string        `json:"name"`
+	Pass    string        `json:"pass"`
+	Port    int           `json:"port"`
 }
 
 var _ sophos.RestGetter = &HttpParentProxy{}

@@ -74,15 +74,15 @@ type GeoipDstexceptions []GeoipDstexception
 // GeoipDstexception represents a UTM incoming exceptions
 type GeoipDstexception struct {
 	Locked              string        `json:"_locked"`
-	Reference           string        `json:"_ref"`
 	ObjectType          string        `json:"_type"`
-	Countries           []interface{} `json:"countries"`
+	Reference           string        `json:"_ref"`
 	DestinationNetworks []interface{} `json:"destination_networks"`
 	Name                string        `json:"name"`
 	Services            []interface{} `json:"services"`
 	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
+	Status    bool          `json:"status"`
+	Comment   string        `json:"comment"`
+	Countries []interface{} `json:"countries"`
 }
 
 var _ sophos.RestGetter = &GeoipDstexception{}
@@ -203,8 +203,8 @@ type GeoipGroups []GeoipGroup
 // GeoipGroup represents a UTM group
 type GeoipGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -261,15 +261,15 @@ type GeoipSrcexceptions []GeoipSrcexception
 // GeoipSrcexception represents a UTM outgoing exceptions
 type GeoipSrcexception struct {
 	Locked         string        `json:"_locked"`
-	Reference      string        `json:"_ref"`
 	ObjectType     string        `json:"_type"`
+	Reference      string        `json:"_ref"`
+	Comment        string        `json:"comment"`
+	Countries      []interface{} `json:"countries"`
 	Name           string        `json:"name"`
 	Services       []interface{} `json:"services"`
 	SourceNetworks []interface{} `json:"source_networks"`
 	// Status default value is false
-	Status    bool          `json:"status"`
-	Comment   string        `json:"comment"`
-	Countries []interface{} `json:"countries"`
+	Status bool `json:"status"`
 }
 
 var _ sophos.RestGetter = &GeoipSrcexception{}

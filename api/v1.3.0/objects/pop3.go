@@ -100,14 +100,14 @@ type Pop3Accounts []Pop3Account
 // Pop3Account represents a UTM POP3 account
 type Pop3Account struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
 	Name       string `json:"name"`
 	Password   string `json:"password"`
 	// Server description: REF(pop3/server)
 	Server   string `json:"server"`
 	Username string `json:"username"`
+	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &Pop3Account{}
@@ -164,15 +164,15 @@ type Pop3Exceptions []Pop3Exception
 // Pop3Exception represents a UTM POP3 filter exception
 type Pop3Exception struct {
 	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
 	ObjectType string        `json:"_type"`
-	Client     []interface{} `json:"client"`
+	Reference  string        `json:"_ref"`
 	Comment    string        `json:"comment"`
 	Name       string        `json:"name"`
 	Sender     []interface{} `json:"sender"`
 	Skiplist   []interface{} `json:"skiplist"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status bool          `json:"status"`
+	Client []interface{} `json:"client"`
 }
 
 var _ sophos.RestGetter = &Pop3Exception{}
@@ -229,8 +229,8 @@ type Pop3Groups []Pop3Group
 // Pop3Group represents a UTM group
 type Pop3Group struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -287,8 +287,8 @@ type Pop3Servers []Pop3Server
 // Pop3Server represents a UTM POP3 server
 type Pop3Server struct {
 	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
 	ObjectType string        `json:"_type"`
+	Reference  string        `json:"_ref"`
 	Comment    string        `json:"comment"`
 	Hosts      []interface{} `json:"hosts"`
 	Name       string        `json:"name"`

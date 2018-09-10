@@ -79,14 +79,14 @@ type IpsecRemoteAuthCas []IpsecRemoteAuthCa
 // IpsecRemoteAuthCa represents a UTM X509 CA and DN match
 type IpsecRemoteAuthCa struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
-	// VpnId default value is "C=*, ST=*, L=*, O=*, OU=*, CN=*, E=*"
-	VpnId string `json:"vpn_id"`
+	Reference  string `json:"_ref"`
 	// Certificate description: REF(ca/signing_ca), REF(ca/verification_ca)
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
+	Name        string `json:"name"`
+	// VpnId default value is "C=*, ST=*, L=*, O=*, OU=*, CN=*, E=*"
+	VpnId string `json:"vpn_id"`
 }
 
 var _ sophos.RestGetter = &IpsecRemoteAuthCa{}
@@ -143,8 +143,8 @@ type IpsecRemoteAuthGroups []IpsecRemoteAuthGroup
 // IpsecRemoteAuthGroup represents a UTM group
 type IpsecRemoteAuthGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -269,15 +269,15 @@ type IpsecRemoteAuthRsas []IpsecRemoteAuthRsa
 // IpsecRemoteAuthRsa represents a UTM RSA public key
 type IpsecRemoteAuthRsa struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	Name       string `json:"name"`
-	Pubkey     string `json:"pubkey"`
+	Reference  string `json:"_ref"`
 	// VpnId default value is ""
 	VpnId string `json:"vpn_id"`
 	// VpnIdType can be one of: []string{"ipv4_address", "fqdn", "user_fqdn"}
 	VpnIdType string `json:"vpn_id_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Pubkey    string `json:"pubkey"`
 }
 
 var _ sophos.RestGetter = &IpsecRemoteAuthRsa{}

@@ -67,8 +67,8 @@ type RouteGroups []RouteGroup
 // RouteGroup represents a UTM group
 type RouteGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -125,24 +125,24 @@ type RoutePolicys []RoutePolicy
 // RoutePolicy represents a UTM policy route
 type RoutePolicy struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	// Destination description: REF(network/*)
 	Destination string `json:"destination"`
-	Name        string `json:"name"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// Status default value is false
+	Status bool   `json:"status"`
+	Name   string `json:"name"`
 	// Service description: REF(service/*)
 	Service string `json:"service"`
 	// Source description: REF(network/*)
 	Source string `json:"source"`
-	// Status default value is false
-	Status bool `json:"status"`
 	// Target description: REF(/*)
 	Target string `json:"target"`
 	// Type can be one of: []string{"itf", "host"}
-	Type    string `json:"type"`
-	Comment string `json:"comment"`
-	// Interface description: REF(interface/*)
-	Interface string `json:"interface"`
+	Type string `json:"type"`
 }
 
 var _ sophos.RestGetter = &RoutePolicy{}
