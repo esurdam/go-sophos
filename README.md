@@ -221,7 +221,25 @@ err := client.PostObject(&pf,
 	sophos.WithSessionClose,
 )
 
-pf.Reference // successful creation will have unmarshalleed the Response 
+// successful creation will have unmarshalleed the Response
+pf.Reference  
+```
+
+Errors
+
+```go
+if err != nil {
+    // for modifying requests (PATCH, PUT, POST, DELETE), err returned may be of type *sophos.Errors
+    // see client.Do and Response type for how errors are parsed
+    err.(*sophos.Errors).Error() == err.Error()
+    sophos.IsFatalErr(err) == err.(*sophos.Errors).IsFatal()
+    
+    // view each individual error
+    for _, e := range *err.(*sophos.Errors) {
+    	e.Error() 
+    	e.IsFatal()
+    }
+}
 ```
 
 ## Generating Types

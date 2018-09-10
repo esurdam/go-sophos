@@ -1,5 +1,7 @@
 package sophos
 
+import "fmt"
+
 // An Error is returned from the Endpoint when errors occur
 // Confd validates all nodes and objects on change operations (e.g., create, update,
 // delete). When you execute a RESTful API call, you may trigger some validation errors.
@@ -38,6 +40,30 @@ func (e Error) IsFatal() bool {
 	return e.Fatal == 1
 }
 
+// IsFatalErr returns true if the error is an Error and is fatal
+func IsFatalErr(err error) bool {
+	switch err.(type) {
+	case *Errors:
+		return err.(*Errors).IsFatal()
+	case Errors:
+		return err.(Errors).IsFatal()
+	case *Error:
+		return err.(*Error).Fatal == 1
+	case Error:
+		return err.(Error).Fatal == 1
+	default:
+		return false
+	}
+}
+
+// Error implements error interface
+func (e Error) Error() string {
+	if e.IsFatal() {
+		return fmt.Sprintf("client do: FATAL error from UTM server: %s", e.Name)
+	}
+	return fmt.Sprintf("client do: error from UTM server: %s", e.Name)
+}
+
 // Errors is a slice of type Error which is returned from the api
 type Errors []Error
 
@@ -49,4 +75,22 @@ func (ee Errors) IsFatal() bool {
 		}
 	}
 	return false
+}
+
+// Error implements error interface
+func (ee Errors) Error() string {
+	if len(ee) == 0 {
+		// we should not get here since we will only return Errors when len(Errors) > 0
+		// but in the event we do
+		return fmt.Sprintf("error accessing UTM interface: check status code. No Errors were retuned in response body.")
+	}
+	for _, e := range ee {
+		// return the first Fatal error message since it is most relevant
+		if e.IsFatal() {
+			return e.Error()
+		}
+	}
+
+	// Otherwise just the first Error
+	return ee[0].Error()
 }
