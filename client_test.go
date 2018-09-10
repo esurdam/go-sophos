@@ -20,9 +20,14 @@ var errOption = func(r *http.Request) error {
 }
 
 func setupTestCase(t *testing.T) func(t *testing.T) {
-	t.Log("setup test case")
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		if r.Method == http.MethodPost {
+			w.WriteHeader(http.StatusCreated)
+			json.NewEncoder(w).Encode(map[string]sophos.MethodMap{})
+			return
+		}
+
 		if strings.HasPrefix(r.URL.Path, "/api/definitions/") {
 			json.NewEncoder(w).Encode(map[string]sophos.MethodMap{})
 			return
@@ -64,7 +69,6 @@ func setupTestCase(t *testing.T) func(t *testing.T) {
 	}
 	return func(t *testing.T) {
 		ts.Close()
-		t.Log("teardown test case")
 	}
 }
 

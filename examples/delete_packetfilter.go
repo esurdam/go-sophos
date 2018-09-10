@@ -39,7 +39,7 @@ func main() {
 	}
 
 	p := types.PacketfilterPacketfilter{
-		Reference: "REF_PacPacAnyFromAnyTo1",
+		Reference: "REF_PacPacAnyFromAnyTo2",
 	}
 
 	err = client.DeleteObject(&p, sophos.WithSessionClose, sophos.AutoResolveErrsMode)
