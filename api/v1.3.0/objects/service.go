@@ -109,8 +109,8 @@ type ServiceAhs []ServiceAh
 // ServiceAh represents a UTM AH service
 type ServiceAh struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Name       string `json:"name"`
 	SpiHigh    int    `json:"spi_high"`
 	SpiLow     int    `json:"spi_low"`
@@ -230,12 +230,12 @@ type ServiceEsps []ServiceEsp
 // ServiceEsp represents a UTM ESP service
 type ServiceEsp struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 	SpiHigh    int    `json:"spi_high"`
 	SpiLow     int    `json:"spi_low"`
-	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &ServiceEsp{}
@@ -420,12 +420,12 @@ type ServiceIcmpv6s []ServiceIcmpv6
 // ServiceIcmpv6 represents a UTM ICMPv6 service
 type ServiceIcmpv6 struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Code       int    `json:"code"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 	Type       int    `json:"type"`
-	Code       int    `json:"code"`
 }
 
 var _ sophos.RestGetter = &ServiceIcmpv6{}

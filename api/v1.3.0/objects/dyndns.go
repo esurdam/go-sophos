@@ -60,39 +60,39 @@ type DyndnsDyndnss []DyndnsDyndns
 // DyndnsDyndns represents a UTM DynDNS mapping
 type DyndnsDyndns struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// Backupmx default value is false
-	Backupmx bool   `json:"backupmx"`
-	Comment  string `json:"comment"`
-	// Interface description: REF(interface/*)
-	Interface string `json:"interface"`
+	Reference  string `json:"_ref"`
+	// Type can be one of: []string{"dns-o-matic", "dnsdynamic", "dnspark", "dtdns", "dyndns", "dyndns-custom", "easydns", "freedns", "namecheap", "no-ip", "opendns", "selfhost", "strato", "zoneedit"}
+	// Type default value is "dyndns"
+	Type    string        `json:"type"`
+	Aliases []interface{} `json:"aliases"`
+	// Hostname default value is ""
+	Hostname string `json:"hostname"`
 	// Label default value is ""
 	Label string `json:"label"`
-	Name  string `json:"name"`
+	// Mx description: (HOSTNAME)
+	// Mx default value is ""
+	Mx string `json:"mx"`
 	// Password default value is ""
 	Password string `json:"password"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
 	// Record can be one of: []string{"a", "aaaa", "both"}
 	// Record default value is "a"
-	Record string `json:"record"`
+	Record  string `json:"record"`
+	User    string `json:"user"`
+	Comment string `json:"comment"`
+	// Status default value is false
+	Status bool `json:"status"`
 	// Strategy can be one of: []string{"if", "web"}
 	// Strategy default value is "if"
 	Strategy string `json:"strategy"`
 	// Wildcard default value is false
-	Wildcard bool          `json:"wildcard"`
-	Aliases  []interface{} `json:"aliases"`
-	// Hostname default value is ""
-	Hostname string `json:"hostname"`
+	Wildcard bool `json:"wildcard"`
+	// Backupmx default value is false
+	Backupmx bool   `json:"backupmx"`
 	Mxpri    int    `json:"mxpri"`
-	// Type can be one of: []string{"dns-o-matic", "dnsdynamic", "dnspark", "dtdns", "dyndns", "dyndns-custom", "easydns", "freedns", "namecheap", "no-ip", "opendns", "selfhost", "strato", "zoneedit"}
-	// Type default value is "dyndns"
-	Type string `json:"type"`
-	User string `json:"user"`
-	// Mx description: (HOSTNAME)
-	// Mx default value is ""
-	Mx string `json:"mx"`
-	// Status default value is false
-	Status bool `json:"status"`
+	Name     string `json:"name"`
 }
 
 var _ sophos.RestGetter = &DyndnsDyndns{}
@@ -149,10 +149,10 @@ type DyndnsGroups []DyndnsGroup
 // DyndnsGroup represents a UTM group
 type DyndnsGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &DyndnsGroup{}

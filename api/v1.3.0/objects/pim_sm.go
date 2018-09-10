@@ -77,8 +77,8 @@ type PimSmGroups []PimSmGroup
 // PimSmGroup represents a UTM group
 type PimSmGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -135,14 +135,14 @@ type PimSmInterfaces []PimSmInterface
 // PimSmInterface represents a UTM multicast routing interface
 type PimSmInterface struct {
 	Locked       string        `json:"_locked"`
-	Reference    string        `json:"_ref"`
 	ObjectType   string        `json:"_type"`
-	Comment      string        `json:"comment"`
+	Reference    string        `json:"_ref"`
 	DrPriority   int           `json:"dr_priority"`
 	IgmpVersions []interface{} `json:"igmp_versions"`
 	// Interface description: REF(interface/*)
 	Interface string `json:"interface"`
 	Name      string `json:"name"`
+	Comment   string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &PimSmInterface{}
@@ -199,8 +199,9 @@ type PimSmRoutes []PimSmRoute
 // PimSmRoute represents a UTM multicast route
 type PimSmRoute struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	// Gateway description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	// Gateway default value is ""
 	Gateway string `json:"gateway"`
@@ -213,8 +214,7 @@ type PimSmRoute struct {
 	// Status default value is false
 	Status bool `json:"status"`
 	// Type can be one of: []string{"gateway", "interface"}
-	Type    string `json:"type"`
-	Comment string `json:"comment"`
+	Type string `json:"type"`
 }
 
 var _ sophos.RestGetter = &PimSmRoute{}
@@ -269,8 +269,8 @@ type PimSmRpRouters []PimSmRpRouter
 // PimSmRpRouter represents a UTM rendezvous point router
 type PimSmRpRouter struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	// Host description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
 	Host            string        `json:"host"`

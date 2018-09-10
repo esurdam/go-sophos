@@ -470,4 +470,4 @@ func (*dhcpServerMock) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (d *dhcpServerMock) GetType() string { return d._type }
+func (d *dhcpServerMock) GetType() string { return d.ObjectType }

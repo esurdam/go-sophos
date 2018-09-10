@@ -125,17 +125,17 @@ type SmtpExceptions []SmtpException
 
 // SmtpException represents a UTM SMTP filter exception
 type SmtpException struct {
-	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
-	ObjectType string        `json:"_type"`
+	Locked     string `json:"_locked"`
+	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	// Status default value is false
+	Status     bool          `json:"status"`
+	Comment    string        `json:"comment"`
 	Name       string        `json:"name"`
 	Networks   []interface{} `json:"networks"`
 	Recipients []interface{} `json:"recipients"`
 	Senders    []interface{} `json:"senders"`
 	Skiplist   []interface{} `json:"skiplist"`
-	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &SmtpException{}
@@ -192,8 +192,8 @@ type SmtpGroups []SmtpGroup
 // SmtpGroup represents a UTM group
 type SmtpGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -250,16 +250,16 @@ type SmtpHeaderOperations []SmtpHeaderOperation
 // SmtpHeaderOperation represents a UTM Header modification operation
 type SmtpHeaderOperation struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	HeaderName string `json:"header_name"`
-	Name       string `json:"name"`
+	Reference  string `json:"_ref"`
 	// Operation can be one of: []string{"add", "delete"}
 	// Operation default value is "add"
 	Operation string `json:"operation"`
 	// Parameter default value is ""
-	Parameter string `json:"parameter"`
+	Parameter  string `json:"parameter"`
+	Comment    string `json:"comment"`
+	HeaderName string `json:"header_name"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SmtpHeaderOperation{}

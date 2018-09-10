@@ -61,10 +61,10 @@ type RightGroups []RightGroup
 // RightGroup represents a UTM group
 type RightGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
 	Name       string `json:"name"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &RightGroup{}

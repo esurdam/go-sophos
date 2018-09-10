@@ -240,19 +240,19 @@ type IpsRules []IpsRule
 // IpsRule represents a UTM IPS rule
 type IpsRule struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	Filter1    string `json:"filter1"`
-	Filter2    string `json:"filter2"`
-	Msg        string `json:"msg"`
-	Name       string `json:"name"`
-	Sid        int    `json:"sid"`
+	Reference  string `json:"_ref"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// Action can be one of: []string{"alert", "drop"}
 	// Action default value is "alert"
-	Action string `json:"action"`
+	Action  string `json:"action"`
+	Comment string `json:"comment"`
+	Filter1 string `json:"filter1"`
+	Filter2 string `json:"filter2"`
+	Msg     string `json:"msg"`
+	Name    string `json:"name"`
+	Sid     int    `json:"sid"`
 }
 
 var _ sophos.RestGetter = &IpsRule{}
@@ -307,8 +307,9 @@ type IpsRuleModifiers []IpsRuleModifier
 // IpsRuleModifier represents a UTM IPS rule modifier
 type IpsRuleModifier struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 	// Notification default value is false
 	Notification bool `json:"notification"`
@@ -317,8 +318,7 @@ type IpsRuleModifier struct {
 	Status bool `json:"status"`
 	// Action can be one of: []string{"alert", "drop"}
 	// Action default value is "drop"
-	Action  string `json:"action"`
-	Comment string `json:"comment"`
+	Action string `json:"action"`
 }
 
 var _ sophos.RestGetter = &IpsRuleModifier{}

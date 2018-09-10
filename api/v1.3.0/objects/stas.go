@@ -61,15 +61,15 @@ type StasCollectors []StasCollector
 // StasCollector represents a UTM STAS Collector
 type StasCollector struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	// Host description: REF(network/host), REF(network/dns_host)
-	Host string `json:"host"`
-	Name string `json:"name"`
+	Reference  string `json:"_ref"`
+	Name       string `json:"name"`
 	// Port description: REF(service/udp)
 	// Port default value is "REF_ServiceSTASCollector"
-	Port string `json:"port"`
+	Port    string `json:"port"`
+	Comment string `json:"comment"`
+	// Host description: REF(network/host), REF(network/dns_host)
+	Host string `json:"host"`
 }
 
 var _ sophos.RestGetter = &StasCollector{}
@@ -126,8 +126,8 @@ type StasGroups []StasGroup
 // StasGroup represents a UTM stas->group
 type StasGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }

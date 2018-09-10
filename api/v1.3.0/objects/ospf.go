@@ -73,9 +73,12 @@ type OspfAreas []OspfArea
 // OspfArea represents a UTM OSPF area
 type OspfArea struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
+	Reference  string `json:"_ref"`
+	// Id description: (IPADDR)
+	Id         string        `json:"id"`
+	Interfaces []interface{} `json:"interfaces"`
+	Name       string        `json:"name"`
 	// Type can be one of: []string{"normal", "stub", "nssa", "stub no-summary", "nssa no-summary"}
 	// Type default value is "normal"
 	Type         string        `json:"type"`
@@ -84,9 +87,6 @@ type OspfArea struct {
 	Authentication string `json:"authentication"`
 	Comment        string `json:"comment"`
 	DefaultCost    int    `json:"default_cost"`
-	// Id description: (IPADDR)
-	Id         string        `json:"id"`
-	Interfaces []interface{} `json:"interfaces"`
 }
 
 var _ sophos.RestGetter = &OspfArea{}
@@ -141,10 +141,10 @@ type OspfGroups []OspfGroup
 // OspfGroup represents a UTM group
 type OspfGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &OspfGroup{}
@@ -199,27 +199,27 @@ type OspfInterfaces []OspfInterface
 // OspfInterface represents a UTM OSPF interface
 type OspfInterface struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	// RetransmitInterval description: Constraints: 0, 3-65535
+	RetransmitInterval int `json:"retransmit_interval"`
 	// Authentication can be one of: []string{"message-digest", "plain-text", "null"}
 	Authentication string `json:"authentication"`
-	Comment        string `json:"comment"`
-	Name           string `json:"name"`
-	Priority       int    `json:"priority"`
-	// TransmitDelay description: Constraints: 0, 1-65535
-	TransmitDelay int `json:"transmit_delay"`
 	// AuthenticationKey description: (REGEX)
 	AuthenticationKey string `json:"authentication_key"`
-	Cost              int    `json:"cost"`
-	// DeadInterval description: Constraints: 0, 1-65535
-	DeadInterval int `json:"dead_interval"`
+	Comment           string `json:"comment"`
 	// HelloInterval description: Constraints: 0, 1-65535
 	HelloInterval int `json:"hello_interval"`
 	// Interface description: REF(interface/*)
 	Interface         string        `json:"interface"`
 	MessageDigestKeys []interface{} `json:"message_digest_keys"`
-	// RetransmitInterval description: Constraints: 0, 3-65535
-	RetransmitInterval int `json:"retransmit_interval"`
+	Priority          int           `json:"priority"`
+	// TransmitDelay description: Constraints: 0, 1-65535
+	TransmitDelay int `json:"transmit_delay"`
+	Cost          int `json:"cost"`
+	// DeadInterval description: Constraints: 0, 1-65535
+	DeadInterval int    `json:"dead_interval"`
+	Name         string `json:"name"`
 }
 
 var _ sophos.RestGetter = &OspfInterface{}
@@ -275,14 +275,14 @@ type OspfMessageDigestKeys []OspfMessageDigestKey
 
 // OspfMessageDigestKey represents a UTM OSPF message digest key
 type OspfMessageDigestKey struct {
-	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
-	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	// MessageDigestKey description: (REGEX)
-	MessageDigestKey   string `json:"message_digest_key"`
+	Locked             string `json:"_locked"`
+	ObjectType         string `json:"_type"`
+	Reference          string `json:"_ref"`
 	MessageDigestKeyId int    `json:"message_digest_key_id"`
 	Name               string `json:"name"`
+	Comment            string `json:"comment"`
+	// MessageDigestKey description: (REGEX)
+	MessageDigestKey string `json:"message_digest_key"`
 }
 
 var _ sophos.RestGetter = &OspfMessageDigestKey{}

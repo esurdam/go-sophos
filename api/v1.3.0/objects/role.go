@@ -61,8 +61,8 @@ type RoleGroups []RoleGroup
 // RoleGroup represents a UTM group
 type RoleGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }

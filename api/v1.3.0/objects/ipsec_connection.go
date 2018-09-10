@@ -164,8 +164,8 @@ type IpsecConnectionGroups []IpsecConnectionGroup
 // IpsecConnectionGroup represents a UTM group
 type IpsecConnectionGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -302,24 +302,24 @@ type IpsecConnectionRoadwarriorCas []IpsecConnectionRoadwarriorCa
 // IpsecConnectionRoadwarriorCa represents a UTM IPsec CA remote access
 type IpsecConnectionRoadwarriorCa struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// Interface description: REF(interface/*)
-	Interface string `json:"interface"`
+	Reference  string `json:"_ref"`
+	// Authentication description: REF(ipsec_remote_auth/ca)
+	Authentication string `json:"authentication"`
 	// IpPool description: REF(network/network)
 	IpPool   string        `json:"ip_pool"`
+	Name     string        `json:"name"`
 	Networks []interface{} `json:"networks"`
+	// UseIpPool default value is false
+	UseIpPool bool   `json:"use_ip_pool"`
+	Comment   string `json:"comment"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
 	// Policy description: REF(ipsec/policy)
 	Policy string `json:"policy"`
 	// Status default value is false
-	Status bool `json:"status"`
-	// UseIpPool default value is false
-	UseIpPool bool          `json:"use_ip_pool"`
-	Users     []interface{} `json:"users"`
-	// Authentication description: REF(ipsec_remote_auth/ca)
-	Authentication string `json:"authentication"`
-	Comment        string `json:"comment"`
-	Name           string `json:"name"`
+	Status bool          `json:"status"`
+	Users  []interface{} `json:"users"`
 	// Xauth default value is false
 	Xauth bool `json:"xauth"`
 }
@@ -380,42 +380,42 @@ type IpsecConnectionRoadwarriorCiscos []IpsecConnectionRoadwarriorCisco
 // IpsecConnectionRoadwarriorCisco represents a UTM Cisco VPN client connection
 type IpsecConnectionRoadwarriorCisco struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// AutoPfrule default value is false
-	AutoPfrule bool `json:"auto_pfrule"`
-	// IpAssignmentPool description: REF(network/network)
-	IpAssignmentPool string `json:"ip_assignment_pool"`
-	// IphoneOndemandEnabled default value is false
-	IphoneOndemandEnabled bool          `json:"iphone_ondemand_enabled"`
-	Aaa                   []interface{} `json:"aaa"`
+	Reference  string `json:"_ref"`
 	// AutoPfOut description: REF(packetfilter/packetfilter)
 	// AutoPfOut default value is ""
-	AutoPfOut             string        `json:"auto_pf_out"`
-	IphoneOndemandDomains []interface{} `json:"iphone_ondemand_domains"`
+	AutoPfOut string `json:"auto_pf_out"`
+	// AutoPfrule default value is false
+	AutoPfrule bool `json:"auto_pfrule"`
+	// IphoneOndemandEnabled default value is false
+	IphoneOndemandEnabled bool   `json:"iphone_ondemand_enabled"`
+	Name                  string `json:"name"`
 	// Status default value is false
 	Status bool `json:"status"`
-	// Certificate description: REF(ca/host_key_cert)
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
-	// IphoneHostname default value is ""
-	IphoneHostname string `json:"iphone_hostname"`
-	// IphoneOndemandType can be one of: []string{"OnDemandMatchDomainsAlways", "OnDemandMatchDomainsOnRetry"}
-	// IphoneOndemandType default value is "OnDemandMatchDomainsOnRetry"
-	IphoneOndemandType string `json:"iphone_ondemand_type"`
-	Name               string `json:"name"`
 	// AutoPfIn description: REF(packetfilter/packetfilter)
 	// AutoPfIn default value is ""
 	AutoPfIn string `json:"auto_pf_in"`
 	// Interface description: REF(interface/*)
-	Interface            string `json:"interface"`
-	IphoneConnectionName string `json:"iphone_connection_name"`
-	// IphoneStatus default value is false
-	IphoneStatus bool          `json:"iphone_status"`
-	Networks     []interface{} `json:"networks"`
+	Interface             string        `json:"interface"`
+	IphoneOndemandDomains []interface{} `json:"iphone_ondemand_domains"`
+	Networks              []interface{} `json:"networks"`
 	// Policy description: REF(ipsec/policy)
 	// Policy default value is "REF_IPsecPolicyCisco"
-	Policy string `json:"policy"`
+	Policy  string        `json:"policy"`
+	Aaa     []interface{} `json:"aaa"`
+	Comment string        `json:"comment"`
+	// IpAssignmentPool description: REF(network/network)
+	IpAssignmentPool string `json:"ip_assignment_pool"`
+	// IphoneOndemandType can be one of: []string{"OnDemandMatchDomainsAlways", "OnDemandMatchDomainsOnRetry"}
+	// IphoneOndemandType default value is "OnDemandMatchDomainsOnRetry"
+	IphoneOndemandType string `json:"iphone_ondemand_type"`
+	// IphoneStatus default value is false
+	IphoneStatus bool `json:"iphone_status"`
+	// Certificate description: REF(ca/host_key_cert)
+	Certificate          string `json:"certificate"`
+	IphoneConnectionName string `json:"iphone_connection_name"`
+	// IphoneHostname default value is ""
+	IphoneHostname string `json:"iphone_hostname"`
 }
 
 var _ sophos.RestGetter = &IpsecConnectionRoadwarriorCisco{}
@@ -474,8 +474,8 @@ type IpsecConnectionRoadwarriorPsks []IpsecConnectionRoadwarriorPsk
 // IpsecConnectionRoadwarriorPsk represents a UTM IPsec PSK remote access
 type IpsecConnectionRoadwarriorPsk struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	// Interface description: REF(interface/*)
 	Interface string `json:"interface"`
@@ -483,17 +483,17 @@ type IpsecConnectionRoadwarriorPsk struct {
 	IpPool   string        `json:"ip_pool"`
 	Name     string        `json:"name"`
 	Networks []interface{} `json:"networks"`
+	// Policy description: REF(ipsec/policy)
+	Policy string `json:"policy"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// UseIpPool default value is false
 	UseIpPool bool `json:"use_ip_pool"`
-	// Xauth default value is false
-	Xauth bool `json:"xauth"`
 	// Authentication description: REF(ipsec_remote_auth/psk)
 	Authentication string `json:"authentication"`
-	// Policy description: REF(ipsec/policy)
-	Policy string        `json:"policy"`
-	Users  []interface{} `json:"users"`
+	// Xauth default value is false
+	Xauth bool          `json:"xauth"`
+	Users []interface{} `json:"users"`
 }
 
 var _ sophos.RestGetter = &IpsecConnectionRoadwarriorPsk{}
@@ -551,33 +551,33 @@ type IpsecConnectionRoadwarriorX509s []IpsecConnectionRoadwarriorX509
 
 // IpsecConnectionRoadwarriorX509 represents a UTM IPsec X509 remote access
 type IpsecConnectionRoadwarriorX509 struct {
-	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
-	ObjectType string `json:"_type"`
-	// AutoPfOut description: REF(packetfilter/packetfilter)
-	// AutoPfOut default value is ""
-	AutoPfOut string        `json:"auto_pf_out"`
-	Name      string        `json:"name"`
-	Networks  []interface{} `json:"networks"`
+	Locked     string        `json:"_locked"`
+	ObjectType string        `json:"_type"`
+	Reference  string        `json:"_ref"`
+	Networks   []interface{} `json:"networks"`
+	// Policy description: REF(ipsec/policy)
+	Policy string `json:"policy"`
+	// Status default value is false
+	Status bool `json:"status"`
 	// Xauth default value is false
 	Xauth bool `json:"xauth"`
 	// AutoPfIn description: REF(packetfilter/packetfilter)
 	// AutoPfIn default value is ""
 	AutoPfIn string `json:"auto_pf_in"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut string        `json:"auto_pf_out"`
+	Comment   string        `json:"comment"`
+	Name      string        `json:"name"`
+	Users     []interface{} `json:"users"`
 	// AutoPfrule default value is false
-	AutoPfrule bool   `json:"auto_pfrule"`
-	Comment    string `json:"comment"`
+	AutoPfrule bool `json:"auto_pfrule"`
 	// Interface description: REF(interface/*)
 	Interface string `json:"interface"`
 	// IpPool description: REF(network/network)
 	IpPool string `json:"ip_pool"`
-	// Policy description: REF(ipsec/policy)
-	Policy string `json:"policy"`
-	// Status default value is false
-	Status bool `json:"status"`
 	// UseIpPool default value is false
-	UseIpPool bool          `json:"use_ip_pool"`
-	Users     []interface{} `json:"users"`
+	UseIpPool bool `json:"use_ip_pool"`
 }
 
 var _ sophos.RestGetter = &IpsecConnectionRoadwarriorX509{}

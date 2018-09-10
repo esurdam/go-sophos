@@ -116,13 +116,13 @@ type CaCrls []CaCrl
 // CaCrl represents a UTM certificate revocation list
 type CaCrl struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Name       string `json:"name"`
+	Comment    string `json:"comment"`
+	Crl        string `json:"crl"`
 	// Meta description: REF(ca/meta_crl)
-	Meta    string `json:"meta"`
-	Name    string `json:"name"`
-	Comment string `json:"comment"`
-	Crl     string `json:"crl"`
+	Meta string `json:"meta"`
 }
 
 var _ sophos.RestGetter = &CaCrl{}
@@ -177,8 +177,8 @@ type CaGroups []CaGroup
 // CaGroup represents a UTM group
 type CaGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -365,16 +365,16 @@ type CaHttpVerificationCas []CaHttpVerificationCa
 
 // CaHttpVerificationCa represents a UTM HTTPS verification CA
 type CaHttpVerificationCa struct {
-	Locked      string `json:"_locked"`
-	Reference   string `json:"_ref"`
-	ObjectType  string `json:"_type"`
+	Locked     string `json:"_locked"`
+	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	// Trust default value is false
+	Trust       bool   `json:"trust"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
 	// Meta description: REF(ca/meta_x509)
 	Meta string `json:"meta"`
 	Name string `json:"name"`
-	// Trust default value is false
-	Trust bool `json:"trust"`
 }
 
 var _ sophos.RestGetter = &CaHttpVerificationCa{}
@@ -431,14 +431,14 @@ type CaMetaCrls []CaMetaCrl
 // CaMetaCrl represents a UTM CRL meta information
 type CaMetaCrl struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	Hash       string `json:"hash"`
+	Reference  string `json:"_ref"`
 	Issuer     string `json:"issuer"`
 	Lastupdate string `json:"lastupdate"`
 	Name       string `json:"name"`
 	Nextupdate string `json:"nextupdate"`
+	Comment    string `json:"comment"`
+	Hash       string `json:"hash"`
 }
 
 var _ sophos.RestGetter = &CaMetaCrl{}
@@ -702,8 +702,8 @@ type CaVerificationCas []CaVerificationCa
 // CaVerificationCa represents a UTM X509 verification CA
 type CaVerificationCa struct {
 	Locked      string `json:"_locked"`
-	Reference   string `json:"_ref"`
 	ObjectType  string `json:"_type"`
+	Reference   string `json:"_ref"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
 	// Meta description: REF(ca/meta_x509)

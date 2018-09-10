@@ -79,8 +79,8 @@ type ItfparamsBridgePorts []ItfparamsBridgePort
 // ItfparamsBridgePort represents a UTM bridge port
 type ItfparamsBridgePort struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	// Itfhw description: REF(itfhw/ethernet), REF(itfhw/red_server), REF(itfhw/red_client), REF(itfhw/awe_network), REF(itfhw/lag)
 	Itfhw string `json:"itfhw"`
@@ -145,8 +145,8 @@ type ItfparamsGroups []ItfparamsGroup
 // ItfparamsGroup represents a UTM group
 type ItfparamsGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -377,42 +377,42 @@ type ItfparamsSecondarys []ItfparamsSecondary
 // ItfparamsSecondary represents a UTM additional interface address
 type ItfparamsSecondary struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// InterfaceAddress description: REF(network/interface_address)
-	// InterfaceAddress default value is ""
-	InterfaceAddress string `json:"interface_address"`
-	Name             string `json:"name"`
-	// Type6 can be one of: []string{"static"}
-	// Type6 default value is "static"
-	Type6 string `json:"type6"`
+	Reference  string `json:"_ref"`
 	// Address6 description: (IP6ADDR)
 	// Address6 default value is ""
 	Address6 string `json:"address6"`
 	Comment  string `json:"comment"`
+	// Id default value is ""
+	Id       string `json:"id"`
+	Netmask  int    `json:"netmask"`
+	Netmask6 int    `json:"netmask6"`
+	// Resolved6 default value is false
+	Resolved6 bool `json:"resolved6"`
+	// Type6 can be one of: []string{"static"}
+	// Type6 default value is "static"
+	Type6 string `json:"type6"`
+	// InterfaceAddress description: REF(network/interface_address)
+	// InterfaceAddress default value is ""
+	InterfaceAddress string `json:"interface_address"`
+	Name             string `json:"name"`
+	HaNode           int    `json:"ha_node"`
+	// Resolved default value is false
+	Resolved bool `json:"resolved"`
+	// Address description: (IPADDR)
+	// Address default value is "0.0.0.0"
+	Address string `json:"address"`
 	// InterfaceBroadcast description: REF(network/interface_broadcast)
 	// InterfaceBroadcast default value is ""
 	InterfaceBroadcast string `json:"interface_broadcast"`
-	Netmask6           int    `json:"netmask6"`
+	// InterfaceNetwork description: REF(network/interface_network)
+	// InterfaceNetwork default value is ""
+	InterfaceNetwork string `json:"interface_network"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// Type can be one of: []string{"static"}
 	// Type default value is "static"
 	Type string `json:"type"`
-	// Address description: (IPADDR)
-	// Address default value is "0.0.0.0"
-	Address string `json:"address"`
-	Netmask int    `json:"netmask"`
-	// InterfaceNetwork description: REF(network/interface_network)
-	// InterfaceNetwork default value is ""
-	InterfaceNetwork string `json:"interface_network"`
-	// Id default value is ""
-	Id string `json:"id"`
-	// Resolved default value is false
-	Resolved bool `json:"resolved"`
-	// Resolved6 default value is false
-	Resolved6 bool `json:"resolved6"`
-	HaNode    int  `json:"ha_node"`
 }
 
 var _ sophos.RestGetter = &ItfparamsSecondary{}

@@ -67,10 +67,10 @@ type TimeGroups []TimeGroup
 // TimeGroup represents a UTM group
 type TimeGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &TimeGroup{}
@@ -191,18 +191,18 @@ type TimeSingles []TimeSingle
 // TimeSingle represents a UTM single time period
 type TimeSingle struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// StartDate description: (DATE)
-	StartDate string `json:"start_date"`
-	// StartTime description: (TIME)
-	StartTime string `json:"start_time"`
-	Comment   string `json:"comment"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	// EndDate description: (DATE)
 	EndDate string `json:"end_date"`
 	// EndTime description: (TIME)
 	EndTime string `json:"end_time"`
 	Name    string `json:"name"`
+	// StartDate description: (DATE)
+	StartDate string `json:"start_date"`
+	// StartTime description: (TIME)
+	StartTime string `json:"start_time"`
 }
 
 var _ sophos.RestGetter = &TimeSingle{}

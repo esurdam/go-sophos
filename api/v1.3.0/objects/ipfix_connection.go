@@ -61,10 +61,10 @@ type IpfixConnectionGroups []IpfixConnectionGroup
 // IpfixConnectionGroup represents a UTM group
 type IpfixConnectionGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
 	Name       string `json:"name"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &IpfixConnectionGroup{}
@@ -121,15 +121,15 @@ type IpfixConnectionIpfixConnections []IpfixConnectionIpfixConnection
 // IpfixConnectionIpfixConnection represents a UTM ipfix_connection
 type IpfixConnectionIpfixConnection struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
 	// Host description: REF(network/host), REF(network/dns_host)
 	Host string `json:"host"`
 	Name string `json:"name"`
 	Oid  int    `json:"oid"`
 	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
+	Status bool `json:"status"`
 }
 
 var _ sophos.RestGetter = &IpfixConnectionIpfixConnection{}

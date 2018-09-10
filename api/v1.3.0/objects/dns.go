@@ -72,16 +72,16 @@ type DnsAxfrs []DnsAxfr
 
 // DnsAxfr represents a UTM DNS slave zone
 type DnsAxfr struct {
-	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
-	ObjectType string `json:"_type"`
-	Name       string `json:"name"`
+	Locked     string        `json:"_locked"`
+	ObjectType string        `json:"_type"`
+	Reference  string        `json:"_ref"`
+	Comment    string        `json:"comment"`
+	Master     []interface{} `json:"master"`
+	Name       string        `json:"name"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// Zone description: (HOSTNAME)
-	Zone    string        `json:"zone"`
-	Comment string        `json:"comment"`
-	Master  []interface{} `json:"master"`
+	Zone string `json:"zone"`
 }
 
 var _ sophos.RestGetter = &DnsAxfr{}
@@ -136,8 +136,8 @@ type DnsGroups []DnsGroup
 // DnsGroup represents a UTM group
 type DnsGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }

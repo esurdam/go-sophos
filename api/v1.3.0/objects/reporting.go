@@ -107,8 +107,8 @@ type ReportingDepartments []ReportingDepartment
 // ReportingDepartment represents a UTM department
 type ReportingDepartment struct {
 	Locked     string        `json:"_locked"`
-	Reference  string        `json:"_ref"`
 	ObjectType string        `json:"_type"`
+	Reference  string        `json:"_ref"`
 	Comment    string        `json:"comment"`
 	Name       string        `json:"name"`
 	Networks   []interface{} `json:"networks"`
@@ -243,8 +243,8 @@ type ReportingGroups []ReportingGroup
 // ReportingGroup represents a UTM group
 type ReportingGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -303,17 +303,17 @@ type ReportingMails []ReportingMail
 // ReportingMail represents a UTM scheduled report
 type ReportingMail struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// Status default value is false
-	Status  bool          `json:"status"`
-	Comment string        `json:"comment"`
-	Filters []interface{} `json:"filters"`
+	Reference  string `json:"_ref"`
 	// Interval can be one of: []string{"daily", "weekly", "monthly"}
 	// Interval default value is "daily"
 	Interval   string        `json:"interval"`
 	Name       string        `json:"name"`
 	Recipients []interface{} `json:"recipients"`
+	// Status default value is false
+	Status  bool          `json:"status"`
+	Comment string        `json:"comment"`
+	Filters []interface{} `json:"filters"`
 }
 
 var _ sophos.RestGetter = &ReportingMail{}

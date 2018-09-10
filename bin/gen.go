@@ -696,8 +696,8 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 				// Write the struct from the subtType
 				outBuf.Write([]byte(newType))
 				outBuf.Write([]byte("Locked string `json:\"_locked\"`\n"))
-				outBuf.Write([]byte("Reference string `json:\"_ref\"`\n"))
 				outBuf.Write([]byte("ObjectType string `json:\"_type\"`\n"))
+				outBuf.Write([]byte("Reference string `json:\"_ref\"`\n"))
 				for k, p := range s.Type.Properties {
 					if p.Description != "" {
 						outBuf.Write([]byte(fmt.Sprintf("// %s description: %s\n", toCamelInitCase(k, true), p.Description)))

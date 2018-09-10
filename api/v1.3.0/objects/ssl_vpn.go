@@ -176,8 +176,8 @@ type SslVpnGroups []SslVpnGroup
 // SslVpnGroup represents a UTM group
 type SslVpnGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -306,9 +306,26 @@ type SslVpnServerConnections []SslVpnServerConnection
 // SslVpnServerConnection represents a UTM SSL VPN site-to-site server connection
 type SslVpnServerConnection struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut     string        `json:"auto_pf_out"`
+	LocalNetworks []interface{} `json:"local_networks"`
+	// StaticIp description: (IPADDR)
+	// StaticIp default value is "0.0.0.0"
+	StaticIp string `json:"static_ip"`
+	// StaticIpStatus default value is false
+	StaticIpStatus bool `json:"static_ip_status"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// AutoPfrule default value is false
+	AutoPfrule bool   `json:"auto_pfrule"`
 	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 	// Peer description: REF(aaa/user)
 	// Peer default value is ""
 	Peer           string        `json:"peer"`
@@ -316,23 +333,6 @@ type SslVpnServerConnection struct {
 	// StaticIp6 description: (IP6ADDR)
 	// StaticIp6 default value is "::"
 	StaticIp6 string `json:"static_ip6"`
-	// StaticIpStatus default value is false
-	StaticIpStatus bool `json:"static_ip_status"`
-	// Status default value is false
-	Status bool `json:"status"`
-	// AutoPfrule default value is false
-	AutoPfrule bool `json:"auto_pfrule"`
-	// AutoPfOut description: REF(packetfilter/packetfilter)
-	// AutoPfOut default value is ""
-	AutoPfOut     string        `json:"auto_pf_out"`
-	LocalNetworks []interface{} `json:"local_networks"`
-	Name          string        `json:"name"`
-	// StaticIp description: (IPADDR)
-	// StaticIp default value is "0.0.0.0"
-	StaticIp string `json:"static_ip"`
-	// AutoPfIn description: REF(packetfilter/packetfilter)
-	// AutoPfIn default value is ""
-	AutoPfIn string `json:"auto_pf_in"`
 }
 
 var _ sophos.RestGetter = &SslVpnServerConnection{}

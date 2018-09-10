@@ -61,8 +61,8 @@ type OverrideGroups []OverrideGroup
 // OverrideGroup represents a UTM group
 type OverrideGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -121,16 +121,16 @@ type OverrideObjrefs []OverrideObjref
 // OverrideObjref represents a UTM monitoring action
 type OverrideObjref struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Attr       string `json:"attr"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
+	Name       string `json:"name"`
+	// Ref description: REF(/*)
+	Ref     string `json:"ref"`
+	Value   string `json:"value"`
+	Attr    string `json:"attr"`
+	Comment string `json:"comment"`
 	// Condition description: REF(condition/*)
 	Condition string `json:"condition"`
-	Name      string `json:"name"`
-	// Ref description: REF(/*)
-	Ref   string `json:"ref"`
-	Value string `json:"value"`
 }
 
 var _ sophos.RestGetter = &OverrideObjref{}

@@ -61,8 +61,8 @@ type NotificationGroups []NotificationGroup
 // NotificationGroup represents a UTM group
 type NotificationGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -121,15 +121,15 @@ type NotificationNotifications []NotificationNotification
 // NotificationNotification represents a UTM notification
 type NotificationNotification struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
+	Reference  string `json:"_ref"`
+	// Snmp default value is false
+	Snmp    bool   `json:"snmp"`
+	Comment string `json:"comment"`
 	// Email default value is false
 	Email bool   `json:"email"`
 	Id    string `json:"id"`
 	Name  string `json:"name"`
-	// Snmp default value is false
-	Snmp bool `json:"snmp"`
 }
 
 var _ sophos.RestGetter = &NotificationNotification{}

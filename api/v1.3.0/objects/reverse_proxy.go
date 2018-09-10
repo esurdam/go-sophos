@@ -300,35 +300,35 @@ type ReverseProxyExceptions []ReverseProxyException
 // ReverseProxyException represents a UTM webserver protection exception
 type ReverseProxyException struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
-	// Skiphtmlrewrite default value is false
-	Skiphtmlrewrite bool `json:"skiphtmlrewrite"`
-	// Skiptft default value is false
-	Skiptft bool `json:"skiptft"`
-	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
-	Name    string `json:"name"`
-	// Skipcookie default value is false
-	Skipcookie                  bool          `json:"skipcookie"`
-	Path                        []interface{} `json:"path"`
-	SkipCustomThreatsFilters    []interface{} `json:"skip_custom_threats_filters"`
-	SkipThreatsFilterCategories []interface{} `json:"skip_threats_filter_categories"`
+	Reference  string `json:"_ref"`
+	Name       string `json:"name"`
 	// Skipav default value is false
 	Skipav bool `json:"skipav"`
 	// Skipbadclients default value is false
 	Skipbadclients bool `json:"skipbadclients"`
-	// Skipform default value is false
-	Skipform bool `json:"skipform"`
 	// SkipformMissingtoken default value is false
 	SkipformMissingtoken bool `json:"skipform_missingtoken"`
+	// Skiphtmlrewrite default value is false
+	Skiphtmlrewrite bool `json:"skiphtmlrewrite"`
+	// Skipurl default value is false
+	Skipurl bool   `json:"skipurl"`
+	Comment string `json:"comment"`
 	// Op can be one of: []string{"AND", "OR"}
 	// Op default value is "AND"
 	Op string `json:"op"`
-	// Skipurl default value is false
-	Skipurl bool          `json:"skipurl"`
+	// Skipform default value is false
+	Skipform bool `json:"skipform"`
+	// Skiptft default value is false
+	Skiptft bool          `json:"skiptft"`
 	Source  []interface{} `json:"source"`
+	// Status default value is false
+	Status                      bool          `json:"status"`
+	Path                        []interface{} `json:"path"`
+	SkipCustomThreatsFilters    []interface{} `json:"skip_custom_threats_filters"`
+	SkipThreatsFilterCategories []interface{} `json:"skip_threats_filter_categories"`
+	// Skipcookie default value is false
+	Skipcookie bool `json:"skipcookie"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyException{}
@@ -385,8 +385,8 @@ type ReverseProxyFilters []ReverseProxyFilter
 // ReverseProxyFilter represents a UTM web application firewall filter rule
 type ReverseProxyFilter struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Expr       string `json:"expr"`
 	Name       string `json:"name"`
@@ -597,8 +597,8 @@ type ReverseProxyGroups []ReverseProxyGroup
 // ReverseProxyGroup represents a UTM group
 type ReverseProxyGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
@@ -827,8 +827,10 @@ type ReverseProxyRedirections []ReverseProxyRedirection
 // ReverseProxyRedirection represents a UTM request redirection
 type ReverseProxyRedirection struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 	// Status default value is false
 	Status     bool   `json:"status"`
 	TargetHost string `json:"target_host"`
@@ -836,16 +838,14 @@ type ReverseProxyRedirection struct {
 	TargetHostIpv6 bool `json:"target_host_ipv6"`
 	// TargetPath default value is "/"
 	TargetPath string `json:"target_path"`
-	TargetPort int    `json:"target_port"`
-	Comment    string `json:"comment"`
+	// Frontend description: REF(reverse_proxy/frontend)
+	Frontend string `json:"frontend"`
 	// ResponseCode can be one of: []string{"301", "302", "303", "307", "308"}
 	// ResponseCode default value is "302"
 	ResponseCode string `json:"response_code"`
 	// SourcePath default value is "/"
 	SourcePath string `json:"source_path"`
-	// Frontend description: REF(reverse_proxy/frontend)
-	Frontend string `json:"frontend"`
-	Name     string `json:"name"`
+	TargetPort int    `json:"target_port"`
 	// TargetProtocol can be one of: []string{"http", "https"}
 	// TargetProtocol default value is "http"
 	TargetProtocol string `json:"target_protocol"`
@@ -904,14 +904,14 @@ type ReverseProxyThreatsFilters []ReverseProxyThreatsFilter
 
 // ReverseProxyThreatsFilter represents a UTM custom threat filter category
 type ReverseProxyThreatsFilter struct {
-	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
-	ObjectType string `json:"_type"`
-	Comment    string `json:"comment"`
-	// Files description: (HASH)
-	Files            interface{}   `json:"files"`
+	Locked           string        `json:"_locked"`
+	ObjectType       string        `json:"_type"`
+	Reference        string        `json:"_ref"`
 	Name             string        `json:"name"`
 	OrderedFilenames []interface{} `json:"ordered_filenames"`
+	Comment          string        `json:"comment"`
+	// Files description: (HASH)
+	Files interface{} `json:"files"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyThreatsFilter{}

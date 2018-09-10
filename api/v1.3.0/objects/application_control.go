@@ -61,8 +61,8 @@ type ApplicationControlGroups []ApplicationControlGroup
 // ApplicationControlGroup represents a UTM group
 type ApplicationControlGroup struct {
 	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
 	ObjectType string `json:"_type"`
+	Reference  string `json:"_ref"`
 	Comment    string `json:"comment"`
 	Name       string `json:"name"`
 }
