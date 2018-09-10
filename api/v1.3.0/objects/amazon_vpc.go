@@ -134,17 +134,35 @@ func (*AmazonVpcConnection) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (a *AmazonVpcConnection) GetType() string { return a._type }
 
-// AmazonVpcGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AmazonVpcGroup []interface{}
+// AmazonVpcGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AmazonVpcGroups []AmazonVpcGroup
 
-var _ sophos.RestObject = &AmazonVpcGroup{}
+// AmazonVpcGroup represents a UTM group
+type AmazonVpcGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AmazonVpcGroup GET path
+var _ sophos.RestGetter = &AmazonVpcGroup{}
+
+// GetPath implements sophos.RestObject and returns the AmazonVpcGroups GET path
 // Returns all available amazon_vpc/group objects
-func (*AmazonVpcGroup) GetPath() string { return "/api/objects/amazon_vpc/group/" }
+func (*AmazonVpcGroups) GetPath() string { return "/api/objects/amazon_vpc/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*AmazonVpcGroup) RefRequired() (string, bool) { return "", false }
+func (*AmazonVpcGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AmazonVpcGroups GET path
+// Returns all available group types
+func (a *AmazonVpcGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/amazon_vpc/group/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AmazonVpcGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AmazonVpcGroup DELETE path
 // Creates or updates the complete object group

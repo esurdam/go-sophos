@@ -55,17 +55,35 @@ func (Condition) References() []string {
 	}
 }
 
-// ConditionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ConditionGroup []interface{}
+// ConditionGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ConditionGroups []ConditionGroup
 
-var _ sophos.RestObject = &ConditionGroup{}
+// ConditionGroup represents a UTM group
+type ConditionGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ConditionGroup GET path
+var _ sophos.RestGetter = &ConditionGroup{}
+
+// GetPath implements sophos.RestObject and returns the ConditionGroups GET path
 // Returns all available condition/group objects
-func (*ConditionGroup) GetPath() string { return "/api/objects/condition/group/" }
+func (*ConditionGroups) GetPath() string { return "/api/objects/condition/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ConditionGroup) RefRequired() (string, bool) { return "", false }
+func (*ConditionGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ConditionGroups GET path
+// Returns all available group types
+func (c *ConditionGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/condition/group/%s", c.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (c *ConditionGroup) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ConditionGroup DELETE path
 // Creates or updates the complete object group

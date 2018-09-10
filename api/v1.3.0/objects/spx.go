@@ -82,17 +82,33 @@ func (Spx) References() []string {
 	}
 }
 
-// SpxGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SpxGroup []interface{}
+// SpxGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type SpxGroups []SpxGroup
 
-var _ sophos.RestObject = &SpxGroup{}
+// SpxGroup represents a UTM group
+type SpxGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the SpxGroup GET path
+var _ sophos.RestGetter = &SpxGroup{}
+
+// GetPath implements sophos.RestObject and returns the SpxGroups GET path
 // Returns all available spx/group objects
-func (*SpxGroup) GetPath() string { return "/api/objects/spx/group/" }
+func (*SpxGroups) GetPath() string { return "/api/objects/spx/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*SpxGroup) RefRequired() (string, bool) { return "", false }
+func (*SpxGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SpxGroups GET path
+// Returns all available group types
+func (s *SpxGroup) GetPath() string { return fmt.Sprintf("/api/objects/spx/group/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *SpxGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SpxGroup DELETE path
 // Creates or updates the complete object group

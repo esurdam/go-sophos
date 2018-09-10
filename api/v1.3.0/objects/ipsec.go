@@ -75,17 +75,33 @@ func (Ipsec) References() []string {
 	}
 }
 
-// IpsecGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecGroup []interface{}
+// IpsecGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecGroups []IpsecGroup
 
-var _ sophos.RestObject = &IpsecGroup{}
+// IpsecGroup represents a UTM group
+type IpsecGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	Comment   string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecGroup GET path
+var _ sophos.RestGetter = &IpsecGroup{}
+
+// GetPath implements sophos.RestObject and returns the IpsecGroups GET path
 // Returns all available ipsec/group objects
-func (*IpsecGroup) GetPath() string { return "/api/objects/ipsec/group/" }
+func (*IpsecGroups) GetPath() string { return "/api/objects/ipsec/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecGroup) RefRequired() (string, bool) { return "", false }
+func (*IpsecGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecGroups GET path
+// Returns all available group types
+func (i *IpsecGroup) GetPath() string { return fmt.Sprintf("/api/objects/ipsec/group/%s", i.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecGroup DELETE path
 // Creates or updates the complete object group

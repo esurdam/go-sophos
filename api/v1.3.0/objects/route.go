@@ -61,17 +61,33 @@ func (Route) References() []string {
 	}
 }
 
-// RouteGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RouteGroup []interface{}
+// RouteGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type RouteGroups []RouteGroup
 
-var _ sophos.RestObject = &RouteGroup{}
+// RouteGroup represents a UTM group
+type RouteGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	Comment   string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the RouteGroup GET path
+var _ sophos.RestGetter = &RouteGroup{}
+
+// GetPath implements sophos.RestObject and returns the RouteGroups GET path
 // Returns all available route/group objects
-func (*RouteGroup) GetPath() string { return "/api/objects/route/group/" }
+func (*RouteGroups) GetPath() string { return "/api/objects/route/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*RouteGroup) RefRequired() (string, bool) { return "", false }
+func (*RouteGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RouteGroups GET path
+// Returns all available group types
+func (r *RouteGroup) GetPath() string { return fmt.Sprintf("/api/objects/route/group/%s", r.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (r *RouteGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RouteGroup DELETE path
 // Creates or updates the complete object group
@@ -103,17 +119,49 @@ func (*RouteGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/route/group/%s/usedby", ref)
 }
 
-// RoutePolicy is an Sophos Endpoint subType and implements sophos.RestObject
-type RoutePolicy []interface{}
+// RoutePolicys is an Sophos Endpoint subType and implements sophos.RestObject
+type RoutePolicys []RoutePolicy
 
-var _ sophos.RestObject = &RoutePolicy{}
+// RoutePolicy represents a UTM policy route
+type RoutePolicy struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	// Source description: REF(network/*)
+	Source string `json:"source"`
+	// Target description: REF(/*)
+	Target string `json:"target"`
+	// Type can be one of: []string{"itf", "host"}
+	Type    string `json:"type"`
+	Comment string `json:"comment"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the RoutePolicy GET path
+var _ sophos.RestGetter = &RoutePolicy{}
+
+// GetPath implements sophos.RestObject and returns the RoutePolicys GET path
 // Returns all available route/policy objects
-func (*RoutePolicy) GetPath() string { return "/api/objects/route/policy/" }
+func (*RoutePolicys) GetPath() string { return "/api/objects/route/policy/" }
 
 // RefRequired implements sophos.RestObject
-func (*RoutePolicy) RefRequired() (string, bool) { return "", false }
+func (*RoutePolicys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RoutePolicys GET path
+// Returns all available policy types
+func (r *RoutePolicy) GetPath() string {
+	return fmt.Sprintf("/api/objects/route/policy/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *RoutePolicy) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RoutePolicy DELETE path
 // Creates or updates the complete object policy

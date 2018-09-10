@@ -55,17 +55,35 @@ func (Override) References() []string {
 	}
 }
 
-// OverrideGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type OverrideGroup []interface{}
+// OverrideGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type OverrideGroups []OverrideGroup
 
-var _ sophos.RestObject = &OverrideGroup{}
+// OverrideGroup represents a UTM group
+type OverrideGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the OverrideGroup GET path
+var _ sophos.RestGetter = &OverrideGroup{}
+
+// GetPath implements sophos.RestObject and returns the OverrideGroups GET path
 // Returns all available override/group objects
-func (*OverrideGroup) GetPath() string { return "/api/objects/override/group/" }
+func (*OverrideGroups) GetPath() string { return "/api/objects/override/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*OverrideGroup) RefRequired() (string, bool) { return "", false }
+func (*OverrideGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OverrideGroups GET path
+// Returns all available group types
+func (o *OverrideGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/override/group/%s", o.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (o *OverrideGroup) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OverrideGroup DELETE path
 // Creates or updates the complete object group
@@ -97,17 +115,41 @@ func (*OverrideGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/override/group/%s/usedby", ref)
 }
 
-// OverrideObjref is an Sophos Endpoint subType and implements sophos.RestObject
-type OverrideObjref []interface{}
+// OverrideObjrefs is an Sophos Endpoint subType and implements sophos.RestObject
+type OverrideObjrefs []OverrideObjref
 
-var _ sophos.RestObject = &OverrideObjref{}
+// OverrideObjref represents a UTM monitoring action
+type OverrideObjref struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Ref description: REF(/*)
+	Ref     string `json:"ref"`
+	Value   string `json:"value"`
+	Attr    string `json:"attr"`
+	Comment string `json:"comment"`
+	// Condition description: REF(condition/*)
+	Condition string `json:"condition"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the OverrideObjref GET path
+var _ sophos.RestGetter = &OverrideObjref{}
+
+// GetPath implements sophos.RestObject and returns the OverrideObjrefs GET path
 // Returns all available override/objref objects
-func (*OverrideObjref) GetPath() string { return "/api/objects/override/objref/" }
+func (*OverrideObjrefs) GetPath() string { return "/api/objects/override/objref/" }
 
 // RefRequired implements sophos.RestObject
-func (*OverrideObjref) RefRequired() (string, bool) { return "", false }
+func (*OverrideObjrefs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OverrideObjrefs GET path
+// Returns all available objref types
+func (o *OverrideObjref) GetPath() string {
+	return fmt.Sprintf("/api/objects/override/objref/%s", o.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (o *OverrideObjref) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OverrideObjref DELETE path
 // Creates or updates the complete object objref

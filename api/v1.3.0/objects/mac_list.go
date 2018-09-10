@@ -55,17 +55,35 @@ func (MacList) References() []string {
 	}
 }
 
-// MacListGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type MacListGroup []interface{}
+// MacListGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type MacListGroups []MacListGroup
 
-var _ sophos.RestObject = &MacListGroup{}
+// MacListGroup represents a UTM group
+type MacListGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	Comment   string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the MacListGroup GET path
+var _ sophos.RestGetter = &MacListGroup{}
+
+// GetPath implements sophos.RestObject and returns the MacListGroups GET path
 // Returns all available mac_list/group objects
-func (*MacListGroup) GetPath() string { return "/api/objects/mac_list/group/" }
+func (*MacListGroups) GetPath() string { return "/api/objects/mac_list/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*MacListGroup) RefRequired() (string, bool) { return "", false }
+func (*MacListGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the MacListGroups GET path
+// Returns all available group types
+func (m *MacListGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/mac_list/group/%s", m.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (m *MacListGroup) RefRequired() (string, bool) { return m.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the MacListGroup DELETE path
 // Creates or updates the complete object group
@@ -97,17 +115,37 @@ func (*MacListGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/mac_list/group/%s/usedby", ref)
 }
 
-// MacListMacList is an Sophos Endpoint subType and implements sophos.RestObject
-type MacListMacList []interface{}
+// MacListMacLists is an Sophos Endpoint subType and implements sophos.RestObject
+type MacListMacLists []MacListMacList
 
-var _ sophos.RestObject = &MacListMacList{}
+// MacListMacList represents a UTM MAC address list
+type MacListMacList struct {
+	Locked      string        `json:"_locked"`
+	Reference   string        `json:"_ref"`
+	_type       string        `json:"_type"`
+	HostList    []interface{} `json:"host_list"`
+	Name        string        `json:"name"`
+	AddressList []interface{} `json:"address_list"`
+	Comment     string        `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the MacListMacList GET path
+var _ sophos.RestGetter = &MacListMacList{}
+
+// GetPath implements sophos.RestObject and returns the MacListMacLists GET path
 // Returns all available mac_list/mac_list objects
-func (*MacListMacList) GetPath() string { return "/api/objects/mac_list/mac_list/" }
+func (*MacListMacLists) GetPath() string { return "/api/objects/mac_list/mac_list/" }
 
 // RefRequired implements sophos.RestObject
-func (*MacListMacList) RefRequired() (string, bool) { return "", false }
+func (*MacListMacLists) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the MacListMacLists GET path
+// Returns all available mac_list types
+func (m *MacListMacList) GetPath() string {
+	return fmt.Sprintf("/api/objects/mac_list/mac_list/%s", m.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (m *MacListMacList) RefRequired() (string, bool) { return m.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the MacListMacList DELETE path
 // Creates or updates the complete object mac_list

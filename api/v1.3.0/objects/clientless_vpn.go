@@ -134,17 +134,35 @@ func (*ClientlessVpnConnection) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (c *ClientlessVpnConnection) GetType() string { return c._type }
 
-// ClientlessVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ClientlessVpnGroup []interface{}
+// ClientlessVpnGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ClientlessVpnGroups []ClientlessVpnGroup
 
-var _ sophos.RestObject = &ClientlessVpnGroup{}
+// ClientlessVpnGroup represents a UTM group
+type ClientlessVpnGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ClientlessVpnGroup GET path
+var _ sophos.RestGetter = &ClientlessVpnGroup{}
+
+// GetPath implements sophos.RestObject and returns the ClientlessVpnGroups GET path
 // Returns all available clientless_vpn/group objects
-func (*ClientlessVpnGroup) GetPath() string { return "/api/objects/clientless_vpn/group/" }
+func (*ClientlessVpnGroups) GetPath() string { return "/api/objects/clientless_vpn/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ClientlessVpnGroup) RefRequired() (string, bool) { return "", false }
+func (*ClientlessVpnGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ClientlessVpnGroups GET path
+// Returns all available group types
+func (c *ClientlessVpnGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/clientless_vpn/group/%s", c.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (c *ClientlessVpnGroup) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ClientlessVpnGroup DELETE path
 // Creates or updates the complete object group

@@ -88,17 +88,33 @@ func (Dhcp) References() []string {
 	}
 }
 
-// DhcpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpGroup []interface{}
+// DhcpGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpGroups []DhcpGroup
 
-var _ sophos.RestObject = &DhcpGroup{}
+// DhcpGroup represents a UTM group
+type DhcpGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the DhcpGroup GET path
+var _ sophos.RestGetter = &DhcpGroup{}
+
+// GetPath implements sophos.RestObject and returns the DhcpGroups GET path
 // Returns all available dhcp/group objects
-func (*DhcpGroup) GetPath() string { return "/api/objects/dhcp/group/" }
+func (*DhcpGroups) GetPath() string { return "/api/objects/dhcp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*DhcpGroup) RefRequired() (string, bool) { return "", false }
+func (*DhcpGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DhcpGroups GET path
+// Returns all available group types
+func (d *DhcpGroup) GetPath() string { return fmt.Sprintf("/api/objects/dhcp/group/%s", d.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (d *DhcpGroup) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DhcpGroup DELETE path
 // Creates or updates the complete object group
@@ -204,17 +220,55 @@ func (*DhcpOption) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (d *DhcpOption) GetType() string { return d._type }
 
-// DhcpOption6 is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpOption6 []interface{}
+// DhcpOption6s is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpOption6s []DhcpOption6
 
-var _ sophos.RestObject = &DhcpOption6{}
+// DhcpOption6 represents a UTM DHCPv6 option
+type DhcpOption6 struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Comment   string        `json:"comment"`
+	Host      []interface{} `json:"host"`
+	// Mac description: (HEXSTRING)
+	Mac  string `json:"mac"`
+	Name string `json:"name"`
+	// Address description: REF(network/interface_address), REF(network/host), REF(network/dns_host), REF(network/dns_group), REF(network/availability_group), REF(network/group)
+	Address  string        `json:"address"`
+	Server   []interface{} `json:"server"`
+	Vendor   string        `json:"vendor"`
+	DhcpName string        `json:"dhcp_name"`
+	Integer  int           `json:"integer"`
+	// String description: (HEXSTRING)
+	String string `json:"string"`
+	// Type can be one of: []string{"ip-address", "text", "string", "integer"}
+	Type string `json:"type"`
+	// Code description: Constraints: 7, 10-12, 15-18, 21-255
+	Code int `json:"code"`
+	// Scope can be one of: []string{"global", "server", "host", "mac", "vendor"}
+	Scope string `json:"scope"`
+	// Status default value is false
+	Status bool   `json:"status"`
+	Text   string `json:"text"`
+}
 
-// GetPath implements sophos.RestObject and returns the DhcpOption6 GET path
+var _ sophos.RestGetter = &DhcpOption6{}
+
+// GetPath implements sophos.RestObject and returns the DhcpOption6s GET path
 // Returns all available dhcp/option6 objects
-func (*DhcpOption6) GetPath() string { return "/api/objects/dhcp/option6/" }
+func (*DhcpOption6s) GetPath() string { return "/api/objects/dhcp/option6/" }
 
 // RefRequired implements sophos.RestObject
-func (*DhcpOption6) RefRequired() (string, bool) { return "", false }
+func (*DhcpOption6s) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DhcpOption6s GET path
+// Returns all available option6 types
+func (d *DhcpOption6) GetPath() string {
+	return fmt.Sprintf("/api/objects/dhcp/option6/%s", d.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (d *DhcpOption6) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DhcpOption6 DELETE path
 // Creates or updates the complete object option6
@@ -325,17 +379,70 @@ func (*DhcpServer) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (d *DhcpServer) GetType() string { return d._type }
 
-// DhcpServer6 is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpServer6 []interface{}
+// DhcpServer6s is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpServer6s []DhcpServer6
 
-var _ sophos.RestObject = &DhcpServer6{}
+// DhcpServer6 represents a UTM DHCPv6 server
+type DhcpServer6 struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Domain default value is ""
+	Domain   string `json:"domain"`
+	PrefdLft int    `json:"prefd_lft"`
+	// RangeEnd description: (IP6ADDR)
+	RangeEnd string `json:"range_end"`
+	// Address description: REF(itfparams/*)
+	Address string `json:"address"`
+	// Dns1 description: (IP6ADDR)
+	// Dns1 default value is "::"
+	Dns1     string        `json:"dns1"`
+	Mappings []interface{} `json:"mappings"`
+	Netmask6 int           `json:"netmask6"`
+	// Mtu description: Constraints: 0, 1280-9000
+	Mtu  int    `json:"mtu"`
+	Name string `json:"name"`
+	// ProxyAutoconfig default value is false
+	ProxyAutoconfig bool `json:"proxy_autoconfig"`
+	// RangeStart description: (IP6ADDR)
+	RangeStart string `json:"range_start"`
+	Comment    string `json:"comment"`
+	DefaultLft int    `json:"default_lft"`
+	// DenyUnknown default value is false
+	DenyUnknown bool `json:"deny_unknown"`
+	// Interface description: REF(interface/ethernet), REF(interface/vlan), REF(interface/bridge)
+	Interface string `json:"interface"`
+	ValidLft  int    `json:"valid_lft"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// Dns2 description: (IP6ADDR)
+	// Dns2 default value is "::"
+	Dns2 string `json:"dns2"`
+	// OnLink default value is false
+	OnLink bool `json:"on_link"`
+	// RelayMode default value is false
+	RelayMode bool `json:"relay_mode"`
+}
 
-// GetPath implements sophos.RestObject and returns the DhcpServer6 GET path
+var _ sophos.RestGetter = &DhcpServer6{}
+
+// GetPath implements sophos.RestObject and returns the DhcpServer6s GET path
 // Returns all available dhcp/server6 objects
-func (*DhcpServer6) GetPath() string { return "/api/objects/dhcp/server6/" }
+func (*DhcpServer6s) GetPath() string { return "/api/objects/dhcp/server6/" }
 
 // RefRequired implements sophos.RestObject
-func (*DhcpServer6) RefRequired() (string, bool) { return "", false }
+func (*DhcpServer6s) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DhcpServer6s GET path
+// Returns all available server6 types
+func (d *DhcpServer6) GetPath() string {
+	return fmt.Sprintf("/api/objects/dhcp/server6/%s", d.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (d *DhcpServer6) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DhcpServer6 DELETE path
 // Creates or updates the complete object server6
@@ -367,17 +474,66 @@ func (*DhcpServer6) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dhcp/server6/%s/usedby", ref)
 }
 
-// DhcpStateless is an Sophos Endpoint subType and implements sophos.RestObject
-type DhcpStateless []interface{}
+// DhcpStatelesss is an Sophos Endpoint subType and implements sophos.RestObject
+type DhcpStatelesss []DhcpStateless
 
-var _ sophos.RestObject = &DhcpStateless{}
+// DhcpStateless represents a UTM IPv6 prefix advertisement
+type DhcpStateless struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Address description: REF(itfparams/*)
+	Address string `json:"address"`
+	Comment string `json:"comment"`
+	// Dns1 description: (IP6ADDR)
+	// Dns1 default value is "::"
+	Dns1 string `json:"dns1"`
+	// ManagedFlag default value is false
+	ManagedFlag bool `json:"managed_flag"`
+	// StatelessServerStatus default value is true
+	StatelessServerStatus bool `json:"stateless_server_status"`
+	// Interface description: REF(interface/ethernet), REF(interface/vlan), REF(interface/bridge)
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	// OnLink default value is false
+	OnLink     bool `json:"on_link"`
+	PrefdLft   int  `json:"prefd_lft"`
+	ValidLft   int  `json:"valid_lft"`
+	DefaultLft int  `json:"default_lft"`
+	// Dns2 description: (IP6ADDR)
+	// Dns2 default value is "::"
+	Dns2 string `json:"dns2"`
+	// Domain default value is ""
+	Domain string `json:"domain"`
+	// OtherConfig default value is false
+	OtherConfig bool `json:"other_config"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// Mtu description: Constraints: 0, 1280-9000
+	Mtu int `json:"mtu"`
+	// ProxyAutoconfig default value is false
+	ProxyAutoconfig bool `json:"proxy_autoconfig"`
+}
 
-// GetPath implements sophos.RestObject and returns the DhcpStateless GET path
+var _ sophos.RestGetter = &DhcpStateless{}
+
+// GetPath implements sophos.RestObject and returns the DhcpStatelesss GET path
 // Returns all available dhcp/stateless objects
-func (*DhcpStateless) GetPath() string { return "/api/objects/dhcp/stateless/" }
+func (*DhcpStatelesss) GetPath() string { return "/api/objects/dhcp/stateless/" }
 
 // RefRequired implements sophos.RestObject
-func (*DhcpStateless) RefRequired() (string, bool) { return "", false }
+func (*DhcpStatelesss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DhcpStatelesss GET path
+// Returns all available stateless types
+func (d *DhcpStateless) GetPath() string {
+	return fmt.Sprintf("/api/objects/dhcp/stateless/%s", d.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (d *DhcpStateless) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DhcpStateless DELETE path
 // Creates or updates the complete object stateless

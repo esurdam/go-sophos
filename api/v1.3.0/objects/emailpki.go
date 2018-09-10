@@ -96,17 +96,35 @@ func (Emailpki) References() []string {
 	}
 }
 
-// EmailpkiGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type EmailpkiGroup []interface{}
+// EmailpkiGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type EmailpkiGroups []EmailpkiGroup
 
-var _ sophos.RestObject = &EmailpkiGroup{}
+// EmailpkiGroup represents a UTM group
+type EmailpkiGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the EmailpkiGroup GET path
+var _ sophos.RestGetter = &EmailpkiGroup{}
+
+// GetPath implements sophos.RestObject and returns the EmailpkiGroups GET path
 // Returns all available emailpki/group objects
-func (*EmailpkiGroup) GetPath() string { return "/api/objects/emailpki/group/" }
+func (*EmailpkiGroups) GetPath() string { return "/api/objects/emailpki/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*EmailpkiGroup) RefRequired() (string, bool) { return "", false }
+func (*EmailpkiGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EmailpkiGroups GET path
+// Returns all available group types
+func (e *EmailpkiGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/emailpki/group/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EmailpkiGroup) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EmailpkiGroup DELETE path
 // Creates or updates the complete object group
@@ -138,17 +156,44 @@ func (*EmailpkiGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/group/%s/usedby", ref)
 }
 
-// EmailpkiOpenpgp is an Sophos Endpoint subType and implements sophos.RestObject
-type EmailpkiOpenpgp []interface{}
+// EmailpkiOpenpgps is an Sophos Endpoint subType and implements sophos.RestObject
+type EmailpkiOpenpgps []EmailpkiOpenpgp
 
-var _ sophos.RestObject = &EmailpkiOpenpgp{}
+// EmailpkiOpenpgp represents a UTM Email encryption OpenPGP key
+type EmailpkiOpenpgp struct {
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	_type       string `json:"_type"`
+	Fingerprint string `json:"fingerprint"`
+	Name        string `json:"name"`
+	// Privkey default value is ""
+	Privkey string `json:"privkey"`
+	Pubkey  string `json:"pubkey"`
+	// Realname default value is ""
+	Realname string        `json:"realname"`
+	Comment  string        `json:"comment"`
+	Emails   []interface{} `json:"emails"`
+	// Expires default value is ""
+	Expires string `json:"expires"`
+}
 
-// GetPath implements sophos.RestObject and returns the EmailpkiOpenpgp GET path
+var _ sophos.RestGetter = &EmailpkiOpenpgp{}
+
+// GetPath implements sophos.RestObject and returns the EmailpkiOpenpgps GET path
 // Returns all available emailpki/openpgp objects
-func (*EmailpkiOpenpgp) GetPath() string { return "/api/objects/emailpki/openpgp/" }
+func (*EmailpkiOpenpgps) GetPath() string { return "/api/objects/emailpki/openpgp/" }
 
 // RefRequired implements sophos.RestObject
-func (*EmailpkiOpenpgp) RefRequired() (string, bool) { return "", false }
+func (*EmailpkiOpenpgps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EmailpkiOpenpgps GET path
+// Returns all available openpgp types
+func (e *EmailpkiOpenpgp) GetPath() string {
+	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EmailpkiOpenpgp) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EmailpkiOpenpgp DELETE path
 // Creates or updates the complete object openpgp
@@ -180,17 +225,48 @@ func (*EmailpkiOpenpgp) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/openpgp/%s/usedby", ref)
 }
 
-// EmailpkiSmime is an Sophos Endpoint subType and implements sophos.RestObject
-type EmailpkiSmime []interface{}
+// EmailpkiSmimes is an Sophos Endpoint subType and implements sophos.RestObject
+type EmailpkiSmimes []EmailpkiSmime
 
-var _ sophos.RestObject = &EmailpkiSmime{}
+// EmailpkiSmime represents a UTM email encryption S/MIME certificate
+type EmailpkiSmime struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Domaincert default value is false
+	Domaincert  bool   `json:"domaincert"`
+	Expires     string `json:"expires"`
+	Fingerprint string `json:"fingerprint"`
+	// Key default value is ""
+	Key     string        `json:"key"`
+	Name    string        `json:"name"`
+	Cert    string        `json:"cert"`
+	Comment string        `json:"comment"`
+	Dn      string        `json:"dn"`
+	Emails  []interface{} `json:"emails"`
+	// Realname default value is ""
+	Realname string `json:"realname"`
+	// Trust default value is false
+	Trust bool `json:"trust"`
+}
 
-// GetPath implements sophos.RestObject and returns the EmailpkiSmime GET path
+var _ sophos.RestGetter = &EmailpkiSmime{}
+
+// GetPath implements sophos.RestObject and returns the EmailpkiSmimes GET path
 // Returns all available emailpki/smime objects
-func (*EmailpkiSmime) GetPath() string { return "/api/objects/emailpki/smime/" }
+func (*EmailpkiSmimes) GetPath() string { return "/api/objects/emailpki/smime/" }
 
 // RefRequired implements sophos.RestObject
-func (*EmailpkiSmime) RefRequired() (string, bool) { return "", false }
+func (*EmailpkiSmimes) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EmailpkiSmimes GET path
+// Returns all available smime types
+func (e *EmailpkiSmime) GetPath() string {
+	return fmt.Sprintf("/api/objects/emailpki/smime/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EmailpkiSmime) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EmailpkiSmime DELETE path
 // Creates or updates the complete object smime
@@ -222,17 +298,60 @@ func (*EmailpkiSmime) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/emailpki/smime/%s/usedby", ref)
 }
 
-// EmailpkiUser is an Sophos Endpoint subType and implements sophos.RestObject
-type EmailpkiUser []interface{}
+// EmailpkiUsers is an Sophos Endpoint subType and implements sophos.RestObject
+type EmailpkiUsers []EmailpkiUser
 
-var _ sophos.RestObject = &EmailpkiUser{}
+// EmailpkiUser represents a UTM email encryption user
+type EmailpkiUser struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Verify can be one of: []string{"global", "on", "off"}
+	// Verify default value is "global"
+	Verify string `json:"verify"`
+	// Domaincert default value is false
+	Domaincert bool   `json:"domaincert"`
+	Name       string `json:"name"`
+	// OpenpgpStatus default value is true
+	OpenpgpStatus bool `json:"openpgp_status"`
+	// SmimeStatus default value is true
+	SmimeStatus bool   `json:"smime_status"`
+	Realname    string `json:"realname"`
+	// Sign can be one of: []string{"global", "on", "off"}
+	// Sign default value is "global"
+	Sign string `json:"sign"`
+	// Smime description: REF(emailpki/smime)
+	// Smime default value is ""
+	Smime   string `json:"smime"`
+	Comment string `json:"comment"`
+	// Decrypt can be one of: []string{"global", "on", "off"}
+	// Decrypt default value is "global"
+	Decrypt string `json:"decrypt"`
+	// Encrypt can be one of: []string{"global", "on", "off"}
+	// Encrypt default value is "global"
+	Encrypt string `json:"encrypt"`
+	// Openpgp description: REF(emailpki/openpgp)
+	// Openpgp default value is ""
+	Openpgp string `json:"openpgp"`
+}
 
-// GetPath implements sophos.RestObject and returns the EmailpkiUser GET path
+var _ sophos.RestGetter = &EmailpkiUser{}
+
+// GetPath implements sophos.RestObject and returns the EmailpkiUsers GET path
 // Returns all available emailpki/user objects
-func (*EmailpkiUser) GetPath() string { return "/api/objects/emailpki/user/" }
+func (*EmailpkiUsers) GetPath() string { return "/api/objects/emailpki/user/" }
 
 // RefRequired implements sophos.RestObject
-func (*EmailpkiUser) RefRequired() (string, bool) { return "", false }
+func (*EmailpkiUsers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EmailpkiUsers GET path
+// Returns all available user types
+func (e *EmailpkiUser) GetPath() string {
+	return fmt.Sprintf("/api/objects/emailpki/user/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EmailpkiUser) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EmailpkiUser DELETE path
 // Creates or updates the complete object user

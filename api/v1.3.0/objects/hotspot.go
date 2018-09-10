@@ -63,17 +63,35 @@ func (Hotspot) References() []string {
 	}
 }
 
-// HotspotGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type HotspotGroup []interface{}
+// HotspotGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type HotspotGroups []HotspotGroup
 
-var _ sophos.RestObject = &HotspotGroup{}
+// HotspotGroup represents a UTM group
+type HotspotGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the HotspotGroup GET path
+var _ sophos.RestGetter = &HotspotGroup{}
+
+// GetPath implements sophos.RestObject and returns the HotspotGroups GET path
 // Returns all available hotspot/group objects
-func (*HotspotGroup) GetPath() string { return "/api/objects/hotspot/group/" }
+func (*HotspotGroups) GetPath() string { return "/api/objects/hotspot/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*HotspotGroup) RefRequired() (string, bool) { return "", false }
+func (*HotspotGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HotspotGroups GET path
+// Returns all available group types
+func (h *HotspotGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/hotspot/group/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HotspotGroup) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HotspotGroup DELETE path
 // Creates or updates the complete object group
@@ -105,17 +123,90 @@ func (*HotspotGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/group/%s/usedby", ref)
 }
 
-// HotspotPortal is an Sophos Endpoint subType and implements sophos.RestObject
-type HotspotPortal []interface{}
+// HotspotPortals is an Sophos Endpoint subType and implements sophos.RestObject
+type HotspotPortals []HotspotPortal
 
-var _ sophos.RestObject = &HotspotPortal{}
+// HotspotPortal represents a UTM hotspot
+type HotspotPortal struct {
+	Locked      string        `json:"_locked"`
+	Reference   string        `json:"_ref"`
+	_type       string        `json:"_type"`
+	RedirectUrl string        `json:"redirect_url"`
+	Title       string        `json:"title"`
+	AdminUsers  []interface{} `json:"admin_users"`
+	// FiasPort description: REF(service/tcp)
+	// FiasPort default value is ""
+	FiasPort string `json:"fias_port"`
+	Maclimit int    `json:"maclimit"`
+	// PwTime description: (TIME)
+	PwTime          string `json:"pw_time"`
+	VouchersPerPage int    `json:"vouchers_per_page"`
+	// Hostname description: REF(network/dns_host)
+	// Hostname default value is ""
+	Hostname string `json:"hostname"`
+	// HostnameType can be one of: []string{"none", "custom"}
+	// HostnameType default value is "none"
+	HostnameType string `json:"hostname_type"`
+	// Template description: (HASH)
+	Template interface{}   `json:"template"`
+	Vouchers []interface{} `json:"vouchers"`
+	// CustomAssets description: (HASH)
+	CustomAssets interface{} `json:"custom_assets"`
+	// SyncPsk default value is false
+	SyncPsk bool `json:"sync_psk"`
+	// Type can be one of: []string{"terms", "password", "voucher", "backend_auth", "sms", "fias"}
+	Type    string `json:"type"`
+	Comment string `json:"comment"`
+	Expiry  int    `json:"expiry"`
+	// Logo default value is ""
+	Logo string `json:"logo"`
+	// VoucherTemplate description: (HASH)
+	VoucherTemplate interface{}   `json:"voucher_template"`
+	Interfaces      []interface{} `json:"interfaces"`
+	// Pagesize default value is "a4"
+	Pagesize string `json:"pagesize"`
+	SmsText  string `json:"sms_text"`
+	Terms    string `json:"terms"`
+	// FiasCodeset can be one of: []string{"cp850", "cp1252"}
+	// FiasCodeset default value is "cp850"
+	FiasCodeset string `json:"fias_codeset"`
+	// FiasServer description: REF(network/host), REF(network/dns_host)
+	// FiasServer default value is ""
+	FiasServer   string        `json:"fias_server"`
+	HotspotUsers []interface{} `json:"hotspot_users"`
+	// LogoFilename default value is "default_logo.png"
+	LogoFilename string `json:"logo_filename"`
+	// LogoResize default value is false
+	LogoResize bool   `json:"logo_resize"`
+	Name       string `json:"name"`
+	// VoucherQrcode default value is false
+	VoucherQrcode bool `json:"voucher_qrcode"`
+	// CustomizationType can be one of: []string{"basic", "full"}
+	// CustomizationType default value is "basic"
+	CustomizationType string        `json:"customization_type"`
+	Description       string        `json:"description"`
+	Mail              []interface{} `json:"mail"`
+	// SslRedirect default value is false
+	SslRedirect bool `json:"ssl_redirect"`
+}
 
-// GetPath implements sophos.RestObject and returns the HotspotPortal GET path
+var _ sophos.RestGetter = &HotspotPortal{}
+
+// GetPath implements sophos.RestObject and returns the HotspotPortals GET path
 // Returns all available hotspot/portal objects
-func (*HotspotPortal) GetPath() string { return "/api/objects/hotspot/portal/" }
+func (*HotspotPortals) GetPath() string { return "/api/objects/hotspot/portal/" }
 
 // RefRequired implements sophos.RestObject
-func (*HotspotPortal) RefRequired() (string, bool) { return "", false }
+func (*HotspotPortals) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HotspotPortals GET path
+// Returns all available portal types
+func (h *HotspotPortal) GetPath() string {
+	return fmt.Sprintf("/api/objects/hotspot/portal/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HotspotPortal) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HotspotPortal DELETE path
 // Creates or updates the complete object portal
@@ -147,17 +238,38 @@ func (*HotspotPortal) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/hotspot/portal/%s/usedby", ref)
 }
 
-// HotspotVoucher is an Sophos Endpoint subType and implements sophos.RestObject
-type HotspotVoucher []interface{}
+// HotspotVouchers is an Sophos Endpoint subType and implements sophos.RestObject
+type HotspotVouchers []HotspotVoucher
 
-var _ sophos.RestObject = &HotspotVoucher{}
+// HotspotVoucher represents a UTM voucher definiton
+type HotspotVoucher struct {
+	Locked       string `json:"_locked"`
+	Reference    string `json:"_ref"`
+	_type        string `json:"_type"`
+	Trafficlimit int    `json:"trafficlimit"`
+	Comment      string `json:"comment"`
+	Expiry       int    `json:"expiry"`
+	Name         string `json:"name"`
+	Timequota    int    `json:"timequota"`
+}
 
-// GetPath implements sophos.RestObject and returns the HotspotVoucher GET path
+var _ sophos.RestGetter = &HotspotVoucher{}
+
+// GetPath implements sophos.RestObject and returns the HotspotVouchers GET path
 // Returns all available hotspot/voucher objects
-func (*HotspotVoucher) GetPath() string { return "/api/objects/hotspot/voucher/" }
+func (*HotspotVouchers) GetPath() string { return "/api/objects/hotspot/voucher/" }
 
 // RefRequired implements sophos.RestObject
-func (*HotspotVoucher) RefRequired() (string, bool) { return "", false }
+func (*HotspotVouchers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HotspotVouchers GET path
+// Returns all available voucher types
+func (h *HotspotVoucher) GetPath() string {
+	return fmt.Sprintf("/api/objects/hotspot/voucher/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HotspotVoucher) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HotspotVoucher DELETE path
 // Creates or updates the complete object voucher

@@ -234,17 +234,42 @@ func (*IpsGroup) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *IpsGroup) GetType() string { return i._type }
 
-// IpsRule is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsRule []interface{}
+// IpsRules is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsRules []IpsRule
 
-var _ sophos.RestObject = &IpsRule{}
+// IpsRule represents a UTM IPS rule
+type IpsRule struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Action can be one of: []string{"alert", "drop"}
+	// Action default value is "alert"
+	Action  string `json:"action"`
+	Comment string `json:"comment"`
+	Filter1 string `json:"filter1"`
+	Filter2 string `json:"filter2"`
+	Msg     string `json:"msg"`
+	Name    string `json:"name"`
+	Sid     int    `json:"sid"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsRule GET path
+var _ sophos.RestGetter = &IpsRule{}
+
+// GetPath implements sophos.RestObject and returns the IpsRules GET path
 // Returns all available ips/rule objects
-func (*IpsRule) GetPath() string { return "/api/objects/ips/rule/" }
+func (*IpsRules) GetPath() string { return "/api/objects/ips/rule/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsRule) RefRequired() (string, bool) { return "", false }
+func (*IpsRules) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsRules GET path
+// Returns all available rule types
+func (i *IpsRule) GetPath() string { return fmt.Sprintf("/api/objects/ips/rule/%s", i.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (i *IpsRule) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsRule DELETE path
 // Creates or updates the complete object rule
@@ -276,17 +301,43 @@ func (*IpsRule) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ips/rule/%s/usedby", ref)
 }
 
-// IpsRuleModifier is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsRuleModifier []interface{}
+// IpsRuleModifiers is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsRuleModifiers []IpsRuleModifier
 
-var _ sophos.RestObject = &IpsRuleModifier{}
+// IpsRuleModifier represents a UTM IPS rule modifier
+type IpsRuleModifier struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Action can be one of: []string{"alert", "drop"}
+	// Action default value is "drop"
+	Action  string `json:"action"`
+	Comment string `json:"comment"`
+	Name    string `json:"name"`
+	// Notification default value is false
+	Notification bool `json:"notification"`
+	Sid          int  `json:"sid"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsRuleModifier GET path
+var _ sophos.RestGetter = &IpsRuleModifier{}
+
+// GetPath implements sophos.RestObject and returns the IpsRuleModifiers GET path
 // Returns all available ips/rule_modifier objects
-func (*IpsRuleModifier) GetPath() string { return "/api/objects/ips/rule_modifier/" }
+func (*IpsRuleModifiers) GetPath() string { return "/api/objects/ips/rule_modifier/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsRuleModifier) RefRequired() (string, bool) { return "", false }
+func (*IpsRuleModifiers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsRuleModifiers GET path
+// Returns all available rule_modifier types
+func (i *IpsRuleModifier) GetPath() string {
+	return fmt.Sprintf("/api/objects/ips/rule_modifier/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsRuleModifier) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsRuleModifier DELETE path
 // Creates or updates the complete object rule_modifier

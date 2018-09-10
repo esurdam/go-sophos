@@ -61,17 +61,33 @@ func (Time) References() []string {
 	}
 }
 
-// TimeGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type TimeGroup []interface{}
+// TimeGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type TimeGroups []TimeGroup
 
-var _ sophos.RestObject = &TimeGroup{}
+// TimeGroup represents a UTM group
+type TimeGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the TimeGroup GET path
+var _ sophos.RestGetter = &TimeGroup{}
+
+// GetPath implements sophos.RestObject and returns the TimeGroups GET path
 // Returns all available time/group objects
-func (*TimeGroup) GetPath() string { return "/api/objects/time/group/" }
+func (*TimeGroups) GetPath() string { return "/api/objects/time/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*TimeGroup) RefRequired() (string, bool) { return "", false }
+func (*TimeGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the TimeGroups GET path
+// Returns all available group types
+func (t *TimeGroup) GetPath() string { return fmt.Sprintf("/api/objects/time/group/%s", t.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (t *TimeGroup) RefRequired() (string, bool) { return t.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the TimeGroup DELETE path
 // Creates or updates the complete object group
@@ -169,17 +185,41 @@ func (*TimeRecurring) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (t *TimeRecurring) GetType() string { return t._type }
 
-// TimeSingle is an Sophos Endpoint subType and implements sophos.RestObject
-type TimeSingle []interface{}
+// TimeSingles is an Sophos Endpoint subType and implements sophos.RestObject
+type TimeSingles []TimeSingle
 
-var _ sophos.RestObject = &TimeSingle{}
+// TimeSingle represents a UTM single time period
+type TimeSingle struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// StartDate description: (DATE)
+	StartDate string `json:"start_date"`
+	// StartTime description: (TIME)
+	StartTime string `json:"start_time"`
+	Comment   string `json:"comment"`
+	// EndDate description: (DATE)
+	EndDate string `json:"end_date"`
+	// EndTime description: (TIME)
+	EndTime string `json:"end_time"`
+	Name    string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the TimeSingle GET path
+var _ sophos.RestGetter = &TimeSingle{}
+
+// GetPath implements sophos.RestObject and returns the TimeSingles GET path
 // Returns all available time/single objects
-func (*TimeSingle) GetPath() string { return "/api/objects/time/single/" }
+func (*TimeSingles) GetPath() string { return "/api/objects/time/single/" }
 
 // RefRequired implements sophos.RestObject
-func (*TimeSingle) RefRequired() (string, bool) { return "", false }
+func (*TimeSingles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the TimeSingles GET path
+// Returns all available single types
+func (t *TimeSingle) GetPath() string { return fmt.Sprintf("/api/objects/time/single/%s", t.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (t *TimeSingle) RefRequired() (string, bool) { return t.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the TimeSingle DELETE path
 // Creates or updates the complete object single

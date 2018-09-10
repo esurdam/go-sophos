@@ -55,17 +55,33 @@ func (Role) References() []string {
 	}
 }
 
-// RoleGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RoleGroup []interface{}
+// RoleGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type RoleGroups []RoleGroup
 
-var _ sophos.RestObject = &RoleGroup{}
+// RoleGroup represents a UTM group
+type RoleGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the RoleGroup GET path
+var _ sophos.RestGetter = &RoleGroup{}
+
+// GetPath implements sophos.RestObject and returns the RoleGroups GET path
 // Returns all available role/group objects
-func (*RoleGroup) GetPath() string { return "/api/objects/role/group/" }
+func (*RoleGroups) GetPath() string { return "/api/objects/role/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*RoleGroup) RefRequired() (string, bool) { return "", false }
+func (*RoleGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RoleGroups GET path
+// Returns all available group types
+func (r *RoleGroup) GetPath() string { return fmt.Sprintf("/api/objects/role/group/%s", r.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (r *RoleGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RoleGroup DELETE path
 // Creates or updates the complete object group

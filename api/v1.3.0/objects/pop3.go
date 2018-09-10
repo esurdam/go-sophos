@@ -94,17 +94,39 @@ func (Pop3) References() []string {
 	}
 }
 
-// Pop3Account is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Account []interface{}
+// Pop3Accounts is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Accounts []Pop3Account
 
-var _ sophos.RestObject = &Pop3Account{}
+// Pop3Account represents a UTM POP3 account
+type Pop3Account struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Password  string `json:"password"`
+	// Server description: REF(pop3/server)
+	Server   string `json:"server"`
+	Username string `json:"username"`
+}
 
-// GetPath implements sophos.RestObject and returns the Pop3Account GET path
+var _ sophos.RestGetter = &Pop3Account{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Accounts GET path
 // Returns all available pop3/account objects
-func (*Pop3Account) GetPath() string { return "/api/objects/pop3/account/" }
+func (*Pop3Accounts) GetPath() string { return "/api/objects/pop3/account/" }
 
 // RefRequired implements sophos.RestObject
-func (*Pop3Account) RefRequired() (string, bool) { return "", false }
+func (*Pop3Accounts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the Pop3Accounts GET path
+// Returns all available account types
+func (p *Pop3Account) GetPath() string {
+	return fmt.Sprintf("/api/objects/pop3/account/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *Pop3Account) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the Pop3Account DELETE path
 // Creates or updates the complete object account
@@ -136,17 +158,40 @@ func (*Pop3Account) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/account/%s/usedby", ref)
 }
 
-// Pop3Exception is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Exception []interface{}
+// Pop3Exceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Exceptions []Pop3Exception
 
-var _ sophos.RestObject = &Pop3Exception{}
+// Pop3Exception represents a UTM POP3 filter exception
+type Pop3Exception struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Client    []interface{} `json:"client"`
+	Comment   string        `json:"comment"`
+	Name      string        `json:"name"`
+	Sender    []interface{} `json:"sender"`
+	Skiplist  []interface{} `json:"skiplist"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the Pop3Exception GET path
+var _ sophos.RestGetter = &Pop3Exception{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Exceptions GET path
 // Returns all available pop3/exception objects
-func (*Pop3Exception) GetPath() string { return "/api/objects/pop3/exception/" }
+func (*Pop3Exceptions) GetPath() string { return "/api/objects/pop3/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*Pop3Exception) RefRequired() (string, bool) { return "", false }
+func (*Pop3Exceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the Pop3Exceptions GET path
+// Returns all available exception types
+func (p *Pop3Exception) GetPath() string {
+	return fmt.Sprintf("/api/objects/pop3/exception/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *Pop3Exception) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the Pop3Exception DELETE path
 // Creates or updates the complete object exception
@@ -178,17 +223,33 @@ func (*Pop3Exception) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/exception/%s/usedby", ref)
 }
 
-// Pop3Group is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Group []interface{}
+// Pop3Groups is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Groups []Pop3Group
 
-var _ sophos.RestObject = &Pop3Group{}
+// Pop3Group represents a UTM group
+type Pop3Group struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the Pop3Group GET path
+var _ sophos.RestGetter = &Pop3Group{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Groups GET path
 // Returns all available pop3/group objects
-func (*Pop3Group) GetPath() string { return "/api/objects/pop3/group/" }
+func (*Pop3Groups) GetPath() string { return "/api/objects/pop3/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*Pop3Group) RefRequired() (string, bool) { return "", false }
+func (*Pop3Groups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the Pop3Groups GET path
+// Returns all available group types
+func (p *Pop3Group) GetPath() string { return fmt.Sprintf("/api/objects/pop3/group/%s", p.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (p *Pop3Group) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the Pop3Group DELETE path
 // Creates or updates the complete object group
@@ -220,17 +281,37 @@ func (*Pop3Group) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pop3/group/%s/usedby", ref)
 }
 
-// Pop3Server is an Sophos Endpoint subType and implements sophos.RestObject
-type Pop3Server []interface{}
+// Pop3Servers is an Sophos Endpoint subType and implements sophos.RestObject
+type Pop3Servers []Pop3Server
 
-var _ sophos.RestObject = &Pop3Server{}
+// Pop3Server represents a UTM POP3 server
+type Pop3Server struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	// TlsCert description: REF(ca/host_key_cert)
+	// TlsCert default value is ""
+	TlsCert string        `json:"tls_cert"`
+	Comment string        `json:"comment"`
+	Hosts   []interface{} `json:"hosts"`
+}
 
-// GetPath implements sophos.RestObject and returns the Pop3Server GET path
+var _ sophos.RestGetter = &Pop3Server{}
+
+// GetPath implements sophos.RestObject and returns the Pop3Servers GET path
 // Returns all available pop3/server objects
-func (*Pop3Server) GetPath() string { return "/api/objects/pop3/server/" }
+func (*Pop3Servers) GetPath() string { return "/api/objects/pop3/server/" }
 
 // RefRequired implements sophos.RestObject
-func (*Pop3Server) RefRequired() (string, bool) { return "", false }
+func (*Pop3Servers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the Pop3Servers GET path
+// Returns all available server types
+func (p *Pop3Server) GetPath() string { return fmt.Sprintf("/api/objects/pop3/server/%s", p.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (p *Pop3Server) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the Pop3Server DELETE path
 // Creates or updates the complete object server

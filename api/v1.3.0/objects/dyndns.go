@@ -54,17 +54,64 @@ func (Dyndns) References() []string {
 	}
 }
 
-// DyndnsDyndns is an Sophos Endpoint subType and implements sophos.RestObject
-type DyndnsDyndns []interface{}
+// DyndnsDyndnss is an Sophos Endpoint subType and implements sophos.RestObject
+type DyndnsDyndnss []DyndnsDyndns
 
-var _ sophos.RestObject = &DyndnsDyndns{}
+// DyndnsDyndns represents a UTM DynDNS mapping
+type DyndnsDyndns struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Hostname default value is ""
+	Hostname string `json:"hostname"`
+	// Strategy can be one of: []string{"if", "web"}
+	// Strategy default value is "if"
+	Strategy string        `json:"strategy"`
+	Aliases  []interface{} `json:"aliases"`
+	// Backupmx default value is false
+	Backupmx bool `json:"backupmx"`
+	// Label default value is ""
+	Label string `json:"label"`
+	Mxpri int    `json:"mxpri"`
+	Name  string `json:"name"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+	// Password default value is ""
+	Password string `json:"password"`
+	User     string `json:"user"`
+	// Wildcard default value is false
+	Wildcard bool `json:"wildcard"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// Mx description: (HOSTNAME)
+	// Mx default value is ""
+	Mx string `json:"mx"`
+	// Record can be one of: []string{"a", "aaaa", "both"}
+	// Record default value is "a"
+	Record string `json:"record"`
+	// Type can be one of: []string{"dns-o-matic", "dnsdynamic", "dnspark", "dtdns", "dyndns", "dyndns-custom", "easydns", "freedns", "namecheap", "no-ip", "opendns", "selfhost", "strato", "zoneedit"}
+	// Type default value is "dyndns"
+	Type string `json:"type"`
+}
 
-// GetPath implements sophos.RestObject and returns the DyndnsDyndns GET path
+var _ sophos.RestGetter = &DyndnsDyndns{}
+
+// GetPath implements sophos.RestObject and returns the DyndnsDyndnss GET path
 // Returns all available dyndns/dyndns objects
-func (*DyndnsDyndns) GetPath() string { return "/api/objects/dyndns/dyndns/" }
+func (*DyndnsDyndnss) GetPath() string { return "/api/objects/dyndns/dyndns/" }
 
 // RefRequired implements sophos.RestObject
-func (*DyndnsDyndns) RefRequired() (string, bool) { return "", false }
+func (*DyndnsDyndnss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DyndnsDyndnss GET path
+// Returns all available dyndns types
+func (d *DyndnsDyndns) GetPath() string {
+	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s", d.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (d *DyndnsDyndns) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DyndnsDyndns DELETE path
 // Creates or updates the complete object dyndns
@@ -96,17 +143,35 @@ func (*DyndnsDyndns) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dyndns/dyndns/%s/usedby", ref)
 }
 
-// DyndnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DyndnsGroup []interface{}
+// DyndnsGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type DyndnsGroups []DyndnsGroup
 
-var _ sophos.RestObject = &DyndnsGroup{}
+// DyndnsGroup represents a UTM group
+type DyndnsGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the DyndnsGroup GET path
+var _ sophos.RestGetter = &DyndnsGroup{}
+
+// GetPath implements sophos.RestObject and returns the DyndnsGroups GET path
 // Returns all available dyndns/group objects
-func (*DyndnsGroup) GetPath() string { return "/api/objects/dyndns/group/" }
+func (*DyndnsGroups) GetPath() string { return "/api/objects/dyndns/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*DyndnsGroup) RefRequired() (string, bool) { return "", false }
+func (*DyndnsGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DyndnsGroups GET path
+// Returns all available group types
+func (d *DyndnsGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/dyndns/group/%s", d.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (d *DyndnsGroup) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DyndnsGroup DELETE path
 // Creates or updates the complete object group

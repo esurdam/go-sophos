@@ -71,17 +71,33 @@ func (PimSm) References() []string {
 	}
 }
 
-// PimSmGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmGroup []interface{}
+// PimSmGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmGroups []PimSmGroup
 
-var _ sophos.RestObject = &PimSmGroup{}
+// PimSmGroup represents a UTM group
+type PimSmGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the PimSmGroup GET path
+var _ sophos.RestGetter = &PimSmGroup{}
+
+// GetPath implements sophos.RestObject and returns the PimSmGroups GET path
 // Returns all available pim_sm/group objects
-func (*PimSmGroup) GetPath() string { return "/api/objects/pim_sm/group/" }
+func (*PimSmGroups) GetPath() string { return "/api/objects/pim_sm/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*PimSmGroup) RefRequired() (string, bool) { return "", false }
+func (*PimSmGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PimSmGroups GET path
+// Returns all available group types
+func (p *PimSmGroup) GetPath() string { return fmt.Sprintf("/api/objects/pim_sm/group/%s", p.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (p *PimSmGroup) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PimSmGroup DELETE path
 // Creates or updates the complete object group
@@ -113,17 +129,39 @@ func (*PimSmGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/group/%s/usedby", ref)
 }
 
-// PimSmInterface is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmInterface []interface{}
+// PimSmInterfaces is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmInterfaces []PimSmInterface
 
-var _ sophos.RestObject = &PimSmInterface{}
+// PimSmInterface represents a UTM multicast routing interface
+type PimSmInterface struct {
+	Locked       string        `json:"_locked"`
+	Reference    string        `json:"_ref"`
+	_type        string        `json:"_type"`
+	Comment      string        `json:"comment"`
+	DrPriority   int           `json:"dr_priority"`
+	IgmpVersions []interface{} `json:"igmp_versions"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the PimSmInterface GET path
+var _ sophos.RestGetter = &PimSmInterface{}
+
+// GetPath implements sophos.RestObject and returns the PimSmInterfaces GET path
 // Returns all available pim_sm/interface objects
-func (*PimSmInterface) GetPath() string { return "/api/objects/pim_sm/interface/" }
+func (*PimSmInterfaces) GetPath() string { return "/api/objects/pim_sm/interface/" }
 
 // RefRequired implements sophos.RestObject
-func (*PimSmInterface) RefRequired() (string, bool) { return "", false }
+func (*PimSmInterfaces) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PimSmInterfaces GET path
+// Returns all available interface types
+func (p *PimSmInterface) GetPath() string {
+	return fmt.Sprintf("/api/objects/pim_sm/interface/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PimSmInterface) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PimSmInterface DELETE path
 // Creates or updates the complete object interface
@@ -155,17 +193,45 @@ func (*PimSmInterface) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/interface/%s/usedby", ref)
 }
 
-// PimSmRoute is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmRoute []interface{}
+// PimSmRoutes is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmRoutes []PimSmRoute
 
-var _ sophos.RestObject = &PimSmRoute{}
+// PimSmRoute represents a UTM multicast route
+type PimSmRoute struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Gateway description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	// Gateway default value is ""
+	Gateway string `json:"gateway"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	// Network description: REF(network/*)
+	Network string `json:"network"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Type can be one of: []string{"gateway", "interface"}
+	Type string `json:"type"`
+}
 
-// GetPath implements sophos.RestObject and returns the PimSmRoute GET path
+var _ sophos.RestGetter = &PimSmRoute{}
+
+// GetPath implements sophos.RestObject and returns the PimSmRoutes GET path
 // Returns all available pim_sm/route objects
-func (*PimSmRoute) GetPath() string { return "/api/objects/pim_sm/route/" }
+func (*PimSmRoutes) GetPath() string { return "/api/objects/pim_sm/route/" }
 
 // RefRequired implements sophos.RestObject
-func (*PimSmRoute) RefRequired() (string, bool) { return "", false }
+func (*PimSmRoutes) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PimSmRoutes GET path
+// Returns all available route types
+func (p *PimSmRoute) GetPath() string { return fmt.Sprintf("/api/objects/pim_sm/route/%s", p.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (p *PimSmRoute) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PimSmRoute DELETE path
 // Creates or updates the complete object route
@@ -197,17 +263,39 @@ func (*PimSmRoute) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/pim_sm/route/%s/usedby", ref)
 }
 
-// PimSmRpRouter is an Sophos Endpoint subType and implements sophos.RestObject
-type PimSmRpRouter []interface{}
+// PimSmRpRouters is an Sophos Endpoint subType and implements sophos.RestObject
+type PimSmRpRouters []PimSmRpRouter
 
-var _ sophos.RestObject = &PimSmRpRouter{}
+// PimSmRpRouter represents a UTM rendezvous point router
+type PimSmRpRouter struct {
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	_type      string `json:"_type"`
+	RpPriority int    `json:"rp_priority"`
+	Comment    string `json:"comment"`
+	// Host description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
+	Host            string        `json:"host"`
+	MulticastGroups []interface{} `json:"multicast_groups"`
+	Name            string        `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the PimSmRpRouter GET path
+var _ sophos.RestGetter = &PimSmRpRouter{}
+
+// GetPath implements sophos.RestObject and returns the PimSmRpRouters GET path
 // Returns all available pim_sm/rp_router objects
-func (*PimSmRpRouter) GetPath() string { return "/api/objects/pim_sm/rp_router/" }
+func (*PimSmRpRouters) GetPath() string { return "/api/objects/pim_sm/rp_router/" }
 
 // RefRequired implements sophos.RestObject
-func (*PimSmRpRouter) RefRequired() (string, bool) { return "", false }
+func (*PimSmRpRouters) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PimSmRpRouters GET path
+// Returns all available rp_router types
+func (p *PimSmRpRouter) GetPath() string {
+	return fmt.Sprintf("/api/objects/pim_sm/rp_router/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PimSmRpRouter) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PimSmRpRouter DELETE path
 // Creates or updates the complete object rp_router

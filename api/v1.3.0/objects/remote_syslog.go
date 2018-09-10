@@ -57,17 +57,35 @@ func (RemoteSyslog) References() []string {
 	}
 }
 
-// RemoteSyslogGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RemoteSyslogGroup []interface{}
+// RemoteSyslogGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type RemoteSyslogGroups []RemoteSyslogGroup
 
-var _ sophos.RestObject = &RemoteSyslogGroup{}
+// RemoteSyslogGroup represents a UTM group
+type RemoteSyslogGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the RemoteSyslogGroup GET path
+var _ sophos.RestGetter = &RemoteSyslogGroup{}
+
+// GetPath implements sophos.RestObject and returns the RemoteSyslogGroups GET path
 // Returns all available remote_syslog/group objects
-func (*RemoteSyslogGroup) GetPath() string { return "/api/objects/remote_syslog/group/" }
+func (*RemoteSyslogGroups) GetPath() string { return "/api/objects/remote_syslog/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*RemoteSyslogGroup) RefRequired() (string, bool) { return "", false }
+func (*RemoteSyslogGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RemoteSyslogGroups GET path
+// Returns all available group types
+func (r *RemoteSyslogGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/remote_syslog/group/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *RemoteSyslogGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RemoteSyslogGroup DELETE path
 // Creates or updates the complete object group
@@ -99,17 +117,43 @@ func (*RemoteSyslogGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/remote_syslog/group/%s/usedby", ref)
 }
 
-// RemoteSyslogServer is an Sophos Endpoint subType and implements sophos.RestObject
-type RemoteSyslogServer []interface{}
+// RemoteSyslogServers is an Sophos Endpoint subType and implements sophos.RestObject
+type RemoteSyslogServers []RemoteSyslogServer
 
-var _ sophos.RestObject = &RemoteSyslogServer{}
+// RemoteSyslogServer represents a UTM remote syslog server
+type RemoteSyslogServer struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server  string `json:"server"`
+	Comment string `json:"comment"`
+	// LocalAddr description: REF(network/interface_address), REF(network/any)
+	// LocalAddr default value is "REF_NetworkAny"
+	LocalAddr string `json:"local_addr"`
+	Name      string `json:"name"`
+	// Port description: REF(service/tcp), REF(service/udp)
+	// Port default value is "REF_SEzkPqGizE"
+	Port string `json:"port"`
+}
 
-// GetPath implements sophos.RestObject and returns the RemoteSyslogServer GET path
+var _ sophos.RestGetter = &RemoteSyslogServer{}
+
+// GetPath implements sophos.RestObject and returns the RemoteSyslogServers GET path
 // Returns all available remote_syslog/server objects
-func (*RemoteSyslogServer) GetPath() string { return "/api/objects/remote_syslog/server/" }
+func (*RemoteSyslogServers) GetPath() string { return "/api/objects/remote_syslog/server/" }
 
 // RefRequired implements sophos.RestObject
-func (*RemoteSyslogServer) RefRequired() (string, bool) { return "", false }
+func (*RemoteSyslogServers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RemoteSyslogServers GET path
+// Returns all available server types
+func (r *RemoteSyslogServer) GetPath() string {
+	return fmt.Sprintf("/api/objects/remote_syslog/server/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *RemoteSyslogServer) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RemoteSyslogServer DELETE path
 // Creates or updates the complete object server

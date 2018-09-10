@@ -55,17 +55,35 @@ func (ApplicationControl) References() []string {
 	}
 }
 
-// ApplicationControlGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ApplicationControlGroup []interface{}
+// ApplicationControlGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ApplicationControlGroups []ApplicationControlGroup
 
-var _ sophos.RestObject = &ApplicationControlGroup{}
+// ApplicationControlGroup represents a UTM group
+type ApplicationControlGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ApplicationControlGroup GET path
+var _ sophos.RestGetter = &ApplicationControlGroup{}
+
+// GetPath implements sophos.RestObject and returns the ApplicationControlGroups GET path
 // Returns all available application_control/group objects
-func (*ApplicationControlGroup) GetPath() string { return "/api/objects/application_control/group/" }
+func (*ApplicationControlGroups) GetPath() string { return "/api/objects/application_control/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ApplicationControlGroup) RefRequired() (string, bool) { return "", false }
+func (*ApplicationControlGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ApplicationControlGroups GET path
+// Returns all available group types
+func (a *ApplicationControlGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/application_control/group/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *ApplicationControlGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ApplicationControlGroup DELETE path
 // Creates or updates the complete object group
