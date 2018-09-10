@@ -86,12 +86,16 @@ func (c Client) Do(method, path string, body io.Reader, options ...Option) (resp
 
 	resp.Response = res
 	if res.StatusCode >= 400 && res.StatusCode <= 422 {
-		_ = resp.MarshalTo(&resp.Errors)
-		for _, e := range resp.Errors {
-			err = fmt.Errorf("client do: error from server: [%d] %s", res.StatusCode, e.Name)
-			break
-		}
 		err = fmt.Errorf("client do: error from server: %s", res.Status)
+
+		// check for Errors
+		var ee Errors
+		_ = resp.MarshalTo(&ee)
+		if len(ee) > 0 {
+			resp.Errors = &ee
+			err = resp.Errors
+		}
+
 		return
 	}
 
@@ -231,10 +235,11 @@ func (c Client) GetObject(o RestGetter, options ...Option) error {
 func (c Client) PostObject(o RestObject, options ...Option) error {
 	byt, _ := json.Marshal(o)
 	res, err := c.Post(o.PostPath(), bytes.NewReader(byt))
-	// Operation successful and created a new resource. The newly created
-	// resource and its path and REF_ string are returned in the
-	// Location header
+
 	if res.StatusCode == http.StatusCreated {
+		// Operation successful and created a new resource. The newly created
+		// resource and its path and REF_ string are returned in the
+		// Location header
 		err = res.MarshalTo(o)
 	}
 

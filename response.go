@@ -8,7 +8,8 @@ import (
 // Response contains the http.Response from the API
 type Response struct {
 	*http.Response
-	Errors Errors
+	// Errors is a slice of type Error that != nil when http.StatusCode >= 400 <= 421
+	Errors *Errors
 }
 
 // MarshalTo marshals the response's body to the provided interface

@@ -36,8 +36,15 @@ func TestResponse_Errors(t *testing.T) {
 	td := setupTestCase(t)
 	defer td(t)
 
-	res, _ := client.Get("/api/errorjson")
-	errs := res.Errors
+	res, err := client.Get("/api/errorjson")
+	if err == nil {
+		t.Error("TestResponse_Errors should have error for /api/errorjson")
+	}
+	if res.Errors == nil {
+		t.Error("TestResponse_Errors should have error for /api/errorjson")
+	}
+
+	errs := *res.Errors
 	if len(errs) != 1 {
 		t.Error("TestResponse_Errors should have returned Error")
 		return
