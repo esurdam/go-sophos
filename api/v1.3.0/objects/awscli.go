@@ -59,11 +59,11 @@ type AwscliGroups []AwscliGroup
 
 // AwscliGroup represents a UTM awscli->group
 type AwscliGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AwscliGroup{}
@@ -119,16 +119,9 @@ type AwscliProfiles []AwscliProfile
 
 // AwscliProfile represents a UTM AWS CLI Profile
 type AwscliProfile struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// AwsSessionToken default value is ""
-	AwsSessionToken string `json:"aws_session_token"`
-	Comment         string `json:"comment"`
-	Name            string `json:"name"`
-	// Output can be one of: []string{"json", "text", "table"}
-	// Output default value is "json"
-	Output string `json:"output"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// ProfileName description: (REGEX)
 	// ProfileName default value is "default"
 	ProfileName string `json:"profile_name"`
@@ -139,6 +132,13 @@ type AwscliProfile struct {
 	AwsAccessKeyId string `json:"aws_access_key_id"`
 	// AwsSecretAccessKey default value is ""
 	AwsSecretAccessKey string `json:"aws_secret_access_key"`
+	// AwsSessionToken default value is ""
+	AwsSessionToken string `json:"aws_session_token"`
+	Comment         string `json:"comment"`
+	Name            string `json:"name"`
+	// Output can be one of: []string{"json", "text", "table"}
+	// Output default value is "json"
+	Output string `json:"output"`
 }
 
 var _ sophos.RestGetter = &AwscliProfile{}

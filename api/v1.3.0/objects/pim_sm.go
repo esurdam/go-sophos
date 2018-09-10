@@ -76,11 +76,11 @@ type PimSmGroups []PimSmGroup
 
 // PimSmGroup represents a UTM group
 type PimSmGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &PimSmGroup{}
@@ -136,7 +136,7 @@ type PimSmInterfaces []PimSmInterface
 type PimSmInterface struct {
 	Locked       string        `json:"_locked"`
 	Reference    string        `json:"_ref"`
-	_type        string        `json:"_type"`
+	ObjectType   string        `json:"_type"`
 	Comment      string        `json:"comment"`
 	DrPriority   int           `json:"dr_priority"`
 	IgmpVersions []interface{} `json:"igmp_versions"`
@@ -198,10 +198,9 @@ type PimSmRoutes []PimSmRoute
 
 // PimSmRoute represents a UTM multicast route
 type PimSmRoute struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Gateway description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	// Gateway default value is ""
 	Gateway string `json:"gateway"`
@@ -214,7 +213,8 @@ type PimSmRoute struct {
 	// Status default value is false
 	Status bool `json:"status"`
 	// Type can be one of: []string{"gateway", "interface"}
-	Type string `json:"type"`
+	Type    string `json:"type"`
+	Comment string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &PimSmRoute{}
@@ -270,13 +270,13 @@ type PimSmRpRouters []PimSmRpRouter
 type PimSmRpRouter struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
-	RpPriority int    `json:"rp_priority"`
+	ObjectType string `json:"_type"`
 	Comment    string `json:"comment"`
 	// Host description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
 	Host            string        `json:"host"`
 	MulticastGroups []interface{} `json:"multicast_groups"`
 	Name            string        `json:"name"`
+	RpPriority      int           `json:"rp_priority"`
 }
 
 var _ sophos.RestGetter = &PimSmRpRouter{}

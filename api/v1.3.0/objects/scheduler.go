@@ -66,11 +66,11 @@ type SchedulerGroups []SchedulerGroup
 
 // SchedulerGroup represents a UTM group
 type SchedulerGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SchedulerGroup{}
@@ -128,7 +128,7 @@ type SchedulerLoadbalances []SchedulerLoadbalance
 type SchedulerLoadbalance struct {
 	Locked          string        `json:"_locked"`
 	Reference       string        `json:"_ref"`
-	_type           string        `json:"_type"`
+	ObjectType      string        `json:"_type"`
 	Algorithm       string        `json:"algorithm"`
 	CheckData       string        `json:"check_data"`
 	CheckHosts      []interface{} `json:"check_hosts"`
@@ -194,7 +194,7 @@ func (*SchedulerLoadbalance) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SchedulerLoadbalance) GetType() string { return s._type }
+func (s *SchedulerLoadbalance) GetType() string { return s.ObjectType }
 
 // SchedulerRules is an Sophos Endpoint subType and implements sophos.RestObject
 type SchedulerRules []SchedulerRule
@@ -203,7 +203,7 @@ type SchedulerRules []SchedulerRule
 type SchedulerRule struct {
 	Locked          string `json:"_locked"`
 	Reference       string `json:"_ref"`
-	_type           string `json:"_type"`
+	ObjectType      string `json:"_type"`
 	Comment         string `json:"comment"`
 	Destination     string `json:"destination"`
 	Interface       string `json:"interface"`
@@ -266,4 +266,4 @@ func (*SchedulerRule) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SchedulerRule) GetType() string { return s._type }
+func (s *SchedulerRule) GetType() string { return s.ObjectType }

@@ -101,11 +101,11 @@ type EmailpkiGroups []EmailpkiGroup
 
 // EmailpkiGroup represents a UTM group
 type EmailpkiGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &EmailpkiGroup{}
@@ -161,20 +161,20 @@ type EmailpkiOpenpgps []EmailpkiOpenpgp
 
 // EmailpkiOpenpgp represents a UTM Email encryption OpenPGP key
 type EmailpkiOpenpgp struct {
-	Locked      string `json:"_locked"`
-	Reference   string `json:"_ref"`
-	_type       string `json:"_type"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Emails     []interface{} `json:"emails"`
+	// Expires default value is ""
+	Expires     string `json:"expires"`
 	Fingerprint string `json:"fingerprint"`
 	Name        string `json:"name"`
 	// Privkey default value is ""
 	Privkey string `json:"privkey"`
 	Pubkey  string `json:"pubkey"`
 	// Realname default value is ""
-	Realname string        `json:"realname"`
-	Comment  string        `json:"comment"`
-	Emails   []interface{} `json:"emails"`
-	// Expires default value is ""
-	Expires string `json:"expires"`
+	Realname string `json:"realname"`
+	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &EmailpkiOpenpgp{}
@@ -230,24 +230,24 @@ type EmailpkiSmimes []EmailpkiSmime
 
 // EmailpkiSmime represents a UTM email encryption S/MIME certificate
 type EmailpkiSmime struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Domaincert default value is false
-	Domaincert  bool   `json:"domaincert"`
-	Expires     string `json:"expires"`
-	Fingerprint string `json:"fingerprint"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Key default value is ""
-	Key     string        `json:"key"`
-	Name    string        `json:"name"`
-	Cert    string        `json:"cert"`
-	Comment string        `json:"comment"`
-	Dn      string        `json:"dn"`
-	Emails  []interface{} `json:"emails"`
+	Key  string `json:"key"`
+	Name string `json:"name"`
+	// Trust default value is false
+	Trust   bool   `json:"trust"`
+	Comment string `json:"comment"`
+	Expires string `json:"expires"`
+	// Domaincert default value is false
+	Domaincert  bool          `json:"domaincert"`
+	Emails      []interface{} `json:"emails"`
+	Fingerprint string        `json:"fingerprint"`
 	// Realname default value is ""
 	Realname string `json:"realname"`
-	// Trust default value is false
-	Trust bool `json:"trust"`
+	Cert     string `json:"cert"`
+	Dn       string `json:"dn"`
 }
 
 var _ sophos.RestGetter = &EmailpkiSmime{}
@@ -303,36 +303,36 @@ type EmailpkiUsers []EmailpkiUser
 
 // EmailpkiUser represents a UTM email encryption user
 type EmailpkiUser struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Verify can be one of: []string{"global", "on", "off"}
-	// Verify default value is "global"
-	Verify string `json:"verify"`
-	// Domaincert default value is false
-	Domaincert bool   `json:"domaincert"`
-	Name       string `json:"name"`
-	// OpenpgpStatus default value is true
-	OpenpgpStatus bool `json:"openpgp_status"`
-	// SmimeStatus default value is true
-	SmimeStatus bool   `json:"smime_status"`
-	Realname    string `json:"realname"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	// Encrypt can be one of: []string{"global", "on", "off"}
+	// Encrypt default value is "global"
+	Encrypt string `json:"encrypt"`
+	Name    string `json:"name"`
 	// Sign can be one of: []string{"global", "on", "off"}
 	// Sign default value is "global"
 	Sign string `json:"sign"`
 	// Smime description: REF(emailpki/smime)
 	// Smime default value is ""
-	Smime   string `json:"smime"`
-	Comment string `json:"comment"`
+	Smime string `json:"smime"`
 	// Decrypt can be one of: []string{"global", "on", "off"}
 	// Decrypt default value is "global"
 	Decrypt string `json:"decrypt"`
-	// Encrypt can be one of: []string{"global", "on", "off"}
-	// Encrypt default value is "global"
-	Encrypt string `json:"encrypt"`
+	// Domaincert default value is false
+	Domaincert bool `json:"domaincert"`
 	// Openpgp description: REF(emailpki/openpgp)
 	// Openpgp default value is ""
 	Openpgp string `json:"openpgp"`
+	// OpenpgpStatus default value is true
+	OpenpgpStatus bool   `json:"openpgp_status"`
+	Realname      string `json:"realname"`
+	// SmimeStatus default value is true
+	SmimeStatus bool `json:"smime_status"`
+	// Verify can be one of: []string{"global", "on", "off"}
+	// Verify default value is "global"
+	Verify string `json:"verify"`
 }
 
 var _ sophos.RestGetter = &EmailpkiUser{}

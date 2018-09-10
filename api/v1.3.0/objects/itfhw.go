@@ -116,7 +116,7 @@ type ItfhwAweNetworks []ItfhwAweNetwork
 type ItfhwAweNetwork struct {
 	Locked            string        `json:"_locked"`
 	Reference         string        `json:"_ref"`
-	_type             string        `json:"_type"`
+	ObjectType        string        `json:"_type"`
 	ApBridgemode      string        `json:"ap_bridgemode"`
 	Bridge            string        `json:"bridge"`
 	ClientIsolation   bool          `json:"client_isolation"`
@@ -202,20 +202,20 @@ func (*ItfhwAweNetwork) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *ItfhwAweNetwork) GetType() string { return i._type }
+func (i *ItfhwAweNetwork) GetType() string { return i.ObjectType }
 
 // ItfhwAweNetworkGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwAweNetworkGroups []ItfhwAweNetworkGroup
 
 // ItfhwAweNetworkGroup represents a UTM wireless access point group
 type ItfhwAweNetworkGroup struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	ApVlantag int           `json:"ap_vlantag"`
-	Comment   string        `json:"comment"`
-	Members   []interface{} `json:"members"`
-	Name      string        `json:"name"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	ApVlantag  int           `json:"ap_vlantag"`
+	Comment    string        `json:"comment"`
+	Members    []interface{} `json:"members"`
+	Name       string        `json:"name"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// Vlantagging default value is false
@@ -275,18 +275,18 @@ type ItfhwBridges []ItfhwBridge
 
 // ItfhwBridge represents a UTM bridge interface
 type ItfhwBridge struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Description default value is "Bridge"
 	Description string `json:"description"`
 	// Hardware description: (REGEX)
 	Hardware string `json:"hardware"`
 	// Mac description: (MACADDR)
 	// Mac default value is "00:00:00:00:00:00"
-	Mac  string `json:"mac"`
-	Name string `json:"name"`
+	Mac     string `json:"mac"`
+	Name    string `json:"name"`
+	Comment string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &ItfhwBridge{}
@@ -344,7 +344,7 @@ type ItfhwEthernets []ItfhwEthernet
 type ItfhwEthernet struct {
 	Locked                string `json:"_locked"`
 	Reference             string `json:"_ref"`
-	_type                 string `json:"_type"`
+	ObjectType            string `json:"_type"`
 	AutoNegotiation       bool   `json:"auto_negotiation"`
 	AutoNegotiationStatus bool   `json:"auto_negotiation_status"`
 	Comment               string `json:"comment"`
@@ -414,18 +414,18 @@ func (*ItfhwEthernet) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *ItfhwEthernet) GetType() string { return i._type }
+func (i *ItfhwEthernet) GetType() string { return i.ObjectType }
 
 // ItfhwGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwGroups []ItfhwGroup
 
 // ItfhwGroup represents a UTM group
 type ItfhwGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ItfhwGroup{}
@@ -481,7 +481,7 @@ type ItfhwLags []ItfhwLag
 type ItfhwLag struct {
 	Locked         string `json:"_locked"`
 	Reference      string `json:"_ref"`
-	_type          string `json:"_type"`
+	ObjectType     string `json:"_type"`
 	Comment        string `json:"comment"`
 	Description    string `json:"description"`
 	Hardware       string `json:"hardware"`
@@ -537,38 +537,38 @@ func (*ItfhwLag) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *ItfhwLag) GetType() string { return i._type }
+func (i *ItfhwLag) GetType() string { return i.ObjectType }
 
 // ItfhwRedClients is an Sophos Endpoint subType and implements sophos.RestObject
 type ItfhwRedClients []ItfhwRedClient
 
 // ItfhwRedClient represents a UTM RED client interface
 type ItfhwRedClient struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Hardware description: (REGEX)
-	Hardware  string `json:"hardware"`
-	LocalCert string `json:"local_cert"`
-	LocalKey  string `json:"local_key"`
-	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
-	HubCa   string `json:"hub_ca"`
-	// HubHost description: REF(network/host), REF(network/dns_host)
-	HubHost string `json:"hub_host"`
-	// Mac description: (MACADDR)
-	// Mac default value is "00:00:00:00:00:00"
-	Mac  string `json:"mac"`
-	Name string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// TunnelCompression default value is false
 	TunnelCompression bool `json:"tunnel_compression"`
 	// TunnelCompressionAlgorithm can be one of: []string{"deflate", "lzo", "gzip"}
 	// TunnelCompressionAlgorithm default value is "lzo"
 	TunnelCompressionAlgorithm string `json:"tunnel_compression_algorithm"`
-	TunnelId                   int    `json:"tunnel_id"`
+	Comment                    string `json:"comment"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+	Name     string `json:"name"`
+	// Status default value is false
+	Status   bool   `json:"status"`
+	LocalKey string `json:"local_key"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac      string `json:"mac"`
+	TunnelId int    `json:"tunnel_id"`
 	// Description default value is "Remote Ethernet Client Device"
 	Description string `json:"description"`
+	HubCa       string `json:"hub_ca"`
+	// HubHost description: REF(network/host), REF(network/dns_host)
+	HubHost   string `json:"hub_host"`
+	LocalCert string `json:"local_cert"`
 }
 
 var _ sophos.RestGetter = &ItfhwRedClient{}
@@ -624,160 +624,160 @@ type ItfhwRedServers []ItfhwRedServer
 
 // ItfhwRedServer represents a UTM RED server interface
 type ItfhwRedServer struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	// Lan2Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
-	// Lan2Mode default value is "unused"
-	Lan2Mode string `json:"lan2_mode"`
-	TunnelId int    `json:"tunnel_id"`
-	// DeploymentMode can be one of: []string{"online", "offline"}
-	// DeploymentMode default value is "online"
-	DeploymentMode string `json:"deployment_mode"`
-	// FastFailover default value is false
-	FastFailover bool `json:"fast_failover"`
-	// MobileNetwork can be one of: []string{"gsm", "cdma"}
-	// MobileNetwork default value is "gsm"
-	MobileNetwork string        `json:"mobile_network"`
-	Pin           int           `json:"pin"`
-	FullbrDomains []interface{} `json:"fullbr_domains"`
-	// Lan3Vids default value is ""
-	Lan3Vids      string `json:"lan3_vids"`
-	ManualNetmask int    `json:"manual_netmask"`
-	// UplinkMode can be one of: []string{"dhcp", "manual"}
-	// UplinkMode default value is "dhcp"
-	UplinkMode string `json:"uplink_mode"`
-	// LanportMode can be one of: []string{"switch", "vlan"}
-	// LanportMode default value is "switch"
-	LanportMode string `json:"lanport_mode"`
-	// Manual2Defgw description: (IPADDR)
-	// Manual2Defgw default value is "0.0.0.0"
-	Manual2Defgw string `json:"manual2_defgw"`
-	// PinAsString description: (REGEX)
-	// PinAsString default value is ""
-	PinAsString string `json:"pin_as_string"`
-	// RouteMode can be one of: []string{"default", "split", "fullbr"}
-	// RouteMode default value is "default"
-	RouteMode string `json:"route_mode"`
-	// UplinkBalancing can be one of: []string{"balance", "failover"}
-	// UplinkBalancing default value is "failover"
-	UplinkBalancing string `json:"uplink_balancing"`
-	// FullbrDns description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
-	// FullbrDns default value is ""
-	FullbrDns string `json:"fullbr_dns"`
-	// LocalNetworksTarget description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
-	// LocalNetworksTarget default value is ""
-	LocalNetworksTarget string `json:"local_networks_target"`
-	// Status default value is false
-	Status bool `json:"status"`
-	// UnlockCode default value is ""
-	UnlockCode string `json:"unlock_code"`
-	// Uplink2Mode can be one of: []string{"dhcp", "manual"}
-	// Uplink2Mode default value is "dhcp"
-	Uplink2Mode string `json:"uplink2_mode"`
-	// Hardware description: (REGEX)
-	Hardware string `json:"hardware"`
-	// HubHostname default value is ""
-	HubHostname string `json:"hub_hostname"`
-	// Lan4Vids default value is ""
-	Lan4Vids               string `json:"lan4_vids"`
-	MacFilterEntriesRed15W int    `json:"mac_filter_entries_red15w"`
-	Manual2Netmask         int    `json:"manual2_netmask"`
-	// BridgeAddress description: (IPADDR)
-	// BridgeAddress default value is "0.0.0.0"
-	BridgeAddress         string `json:"bridge_address"`
-	MacFilterEntriesRed10 int    `json:"mac_filter_entries_red10"`
-	// MacFilterList description: REF(mac_list/*)
-	// MacFilterList default value is ""
-	MacFilterList string        `json:"mac_filter_list"`
-	LocalNetworks []interface{} `json:"local_networks"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// MacFilterType can be one of: []string{"none", "whitelist", "blacklist"}
 	// MacFilterType default value is "none"
 	MacFilterType string `json:"mac_filter_type"`
+	// TunnelState default value is false
+	TunnelState bool `json:"tunnel_state"`
+	// HubHostname default value is ""
+	HubHostname string `json:"hub_hostname"`
+	// Lan3Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan3Mode default value is "unused"
+	Lan3Mode      string        `json:"lan3_mode"`
+	FullbrDomains []interface{} `json:"fullbr_domains"`
+	// Hub2Hostname default value is ""
+	Hub2Hostname           string `json:"hub2_hostname"`
+	MacFilterEntriesRed15W int    `json:"mac_filter_entries_red15w"`
+	// TunnelCompression default value is false
+	TunnelCompression bool   `json:"tunnel_compression"`
+	TunnelId          int    `json:"tunnel_id"`
+	Comment           string `json:"comment"`
+	// FullbrDns description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
+	// FullbrDns default value is ""
+	FullbrDns string `json:"fullbr_dns"`
+	// Manual2Address description: (IPADDR)
+	// Manual2Address default value is "0.0.0.0"
+	Manual2Address string `json:"manual2_address"`
+	// ManualDns description: (IPADDR)
+	// ManualDns default value is "0.0.0.0"
+	ManualDns string `json:"manual_dns"`
+	Pin       int    `json:"pin"`
+	// RemoteCert description: REF(ca/host_key_cert)
+	// RemoteCert default value is ""
+	RemoteCert string `json:"remote_cert"`
+	// UnlockCode default value is ""
+	UnlockCode string `json:"unlock_code"`
+	// Lan4Vids default value is ""
+	Lan4Vids              string `json:"lan4_vids"`
+	MacFilterEntriesRed50 int    `json:"mac_filter_entries_red50"`
 	// State can be one of: []string{"initializing", "runnable", "notbound"}
 	// State default value is "initializing"
 	State string `json:"state"`
-	// Apn default value is ""
-	Apn string `json:"apn"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac string `json:"mac"`
+	// PrevUnlockCode default value is ""
+	PrevUnlockCode string `json:"prev_unlock_code"`
+	DebugLevel     int    `json:"debug_level"`
+	// LanportMode can be one of: []string{"switch", "vlan"}
+	// LanportMode default value is "switch"
+	LanportMode string `json:"lanport_mode"`
+	// FailoverDirect default value is true
+	FailoverDirect bool `json:"failover_direct"`
+	ManualNetmask  int  `json:"manual_netmask"`
+	// MacFilterList description: REF(mac_list/*)
+	// MacFilterList default value is ""
+	MacFilterList string `json:"mac_filter_list"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// TunnelCompressionAlgorithm can be one of: []string{"deflate", "lzo", "gzip"}
+	// TunnelCompressionAlgorithm default value is "lzo"
+	TunnelCompressionAlgorithm string `json:"tunnel_compression_algorithm"`
+	// BridgeAddress description: (IPADDR)
+	// BridgeAddress default value is "0.0.0.0"
+	BridgeAddress string `json:"bridge_address"`
 	// BridgeProto can be one of: []string{"dhcp", "static", "none"}
 	// BridgeProto default value is "none"
 	BridgeProto string `json:"bridge_proto"`
-	// Mac description: (MACADDR)
-	// Mac default value is "00:00:00:00:00:00"
-	Mac                   string `json:"mac"`
-	MacFilterEntriesRed15 int    `json:"mac_filter_entries_red15"`
-	// TunnelCompression default value is false
-	TunnelCompression bool `json:"tunnel_compression"`
+	// Lan1Vids default value is ""
+	Lan1Vids       string        `json:"lan1_vids"`
+	LocalNetworks  []interface{} `json:"local_networks"`
+	Manual2Netmask int           `json:"manual2_netmask"`
 	// UmtsState can be one of: []string{"READY", "PIN", "PUK"}
 	// UmtsState default value is "READY"
 	UmtsState string `json:"umts_state"`
+	// Username default value is ""
+	Username string `json:"username"`
+	// ActivateModem default value is false
+	ActivateModem bool `json:"activate_modem"`
+	// Lan1Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan1Mode default value is "unused"
+	Lan1Mode string `json:"lan1_mode"`
+	// PinAsString description: (REGEX)
+	// PinAsString default value is ""
+	PinAsString string `json:"pin_as_string"`
+	// Uplink2Mode can be one of: []string{"dhcp", "manual"}
+	// Uplink2Mode default value is "dhcp"
+	Uplink2Mode string `json:"uplink2_mode"`
+	// UplinkMode can be one of: []string{"dhcp", "manual"}
+	// UplinkMode default value is "dhcp"
+	UplinkMode string `json:"uplink_mode"`
+	// DialString default value is "*99#"
+	DialString string `json:"dial_string"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+	// ManualDefgw description: (IPADDR)
+	// ManualDefgw default value is "0.0.0.0"
+	ManualDefgw string `json:"manual_defgw"`
+	// LocalNetworksTarget description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
+	// LocalNetworksTarget default value is ""
+	LocalNetworksTarget string `json:"local_networks_target"`
+	RedId               string `json:"red_id"`
+	// FastFailover default value is false
+	FastFailover bool `json:"fast_failover"`
+	// Lan4Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan4Mode default value is "unused"
+	Lan4Mode              string `json:"lan4_mode"`
+	MacFilterEntriesRed15 int    `json:"mac_filter_entries_red15"`
+	// ManualAddress description: (IPADDR)
+	// ManualAddress default value is "0.0.0.0"
+	ManualAddress string `json:"manual_address"`
+	// MobileNetwork can be one of: []string{"gsm", "cdma"}
+	// MobileNetwork default value is "gsm"
+	MobileNetwork string `json:"mobile_network"`
+	// Description default value is "Remote Ethernet Server Device"
+	Description           string `json:"description"`
+	MacFilterEntriesRed10 int    `json:"mac_filter_entries_red10"`
+	// Lan3Vids default value is ""
+	Lan3Vids string `json:"lan3_vids"`
+	// Authorized default value is false
+	Authorized bool `json:"authorized"`
+	// DeploymentMode can be one of: []string{"online", "offline"}
+	// DeploymentMode default value is "online"
+	DeploymentMode string `json:"deployment_mode"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// Type can be one of: []string{"red", "red15", "red15w", "red50", "asg", "software"}
+	// Type default value is "asg"
+	Type string `json:"type"`
+	// Manual2Defgw description: (IPADDR)
+	// Manual2Defgw default value is "0.0.0.0"
+	Manual2Defgw string `json:"manual2_defgw"`
+	// Manual2Dns description: (IPADDR)
+	// Manual2Dns default value is "0.0.0.0"
+	Manual2Dns string `json:"manual2_dns"`
+	Name       string `json:"name"`
+	// RouteMode can be one of: []string{"default", "split", "fullbr"}
+	// RouteMode default value is "default"
+	RouteMode     string        `json:"route_mode"`
+	SplitNetworks []interface{} `json:"split_networks"`
+	// UplinkBalancing can be one of: []string{"balance", "failover"}
+	// UplinkBalancing default value is "failover"
+	UplinkBalancing string `json:"uplink_balancing"`
+	// Apn default value is ""
+	Apn string `json:"apn"`
 	// HostnameBalancing can be one of: []string{"balance", "failover"}
 	// HostnameBalancing default value is "failover"
 	HostnameBalancing string `json:"hostname_balancing"`
 	// Lan2Vids default value is ""
-	Lan2Vids string `json:"lan2_vids"`
-	// Lan3Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
-	// Lan3Mode default value is "unused"
-	Lan3Mode string `json:"lan3_mode"`
-	// Manual2Address description: (IPADDR)
-	// Manual2Address default value is "0.0.0.0"
-	Manual2Address string `json:"manual2_address"`
-	// Manual2Dns description: (IPADDR)
-	// Manual2Dns default value is "0.0.0.0"
-	Manual2Dns string `json:"manual2_dns"`
-	// Password default value is ""
-	Password string `json:"password"`
-	// RemoteCert description: REF(ca/host_key_cert)
-	// RemoteCert default value is ""
-	RemoteCert string `json:"remote_cert"`
-	// Username default value is ""
-	Username string `json:"username"`
-	Name     string `json:"name"`
-	RedId    string `json:"red_id"`
-	// ActivateModem default value is false
-	ActivateModem bool `json:"activate_modem"`
-	// Description default value is "Remote Ethernet Server Device"
-	Description string `json:"description"`
-	// FailoverDirect default value is true
-	FailoverDirect bool `json:"failover_direct"`
-	// Hub2Hostname default value is ""
-	Hub2Hostname          string `json:"hub2_hostname"`
-	MacFilterEntriesRed50 int    `json:"mac_filter_entries_red50"`
-	// DialString default value is "*99#"
-	DialString string `json:"dial_string"`
-	// Lan1Vids default value is ""
-	Lan1Vids string `json:"lan1_vids"`
-	// ManualDns description: (IPADDR)
-	// ManualDns default value is "0.0.0.0"
-	ManualDns     string        `json:"manual_dns"`
-	SplitNetworks []interface{} `json:"split_networks"`
-	// Type can be one of: []string{"red", "red15", "red15w", "red50", "asg", "software"}
-	// Type default value is "asg"
-	Type string `json:"type"`
-	// Lan4Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
-	// Lan4Mode default value is "unused"
-	Lan4Mode string `json:"lan4_mode"`
-	// TunnelCompressionAlgorithm can be one of: []string{"deflate", "lzo", "gzip"}
-	// TunnelCompressionAlgorithm default value is "lzo"
-	TunnelCompressionAlgorithm string `json:"tunnel_compression_algorithm"`
-	// TunnelState default value is false
-	TunnelState   bool `json:"tunnel_state"`
-	BridgeNetmask int  `json:"bridge_netmask"`
-	// Lan1Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
-	// Lan1Mode default value is "unused"
-	Lan1Mode string `json:"lan1_mode"`
-	// ManualAddress description: (IPADDR)
-	// ManualAddress default value is "0.0.0.0"
-	ManualAddress string `json:"manual_address"`
-	// PrevUnlockCode default value is ""
-	PrevUnlockCode string `json:"prev_unlock_code"`
-	// Authorized default value is false
-	Authorized bool `json:"authorized"`
-	DebugLevel int  `json:"debug_level"`
-	// ManualDefgw description: (IPADDR)
-	// ManualDefgw default value is "0.0.0.0"
-	ManualDefgw string `json:"manual_defgw"`
+	Lan2Vids      string `json:"lan2_vids"`
+	BridgeNetmask int    `json:"bridge_netmask"`
+	// Lan2Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan2Mode default value is "unused"
+	Lan2Mode string `json:"lan2_mode"`
 }
 
 var _ sophos.RestGetter = &ItfhwRedServer{}
@@ -833,11 +833,11 @@ type ItfhwSerials []ItfhwSerial
 
 // ItfhwSerial represents a UTM serial interface
 type ItfhwSerial struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	Port      string `json:"port"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	Port       string `json:"port"`
 	// Baud default value is ""
 	Baud        string `json:"baud"`
 	Comment     string `json:"comment"`
@@ -900,21 +900,21 @@ type ItfhwUsbserials []ItfhwUsbserial
 
 // ItfhwUsbserial represents a UTM USB serial interface
 type ItfhwUsbserial struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	// Product default value is ""
-	Product string `json:"product"`
-	// Vendor default value is ""
-	Vendor  string `json:"vendor"`
-	Comment string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// Control description: (REGEX)
 	// Control default value is ""
 	Control     string `json:"control"`
 	Description string `json:"description"`
 	// Hardware description: (REGEX)
 	Hardware string `json:"hardware"`
+	Name     string `json:"name"`
+	// Product default value is ""
+	Product string `json:"product"`
+	// Vendor default value is ""
+	Vendor string `json:"vendor"`
 }
 
 var _ sophos.RestGetter = &ItfhwUsbserial{}
@@ -970,10 +970,10 @@ type ItfhwVirtuals []ItfhwVirtual
 
 // ItfhwVirtual represents a UTM virtual interface
 type ItfhwVirtual struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// Description default value is "IPv6 Tunnel"
 	Description string `json:"description"`
 	// Hardware can be one of: []string{"6to4", "aiccu", "tspc", "teredo", "he.net"}

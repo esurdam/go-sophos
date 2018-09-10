@@ -90,33 +90,33 @@ type AuthenticationAdirectorys []AuthenticationAdirectory
 
 // AuthenticationAdirectory represents a UTM Microsoft Active Directory server
 type AuthenticationAdirectory struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Backend default value is ""
 	Backend string `json:"backend"`
-	// BaseDn default value is ""
-	BaseDn           string        `json:"base_dn"`
-	PrefetchContexts []interface{} `json:"prefetch_contexts"`
-	PrefetchInterval []interface{} `json:"prefetch_interval"`
-	Timeout          int           `json:"timeout"`
 	// BindDn default value is ""
-	BindDn  string `json:"bind_dn"`
-	Comment string `json:"comment"`
-	// Sasl default value is false
-	Sasl bool `json:"sasl"`
-	// Ssl default value is false
-	Ssl bool `json:"ssl"`
+	BindDn           string        `json:"bind_dn"`
+	Name             string        `json:"name"`
+	PrefetchInterval []interface{} `json:"prefetch_interval"`
 	// Status default value is false
 	Status bool `json:"status"`
-	// BindPw default value is ""
-	BindPw string `json:"bind_pw"`
-	Name   string `json:"name"`
-	Port   int    `json:"port"`
+	// BaseDn default value is ""
+	BaseDn  string `json:"base_dn"`
+	Comment string `json:"comment"`
+	Port    int    `json:"port"`
 	// PrefetchBackendSync default value is false
 	PrefetchBackendSync bool `json:"prefetch_backend_sync"`
+	// Sasl default value is false
+	Sasl bool `json:"sasl"`
 	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	Server string `json:"server"`
+	// Ssl default value is false
+	Ssl bool `json:"ssl"`
+	// BindPw default value is ""
+	BindPw           string        `json:"bind_pw"`
+	PrefetchContexts []interface{} `json:"prefetch_contexts"`
+	Timeout          int           `json:"timeout"`
 }
 
 var _ sophos.RestGetter = &AuthenticationAdirectory{}
@@ -172,32 +172,32 @@ type AuthenticationEdirectorys []AuthenticationEdirectory
 
 // AuthenticationEdirectory represents a UTM Novell eDirectory server
 type AuthenticationEdirectory struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Contexts  []interface{} `json:"contexts"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Sasl default value is false
+	Sasl bool `json:"sasl"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// BindDn default value is ""
+	BindDn string `json:"bind_dn"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
+	// BindPw default value is ""
+	BindPw string `json:"bind_pw"`
+	Name   string `json:"name"`
+	// Ssl default value is true
+	Ssl      bool          `json:"ssl"`
+	Timeout  int           `json:"timeout"`
+	Comment  string        `json:"comment"`
+	Contexts []interface{} `json:"contexts"`
+	Port     int           `json:"port"`
 	// PrefetchBackendSync default value is false
 	PrefetchBackendSync bool          `json:"prefetch_backend_sync"`
 	PrefetchContexts    []interface{} `json:"prefetch_contexts"`
 	PrefetchInterval    []interface{} `json:"prefetch_interval"`
-	// Sasl default value is false
-	Sasl bool `json:"sasl"`
-	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
-	Server string `json:"server"`
-	// Ssl default value is true
-	Ssl bool `json:"ssl"`
 	// Backend default value is ""
 	Backend string `json:"backend"`
-	// BindDn default value is ""
-	BindDn string `json:"bind_dn"`
-	// BindPw default value is ""
-	BindPw  string `json:"bind_pw"`
-	Comment string `json:"comment"`
-	Port    int    `json:"port"`
-	// Status default value is false
-	Status  bool   `json:"status"`
-	Name    string `json:"name"`
-	Timeout int    `json:"timeout"`
 }
 
 var _ sophos.RestGetter = &AuthenticationEdirectory{}
@@ -253,11 +253,11 @@ type AuthenticationGroups []AuthenticationGroup
 
 // AuthenticationGroup represents a UTM group
 type AuthenticationGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AuthenticationGroup{}
@@ -313,38 +313,38 @@ type AuthenticationLdaps []AuthenticationLdap
 
 // AuthenticationLdap represents a UTM LDAP server
 type AuthenticationLdap struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Status default value is false
-	Status bool `json:"status"`
+	Locked           string        `json:"_locked"`
+	Reference        string        `json:"_ref"`
+	ObjectType       string        `json:"_type"`
+	PrefetchInterval []interface{} `json:"prefetch_interval"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
 	// UserAttrib can be one of: []string{"cn", "sn", "uid", "custom"}
 	// UserAttrib default value is "cn"
 	UserAttrib string `json:"user_attrib"`
-	// UserAttribCustom default value is ""
-	UserAttribCustom string `json:"user_attrib_custom"`
-	// Backend default value is ""
-	Backend string `json:"backend"`
-	// BindPw default value is ""
-	BindPw           string        `json:"bind_pw"`
-	Comment          string        `json:"comment"`
-	PrefetchContexts []interface{} `json:"prefetch_contexts"`
-	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
-	Server  string `json:"server"`
-	Timeout int    `json:"timeout"`
 	// BaseDn default value is ""
 	BaseDn string `json:"base_dn"`
+	// BindPw default value is ""
+	BindPw           string        `json:"bind_pw"`
+	Name             string        `json:"name"`
+	PrefetchContexts []interface{} `json:"prefetch_contexts"`
+	Timeout          int           `json:"timeout"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
 	// BindDn default value is ""
-	BindDn string `json:"bind_dn"`
+	BindDn  string `json:"bind_dn"`
+	Comment string `json:"comment"`
+	Port    int    `json:"port"`
 	// PrefetchBackendSync default value is false
-	PrefetchBackendSync bool          `json:"prefetch_backend_sync"`
-	PrefetchInterval    []interface{} `json:"prefetch_interval"`
-	Name                string        `json:"name"`
-	Port                int           `json:"port"`
+	PrefetchBackendSync bool `json:"prefetch_backend_sync"`
 	// Sasl default value is false
 	Sasl bool `json:"sasl"`
 	// Ssl default value is false
 	Ssl bool `json:"ssl"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// UserAttribCustom default value is ""
+	UserAttribCustom string `json:"user_attrib_custom"`
 }
 
 var _ sophos.RestGetter = &AuthenticationLdap{}
@@ -400,29 +400,29 @@ type AuthenticationOtpTokens []AuthenticationOtpToken
 
 // AuthenticationOtpToken represents a UTM One Time Password token
 type AuthenticationOtpToken struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Offset     int    `json:"offset"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// User description: REF(aaa/user)
+	// User default value is ""
+	User    string `json:"user"`
+	Secret  string `json:"secret"`
+	Comment string `json:"comment"`
 	// Digest can be one of: []string{"sha1", "sha256", "sha512"}
 	// Digest default value is "sha1"
 	Digest     string        `json:"digest"`
 	ExtraCodes []interface{} `json:"extra_codes"`
 	// ForSsh default value is false
-	ForSsh  bool   `json:"for_ssh"`
+	ForSsh bool `json:"for_ssh"`
+	// Hide default value is false
+	Hide    bool   `json:"hide"`
 	Lastuse int    `json:"lastuse"`
 	Name    string `json:"name"`
 	// Timestep description: Constraints: 0, 10-120
 	Timestep int `json:"timestep"`
-	// User description: REF(aaa/user)
-	// User default value is ""
-	User    string `json:"user"`
-	Comment string `json:"comment"`
-	// Hide default value is false
-	Hide   bool   `json:"hide"`
-	Offset int    `json:"offset"`
-	Secret string `json:"secret"`
-	// Status default value is false
-	Status bool `json:"status"`
 }
 
 var _ sophos.RestGetter = &AuthenticationOtpToken{}
@@ -478,12 +478,12 @@ type AuthenticationRadiuss []AuthenticationRadius
 
 // AuthenticationRadius represents a UTM RADIUS server
 type AuthenticationRadius struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Port      int    `json:"port"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Port       int    `json:"port"`
 	// Secret default value is ""
 	Secret string `json:"secret"`
 	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
@@ -548,10 +548,10 @@ type AuthenticationTacacss []AuthenticationTacacs
 
 // AuthenticationTacacs represents a UTM TACACS+ server
 type AuthenticationTacacs struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Port      int    `json:"port"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Port       int    `json:"port"`
 	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	Server string `json:"server"`
 	// Status default value is false

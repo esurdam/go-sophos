@@ -125,27 +125,27 @@ type EppAvExceptions []EppAvException
 
 // EppAvException represents a UTM antivirus exception
 type EppAvException struct {
-	Locked        string `json:"_locked"`
-	Reference     string `json:"_ref"`
-	_type         string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Checksum default value is ""
+	Checksum        string        `json:"checksum"`
+	EndpointsGroups []interface{} `json:"endpoints_groups"`
+	HipsName        string        `json:"hips_name"`
+	// IpAddress description: (IPADDR)
+	// IpAddress default value is ""
+	IpAddress string `json:"ip_address"`
+	// Type can be one of: []string{"adware_pua", "scanning_exclusions", "scanning_extensions", "buffer_overflow", "suspicious_files", "suspicious_behaviours", "websites"}
+	// Type default value is "websites"
+	Type string `json:"type"`
+	// WebFormat can be one of: []string{"domain_name", "ip_address", "ip_address_mask"}
+	// WebFormat default value is "domain_name"
+	WebFormat     string `json:"web_format"`
+	Comment       string `json:"comment"`
 	IpAddressMask int    `json:"ip_address_mask"`
 	Name          string `json:"name"`
 	// Timeline default value is ""
 	Timeline string `json:"timeline"`
-	// Type can be one of: []string{"adware_pua", "scanning_exclusions", "scanning_extensions", "buffer_overflow", "suspicious_files", "suspicious_behaviours", "websites"}
-	// Type default value is "websites"
-	Type string `json:"type"`
-	// Checksum default value is ""
-	Checksum string `json:"checksum"`
-	HipsName string `json:"hips_name"`
-	// IpAddress description: (IPADDR)
-	// IpAddress default value is ""
-	IpAddress       string        `json:"ip_address"`
-	Comment         string        `json:"comment"`
-	EndpointsGroups []interface{} `json:"endpoints_groups"`
-	// WebFormat can be one of: []string{"domain_name", "ip_address", "ip_address_mask"}
-	// WebFormat default value is "domain_name"
-	WebFormat string `json:"web_format"`
 }
 
 var _ sophos.RestGetter = &EppAvException{}
@@ -203,7 +203,7 @@ type EppAvPolicys []EppAvPolicy
 type EppAvPolicy struct {
 	Locked                    string `json:"_locked"`
 	Reference                 string `json:"_ref"`
-	_type                     string `json:"_type"`
+	ObjectType                string `json:"_type"`
 	AlertOnly                 bool   `json:"alert_only"`
 	AutoCleanup               bool   `json:"auto_cleanup"`
 	BlockMaliciousSites       bool   `json:"block_malicious_sites"`
@@ -280,7 +280,7 @@ func (*EppAvPolicy) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (e *EppAvPolicy) GetType() string { return e._type }
+func (e *EppAvPolicy) GetType() string { return e.ObjectType }
 
 // EppDcExceptions is an Sophos Endpoint subType and implements sophos.RestObject
 type EppDcExceptions []EppDcException
@@ -289,15 +289,15 @@ type EppDcExceptions []EppDcException
 type EppDcException struct {
 	Locked                       string        `json:"_locked"`
 	Reference                    string        `json:"_ref"`
-	_type                        string        `json:"_type"`
-	AllowedEndpointsGroups       []interface{} `json:"allowed_endpoints_groups"`
-	Comment                      string        `json:"comment"`
+	ObjectType                   string        `json:"_type"`
 	CustomBlockedEndpointsGroups []interface{} `json:"custom_blocked_endpoints_groups"`
 	DeviceId                     string        `json:"device_id"`
 	// DeviceType can be one of: []string{"floppy_drive", "optical_drive", "removable_storage", "encrypted_storage", "modem", "wireless", "bluetooth", "infrared"}
 	// DeviceType default value is "removable_storage"
-	DeviceType string `json:"device_type"`
-	Name       string `json:"name"`
+	DeviceType             string        `json:"device_type"`
+	Name                   string        `json:"name"`
+	AllowedEndpointsGroups []interface{} `json:"allowed_endpoints_groups"`
+	Comment                string        `json:"comment"`
 }
 
 var _ sophos.RestGetter = &EppDcException{}
@@ -355,7 +355,7 @@ type EppDcPolicys []EppDcPolicy
 type EppDcPolicy struct {
 	Locked           string `json:"_locked"`
 	Reference        string `json:"_ref"`
-	_type            string `json:"_type"`
+	ObjectType       string `json:"_type"`
 	Bluetooth        string `json:"bluetooth"`
 	Comment          string `json:"comment"`
 	EncryptedStorage string `json:"encrypted_storage"`
@@ -417,7 +417,7 @@ func (*EppDcPolicy) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (e *EppDcPolicy) GetType() string { return e._type }
+func (e *EppDcPolicy) GetType() string { return e.ObjectType }
 
 // EppDevices is an Sophos Endpoint subType and implements sophos.RestObject
 type EppDevices []EppDevice
@@ -426,24 +426,24 @@ type EppDevices []EppDevice
 type EppDevice struct {
 	Locked                       string        `json:"_locked"`
 	Reference                    string        `json:"_ref"`
-	_type                        string        `json:"_type"`
-	AllowedEndpointsGroups       []interface{} `json:"allowed_endpoints_groups"`
-	Comment                      string        `json:"comment"`
+	ObjectType                   string        `json:"_type"`
 	CustomBlockedEndpointsGroups []interface{} `json:"custom_blocked_endpoints_groups"`
-	DeviceId                     string        `json:"device_id"`
+	// DeviceType can be one of: []string{"floppy_drive", "optical_drive", "removable_storage", "encrypted_storage", "modem", "wireless", "bluetooth", "infrared"}
+	// DeviceType default value is "removable_storage"
+	DeviceType string `json:"device_type"`
+	Name       string `json:"name"`
+	// ProductName default value is ""
+	ProductName            string        `json:"product_name"`
+	AllowedEndpointsGroups []interface{} `json:"allowed_endpoints_groups"`
+	Comment                string        `json:"comment"`
+	DeviceId               string        `json:"device_id"`
+	// GenericFlag default value is false
+	GenericFlag bool `json:"generic_flag"`
 	// InstanceId default value is ""
 	InstanceId string `json:"instance_id"`
 	// LastEndpoint description: REF(epp/endpoint)
 	// LastEndpoint default value is ""
 	LastEndpoint string `json:"last_endpoint"`
-	// ProductName default value is ""
-	ProductName string `json:"product_name"`
-	// DeviceType can be one of: []string{"floppy_drive", "optical_drive", "removable_storage", "encrypted_storage", "modem", "wireless", "bluetooth", "infrared"}
-	// DeviceType default value is "removable_storage"
-	DeviceType string `json:"device_type"`
-	// GenericFlag default value is false
-	GenericFlag bool   `json:"generic_flag"`
-	Name        string `json:"name"`
 }
 
 var _ sophos.RestGetter = &EppDevice{}
@@ -497,28 +497,28 @@ type EppEndpoints []EppEndpoint
 
 // EppEndpoint represents a UTM computer
 type EppEndpoint struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Accepted default value is false
-	Accepted bool `json:"accepted"`
-	// InventoryNumber default value is ""
-	InventoryNumber string `json:"inventory_number"`
-	Name            string `json:"name"`
-	// Os default value is ""
-	Os string `json:"os"`
-	// TamperProtection default value is false
-	TamperProtection bool   `json:"tamper_protection"`
-	Comment          string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// EndpointType can be one of: []string{"laptop", "desktop", "server"}
 	// EndpointType default value is "desktop"
 	EndpointType string `json:"endpoint_type"`
-	// McsId default value is ""
-	McsId string `json:"mcs_id"`
+	// Os default value is ""
+	Os string `json:"os"`
 	// SavStatus default value is false
 	SavStatus bool `json:"sav_status"`
 	// SavVersion default value is ""
 	SavVersion string `json:"sav_version"`
+	// TamperProtection default value is false
+	TamperProtection bool `json:"tamper_protection"`
+	// Accepted default value is false
+	Accepted bool   `json:"accepted"`
+	Comment  string `json:"comment"`
+	// InventoryNumber default value is ""
+	InventoryNumber string `json:"inventory_number"`
+	// McsId default value is ""
+	McsId string `json:"mcs_id"`
+	Name  string `json:"name"`
 }
 
 var _ sophos.RestGetter = &EppEndpoint{}
@@ -576,7 +576,7 @@ type EppEndpointsGroups []EppEndpointsGroup
 type EppEndpointsGroup struct {
 	Locked           string        `json:"_locked"`
 	Reference        string        `json:"_ref"`
-	_type            string        `json:"_type"`
+	ObjectType       string        `json:"_type"`
 	AvPolicy         string        `json:"av_policy"`
 	Comment          string        `json:"comment"`
 	DcPolicy         string        `json:"dc_policy"`
@@ -640,18 +640,18 @@ func (*EppEndpointsGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (e *EppEndpointsGroup) GetType() string { return e._type }
+func (e *EppEndpointsGroup) GetType() string { return e.ObjectType }
 
 // EppGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type EppGroups []EppGroup
 
 // EppGroup represents a UTM group
 type EppGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &EppGroup{}

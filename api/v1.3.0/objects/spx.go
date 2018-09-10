@@ -87,11 +87,11 @@ type SpxGroups []SpxGroup
 
 // SpxGroup represents a UTM group
 type SpxGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SpxGroup{}
@@ -147,7 +147,7 @@ type SpxTemplates []SpxTemplate
 type SpxTemplate struct {
 	Locked                         string `json:"_locked"`
 	Reference                      string `json:"_ref"`
-	_type                          string `json:"_type"`
+	ObjectType                     string `json:"_type"`
 	Comment                        string `json:"comment"`
 	Name                           string `json:"name"`
 	OrgName                        string `json:"org_name"`
@@ -241,4 +241,4 @@ func (*SpxTemplate) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SpxTemplate) GetType() string { return s._type }
+func (s *SpxTemplate) GetType() string { return s.ObjectType }

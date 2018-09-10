@@ -210,7 +210,7 @@ type HttpCffActions []HttpCffAction
 type HttpCffAction struct {
 	Locked                   string        `json:"_locked"`
 	Reference                string        `json:"_ref"`
-	_type                    string        `json:"_type"`
+	ObjectType               string        `json:"_type"`
 	AllowTags                []interface{} `json:"allow_tags"`
 	Av                       bool          `json:"av"`
 	AvEngines                string        `json:"av_engines"`
@@ -300,7 +300,7 @@ func (*HttpCffAction) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpCffAction) GetType() string { return h._type }
+func (h *HttpCffAction) GetType() string { return h.ObjectType }
 
 // HttpCffProfiles is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpCffProfiles []HttpCffProfile
@@ -309,7 +309,7 @@ type HttpCffProfiles []HttpCffProfile
 type HttpCffProfile struct {
 	Locked         string   `json:"_locked"`
 	Reference      string   `json:"_ref"`
-	_type          string   `json:"_type"`
+	ObjectType     string   `json:"_type"`
 	Aaa            []string `json:"aaa"`
 	Action         string   `json:"action"`
 	CffProfileName string   `json:"cff_profile_name"`
@@ -369,22 +369,22 @@ func (*HttpCffProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpCffProfile) GetType() string { return h._type }
+func (h *HttpCffProfile) GetType() string { return h.ObjectType }
 
 // HttpDeviceAuths is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpDeviceAuths []HttpDeviceAuth
 
 // HttpDeviceAuth represents a UTM device-specific authentication
 type HttpDeviceAuth struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// DeviceType can be one of: []string{"Windows", "Mac OS X", "Linux", "iOS", "Android", "Kindle", "Blackberry"}
 	DeviceType string `json:"device_type"`
 	Name       string `json:"name"`
 	// AuthMode can be one of: []string{"none", "aua", "edir_sso", "ntlm", "opendirectory_auth", "browser", "agent"}
 	AuthMode string `json:"auth_mode"`
-	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &HttpDeviceAuth{}
@@ -440,19 +440,19 @@ type HttpDomainRegexs []HttpDomainRegex
 
 // HttpDomainRegex represents a UTM whitelist/blacklist
 type HttpDomainRegex struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Comment    string        `json:"comment"`
+	Domain     []interface{} `json:"domain"`
+	// IncludeSubdomains default value is false
+	IncludeSubdomains bool `json:"include_subdomains"`
 	// Mode can be one of: []string{"Domain", "Regex"}
 	Mode    string        `json:"mode"`
 	Name    string        `json:"name"`
 	Regexps []interface{} `json:"regexps"`
 	// RestrictRegex default value is false
-	RestrictRegex bool          `json:"restrict_regex"`
-	Comment       string        `json:"comment"`
-	Domain        []interface{} `json:"domain"`
-	// IncludeSubdomains default value is false
-	IncludeSubdomains bool `json:"include_subdomains"`
+	RestrictRegex bool `json:"restrict_regex"`
 }
 
 var _ sophos.RestGetter = &HttpDomainRegex{}
@@ -510,7 +510,7 @@ type HttpExceptions []HttpException
 type HttpException struct {
 	Locked          string        `json:"_locked"`
 	Reference       string        `json:"_ref"`
-	_type           string        `json:"_type"`
+	ObjectType      string        `json:"_type"`
 	Aaa             []interface{} `json:"aaa"`
 	Comment         string        `json:"comment"`
 	Domains         []string      `json:"domains"`
@@ -574,18 +574,18 @@ func (*HttpException) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpException) GetType() string { return h._type }
+func (h *HttpException) GetType() string { return h.ObjectType }
 
 // HttpGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpGroups []HttpGroup
 
 // HttpGroup represents a UTM group
 type HttpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &HttpGroup{}
@@ -639,13 +639,9 @@ type HttpLocalSites []HttpLocalSite
 
 // HttpLocalSite represents a UTM local site list entry
 type HttpLocalSite struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Category description: REF(http/sp_subcat)
-	// Category default value is ""
-	Category string `json:"category"`
-	Comment  string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// IncludeSubdomains default value is false
 	IncludeSubdomains bool   `json:"include_subdomains"`
 	Name              string `json:"name"`
@@ -654,6 +650,10 @@ type HttpLocalSite struct {
 	Reputation string        `json:"reputation"`
 	Site       string        `json:"site"`
 	Tags       []interface{} `json:"tags"`
+	// Category description: REF(http/sp_subcat)
+	// Category default value is ""
+	Category string `json:"category"`
+	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &HttpLocalSite{}
@@ -709,11 +709,11 @@ type HttpLslTags []HttpLslTag
 
 // HttpLslTag represents a UTM tags
 type HttpLslTag struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &HttpLslTag{}
@@ -767,13 +767,13 @@ type HttpPacFiles []HttpPacFile
 
 // HttpPacFile is a generated Sophos object
 type HttpPacFile struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Content   string `json:"content"`
-	Name      string `json:"name"`
-	Status    bool   `json:"status"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Content    string `json:"content"`
+	Name       string `json:"name"`
+	Status     bool   `json:"status"`
 }
 
 var _ sophos.RestGetter = &HttpPacFile{}
@@ -825,24 +825,24 @@ func (*HttpPacFile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpPacFile) GetType() string { return h._type }
+func (h *HttpPacFile) GetType() string { return h.ObjectType }
 
 // HttpParentProxys is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpParentProxys []HttpParentProxy
 
 // HttpParentProxy represents a UTM parent web proxy
 type HttpParentProxy struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Port      int    `json:"port"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Comment    string        `json:"comment"`
+	Match      []interface{} `json:"match"`
+	Name       string        `json:"name"`
+	Pass       string        `json:"pass"`
+	Port       int           `json:"port"`
 	// Target description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
-	Target  string        `json:"target"`
-	User    string        `json:"user"`
-	Comment string        `json:"comment"`
-	Match   []interface{} `json:"match"`
-	Name    string        `json:"name"`
-	Pass    string        `json:"pass"`
+	Target string `json:"target"`
+	User   string `json:"user"`
 }
 
 var _ sophos.RestGetter = &HttpParentProxy{}
@@ -900,7 +900,7 @@ type HttpProfiles []HttpProfile
 type HttpProfile struct {
 	Locked             string        `json:"_locked"`
 	Reference          string        `json:"_ref"`
-	_type              string        `json:"_type"`
+	ObjectType         string        `json:"_type"`
 	Aua                bool          `json:"aua"`
 	BlockOnAuthFailed  bool          `json:"block_on_auth_failed"`
 	CffProfiles        []string      `json:"cff_profiles"`
@@ -976,20 +976,20 @@ func (*HttpProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpProfile) GetType() string { return h._type }
+func (h *HttpProfile) GetType() string { return h.ObjectType }
 
 // HttpSpCategorys is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpSpCategorys []HttpSpCategory
 
 // HttpSpCategory is a generated Sophos object
 type HttpSpCategory struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	ID        string   `json:"id"`
-	Name      string   `json:"name"`
-	Subcats   []string `json:"subcats"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	ID         string   `json:"id"`
+	Name       string   `json:"name"`
+	Subcats    []string `json:"subcats"`
 }
 
 var _ sophos.RestGetter = &HttpSpCategory{}
@@ -1041,19 +1041,19 @@ func (*HttpSpCategory) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpSpCategory) GetType() string { return h._type }
+func (h *HttpSpCategory) GetType() string { return h.ObjectType }
 
 // HttpSpSubcats is an Sophos Endpoint subType and implements sophos.RestObject
 type HttpSpSubcats []HttpSpSubcat
 
 // HttpSpSubcat is a generated Sophos object
 type HttpSpSubcat struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	ID        string `json:"id"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	ID         string `json:"id"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &HttpSpSubcat{}
@@ -1105,4 +1105,4 @@ func (*HttpSpSubcat) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (h *HttpSpSubcat) GetType() string { return h._type }
+func (h *HttpSpSubcat) GetType() string { return h.ObjectType }

@@ -71,16 +71,16 @@ type FtpExceptions []FtpException
 
 // FtpException represents a UTM FTP filter exception
 type FtpException struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Server    []interface{} `json:"server"`
-	Skiplist  []interface{} `json:"skiplist"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Status default value is false
-	Status  bool          `json:"status"`
-	Client  []interface{} `json:"client"`
-	Comment string        `json:"comment"`
-	Name    string        `json:"name"`
+	Status   bool          `json:"status"`
+	Client   []interface{} `json:"client"`
+	Comment  string        `json:"comment"`
+	Name     string        `json:"name"`
+	Server   []interface{} `json:"server"`
+	Skiplist []interface{} `json:"skiplist"`
 }
 
 var _ sophos.RestGetter = &FtpException{}
@@ -136,11 +136,11 @@ type FtpGroups []FtpGroup
 
 // FtpGroup represents a UTM group
 type FtpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &FtpGroup{}

@@ -60,11 +60,11 @@ type UserPreferencesGroups []UserPreferencesGroup
 
 // UserPreferencesGroup represents a UTM group
 type UserPreferencesGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &UserPreferencesGroup{}
@@ -122,7 +122,7 @@ type UserPreferencesWebadmins []UserPreferencesWebadmin
 type UserPreferencesWebadmin struct {
 	Locked               string   `json:"_locked"`
 	Reference            string   `json:"_ref"`
-	_type                string   `json:"_type"`
+	ObjectType           string   `json:"_type"`
 	BrowserTitle         string   `json:"browser_title"`
 	Comment              string   `json:"comment"`
 	DashboardAutogroup   bool     `json:"dashboard_autogroup"`
@@ -192,4 +192,4 @@ func (*UserPreferencesWebadmin) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (u *UserPreferencesWebadmin) GetType() string { return u._type }
+func (u *UserPreferencesWebadmin) GetType() string { return u.ObjectType }

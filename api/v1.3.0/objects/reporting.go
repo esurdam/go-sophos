@@ -106,13 +106,13 @@ type ReportingDepartments []ReportingDepartment
 
 // ReportingDepartment represents a UTM department
 type ReportingDepartment struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Comment   string        `json:"comment"`
-	Name      string        `json:"name"`
-	Networks  []interface{} `json:"networks"`
-	Users     []interface{} `json:"users"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Comment    string        `json:"comment"`
+	Name       string        `json:"name"`
+	Networks   []interface{} `json:"networks"`
+	Users      []interface{} `json:"users"`
 }
 
 var _ sophos.RestGetter = &ReportingDepartment{}
@@ -170,7 +170,7 @@ type ReportingFilters []ReportingFilter
 type ReportingFilter struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
+	ObjectType string `json:"_type"`
 	Callname   string `json:"callname"`
 	Comment    string `json:"comment"`
 	Department string `json:"department"`
@@ -235,18 +235,18 @@ func (*ReportingFilter) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReportingFilter) GetType() string { return r._type }
+func (r *ReportingFilter) GetType() string { return r.ObjectType }
 
 // ReportingGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ReportingGroups []ReportingGroup
 
 // ReportingGroup represents a UTM group
 type ReportingGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ReportingGroup{}
@@ -302,18 +302,18 @@ type ReportingMails []ReportingMail
 
 // ReportingMail represents a UTM scheduled report
 type ReportingMail struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Filters   []interface{} `json:"filters"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Status default value is false
+	Status  bool          `json:"status"`
+	Comment string        `json:"comment"`
+	Filters []interface{} `json:"filters"`
 	// Interval can be one of: []string{"daily", "weekly", "monthly"}
 	// Interval default value is "daily"
 	Interval   string        `json:"interval"`
 	Name       string        `json:"name"`
 	Recipients []interface{} `json:"recipients"`
-	// Status default value is false
-	Status  bool   `json:"status"`
-	Comment string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &ReportingMail{}

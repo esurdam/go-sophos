@@ -62,7 +62,7 @@ type AaaGroups []AaaGroup
 type AaaGroup struct {
 	Locked               string        `json:"_locked"`
 	Reference            string        `json:"_ref"`
-	_type                string        `json:"_type"`
+	ObjectType           string        `json:"_type"`
 	AdirectoryGroups     []interface{} `json:"adirectory_groups"`
 	AdirectoryGroupsSids struct{}      `json:"adirectory_groups_sids"`
 	BackendMatch         string        `json:"backend_match"`
@@ -126,7 +126,7 @@ func (*AaaGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AaaGroup) GetType() string { return a._type }
+func (a *AaaGroup) GetType() string { return a.ObjectType }
 
 // AaaUsers is an Sophos Endpoint subType and implements sophos.RestObject
 type AaaUsers []AaaUser
@@ -135,7 +135,7 @@ type AaaUsers []AaaUser
 type AaaUser struct {
 	Locked           string        `json:"_locked"`
 	Reference        string        `json:"_ref"`
-	_type            string        `json:"_type"`
+	ObjectType       string        `json:"_type"`
 	AccManaged       bool          `json:"acc_managed"`
 	AllowedNetworks  []string      `json:"allowed_networks"`
 	Authentication   string        `json:"authentication"`
@@ -212,4 +212,4 @@ func (*AaaUser) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AaaUser) GetType() string { return a._type }
+func (a *AaaUser) GetType() string { return a.ObjectType }

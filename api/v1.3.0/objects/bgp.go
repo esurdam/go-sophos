@@ -86,7 +86,7 @@ type BgpAmazonVpcs []BgpAmazonVpc
 type BgpAmazonVpc struct {
 	Locked       string   `json:"_locked"`
 	Reference    string   `json:"_ref"`
-	_type        string   `json:"_type"`
+	ObjectType   string   `json:"_type"`
 	Comment      string   `json:"comment"`
 	Custom       string   `json:"custom"`
 	Host         string   `json:"host"`
@@ -147,24 +147,24 @@ func (*BgpAmazonVpc) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (b *BgpAmazonVpc) GetType() string { return b._type }
+func (b *BgpAmazonVpc) GetType() string { return b.ObjectType }
 
 // BgpFilters is an Sophos Endpoint subType and implements sophos.RestObject
 type BgpFilters []BgpFilter
 
 // BgpFilter represents a UTM BGP filter list
 type BgpFilter struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Type can be one of: []string{"as_number", "ip_address"}
-	Type string `json:"type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Action can be one of: []string{"permit", "deny"}
 	Action  string        `json:"action"`
 	Address []interface{} `json:"address"`
 	AsRegex []interface{} `json:"as_regex"`
 	Comment string        `json:"comment"`
 	Name    string        `json:"name"`
+	// Type can be one of: []string{"as_number", "ip_address"}
+	Type string `json:"type"`
 }
 
 var _ sophos.RestGetter = &BgpFilter{}
@@ -218,11 +218,11 @@ type BgpGroups []BgpGroup
 
 // BgpGroup represents a UTM group
 type BgpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &BgpGroup{}
@@ -276,38 +276,38 @@ type BgpNeighbors []BgpNeighbor
 
 // BgpNeighbor represents a UTM BGP neighbor
 type BgpNeighbor struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// FilterIn description: REF(bgp/filter)
+	FilterIn string `json:"filter_in"`
+	Name     string `json:"name"`
+	Asn      int    `json:"asn"`
+	// DefaultOriginate default value is false
+	DefaultOriginate bool `json:"default_originate"`
 	// Host description: REF(network/host)
 	Host string `json:"host"`
 	// NextHopSelf default value is false
 	NextHopSelf bool `json:"next_hop_self"`
 	// Password description: (REGEX)
 	Password string `json:"password"`
+	// Status default value is true
+	Status bool `json:"status"`
+	Weight int  `json:"weight"`
+	// Authentication can be one of: []string{"null", "password"}
+	// Authentication default value is "null"
+	Authentication string `json:"authentication"`
 	// RouteIn description: REF(bgp/route_map)
 	RouteIn string `json:"route_in"`
-	// Status default value is true
-	Status bool   `json:"status"`
-	Name   string `json:"name"`
 	// SoftReconfiguration default value is true
 	SoftReconfiguration bool `json:"soft_reconfiguration"`
-	Weight              int  `json:"weight"`
-	Asn                 int  `json:"asn"`
-	// FilterIn description: REF(bgp/filter)
-	FilterIn string `json:"filter_in"`
 	// FilterOut description: REF(bgp/filter)
 	FilterOut string `json:"filter_out"`
 	// Multihop default value is false
 	Multihop bool `json:"multihop"`
-	// Authentication can be one of: []string{"null", "password"}
-	// Authentication default value is "null"
-	Authentication string `json:"authentication"`
-	// DefaultOriginate default value is false
-	DefaultOriginate bool `json:"default_originate"`
 	// RouteOut description: REF(bgp/route_map)
 	RouteOut string `json:"route_out"`
+	Comment  string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &BgpNeighbor{}
@@ -365,19 +365,19 @@ type BgpRouteMaps []BgpRouteMap
 type BgpRouteMap struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
-	Preference int    `json:"preference"`
+	ObjectType string `json:"_type"`
+	// Prepend description: (REGEX)
+	// Prepend default value is ""
+	Prepend    string        `json:"prepend"`
+	AsRegex    []interface{} `json:"as_regex"`
+	Name       string        `json:"name"`
+	Metric     int           `json:"metric"`
+	Preference int           `json:"preference"`
 	// Type can be one of: []string{"as_number", "ip_address"}
 	Type    string        `json:"type"`
-	AsRegex []interface{} `json:"as_regex"`
-	Metric  int           `json:"metric"`
-	Name    string        `json:"name"`
 	Weight  int           `json:"weight"`
 	Address []interface{} `json:"address"`
 	Comment string        `json:"comment"`
-	// Prepend description: (REGEX)
-	// Prepend default value is ""
-	Prepend string `json:"prepend"`
 }
 
 var _ sophos.RestGetter = &BgpRouteMap{}
@@ -433,23 +433,23 @@ type BgpSystems []BgpSystem
 
 // BgpSystem represents a UTM BGP system
 type BgpSystem struct {
-	Locked       string        `json:"_locked"`
-	Reference    string        `json:"_ref"`
-	_type        string        `json:"_type"`
-	Neighbor     []interface{} `json:"neighbor"`
-	Network      []interface{} `json:"network"`
-	Asn          int           `json:"asn"`
-	Comment      string        `json:"comment"`
-	Name         string        `json:"name"`
-	MaximumPaths int           `json:"maximum_paths"`
-	// Status default value is true
-	Status bool `json:"status"`
-	// Custom default value is ""
-	Custom string `json:"custom"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Asn        int    `json:"asn"`
 	// Id description: (IPADDR)
 	Id string `json:"id"`
 	// InstallRoutes default value is true
-	InstallRoutes bool `json:"install_routes"`
+	InstallRoutes bool   `json:"install_routes"`
+	MaximumPaths  int    `json:"maximum_paths"`
+	Name          string `json:"name"`
+	Comment       string `json:"comment"`
+	// Custom default value is ""
+	Custom   string        `json:"custom"`
+	Neighbor []interface{} `json:"neighbor"`
+	Network  []interface{} `json:"network"`
+	// Status default value is true
+	Status bool `json:"status"`
 }
 
 var _ sophos.RestGetter = &BgpSystem{}

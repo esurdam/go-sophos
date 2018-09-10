@@ -60,11 +60,11 @@ type RightGroups []RightGroup
 
 // RightGroup represents a UTM group
 type RightGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &RightGroup{}
@@ -118,11 +118,11 @@ type RightRights []RightRight
 
 // RightRight is a generated Sophos object
 type RightRight struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &RightRight{}
@@ -172,4 +172,4 @@ func (*RightRight) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *RightRight) GetType() string { return r._type }
+func (r *RightRight) GetType() string { return r.ObjectType }

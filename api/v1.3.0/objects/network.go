@@ -128,7 +128,7 @@ type NetworkAaas []NetworkAaa
 type NetworkAaa struct {
 	Locked     string        `json:"_locked"`
 	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
+	ObjectType string        `json:"_type"`
 	Addresses  []interface{} `json:"addresses"`
 	Addresses6 []interface{} `json:"addresses6"`
 	Comment    string        `json:"comment"`
@@ -184,25 +184,25 @@ func (*NetworkAaa) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkAaa) GetType() string { return n._type }
+func (n *NetworkAaa) GetType() string { return n.ObjectType }
 
 // NetworkAnys is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkAnys []NetworkAny
 
 // NetworkAny is a generated Sophos object
 type NetworkAny struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Address6   string `json:"address6"`
+	Comment    string `json:"comment"`
+	Interface  string `json:"interface"`
+	Name       string `json:"name"`
+	Netmask    int64  `json:"netmask"`
+	Netmask6   int64  `json:"netmask6"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
 }
 
 var _ sophos.RestGetter = &NetworkAny{}
@@ -252,42 +252,42 @@ func (*NetworkAny) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkAny) GetType() string { return n._type }
+func (n *NetworkAny) GetType() string { return n.ObjectType }
 
 // NetworkAvailabilityGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkAvailabilityGroups []NetworkAvailabilityGroup
 
 // NetworkAvailabilityGroup represents a UTM availability group
 type NetworkAvailabilityGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	CheckPort  int           `json:"check_port"`
+	Comment    string        `json:"comment"`
+	Members    []interface{} `json:"members"`
+	// Resolved default value is false
+	Resolved bool `json:"resolved"`
+	Timeout2 int  `json:"timeout2"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// Resolved6 default value is false
+	Resolved6 bool `json:"resolved6"`
 	// Address description: (IPADDR)
 	// Address default value is "0.0.0.0"
 	Address string `json:"address"`
 	// Address6 description: (IP6ADDR)
 	// Address6 default value is "::"
 	Address6 string `json:"address6"`
-	// Interface description: REF(interface/*)
-	// Interface default value is ""
-	Interface string `json:"interface"`
 	// CheckData default value is ""
 	CheckData string `json:"check_data"`
-	Name      string `json:"name"`
-	// Resolved default value is false
-	Resolved bool `json:"resolved"`
-	// Resolved6 default value is false
-	Resolved6 bool   `json:"resolved6"`
-	Comment   string `json:"comment"`
-	Timeout   int    `json:"timeout"`
-	Timeout2  int    `json:"timeout2"`
-	CheckPort int    `json:"check_port"`
 	// CheckType can be one of: []string{"icmp", "udp", "tcp", "http", "https"}
 	// CheckType default value is "icmp"
-	CheckType string        `json:"check_type"`
-	Members   []interface{} `json:"members"`
+	CheckType string `json:"check_type"`
+	Name      string `json:"name"`
 	// Sticky default value is true
-	Sticky bool `json:"sticky"`
+	Sticky  bool `json:"sticky"`
+	Timeout int  `json:"timeout"`
 }
 
 var _ sophos.RestGetter = &NetworkAvailabilityGroup{}
@@ -345,7 +345,7 @@ type NetworkDnsGroups []NetworkDnsGroup
 type NetworkDnsGroup struct {
 	Locked     string        `json:"_locked"`
 	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
+	ObjectType string        `json:"_type"`
 	Addresses  []string      `json:"addresses"`
 	Addresses6 []interface{} `json:"addresses6"`
 	Comment    string        `json:"comment"`
@@ -406,25 +406,25 @@ func (*NetworkDnsGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkDnsGroup) GetType() string { return n._type }
+func (n *NetworkDnsGroup) GetType() string { return n.ObjectType }
 
 // NetworkDnsHosts is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkDnsHosts []NetworkDnsHost
 
 // NetworkDnsHost is a generated Sophos object
 type NetworkDnsHost struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Hostname  string `json:"hostname"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-	Timeout   int64  `json:"timeout"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Address6   string `json:"address6"`
+	Comment    string `json:"comment"`
+	Hostname   string `json:"hostname"`
+	Interface  string `json:"interface"`
+	Name       string `json:"name"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
+	Timeout    int64  `json:"timeout"`
 }
 
 var _ sophos.RestGetter = &NetworkDnsHost{}
@@ -476,20 +476,20 @@ func (*NetworkDnsHost) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkDnsHost) GetType() string { return n._type }
+func (n *NetworkDnsHost) GetType() string { return n.ObjectType }
 
 // NetworkGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkGroups []NetworkGroup
 
 // NetworkGroup is a generated Sophos object
 type NetworkGroup struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Members   []string `json:"members"`
-	Name      string   `json:"name"`
-	Types     []string `json:"types"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	Members    []string `json:"members"`
+	Name       string   `json:"name"`
+	Types      []string `json:"types"`
 }
 
 var _ sophos.RestGetter = &NetworkGroup{}
@@ -541,7 +541,7 @@ func (*NetworkGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkGroup) GetType() string { return n._type }
+func (n *NetworkGroup) GetType() string { return n.ObjectType }
 
 // NetworkHosts is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkHosts []NetworkHost
@@ -550,7 +550,7 @@ type NetworkHosts []NetworkHost
 type NetworkHost struct {
 	Locked     string        `json:"_locked"`
 	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
+	ObjectType string        `json:"_type"`
 	Address    string        `json:"address"`
 	Address6   string        `json:"address6"`
 	Comment    string        `json:"comment"`
@@ -613,22 +613,22 @@ func (*NetworkHost) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkHost) GetType() string { return n._type }
+func (n *NetworkHost) GetType() string { return n.ObjectType }
 
 // NetworkInterfaceAddresss is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkInterfaceAddresss []NetworkInterfaceAddress
 
 // NetworkInterfaceAddress is a generated Sophos object
 type NetworkInterfaceAddress struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Address6   string `json:"address6"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
 }
 
 var _ sophos.RestGetter = &NetworkInterfaceAddress{}
@@ -680,20 +680,20 @@ func (*NetworkInterfaceAddress) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkInterfaceAddress) GetType() string { return n._type }
+func (n *NetworkInterfaceAddress) GetType() string { return n.ObjectType }
 
 // NetworkInterfaceBroadcasts is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkInterfaceBroadcasts []NetworkInterfaceBroadcast
 
 // NetworkInterfaceBroadcast is a generated Sophos object
 type NetworkInterfaceBroadcast struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Resolved   bool   `json:"resolved"`
 }
 
 var _ sophos.RestGetter = &NetworkInterfaceBroadcast{}
@@ -747,24 +747,24 @@ func (*NetworkInterfaceBroadcast) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkInterfaceBroadcast) GetType() string { return n._type }
+func (n *NetworkInterfaceBroadcast) GetType() string { return n.ObjectType }
 
 // NetworkInterfaceNetworks is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkInterfaceNetworks []NetworkInterfaceNetwork
 
 // NetworkInterfaceNetwork is a generated Sophos object
 type NetworkInterfaceNetwork struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Address6   string `json:"address6"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Netmask    int64  `json:"netmask"`
+	Netmask6   int64  `json:"netmask6"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
 }
 
 var _ sophos.RestGetter = &NetworkInterfaceNetwork{}
@@ -816,17 +816,16 @@ func (*NetworkInterfaceNetwork) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
+func (n *NetworkInterfaceNetwork) GetType() string { return n.ObjectType }
 
 // NetworkMulticasts is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkMulticasts []NetworkMulticast
 
 // NetworkMulticast represents a UTM multicast group
 type NetworkMulticast struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Netmask   int    `json:"netmask"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Resolved default value is true
 	Resolved bool `json:"resolved"`
 	// Address description: (IPADDR)
@@ -836,6 +835,7 @@ type NetworkMulticast struct {
 	// Interface default value is ""
 	Interface string `json:"interface"`
 	Name      string `json:"name"`
+	Netmask   int    `json:"netmask"`
 }
 
 var _ sophos.RestGetter = &NetworkMulticast{}
@@ -891,18 +891,18 @@ type NetworkNetworks []NetworkNetwork
 
 // NetworkNetwork is a generated Sophos object
 type NetworkNetwork struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Address6  string `json:"address6"`
-	Comment   string `json:"comment"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
-	Netmask6  int64  `json:"netmask6"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Address6   string `json:"address6"`
+	Comment    string `json:"comment"`
+	Interface  string `json:"interface"`
+	Name       string `json:"name"`
+	Netmask    int64  `json:"netmask"`
+	Netmask6   int64  `json:"netmask6"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
 }
 
 var _ sophos.RestGetter = &NetworkNetwork{}
@@ -954,25 +954,25 @@ func (*NetworkNetwork) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkNetwork) GetType() string { return n._type }
+func (n *NetworkNetwork) GetType() string { return n.ObjectType }
 
 // NetworkRanges is an Sophos Endpoint subType and implements sophos.RestObject
 type NetworkRanges []NetworkRange
 
 // NetworkRange is a generated Sophos object
 type NetworkRange struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	From      string `json:"from"`
-	From6     string `json:"from6"`
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	Resolved  bool   `json:"resolved"`
-	Resolved6 bool   `json:"resolved6"`
-	To        string `json:"to"`
-	To6       string `json:"to6"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	From       string `json:"from"`
+	From6      string `json:"from6"`
+	Interface  string `json:"interface"`
+	Name       string `json:"name"`
+	Resolved   bool   `json:"resolved"`
+	Resolved6  bool   `json:"resolved6"`
+	To         string `json:"to"`
+	To6        string `json:"to6"`
 }
 
 var _ sophos.RestGetter = &NetworkRange{}
@@ -1024,4 +1024,4 @@ func (*NetworkRange) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (n *NetworkRange) GetType() string { return n._type }
+func (n *NetworkRange) GetType() string { return n.ObjectType }

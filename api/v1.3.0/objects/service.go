@@ -108,13 +108,13 @@ type ServiceAhs []ServiceAh
 
 // ServiceAh represents a UTM AH service
 type ServiceAh struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	SpiHigh   int    `json:"spi_high"`
-	SpiLow    int    `json:"spi_low"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	SpiHigh    int    `json:"spi_high"`
+	SpiLow     int    `json:"spi_low"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &ServiceAh{}
@@ -168,11 +168,11 @@ type ServiceAnys []ServiceAny
 
 // ServiceAny is a generated Sophos object
 type ServiceAny struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ServiceAny{}
@@ -222,20 +222,20 @@ func (*ServiceAny) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceAny) GetType() string { return s._type }
+func (s *ServiceAny) GetType() string { return s.ObjectType }
 
 // ServiceEsps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceEsps []ServiceEsp
 
 // ServiceEsp represents a UTM ESP service
 type ServiceEsp struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	SpiHigh   int    `json:"spi_high"`
-	SpiLow    int    `json:"spi_low"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	SpiHigh    int    `json:"spi_high"`
+	SpiLow     int    `json:"spi_low"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &ServiceEsp{}
@@ -289,13 +289,13 @@ type ServiceGroups []ServiceGroup
 
 // ServiceGroup is a generated Sophos object
 type ServiceGroup struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Members   []string `json:"members"`
-	Name      string   `json:"name"`
-	Types     []string `json:"types"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	Members    []string `json:"members"`
+	Name       string   `json:"name"`
+	Types      []string `json:"types"`
 }
 
 var _ sophos.RestGetter = &ServiceGroup{}
@@ -347,20 +347,20 @@ func (*ServiceGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceGroup) GetType() string { return s._type }
+func (s *ServiceGroup) GetType() string { return s.ObjectType }
 
 // ServiceIcmps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceIcmps []ServiceIcmp
 
 // ServiceIcmp is a generated Sophos object
 type ServiceIcmp struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Code      int64  `json:"code"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Type      int64  `json:"type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Code       int64  `json:"code"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Type       int64  `json:"type"`
 }
 
 var _ sophos.RestGetter = &ServiceIcmp{}
@@ -412,20 +412,20 @@ func (*ServiceIcmp) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceIcmp) GetType() string { return s._type }
+func (s *ServiceIcmp) GetType() string { return s.ObjectType }
 
 // ServiceIcmpv6s is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceIcmpv6s []ServiceIcmpv6
 
 // ServiceIcmpv6 represents a UTM ICMPv6 service
 type ServiceIcmpv6 struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Code      int    `json:"code"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Type      int    `json:"type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Type       int    `json:"type"`
+	Code       int    `json:"code"`
 }
 
 var _ sophos.RestGetter = &ServiceIcmpv6{}
@@ -481,12 +481,12 @@ type ServiceIps []ServiceIp
 
 // ServiceIp is a generated Sophos object
 type ServiceIp struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Proto     int64  `json:"proto"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Proto      int64  `json:"proto"`
 }
 
 var _ sophos.RestGetter = &ServiceIp{}
@@ -536,7 +536,7 @@ func (*ServiceIp) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceIp) GetType() string { return s._type }
+func (s *ServiceIp) GetType() string { return s.ObjectType }
 
 // ServiceTcps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceTcps []ServiceTcp
@@ -545,7 +545,7 @@ type ServiceTcps []ServiceTcp
 type ServiceTcp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
-	_type        string `json:"_type"`
+	ObjectType   string `json:"_type"`
 	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
 	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
 	Comment      string `json:"comment"`
@@ -603,7 +603,7 @@ func (*ServiceTcp) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceTcp) GetType() string { return s._type }
+func (s *ServiceTcp) GetType() string { return s.ObjectType }
 
 // ServiceTcpudps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceTcpudps []ServiceTcpudp
@@ -612,7 +612,7 @@ type ServiceTcpudps []ServiceTcpudp
 type ServiceTcpudp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
-	_type        string `json:"_type"`
+	ObjectType   string `json:"_type"`
 	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
 	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
 	Comment      string `json:"comment"`
@@ -672,7 +672,7 @@ func (*ServiceTcpudp) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceTcpudp) GetType() string { return s._type }
+func (s *ServiceTcpudp) GetType() string { return s.ObjectType }
 
 // ServiceUdps is an Sophos Endpoint subType and implements sophos.RestObject
 type ServiceUdps []ServiceUdp
@@ -681,7 +681,7 @@ type ServiceUdps []ServiceUdp
 type ServiceUdp struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
-	_type        string `json:"_type"`
+	ObjectType   string `json:"_type"`
 	AutoPfSvcDst string `json:"auto_pf_svc_dst"`
 	AutoPfSvcSrc string `json:"auto_pf_svc_src"`
 	Comment      string `json:"comment"`
@@ -739,4 +739,4 @@ func (*ServiceUdp) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *ServiceUdp) GetType() string { return s._type }
+func (s *ServiceUdp) GetType() string { return s.ObjectType }

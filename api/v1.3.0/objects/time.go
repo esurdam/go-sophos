@@ -66,11 +66,11 @@ type TimeGroups []TimeGroup
 
 // TimeGroup represents a UTM group
 type TimeGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &TimeGroup{}
@@ -124,14 +124,14 @@ type TimeRecurrings []TimeRecurring
 
 // TimeRecurring is a generated Sophos object
 type TimeRecurring struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	EndTime   string   `json:"end_time"`
-	Name      string   `json:"name"`
-	StartTime string   `json:"start_time"`
-	Weekdays  []string `json:"weekdays"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	EndTime    string   `json:"end_time"`
+	Name       string   `json:"name"`
+	StartTime  string   `json:"start_time"`
+	Weekdays   []string `json:"weekdays"`
 }
 
 var _ sophos.RestGetter = &TimeRecurring{}
@@ -183,16 +183,16 @@ func (*TimeRecurring) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (t *TimeRecurring) GetType() string { return t._type }
+func (t *TimeRecurring) GetType() string { return t.ObjectType }
 
 // TimeSingles is an Sophos Endpoint subType and implements sophos.RestObject
 type TimeSingles []TimeSingle
 
 // TimeSingle represents a UTM single time period
 type TimeSingle struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// StartDate description: (DATE)
 	StartDate string `json:"start_date"`
 	// StartTime description: (TIME)

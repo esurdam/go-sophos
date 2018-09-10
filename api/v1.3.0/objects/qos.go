@@ -88,22 +88,22 @@ type QosApplicationSelectors []QosApplicationSelector
 
 // QosApplicationSelector represents a UTM QoS application selector
 type QosApplicationSelector struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// ConnbytesUpperlimit default value is false
+	ConnbytesUpperlimit bool `json:"connbytes_upperlimit"`
 	// Source description: REF(network/*)
 	Source       string        `json:"source"`
+	Groups       []interface{} `json:"groups"`
+	Name         string        `json:"name"`
 	Applications []interface{} `json:"applications"`
 	Comment      string        `json:"comment"`
 	Connbytes    int           `json:"connbytes"`
 	// Destination description: REF(network/*)
-	Destination string `json:"destination"`
-	Name        string `json:"name"`
-	// ConnbytesUpperlimit default value is false
-	ConnbytesUpperlimit     bool          `json:"connbytes_upperlimit"`
-	GroupFilterProductivity int           `json:"group_filter_productivity"`
-	GroupFilterRisk         int           `json:"group_filter_risk"`
-	Groups                  []interface{} `json:"groups"`
+	Destination             string `json:"destination"`
+	GroupFilterProductivity int    `json:"group_filter_productivity"`
+	GroupFilterRisk         int    `json:"group_filter_risk"`
 }
 
 var _ sophos.RestGetter = &QosApplicationSelector{}
@@ -159,11 +159,11 @@ type QosGroups []QosGroup
 
 // QosGroup represents a UTM group
 type QosGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &QosGroup{}
@@ -217,18 +217,18 @@ type QosIngressRules []QosIngressRule
 
 // QosIngressRule represents a UTM QoS traffic throttling
 type QosIngressRule struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Mode can be one of: []string{",", "srcip", "dstip", "srcip,dstip"}
-	// Mode default value is ""
-	Mode string `json:"mode"`
-	Name string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Status default value is false
 	Status           bool          `json:"status"`
 	TrafficSelectors []interface{} `json:"traffic_selectors"`
 	Comment          string        `json:"comment"`
 	Limit            int           `json:"limit"`
+	// Mode can be one of: []string{",", "srcip", "dstip", "srcip,dstip"}
+	// Mode default value is ""
+	Mode string `json:"mode"`
+	Name string `json:"name"`
 }
 
 var _ sophos.RestGetter = &QosIngressRule{}
@@ -286,7 +286,7 @@ type QosInterfaces []QosInterface
 type QosInterface struct {
 	Locked            string        `json:"_locked"`
 	Reference         string        `json:"_ref"`
-	_type             string        `json:"_type"`
+	ObjectType        string        `json:"_type"`
 	Comment           string        `json:"comment"`
 	Downlink          int64         `json:"downlink"`
 	DownlinkOptimizer bool          `json:"downlink_optimizer"`
@@ -349,25 +349,25 @@ func (*QosInterface) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (q *QosInterface) GetType() string { return q._type }
+func (q *QosInterface) GetType() string { return q.ObjectType }
 
 // QosRules is an Sophos Endpoint subType and implements sophos.RestObject
 type QosRules []QosRule
 
 // QosRule represents a UTM QoS bandwidth pool
 type QosRule struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Bandwidth  int    `json:"bandwidth"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 	// Status default value is false
 	Status           bool          `json:"status"`
 	TrafficSelectors []interface{} `json:"traffic_selectors"`
 	// UpperLimitStatus default value is false
 	UpperLimitStatus bool `json:"upper_limit_status"`
 	UpperLimitValue  int  `json:"upper_limit_value"`
-	Bandwidth        int  `json:"bandwidth"`
 }
 
 var _ sophos.RestGetter = &QosRule{}
@@ -421,37 +421,37 @@ type QosTrafficSelectors []QosTrafficSelector
 
 // QosTrafficSelector represents a UTM QoS traffic selector
 type QosTrafficSelector struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// ConnbytesUpperlimit default value is false
+	ConnbytesUpperlimit bool          `json:"connbytes_upperlimit"`
+	TcpFlags            []interface{} `json:"tcp_flags"`
+	// Tos can be one of: []string{"off", "normal", "min_cost", "max_reliable", "max_throughput", "min_delay"}
+	// Tos default value is "off"
+	Tos string `json:"tos"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	DscpValue   int    `json:"dscp_value"`
+	Name        string `json:"name"`
+	// PacketLength default value is ""
+	PacketLength string `json:"packet_length"`
+	Comment      string `json:"comment"`
+	Connbytes    int    `json:"connbytes"`
+	// DscpString can be one of: []string{"BE", "AF11", "AF12", "AF13", "AF21", "AF22", "AF23", "AF31", "AF32", "AF33", "AF41", "AF42", "AF43", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "EF"}
+	// DscpString default value is "BE"
+	DscpString string `json:"dscp_string"`
 	// DscpType can be one of: []string{"off", "value", "class"}
 	// DscpType default value is "off"
 	DscpType string `json:"dscp_type"`
 	// Helper description: (REGEX)
 	// Helper default value is ""
 	Helper string `json:"helper"`
-	Name   string `json:"name"`
-	// PacketLength default value is ""
-	PacketLength string `json:"packet_length"`
 	// Service description: REF(service/*)
 	// Service default value is "REF_ServiceAny"
 	Service string `json:"service"`
-	// ConnbytesUpperlimit default value is false
-	ConnbytesUpperlimit bool `json:"connbytes_upperlimit"`
-	// DscpString can be one of: []string{"BE", "AF11", "AF12", "AF13", "AF21", "AF22", "AF23", "AF31", "AF32", "AF33", "AF41", "AF42", "AF43", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "EF"}
-	// DscpString default value is "BE"
-	DscpString string `json:"dscp_string"`
-	Comment    string `json:"comment"`
-	DscpValue  int    `json:"dscp_value"`
-	Connbytes  int    `json:"connbytes"`
 	// Source description: REF(network/*)
-	Source   string        `json:"source"`
-	TcpFlags []interface{} `json:"tcp_flags"`
-	// Tos can be one of: []string{"off", "normal", "min_cost", "max_reliable", "max_throughput", "min_delay"}
-	// Tos default value is "off"
-	Tos string `json:"tos"`
-	// Destination description: REF(network/*)
-	Destination string `json:"destination"`
+	Source string `json:"source"`
 }
 
 var _ sophos.RestGetter = &QosTrafficSelector{}
@@ -507,12 +507,12 @@ type QosTrafficSelectorGroups []QosTrafficSelectorGroup
 
 // QosTrafficSelectorGroup represents a UTM QoS traffic selector group
 type QosTrafficSelectorGroup struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Members   []interface{} `json:"members"`
-	Name      string        `json:"name"`
-	Comment   string        `json:"comment"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Members    []interface{} `json:"members"`
+	Name       string        `json:"name"`
+	Comment    string        `json:"comment"`
 }
 
 var _ sophos.RestGetter = &QosTrafficSelectorGroup{}

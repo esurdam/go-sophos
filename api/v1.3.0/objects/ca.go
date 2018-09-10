@@ -115,14 +115,14 @@ type CaCrls []CaCrl
 
 // CaCrl represents a UTM certificate revocation list
 type CaCrl struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Crl       string `json:"crl"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Meta description: REF(ca/meta_crl)
-	Meta string `json:"meta"`
-	Name string `json:"name"`
+	Meta    string `json:"meta"`
+	Name    string `json:"name"`
+	Comment string `json:"comment"`
+	Crl     string `json:"crl"`
 }
 
 var _ sophos.RestGetter = &CaCrl{}
@@ -176,11 +176,11 @@ type CaGroups []CaGroup
 
 // CaGroup represents a UTM group
 type CaGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &CaGroup{}
@@ -236,7 +236,7 @@ type CaHostCerts []CaHostCert
 type CaHostCert struct {
 	Locked      string `json:"_locked"`
 	Reference   string `json:"_ref"`
-	_type       string `json:"_type"`
+	ObjectType  string `json:"_type"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
 	Meta        string `json:"meta"`
@@ -290,7 +290,7 @@ func (*CaHostCert) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *CaHostCert) GetType() string { return c._type }
+func (c *CaHostCert) GetType() string { return c.ObjectType }
 
 // CaHostKeyCerts is an Sophos Endpoint subType and implements sophos.RestObject
 type CaHostKeyCerts []CaHostKeyCert
@@ -299,7 +299,7 @@ type CaHostKeyCerts []CaHostKeyCert
 type CaHostKeyCert struct {
 	Locked      string `json:"_locked"`
 	Reference   string `json:"_ref"`
-	_type       string `json:"_type"`
+	ObjectType  string `json:"_type"`
 	Ca          string `json:"ca"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
@@ -358,23 +358,23 @@ func (*CaHostKeyCert) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *CaHostKeyCert) GetType() string { return c._type }
+func (c *CaHostKeyCert) GetType() string { return c.ObjectType }
 
 // CaHttpVerificationCas is an Sophos Endpoint subType and implements sophos.RestObject
 type CaHttpVerificationCas []CaHttpVerificationCa
 
 // CaHttpVerificationCa represents a UTM HTTPS verification CA
 type CaHttpVerificationCa struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	ObjectType  string `json:"_type"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
 	// Meta description: REF(ca/meta_x509)
 	Meta string `json:"meta"`
 	Name string `json:"name"`
 	// Trust default value is false
-	Trust       bool   `json:"trust"`
-	Certificate string `json:"certificate"`
-	Comment     string `json:"comment"`
+	Trust bool `json:"trust"`
 }
 
 var _ sophos.RestGetter = &CaHttpVerificationCa{}
@@ -432,7 +432,7 @@ type CaMetaCrls []CaMetaCrl
 type CaMetaCrl struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
+	ObjectType string `json:"_type"`
 	Comment    string `json:"comment"`
 	Hash       string `json:"hash"`
 	Issuer     string `json:"issuer"`
@@ -494,7 +494,7 @@ type CaMetaX509s []CaMetaX509
 type CaMetaX509 struct {
 	Locked             string   `json:"_locked"`
 	Reference          string   `json:"_ref"`
-	_type              string   `json:"_type"`
+	ObjectType         string   `json:"_type"`
 	Comment            string   `json:"comment"`
 	Enddate            string   `json:"enddate"`
 	Fingerprint        string   `json:"fingerprint"`
@@ -558,23 +558,23 @@ func (*CaMetaX509) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *CaMetaX509) GetType() string { return c._type }
+func (c *CaMetaX509) GetType() string { return c.ObjectType }
 
 // CaRsas is an Sophos Endpoint subType and implements sophos.RestObject
 type CaRsas []CaRsa
 
 // CaRsa is a generated Sophos object
 type CaRsa struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Key       string `json:"key"`
-	KeySize   int64  `json:"key_size"`
-	Name      string `json:"name"`
-	Pubkey    string `json:"pubkey"`
-	VpnID     string `json:"vpn_id"`
-	VpnIDType string `json:"vpn_id_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Key        string `json:"key"`
+	KeySize    int64  `json:"key_size"`
+	Name       string `json:"name"`
+	Pubkey     string `json:"pubkey"`
+	VpnID      string `json:"vpn_id"`
+	VpnIDType  string `json:"vpn_id_type"`
 }
 
 var _ sophos.RestGetter = &CaRsa{}
@@ -624,7 +624,7 @@ func (*CaRsa) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *CaRsa) GetType() string { return c._type }
+func (c *CaRsa) GetType() string { return c.ObjectType }
 
 // CaSigningCas is an Sophos Endpoint subType and implements sophos.RestObject
 type CaSigningCas []CaSigningCa
@@ -633,7 +633,7 @@ type CaSigningCas []CaSigningCa
 type CaSigningCa struct {
 	Locked      string `json:"_locked"`
 	Reference   string `json:"_ref"`
-	_type       string `json:"_type"`
+	ObjectType  string `json:"_type"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
 	Config      string `json:"config"`
@@ -694,21 +694,21 @@ func (*CaSigningCa) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *CaSigningCa) GetType() string { return c._type }
+func (c *CaSigningCa) GetType() string { return c.ObjectType }
 
 // CaVerificationCas is an Sophos Endpoint subType and implements sophos.RestObject
 type CaVerificationCas []CaVerificationCa
 
 // CaVerificationCa represents a UTM X509 verification CA
 type CaVerificationCa struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Meta description: REF(ca/meta_x509)
-	Meta        string `json:"meta"`
-	Name        string `json:"name"`
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	ObjectType  string `json:"_type"`
 	Certificate string `json:"certificate"`
 	Comment     string `json:"comment"`
+	// Meta description: REF(ca/meta_x509)
+	Meta string `json:"meta"`
+	Name string `json:"name"`
 }
 
 var _ sophos.RestGetter = &CaVerificationCa{}

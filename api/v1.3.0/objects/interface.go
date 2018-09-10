@@ -102,49 +102,49 @@ type InterfaceBridges []InterfaceBridge
 
 // InterfaceBridge represents a UTM bridge
 type InterfaceBridge struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Proxyndp default value is false
-	Proxyndp  bool `json:"proxyndp"`
-	StpMaxage int  `json:"stp_maxage"`
-	// UseDhcpv6 default value is false
-	UseDhcpv6 bool `json:"use_dhcpv6"`
-	// VirtualMac description: (MACADDR)
-	// VirtualMac default value is "00:00:00:00:00:00"
-	VirtualMac string `json:"virtual_mac"`
+	Locked              string        `json:"_locked"`
+	Reference           string        `json:"_ref"`
+	ObjectType          string        `json:"_type"`
+	Ageing              int           `json:"ageing"`
+	ForwardedEthertypes []interface{} `json:"forwarded_ethertypes"`
 	// Itfhw description: REF(itfhw/bridge)
 	Itfhw string `json:"itfhw"`
+	Name  string `json:"name"`
+	// UseDhcp default value is false
+	UseDhcp bool `json:"use_dhcp"`
+	// VirtualMac description: (MACADDR)
+	// VirtualMac default value is "00:00:00:00:00:00"
+	VirtualMac          string        `json:"virtual_mac"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
 	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
-	Name             string `json:"name"`
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
 	// Proxyarp default value is false
-	Proxyarp bool   `json:"proxyarp"`
-	StpHello int    `json:"stp_hello"`
-	StpPrio  int    `json:"stp_prio"`
-	Comment  string `json:"comment"`
-	// ArpBcast default value is false
-	ArpBcast bool `json:"arp_bcast"`
+	Proxyarp  bool `json:"proxyarp"`
+	StpMaxage int  `json:"stp_maxage"`
 	// ConvertedFromHw description: REF(itfhw/*)
 	// ConvertedFromHw default value is ""
 	ConvertedFromHw string `json:"converted_from_hw"`
-	// Link default value is true
-	Link  bool `json:"link"`
-	StpFd int  `json:"stp_fd"`
-	// UseDhcp default value is false
-	UseDhcp             bool          `json:"use_dhcp"`
-	Ageing              int           `json:"ageing"`
-	ForwardedEthertypes []interface{} `json:"forwarded_ethertypes"`
-	Mtu                 int           `json:"mtu"`
-	Ports               []interface{} `json:"ports"`
 	// PrimaryAddress description: REF(itfparams/primary)
 	// PrimaryAddress default value is ""
 	PrimaryAddress string `json:"primary_address"`
+	// Proxyndp default value is false
+	Proxyndp bool `json:"proxyndp"`
+	StpFd    int  `json:"stp_fd"`
+	StpPrio  int  `json:"stp_prio"`
+	// UseDhcpv6 default value is false
+	UseDhcpv6 bool `json:"use_dhcpv6"`
+	// Link default value is true
+	Link    bool          `json:"link"`
+	Comment string        `json:"comment"`
+	Mtu     int           `json:"mtu"`
+	Ports   []interface{} `json:"ports"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status   bool `json:"status"`
+	StpHello int  `json:"stp_hello"`
 	// StpStatus default value is false
-	StpStatus           bool          `json:"stp_status"`
-	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	StpStatus bool `json:"stp_status"`
+	// ArpBcast default value is false
+	ArpBcast bool `json:"arp_bcast"`
 }
 
 var _ sophos.RestGetter = &InterfaceBridge{}
@@ -202,7 +202,7 @@ type InterfaceEthernets []InterfaceEthernet
 type InterfaceEthernet struct {
 	Locked              string        `json:"_locked"`
 	Reference           string        `json:"_ref"`
-	_type               string        `json:"_type"`
+	ObjectType          string        `json:"_type"`
 	AdditionalAddresses []interface{} `json:"additional_addresses"`
 	Bandwidth           int64         `json:"bandwidth"`
 	Comment             string        `json:"comment"`
@@ -268,7 +268,7 @@ func (*InterfaceEthernet) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *InterfaceEthernet) GetType() string { return i._type }
+func (i *InterfaceEthernet) GetType() string { return i.ObjectType }
 
 // InterfaceGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfaceGroups []InterfaceGroup
@@ -277,7 +277,7 @@ type InterfaceGroups []InterfaceGroup
 type InterfaceGroup struct {
 	Locked           string        `json:"_locked"`
 	Reference        string        `json:"_ref"`
-	_type            string        `json:"_type"`
+	ObjectType       string        `json:"_type"`
 	Comment          string        `json:"comment"`
 	Link             bool          `json:"link"`
 	Members          []interface{} `json:"members"`
@@ -334,61 +334,61 @@ func (*InterfaceGroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *InterfaceGroup) GetType() string { return i._type }
+func (i *InterfaceGroup) GetType() string { return i.ObjectType }
 
 // InterfacePpp3Gs is an Sophos Endpoint subType and implements sophos.RestObject
 type InterfacePpp3Gs []InterfacePpp3G
 
 // InterfacePpp3G represents a UTM ppp3g
 type InterfacePpp3G struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Signal    int    `json:"signal"`
-	// VirtualDevice description: (REGEX)
-	// VirtualDevice default value is ""
-	VirtualDevice string `json:"virtual_device"`
-	Comment       string `json:"comment"`
-	// Custom default value is ""
-	Custom string `json:"custom"`
-	// Itfhw description: REF(itfhw/usbserial)
-	Itfhw string `json:"itfhw"`
-	Mtu   int    `json:"mtu"`
-	// Pin default value is ""
-	Pin string `json:"pin"`
-	// PrimaryAddress description: REF(itfparams/primary)
-	// PrimaryAddress default value is ""
-	PrimaryAddress string `json:"primary_address"`
-	Inbandwidth    int    `json:"inbandwidth"`
-	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
-	Name             string `json:"name"`
-	// ResetString default value is "ATZ"
-	ResetString  string `json:"reset_string"`
-	Outbandwidth int    `json:"outbandwidth"`
-	// Password default value is ""
-	Password string `json:"password"`
-	// Apn default value is "unknown"
-	Apn string `json:"apn"`
-	// ApnAuto default value is true
-	ApnAuto   bool `json:"apn_auto"`
-	Bandwidth int  `json:"bandwidth"`
-	// DialString default value is "*99#"
-	DialString string `json:"dial_string"`
-	// InitString default value is "ATZ"
-	InitString string `json:"init_string"`
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	ObjectType  string `json:"_type"`
+	Inbandwidth int    `json:"inbandwidth"`
 	// Link default value is true
-	Link     bool   `json:"link"`
-	Username string `json:"username"`
-	// IdleTime default value is ""
-	IdleTime string `json:"idle_time"`
+	Link bool `json:"link"`
 	// MobileNetwork can be one of: []string{"gsm", "cdma", "lte"}
 	// MobileNetwork default value is "gsm"
 	MobileNetwork string `json:"mobile_network"`
+	Mtu           int    `json:"mtu"`
+	Name          string `json:"name"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+	// IdleTime default value is ""
+	IdleTime string `json:"idle_time"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+	Username      string `json:"username"`
+	Comment       string `json:"comment"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// DialString default value is "*99#"
+	DialString string `json:"dial_string"`
+	// InitString default value is "ATZ"
+	InitString   string `json:"init_string"`
+	Outbandwidth int    `json:"outbandwidth"`
+	// ResetString default value is "ATZ"
+	ResetString string `json:"reset_string"`
+	Bandwidth   int    `json:"bandwidth"`
 	// Multilink default value is false
 	Multilink bool `json:"multilink"`
+	// Pin default value is ""
+	Pin    string `json:"pin"`
+	Signal int    `json:"signal"`
+	// Apn default value is "unknown"
+	Apn string `json:"apn"`
+	// Itfhw description: REF(itfhw/usbserial)
+	Itfhw string `json:"itfhw"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
 	// Status default value is false
 	Status bool `json:"status"`
+	// ApnAuto default value is true
+	ApnAuto bool `json:"apn_auto"`
 }
 
 var _ sophos.RestGetter = &InterfacePpp3G{}
@@ -444,50 +444,50 @@ type InterfacePppmodems []InterfacePppmodem
 
 // InterfacePppmodem represents a UTM PPP modem interface
 type InterfacePppmodem struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// IdleTime default value is ""
-	IdleTime string `json:"idle_time"`
-	// Password default value is ""
-	Password string `json:"password"`
-	// VirtualDevice description: (REGEX)
-	// VirtualDevice default value is ""
-	VirtualDevice string `json:"virtual_device"`
-	// Link default value is true
-	Link bool `json:"link"`
-	Mtu  int  `json:"mtu"`
-	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
-	Bandwidth        int  `json:"bandwidth"`
-	// FlowControl can be one of: []string{"hardware", "software"}
-	// FlowControl default value is "hardware"
-	FlowControl string `json:"flow_control"`
-	Inbandwidth int    `json:"inbandwidth"`
-	// InitString default value is "ATZ"
-	InitString string `json:"init_string"`
-	// LineSpeed can be one of: []string{"9600", "14400", "19200", "26400", "31200", "38400", "57600", "115200", "230400"}
-	// LineSpeed default value is "115200"
-	LineSpeed string `json:"line_speed"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// ResetString default value is "ATZ"
 	ResetString string `json:"reset_string"`
 	// Status default value is false
-	Status   bool   `json:"status"`
-	Username string `json:"username"`
+	Status bool `json:"status"`
 	// Custom default value is ""
 	Custom string `json:"custom"`
-	// DialString default value is ""
-	DialString string `json:"dial_string"`
 	// Itfhw description: REF(itfhw/serial)
 	Itfhw string `json:"itfhw"`
-	// Multilink default value is false
-	Multilink    bool   `json:"multilink"`
+	Mtu   int    `json:"mtu"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+	Comment       string `json:"comment"`
+	// FlowControl can be one of: []string{"hardware", "software"}
+	// FlowControl default value is "hardware"
+	FlowControl string `json:"flow_control"`
+	// IdleTime default value is ""
+	IdleTime string `json:"idle_time"`
+	// InitString default value is "ATZ"
+	InitString string `json:"init_string"`
+	Bandwidth  int    `json:"bandwidth"`
+	// Link default value is true
+	Link         bool   `json:"link"`
+	Name         string `json:"name"`
+	Username     string `json:"username"`
 	Outbandwidth int    `json:"outbandwidth"`
-	Comment      string `json:"comment"`
+	// Password default value is ""
+	Password string `json:"password"`
 	// PrimaryAddress description: REF(itfparams/primary)
 	// PrimaryAddress default value is ""
 	PrimaryAddress string `json:"primary_address"`
+	// DialString default value is ""
+	DialString  string `json:"dial_string"`
+	Inbandwidth int    `json:"inbandwidth"`
+	// LineSpeed can be one of: []string{"9600", "14400", "19200", "26400", "31200", "38400", "57600", "115200", "230400"}
+	// LineSpeed default value is "115200"
+	LineSpeed string `json:"line_speed"`
+	// Multilink default value is false
+	Multilink bool `json:"multilink"`
 }
 
 var _ sophos.RestGetter = &InterfacePppmodem{}
@@ -543,48 +543,48 @@ type InterfacePppoas []InterfacePppoa
 
 // InterfacePppoa represents a UTM PPPoA/PPTP DSL interface
 type InterfacePppoa struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Custom default value is ""
-	Custom      string `json:"custom"`
-	Inbandwidth int    `json:"inbandwidth"`
-	// Itfhw description: REF(itfhw/ethernet)
-	Itfhw string `json:"itfhw"`
-	// Link default value is true
-	Link bool `json:"link"`
-	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
-	Name             string `json:"name"`
-	Username         string `json:"username"`
-	Mtu              int    `json:"mtu"`
+	Custom string `json:"custom"`
+	// NicAddress description: (IPADDR)
+	NicAddress string `json:"nic_address"`
+	NicNetmask int    `json:"nic_netmask"`
 	// PingAddress description: (IPADDR)
 	// PingAddress default value is ""
 	PingAddress string `json:"ping_address"`
 	// PrimaryAddress description: REF(itfparams/primary)
 	// PrimaryAddress default value is ""
-	PrimaryAddress   string `json:"primary_address"`
+	PrimaryAddress string `json:"primary_address"`
+	Bandwidth      int    `json:"bandwidth"`
+	// Itfhw description: REF(itfhw/ethernet)
+	Itfhw string `json:"itfhw"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice    string `json:"virtual_device"`
 	ReconnectTimeout int    `json:"reconnect_timeout"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status      bool `json:"status"`
+	Inbandwidth int  `json:"inbandwidth"`
+	// Link default value is true
+	Link bool `json:"link"`
 	// ModemAddress description: (IPADDR)
 	ModemAddress string `json:"modem_address"`
+	Mtu          int    `json:"mtu"`
+	Name         string `json:"name"`
+	Outbandwidth int    `json:"outbandwidth"`
+	Comment      string `json:"comment"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
 	// Multilink default value is false
 	Multilink bool `json:"multilink"`
-	// NicAddress description: (IPADDR)
-	NicAddress string `json:"nic_address"`
-	NicNetmask int    `json:"nic_netmask"`
+	// Password default value is ""
+	Password string `json:"password"`
 	// ReconnectDaily description: (TIME)
 	// ReconnectDaily default value is ""
 	ReconnectDaily string `json:"reconnect_daily"`
-	Bandwidth      int    `json:"bandwidth"`
-	Comment        string `json:"comment"`
-	Outbandwidth   int    `json:"outbandwidth"`
-	// Password default value is ""
-	Password string `json:"password"`
-	// VirtualDevice description: (REGEX)
-	// VirtualDevice default value is ""
-	VirtualDevice string `json:"virtual_device"`
+	Username       string `json:"username"`
 }
 
 var _ sophos.RestGetter = &InterfacePppoa{}
@@ -640,47 +640,47 @@ type InterfacePppoes []InterfacePppoe
 
 // InterfacePppoe represents a UTM PPPoE DSL interface
 type InterfacePppoe struct {
-	Locked              string        `json:"_locked"`
-	Reference           string        `json:"_ref"`
-	_type               string        `json:"_type"`
-	AdditionalAddresses []interface{} `json:"additional_addresses"`
-	Mtu                 int           `json:"mtu"`
-	// Multilink default value is false
-	Multilink    bool   `json:"multilink"`
-	Outbandwidth int    `json:"outbandwidth"`
-	Username     string `json:"username"`
-	// Status default value is false
-	Status      bool `json:"status"`
-	Bandwidth   int  `json:"bandwidth"`
-	Inbandwidth int  `json:"inbandwidth"`
-	// Link default value is true
-	Link             bool   `json:"link"`
-	Name             string `json:"name"`
-	ReconnectTimeout int    `json:"reconnect_timeout"`
-	// MultilinkStatus description: (HASH)
-	MultilinkStatus interface{} `json:"multilink_status"`
-	Comment         string      `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Custom default value is ""
-	Custom string `json:"custom"`
+	Custom      string `json:"custom"`
+	Inbandwidth int    `json:"inbandwidth"`
 	// Itfhw description: REF(itfhw/ethernet)
-	Itfhw string `json:"itfhw"`
-	// Macvlan default value is false
-	Macvlan bool `json:"macvlan"`
-	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery bool          `json:"mtu_auto_discovery"`
-	Vlantag          int           `json:"vlantag"`
-	ItfhwSlaves      []interface{} `json:"itfhw_slaves"`
-	// Password default value is ""
-	Password string `json:"password"`
+	Itfhw        string `json:"itfhw"`
+	Name         string `json:"name"`
+	Outbandwidth int    `json:"outbandwidth"`
 	// PrimaryAddress description: REF(itfparams/primary)
 	// PrimaryAddress default value is ""
-	PrimaryAddress string `json:"primary_address"`
+	PrimaryAddress      string        `json:"primary_address"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	Comment             string        `json:"comment"`
+	ReconnectTimeout    int           `json:"reconnect_timeout"`
+	// Status default value is false
+	Status   bool   `json:"status"`
+	Mtu      int    `json:"mtu"`
+	Username string `json:"username"`
+	// Macvlan default value is false
+	Macvlan bool `json:"macvlan"`
+	// Multilink default value is false
+	Multilink bool `json:"multilink"`
+	// MultilinkStatus description: (HASH)
+	MultilinkStatus interface{} `json:"multilink_status"`
 	// ReconnectDaily description: (TIME)
 	// ReconnectDaily default value is ""
-	ReconnectDaily string `json:"reconnect_daily"`
+	ReconnectDaily string        `json:"reconnect_daily"`
+	Vlantag        int           `json:"vlantag"`
+	ItfhwSlaves    []interface{} `json:"itfhw_slaves"`
+	// Link default value is true
+	Link bool `json:"link"`
+	// Password default value is ""
+	Password string `json:"password"`
 	// VirtualDevice description: (REGEX)
 	// VirtualDevice default value is ""
 	VirtualDevice string `json:"virtual_device"`
+	Bandwidth     int    `json:"bandwidth"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
 }
 
 var _ sophos.RestGetter = &InterfacePppoe{}
@@ -736,27 +736,27 @@ type InterfaceTunnels []InterfaceTunnel
 
 // InterfaceTunnel represents a UTM tunnel interface
 type InterfaceTunnel struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Bandwidth int    `json:"bandwidth"`
-	// Itfhw description: REF(itfhw/virtual)
-	Itfhw string `json:"itfhw"`
-	Mtu   int    `json:"mtu"`
-	// MtuAutoDiscovery default value is false
-	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
-	Outbandwidth        int           `json:"outbandwidth"`
+	Locked              string        `json:"_locked"`
+	Reference           string        `json:"_ref"`
+	ObjectType          string        `json:"_type"`
 	AdditionalAddresses []interface{} `json:"additional_addresses"`
 	Comment             string        `json:"comment"`
-	Inbandwidth         int           `json:"inbandwidth"`
-	// Link default value is true
-	Link bool   `json:"link"`
-	Name string `json:"name"`
+	// Itfhw description: REF(itfhw/virtual)
+	Itfhw        string `json:"itfhw"`
+	Outbandwidth int    `json:"outbandwidth"`
 	// PrimaryAddress description: REF(itfparams/primary)
 	// PrimaryAddress default value is ""
 	PrimaryAddress string `json:"primary_address"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status      bool `json:"status"`
+	Bandwidth   int  `json:"bandwidth"`
+	Inbandwidth int  `json:"inbandwidth"`
+	// Link default value is true
+	Link bool `json:"link"`
+	Mtu  int  `json:"mtu"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
+	Name             string `json:"name"`
 }
 
 var _ sophos.RestGetter = &InterfaceTunnel{}
@@ -814,7 +814,7 @@ type InterfaceVlans []InterfaceVlan
 type InterfaceVlan struct {
 	Locked              string        `json:"_locked"`
 	Reference           string        `json:"_ref"`
-	_type               string        `json:"_type"`
+	ObjectType          string        `json:"_type"`
 	AdditionalAddresses []interface{} `json:"additional_addresses"`
 	Bandwidth           int64         `json:"bandwidth"`
 	Comment             string        `json:"comment"`
@@ -882,4 +882,4 @@ func (*InterfaceVlan) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *InterfaceVlan) GetType() string { return i._type }
+func (i *InterfaceVlan) GetType() string { return i.ObjectType }
