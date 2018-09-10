@@ -73,17 +73,41 @@ func (Itfparams) References() []string {
 	}
 }
 
-// ItfparamsBridgePort is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfparamsBridgePort []interface{}
+// ItfparamsBridgePorts is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfparamsBridgePorts []ItfparamsBridgePort
 
-var _ sophos.RestObject = &ItfparamsBridgePort{}
+// ItfparamsBridgePort represents a UTM bridge port
+type ItfparamsBridgePort struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Itfhw description: REF(itfhw/ethernet), REF(itfhw/red_server), REF(itfhw/red_client), REF(itfhw/awe_network), REF(itfhw/lag)
+	Itfhw string `json:"itfhw"`
+	Name  string `json:"name"`
+	// Status default value is true
+	Status      bool   `json:"status"`
+	StpPathcost int    `json:"stp_pathcost"`
+	StpPortprio int    `json:"stp_portprio"`
+	Comment     string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfparamsBridgePort GET path
+var _ sophos.RestGetter = &ItfparamsBridgePort{}
+
+// GetPath implements sophos.RestObject and returns the ItfparamsBridgePorts GET path
 // Returns all available itfparams/bridge_port objects
-func (*ItfparamsBridgePort) GetPath() string { return "/api/objects/itfparams/bridge_port/" }
+func (*ItfparamsBridgePorts) GetPath() string { return "/api/objects/itfparams/bridge_port/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfparamsBridgePort) RefRequired() (string, bool) { return "", false }
+func (*ItfparamsBridgePorts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfparamsBridgePorts GET path
+// Returns all available bridge_port types
+func (i *ItfparamsBridgePort) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfparamsBridgePort) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfparamsBridgePort DELETE path
 // Creates or updates the complete object bridge_port
@@ -115,17 +139,35 @@ func (*ItfparamsBridgePort) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfparams/bridge_port/%s/usedby", ref)
 }
 
-// ItfparamsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfparamsGroup []interface{}
+// ItfparamsGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfparamsGroups []ItfparamsGroup
 
-var _ sophos.RestObject = &ItfparamsGroup{}
+// ItfparamsGroup represents a UTM group
+type ItfparamsGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfparamsGroup GET path
+var _ sophos.RestGetter = &ItfparamsGroup{}
+
+// GetPath implements sophos.RestObject and returns the ItfparamsGroups GET path
 // Returns all available itfparams/group objects
-func (*ItfparamsGroup) GetPath() string { return "/api/objects/itfparams/group/" }
+func (*ItfparamsGroups) GetPath() string { return "/api/objects/itfparams/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfparamsGroup) RefRequired() (string, bool) { return "", false }
+func (*ItfparamsGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfparamsGroups GET path
+// Returns all available group types
+func (i *ItfparamsGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfparams/group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfparamsGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfparamsGroup DELETE path
 // Creates or updates the complete object group
@@ -329,17 +371,67 @@ func (*ItfparamsPrimary) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *ItfparamsPrimary) GetType() string { return i._type }
 
-// ItfparamsSecondary is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfparamsSecondary []interface{}
+// ItfparamsSecondarys is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfparamsSecondarys []ItfparamsSecondary
 
-var _ sophos.RestObject = &ItfparamsSecondary{}
+// ItfparamsSecondary represents a UTM additional interface address
+type ItfparamsSecondary struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Resolved default value is false
+	Resolved bool `json:"resolved"`
+	HaNode   int  `json:"ha_node"`
+	// InterfaceBroadcast description: REF(network/interface_broadcast)
+	// InterfaceBroadcast default value is ""
+	InterfaceBroadcast string `json:"interface_broadcast"`
+	// InterfaceNetwork description: REF(network/interface_network)
+	// InterfaceNetwork default value is ""
+	InterfaceNetwork string `json:"interface_network"`
+	// InterfaceAddress description: REF(network/interface_address)
+	// InterfaceAddress default value is ""
+	InterfaceAddress string `json:"interface_address"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Address6 description: (IP6ADDR)
+	// Address6 default value is ""
+	Address6 string `json:"address6"`
+	Comment  string `json:"comment"`
+	// Id default value is ""
+	Id      string `json:"id"`
+	Netmask int    `json:"netmask"`
+	// Type6 can be one of: []string{"static"}
+	// Type6 default value is "static"
+	Type6 string `json:"type6"`
+	// Resolved6 default value is false
+	Resolved6 bool `json:"resolved6"`
+	// Type can be one of: []string{"static"}
+	// Type default value is "static"
+	Type string `json:"type"`
+	// Address description: (IPADDR)
+	// Address default value is "0.0.0.0"
+	Address  string `json:"address"`
+	Name     string `json:"name"`
+	Netmask6 int    `json:"netmask6"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfparamsSecondary GET path
+var _ sophos.RestGetter = &ItfparamsSecondary{}
+
+// GetPath implements sophos.RestObject and returns the ItfparamsSecondarys GET path
 // Returns all available itfparams/secondary objects
-func (*ItfparamsSecondary) GetPath() string { return "/api/objects/itfparams/secondary/" }
+func (*ItfparamsSecondarys) GetPath() string { return "/api/objects/itfparams/secondary/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfparamsSecondary) RefRequired() (string, bool) { return "", false }
+func (*ItfparamsSecondarys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfparamsSecondarys GET path
+// Returns all available secondary types
+func (i *ItfparamsSecondary) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfparams/secondary/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfparamsSecondary) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfparamsSecondary DELETE path
 // Creates or updates the complete object secondary

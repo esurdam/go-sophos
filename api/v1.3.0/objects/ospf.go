@@ -67,17 +67,43 @@ func (Ospf) References() []string {
 	}
 }
 
-// OspfArea is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfArea []interface{}
+// OspfAreas is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfAreas []OspfArea
 
-var _ sophos.RestObject = &OspfArea{}
+// OspfArea represents a UTM OSPF area
+type OspfArea struct {
+	Locked       string        `json:"_locked"`
+	Reference    string        `json:"_ref"`
+	_type        string        `json:"_type"`
+	VirtualLinks []interface{} `json:"virtual_links"`
+	// Authentication can be one of: []string{"message-digest", "plain-text", "null"}
+	Authentication string `json:"authentication"`
+	Comment        string `json:"comment"`
+	DefaultCost    int    `json:"default_cost"`
+	// Id description: (IPADDR)
+	Id         string        `json:"id"`
+	Interfaces []interface{} `json:"interfaces"`
+	Name       string        `json:"name"`
+	// Type can be one of: []string{"normal", "stub", "nssa", "stub no-summary", "nssa no-summary"}
+	// Type default value is "normal"
+	Type string `json:"type"`
+}
 
-// GetPath implements sophos.RestObject and returns the OspfArea GET path
+var _ sophos.RestGetter = &OspfArea{}
+
+// GetPath implements sophos.RestObject and returns the OspfAreas GET path
 // Returns all available ospf/area objects
-func (*OspfArea) GetPath() string { return "/api/objects/ospf/area/" }
+func (*OspfAreas) GetPath() string { return "/api/objects/ospf/area/" }
 
 // RefRequired implements sophos.RestObject
-func (*OspfArea) RefRequired() (string, bool) { return "", false }
+func (*OspfAreas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OspfAreas GET path
+// Returns all available area types
+func (o *OspfArea) GetPath() string { return fmt.Sprintf("/api/objects/ospf/area/%s", o.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (o *OspfArea) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OspfArea DELETE path
 // Creates or updates the complete object area
@@ -109,17 +135,33 @@ func (*OspfArea) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/area/%s/usedby", ref)
 }
 
-// OspfGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfGroup []interface{}
+// OspfGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfGroups []OspfGroup
 
-var _ sophos.RestObject = &OspfGroup{}
+// OspfGroup represents a UTM group
+type OspfGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the OspfGroup GET path
+var _ sophos.RestGetter = &OspfGroup{}
+
+// GetPath implements sophos.RestObject and returns the OspfGroups GET path
 // Returns all available ospf/group objects
-func (*OspfGroup) GetPath() string { return "/api/objects/ospf/group/" }
+func (*OspfGroups) GetPath() string { return "/api/objects/ospf/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*OspfGroup) RefRequired() (string, bool) { return "", false }
+func (*OspfGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OspfGroups GET path
+// Returns all available group types
+func (o *OspfGroup) GetPath() string { return fmt.Sprintf("/api/objects/ospf/group/%s", o.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (o *OspfGroup) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OspfGroup DELETE path
 // Creates or updates the complete object group
@@ -151,17 +193,52 @@ func (*OspfGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/group/%s/usedby", ref)
 }
 
-// OspfInterface is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfInterface []interface{}
+// OspfInterfaces is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfInterfaces []OspfInterface
 
-var _ sophos.RestObject = &OspfInterface{}
+// OspfInterface represents a UTM OSPF interface
+type OspfInterface struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// TransmitDelay description: Constraints: 0, 1-65535
+	TransmitDelay int `json:"transmit_delay"`
+	// AuthenticationKey description: (REGEX)
+	AuthenticationKey string `json:"authentication_key"`
+	// HelloInterval description: Constraints: 0, 1-65535
+	HelloInterval     int           `json:"hello_interval"`
+	MessageDigestKeys []interface{} `json:"message_digest_keys"`
+	// DeadInterval description: Constraints: 0, 1-65535
+	DeadInterval int `json:"dead_interval"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+	Priority  int    `json:"priority"`
+	// RetransmitInterval description: Constraints: 0, 3-65535
+	RetransmitInterval int `json:"retransmit_interval"`
+	// Authentication can be one of: []string{"message-digest", "plain-text", "null"}
+	Authentication string `json:"authentication"`
+	Comment        string `json:"comment"`
+	Cost           int    `json:"cost"`
+}
 
-// GetPath implements sophos.RestObject and returns the OspfInterface GET path
+var _ sophos.RestGetter = &OspfInterface{}
+
+// GetPath implements sophos.RestObject and returns the OspfInterfaces GET path
 // Returns all available ospf/interface objects
-func (*OspfInterface) GetPath() string { return "/api/objects/ospf/interface/" }
+func (*OspfInterfaces) GetPath() string { return "/api/objects/ospf/interface/" }
 
 // RefRequired implements sophos.RestObject
-func (*OspfInterface) RefRequired() (string, bool) { return "", false }
+func (*OspfInterfaces) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OspfInterfaces GET path
+// Returns all available interface types
+func (o *OspfInterface) GetPath() string {
+	return fmt.Sprintf("/api/objects/ospf/interface/%s", o.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (o *OspfInterface) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OspfInterface DELETE path
 // Creates or updates the complete object interface
@@ -193,17 +270,38 @@ func (*OspfInterface) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ospf/interface/%s/usedby", ref)
 }
 
-// OspfMessageDigestKey is an Sophos Endpoint subType and implements sophos.RestObject
-type OspfMessageDigestKey []interface{}
+// OspfMessageDigestKeys is an Sophos Endpoint subType and implements sophos.RestObject
+type OspfMessageDigestKeys []OspfMessageDigestKey
 
-var _ sophos.RestObject = &OspfMessageDigestKey{}
+// OspfMessageDigestKey represents a UTM OSPF message digest key
+type OspfMessageDigestKey struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// MessageDigestKey description: (REGEX)
+	MessageDigestKey   string `json:"message_digest_key"`
+	MessageDigestKeyId int    `json:"message_digest_key_id"`
+	Name               string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the OspfMessageDigestKey GET path
+var _ sophos.RestGetter = &OspfMessageDigestKey{}
+
+// GetPath implements sophos.RestObject and returns the OspfMessageDigestKeys GET path
 // Returns all available ospf/message_digest_key objects
-func (*OspfMessageDigestKey) GetPath() string { return "/api/objects/ospf/message_digest_key/" }
+func (*OspfMessageDigestKeys) GetPath() string { return "/api/objects/ospf/message_digest_key/" }
 
 // RefRequired implements sophos.RestObject
-func (*OspfMessageDigestKey) RefRequired() (string, bool) { return "", false }
+func (*OspfMessageDigestKeys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the OspfMessageDigestKeys GET path
+// Returns all available message_digest_key types
+func (o *OspfMessageDigestKey) GetPath() string {
+	return fmt.Sprintf("/api/objects/ospf/message_digest_key/%s", o.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (o *OspfMessageDigestKey) RefRequired() (string, bool) { return o.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the OspfMessageDigestKey DELETE path
 // Creates or updates the complete object message_digest_key

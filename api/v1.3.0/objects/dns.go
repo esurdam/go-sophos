@@ -67,17 +67,38 @@ func (Dns) References() []string {
 	}
 }
 
-// DnsAxfr is an Sophos Endpoint subType and implements sophos.RestObject
-type DnsAxfr []interface{}
+// DnsAxfrs is an Sophos Endpoint subType and implements sophos.RestObject
+type DnsAxfrs []DnsAxfr
 
-var _ sophos.RestObject = &DnsAxfr{}
+// DnsAxfr represents a UTM DNS slave zone
+type DnsAxfr struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Zone description: (HOSTNAME)
+	Zone    string        `json:"zone"`
+	Comment string        `json:"comment"`
+	Master  []interface{} `json:"master"`
+}
 
-// GetPath implements sophos.RestObject and returns the DnsAxfr GET path
+var _ sophos.RestGetter = &DnsAxfr{}
+
+// GetPath implements sophos.RestObject and returns the DnsAxfrs GET path
 // Returns all available dns/axfr objects
-func (*DnsAxfr) GetPath() string { return "/api/objects/dns/axfr/" }
+func (*DnsAxfrs) GetPath() string { return "/api/objects/dns/axfr/" }
 
 // RefRequired implements sophos.RestObject
-func (*DnsAxfr) RefRequired() (string, bool) { return "", false }
+func (*DnsAxfrs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DnsAxfrs GET path
+// Returns all available axfr types
+func (d *DnsAxfr) GetPath() string { return fmt.Sprintf("/api/objects/dns/axfr/%s", d.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (d *DnsAxfr) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DnsAxfr DELETE path
 // Creates or updates the complete object axfr
@@ -109,17 +130,33 @@ func (*DnsAxfr) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/dns/axfr/%s/usedby", ref)
 }
 
-// DnsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type DnsGroup []interface{}
+// DnsGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type DnsGroups []DnsGroup
 
-var _ sophos.RestObject = &DnsGroup{}
+// DnsGroup represents a UTM group
+type DnsGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the DnsGroup GET path
+var _ sophos.RestGetter = &DnsGroup{}
+
+// GetPath implements sophos.RestObject and returns the DnsGroups GET path
 // Returns all available dns/group objects
-func (*DnsGroup) GetPath() string { return "/api/objects/dns/group/" }
+func (*DnsGroups) GetPath() string { return "/api/objects/dns/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*DnsGroup) RefRequired() (string, bool) { return "", false }
+func (*DnsGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the DnsGroups GET path
+// Returns all available group types
+func (d *DnsGroup) GetPath() string { return fmt.Sprintf("/api/objects/dns/group/%s", d.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (d *DnsGroup) RefRequired() (string, bool) { return d.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the DnsGroup DELETE path
 // Creates or updates the complete object group

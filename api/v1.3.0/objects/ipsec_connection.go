@@ -158,17 +158,35 @@ func (*IpsecConnectionAmazonVpc) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *IpsecConnectionAmazonVpc) GetType() string { return i._type }
 
-// IpsecConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionGroup []interface{}
+// IpsecConnectionGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionGroups []IpsecConnectionGroup
 
-var _ sophos.RestObject = &IpsecConnectionGroup{}
+// IpsecConnectionGroup represents a UTM group
+type IpsecConnectionGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionGroup GET path
+var _ sophos.RestGetter = &IpsecConnectionGroup{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionGroups GET path
 // Returns all available ipsec_connection/group objects
-func (*IpsecConnectionGroup) GetPath() string { return "/api/objects/ipsec_connection/group/" }
+func (*IpsecConnectionGroups) GetPath() string { return "/api/objects/ipsec_connection/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionGroup) RefRequired() (string, bool) { return "", false }
+func (*IpsecConnectionGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionGroups GET path
+// Returns all available group types
+func (i *IpsecConnectionGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecConnectionGroup DELETE path
 // Creates or updates the complete object group
@@ -278,19 +296,53 @@ func (*IpsecConnectionL2Tp) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *IpsecConnectionL2Tp) GetType() string { return i._type }
 
-// IpsecConnectionRoadwarriorCa is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionRoadwarriorCa []interface{}
+// IpsecConnectionRoadwarriorCas is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionRoadwarriorCas []IpsecConnectionRoadwarriorCa
 
-var _ sophos.RestObject = &IpsecConnectionRoadwarriorCa{}
+// IpsecConnectionRoadwarriorCa represents a UTM IPsec CA remote access
+type IpsecConnectionRoadwarriorCa struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Users     []interface{} `json:"users"`
+	// Authentication description: REF(ipsec_remote_auth/ca)
+	Authentication string `json:"authentication"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// IpPool description: REF(network/network)
+	IpPool string `json:"ip_pool"`
+	Name   string `json:"name"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// UseIpPool default value is false
+	UseIpPool bool          `json:"use_ip_pool"`
+	Comment   string        `json:"comment"`
+	Networks  []interface{} `json:"networks"`
+	// Policy description: REF(ipsec/policy)
+	Policy string `json:"policy"`
+	// Xauth default value is false
+	Xauth bool `json:"xauth"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCa GET path
+var _ sophos.RestGetter = &IpsecConnectionRoadwarriorCa{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCas GET path
 // Returns all available ipsec_connection/roadwarrior_ca objects
-func (*IpsecConnectionRoadwarriorCa) GetPath() string {
+func (*IpsecConnectionRoadwarriorCas) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_ca/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionRoadwarriorCa) RefRequired() (string, bool) { return "", false }
+func (*IpsecConnectionRoadwarriorCas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCas GET path
+// Returns all available roadwarrior_ca types
+func (i *IpsecConnectionRoadwarriorCa) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionRoadwarriorCa) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCa DELETE path
 // Creates or updates the complete object roadwarrior_ca
@@ -322,19 +374,69 @@ func (*IpsecConnectionRoadwarriorCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_ca/%s/usedby", ref)
 }
 
-// IpsecConnectionRoadwarriorCisco is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionRoadwarriorCisco []interface{}
+// IpsecConnectionRoadwarriorCiscos is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionRoadwarriorCiscos []IpsecConnectionRoadwarriorCisco
 
-var _ sophos.RestObject = &IpsecConnectionRoadwarriorCisco{}
+// IpsecConnectionRoadwarriorCisco represents a UTM Cisco VPN client connection
+type IpsecConnectionRoadwarriorCisco struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Interface description: REF(interface/*)
+	Interface            string `json:"interface"`
+	IphoneConnectionName string `json:"iphone_connection_name"`
+	// IphoneHostname default value is ""
+	IphoneHostname string `json:"iphone_hostname"`
+	// IphoneStatus default value is false
+	IphoneStatus bool `json:"iphone_status"`
+	// AutoPfrule default value is false
+	AutoPfrule bool   `json:"auto_pfrule"`
+	Name       string `json:"name"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut string `json:"auto_pf_out"`
+	// IphoneOndemandEnabled default value is false
+	IphoneOndemandEnabled bool          `json:"iphone_ondemand_enabled"`
+	Networks              []interface{} `json:"networks"`
+	Aaa                   []interface{} `json:"aaa"`
+	// Certificate description: REF(ca/host_key_cert)
+	Certificate string `json:"certificate"`
+	// IpAssignmentPool description: REF(network/network)
+	IpAssignmentPool      string        `json:"ip_assignment_pool"`
+	IphoneOndemandDomains []interface{} `json:"iphone_ondemand_domains"`
+	// IphoneOndemandType can be one of: []string{"OnDemandMatchDomainsAlways", "OnDemandMatchDomainsOnRetry"}
+	// IphoneOndemandType default value is "OnDemandMatchDomainsOnRetry"
+	IphoneOndemandType string `json:"iphone_ondemand_type"`
+	// Policy description: REF(ipsec/policy)
+	// Policy default value is "REF_IPsecPolicyCisco"
+	Policy string `json:"policy"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco GET path
+var _ sophos.RestGetter = &IpsecConnectionRoadwarriorCisco{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCiscos GET path
 // Returns all available ipsec_connection/roadwarrior_cisco objects
-func (*IpsecConnectionRoadwarriorCisco) GetPath() string {
+func (*IpsecConnectionRoadwarriorCiscos) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_cisco/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionRoadwarriorCisco) RefRequired() (string, bool) { return "", false }
+func (*IpsecConnectionRoadwarriorCiscos) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCiscos GET path
+// Returns all available roadwarrior_cisco types
+func (i *IpsecConnectionRoadwarriorCisco) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionRoadwarriorCisco) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorCisco DELETE path
 // Creates or updates the complete object roadwarrior_cisco
@@ -366,19 +468,53 @@ func (*IpsecConnectionRoadwarriorCisco) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_cisco/%s/usedby", ref)
 }
 
-// IpsecConnectionRoadwarriorPsk is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionRoadwarriorPsk []interface{}
+// IpsecConnectionRoadwarriorPsks is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionRoadwarriorPsks []IpsecConnectionRoadwarriorPsk
 
-var _ sophos.RestObject = &IpsecConnectionRoadwarriorPsk{}
+// IpsecConnectionRoadwarriorPsk represents a UTM IPsec PSK remote access
+type IpsecConnectionRoadwarriorPsk struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Name      string        `json:"name"`
+	Networks  []interface{} `json:"networks"`
+	// UseIpPool default value is false
+	UseIpPool bool          `json:"use_ip_pool"`
+	Users     []interface{} `json:"users"`
+	// Xauth default value is false
+	Xauth bool `json:"xauth"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Authentication description: REF(ipsec_remote_auth/psk)
+	Authentication string `json:"authentication"`
+	Comment        string `json:"comment"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// IpPool description: REF(network/network)
+	IpPool string `json:"ip_pool"`
+	// Policy description: REF(ipsec/policy)
+	Policy string `json:"policy"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsk GET path
+var _ sophos.RestGetter = &IpsecConnectionRoadwarriorPsk{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsks GET path
 // Returns all available ipsec_connection/roadwarrior_psk objects
-func (*IpsecConnectionRoadwarriorPsk) GetPath() string {
+func (*IpsecConnectionRoadwarriorPsks) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_psk/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionRoadwarriorPsk) RefRequired() (string, bool) { return "", false }
+func (*IpsecConnectionRoadwarriorPsks) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsks GET path
+// Returns all available roadwarrior_psk types
+func (i *IpsecConnectionRoadwarriorPsk) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionRoadwarriorPsk) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorPsk DELETE path
 // Creates or updates the complete object roadwarrior_psk
@@ -410,19 +546,59 @@ func (*IpsecConnectionRoadwarriorPsk) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_psk/%s/usedby", ref)
 }
 
-// IpsecConnectionRoadwarriorX509 is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecConnectionRoadwarriorX509 []interface{}
+// IpsecConnectionRoadwarriorX509s is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecConnectionRoadwarriorX509s []IpsecConnectionRoadwarriorX509
 
-var _ sophos.RestObject = &IpsecConnectionRoadwarriorX509{}
+// IpsecConnectionRoadwarriorX509 represents a UTM IPsec X509 remote access
+type IpsecConnectionRoadwarriorX509 struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// IpPool description: REF(network/network)
+	IpPool   string        `json:"ip_pool"`
+	Name     string        `json:"name"`
+	Networks []interface{} `json:"networks"`
+	// Policy description: REF(ipsec/policy)
+	Policy string `json:"policy"`
+	// Xauth default value is false
+	Xauth bool `json:"xauth"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut string `json:"auto_pf_out"`
+	// AutoPfrule default value is false
+	AutoPfrule bool `json:"auto_pfrule"`
+	// Interface description: REF(interface/*)
+	Interface string `json:"interface"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// UseIpPool default value is false
+	UseIpPool bool          `json:"use_ip_pool"`
+	Users     []interface{} `json:"users"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509 GET path
+var _ sophos.RestGetter = &IpsecConnectionRoadwarriorX509{}
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509s GET path
 // Returns all available ipsec_connection/roadwarrior_x509 objects
-func (*IpsecConnectionRoadwarriorX509) GetPath() string {
+func (*IpsecConnectionRoadwarriorX509s) GetPath() string {
 	return "/api/objects/ipsec_connection/roadwarrior_x509/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecConnectionRoadwarriorX509) RefRequired() (string, bool) { return "", false }
+func (*IpsecConnectionRoadwarriorX509s) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509s GET path
+// Returns all available roadwarrior_x509 types
+func (i *IpsecConnectionRoadwarriorX509) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_connection/roadwarrior_x509/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecConnectionRoadwarriorX509) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecConnectionRoadwarriorX509 DELETE path
 // Creates or updates the complete object roadwarrior_x509

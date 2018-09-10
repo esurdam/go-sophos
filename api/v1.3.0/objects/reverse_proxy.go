@@ -294,17 +294,60 @@ func (*ReverseProxyBackend) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (r *ReverseProxyBackend) GetType() string { return r._type }
 
-// ReverseProxyException is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyException []interface{}
+// ReverseProxyExceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyExceptions []ReverseProxyException
 
-var _ sophos.RestObject = &ReverseProxyException{}
+// ReverseProxyException represents a UTM webserver protection exception
+type ReverseProxyException struct {
+	Locked                   string        `json:"_locked"`
+	Reference                string        `json:"_ref"`
+	_type                    string        `json:"_type"`
+	SkipCustomThreatsFilters []interface{} `json:"skip_custom_threats_filters"`
+	// Skipform default value is false
+	Skipform bool `json:"skipform"`
+	// SkipformMissingtoken default value is false
+	SkipformMissingtoken bool `json:"skipform_missingtoken"`
+	// Skipurl default value is false
+	Skipurl bool   `json:"skipurl"`
+	Comment string `json:"comment"`
+	// Skiptft default value is false
+	Skiptft bool `json:"skiptft"`
+	// Status default value is false
+	Status bool   `json:"status"`
+	Name   string `json:"name"`
+	// Op can be one of: []string{"AND", "OR"}
+	// Op default value is "AND"
+	Op   string        `json:"op"`
+	Path []interface{} `json:"path"`
+	// Skipav default value is false
+	Skipav bool `json:"skipav"`
+	// Skipcookie default value is false
+	Skipcookie                  bool          `json:"skipcookie"`
+	Source                      []interface{} `json:"source"`
+	SkipThreatsFilterCategories []interface{} `json:"skip_threats_filter_categories"`
+	// Skipbadclients default value is false
+	Skipbadclients bool `json:"skipbadclients"`
+	// Skiphtmlrewrite default value is false
+	Skiphtmlrewrite bool `json:"skiphtmlrewrite"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyException GET path
+var _ sophos.RestGetter = &ReverseProxyException{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyExceptions GET path
 // Returns all available reverse_proxy/exception objects
-func (*ReverseProxyException) GetPath() string { return "/api/objects/reverse_proxy/exception/" }
+func (*ReverseProxyExceptions) GetPath() string { return "/api/objects/reverse_proxy/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyException) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyExceptions GET path
+// Returns all available exception types
+func (r *ReverseProxyException) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyException) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReverseProxyException DELETE path
 // Creates or updates the complete object exception
@@ -336,17 +379,38 @@ func (*ReverseProxyException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/exception/%s/usedby", ref)
 }
 
-// ReverseProxyFilter is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyFilter []interface{}
+// ReverseProxyFilters is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyFilters []ReverseProxyFilter
 
-var _ sophos.RestObject = &ReverseProxyFilter{}
+// ReverseProxyFilter represents a UTM web application firewall filter rule
+type ReverseProxyFilter struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Expr      string `json:"expr"`
+	Name      string `json:"name"`
+	// Target can be one of: []string{"HTTP_REFERER", "REQUEST_URI", "THE_REQUEST"}
+	Target string `json:"target"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyFilter GET path
+var _ sophos.RestGetter = &ReverseProxyFilter{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyFilters GET path
 // Returns all available reverse_proxy/filter objects
-func (*ReverseProxyFilter) GetPath() string { return "/api/objects/reverse_proxy/filter/" }
+func (*ReverseProxyFilters) GetPath() string { return "/api/objects/reverse_proxy/filter/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyFilter) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyFilters) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyFilters GET path
+// Returns all available filter types
+func (r *ReverseProxyFilter) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/filter/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyFilter) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReverseProxyFilter DELETE path
 // Creates or updates the complete object filter
@@ -527,17 +591,35 @@ func (*ReverseProxyFrontend) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (r *ReverseProxyFrontend) GetType() string { return r._type }
 
-// ReverseProxyGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyGroup []interface{}
+// ReverseProxyGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyGroups []ReverseProxyGroup
 
-var _ sophos.RestObject = &ReverseProxyGroup{}
+// ReverseProxyGroup represents a UTM group
+type ReverseProxyGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyGroup GET path
+var _ sophos.RestGetter = &ReverseProxyGroup{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyGroups GET path
 // Returns all available reverse_proxy/group objects
-func (*ReverseProxyGroup) GetPath() string { return "/api/objects/reverse_proxy/group/" }
+func (*ReverseProxyGroups) GetPath() string { return "/api/objects/reverse_proxy/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyGroup) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyGroups GET path
+// Returns all available group types
+func (r *ReverseProxyGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/group/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReverseProxyGroup DELETE path
 // Creates or updates the complete object group
@@ -739,17 +821,53 @@ func (*ReverseProxyProfile) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (r *ReverseProxyProfile) GetType() string { return r._type }
 
-// ReverseProxyRedirection is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyRedirection []interface{}
+// ReverseProxyRedirections is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyRedirections []ReverseProxyRedirection
 
-var _ sophos.RestObject = &ReverseProxyRedirection{}
+// ReverseProxyRedirection represents a UTM request redirection
+type ReverseProxyRedirection struct {
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	_type      string `json:"_type"`
+	TargetPort int    `json:"target_port"`
+	// TargetProtocol can be one of: []string{"http", "https"}
+	// TargetProtocol default value is "http"
+	TargetProtocol string `json:"target_protocol"`
+	// Frontend description: REF(reverse_proxy/frontend)
+	Frontend string `json:"frontend"`
+	// ResponseCode can be one of: []string{"301", "302", "303", "307", "308"}
+	// ResponseCode default value is "302"
+	ResponseCode string `json:"response_code"`
+	// Status default value is false
+	Status     bool   `json:"status"`
+	TargetHost string `json:"target_host"`
+	// TargetHostIpv6 default value is false
+	TargetHostIpv6 bool `json:"target_host_ipv6"`
+	// TargetPath default value is "/"
+	TargetPath string `json:"target_path"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	// SourcePath default value is "/"
+	SourcePath string `json:"source_path"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyRedirection GET path
+var _ sophos.RestGetter = &ReverseProxyRedirection{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyRedirections GET path
 // Returns all available reverse_proxy/redirection objects
-func (*ReverseProxyRedirection) GetPath() string { return "/api/objects/reverse_proxy/redirection/" }
+func (*ReverseProxyRedirections) GetPath() string { return "/api/objects/reverse_proxy/redirection/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyRedirection) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyRedirections) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyRedirections GET path
+// Returns all available redirection types
+func (r *ReverseProxyRedirection) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyRedirection) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReverseProxyRedirection DELETE path
 // Creates or updates the complete object redirection
@@ -781,19 +899,40 @@ func (*ReverseProxyRedirection) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reverse_proxy/redirection/%s/usedby", ref)
 }
 
-// ReverseProxyThreatsFilter is an Sophos Endpoint subType and implements sophos.RestObject
-type ReverseProxyThreatsFilter []interface{}
+// ReverseProxyThreatsFilters is an Sophos Endpoint subType and implements sophos.RestObject
+type ReverseProxyThreatsFilters []ReverseProxyThreatsFilter
 
-var _ sophos.RestObject = &ReverseProxyThreatsFilter{}
+// ReverseProxyThreatsFilter represents a UTM custom threat filter category
+type ReverseProxyThreatsFilter struct {
+	Locked           string        `json:"_locked"`
+	Reference        string        `json:"_ref"`
+	_type            string        `json:"_type"`
+	OrderedFilenames []interface{} `json:"ordered_filenames"`
+	Comment          string        `json:"comment"`
+	// Files description: (HASH)
+	Files interface{} `json:"files"`
+	Name  string      `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilter GET path
+var _ sophos.RestGetter = &ReverseProxyThreatsFilter{}
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilters GET path
 // Returns all available reverse_proxy/threats_filter objects
-func (*ReverseProxyThreatsFilter) GetPath() string {
+func (*ReverseProxyThreatsFilters) GetPath() string {
 	return "/api/objects/reverse_proxy/threats_filter/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*ReverseProxyThreatsFilter) RefRequired() (string, bool) { return "", false }
+func (*ReverseProxyThreatsFilters) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReverseProxyThreatsFilters GET path
+// Returns all available threats_filter types
+func (r *ReverseProxyThreatsFilter) GetPath() string {
+	return fmt.Sprintf("/api/objects/reverse_proxy/threats_filter/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReverseProxyThreatsFilter) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReverseProxyThreatsFilter DELETE path
 // Creates or updates the complete object threats_filter

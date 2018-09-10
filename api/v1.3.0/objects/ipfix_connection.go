@@ -55,17 +55,35 @@ func (IpfixConnection) References() []string {
 	}
 }
 
-// IpfixConnectionGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpfixConnectionGroup []interface{}
+// IpfixConnectionGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type IpfixConnectionGroups []IpfixConnectionGroup
 
-var _ sophos.RestObject = &IpfixConnectionGroup{}
+// IpfixConnectionGroup represents a UTM group
+type IpfixConnectionGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpfixConnectionGroup GET path
+var _ sophos.RestGetter = &IpfixConnectionGroup{}
+
+// GetPath implements sophos.RestObject and returns the IpfixConnectionGroups GET path
 // Returns all available ipfix_connection/group objects
-func (*IpfixConnectionGroup) GetPath() string { return "/api/objects/ipfix_connection/group/" }
+func (*IpfixConnectionGroups) GetPath() string { return "/api/objects/ipfix_connection/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpfixConnectionGroup) RefRequired() (string, bool) { return "", false }
+func (*IpfixConnectionGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpfixConnectionGroups GET path
+// Returns all available group types
+func (i *IpfixConnectionGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpfixConnectionGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpfixConnectionGroup DELETE path
 // Creates or updates the complete object group
@@ -97,19 +115,42 @@ func (*IpfixConnectionGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipfix_connection/group/%s/usedby", ref)
 }
 
-// IpfixConnectionIpfixConnection is an Sophos Endpoint subType and implements sophos.RestObject
-type IpfixConnectionIpfixConnection []interface{}
+// IpfixConnectionIpfixConnections is an Sophos Endpoint subType and implements sophos.RestObject
+type IpfixConnectionIpfixConnections []IpfixConnectionIpfixConnection
 
-var _ sophos.RestObject = &IpfixConnectionIpfixConnection{}
+// IpfixConnectionIpfixConnection represents a UTM ipfix_connection
+type IpfixConnectionIpfixConnection struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Host description: REF(network/host), REF(network/dns_host)
+	Host string `json:"host"`
+	Name string `json:"name"`
+	Oid  int    `json:"oid"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpfixConnectionIpfixConnection GET path
+var _ sophos.RestGetter = &IpfixConnectionIpfixConnection{}
+
+// GetPath implements sophos.RestObject and returns the IpfixConnectionIpfixConnections GET path
 // Returns all available ipfix_connection/ipfix_connection objects
-func (*IpfixConnectionIpfixConnection) GetPath() string {
+func (*IpfixConnectionIpfixConnections) GetPath() string {
 	return "/api/objects/ipfix_connection/ipfix_connection/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*IpfixConnectionIpfixConnection) RefRequired() (string, bool) { return "", false }
+func (*IpfixConnectionIpfixConnections) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpfixConnectionIpfixConnections GET path
+// Returns all available ipfix_connection types
+func (i *IpfixConnectionIpfixConnection) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipfix_connection/ipfix_connection/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpfixConnectionIpfixConnection) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpfixConnectionIpfixConnection DELETE path
 // Creates or updates the complete object ipfix_connection

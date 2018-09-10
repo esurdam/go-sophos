@@ -55,17 +55,33 @@ func (Right) References() []string {
 	}
 }
 
-// RightGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type RightGroup []interface{}
+// RightGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type RightGroups []RightGroup
 
-var _ sophos.RestObject = &RightGroup{}
+// RightGroup represents a UTM group
+type RightGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the RightGroup GET path
+var _ sophos.RestGetter = &RightGroup{}
+
+// GetPath implements sophos.RestObject and returns the RightGroups GET path
 // Returns all available right/group objects
-func (*RightGroup) GetPath() string { return "/api/objects/right/group/" }
+func (*RightGroups) GetPath() string { return "/api/objects/right/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*RightGroup) RefRequired() (string, bool) { return "", false }
+func (*RightGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the RightGroups GET path
+// Returns all available group types
+func (r *RightGroup) GetPath() string { return fmt.Sprintf("/api/objects/right/group/%s", r.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (r *RightGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the RightGroup DELETE path
 // Creates or updates the complete object group

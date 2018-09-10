@@ -68,17 +68,40 @@ func (Geoip) References() []string {
 	}
 }
 
-// GeoipDstexception is an Sophos Endpoint subType and implements sophos.RestObject
-type GeoipDstexception []interface{}
+// GeoipDstexceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type GeoipDstexceptions []GeoipDstexception
 
-var _ sophos.RestObject = &GeoipDstexception{}
+// GeoipDstexception represents a UTM incoming exceptions
+type GeoipDstexception struct {
+	Locked              string        `json:"_locked"`
+	Reference           string        `json:"_ref"`
+	_type               string        `json:"_type"`
+	Comment             string        `json:"comment"`
+	Countries           []interface{} `json:"countries"`
+	DestinationNetworks []interface{} `json:"destination_networks"`
+	Name                string        `json:"name"`
+	Services            []interface{} `json:"services"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the GeoipDstexception GET path
+var _ sophos.RestGetter = &GeoipDstexception{}
+
+// GetPath implements sophos.RestObject and returns the GeoipDstexceptions GET path
 // Returns all available geoip/dstexception objects
-func (*GeoipDstexception) GetPath() string { return "/api/objects/geoip/dstexception/" }
+func (*GeoipDstexceptions) GetPath() string { return "/api/objects/geoip/dstexception/" }
 
 // RefRequired implements sophos.RestObject
-func (*GeoipDstexception) RefRequired() (string, bool) { return "", false }
+func (*GeoipDstexceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the GeoipDstexceptions GET path
+// Returns all available dstexception types
+func (g *GeoipDstexception) GetPath() string {
+	return fmt.Sprintf("/api/objects/geoip/dstexception/%s", g.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (g *GeoipDstexception) RefRequired() (string, bool) { return g.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the GeoipDstexception DELETE path
 // Creates or updates the complete object dstexception
@@ -174,17 +197,33 @@ func (*GeoipGeoipgroup) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (g *GeoipGeoipgroup) GetType() string { return g._type }
 
-// GeoipGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type GeoipGroup []interface{}
+// GeoipGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type GeoipGroups []GeoipGroup
 
-var _ sophos.RestObject = &GeoipGroup{}
+// GeoipGroup represents a UTM group
+type GeoipGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	Comment   string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the GeoipGroup GET path
+var _ sophos.RestGetter = &GeoipGroup{}
+
+// GetPath implements sophos.RestObject and returns the GeoipGroups GET path
 // Returns all available geoip/group objects
-func (*GeoipGroup) GetPath() string { return "/api/objects/geoip/group/" }
+func (*GeoipGroups) GetPath() string { return "/api/objects/geoip/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*GeoipGroup) RefRequired() (string, bool) { return "", false }
+func (*GeoipGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the GeoipGroups GET path
+// Returns all available group types
+func (g *GeoipGroup) GetPath() string { return fmt.Sprintf("/api/objects/geoip/group/%s", g.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (g *GeoipGroup) RefRequired() (string, bool) { return g.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the GeoipGroup DELETE path
 // Creates or updates the complete object group
@@ -216,17 +255,40 @@ func (*GeoipGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/geoip/group/%s/usedby", ref)
 }
 
-// GeoipSrcexception is an Sophos Endpoint subType and implements sophos.RestObject
-type GeoipSrcexception []interface{}
+// GeoipSrcexceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type GeoipSrcexceptions []GeoipSrcexception
 
-var _ sophos.RestObject = &GeoipSrcexception{}
+// GeoipSrcexception represents a UTM outgoing exceptions
+type GeoipSrcexception struct {
+	Locked         string        `json:"_locked"`
+	Reference      string        `json:"_ref"`
+	_type          string        `json:"_type"`
+	Services       []interface{} `json:"services"`
+	SourceNetworks []interface{} `json:"source_networks"`
+	// Status default value is false
+	Status    bool          `json:"status"`
+	Comment   string        `json:"comment"`
+	Countries []interface{} `json:"countries"`
+	Name      string        `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the GeoipSrcexception GET path
+var _ sophos.RestGetter = &GeoipSrcexception{}
+
+// GetPath implements sophos.RestObject and returns the GeoipSrcexceptions GET path
 // Returns all available geoip/srcexception objects
-func (*GeoipSrcexception) GetPath() string { return "/api/objects/geoip/srcexception/" }
+func (*GeoipSrcexceptions) GetPath() string { return "/api/objects/geoip/srcexception/" }
 
 // RefRequired implements sophos.RestObject
-func (*GeoipSrcexception) RefRequired() (string, bool) { return "", false }
+func (*GeoipSrcexceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the GeoipSrcexceptions GET path
+// Returns all available srcexception types
+func (g *GeoipSrcexception) GetPath() string {
+	return fmt.Sprintf("/api/objects/geoip/srcexception/%s", g.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (g *GeoipSrcexception) RefRequired() (string, bool) { return g.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the GeoipSrcexception DELETE path
 // Creates or updates the complete object srcexception

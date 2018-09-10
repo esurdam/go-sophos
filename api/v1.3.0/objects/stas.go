@@ -55,17 +55,40 @@ func (Stas) References() []string {
 	}
 }
 
-// StasCollector is an Sophos Endpoint subType and implements sophos.RestObject
-type StasCollector []interface{}
+// StasCollectors is an Sophos Endpoint subType and implements sophos.RestObject
+type StasCollectors []StasCollector
 
-var _ sophos.RestObject = &StasCollector{}
+// StasCollector represents a UTM STAS Collector
+type StasCollector struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Host description: REF(network/host), REF(network/dns_host)
+	Host string `json:"host"`
+	Name string `json:"name"`
+	// Port description: REF(service/udp)
+	// Port default value is "REF_ServiceSTASCollector"
+	Port string `json:"port"`
+}
 
-// GetPath implements sophos.RestObject and returns the StasCollector GET path
+var _ sophos.RestGetter = &StasCollector{}
+
+// GetPath implements sophos.RestObject and returns the StasCollectors GET path
 // Returns all available stas/collector objects
-func (*StasCollector) GetPath() string { return "/api/objects/stas/collector/" }
+func (*StasCollectors) GetPath() string { return "/api/objects/stas/collector/" }
 
 // RefRequired implements sophos.RestObject
-func (*StasCollector) RefRequired() (string, bool) { return "", false }
+func (*StasCollectors) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the StasCollectors GET path
+// Returns all available collector types
+func (s *StasCollector) GetPath() string {
+	return fmt.Sprintf("/api/objects/stas/collector/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *StasCollector) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the StasCollector DELETE path
 // Creates or updates the complete object collector
@@ -97,17 +120,33 @@ func (*StasCollector) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/stas/collector/%s/usedby", ref)
 }
 
-// StasGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type StasGroup []interface{}
+// StasGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type StasGroups []StasGroup
 
-var _ sophos.RestObject = &StasGroup{}
+// StasGroup represents a UTM stas->group
+type StasGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the StasGroup GET path
+var _ sophos.RestGetter = &StasGroup{}
+
+// GetPath implements sophos.RestObject and returns the StasGroups GET path
 // Returns all available stas/group objects
-func (*StasGroup) GetPath() string { return "/api/objects/stas/group/" }
+func (*StasGroups) GetPath() string { return "/api/objects/stas/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*StasGroup) RefRequired() (string, bool) { return "", false }
+func (*StasGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the StasGroups GET path
+// Returns all available group types
+func (s *StasGroup) GetPath() string { return fmt.Sprintf("/api/objects/stas/group/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *StasGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the StasGroup DELETE path
 // Creates or updates the complete object group

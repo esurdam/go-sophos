@@ -54,17 +54,35 @@ func (Awscli) References() []string {
 	}
 }
 
-// AwscliGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AwscliGroup []interface{}
+// AwscliGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AwscliGroups []AwscliGroup
 
-var _ sophos.RestObject = &AwscliGroup{}
+// AwscliGroup represents a UTM awscli->group
+type AwscliGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AwscliGroup GET path
+var _ sophos.RestGetter = &AwscliGroup{}
+
+// GetPath implements sophos.RestObject and returns the AwscliGroups GET path
 // Returns all available awscli/group objects
-func (*AwscliGroup) GetPath() string { return "/api/objects/awscli/group/" }
+func (*AwscliGroups) GetPath() string { return "/api/objects/awscli/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*AwscliGroup) RefRequired() (string, bool) { return "", false }
+func (*AwscliGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AwscliGroups GET path
+// Returns all available group types
+func (a *AwscliGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/awscli/group/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AwscliGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AwscliGroup DELETE path
 // Creates or updates the complete object group
@@ -96,17 +114,50 @@ func (*AwscliGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awscli/group/%s/usedby", ref)
 }
 
-// AwscliProfile is an Sophos Endpoint subType and implements sophos.RestObject
-type AwscliProfile []interface{}
+// AwscliProfiles is an Sophos Endpoint subType and implements sophos.RestObject
+type AwscliProfiles []AwscliProfile
 
-var _ sophos.RestObject = &AwscliProfile{}
+// AwscliProfile represents a UTM AWS CLI Profile
+type AwscliProfile struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// AwsSessionToken default value is ""
+	AwsSessionToken string `json:"aws_session_token"`
+	Comment         string `json:"comment"`
+	Name            string `json:"name"`
+	// Output can be one of: []string{"json", "text", "table"}
+	// Output default value is "json"
+	Output string `json:"output"`
+	// ProfileName description: (REGEX)
+	// ProfileName default value is "default"
+	ProfileName string `json:"profile_name"`
+	// Region description: REF(aws/region)
+	Region string `json:"region"`
+	// AwsAccessKeyId description: (REGEX)
+	// AwsAccessKeyId default value is ""
+	AwsAccessKeyId string `json:"aws_access_key_id"`
+	// AwsSecretAccessKey default value is ""
+	AwsSecretAccessKey string `json:"aws_secret_access_key"`
+}
 
-// GetPath implements sophos.RestObject and returns the AwscliProfile GET path
+var _ sophos.RestGetter = &AwscliProfile{}
+
+// GetPath implements sophos.RestObject and returns the AwscliProfiles GET path
 // Returns all available awscli/profile objects
-func (*AwscliProfile) GetPath() string { return "/api/objects/awscli/profile/" }
+func (*AwscliProfiles) GetPath() string { return "/api/objects/awscli/profile/" }
 
 // RefRequired implements sophos.RestObject
-func (*AwscliProfile) RefRequired() (string, bool) { return "", false }
+func (*AwscliProfiles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AwscliProfiles GET path
+// Returns all available profile types
+func (a *AwscliProfile) GetPath() string {
+	return fmt.Sprintf("/api/objects/awscli/profile/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AwscliProfile) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AwscliProfile DELETE path
 // Creates or updates the complete object profile

@@ -61,19 +61,37 @@ func (AweNetworkDeviceAssociation) References() []string {
 	}
 }
 
-// AweNetworkDeviceAssociationGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AweNetworkDeviceAssociationGroup []interface{}
+// AweNetworkDeviceAssociationGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AweNetworkDeviceAssociationGroups []AweNetworkDeviceAssociationGroup
 
-var _ sophos.RestObject = &AweNetworkDeviceAssociationGroup{}
+// AweNetworkDeviceAssociationGroup represents a UTM group
+type AweNetworkDeviceAssociationGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationGroup GET path
+var _ sophos.RestGetter = &AweNetworkDeviceAssociationGroup{}
+
+// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationGroups GET path
 // Returns all available awe_network_device_association/group objects
-func (*AweNetworkDeviceAssociationGroup) GetPath() string {
+func (*AweNetworkDeviceAssociationGroups) GetPath() string {
 	return "/api/objects/awe_network_device_association/group/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*AweNetworkDeviceAssociationGroup) RefRequired() (string, bool) { return "", false }
+func (*AweNetworkDeviceAssociationGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationGroups GET path
+// Returns all available group types
+func (a *AweNetworkDeviceAssociationGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AweNetworkDeviceAssociationGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweNetworkDeviceAssociationGroup DELETE path
 // Creates or updates the complete object group
@@ -105,19 +123,44 @@ func (*AweNetworkDeviceAssociationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe_network_device_association/group/%s/usedby", ref)
 }
 
-// AweNetworkDeviceAssociationMeshRole is an Sophos Endpoint subType and implements sophos.RestObject
-type AweNetworkDeviceAssociationMeshRole []interface{}
+// AweNetworkDeviceAssociationMeshRoles is an Sophos Endpoint subType and implements sophos.RestObject
+type AweNetworkDeviceAssociationMeshRoles []AweNetworkDeviceAssociationMeshRole
 
-var _ sophos.RestObject = &AweNetworkDeviceAssociationMeshRole{}
+// AweNetworkDeviceAssociationMeshRole represents a UTM assign device to mesh network
+type AweNetworkDeviceAssociationMeshRole struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Device description: REF(awe/device)
+	Device string `json:"device"`
+	// Mesh description: REF(itfhw/awe_network)
+	Mesh string `json:"mesh"`
+	Name string `json:"name"`
+	// Role can be one of: []string{"point", "portal"}
+	// Role default value is "portal"
+	Role string `json:"role"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationMeshRole GET path
+var _ sophos.RestGetter = &AweNetworkDeviceAssociationMeshRole{}
+
+// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationMeshRoles GET path
 // Returns all available awe_network_device_association/mesh_role objects
-func (*AweNetworkDeviceAssociationMeshRole) GetPath() string {
+func (*AweNetworkDeviceAssociationMeshRoles) GetPath() string {
 	return "/api/objects/awe_network_device_association/mesh_role/"
 }
 
 // RefRequired implements sophos.RestObject
-func (*AweNetworkDeviceAssociationMeshRole) RefRequired() (string, bool) { return "", false }
+func (*AweNetworkDeviceAssociationMeshRoles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweNetworkDeviceAssociationMeshRoles GET path
+// Returns all available mesh_role types
+func (a *AweNetworkDeviceAssociationMeshRole) GetPath() string {
+	return fmt.Sprintf("/api/objects/awe_network_device_association/mesh_role/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AweNetworkDeviceAssociationMeshRole) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweNetworkDeviceAssociationMeshRole DELETE path
 // Creates or updates the complete object mesh_role

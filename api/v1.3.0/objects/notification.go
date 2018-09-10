@@ -55,17 +55,35 @@ func (Notification) References() []string {
 	}
 }
 
-// NotificationGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NotificationGroup []interface{}
+// NotificationGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type NotificationGroups []NotificationGroup
 
-var _ sophos.RestObject = &NotificationGroup{}
+// NotificationGroup represents a UTM group
+type NotificationGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the NotificationGroup GET path
+var _ sophos.RestGetter = &NotificationGroup{}
+
+// GetPath implements sophos.RestObject and returns the NotificationGroups GET path
 // Returns all available notification/group objects
-func (*NotificationGroup) GetPath() string { return "/api/objects/notification/group/" }
+func (*NotificationGroups) GetPath() string { return "/api/objects/notification/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*NotificationGroup) RefRequired() (string, bool) { return "", false }
+func (*NotificationGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NotificationGroups GET path
+// Returns all available group types
+func (n *NotificationGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/notification/group/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NotificationGroup) RefRequired() (string, bool) { return n.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the NotificationGroup DELETE path
 // Creates or updates the complete object group
@@ -97,17 +115,40 @@ func (*NotificationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/notification/group/%s/usedby", ref)
 }
 
-// NotificationNotification is an Sophos Endpoint subType and implements sophos.RestObject
-type NotificationNotification []interface{}
+// NotificationNotifications is an Sophos Endpoint subType and implements sophos.RestObject
+type NotificationNotifications []NotificationNotification
 
-var _ sophos.RestObject = &NotificationNotification{}
+// NotificationNotification represents a UTM notification
+type NotificationNotification struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Id        string `json:"id"`
+	Name      string `json:"name"`
+	// Snmp default value is false
+	Snmp    bool   `json:"snmp"`
+	Comment string `json:"comment"`
+	// Email default value is false
+	Email bool `json:"email"`
+}
 
-// GetPath implements sophos.RestObject and returns the NotificationNotification GET path
+var _ sophos.RestGetter = &NotificationNotification{}
+
+// GetPath implements sophos.RestObject and returns the NotificationNotifications GET path
 // Returns all available notification/notification objects
-func (*NotificationNotification) GetPath() string { return "/api/objects/notification/notification/" }
+func (*NotificationNotifications) GetPath() string { return "/api/objects/notification/notification/" }
 
 // RefRequired implements sophos.RestObject
-func (*NotificationNotification) RefRequired() (string, bool) { return "", false }
+func (*NotificationNotifications) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NotificationNotifications GET path
+// Returns all available notification types
+func (n *NotificationNotification) GetPath() string {
+	return fmt.Sprintf("/api/objects/notification/notification/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NotificationNotification) RefRequired() (string, bool) { return n.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the NotificationNotification DELETE path
 // Creates or updates the complete object notification

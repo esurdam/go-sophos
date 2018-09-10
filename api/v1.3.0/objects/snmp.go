@@ -67,17 +67,33 @@ func (Snmp) References() []string {
 	}
 }
 
-// SnmpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SnmpGroup []interface{}
+// SnmpGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type SnmpGroups []SnmpGroup
 
-var _ sophos.RestObject = &SnmpGroup{}
+// SnmpGroup represents a UTM group
+type SnmpGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the SnmpGroup GET path
+var _ sophos.RestGetter = &SnmpGroup{}
+
+// GetPath implements sophos.RestObject and returns the SnmpGroups GET path
 // Returns all available snmp/group objects
-func (*SnmpGroup) GetPath() string { return "/api/objects/snmp/group/" }
+func (*SnmpGroups) GetPath() string { return "/api/objects/snmp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*SnmpGroup) RefRequired() (string, bool) { return "", false }
+func (*SnmpGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SnmpGroups GET path
+// Returns all available group types
+func (s *SnmpGroup) GetPath() string { return fmt.Sprintf("/api/objects/snmp/group/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *SnmpGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SnmpGroup DELETE path
 // Creates or updates the complete object group
@@ -109,17 +125,60 @@ func (*SnmpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/snmp/group/%s/usedby", ref)
 }
 
-// SnmpTrap is an Sophos Endpoint subType and implements sophos.RestObject
-type SnmpTrap []interface{}
+// SnmpTraps is an Sophos Endpoint subType and implements sophos.RestObject
+type SnmpTraps []SnmpTrap
 
-var _ sophos.RestObject = &SnmpTrap{}
+// SnmpTrap represents a UTM SNMP trap
+type SnmpTrap struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// AuthPassword description: (SNMPSTRING)
+	// AuthPassword default value is ""
+	AuthPassword string `json:"auth_password"`
+	// EncryptType can be one of: []string{"None", "DES", "AES"}
+	// EncryptType default value is "None"
+	EncryptType string `json:"encrypt_type"`
+	// Engineid default value is ""
+	Engineid string `json:"engineid"`
+	// Host description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Host string `json:"host"`
+	Name string `json:"name"`
+	// Version can be one of: []string{"v2c", "v3"}
+	// Version default value is "v2c"
+	Version string `json:"version"`
+	// AuthType can be one of: []string{"MD5", "SHA"}
+	// AuthType default value is "MD5"
+	AuthType string `json:"auth_type"`
+	Comment  string `json:"comment"`
+	// Community description: (SNMPSTRING)
+	// Community default value is "public"
+	Community string `json:"community"`
+	// EncryptPassword description: (SNMPSTRING)
+	// EncryptPassword default value is ""
+	EncryptPassword string `json:"encrypt_password"`
+	// Status default value is true
+	Status bool `json:"status"`
+	// Username description: (SNMPSTRING)
+	// Username default value is ""
+	Username string `json:"username"`
+}
 
-// GetPath implements sophos.RestObject and returns the SnmpTrap GET path
+var _ sophos.RestGetter = &SnmpTrap{}
+
+// GetPath implements sophos.RestObject and returns the SnmpTraps GET path
 // Returns all available snmp/trap objects
-func (*SnmpTrap) GetPath() string { return "/api/objects/snmp/trap/" }
+func (*SnmpTraps) GetPath() string { return "/api/objects/snmp/trap/" }
 
 // RefRequired implements sophos.RestObject
-func (*SnmpTrap) RefRequired() (string, bool) { return "", false }
+func (*SnmpTraps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SnmpTraps GET path
+// Returns all available trap types
+func (s *SnmpTrap) GetPath() string { return fmt.Sprintf("/api/objects/snmp/trap/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *SnmpTrap) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SnmpTrap DELETE path
 // Creates or updates the complete object trap

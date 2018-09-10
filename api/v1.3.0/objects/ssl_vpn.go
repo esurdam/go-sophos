@@ -170,17 +170,35 @@ func (*SslVpnClientConnection) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (s *SslVpnClientConnection) GetType() string { return s._type }
 
-// SslVpnGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SslVpnGroup []interface{}
+// SslVpnGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type SslVpnGroups []SslVpnGroup
 
-var _ sophos.RestObject = &SslVpnGroup{}
+// SslVpnGroup represents a UTM group
+type SslVpnGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the SslVpnGroup GET path
+var _ sophos.RestGetter = &SslVpnGroup{}
+
+// GetPath implements sophos.RestObject and returns the SslVpnGroups GET path
 // Returns all available ssl_vpn/group objects
-func (*SslVpnGroup) GetPath() string { return "/api/objects/ssl_vpn/group/" }
+func (*SslVpnGroups) GetPath() string { return "/api/objects/ssl_vpn/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*SslVpnGroup) RefRequired() (string, bool) { return "", false }
+func (*SslVpnGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SslVpnGroups GET path
+// Returns all available group types
+func (s *SslVpnGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/group/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SslVpnGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SslVpnGroup DELETE path
 // Creates or updates the complete object group
@@ -282,17 +300,58 @@ func (*SslVpnRemoteAccessProfile) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
 
-// SslVpnServerConnection is an Sophos Endpoint subType and implements sophos.RestObject
-type SslVpnServerConnection []interface{}
+// SslVpnServerConnections is an Sophos Endpoint subType and implements sophos.RestObject
+type SslVpnServerConnections []SslVpnServerConnection
 
-var _ sophos.RestObject = &SslVpnServerConnection{}
+// SslVpnServerConnection represents a UTM SSL VPN site-to-site server connection
+type SslVpnServerConnection struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut     string        `json:"auto_pf_out"`
+	Comment       string        `json:"comment"`
+	LocalNetworks []interface{} `json:"local_networks"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// StaticIpStatus default value is false
+	StaticIpStatus bool `json:"static_ip_status"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+	// AutoPfrule default value is false
+	AutoPfrule bool   `json:"auto_pfrule"`
+	Name       string `json:"name"`
+	// Peer description: REF(aaa/user)
+	// Peer default value is ""
+	Peer           string        `json:"peer"`
+	RemoteNetworks []interface{} `json:"remote_networks"`
+	// StaticIp description: (IPADDR)
+	// StaticIp default value is "0.0.0.0"
+	StaticIp string `json:"static_ip"`
+	// StaticIp6 description: (IP6ADDR)
+	// StaticIp6 default value is "::"
+	StaticIp6 string `json:"static_ip6"`
+}
 
-// GetPath implements sophos.RestObject and returns the SslVpnServerConnection GET path
+var _ sophos.RestGetter = &SslVpnServerConnection{}
+
+// GetPath implements sophos.RestObject and returns the SslVpnServerConnections GET path
 // Returns all available ssl_vpn/server_connection objects
-func (*SslVpnServerConnection) GetPath() string { return "/api/objects/ssl_vpn/server_connection/" }
+func (*SslVpnServerConnections) GetPath() string { return "/api/objects/ssl_vpn/server_connection/" }
 
 // RefRequired implements sophos.RestObject
-func (*SslVpnServerConnection) RefRequired() (string, bool) { return "", false }
+func (*SslVpnServerConnections) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SslVpnServerConnections GET path
+// Returns all available server_connection types
+func (s *SslVpnServerConnection) GetPath() string {
+	return fmt.Sprintf("/api/objects/ssl_vpn/server_connection/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SslVpnServerConnection) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SslVpnServerConnection DELETE path
 // Creates or updates the complete object server_connection

@@ -55,17 +55,35 @@ func (UserPreferences) References() []string {
 	}
 }
 
-// UserPreferencesGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type UserPreferencesGroup []interface{}
+// UserPreferencesGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type UserPreferencesGroups []UserPreferencesGroup
 
-var _ sophos.RestObject = &UserPreferencesGroup{}
+// UserPreferencesGroup represents a UTM group
+type UserPreferencesGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the UserPreferencesGroup GET path
+var _ sophos.RestGetter = &UserPreferencesGroup{}
+
+// GetPath implements sophos.RestObject and returns the UserPreferencesGroups GET path
 // Returns all available user_preferences/group objects
-func (*UserPreferencesGroup) GetPath() string { return "/api/objects/user_preferences/group/" }
+func (*UserPreferencesGroups) GetPath() string { return "/api/objects/user_preferences/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*UserPreferencesGroup) RefRequired() (string, bool) { return "", false }
+func (*UserPreferencesGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the UserPreferencesGroups GET path
+// Returns all available group types
+func (u *UserPreferencesGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/user_preferences/group/%s", u.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (u *UserPreferencesGroup) RefRequired() (string, bool) { return u.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the UserPreferencesGroup DELETE path
 // Creates or updates the complete object group

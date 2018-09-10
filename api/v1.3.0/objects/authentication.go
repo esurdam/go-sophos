@@ -85,17 +85,57 @@ func (Authentication) References() []string {
 	}
 }
 
-// AuthenticationAdirectory is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationAdirectory []interface{}
+// AuthenticationAdirectorys is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationAdirectorys []AuthenticationAdirectory
 
-var _ sophos.RestObject = &AuthenticationAdirectory{}
+// AuthenticationAdirectory represents a UTM Microsoft Active Directory server
+type AuthenticationAdirectory struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
+	// BaseDn default value is ""
+	BaseDn           string        `json:"base_dn"`
+	PrefetchContexts []interface{} `json:"prefetch_contexts"`
+	PrefetchInterval []interface{} `json:"prefetch_interval"`
+	Timeout          int           `json:"timeout"`
+	// BindDn default value is ""
+	BindDn  string `json:"bind_dn"`
+	Comment string `json:"comment"`
+	// Sasl default value is false
+	Sasl bool `json:"sasl"`
+	// Ssl default value is false
+	Ssl bool `json:"ssl"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// BindPw default value is ""
+	BindPw string `json:"bind_pw"`
+	Name   string `json:"name"`
+	Port   int    `json:"port"`
+	// PrefetchBackendSync default value is false
+	PrefetchBackendSync bool `json:"prefetch_backend_sync"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationAdirectory GET path
+var _ sophos.RestGetter = &AuthenticationAdirectory{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationAdirectorys GET path
 // Returns all available authentication/adirectory objects
-func (*AuthenticationAdirectory) GetPath() string { return "/api/objects/authentication/adirectory/" }
+func (*AuthenticationAdirectorys) GetPath() string { return "/api/objects/authentication/adirectory/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationAdirectory) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationAdirectorys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationAdirectorys GET path
+// Returns all available adirectory types
+func (a *AuthenticationAdirectory) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/adirectory/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationAdirectory) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationAdirectory DELETE path
 // Creates or updates the complete object adirectory
@@ -127,17 +167,56 @@ func (*AuthenticationAdirectory) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/adirectory/%s/usedby", ref)
 }
 
-// AuthenticationEdirectory is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationEdirectory []interface{}
+// AuthenticationEdirectorys is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationEdirectorys []AuthenticationEdirectory
 
-var _ sophos.RestObject = &AuthenticationEdirectory{}
+// AuthenticationEdirectory represents a UTM Novell eDirectory server
+type AuthenticationEdirectory struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Contexts  []interface{} `json:"contexts"`
+	// PrefetchBackendSync default value is false
+	PrefetchBackendSync bool          `json:"prefetch_backend_sync"`
+	PrefetchContexts    []interface{} `json:"prefetch_contexts"`
+	PrefetchInterval    []interface{} `json:"prefetch_interval"`
+	// Sasl default value is false
+	Sasl bool `json:"sasl"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
+	// Ssl default value is true
+	Ssl bool `json:"ssl"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
+	// BindDn default value is ""
+	BindDn string `json:"bind_dn"`
+	// BindPw default value is ""
+	BindPw  string `json:"bind_pw"`
+	Comment string `json:"comment"`
+	Port    int    `json:"port"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Name    string `json:"name"`
+	Timeout int    `json:"timeout"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationEdirectory GET path
+var _ sophos.RestGetter = &AuthenticationEdirectory{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationEdirectorys GET path
 // Returns all available authentication/edirectory objects
-func (*AuthenticationEdirectory) GetPath() string { return "/api/objects/authentication/edirectory/" }
+func (*AuthenticationEdirectorys) GetPath() string { return "/api/objects/authentication/edirectory/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationEdirectory) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationEdirectorys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationEdirectorys GET path
+// Returns all available edirectory types
+func (a *AuthenticationEdirectory) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/edirectory/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationEdirectory) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationEdirectory DELETE path
 // Creates or updates the complete object edirectory
@@ -169,17 +248,35 @@ func (*AuthenticationEdirectory) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/edirectory/%s/usedby", ref)
 }
 
-// AuthenticationGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationGroup []interface{}
+// AuthenticationGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationGroups []AuthenticationGroup
 
-var _ sophos.RestObject = &AuthenticationGroup{}
+// AuthenticationGroup represents a UTM group
+type AuthenticationGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationGroup GET path
+var _ sophos.RestGetter = &AuthenticationGroup{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationGroups GET path
 // Returns all available authentication/group objects
-func (*AuthenticationGroup) GetPath() string { return "/api/objects/authentication/group/" }
+func (*AuthenticationGroups) GetPath() string { return "/api/objects/authentication/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationGroup) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationGroups GET path
+// Returns all available group types
+func (a *AuthenticationGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/group/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationGroup DELETE path
 // Creates or updates the complete object group
@@ -211,17 +308,62 @@ func (*AuthenticationGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/group/%s/usedby", ref)
 }
 
-// AuthenticationLdap is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationLdap []interface{}
+// AuthenticationLdaps is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationLdaps []AuthenticationLdap
 
-var _ sophos.RestObject = &AuthenticationLdap{}
+// AuthenticationLdap represents a UTM LDAP server
+type AuthenticationLdap struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// UserAttrib can be one of: []string{"cn", "sn", "uid", "custom"}
+	// UserAttrib default value is "cn"
+	UserAttrib string `json:"user_attrib"`
+	// UserAttribCustom default value is ""
+	UserAttribCustom string `json:"user_attrib_custom"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
+	// BindPw default value is ""
+	BindPw           string        `json:"bind_pw"`
+	Comment          string        `json:"comment"`
+	PrefetchContexts []interface{} `json:"prefetch_contexts"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server  string `json:"server"`
+	Timeout int    `json:"timeout"`
+	// BaseDn default value is ""
+	BaseDn string `json:"base_dn"`
+	// BindDn default value is ""
+	BindDn string `json:"bind_dn"`
+	// PrefetchBackendSync default value is false
+	PrefetchBackendSync bool          `json:"prefetch_backend_sync"`
+	PrefetchInterval    []interface{} `json:"prefetch_interval"`
+	Name                string        `json:"name"`
+	Port                int           `json:"port"`
+	// Sasl default value is false
+	Sasl bool `json:"sasl"`
+	// Ssl default value is false
+	Ssl bool `json:"ssl"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationLdap GET path
+var _ sophos.RestGetter = &AuthenticationLdap{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationLdaps GET path
 // Returns all available authentication/ldap objects
-func (*AuthenticationLdap) GetPath() string { return "/api/objects/authentication/ldap/" }
+func (*AuthenticationLdaps) GetPath() string { return "/api/objects/authentication/ldap/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationLdap) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationLdaps) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationLdaps GET path
+// Returns all available ldap types
+func (a *AuthenticationLdap) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/ldap/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationLdap) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationLdap DELETE path
 // Creates or updates the complete object ldap
@@ -253,17 +395,53 @@ func (*AuthenticationLdap) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/ldap/%s/usedby", ref)
 }
 
-// AuthenticationOtpToken is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationOtpToken []interface{}
+// AuthenticationOtpTokens is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationOtpTokens []AuthenticationOtpToken
 
-var _ sophos.RestObject = &AuthenticationOtpToken{}
+// AuthenticationOtpToken represents a UTM One Time Password token
+type AuthenticationOtpToken struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Digest can be one of: []string{"sha1", "sha256", "sha512"}
+	// Digest default value is "sha1"
+	Digest     string        `json:"digest"`
+	ExtraCodes []interface{} `json:"extra_codes"`
+	// ForSsh default value is false
+	ForSsh  bool   `json:"for_ssh"`
+	Lastuse int    `json:"lastuse"`
+	Name    string `json:"name"`
+	// Timestep description: Constraints: 0, 10-120
+	Timestep int `json:"timestep"`
+	// User description: REF(aaa/user)
+	// User default value is ""
+	User    string `json:"user"`
+	Comment string `json:"comment"`
+	// Hide default value is false
+	Hide   bool   `json:"hide"`
+	Offset int    `json:"offset"`
+	Secret string `json:"secret"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationOtpToken GET path
+var _ sophos.RestGetter = &AuthenticationOtpToken{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationOtpTokens GET path
 // Returns all available authentication/otp_token objects
-func (*AuthenticationOtpToken) GetPath() string { return "/api/objects/authentication/otp_token/" }
+func (*AuthenticationOtpTokens) GetPath() string { return "/api/objects/authentication/otp_token/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationOtpToken) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationOtpTokens) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationOtpTokens GET path
+// Returns all available otp_token types
+func (a *AuthenticationOtpToken) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/otp_token/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationOtpToken) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationOtpToken DELETE path
 // Creates or updates the complete object otp_token
@@ -295,17 +473,45 @@ func (*AuthenticationOtpToken) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/otp_token/%s/usedby", ref)
 }
 
-// AuthenticationRadius is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationRadius []interface{}
+// AuthenticationRadiuss is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationRadiuss []AuthenticationRadius
 
-var _ sophos.RestObject = &AuthenticationRadius{}
+// AuthenticationRadius represents a UTM RADIUS server
+type AuthenticationRadius struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Port      int    `json:"port"`
+	// Secret default value is ""
+	Secret string `json:"secret"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
+	// Status default value is false
+	Status  bool `json:"status"`
+	Timeout int  `json:"timeout"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationRadius GET path
+var _ sophos.RestGetter = &AuthenticationRadius{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationRadiuss GET path
 // Returns all available authentication/radius objects
-func (*AuthenticationRadius) GetPath() string { return "/api/objects/authentication/radius/" }
+func (*AuthenticationRadiuss) GetPath() string { return "/api/objects/authentication/radius/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationRadius) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationRadiuss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationRadiuss GET path
+// Returns all available radius types
+func (a *AuthenticationRadius) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/radius/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationRadius) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationRadius DELETE path
 // Creates or updates the complete object radius
@@ -337,17 +543,45 @@ func (*AuthenticationRadius) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/authentication/radius/%s/usedby", ref)
 }
 
-// AuthenticationTacacs is an Sophos Endpoint subType and implements sophos.RestObject
-type AuthenticationTacacs []interface{}
+// AuthenticationTacacss is an Sophos Endpoint subType and implements sophos.RestObject
+type AuthenticationTacacss []AuthenticationTacacs
 
-var _ sophos.RestObject = &AuthenticationTacacs{}
+// AuthenticationTacacs represents a UTM TACACS+ server
+type AuthenticationTacacs struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Port      int    `json:"port"`
+	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Server string `json:"server"`
+	// Status default value is false
+	Status  bool `json:"status"`
+	Timeout int  `json:"timeout"`
+	// Backend default value is ""
+	Backend string `json:"backend"`
+	Comment string `json:"comment"`
+	// Key default value is ""
+	Key  string `json:"key"`
+	Name string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AuthenticationTacacs GET path
+var _ sophos.RestGetter = &AuthenticationTacacs{}
+
+// GetPath implements sophos.RestObject and returns the AuthenticationTacacss GET path
 // Returns all available authentication/tacacs objects
-func (*AuthenticationTacacs) GetPath() string { return "/api/objects/authentication/tacacs/" }
+func (*AuthenticationTacacss) GetPath() string { return "/api/objects/authentication/tacacs/" }
 
 // RefRequired implements sophos.RestObject
-func (*AuthenticationTacacs) RefRequired() (string, bool) { return "", false }
+func (*AuthenticationTacacss) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AuthenticationTacacss GET path
+// Returns all available tacacs types
+func (a *AuthenticationTacacs) GetPath() string {
+	return fmt.Sprintf("/api/objects/authentication/tacacs/%s", a.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (a *AuthenticationTacacs) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AuthenticationTacacs DELETE path
 // Creates or updates the complete object tacacs

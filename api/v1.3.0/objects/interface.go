@@ -97,17 +97,73 @@ func (Interface) References() []string {
 	}
 }
 
-// InterfaceBridge is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceBridge []interface{}
+// InterfaceBridges is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceBridges []InterfaceBridge
 
-var _ sophos.RestObject = &InterfaceBridge{}
+// InterfaceBridge represents a UTM bridge
+type InterfaceBridge struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Proxyndp default value is false
+	Proxyndp  bool `json:"proxyndp"`
+	StpMaxage int  `json:"stp_maxage"`
+	// UseDhcpv6 default value is false
+	UseDhcpv6 bool `json:"use_dhcpv6"`
+	// VirtualMac description: (MACADDR)
+	// VirtualMac default value is "00:00:00:00:00:00"
+	VirtualMac string `json:"virtual_mac"`
+	// Itfhw description: REF(itfhw/bridge)
+	Itfhw string `json:"itfhw"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
+	Name             string `json:"name"`
+	// Proxyarp default value is false
+	Proxyarp bool   `json:"proxyarp"`
+	StpHello int    `json:"stp_hello"`
+	StpPrio  int    `json:"stp_prio"`
+	Comment  string `json:"comment"`
+	// ArpBcast default value is false
+	ArpBcast bool `json:"arp_bcast"`
+	// ConvertedFromHw description: REF(itfhw/*)
+	// ConvertedFromHw default value is ""
+	ConvertedFromHw string `json:"converted_from_hw"`
+	// Link default value is true
+	Link  bool `json:"link"`
+	StpFd int  `json:"stp_fd"`
+	// UseDhcp default value is false
+	UseDhcp             bool          `json:"use_dhcp"`
+	Ageing              int           `json:"ageing"`
+	ForwardedEthertypes []interface{} `json:"forwarded_ethertypes"`
+	Mtu                 int           `json:"mtu"`
+	Ports               []interface{} `json:"ports"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// StpStatus default value is false
+	StpStatus           bool          `json:"stp_status"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfaceBridge GET path
+var _ sophos.RestGetter = &InterfaceBridge{}
+
+// GetPath implements sophos.RestObject and returns the InterfaceBridges GET path
 // Returns all available interface/bridge objects
-func (*InterfaceBridge) GetPath() string { return "/api/objects/interface/bridge/" }
+func (*InterfaceBridges) GetPath() string { return "/api/objects/interface/bridge/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfaceBridge) RefRequired() (string, bool) { return "", false }
+func (*InterfaceBridges) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfaceBridges GET path
+// Returns all available bridge types
+func (i *InterfaceBridge) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/bridge/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfaceBridge) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfaceBridge DELETE path
 // Creates or updates the complete object bridge
@@ -280,17 +336,78 @@ func (*InterfaceGroup) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *InterfaceGroup) GetType() string { return i._type }
 
-// InterfacePpp3G is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePpp3G []interface{}
+// InterfacePpp3Gs is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePpp3Gs []InterfacePpp3G
 
-var _ sophos.RestObject = &InterfacePpp3G{}
+// InterfacePpp3G represents a UTM ppp3g
+type InterfacePpp3G struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Signal    int    `json:"signal"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+	Comment       string `json:"comment"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// Itfhw description: REF(itfhw/usbserial)
+	Itfhw string `json:"itfhw"`
+	Mtu   int    `json:"mtu"`
+	// Pin default value is ""
+	Pin string `json:"pin"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+	Inbandwidth    int    `json:"inbandwidth"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
+	Name             string `json:"name"`
+	// ResetString default value is "ATZ"
+	ResetString  string `json:"reset_string"`
+	Outbandwidth int    `json:"outbandwidth"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// Apn default value is "unknown"
+	Apn string `json:"apn"`
+	// ApnAuto default value is true
+	ApnAuto   bool `json:"apn_auto"`
+	Bandwidth int  `json:"bandwidth"`
+	// DialString default value is "*99#"
+	DialString string `json:"dial_string"`
+	// InitString default value is "ATZ"
+	InitString string `json:"init_string"`
+	// Link default value is true
+	Link     bool   `json:"link"`
+	Username string `json:"username"`
+	// IdleTime default value is ""
+	IdleTime string `json:"idle_time"`
+	// MobileNetwork can be one of: []string{"gsm", "cdma", "lte"}
+	// MobileNetwork default value is "gsm"
+	MobileNetwork string `json:"mobile_network"`
+	// Multilink default value is false
+	Multilink bool `json:"multilink"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfacePpp3G GET path
+var _ sophos.RestGetter = &InterfacePpp3G{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePpp3Gs GET path
 // Returns all available interface/ppp3g objects
-func (*InterfacePpp3G) GetPath() string { return "/api/objects/interface/ppp3g/" }
+func (*InterfacePpp3Gs) GetPath() string { return "/api/objects/interface/ppp3g/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfacePpp3G) RefRequired() (string, bool) { return "", false }
+func (*InterfacePpp3Gs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfacePpp3Gs GET path
+// Returns all available ppp3g types
+func (i *InterfacePpp3G) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/ppp3g/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfacePpp3G) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfacePpp3G DELETE path
 // Creates or updates the complete object ppp3g
@@ -322,17 +439,74 @@ func (*InterfacePpp3G) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/ppp3g/%s/usedby", ref)
 }
 
-// InterfacePppmodem is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppmodem []interface{}
+// InterfacePppmodems is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppmodems []InterfacePppmodem
 
-var _ sophos.RestObject = &InterfacePppmodem{}
+// InterfacePppmodem represents a UTM PPP modem interface
+type InterfacePppmodem struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// IdleTime default value is ""
+	IdleTime string `json:"idle_time"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+	// Link default value is true
+	Link bool `json:"link"`
+	Mtu  int  `json:"mtu"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool `json:"mtu_auto_discovery"`
+	Bandwidth        int  `json:"bandwidth"`
+	// FlowControl can be one of: []string{"hardware", "software"}
+	// FlowControl default value is "hardware"
+	FlowControl string `json:"flow_control"`
+	Inbandwidth int    `json:"inbandwidth"`
+	// InitString default value is "ATZ"
+	InitString string `json:"init_string"`
+	// LineSpeed can be one of: []string{"9600", "14400", "19200", "26400", "31200", "38400", "57600", "115200", "230400"}
+	// LineSpeed default value is "115200"
+	LineSpeed string `json:"line_speed"`
+	Name      string `json:"name"`
+	// ResetString default value is "ATZ"
+	ResetString string `json:"reset_string"`
+	// Status default value is false
+	Status   bool   `json:"status"`
+	Username string `json:"username"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// DialString default value is ""
+	DialString string `json:"dial_string"`
+	// Itfhw description: REF(itfhw/serial)
+	Itfhw string `json:"itfhw"`
+	// Multilink default value is false
+	Multilink    bool   `json:"multilink"`
+	Outbandwidth int    `json:"outbandwidth"`
+	Comment      string `json:"comment"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfacePppmodem GET path
+var _ sophos.RestGetter = &InterfacePppmodem{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppmodems GET path
 // Returns all available interface/pppmodem objects
-func (*InterfacePppmodem) GetPath() string { return "/api/objects/interface/pppmodem/" }
+func (*InterfacePppmodems) GetPath() string { return "/api/objects/interface/pppmodem/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfacePppmodem) RefRequired() (string, bool) { return "", false }
+func (*InterfacePppmodems) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfacePppmodems GET path
+// Returns all available pppmodem types
+func (i *InterfacePppmodem) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/pppmodem/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfacePppmodem) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfacePppmodem DELETE path
 // Creates or updates the complete object pppmodem
@@ -364,17 +538,72 @@ func (*InterfacePppmodem) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppmodem/%s/usedby", ref)
 }
 
-// InterfacePppoa is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppoa []interface{}
+// InterfacePppoas is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppoas []InterfacePppoa
 
-var _ sophos.RestObject = &InterfacePppoa{}
+// InterfacePppoa represents a UTM PPPoA/PPTP DSL interface
+type InterfacePppoa struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Custom default value is ""
+	Custom      string `json:"custom"`
+	Inbandwidth int    `json:"inbandwidth"`
+	// Itfhw description: REF(itfhw/ethernet)
+	Itfhw string `json:"itfhw"`
+	// Link default value is true
+	Link bool `json:"link"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool   `json:"mtu_auto_discovery"`
+	Name             string `json:"name"`
+	Username         string `json:"username"`
+	Mtu              int    `json:"mtu"`
+	// PingAddress description: (IPADDR)
+	// PingAddress default value is ""
+	PingAddress string `json:"ping_address"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress   string `json:"primary_address"`
+	ReconnectTimeout int    `json:"reconnect_timeout"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// ModemAddress description: (IPADDR)
+	ModemAddress string `json:"modem_address"`
+	// Multilink default value is false
+	Multilink bool `json:"multilink"`
+	// NicAddress description: (IPADDR)
+	NicAddress string `json:"nic_address"`
+	NicNetmask int    `json:"nic_netmask"`
+	// ReconnectDaily description: (TIME)
+	// ReconnectDaily default value is ""
+	ReconnectDaily string `json:"reconnect_daily"`
+	Bandwidth      int    `json:"bandwidth"`
+	Comment        string `json:"comment"`
+	Outbandwidth   int    `json:"outbandwidth"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfacePppoa GET path
+var _ sophos.RestGetter = &InterfacePppoa{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoas GET path
 // Returns all available interface/pppoa objects
-func (*InterfacePppoa) GetPath() string { return "/api/objects/interface/pppoa/" }
+func (*InterfacePppoas) GetPath() string { return "/api/objects/interface/pppoa/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfacePppoa) RefRequired() (string, bool) { return "", false }
+func (*InterfacePppoas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoas GET path
+// Returns all available pppoa types
+func (i *InterfacePppoa) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/pppoa/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfacePppoa) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfacePppoa DELETE path
 // Creates or updates the complete object pppoa
@@ -406,17 +635,71 @@ func (*InterfacePppoa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoa/%s/usedby", ref)
 }
 
-// InterfacePppoe is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfacePppoe []interface{}
+// InterfacePppoes is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfacePppoes []InterfacePppoe
 
-var _ sophos.RestObject = &InterfacePppoe{}
+// InterfacePppoe represents a UTM PPPoE DSL interface
+type InterfacePppoe struct {
+	Locked              string        `json:"_locked"`
+	Reference           string        `json:"_ref"`
+	_type               string        `json:"_type"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	Mtu                 int           `json:"mtu"`
+	// Multilink default value is false
+	Multilink    bool   `json:"multilink"`
+	Outbandwidth int    `json:"outbandwidth"`
+	Username     string `json:"username"`
+	// Status default value is false
+	Status      bool `json:"status"`
+	Bandwidth   int  `json:"bandwidth"`
+	Inbandwidth int  `json:"inbandwidth"`
+	// Link default value is true
+	Link             bool   `json:"link"`
+	Name             string `json:"name"`
+	ReconnectTimeout int    `json:"reconnect_timeout"`
+	// MultilinkStatus description: (HASH)
+	MultilinkStatus interface{} `json:"multilink_status"`
+	Comment         string      `json:"comment"`
+	// Custom default value is ""
+	Custom string `json:"custom"`
+	// Itfhw description: REF(itfhw/ethernet)
+	Itfhw string `json:"itfhw"`
+	// Macvlan default value is false
+	Macvlan bool `json:"macvlan"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery bool          `json:"mtu_auto_discovery"`
+	Vlantag          int           `json:"vlantag"`
+	ItfhwSlaves      []interface{} `json:"itfhw_slaves"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+	// ReconnectDaily description: (TIME)
+	// ReconnectDaily default value is ""
+	ReconnectDaily string `json:"reconnect_daily"`
+	// VirtualDevice description: (REGEX)
+	// VirtualDevice default value is ""
+	VirtualDevice string `json:"virtual_device"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfacePppoe GET path
+var _ sophos.RestGetter = &InterfacePppoe{}
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoes GET path
 // Returns all available interface/pppoe objects
-func (*InterfacePppoe) GetPath() string { return "/api/objects/interface/pppoe/" }
+func (*InterfacePppoes) GetPath() string { return "/api/objects/interface/pppoe/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfacePppoe) RefRequired() (string, bool) { return "", false }
+func (*InterfacePppoes) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfacePppoes GET path
+// Returns all available pppoe types
+func (i *InterfacePppoe) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/pppoe/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfacePppoe) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfacePppoe DELETE path
 // Creates or updates the complete object pppoe
@@ -448,17 +731,51 @@ func (*InterfacePppoe) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/interface/pppoe/%s/usedby", ref)
 }
 
-// InterfaceTunnel is an Sophos Endpoint subType and implements sophos.RestObject
-type InterfaceTunnel []interface{}
+// InterfaceTunnels is an Sophos Endpoint subType and implements sophos.RestObject
+type InterfaceTunnels []InterfaceTunnel
 
-var _ sophos.RestObject = &InterfaceTunnel{}
+// InterfaceTunnel represents a UTM tunnel interface
+type InterfaceTunnel struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Bandwidth int    `json:"bandwidth"`
+	// Itfhw description: REF(itfhw/virtual)
+	Itfhw string `json:"itfhw"`
+	Mtu   int    `json:"mtu"`
+	// MtuAutoDiscovery default value is false
+	MtuAutoDiscovery    bool          `json:"mtu_auto_discovery"`
+	Outbandwidth        int           `json:"outbandwidth"`
+	AdditionalAddresses []interface{} `json:"additional_addresses"`
+	Comment             string        `json:"comment"`
+	Inbandwidth         int           `json:"inbandwidth"`
+	// Link default value is true
+	Link bool   `json:"link"`
+	Name string `json:"name"`
+	// PrimaryAddress description: REF(itfparams/primary)
+	// PrimaryAddress default value is ""
+	PrimaryAddress string `json:"primary_address"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the InterfaceTunnel GET path
+var _ sophos.RestGetter = &InterfaceTunnel{}
+
+// GetPath implements sophos.RestObject and returns the InterfaceTunnels GET path
 // Returns all available interface/tunnel objects
-func (*InterfaceTunnel) GetPath() string { return "/api/objects/interface/tunnel/" }
+func (*InterfaceTunnels) GetPath() string { return "/api/objects/interface/tunnel/" }
 
 // RefRequired implements sophos.RestObject
-func (*InterfaceTunnel) RefRequired() (string, bool) { return "", false }
+func (*InterfaceTunnels) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the InterfaceTunnels GET path
+// Returns all available tunnel types
+func (i *InterfaceTunnel) GetPath() string {
+	return fmt.Sprintf("/api/objects/interface/tunnel/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *InterfaceTunnel) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the InterfaceTunnel DELETE path
 // Creates or updates the complete object tunnel

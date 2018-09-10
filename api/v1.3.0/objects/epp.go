@@ -120,17 +120,51 @@ func (Epp) References() []string {
 	}
 }
 
-// EppAvException is an Sophos Endpoint subType and implements sophos.RestObject
-type EppAvException []interface{}
+// EppAvExceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type EppAvExceptions []EppAvException
 
-var _ sophos.RestObject = &EppAvException{}
+// EppAvException represents a UTM antivirus exception
+type EppAvException struct {
+	Locked        string `json:"_locked"`
+	Reference     string `json:"_ref"`
+	_type         string `json:"_type"`
+	IpAddressMask int    `json:"ip_address_mask"`
+	Name          string `json:"name"`
+	// Timeline default value is ""
+	Timeline string `json:"timeline"`
+	// Type can be one of: []string{"adware_pua", "scanning_exclusions", "scanning_extensions", "buffer_overflow", "suspicious_files", "suspicious_behaviours", "websites"}
+	// Type default value is "websites"
+	Type string `json:"type"`
+	// Checksum default value is ""
+	Checksum string `json:"checksum"`
+	HipsName string `json:"hips_name"`
+	// IpAddress description: (IPADDR)
+	// IpAddress default value is ""
+	IpAddress       string        `json:"ip_address"`
+	Comment         string        `json:"comment"`
+	EndpointsGroups []interface{} `json:"endpoints_groups"`
+	// WebFormat can be one of: []string{"domain_name", "ip_address", "ip_address_mask"}
+	// WebFormat default value is "domain_name"
+	WebFormat string `json:"web_format"`
+}
 
-// GetPath implements sophos.RestObject and returns the EppAvException GET path
+var _ sophos.RestGetter = &EppAvException{}
+
+// GetPath implements sophos.RestObject and returns the EppAvExceptions GET path
 // Returns all available epp/av_exception objects
-func (*EppAvException) GetPath() string { return "/api/objects/epp/av_exception/" }
+func (*EppAvExceptions) GetPath() string { return "/api/objects/epp/av_exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*EppAvException) RefRequired() (string, bool) { return "", false }
+func (*EppAvExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppAvExceptions GET path
+// Returns all available av_exception types
+func (e *EppAvException) GetPath() string {
+	return fmt.Sprintf("/api/objects/epp/av_exception/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EppAvException) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EppAvException DELETE path
 // Creates or updates the complete object av_exception
@@ -248,17 +282,41 @@ func (*EppAvPolicy) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (e *EppAvPolicy) GetType() string { return e._type }
 
-// EppDcException is an Sophos Endpoint subType and implements sophos.RestObject
-type EppDcException []interface{}
+// EppDcExceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type EppDcExceptions []EppDcException
 
-var _ sophos.RestObject = &EppDcException{}
+// EppDcException represents a UTM device exception
+type EppDcException struct {
+	Locked                       string        `json:"_locked"`
+	Reference                    string        `json:"_ref"`
+	_type                        string        `json:"_type"`
+	AllowedEndpointsGroups       []interface{} `json:"allowed_endpoints_groups"`
+	Comment                      string        `json:"comment"`
+	CustomBlockedEndpointsGroups []interface{} `json:"custom_blocked_endpoints_groups"`
+	DeviceId                     string        `json:"device_id"`
+	// DeviceType can be one of: []string{"floppy_drive", "optical_drive", "removable_storage", "encrypted_storage", "modem", "wireless", "bluetooth", "infrared"}
+	// DeviceType default value is "removable_storage"
+	DeviceType string `json:"device_type"`
+	Name       string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the EppDcException GET path
+var _ sophos.RestGetter = &EppDcException{}
+
+// GetPath implements sophos.RestObject and returns the EppDcExceptions GET path
 // Returns all available epp/dc_exception objects
-func (*EppDcException) GetPath() string { return "/api/objects/epp/dc_exception/" }
+func (*EppDcExceptions) GetPath() string { return "/api/objects/epp/dc_exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*EppDcException) RefRequired() (string, bool) { return "", false }
+func (*EppDcExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppDcExceptions GET path
+// Returns all available dc_exception types
+func (e *EppDcException) GetPath() string {
+	return fmt.Sprintf("/api/objects/epp/dc_exception/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EppDcException) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EppDcException DELETE path
 // Creates or updates the complete object dc_exception
@@ -361,17 +419,48 @@ func (*EppDcPolicy) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (e *EppDcPolicy) GetType() string { return e._type }
 
-// EppDevice is an Sophos Endpoint subType and implements sophos.RestObject
-type EppDevice []interface{}
+// EppDevices is an Sophos Endpoint subType and implements sophos.RestObject
+type EppDevices []EppDevice
 
-var _ sophos.RestObject = &EppDevice{}
+// EppDevice represents a UTM device
+type EppDevice struct {
+	Locked                       string        `json:"_locked"`
+	Reference                    string        `json:"_ref"`
+	_type                        string        `json:"_type"`
+	AllowedEndpointsGroups       []interface{} `json:"allowed_endpoints_groups"`
+	Comment                      string        `json:"comment"`
+	CustomBlockedEndpointsGroups []interface{} `json:"custom_blocked_endpoints_groups"`
+	DeviceId                     string        `json:"device_id"`
+	// InstanceId default value is ""
+	InstanceId string `json:"instance_id"`
+	// LastEndpoint description: REF(epp/endpoint)
+	// LastEndpoint default value is ""
+	LastEndpoint string `json:"last_endpoint"`
+	// ProductName default value is ""
+	ProductName string `json:"product_name"`
+	// DeviceType can be one of: []string{"floppy_drive", "optical_drive", "removable_storage", "encrypted_storage", "modem", "wireless", "bluetooth", "infrared"}
+	// DeviceType default value is "removable_storage"
+	DeviceType string `json:"device_type"`
+	// GenericFlag default value is false
+	GenericFlag bool   `json:"generic_flag"`
+	Name        string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the EppDevice GET path
+var _ sophos.RestGetter = &EppDevice{}
+
+// GetPath implements sophos.RestObject and returns the EppDevices GET path
 // Returns all available epp/device objects
-func (*EppDevice) GetPath() string { return "/api/objects/epp/device/" }
+func (*EppDevices) GetPath() string { return "/api/objects/epp/device/" }
 
 // RefRequired implements sophos.RestObject
-func (*EppDevice) RefRequired() (string, bool) { return "", false }
+func (*EppDevices) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppDevices GET path
+// Returns all available device types
+func (e *EppDevice) GetPath() string { return fmt.Sprintf("/api/objects/epp/device/%s", e.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (e *EppDevice) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EppDevice DELETE path
 // Creates or updates the complete object device
@@ -403,17 +492,52 @@ func (*EppDevice) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/epp/device/%s/usedby", ref)
 }
 
-// EppEndpoint is an Sophos Endpoint subType and implements sophos.RestObject
-type EppEndpoint []interface{}
+// EppEndpoints is an Sophos Endpoint subType and implements sophos.RestObject
+type EppEndpoints []EppEndpoint
 
-var _ sophos.RestObject = &EppEndpoint{}
+// EppEndpoint represents a UTM computer
+type EppEndpoint struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Accepted default value is false
+	Accepted bool `json:"accepted"`
+	// InventoryNumber default value is ""
+	InventoryNumber string `json:"inventory_number"`
+	Name            string `json:"name"`
+	// Os default value is ""
+	Os string `json:"os"`
+	// TamperProtection default value is false
+	TamperProtection bool   `json:"tamper_protection"`
+	Comment          string `json:"comment"`
+	// EndpointType can be one of: []string{"laptop", "desktop", "server"}
+	// EndpointType default value is "desktop"
+	EndpointType string `json:"endpoint_type"`
+	// McsId default value is ""
+	McsId string `json:"mcs_id"`
+	// SavStatus default value is false
+	SavStatus bool `json:"sav_status"`
+	// SavVersion default value is ""
+	SavVersion string `json:"sav_version"`
+}
 
-// GetPath implements sophos.RestObject and returns the EppEndpoint GET path
+var _ sophos.RestGetter = &EppEndpoint{}
+
+// GetPath implements sophos.RestObject and returns the EppEndpoints GET path
 // Returns all available epp/endpoint objects
-func (*EppEndpoint) GetPath() string { return "/api/objects/epp/endpoint/" }
+func (*EppEndpoints) GetPath() string { return "/api/objects/epp/endpoint/" }
 
 // RefRequired implements sophos.RestObject
-func (*EppEndpoint) RefRequired() (string, bool) { return "", false }
+func (*EppEndpoints) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppEndpoints GET path
+// Returns all available endpoint types
+func (e *EppEndpoint) GetPath() string {
+	return fmt.Sprintf("/api/objects/epp/endpoint/%s", e.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (e *EppEndpoint) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EppEndpoint DELETE path
 // Creates or updates the complete object endpoint
@@ -518,17 +642,33 @@ func (*EppEndpointsGroup) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (e *EppEndpointsGroup) GetType() string { return e._type }
 
-// EppGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type EppGroup []interface{}
+// EppGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type EppGroups []EppGroup
 
-var _ sophos.RestObject = &EppGroup{}
+// EppGroup represents a UTM group
+type EppGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the EppGroup GET path
+var _ sophos.RestGetter = &EppGroup{}
+
+// GetPath implements sophos.RestObject and returns the EppGroups GET path
 // Returns all available epp/group objects
-func (*EppGroup) GetPath() string { return "/api/objects/epp/group/" }
+func (*EppGroups) GetPath() string { return "/api/objects/epp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*EppGroup) RefRequired() (string, bool) { return "", false }
+func (*EppGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the EppGroups GET path
+// Returns all available group types
+func (e *EppGroup) GetPath() string { return fmt.Sprintf("/api/objects/epp/group/%s", e.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (e *EppGroup) RefRequired() (string, bool) { return e.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the EppGroup DELETE path
 // Creates or updates the complete object group

@@ -61,17 +61,35 @@ func (Scheduler) References() []string {
 	}
 }
 
-// SchedulerGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SchedulerGroup []interface{}
+// SchedulerGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type SchedulerGroups []SchedulerGroup
 
-var _ sophos.RestObject = &SchedulerGroup{}
+// SchedulerGroup represents a UTM group
+type SchedulerGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the SchedulerGroup GET path
+var _ sophos.RestGetter = &SchedulerGroup{}
+
+// GetPath implements sophos.RestObject and returns the SchedulerGroups GET path
 // Returns all available scheduler/group objects
-func (*SchedulerGroup) GetPath() string { return "/api/objects/scheduler/group/" }
+func (*SchedulerGroups) GetPath() string { return "/api/objects/scheduler/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*SchedulerGroup) RefRequired() (string, bool) { return "", false }
+func (*SchedulerGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SchedulerGroups GET path
+// Returns all available group types
+func (s *SchedulerGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/scheduler/group/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SchedulerGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SchedulerGroup DELETE path
 // Creates or updates the complete object group

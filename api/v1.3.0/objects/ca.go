@@ -110,17 +110,36 @@ func (Ca) References() []string {
 	}
 }
 
-// CaCrl is an Sophos Endpoint subType and implements sophos.RestObject
-type CaCrl []interface{}
+// CaCrls is an Sophos Endpoint subType and implements sophos.RestObject
+type CaCrls []CaCrl
 
-var _ sophos.RestObject = &CaCrl{}
+// CaCrl represents a UTM certificate revocation list
+type CaCrl struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Crl       string `json:"crl"`
+	// Meta description: REF(ca/meta_crl)
+	Meta string `json:"meta"`
+	Name string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the CaCrl GET path
+var _ sophos.RestGetter = &CaCrl{}
+
+// GetPath implements sophos.RestObject and returns the CaCrls GET path
 // Returns all available ca/crl objects
-func (*CaCrl) GetPath() string { return "/api/objects/ca/crl/" }
+func (*CaCrls) GetPath() string { return "/api/objects/ca/crl/" }
 
 // RefRequired implements sophos.RestObject
-func (*CaCrl) RefRequired() (string, bool) { return "", false }
+func (*CaCrls) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CaCrls GET path
+// Returns all available crl types
+func (c *CaCrl) GetPath() string { return fmt.Sprintf("/api/objects/ca/crl/%s", c.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (c *CaCrl) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CaCrl DELETE path
 // Creates or updates the complete object crl
@@ -152,17 +171,33 @@ func (*CaCrl) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/crl/%s/usedby", ref)
 }
 
-// CaGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type CaGroup []interface{}
+// CaGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type CaGroups []CaGroup
 
-var _ sophos.RestObject = &CaGroup{}
+// CaGroup represents a UTM group
+type CaGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the CaGroup GET path
+var _ sophos.RestGetter = &CaGroup{}
+
+// GetPath implements sophos.RestObject and returns the CaGroups GET path
 // Returns all available ca/group objects
-func (*CaGroup) GetPath() string { return "/api/objects/ca/group/" }
+func (*CaGroups) GetPath() string { return "/api/objects/ca/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*CaGroup) RefRequired() (string, bool) { return "", false }
+func (*CaGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CaGroups GET path
+// Returns all available group types
+func (c *CaGroup) GetPath() string { return fmt.Sprintf("/api/objects/ca/group/%s", c.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (c *CaGroup) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CaGroup DELETE path
 // Creates or updates the complete object group
@@ -325,17 +360,40 @@ func (*CaHostKeyCert) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (c *CaHostKeyCert) GetType() string { return c._type }
 
-// CaHttpVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject
-type CaHttpVerificationCa []interface{}
+// CaHttpVerificationCas is an Sophos Endpoint subType and implements sophos.RestObject
+type CaHttpVerificationCas []CaHttpVerificationCa
 
-var _ sophos.RestObject = &CaHttpVerificationCa{}
+// CaHttpVerificationCa represents a UTM HTTPS verification CA
+type CaHttpVerificationCa struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Meta description: REF(ca/meta_x509)
+	Meta string `json:"meta"`
+	Name string `json:"name"`
+	// Trust default value is false
+	Trust       bool   `json:"trust"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the CaHttpVerificationCa GET path
+var _ sophos.RestGetter = &CaHttpVerificationCa{}
+
+// GetPath implements sophos.RestObject and returns the CaHttpVerificationCas GET path
 // Returns all available ca/http_verification_ca objects
-func (*CaHttpVerificationCa) GetPath() string { return "/api/objects/ca/http_verification_ca/" }
+func (*CaHttpVerificationCas) GetPath() string { return "/api/objects/ca/http_verification_ca/" }
 
 // RefRequired implements sophos.RestObject
-func (*CaHttpVerificationCa) RefRequired() (string, bool) { return "", false }
+func (*CaHttpVerificationCas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CaHttpVerificationCas GET path
+// Returns all available http_verification_ca types
+func (c *CaHttpVerificationCa) GetPath() string {
+	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s", c.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (c *CaHttpVerificationCa) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CaHttpVerificationCa DELETE path
 // Creates or updates the complete object http_verification_ca
@@ -367,17 +425,37 @@ func (*CaHttpVerificationCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ca/http_verification_ca/%s/usedby", ref)
 }
 
-// CaMetaCrl is an Sophos Endpoint subType and implements sophos.RestObject
-type CaMetaCrl []interface{}
+// CaMetaCrls is an Sophos Endpoint subType and implements sophos.RestObject
+type CaMetaCrls []CaMetaCrl
 
-var _ sophos.RestObject = &CaMetaCrl{}
+// CaMetaCrl represents a UTM CRL meta information
+type CaMetaCrl struct {
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	_type      string `json:"_type"`
+	Comment    string `json:"comment"`
+	Hash       string `json:"hash"`
+	Issuer     string `json:"issuer"`
+	Lastupdate string `json:"lastupdate"`
+	Name       string `json:"name"`
+	Nextupdate string `json:"nextupdate"`
+}
 
-// GetPath implements sophos.RestObject and returns the CaMetaCrl GET path
+var _ sophos.RestGetter = &CaMetaCrl{}
+
+// GetPath implements sophos.RestObject and returns the CaMetaCrls GET path
 // Returns all available ca/meta_crl objects
-func (*CaMetaCrl) GetPath() string { return "/api/objects/ca/meta_crl/" }
+func (*CaMetaCrls) GetPath() string { return "/api/objects/ca/meta_crl/" }
 
 // RefRequired implements sophos.RestObject
-func (*CaMetaCrl) RefRequired() (string, bool) { return "", false }
+func (*CaMetaCrls) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CaMetaCrls GET path
+// Returns all available meta_crl types
+func (c *CaMetaCrl) GetPath() string { return fmt.Sprintf("/api/objects/ca/meta_crl/%s", c.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (c *CaMetaCrl) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CaMetaCrl DELETE path
 // Creates or updates the complete object meta_crl
@@ -618,17 +696,38 @@ func (*CaSigningCa) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (c *CaSigningCa) GetType() string { return c._type }
 
-// CaVerificationCa is an Sophos Endpoint subType and implements sophos.RestObject
-type CaVerificationCa []interface{}
+// CaVerificationCas is an Sophos Endpoint subType and implements sophos.RestObject
+type CaVerificationCas []CaVerificationCa
 
-var _ sophos.RestObject = &CaVerificationCa{}
+// CaVerificationCa represents a UTM X509 verification CA
+type CaVerificationCa struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Meta description: REF(ca/meta_x509)
+	Meta        string `json:"meta"`
+	Name        string `json:"name"`
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the CaVerificationCa GET path
+var _ sophos.RestGetter = &CaVerificationCa{}
+
+// GetPath implements sophos.RestObject and returns the CaVerificationCas GET path
 // Returns all available ca/verification_ca objects
-func (*CaVerificationCa) GetPath() string { return "/api/objects/ca/verification_ca/" }
+func (*CaVerificationCas) GetPath() string { return "/api/objects/ca/verification_ca/" }
 
 // RefRequired implements sophos.RestObject
-func (*CaVerificationCa) RefRequired() (string, bool) { return "", false }
+func (*CaVerificationCas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CaVerificationCas GET path
+// Returns all available verification_ca types
+func (c *CaVerificationCa) GetPath() string {
+	return fmt.Sprintf("/api/objects/ca/verification_ca/%s", c.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (c *CaVerificationCa) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CaVerificationCa DELETE path
 // Creates or updates the complete object verification_ca

@@ -262,6 +262,7 @@ make test
 ```
 
 ## Todo
+- [x] Create all unknown types (not returned from UTM) from their swagger definitions
 - [x] Respond with Errors to ObjectClient functions for caller inspection
 - [x] Finish adding all example from [Sophos docs](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en)
 - [x] Add [nodes](nodes.go) examples in README

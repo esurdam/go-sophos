@@ -61,17 +61,33 @@ func (Aws) References() []string {
 	}
 }
 
-// AwsGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AwsGroup []interface{}
+// AwsGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AwsGroups []AwsGroup
 
-var _ sophos.RestObject = &AwsGroup{}
+// AwsGroup represents a UTM aws->group
+type AwsGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AwsGroup GET path
+var _ sophos.RestGetter = &AwsGroup{}
+
+// GetPath implements sophos.RestObject and returns the AwsGroups GET path
 // Returns all available aws/group objects
-func (*AwsGroup) GetPath() string { return "/api/objects/aws/group/" }
+func (*AwsGroups) GetPath() string { return "/api/objects/aws/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*AwsGroup) RefRequired() (string, bool) { return "", false }
+func (*AwsGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AwsGroups GET path
+// Returns all available group types
+func (a *AwsGroup) GetPath() string { return fmt.Sprintf("/api/objects/aws/group/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AwsGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AwsGroup DELETE path
 // Creates or updates the complete object group

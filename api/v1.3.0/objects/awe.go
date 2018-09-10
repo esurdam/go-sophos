@@ -90,17 +90,39 @@ func (Awe) References() []string {
 	}
 }
 
-// AweClient is an Sophos Endpoint subType and implements sophos.RestObject
-type AweClient []interface{}
+// AweClients is an Sophos Endpoint subType and implements sophos.RestObject
+type AweClients []AweClient
 
-var _ sophos.RestObject = &AweClient{}
+// AweClient represents a UTM wireless client
+type AweClient struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Lastseen  int    `json:"lastseen"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac  string `json:"mac"`
+	Name string `json:"name"`
+	// Vendor default value is "unknown"
+	Vendor  string `json:"vendor"`
+	Comment string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweClient GET path
+var _ sophos.RestGetter = &AweClient{}
+
+// GetPath implements sophos.RestObject and returns the AweClients GET path
 // Returns all available awe/client objects
-func (*AweClient) GetPath() string { return "/api/objects/awe/client/" }
+func (*AweClients) GetPath() string { return "/api/objects/awe/client/" }
 
 // RefRequired implements sophos.RestObject
-func (*AweClient) RefRequired() (string, bool) { return "", false }
+func (*AweClients) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweClients GET path
+// Returns all available client types
+func (a *AweClient) GetPath() string { return fmt.Sprintf("/api/objects/awe/client/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AweClient) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweClient DELETE path
 // Creates or updates the complete object client
@@ -132,17 +154,113 @@ func (*AweClient) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/client/%s/usedby", ref)
 }
 
-// AweDevice is an Sophos Endpoint subType and implements sophos.RestObject
-type AweDevice []interface{}
+// AweDevices is an Sophos Endpoint subType and implements sophos.RestObject
+type AweDevices []AweDevice
 
-var _ sophos.RestObject = &AweDevice{}
+// AweDevice represents a UTM wireless access point
+type AweDevice struct {
+	Locked            string `json:"_locked"`
+	Reference         string `json:"_ref"`
+	_type             string `json:"_type"`
+	SchedScanInterval int    `json:"sched_scan_interval"`
+	// Vlantagging default value is false
+	Vlantagging     bool   `json:"vlantagging"`
+	Name            string `json:"name"`
+	ScanInterval11A int    `json:"scan_interval11a"`
+	Channel11A      int    `json:"channel11a"`
+	Comment         string `json:"comment"`
+	// Key default value is ""
+	Key string `json:"key"`
+	// Location default value is ""
+	Location string `json:"location"`
+	// MeshAbility11A default value is false
+	MeshAbility11A    bool          `json:"mesh_ability11a"`
+	Networks          []interface{} `json:"networks"`
+	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	ApVlantag         int           `json:"ap_vlantag"`
+	// TimeScheduling11A default value is false
+	TimeScheduling11A    bool `json:"time_scheduling11a"`
+	ScanInterval         int  `json:"scan_interval"`
+	SchedScanInterval11A int  `json:"sched_scan_interval11a"`
+	// TunnelId default value is ""
+	TunnelId string `json:"tunnel_id"`
+	Txpower  int    `json:"txpower"`
+	// Enabled default value is false
+	Enabled bool `json:"enabled"`
+	// LastIp description: (IPADDR)
+	// LastIp default value is ""
+	LastIp         string        `json:"last_ip"`
+	AutoChannel11A int           `json:"auto_channel11a"`
+	BridgeModes    []interface{} `json:"bridge_modes"`
+	// TimeScheduling default value is false
+	TimeScheduling   bool          `json:"time_scheduling"`
+	Txpower11A       int           `json:"txpower11a"`
+	ActiveChannels   []interface{} `json:"active_channels"`
+	AllowedChannels  []interface{} `json:"allowed_channels"`
+	AllowedCountries []interface{} `json:"allowed_countries"`
+	// Type default value is ""
+	Type string `json:"type"`
+	// LanMac description: (MACADDR)
+	// LanMac default value is "00:00:00:00:00:00"
+	LanMac string `json:"lan_mac"`
+	// Status default value is false
+	Status        bool          `json:"status"`
+	TimeSelect11A []interface{} `json:"time_select11a"`
+	AutoChannel   int           `json:"auto_channel"`
+	// ChannelWidth11A can be one of: []string{"HT20", "HT40", "VHT20", "VHT40", "VHT80"}
+	// ChannelWidth11A default value is "HT20"
+	ChannelWidth11A string `json:"channel_width11a"`
+	// Id default value is "Remote Wifi Device"
+	Id       string `json:"id"`
+	MaxSsids int    `json:"max_ssids"`
+	// MeshAbility default value is false
+	MeshAbility bool `json:"mesh_ability"`
+	// MeshAbility11G default value is false
+	MeshAbility11G bool `json:"mesh_ability11g"`
+	// R0KhSecret default value is ""
+	R0KhSecret string        `json:"r0kh_secret"`
+	TimeSelect []interface{} `json:"time_select"`
+	// ChannelWidth can be one of: []string{"HT20", "HT40"}
+	// ChannelWidth default value is "HT20"
+	ChannelWidth string `json:"channel_width"`
+	// DfsAbility default value is false
+	DfsAbility bool `json:"dfs_ability"`
+	Channel    int  `json:"channel"`
+	// Country description: (REGEX)
+	// Country default value is ""
+	Country string `json:"country"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// Stp default value is false
+	Stp bool `json:"stp"`
+	// TxPowerControl default value is false
+	TxPowerControl bool `json:"tx_power_control"`
+	// WifiMac description: (MACADDR)
+	// WifiMac default value is "00:00:00:00:00:00"
+	WifiMac string `json:"wifi_mac"`
+	// AcAbility default value is false
+	AcAbility bool `json:"ac_ability"`
+	// Band can be one of: []string{"g", "a"}
+	// Band default value is ""
+	Band string `json:"band"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweDevice GET path
+var _ sophos.RestGetter = &AweDevice{}
+
+// GetPath implements sophos.RestObject and returns the AweDevices GET path
 // Returns all available awe/device objects
-func (*AweDevice) GetPath() string { return "/api/objects/awe/device/" }
+func (*AweDevices) GetPath() string { return "/api/objects/awe/device/" }
 
 // RefRequired implements sophos.RestObject
-func (*AweDevice) RefRequired() (string, bool) { return "", false }
+func (*AweDevices) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweDevices GET path
+// Returns all available device types
+func (a *AweDevice) GetPath() string { return fmt.Sprintf("/api/objects/awe/device/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AweDevice) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweDevice DELETE path
 // Creates or updates the complete object device
@@ -174,17 +292,33 @@ func (*AweDevice) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/device/%s/usedby", ref)
 }
 
-// AweGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type AweGroup []interface{}
+// AweGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type AweGroups []AweGroup
 
-var _ sophos.RestObject = &AweGroup{}
+// AweGroup represents a UTM group
+type AweGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweGroup GET path
+var _ sophos.RestGetter = &AweGroup{}
+
+// GetPath implements sophos.RestObject and returns the AweGroups GET path
 // Returns all available awe/group objects
-func (*AweGroup) GetPath() string { return "/api/objects/awe/group/" }
+func (*AweGroups) GetPath() string { return "/api/objects/awe/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*AweGroup) RefRequired() (string, bool) { return "", false }
+func (*AweGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweGroups GET path
+// Returns all available group types
+func (a *AweGroup) GetPath() string { return fmt.Sprintf("/api/objects/awe/group/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AweGroup) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweGroup DELETE path
 // Creates or updates the complete object group
@@ -216,17 +350,69 @@ func (*AweGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/group/%s/usedby", ref)
 }
 
-// AweLocal is an Sophos Endpoint subType and implements sophos.RestObject
-type AweLocal []interface{}
+// AweLocals is an Sophos Endpoint subType and implements sophos.RestObject
+type AweLocals []AweLocal
 
-var _ sophos.RestObject = &AweLocal{}
+// AweLocal represents a UTM SG wifi
+type AweLocal struct {
+	Locked      string        `json:"_locked"`
+	Reference   string        `json:"_ref"`
+	_type       string        `json:"_type"`
+	BridgeModes []interface{} `json:"bridge_modes"`
+	Comment     string        `json:"comment"`
+	MaxSsids    int           `json:"max_ssids"`
+	Networks    []interface{} `json:"networks"`
+	Name        string        `json:"name"`
+	// Status default value is false
+	Status          bool          `json:"status"`
+	AllowedChannels []interface{} `json:"allowed_channels"`
+	// Band can be one of: []string{"g", "a"}
+	// Band default value is "g"
+	Band    string `json:"band"`
+	Channel int    `json:"channel"`
+	// DfsAbility default value is false
+	DfsAbility bool `json:"dfs_ability"`
+	// Id default value is "Remote Wifi Device"
+	Id string `json:"id"`
+	// MeshAbility11A default value is false
+	MeshAbility11A bool `json:"mesh_ability11a"`
+	// TimeScheduling default value is false
+	TimeScheduling bool `json:"time_scheduling"`
+	// TxPowerControl default value is false
+	TxPowerControl bool `json:"tx_power_control"`
+	AutoChannel    int  `json:"auto_channel"`
+	// MeshAbility11G default value is false
+	MeshAbility11G bool `json:"mesh_ability11g"`
+	ScanInterval   int  `json:"scan_interval"`
+	Txpower        int  `json:"txpower"`
+	// Type default value is ""
+	Type string `json:"type"`
+	// WifiMac description: (MACADDR)
+	// WifiMac default value is "00:00:00:00:00:00"
+	WifiMac           string        `json:"wifi_mac"`
+	ActiveChannels    []interface{} `json:"active_channels"`
+	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	// MeshAbility default value is false
+	MeshAbility       bool          `json:"mesh_ability"`
+	SchedScanInterval int           `json:"sched_scan_interval"`
+	TimeSelect        []interface{} `json:"time_select"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweLocal GET path
+var _ sophos.RestGetter = &AweLocal{}
+
+// GetPath implements sophos.RestObject and returns the AweLocals GET path
 // Returns all available awe/local objects
-func (*AweLocal) GetPath() string { return "/api/objects/awe/local/" }
+func (*AweLocals) GetPath() string { return "/api/objects/awe/local/" }
 
 // RefRequired implements sophos.RestObject
-func (*AweLocal) RefRequired() (string, bool) { return "", false }
+func (*AweLocals) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweLocals GET path
+// Returns all available local types
+func (a *AweLocal) GetPath() string { return fmt.Sprintf("/api/objects/awe/local/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AweLocal) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweLocal DELETE path
 // Creates or updates the complete object local
@@ -258,17 +444,98 @@ func (*AweLocal) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/awe/local/%s/usedby", ref)
 }
 
-// AweRed is an Sophos Endpoint subType and implements sophos.RestObject
-type AweRed []interface{}
+// AweReds is an Sophos Endpoint subType and implements sophos.RestObject
+type AweReds []AweRed
 
-var _ sophos.RestObject = &AweRed{}
+// AweRed represents a UTM RED wifi
+type AweRed struct {
+	Locked         string        `json:"_locked"`
+	Reference      string        `json:"_ref"`
+	_type          string        `json:"_type"`
+	ActiveChannels []interface{} `json:"active_channels"`
+	Channel        int           `json:"channel"`
+	// DfsAbility default value is false
+	DfsAbility bool `json:"dfs_ability"`
+	// Enabled default value is false
+	Enabled bool `json:"enabled"`
+	// Location default value is ""
+	Location string `json:"location"`
+	// Vlantagging default value is false
+	Vlantagging bool `json:"vlantagging"`
+	// Band can be one of: []string{"g", "a"}
+	// Band default value is "g"
+	Band string `json:"band"`
+	// Key default value is ""
+	Key  string `json:"key"`
+	Name string `json:"name"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// AcAbility default value is false
+	AcAbility bool `json:"ac_ability"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// TimeScheduling default value is false
+	TimeScheduling bool `json:"time_scheduling"`
+	// WifiMac description: (MACADDR)
+	// WifiMac default value is "00:00:00:00:00:00"
+	WifiMac         string        `json:"wifi_mac"`
+	AllowedChannels []interface{} `json:"allowed_channels"`
+	AutoChannel     int           `json:"auto_channel"`
+	// LanMac description: (MACADDR)
+	// LanMac default value is "00:00:00:00:00:00"
+	LanMac           string        `json:"lan_mac"`
+	AllowedCountries []interface{} `json:"allowed_countries"`
+	// ChannelWidth can be one of: []string{"HT20", "HT40"}
+	// ChannelWidth default value is "HT20"
+	ChannelWidth string `json:"channel_width"`
+	// Country description: (REGEX)
+	// Country default value is ""
+	Country string `json:"country"`
+	// ForcedCountry default value is ""
+	ForcedCountry     string        `json:"forced_country"`
+	TimeSelect        []interface{} `json:"time_select"`
+	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	ApVlantag         int           `json:"ap_vlantag"`
+	BridgeModes       []interface{} `json:"bridge_modes"`
+	// LastIp description: (IPADDR)
+	// LastIp default value is ""
+	LastIp       string        `json:"last_ip"`
+	Networks     []interface{} `json:"networks"`
+	ScanInterval int           `json:"scan_interval"`
+	// TxPowerControl default value is false
+	TxPowerControl bool `json:"tx_power_control"`
+	// Id default value is "Remote Wifi Device"
+	Id       string `json:"id"`
+	MaxSsids int    `json:"max_ssids"`
+	// R0KhSecret default value is ""
+	R0KhSecret string `json:"r0kh_secret"`
+	Txpower    int    `json:"txpower"`
+	Comment    string `json:"comment"`
+	// MeshAbility default value is false
+	MeshAbility       bool `json:"mesh_ability"`
+	SchedScanInterval int  `json:"sched_scan_interval"`
+	// TunnelId default value is ""
+	TunnelId string `json:"tunnel_id"`
+	// Type default value is ""
+	Type string `json:"type"`
+}
 
-// GetPath implements sophos.RestObject and returns the AweRed GET path
+var _ sophos.RestGetter = &AweRed{}
+
+// GetPath implements sophos.RestObject and returns the AweReds GET path
 // Returns all available awe/red objects
-func (*AweRed) GetPath() string { return "/api/objects/awe/red/" }
+func (*AweReds) GetPath() string { return "/api/objects/awe/red/" }
 
 // RefRequired implements sophos.RestObject
-func (*AweRed) RefRequired() (string, bool) { return "", false }
+func (*AweReds) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the AweReds GET path
+// Returns all available red types
+func (a *AweRed) GetPath() string { return fmt.Sprintf("/api/objects/awe/red/%s", a.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (a *AweRed) RefRequired() (string, bool) { return a.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the AweRed DELETE path
 // Creates or updates the complete object red

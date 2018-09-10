@@ -55,17 +55,38 @@ func (Cron) References() []string {
 	}
 }
 
-// CronAt is an Sophos Endpoint subType and implements sophos.RestObject
-type CronAt []interface{}
+// CronAts is an Sophos Endpoint subType and implements sophos.RestObject
+type CronAts []CronAt
 
-var _ sophos.RestObject = &CronAt{}
+// CronAt represents a UTM scheduled job
+type CronAt struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Date description: (DATE)
+	Date string `json:"date"`
+	Name string `json:"name"`
+	// Time description: (TIME)
+	Time    string `json:"time"`
+	Command string `json:"command"`
+}
 
-// GetPath implements sophos.RestObject and returns the CronAt GET path
+var _ sophos.RestGetter = &CronAt{}
+
+// GetPath implements sophos.RestObject and returns the CronAts GET path
 // Returns all available cron/at objects
-func (*CronAt) GetPath() string { return "/api/objects/cron/at/" }
+func (*CronAts) GetPath() string { return "/api/objects/cron/at/" }
 
 // RefRequired implements sophos.RestObject
-func (*CronAt) RefRequired() (string, bool) { return "", false }
+func (*CronAts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CronAts GET path
+// Returns all available at types
+func (c *CronAt) GetPath() string { return fmt.Sprintf("/api/objects/cron/at/%s", c.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (c *CronAt) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CronAt DELETE path
 // Creates or updates the complete object at
@@ -97,17 +118,33 @@ func (*CronAt) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/cron/at/%s/usedby", ref)
 }
 
-// CronGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type CronGroup []interface{}
+// CronGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type CronGroups []CronGroup
 
-var _ sophos.RestObject = &CronGroup{}
+// CronGroup represents a UTM group
+type CronGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the CronGroup GET path
+var _ sophos.RestGetter = &CronGroup{}
+
+// GetPath implements sophos.RestObject and returns the CronGroups GET path
 // Returns all available cron/group objects
-func (*CronGroup) GetPath() string { return "/api/objects/cron/group/" }
+func (*CronGroups) GetPath() string { return "/api/objects/cron/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*CronGroup) RefRequired() (string, bool) { return "", false }
+func (*CronGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the CronGroups GET path
+// Returns all available group types
+func (c *CronGroup) GetPath() string { return fmt.Sprintf("/api/objects/cron/group/%s", c.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (c *CronGroup) RefRequired() (string, bool) { return c.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the CronGroup DELETE path
 // Creates or updates the complete object group

@@ -371,17 +371,39 @@ func (*HttpCffProfile) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (h *HttpCffProfile) GetType() string { return h._type }
 
-// HttpDeviceAuth is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpDeviceAuth []interface{}
+// HttpDeviceAuths is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpDeviceAuths []HttpDeviceAuth
 
-var _ sophos.RestObject = &HttpDeviceAuth{}
+// HttpDeviceAuth represents a UTM device-specific authentication
+type HttpDeviceAuth struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// DeviceType can be one of: []string{"Windows", "Mac OS X", "Linux", "iOS", "Android", "Kindle", "Blackberry"}
+	DeviceType string `json:"device_type"`
+	Name       string `json:"name"`
+	// AuthMode can be one of: []string{"none", "aua", "edir_sso", "ntlm", "opendirectory_auth", "browser", "agent"}
+	AuthMode string `json:"auth_mode"`
+	Comment  string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpDeviceAuth GET path
+var _ sophos.RestGetter = &HttpDeviceAuth{}
+
+// GetPath implements sophos.RestObject and returns the HttpDeviceAuths GET path
 // Returns all available http/device_auth objects
-func (*HttpDeviceAuth) GetPath() string { return "/api/objects/http/device_auth/" }
+func (*HttpDeviceAuths) GetPath() string { return "/api/objects/http/device_auth/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpDeviceAuth) RefRequired() (string, bool) { return "", false }
+func (*HttpDeviceAuths) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpDeviceAuths GET path
+// Returns all available device_auth types
+func (h *HttpDeviceAuth) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/device_auth/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpDeviceAuth) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpDeviceAuth DELETE path
 // Creates or updates the complete object device_auth
@@ -413,17 +435,43 @@ func (*HttpDeviceAuth) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/device_auth/%s/usedby", ref)
 }
 
-// HttpDomainRegex is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpDomainRegex []interface{}
+// HttpDomainRegexs is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpDomainRegexs []HttpDomainRegex
 
-var _ sophos.RestObject = &HttpDomainRegex{}
+// HttpDomainRegex represents a UTM whitelist/blacklist
+type HttpDomainRegex struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Mode can be one of: []string{"Domain", "Regex"}
+	Mode    string        `json:"mode"`
+	Name    string        `json:"name"`
+	Regexps []interface{} `json:"regexps"`
+	// RestrictRegex default value is false
+	RestrictRegex bool          `json:"restrict_regex"`
+	Comment       string        `json:"comment"`
+	Domain        []interface{} `json:"domain"`
+	// IncludeSubdomains default value is false
+	IncludeSubdomains bool `json:"include_subdomains"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpDomainRegex GET path
+var _ sophos.RestGetter = &HttpDomainRegex{}
+
+// GetPath implements sophos.RestObject and returns the HttpDomainRegexs GET path
 // Returns all available http/domain_regex objects
-func (*HttpDomainRegex) GetPath() string { return "/api/objects/http/domain_regex/" }
+func (*HttpDomainRegexs) GetPath() string { return "/api/objects/http/domain_regex/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpDomainRegex) RefRequired() (string, bool) { return "", false }
+func (*HttpDomainRegexs) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpDomainRegexs GET path
+// Returns all available domain_regex types
+func (h *HttpDomainRegex) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/domain_regex/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpDomainRegex) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpDomainRegex DELETE path
 // Creates or updates the complete object domain_regex
@@ -528,17 +576,33 @@ func (*HttpException) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (h *HttpException) GetType() string { return h._type }
 
-// HttpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpGroup []interface{}
+// HttpGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpGroups []HttpGroup
 
-var _ sophos.RestObject = &HttpGroup{}
+// HttpGroup represents a UTM group
+type HttpGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpGroup GET path
+var _ sophos.RestGetter = &HttpGroup{}
+
+// GetPath implements sophos.RestObject and returns the HttpGroups GET path
 // Returns all available http/group objects
-func (*HttpGroup) GetPath() string { return "/api/objects/http/group/" }
+func (*HttpGroups) GetPath() string { return "/api/objects/http/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpGroup) RefRequired() (string, bool) { return "", false }
+func (*HttpGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpGroups GET path
+// Returns all available group types
+func (h *HttpGroup) GetPath() string { return fmt.Sprintf("/api/objects/http/group/%s", h.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (h *HttpGroup) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpGroup DELETE path
 // Creates or updates the complete object group
@@ -570,17 +634,45 @@ func (*HttpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/group/%s/usedby", ref)
 }
 
-// HttpLocalSite is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpLocalSite []interface{}
+// HttpLocalSites is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpLocalSites []HttpLocalSite
 
-var _ sophos.RestObject = &HttpLocalSite{}
+// HttpLocalSite represents a UTM local site list entry
+type HttpLocalSite struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Category description: REF(http/sp_subcat)
+	// Category default value is ""
+	Category string `json:"category"`
+	Comment  string `json:"comment"`
+	// IncludeSubdomains default value is false
+	IncludeSubdomains bool   `json:"include_subdomains"`
+	Name              string `json:"name"`
+	// Reputation can be one of: []string{"off", "malicious", "suspicious", "unverified", "neutral", "trusted"}
+	// Reputation default value is "off"
+	Reputation string        `json:"reputation"`
+	Site       string        `json:"site"`
+	Tags       []interface{} `json:"tags"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpLocalSite GET path
+var _ sophos.RestGetter = &HttpLocalSite{}
+
+// GetPath implements sophos.RestObject and returns the HttpLocalSites GET path
 // Returns all available http/local_site objects
-func (*HttpLocalSite) GetPath() string { return "/api/objects/http/local_site/" }
+func (*HttpLocalSites) GetPath() string { return "/api/objects/http/local_site/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpLocalSite) RefRequired() (string, bool) { return "", false }
+func (*HttpLocalSites) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpLocalSites GET path
+// Returns all available local_site types
+func (h *HttpLocalSite) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/local_site/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpLocalSite) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpLocalSite DELETE path
 // Creates or updates the complete object local_site
@@ -612,17 +704,33 @@ func (*HttpLocalSite) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/http/local_site/%s/usedby", ref)
 }
 
-// HttpLslTag is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpLslTag []interface{}
+// HttpLslTags is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpLslTags []HttpLslTag
 
-var _ sophos.RestObject = &HttpLslTag{}
+// HttpLslTag represents a UTM tags
+type HttpLslTag struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpLslTag GET path
+var _ sophos.RestGetter = &HttpLslTag{}
+
+// GetPath implements sophos.RestObject and returns the HttpLslTags GET path
 // Returns all available http/lsl_tag objects
-func (*HttpLslTag) GetPath() string { return "/api/objects/http/lsl_tag/" }
+func (*HttpLslTags) GetPath() string { return "/api/objects/http/lsl_tag/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpLslTag) RefRequired() (string, bool) { return "", false }
+func (*HttpLslTags) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpLslTags GET path
+// Returns all available lsl_tag types
+func (h *HttpLslTag) GetPath() string { return fmt.Sprintf("/api/objects/http/lsl_tag/%s", h.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (h *HttpLslTag) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpLslTag DELETE path
 // Creates or updates the complete object lsl_tag
@@ -719,17 +827,41 @@ func (*HttpPacFile) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (h *HttpPacFile) GetType() string { return h._type }
 
-// HttpParentProxy is an Sophos Endpoint subType and implements sophos.RestObject
-type HttpParentProxy []interface{}
+// HttpParentProxys is an Sophos Endpoint subType and implements sophos.RestObject
+type HttpParentProxys []HttpParentProxy
 
-var _ sophos.RestObject = &HttpParentProxy{}
+// HttpParentProxy represents a UTM parent web proxy
+type HttpParentProxy struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Port      int    `json:"port"`
+	// Target description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Target  string        `json:"target"`
+	User    string        `json:"user"`
+	Comment string        `json:"comment"`
+	Match   []interface{} `json:"match"`
+	Name    string        `json:"name"`
+	Pass    string        `json:"pass"`
+}
 
-// GetPath implements sophos.RestObject and returns the HttpParentProxy GET path
+var _ sophos.RestGetter = &HttpParentProxy{}
+
+// GetPath implements sophos.RestObject and returns the HttpParentProxys GET path
 // Returns all available http/parent_proxy objects
-func (*HttpParentProxy) GetPath() string { return "/api/objects/http/parent_proxy/" }
+func (*HttpParentProxys) GetPath() string { return "/api/objects/http/parent_proxy/" }
 
 // RefRequired implements sophos.RestObject
-func (*HttpParentProxy) RefRequired() (string, bool) { return "", false }
+func (*HttpParentProxys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the HttpParentProxys GET path
+// Returns all available parent_proxy types
+func (h *HttpParentProxy) GetPath() string {
+	return fmt.Sprintf("/api/objects/http/parent_proxy/%s", h.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (h *HttpParentProxy) RefRequired() (string, bool) { return h.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the HttpParentProxy DELETE path
 // Creates or updates the complete object parent_proxy

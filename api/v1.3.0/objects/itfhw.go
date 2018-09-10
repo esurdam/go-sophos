@@ -204,17 +204,41 @@ func (*ItfhwAweNetwork) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *ItfhwAweNetwork) GetType() string { return i._type }
 
-// ItfhwAweNetworkGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwAweNetworkGroup []interface{}
+// ItfhwAweNetworkGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwAweNetworkGroups []ItfhwAweNetworkGroup
 
-var _ sophos.RestObject = &ItfhwAweNetworkGroup{}
+// ItfhwAweNetworkGroup represents a UTM wireless access point group
+type ItfhwAweNetworkGroup struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	ApVlantag int           `json:"ap_vlantag"`
+	Comment   string        `json:"comment"`
+	Members   []interface{} `json:"members"`
+	Name      string        `json:"name"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Vlantagging default value is false
+	Vlantagging bool `json:"vlantagging"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwAweNetworkGroup GET path
+var _ sophos.RestGetter = &ItfhwAweNetworkGroup{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwAweNetworkGroups GET path
 // Returns all available itfhw/awe_network_group objects
-func (*ItfhwAweNetworkGroup) GetPath() string { return "/api/objects/itfhw/awe_network_group/" }
+func (*ItfhwAweNetworkGroups) GetPath() string { return "/api/objects/itfhw/awe_network_group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwAweNetworkGroup) RefRequired() (string, bool) { return "", false }
+func (*ItfhwAweNetworkGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwAweNetworkGroups GET path
+// Returns all available awe_network_group types
+func (i *ItfhwAweNetworkGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwAweNetworkGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwAweNetworkGroup DELETE path
 // Creates or updates the complete object awe_network_group
@@ -246,17 +270,42 @@ func (*ItfhwAweNetworkGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/awe_network_group/%s/usedby", ref)
 }
 
-// ItfhwBridge is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwBridge []interface{}
+// ItfhwBridges is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwBridges []ItfhwBridge
 
-var _ sophos.RestObject = &ItfhwBridge{}
+// ItfhwBridge represents a UTM bridge interface
+type ItfhwBridge struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Description default value is "Bridge"
+	Description string `json:"description"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac  string `json:"mac"`
+	Name string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwBridge GET path
+var _ sophos.RestGetter = &ItfhwBridge{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwBridges GET path
 // Returns all available itfhw/bridge objects
-func (*ItfhwBridge) GetPath() string { return "/api/objects/itfhw/bridge/" }
+func (*ItfhwBridges) GetPath() string { return "/api/objects/itfhw/bridge/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwBridge) RefRequired() (string, bool) { return "", false }
+func (*ItfhwBridges) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwBridges GET path
+// Returns all available bridge types
+func (i *ItfhwBridge) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/bridge/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwBridge) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwBridge DELETE path
 // Creates or updates the complete object bridge
@@ -367,17 +416,33 @@ func (*ItfhwEthernet) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *ItfhwEthernet) GetType() string { return i._type }
 
-// ItfhwGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwGroup []interface{}
+// ItfhwGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwGroups []ItfhwGroup
 
-var _ sophos.RestObject = &ItfhwGroup{}
+// ItfhwGroup represents a UTM group
+type ItfhwGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwGroup GET path
+var _ sophos.RestGetter = &ItfhwGroup{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwGroups GET path
 // Returns all available itfhw/group objects
-func (*ItfhwGroup) GetPath() string { return "/api/objects/itfhw/group/" }
+func (*ItfhwGroups) GetPath() string { return "/api/objects/itfhw/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwGroup) RefRequired() (string, bool) { return "", false }
+func (*ItfhwGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwGroups GET path
+// Returns all available group types
+func (i *ItfhwGroup) GetPath() string { return fmt.Sprintf("/api/objects/itfhw/group/%s", i.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwGroup DELETE path
 // Creates or updates the complete object group
@@ -474,17 +539,55 @@ func (*ItfhwLag) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *ItfhwLag) GetType() string { return i._type }
 
-// ItfhwRedClient is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwRedClient []interface{}
+// ItfhwRedClients is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwRedClients []ItfhwRedClient
 
-var _ sophos.RestObject = &ItfhwRedClient{}
+// ItfhwRedClient represents a UTM RED client interface
+type ItfhwRedClient struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Hardware description: (REGEX)
+	Hardware  string `json:"hardware"`
+	LocalCert string `json:"local_cert"`
+	LocalKey  string `json:"local_key"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+	HubCa   string `json:"hub_ca"`
+	// HubHost description: REF(network/host), REF(network/dns_host)
+	HubHost string `json:"hub_host"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac  string `json:"mac"`
+	Name string `json:"name"`
+	// TunnelCompression default value is false
+	TunnelCompression bool `json:"tunnel_compression"`
+	// TunnelCompressionAlgorithm can be one of: []string{"deflate", "lzo", "gzip"}
+	// TunnelCompressionAlgorithm default value is "lzo"
+	TunnelCompressionAlgorithm string `json:"tunnel_compression_algorithm"`
+	TunnelId                   int    `json:"tunnel_id"`
+	// Description default value is "Remote Ethernet Client Device"
+	Description string `json:"description"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwRedClient GET path
+var _ sophos.RestGetter = &ItfhwRedClient{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwRedClients GET path
 // Returns all available itfhw/red_client objects
-func (*ItfhwRedClient) GetPath() string { return "/api/objects/itfhw/red_client/" }
+func (*ItfhwRedClients) GetPath() string { return "/api/objects/itfhw/red_client/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwRedClient) RefRequired() (string, bool) { return "", false }
+func (*ItfhwRedClients) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwRedClients GET path
+// Returns all available red_client types
+func (i *ItfhwRedClient) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/red_client/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwRedClient) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwRedClient DELETE path
 // Creates or updates the complete object red_client
@@ -516,17 +619,184 @@ func (*ItfhwRedClient) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_client/%s/usedby", ref)
 }
 
-// ItfhwRedServer is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwRedServer []interface{}
+// ItfhwRedServers is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwRedServers []ItfhwRedServer
 
-var _ sophos.RestObject = &ItfhwRedServer{}
+// ItfhwRedServer represents a UTM RED server interface
+type ItfhwRedServer struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Lan2Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan2Mode default value is "unused"
+	Lan2Mode string `json:"lan2_mode"`
+	TunnelId int    `json:"tunnel_id"`
+	// DeploymentMode can be one of: []string{"online", "offline"}
+	// DeploymentMode default value is "online"
+	DeploymentMode string `json:"deployment_mode"`
+	// FastFailover default value is false
+	FastFailover bool `json:"fast_failover"`
+	// MobileNetwork can be one of: []string{"gsm", "cdma"}
+	// MobileNetwork default value is "gsm"
+	MobileNetwork string        `json:"mobile_network"`
+	Pin           int           `json:"pin"`
+	FullbrDomains []interface{} `json:"fullbr_domains"`
+	// Lan3Vids default value is ""
+	Lan3Vids      string `json:"lan3_vids"`
+	ManualNetmask int    `json:"manual_netmask"`
+	// UplinkMode can be one of: []string{"dhcp", "manual"}
+	// UplinkMode default value is "dhcp"
+	UplinkMode string `json:"uplink_mode"`
+	// LanportMode can be one of: []string{"switch", "vlan"}
+	// LanportMode default value is "switch"
+	LanportMode string `json:"lanport_mode"`
+	// Manual2Defgw description: (IPADDR)
+	// Manual2Defgw default value is "0.0.0.0"
+	Manual2Defgw string `json:"manual2_defgw"`
+	// PinAsString description: (REGEX)
+	// PinAsString default value is ""
+	PinAsString string `json:"pin_as_string"`
+	// RouteMode can be one of: []string{"default", "split", "fullbr"}
+	// RouteMode default value is "default"
+	RouteMode string `json:"route_mode"`
+	// UplinkBalancing can be one of: []string{"balance", "failover"}
+	// UplinkBalancing default value is "failover"
+	UplinkBalancing string `json:"uplink_balancing"`
+	// FullbrDns description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
+	// FullbrDns default value is ""
+	FullbrDns string `json:"fullbr_dns"`
+	// LocalNetworksTarget description: REF(network/host), REF(network/dns_host), REF(network/interface_address)
+	// LocalNetworksTarget default value is ""
+	LocalNetworksTarget string `json:"local_networks_target"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// UnlockCode default value is ""
+	UnlockCode string `json:"unlock_code"`
+	// Uplink2Mode can be one of: []string{"dhcp", "manual"}
+	// Uplink2Mode default value is "dhcp"
+	Uplink2Mode string `json:"uplink2_mode"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+	// HubHostname default value is ""
+	HubHostname string `json:"hub_hostname"`
+	// Lan4Vids default value is ""
+	Lan4Vids               string `json:"lan4_vids"`
+	MacFilterEntriesRed15W int    `json:"mac_filter_entries_red15w"`
+	Manual2Netmask         int    `json:"manual2_netmask"`
+	// BridgeAddress description: (IPADDR)
+	// BridgeAddress default value is "0.0.0.0"
+	BridgeAddress         string `json:"bridge_address"`
+	MacFilterEntriesRed10 int    `json:"mac_filter_entries_red10"`
+	// MacFilterList description: REF(mac_list/*)
+	// MacFilterList default value is ""
+	MacFilterList string        `json:"mac_filter_list"`
+	LocalNetworks []interface{} `json:"local_networks"`
+	// MacFilterType can be one of: []string{"none", "whitelist", "blacklist"}
+	// MacFilterType default value is "none"
+	MacFilterType string `json:"mac_filter_type"`
+	// State can be one of: []string{"initializing", "runnable", "notbound"}
+	// State default value is "initializing"
+	State string `json:"state"`
+	// Apn default value is ""
+	Apn string `json:"apn"`
+	// BridgeProto can be one of: []string{"dhcp", "static", "none"}
+	// BridgeProto default value is "none"
+	BridgeProto string `json:"bridge_proto"`
+	// Mac description: (MACADDR)
+	// Mac default value is "00:00:00:00:00:00"
+	Mac                   string `json:"mac"`
+	MacFilterEntriesRed15 int    `json:"mac_filter_entries_red15"`
+	// TunnelCompression default value is false
+	TunnelCompression bool `json:"tunnel_compression"`
+	// UmtsState can be one of: []string{"READY", "PIN", "PUK"}
+	// UmtsState default value is "READY"
+	UmtsState string `json:"umts_state"`
+	// HostnameBalancing can be one of: []string{"balance", "failover"}
+	// HostnameBalancing default value is "failover"
+	HostnameBalancing string `json:"hostname_balancing"`
+	// Lan2Vids default value is ""
+	Lan2Vids string `json:"lan2_vids"`
+	// Lan3Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan3Mode default value is "unused"
+	Lan3Mode string `json:"lan3_mode"`
+	// Manual2Address description: (IPADDR)
+	// Manual2Address default value is "0.0.0.0"
+	Manual2Address string `json:"manual2_address"`
+	// Manual2Dns description: (IPADDR)
+	// Manual2Dns default value is "0.0.0.0"
+	Manual2Dns string `json:"manual2_dns"`
+	// Password default value is ""
+	Password string `json:"password"`
+	// RemoteCert description: REF(ca/host_key_cert)
+	// RemoteCert default value is ""
+	RemoteCert string `json:"remote_cert"`
+	// Username default value is ""
+	Username string `json:"username"`
+	Name     string `json:"name"`
+	RedId    string `json:"red_id"`
+	// ActivateModem default value is false
+	ActivateModem bool `json:"activate_modem"`
+	// Description default value is "Remote Ethernet Server Device"
+	Description string `json:"description"`
+	// FailoverDirect default value is true
+	FailoverDirect bool `json:"failover_direct"`
+	// Hub2Hostname default value is ""
+	Hub2Hostname          string `json:"hub2_hostname"`
+	MacFilterEntriesRed50 int    `json:"mac_filter_entries_red50"`
+	// DialString default value is "*99#"
+	DialString string `json:"dial_string"`
+	// Lan1Vids default value is ""
+	Lan1Vids string `json:"lan1_vids"`
+	// ManualDns description: (IPADDR)
+	// ManualDns default value is "0.0.0.0"
+	ManualDns     string        `json:"manual_dns"`
+	SplitNetworks []interface{} `json:"split_networks"`
+	// Type can be one of: []string{"red", "red15", "red15w", "red50", "asg", "software"}
+	// Type default value is "asg"
+	Type string `json:"type"`
+	// Lan4Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan4Mode default value is "unused"
+	Lan4Mode string `json:"lan4_mode"`
+	// TunnelCompressionAlgorithm can be one of: []string{"deflate", "lzo", "gzip"}
+	// TunnelCompressionAlgorithm default value is "lzo"
+	TunnelCompressionAlgorithm string `json:"tunnel_compression_algorithm"`
+	// TunnelState default value is false
+	TunnelState   bool `json:"tunnel_state"`
+	BridgeNetmask int  `json:"bridge_netmask"`
+	// Lan1Mode can be one of: []string{"tagged", "untagged", "untagged_drop_tagged", "unused"}
+	// Lan1Mode default value is "unused"
+	Lan1Mode string `json:"lan1_mode"`
+	// ManualAddress description: (IPADDR)
+	// ManualAddress default value is "0.0.0.0"
+	ManualAddress string `json:"manual_address"`
+	// PrevUnlockCode default value is ""
+	PrevUnlockCode string `json:"prev_unlock_code"`
+	// Authorized default value is false
+	Authorized bool `json:"authorized"`
+	DebugLevel int  `json:"debug_level"`
+	// ManualDefgw description: (IPADDR)
+	// ManualDefgw default value is "0.0.0.0"
+	ManualDefgw string `json:"manual_defgw"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwRedServer GET path
+var _ sophos.RestGetter = &ItfhwRedServer{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwRedServers GET path
 // Returns all available itfhw/red_server objects
-func (*ItfhwRedServer) GetPath() string { return "/api/objects/itfhw/red_server/" }
+func (*ItfhwRedServers) GetPath() string { return "/api/objects/itfhw/red_server/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwRedServer) RefRequired() (string, bool) { return "", false }
+func (*ItfhwRedServers) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwRedServers GET path
+// Returns all available red_server types
+func (i *ItfhwRedServer) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/red_server/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwRedServer) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwRedServer DELETE path
 // Creates or updates the complete object red_server
@@ -558,17 +828,42 @@ func (*ItfhwRedServer) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/red_server/%s/usedby", ref)
 }
 
-// ItfhwSerial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwSerial []interface{}
+// ItfhwSerials is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwSerials []ItfhwSerial
 
-var _ sophos.RestObject = &ItfhwSerial{}
+// ItfhwSerial represents a UTM serial interface
+type ItfhwSerial struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	Port      string `json:"port"`
+	// Baud default value is ""
+	Baud        string `json:"baud"`
+	Comment     string `json:"comment"`
+	Description string `json:"description"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+	Irq      int    `json:"irq"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwSerial GET path
+var _ sophos.RestGetter = &ItfhwSerial{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwSerials GET path
 // Returns all available itfhw/serial objects
-func (*ItfhwSerial) GetPath() string { return "/api/objects/itfhw/serial/" }
+func (*ItfhwSerials) GetPath() string { return "/api/objects/itfhw/serial/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwSerial) RefRequired() (string, bool) { return "", false }
+func (*ItfhwSerials) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwSerials GET path
+// Returns all available serial types
+func (i *ItfhwSerial) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/serial/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwSerial) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwSerial DELETE path
 // Creates or updates the complete object serial
@@ -600,17 +895,45 @@ func (*ItfhwSerial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/serial/%s/usedby", ref)
 }
 
-// ItfhwUsbserial is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwUsbserial []interface{}
+// ItfhwUsbserials is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwUsbserials []ItfhwUsbserial
 
-var _ sophos.RestObject = &ItfhwUsbserial{}
+// ItfhwUsbserial represents a UTM USB serial interface
+type ItfhwUsbserial struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Name      string `json:"name"`
+	// Product default value is ""
+	Product string `json:"product"`
+	// Vendor default value is ""
+	Vendor  string `json:"vendor"`
+	Comment string `json:"comment"`
+	// Control description: (REGEX)
+	// Control default value is ""
+	Control     string `json:"control"`
+	Description string `json:"description"`
+	// Hardware description: (REGEX)
+	Hardware string `json:"hardware"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwUsbserial GET path
+var _ sophos.RestGetter = &ItfhwUsbserial{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwUsbserials GET path
 // Returns all available itfhw/usbserial objects
-func (*ItfhwUsbserial) GetPath() string { return "/api/objects/itfhw/usbserial/" }
+func (*ItfhwUsbserials) GetPath() string { return "/api/objects/itfhw/usbserial/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwUsbserial) RefRequired() (string, bool) { return "", false }
+func (*ItfhwUsbserials) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwUsbserials GET path
+// Returns all available usbserial types
+func (i *ItfhwUsbserial) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwUsbserial) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwUsbserial DELETE path
 // Creates or updates the complete object usbserial
@@ -642,17 +965,40 @@ func (*ItfhwUsbserial) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/itfhw/usbserial/%s/usedby", ref)
 }
 
-// ItfhwVirtual is an Sophos Endpoint subType and implements sophos.RestObject
-type ItfhwVirtual []interface{}
+// ItfhwVirtuals is an Sophos Endpoint subType and implements sophos.RestObject
+type ItfhwVirtuals []ItfhwVirtual
 
-var _ sophos.RestObject = &ItfhwVirtual{}
+// ItfhwVirtual represents a UTM virtual interface
+type ItfhwVirtual struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Description default value is "IPv6 Tunnel"
+	Description string `json:"description"`
+	// Hardware can be one of: []string{"6to4", "aiccu", "tspc", "teredo", "he.net"}
+	// Hardware default value is "teredo"
+	Hardware string `json:"hardware"`
+	Name     string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ItfhwVirtual GET path
+var _ sophos.RestGetter = &ItfhwVirtual{}
+
+// GetPath implements sophos.RestObject and returns the ItfhwVirtuals GET path
 // Returns all available itfhw/virtual objects
-func (*ItfhwVirtual) GetPath() string { return "/api/objects/itfhw/virtual/" }
+func (*ItfhwVirtuals) GetPath() string { return "/api/objects/itfhw/virtual/" }
 
 // RefRequired implements sophos.RestObject
-func (*ItfhwVirtual) RefRequired() (string, bool) { return "", false }
+func (*ItfhwVirtuals) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ItfhwVirtuals GET path
+// Returns all available virtual types
+func (i *ItfhwVirtual) GetPath() string {
+	return fmt.Sprintf("/api/objects/itfhw/virtual/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *ItfhwVirtual) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ItfhwVirtual DELETE path
 // Creates or updates the complete object virtual

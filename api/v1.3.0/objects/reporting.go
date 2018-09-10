@@ -101,17 +101,37 @@ func (Reporting) References() []string {
 	}
 }
 
-// ReportingDepartment is an Sophos Endpoint subType and implements sophos.RestObject
-type ReportingDepartment []interface{}
+// ReportingDepartments is an Sophos Endpoint subType and implements sophos.RestObject
+type ReportingDepartments []ReportingDepartment
 
-var _ sophos.RestObject = &ReportingDepartment{}
+// ReportingDepartment represents a UTM department
+type ReportingDepartment struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Comment   string        `json:"comment"`
+	Name      string        `json:"name"`
+	Networks  []interface{} `json:"networks"`
+	Users     []interface{} `json:"users"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReportingDepartment GET path
+var _ sophos.RestGetter = &ReportingDepartment{}
+
+// GetPath implements sophos.RestObject and returns the ReportingDepartments GET path
 // Returns all available reporting/department objects
-func (*ReportingDepartment) GetPath() string { return "/api/objects/reporting/department/" }
+func (*ReportingDepartments) GetPath() string { return "/api/objects/reporting/department/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReportingDepartment) RefRequired() (string, bool) { return "", false }
+func (*ReportingDepartments) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReportingDepartments GET path
+// Returns all available department types
+func (r *ReportingDepartment) GetPath() string {
+	return fmt.Sprintf("/api/objects/reporting/department/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReportingDepartment) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReportingDepartment DELETE path
 // Creates or updates the complete object department
@@ -217,17 +237,35 @@ func (*ReportingFilter) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (r *ReportingFilter) GetType() string { return r._type }
 
-// ReportingGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type ReportingGroup []interface{}
+// ReportingGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type ReportingGroups []ReportingGroup
 
-var _ sophos.RestObject = &ReportingGroup{}
+// ReportingGroup represents a UTM group
+type ReportingGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReportingGroup GET path
+var _ sophos.RestGetter = &ReportingGroup{}
+
+// GetPath implements sophos.RestObject and returns the ReportingGroups GET path
 // Returns all available reporting/group objects
-func (*ReportingGroup) GetPath() string { return "/api/objects/reporting/group/" }
+func (*ReportingGroups) GetPath() string { return "/api/objects/reporting/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReportingGroup) RefRequired() (string, bool) { return "", false }
+func (*ReportingGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReportingGroups GET path
+// Returns all available group types
+func (r *ReportingGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/reporting/group/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReportingGroup) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReportingGroup DELETE path
 // Creates or updates the complete object group
@@ -259,17 +297,42 @@ func (*ReportingGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/reporting/group/%s/usedby", ref)
 }
 
-// ReportingMail is an Sophos Endpoint subType and implements sophos.RestObject
-type ReportingMail []interface{}
+// ReportingMails is an Sophos Endpoint subType and implements sophos.RestObject
+type ReportingMails []ReportingMail
 
-var _ sophos.RestObject = &ReportingMail{}
+// ReportingMail represents a UTM scheduled report
+type ReportingMail struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Filters   []interface{} `json:"filters"`
+	// Interval can be one of: []string{"daily", "weekly", "monthly"}
+	// Interval default value is "daily"
+	Interval   string        `json:"interval"`
+	Name       string        `json:"name"`
+	Recipients []interface{} `json:"recipients"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the ReportingMail GET path
+var _ sophos.RestGetter = &ReportingMail{}
+
+// GetPath implements sophos.RestObject and returns the ReportingMails GET path
 // Returns all available reporting/mail objects
-func (*ReportingMail) GetPath() string { return "/api/objects/reporting/mail/" }
+func (*ReportingMails) GetPath() string { return "/api/objects/reporting/mail/" }
 
 // RefRequired implements sophos.RestObject
-func (*ReportingMail) RefRequired() (string, bool) { return "", false }
+func (*ReportingMails) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the ReportingMails GET path
+// Returns all available mail types
+func (r *ReportingMail) GetPath() string {
+	return fmt.Sprintf("/api/objects/reporting/mail/%s", r.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (r *ReportingMail) RefRequired() (string, bool) { return r.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the ReportingMail DELETE path
 // Creates or updates the complete object mail

@@ -66,17 +66,40 @@ func (Ftp) References() []string {
 	}
 }
 
-// FtpException is an Sophos Endpoint subType and implements sophos.RestObject
-type FtpException []interface{}
+// FtpExceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type FtpExceptions []FtpException
 
-var _ sophos.RestObject = &FtpException{}
+// FtpException represents a UTM FTP filter exception
+type FtpException struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Server    []interface{} `json:"server"`
+	Skiplist  []interface{} `json:"skiplist"`
+	// Status default value is false
+	Status  bool          `json:"status"`
+	Client  []interface{} `json:"client"`
+	Comment string        `json:"comment"`
+	Name    string        `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the FtpException GET path
+var _ sophos.RestGetter = &FtpException{}
+
+// GetPath implements sophos.RestObject and returns the FtpExceptions GET path
 // Returns all available ftp/exception objects
-func (*FtpException) GetPath() string { return "/api/objects/ftp/exception/" }
+func (*FtpExceptions) GetPath() string { return "/api/objects/ftp/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*FtpException) RefRequired() (string, bool) { return "", false }
+func (*FtpExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the FtpExceptions GET path
+// Returns all available exception types
+func (f *FtpException) GetPath() string {
+	return fmt.Sprintf("/api/objects/ftp/exception/%s", f.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (f *FtpException) RefRequired() (string, bool) { return f.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the FtpException DELETE path
 // Creates or updates the complete object exception
@@ -108,17 +131,33 @@ func (*FtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ftp/exception/%s/usedby", ref)
 }
 
-// FtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type FtpGroup []interface{}
+// FtpGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type FtpGroups []FtpGroup
 
-var _ sophos.RestObject = &FtpGroup{}
+// FtpGroup represents a UTM group
+type FtpGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the FtpGroup GET path
+var _ sophos.RestGetter = &FtpGroup{}
+
+// GetPath implements sophos.RestObject and returns the FtpGroups GET path
 // Returns all available ftp/group objects
-func (*FtpGroup) GetPath() string { return "/api/objects/ftp/group/" }
+func (*FtpGroups) GetPath() string { return "/api/objects/ftp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*FtpGroup) RefRequired() (string, bool) { return "", false }
+func (*FtpGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the FtpGroups GET path
+// Returns all available group types
+func (f *FtpGroup) GetPath() string { return fmt.Sprintf("/api/objects/ftp/group/%s", f.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (f *FtpGroup) RefRequired() (string, bool) { return f.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the FtpGroup DELETE path
 // Creates or updates the complete object group

@@ -254,17 +254,59 @@ func (*NetworkAny) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (n *NetworkAny) GetType() string { return n._type }
 
-// NetworkAvailabilityGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkAvailabilityGroup []interface{}
+// NetworkAvailabilityGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkAvailabilityGroups []NetworkAvailabilityGroup
 
-var _ sophos.RestObject = &NetworkAvailabilityGroup{}
+// NetworkAvailabilityGroup represents a UTM availability group
+type NetworkAvailabilityGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Address description: (IPADDR)
+	// Address default value is "0.0.0.0"
+	Address string `json:"address"`
+	// Address6 description: (IP6ADDR)
+	// Address6 default value is "::"
+	Address6 string `json:"address6"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// CheckData default value is ""
+	CheckData string `json:"check_data"`
+	Name      string `json:"name"`
+	// Resolved default value is false
+	Resolved bool `json:"resolved"`
+	// Resolved6 default value is false
+	Resolved6 bool   `json:"resolved6"`
+	Comment   string `json:"comment"`
+	Timeout   int    `json:"timeout"`
+	Timeout2  int    `json:"timeout2"`
+	CheckPort int    `json:"check_port"`
+	// CheckType can be one of: []string{"icmp", "udp", "tcp", "http", "https"}
+	// CheckType default value is "icmp"
+	CheckType string        `json:"check_type"`
+	Members   []interface{} `json:"members"`
+	// Sticky default value is true
+	Sticky bool `json:"sticky"`
+}
 
-// GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroup GET path
+var _ sophos.RestGetter = &NetworkAvailabilityGroup{}
+
+// GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroups GET path
 // Returns all available network/availability_group objects
-func (*NetworkAvailabilityGroup) GetPath() string { return "/api/objects/network/availability_group/" }
+func (*NetworkAvailabilityGroups) GetPath() string { return "/api/objects/network/availability_group/" }
 
 // RefRequired implements sophos.RestObject
-func (*NetworkAvailabilityGroup) RefRequired() (string, bool) { return "", false }
+func (*NetworkAvailabilityGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkAvailabilityGroups GET path
+// Returns all available availability_group types
+func (n *NetworkAvailabilityGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/availability_group/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkAvailabilityGroup) RefRequired() (string, bool) { return n.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the NetworkAvailabilityGroup DELETE path
 // Creates or updates the complete object availability_group
@@ -776,17 +818,43 @@ func (*NetworkInterfaceNetwork) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (n *NetworkInterfaceNetwork) GetType() string { return n._type }
 
-// NetworkMulticast is an Sophos Endpoint subType and implements sophos.RestObject
-type NetworkMulticast []interface{}
+// NetworkMulticasts is an Sophos Endpoint subType and implements sophos.RestObject
+type NetworkMulticasts []NetworkMulticast
 
-var _ sophos.RestObject = &NetworkMulticast{}
+// NetworkMulticast represents a UTM multicast group
+type NetworkMulticast struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Netmask   int    `json:"netmask"`
+	// Resolved default value is true
+	Resolved bool `json:"resolved"`
+	// Address description: (IPADDR)
+	Address string `json:"address"`
+	Comment string `json:"comment"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the NetworkMulticast GET path
+var _ sophos.RestGetter = &NetworkMulticast{}
+
+// GetPath implements sophos.RestObject and returns the NetworkMulticasts GET path
 // Returns all available network/multicast objects
-func (*NetworkMulticast) GetPath() string { return "/api/objects/network/multicast/" }
+func (*NetworkMulticasts) GetPath() string { return "/api/objects/network/multicast/" }
 
 // RefRequired implements sophos.RestObject
-func (*NetworkMulticast) RefRequired() (string, bool) { return "", false }
+func (*NetworkMulticasts) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the NetworkMulticasts GET path
+// Returns all available multicast types
+func (n *NetworkMulticast) GetPath() string {
+	return fmt.Sprintf("/api/objects/network/multicast/%s", n.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (n *NetworkMulticast) RefRequired() (string, bool) { return n.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the NetworkMulticast DELETE path
 // Creates or updates the complete object multicast

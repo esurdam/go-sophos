@@ -49,14 +49,18 @@ type (
 	swag struct {
 		Paths map[string]methodMap
 		// Definitions are Object definitions
-		Definitions map[string]struct {
-			Properties map[string]struct {
-				Type    string
-				Default interface{}
-			}
-			Description string
+		Definitions map[string]subTypeDef
+	}
+	subTypeDef struct {
+		Properties map[string]struct {
 			Type        string
+			Enum        []string
+			Items       map[string]string
+			Default     interface{}
+			Description string
 		}
+		Description string
+		Type        string
 	}
 	methodMap map[string]struct {
 		Description string
@@ -88,6 +92,7 @@ type (
 		GetPaths          []string
 		PutPath           string
 		PostPath          string
+		Type              subTypeDef
 		DeletePath        string
 		PatchPath         string
 		HasRef            bool
@@ -181,6 +186,7 @@ func main() {
 				panic(err)
 			}
 		}
+
 		fmt.Printf("writing %s\n", def.Name)
 		err = def.Endpoint.ExecuteTemplate(f)
 		if err != nil {
@@ -456,6 +462,7 @@ func (def *definition) process() error {
 			}
 
 			if method == "get" {
+				s.Type = def.Swag.Definitions[strings.Replace(d.Tags[0], "/", ".", -1)]
 				s.GetPaths = []string{path}
 				if !s.HasRef && !usedby {
 					// s.GetPath = path
@@ -467,16 +474,10 @@ func (def *definition) process() error {
 				}
 			}
 
-			// TODO: make struct based on properties defined in s.MethodDescs
 			if method == "put" {
 				s.PutPath = path
 			}
 			if method == "post" {
-				enc := json.NewEncoder(os.Stdout)
-				enc.SetIndent("", "    ")
-				if err := enc.Encode(def.Swag.Definitions[strings.Replace(d.Tags[0], "/", ".", -1)]); err != nil {
-					panic(err)
-				}
 				s.PostPath = path
 			}
 			if method == "delete" {
@@ -592,6 +593,7 @@ func (n *endpoint) AddSubType(s subtype) {
 			}
 
 			if s.GetPath != "" {
+				n.SubTypes[idx].Type = s.Type
 				n.SubTypes[idx].GetPath = s.GetPath
 			}
 
@@ -684,12 +686,50 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 			}
 			if strings.HasSuffix(line, " []interface{}\n") {
 				// 	// make pluralized
+				s.IsPlural = true
 				s.IsPluralInterface = true
-				// 	newLine := strings.Replace(line, " []interface{}", "s []"+toCamelInitCase(name, true), 1)
-				// 	outBuf.Write([]byte(newLine))
-				// 	newType := strings.Replace(line, " []interface{}", " interface{}", 1)
-				// 	outBuf.Write([]byte(newType))
-				// 	continue
+				newLine := strings.Replace(line, " []interface{}", "s []"+name, 1)
+				outBuf.Write([]byte(newLine))
+				outBuf.Write([]byte("// " + name + " represents a UTM " + s.Type.Description + "\n"))
+				newType := strings.Replace(line, " []interface{}", " struct {", 1)
+
+				// Write the struct from the subtType
+				outBuf.Write([]byte(newType))
+				outBuf.Write([]byte("Locked string `json:\"_locked\"`\n"))
+				outBuf.Write([]byte("Reference string `json:\"_ref\"`\n"))
+				outBuf.Write([]byte("_type string `json:\"_type\"`\n"))
+				for k, p := range s.Type.Properties {
+					if p.Description != "" {
+						outBuf.Write([]byte(fmt.Sprintf("// %s description: %s\n", toCamelInitCase(k, true), p.Description)))
+					}
+					if len(p.Enum) > 0 {
+						outBuf.Write([]byte(fmt.Sprintf("// %s can be one of: %#v\n", toCamelInitCase(k, true), p.Enum)))
+					}
+					switch p.Type {
+					case "string":
+						if v, ok := p.Default.(string); ok {
+							outBuf.Write([]byte(fmt.Sprintf("// %s default value is %#v\n", toCamelInitCase(k, true), v)))
+						}
+						outBuf.Write([]byte(fmt.Sprintf("%s string `json:\"%s\"`\n", toCamelInitCase(k, true), k)))
+					case "integer":
+						if v, ok := p.Default.(int); ok {
+							outBuf.Write([]byte(fmt.Sprintf("// %s default value is %d\n", toCamelInitCase(k, true), v)))
+						}
+						outBuf.Write([]byte(fmt.Sprintf("%s int `json:\"%s\"`\n", toCamelInitCase(k, true), k)))
+					case "boolean":
+						if v, ok := p.Default.(bool); ok {
+							outBuf.Write([]byte(fmt.Sprintf("// %s default value is %#v\n", toCamelInitCase(k, true), v)))
+						}
+						outBuf.Write([]byte(fmt.Sprintf("%s bool `json:\"%s\"`\n", toCamelInitCase(k, true), k)))
+					case "array":
+						outBuf.Write([]byte(fmt.Sprintf("%s []interface{} `json:\"%s\"`\n", toCamelInitCase(k, true), k)))
+					default:
+						fmt.Printf("Do not know type \"%s\" for %s: %s\n", p.Type, k, p.Description)
+						outBuf.Write([]byte(fmt.Sprintf("%s interface{} `json:\"%s\"`\n", toCamelInitCase(k, true), k)))
+					}
+				}
+				outBuf.Write([]byte("}\n"))
+				continue
 			}
 		}
 
@@ -745,7 +785,7 @@ func toCamelInitCase(s string, initCase bool) string {
 // }
 // }
 
-var nodeTemplate = `
+var endpointTemplate = `
 // {{.Title}} is a generated struct representing the Sophos {{.Title}} Endpoint
 // GET {{.Path}}
 {{if eq .Bytes ""}}type {{.Title}} struct {
@@ -795,6 +835,7 @@ func({{.Title}}) References() []string {
 {{.Bytes}}
 
 {{if .IsPlural}}
+
 var _ sophos.RestGetter = &{{.Name}}{}
 // GetPath implements sophos.RestObject and returns the {{.Name}}s GET path{{getDesc . .GetPath "get"}}
 func(*{{.Name}}s) GetPath() string { return "/api{{.GetPath}}" }
@@ -875,7 +916,7 @@ var funcMap = template.FuncMap{
 }
 
 func (n *endpoint) ExecuteTemplate(w io.Writer) error {
-	tmpl, err := template.New("").Funcs(funcMap).Parse(nodeTemplate)
+	tmpl, err := template.New("").Funcs(funcMap).Parse(endpointTemplate)
 	if err != nil {
 		return err
 	}

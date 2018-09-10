@@ -73,17 +73,39 @@ func (IpsecRemoteAuth) References() []string {
 	}
 }
 
-// IpsecRemoteAuthCa is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthCa []interface{}
+// IpsecRemoteAuthCas is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthCas []IpsecRemoteAuthCa
 
-var _ sophos.RestObject = &IpsecRemoteAuthCa{}
+// IpsecRemoteAuthCa represents a UTM X509 CA and DN match
+type IpsecRemoteAuthCa struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// VpnId default value is "C=*, ST=*, L=*, O=*, OU=*, CN=*, E=*"
+	VpnId string `json:"vpn_id"`
+	// Certificate description: REF(ca/signing_ca), REF(ca/verification_ca)
+	Certificate string `json:"certificate"`
+	Comment     string `json:"comment"`
+	Name        string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthCa GET path
+var _ sophos.RestGetter = &IpsecRemoteAuthCa{}
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthCas GET path
 // Returns all available ipsec_remote_auth/ca objects
-func (*IpsecRemoteAuthCa) GetPath() string { return "/api/objects/ipsec_remote_auth/ca/" }
+func (*IpsecRemoteAuthCas) GetPath() string { return "/api/objects/ipsec_remote_auth/ca/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthCa) RefRequired() (string, bool) { return "", false }
+func (*IpsecRemoteAuthCas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthCas GET path
+// Returns all available ca types
+func (i *IpsecRemoteAuthCa) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/ca/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecRemoteAuthCa) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthCa DELETE path
 // Creates or updates the complete object ca
@@ -115,17 +137,35 @@ func (*IpsecRemoteAuthCa) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/ipsec_remote_auth/ca/%s/usedby", ref)
 }
 
-// IpsecRemoteAuthGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthGroup []interface{}
+// IpsecRemoteAuthGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthGroups []IpsecRemoteAuthGroup
 
-var _ sophos.RestObject = &IpsecRemoteAuthGroup{}
+// IpsecRemoteAuthGroup represents a UTM group
+type IpsecRemoteAuthGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthGroup GET path
+var _ sophos.RestGetter = &IpsecRemoteAuthGroup{}
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthGroups GET path
 // Returns all available ipsec_remote_auth/group objects
-func (*IpsecRemoteAuthGroup) GetPath() string { return "/api/objects/ipsec_remote_auth/group/" }
+func (*IpsecRemoteAuthGroups) GetPath() string { return "/api/objects/ipsec_remote_auth/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthGroup) RefRequired() (string, bool) { return "", false }
+func (*IpsecRemoteAuthGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthGroups GET path
+// Returns all available group types
+func (i *IpsecRemoteAuthGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/group/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecRemoteAuthGroup) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthGroup DELETE path
 // Creates or updates the complete object group
@@ -223,17 +263,40 @@ func (*IpsecRemoteAuthPsk) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (i *IpsecRemoteAuthPsk) GetType() string { return i._type }
 
-// IpsecRemoteAuthRsa is an Sophos Endpoint subType and implements sophos.RestObject
-type IpsecRemoteAuthRsa []interface{}
+// IpsecRemoteAuthRsas is an Sophos Endpoint subType and implements sophos.RestObject
+type IpsecRemoteAuthRsas []IpsecRemoteAuthRsa
 
-var _ sophos.RestObject = &IpsecRemoteAuthRsa{}
+// IpsecRemoteAuthRsa represents a UTM RSA public key
+type IpsecRemoteAuthRsa struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+	Pubkey    string `json:"pubkey"`
+	// VpnId default value is ""
+	VpnId string `json:"vpn_id"`
+	// VpnIdType can be one of: []string{"ipv4_address", "fqdn", "user_fqdn"}
+	VpnIdType string `json:"vpn_id_type"`
+}
 
-// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthRsa GET path
+var _ sophos.RestGetter = &IpsecRemoteAuthRsa{}
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthRsas GET path
 // Returns all available ipsec_remote_auth/rsa objects
-func (*IpsecRemoteAuthRsa) GetPath() string { return "/api/objects/ipsec_remote_auth/rsa/" }
+func (*IpsecRemoteAuthRsas) GetPath() string { return "/api/objects/ipsec_remote_auth/rsa/" }
 
 // RefRequired implements sophos.RestObject
-func (*IpsecRemoteAuthRsa) RefRequired() (string, bool) { return "", false }
+func (*IpsecRemoteAuthRsas) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the IpsecRemoteAuthRsas GET path
+// Returns all available rsa types
+func (i *IpsecRemoteAuthRsa) GetPath() string {
+	return fmt.Sprintf("/api/objects/ipsec_remote_auth/rsa/%s", i.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (i *IpsecRemoteAuthRsa) RefRequired() (string, bool) { return i.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the IpsecRemoteAuthRsa DELETE path
 // Creates or updates the complete object rsa

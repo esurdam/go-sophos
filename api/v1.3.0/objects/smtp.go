@@ -120,17 +120,41 @@ func (Smtp) References() []string {
 	}
 }
 
-// SmtpException is an Sophos Endpoint subType and implements sophos.RestObject
-type SmtpException []interface{}
+// SmtpExceptions is an Sophos Endpoint subType and implements sophos.RestObject
+type SmtpExceptions []SmtpException
 
-var _ sophos.RestObject = &SmtpException{}
+// SmtpException represents a UTM SMTP filter exception
+type SmtpException struct {
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	_type      string        `json:"_type"`
+	Name       string        `json:"name"`
+	Networks   []interface{} `json:"networks"`
+	Recipients []interface{} `json:"recipients"`
+	Senders    []interface{} `json:"senders"`
+	Skiplist   []interface{} `json:"skiplist"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+}
 
-// GetPath implements sophos.RestObject and returns the SmtpException GET path
+var _ sophos.RestGetter = &SmtpException{}
+
+// GetPath implements sophos.RestObject and returns the SmtpExceptions GET path
 // Returns all available smtp/exception objects
-func (*SmtpException) GetPath() string { return "/api/objects/smtp/exception/" }
+func (*SmtpExceptions) GetPath() string { return "/api/objects/smtp/exception/" }
 
 // RefRequired implements sophos.RestObject
-func (*SmtpException) RefRequired() (string, bool) { return "", false }
+func (*SmtpExceptions) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SmtpExceptions GET path
+// Returns all available exception types
+func (s *SmtpException) GetPath() string {
+	return fmt.Sprintf("/api/objects/smtp/exception/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SmtpException) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SmtpException DELETE path
 // Creates or updates the complete object exception
@@ -162,17 +186,33 @@ func (*SmtpException) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/exception/%s/usedby", ref)
 }
 
-// SmtpGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type SmtpGroup []interface{}
+// SmtpGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type SmtpGroups []SmtpGroup
 
-var _ sophos.RestObject = &SmtpGroup{}
+// SmtpGroup represents a UTM group
+type SmtpGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the SmtpGroup GET path
+var _ sophos.RestGetter = &SmtpGroup{}
+
+// GetPath implements sophos.RestObject and returns the SmtpGroups GET path
 // Returns all available smtp/group objects
-func (*SmtpGroup) GetPath() string { return "/api/objects/smtp/group/" }
+func (*SmtpGroups) GetPath() string { return "/api/objects/smtp/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*SmtpGroup) RefRequired() (string, bool) { return "", false }
+func (*SmtpGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SmtpGroups GET path
+// Returns all available group types
+func (s *SmtpGroup) GetPath() string { return fmt.Sprintf("/api/objects/smtp/group/%s", s.Reference) }
+
+// RefRequired implements sophos.RestObject
+func (s *SmtpGroup) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SmtpGroup DELETE path
 // Creates or updates the complete object group
@@ -204,17 +244,41 @@ func (*SmtpGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/smtp/group/%s/usedby", ref)
 }
 
-// SmtpHeaderOperation is an Sophos Endpoint subType and implements sophos.RestObject
-type SmtpHeaderOperation []interface{}
+// SmtpHeaderOperations is an Sophos Endpoint subType and implements sophos.RestObject
+type SmtpHeaderOperations []SmtpHeaderOperation
 
-var _ sophos.RestObject = &SmtpHeaderOperation{}
+// SmtpHeaderOperation represents a UTM Header modification operation
+type SmtpHeaderOperation struct {
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	_type      string `json:"_type"`
+	Comment    string `json:"comment"`
+	HeaderName string `json:"header_name"`
+	Name       string `json:"name"`
+	// Operation can be one of: []string{"add", "delete"}
+	// Operation default value is "add"
+	Operation string `json:"operation"`
+	// Parameter default value is ""
+	Parameter string `json:"parameter"`
+}
 
-// GetPath implements sophos.RestObject and returns the SmtpHeaderOperation GET path
+var _ sophos.RestGetter = &SmtpHeaderOperation{}
+
+// GetPath implements sophos.RestObject and returns the SmtpHeaderOperations GET path
 // Returns all available smtp/header_operation objects
-func (*SmtpHeaderOperation) GetPath() string { return "/api/objects/smtp/header_operation/" }
+func (*SmtpHeaderOperations) GetPath() string { return "/api/objects/smtp/header_operation/" }
 
 // RefRequired implements sophos.RestObject
-func (*SmtpHeaderOperation) RefRequired() (string, bool) { return "", false }
+func (*SmtpHeaderOperations) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the SmtpHeaderOperations GET path
+// Returns all available header_operation types
+func (s *SmtpHeaderOperation) GetPath() string {
+	return fmt.Sprintf("/api/objects/smtp/header_operation/%s", s.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (s *SmtpHeaderOperation) RefRequired() (string, bool) { return s.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the SmtpHeaderOperation DELETE path
 // Creates or updates the complete object header_operation

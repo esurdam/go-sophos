@@ -128,17 +128,56 @@ func (Packetfilter) References() []string {
 	}
 }
 
-// Packetfilter1to1Nat is an Sophos Endpoint subType and implements sophos.RestObject
-type Packetfilter1to1Nat []interface{}
+// Packetfilter1to1Nats is an Sophos Endpoint subType and implements sophos.RestObject
+type Packetfilter1to1Nats []Packetfilter1to1Nat
 
-var _ sophos.RestObject = &Packetfilter1to1Nat{}
+// Packetfilter1to1Nat represents a UTM 1to1nat
+type Packetfilter1to1Nat struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// MapTo description: REF(network/network)
+	MapTo string `json:"map_to"`
+	// Mode can be one of: []string{"mapsrc", "mapdst"}
+	Mode string `json:"mode"`
+	Name string `json:"name"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// Source description: REF(network/*)
+	Source string `json:"source"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	// Log default value is false
+	Log bool `json:"log"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// AutoPfrule default value is false
+	AutoPfrule bool   `json:"auto_pfrule"`
+	Comment    string `json:"comment"`
+	// Group default value is ""
+	Group string `json:"group"`
+}
 
-// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nat GET path
+var _ sophos.RestGetter = &Packetfilter1to1Nat{}
+
+// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nats GET path
 // Returns all available packetfilter/1to1nat objects
-func (*Packetfilter1to1Nat) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
+func (*Packetfilter1to1Nats) GetPath() string { return "/api/objects/packetfilter/1to1nat/" }
 
 // RefRequired implements sophos.RestObject
-func (*Packetfilter1to1Nat) RefRequired() (string, bool) { return "", false }
+func (*Packetfilter1to1Nats) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the Packetfilter1to1Nats GET path
+// Returns all available 1to1nat types
+func (p *Packetfilter1to1Nat) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *Packetfilter1to1Nat) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the Packetfilter1to1Nat DELETE path
 // Creates or updates the complete object 1to1nat
@@ -170,17 +209,46 @@ func (*Packetfilter1to1Nat) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/1to1nat/%s/usedby", ref)
 }
 
-// PacketfilterGenericProxy is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterGenericProxy []interface{}
+// PacketfilterGenericProxys is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterGenericProxys []PacketfilterGenericProxy
 
-var _ sophos.RestObject = &PacketfilterGenericProxy{}
+// PacketfilterGenericProxy represents a UTM generic proxy rule
+type PacketfilterGenericProxy struct {
+	Locked          string        `json:"_locked"`
+	Reference       string        `json:"_ref"`
+	_type           string        `json:"_type"`
+	AllowedNetworks []interface{} `json:"allowed_networks"`
+	Comment         string        `json:"comment"`
+	// Ininterface description: REF(interface/*)
+	Ininterface string `json:"ininterface"`
+	Name        string `json:"name"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Tohost description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Tohost string `json:"tohost"`
+	// Toservice description: REF(service/*)
+	Toservice string `json:"toservice"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterGenericProxy GET path
+var _ sophos.RestGetter = &PacketfilterGenericProxy{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterGenericProxys GET path
 // Returns all available packetfilter/generic_proxy objects
-func (*PacketfilterGenericProxy) GetPath() string { return "/api/objects/packetfilter/generic_proxy/" }
+func (*PacketfilterGenericProxys) GetPath() string { return "/api/objects/packetfilter/generic_proxy/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterGenericProxy) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterGenericProxys) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterGenericProxys GET path
+// Returns all available generic_proxy types
+func (p *PacketfilterGenericProxy) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterGenericProxy) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PacketfilterGenericProxy DELETE path
 // Creates or updates the complete object generic_proxy
@@ -212,17 +280,35 @@ func (*PacketfilterGenericProxy) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/generic_proxy/%s/usedby", ref)
 }
 
-// PacketfilterGroup is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterGroup []interface{}
+// PacketfilterGroups is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterGroups []PacketfilterGroup
 
-var _ sophos.RestObject = &PacketfilterGroup{}
+// PacketfilterGroup represents a UTM group
+type PacketfilterGroup struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	Name      string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterGroup GET path
+var _ sophos.RestGetter = &PacketfilterGroup{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterGroups GET path
 // Returns all available packetfilter/group objects
-func (*PacketfilterGroup) GetPath() string { return "/api/objects/packetfilter/group/" }
+func (*PacketfilterGroups) GetPath() string { return "/api/objects/packetfilter/group/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterGroup) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterGroups) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterGroups GET path
+// Returns all available group types
+func (p *PacketfilterGroup) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/group/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterGroup) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PacketfilterGroup DELETE path
 // Creates or updates the complete object group
@@ -254,17 +340,62 @@ func (*PacketfilterGroup) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/group/%s/usedby", ref)
 }
 
-// PacketfilterLoadbalance is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterLoadbalance []interface{}
+// PacketfilterLoadbalances is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterLoadbalances []PacketfilterLoadbalance
 
-var _ sophos.RestObject = &PacketfilterLoadbalance{}
+// PacketfilterLoadbalance represents a UTM load balancing rule
+type PacketfilterLoadbalance struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	Comment   string `json:"comment"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// ShutdownCondition description: REF(condition/objref)
+	// ShutdownCondition default value is ""
+	ShutdownCondition string `json:"shutdown_condition"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// AutoPfrule default value is true
+	AutoPfrule bool `json:"auto_pfrule"`
+	// Destination description: REF(network/*)
+	Destination         string        `json:"destination"`
+	DestinationNatGroup []interface{} `json:"destination_nat_group"`
+	// DestinationNatStatus description: (HASH)
+	DestinationNatStatus interface{} `json:"destination_nat_status"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
+	// DestinationNatStatus6 description: (HASH)
+	DestinationNatStatus6 interface{} `json:"destination_nat_status6"`
+	// Scheduler description: REF(scheduler/loadbalance)
+	// Scheduler default value is ""
+	Scheduler string `json:"scheduler"`
+	// ShutdownAddress default value is false
+	ShutdownAddress bool `json:"shutdown_address"`
+	// ShutdownOverride description: REF(override/objref)
+	// ShutdownOverride default value is ""
+	ShutdownOverride string `json:"shutdown_override"`
+	Name             string `json:"name"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalance GET path
+var _ sophos.RestGetter = &PacketfilterLoadbalance{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalances GET path
 // Returns all available packetfilter/loadbalance objects
-func (*PacketfilterLoadbalance) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
+func (*PacketfilterLoadbalances) GetPath() string { return "/api/objects/packetfilter/loadbalance/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterLoadbalance) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterLoadbalances) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterLoadbalances GET path
+// Returns all available loadbalance types
+func (p *PacketfilterLoadbalance) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterLoadbalance) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PacketfilterLoadbalance DELETE path
 // Creates or updates the complete object loadbalance
@@ -296,17 +427,46 @@ func (*PacketfilterLoadbalance) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api/objects/packetfilter/loadbalance/%s/usedby", ref)
 }
 
-// PacketfilterMangle is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterMangle []interface{}
+// PacketfilterMangles is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterMangles []PacketfilterMangle
 
-var _ sophos.RestObject = &PacketfilterMangle{}
+// PacketfilterMangle represents a UTM packet mangle rule
+type PacketfilterMangle struct {
+	Locked    string `json:"_locked"`
+	Reference string `json:"_ref"`
+	_type     string `json:"_type"`
+	// Status default value is false
+	Status  bool          `json:"status"`
+	Action  []interface{} `json:"action"`
+	Comment string        `json:"comment"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	// Direction can be one of: []string{"in", "out"}
+	Direction string `json:"direction"`
+	Name      string `json:"name"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// Source description: REF(network/*)
+	Source string `json:"source"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterMangle GET path
+var _ sophos.RestGetter = &PacketfilterMangle{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterMangles GET path
 // Returns all available packetfilter/mangle objects
-func (*PacketfilterMangle) GetPath() string { return "/api/objects/packetfilter/mangle/" }
+func (*PacketfilterMangles) GetPath() string { return "/api/objects/packetfilter/mangle/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterMangle) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterMangles) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterMangles GET path
+// Returns all available mangle types
+func (p *PacketfilterMangle) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/mangle/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterMangle) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PacketfilterMangle DELETE path
 // Creates or updates the complete object mangle
@@ -559,17 +719,40 @@ func (*PacketfilterPacketfilter) UsedByPath(ref string) string {
 // GetType implements sophos.Object
 func (p *PacketfilterPacketfilter) GetType() string { return p._type }
 
-// PacketfilterRuleset is an Sophos Endpoint subType and implements sophos.RestObject
-type PacketfilterRuleset []interface{}
+// PacketfilterRulesets is an Sophos Endpoint subType and implements sophos.RestObject
+type PacketfilterRulesets []PacketfilterRuleset
 
-var _ sophos.RestObject = &PacketfilterRuleset{}
+// PacketfilterRuleset represents a UTM ruleset
+type PacketfilterRuleset struct {
+	Locked    string        `json:"_locked"`
+	Reference string        `json:"_ref"`
+	_type     string        `json:"_type"`
+	Comment   string        `json:"comment"`
+	Name      string        `json:"name"`
+	Rules     []interface{} `json:"rules"`
+	// RulesStatus description: (HASH)
+	RulesStatus interface{} `json:"rules_status"`
+	// Status default value is false
+	Status bool `json:"status"`
+}
 
-// GetPath implements sophos.RestObject and returns the PacketfilterRuleset GET path
+var _ sophos.RestGetter = &PacketfilterRuleset{}
+
+// GetPath implements sophos.RestObject and returns the PacketfilterRulesets GET path
 // Returns all available packetfilter/ruleset objects
-func (*PacketfilterRuleset) GetPath() string { return "/api/objects/packetfilter/ruleset/" }
+func (*PacketfilterRulesets) GetPath() string { return "/api/objects/packetfilter/ruleset/" }
 
 // RefRequired implements sophos.RestObject
-func (*PacketfilterRuleset) RefRequired() (string, bool) { return "", false }
+func (*PacketfilterRulesets) RefRequired() (string, bool) { return "", false }
+
+// GetPath implements sophos.RestObject and returns the PacketfilterRulesets GET path
+// Returns all available ruleset types
+func (p *PacketfilterRuleset) GetPath() string {
+	return fmt.Sprintf("/api/objects/packetfilter/ruleset/%s", p.Reference)
+}
+
+// RefRequired implements sophos.RestObject
+func (p *PacketfilterRuleset) RefRequired() (string, bool) { return p.Reference, true }
 
 // DeletePath implements sophos.RestObject and returns the PacketfilterRuleset DELETE path
 // Creates or updates the complete object ruleset
