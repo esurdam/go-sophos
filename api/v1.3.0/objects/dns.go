@@ -72,10 +72,10 @@ type DnsAxfrs []DnsAxfr
 
 // DnsAxfr represents a UTM DNS slave zone
 type DnsAxfr struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
 	// Status default value is false
 	Status bool `json:"status"`
 	// Zone description: (HOSTNAME)
@@ -135,11 +135,11 @@ type DnsGroups []DnsGroup
 
 // DnsGroup represents a UTM group
 type DnsGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &DnsGroup{}
@@ -193,14 +193,14 @@ type DnsRoutes []DnsRoute
 
 // DnsRoute is a generated Sophos object
 type DnsRoute struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Name      string   `json:"name"`
-	Prefix    string   `json:"prefix"`
-	Status    bool     `json:"status"`
-	Targets   []string `json:"targets"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	Name       string   `json:"name"`
+	Prefix     string   `json:"prefix"`
+	Status     bool     `json:"status"`
+	Targets    []string `json:"targets"`
 }
 
 var _ sophos.RestGetter = &DnsRoute{}
@@ -250,4 +250,4 @@ func (*DnsRoute) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (d *DnsRoute) GetType() string { return d._type }
+func (d *DnsRoute) GetType() string { return d.ObjectType }

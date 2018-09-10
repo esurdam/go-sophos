@@ -60,11 +60,11 @@ type MacListGroups []MacListGroup
 
 // MacListGroup represents a UTM group
 type MacListGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &MacListGroup{}
@@ -122,11 +122,11 @@ type MacListMacLists []MacListMacList
 type MacListMacList struct {
 	Locked      string        `json:"_locked"`
 	Reference   string        `json:"_ref"`
-	_type       string        `json:"_type"`
-	HostList    []interface{} `json:"host_list"`
-	Name        string        `json:"name"`
+	ObjectType  string        `json:"_type"`
 	AddressList []interface{} `json:"address_list"`
 	Comment     string        `json:"comment"`
+	HostList    []interface{} `json:"host_list"`
+	Name        string        `json:"name"`
 }
 
 var _ sophos.RestGetter = &MacListMacList{}

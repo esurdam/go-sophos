@@ -69,7 +69,7 @@ type AmazonVpcConnections []AmazonVpcConnection
 type AmazonVpcConnection struct {
 	Locked     string   `json:"_locked"`
 	Reference  string   `json:"_ref"`
-	_type      string   `json:"_type"`
+	ObjectType string   `json:"_type"`
 	Comment    string   `json:"comment"`
 	Dev        string   `json:"dev"`
 	ID         string   `json:"id"`
@@ -132,18 +132,18 @@ func (*AmazonVpcConnection) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AmazonVpcConnection) GetType() string { return a._type }
+func (a *AmazonVpcConnection) GetType() string { return a.ObjectType }
 
 // AmazonVpcGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type AmazonVpcGroups []AmazonVpcGroup
 
 // AmazonVpcGroup represents a UTM group
 type AmazonVpcGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AmazonVpcGroup{}
@@ -199,15 +199,15 @@ type AmazonVpcTunnels []AmazonVpcTunnel
 
 // AmazonVpcTunnel is a generated Sophos object
 type AmazonVpcTunnel struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Address   string `json:"address"`
-	Bgp       string `json:"bgp"`
-	Comment   string `json:"comment"`
-	Ipsec     string `json:"ipsec"`
-	Name      string `json:"name"`
-	Netmask   int64  `json:"netmask"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Address    string `json:"address"`
+	Bgp        string `json:"bgp"`
+	Comment    string `json:"comment"`
+	Ipsec      string `json:"ipsec"`
+	Name       string `json:"name"`
+	Netmask    int64  `json:"netmask"`
 }
 
 var _ sophos.RestGetter = &AmazonVpcTunnel{}
@@ -259,4 +259,4 @@ func (*AmazonVpcTunnel) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AmazonVpcTunnel) GetType() string { return a._type }
+func (a *AmazonVpcTunnel) GetType() string { return a.ObjectType }

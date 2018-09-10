@@ -697,7 +697,7 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 				outBuf.Write([]byte(newType))
 				outBuf.Write([]byte("Locked string `json:\"_locked\"`\n"))
 				outBuf.Write([]byte("Reference string `json:\"_ref\"`\n"))
-				outBuf.Write([]byte("_type string `json:\"_type\"`\n"))
+				outBuf.Write([]byte("ObjectType string `json:\"_type\"`\n"))
 				for k, p := range s.Type.Properties {
 					if p.Description != "" {
 						outBuf.Write([]byte(fmt.Sprintf("// %s description: %s\n", toCamelInitCase(k, true), p.Description)))
@@ -735,7 +735,7 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 
 		if strings.Contains(line, "`json:\"_type\"`") {
 			s.IsType = true
-			line = strings.Replace(line, "Type", "_type", -1)
+			line = strings.Replace(line, "Type", "ObjectType", -1)
 		}
 		if strings.Contains(line, "`json:\"_ref\"`") {
 			line = strings.Replace(line, "Ref", "Reference", -1)
@@ -884,7 +884,7 @@ func(*{{.Name}}) UsedByPath(ref string) string {
 
 {{if .IsType}}
 // GetType implements sophos.Object
-func({{firstLetter .Name}} *{{.Name}}) GetType() string { return {{firstLetter .Name}}._type }
+func({{firstLetter .Name}} *{{.Name}}) GetType() string { return {{firstLetter .Name}}.ObjectType }
 {{end}}
 
 {{end}}

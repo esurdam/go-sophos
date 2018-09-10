@@ -62,11 +62,11 @@ type RemoteSyslogGroups []RemoteSyslogGroup
 
 // RemoteSyslogGroup represents a UTM group
 type RemoteSyslogGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &RemoteSyslogGroup{}
@@ -122,9 +122,12 @@ type RemoteSyslogServers []RemoteSyslogServer
 
 // RemoteSyslogServer represents a UTM remote syslog server
 type RemoteSyslogServer struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Port description: REF(service/tcp), REF(service/udp)
+	// Port default value is "REF_SEzkPqGizE"
+	Port string `json:"port"`
 	// Server description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	Server  string `json:"server"`
 	Comment string `json:"comment"`
@@ -132,9 +135,6 @@ type RemoteSyslogServer struct {
 	// LocalAddr default value is "REF_NetworkAny"
 	LocalAddr string `json:"local_addr"`
 	Name      string `json:"name"`
-	// Port description: REF(service/tcp), REF(service/udp)
-	// Port default value is "REF_SEzkPqGizE"
-	Port string `json:"port"`
 }
 
 var _ sophos.RestGetter = &RemoteSyslogServer{}

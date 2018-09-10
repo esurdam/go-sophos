@@ -95,17 +95,17 @@ type AweClients []AweClient
 
 // AweClient represents a UTM wireless client
 type AweClient struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Lastseen  int    `json:"lastseen"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Lastseen   int    `json:"lastseen"`
 	// Mac description: (MACADDR)
 	// Mac default value is "00:00:00:00:00:00"
 	Mac  string `json:"mac"`
 	Name string `json:"name"`
 	// Vendor default value is "unknown"
-	Vendor  string `json:"vendor"`
-	Comment string `json:"comment"`
+	Vendor string `json:"vendor"`
 }
 
 var _ sophos.RestGetter = &AweClient{}
@@ -159,91 +159,91 @@ type AweDevices []AweDevice
 
 // AweDevice represents a UTM wireless access point
 type AweDevice struct {
-	Locked            string `json:"_locked"`
-	Reference         string `json:"_ref"`
-	_type             string `json:"_type"`
-	SchedScanInterval int    `json:"sched_scan_interval"`
-	// Vlantagging default value is false
-	Vlantagging     bool   `json:"vlantagging"`
-	Name            string `json:"name"`
-	ScanInterval11A int    `json:"scan_interval11a"`
-	Channel11A      int    `json:"channel11a"`
-	Comment         string `json:"comment"`
-	// Key default value is ""
-	Key string `json:"key"`
-	// Location default value is ""
-	Location string `json:"location"`
-	// MeshAbility11A default value is false
-	MeshAbility11A    bool          `json:"mesh_ability11a"`
-	Networks          []interface{} `json:"networks"`
-	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
-	ApVlantag         int           `json:"ap_vlantag"`
-	// TimeScheduling11A default value is false
-	TimeScheduling11A    bool `json:"time_scheduling11a"`
-	ScanInterval         int  `json:"scan_interval"`
-	SchedScanInterval11A int  `json:"sched_scan_interval11a"`
-	// TunnelId default value is ""
-	TunnelId string `json:"tunnel_id"`
-	Txpower  int    `json:"txpower"`
-	// Enabled default value is false
-	Enabled bool `json:"enabled"`
-	// LastIp description: (IPADDR)
-	// LastIp default value is ""
-	LastIp         string        `json:"last_ip"`
-	AutoChannel11A int           `json:"auto_channel11a"`
-	BridgeModes    []interface{} `json:"bridge_modes"`
-	// TimeScheduling default value is false
-	TimeScheduling   bool          `json:"time_scheduling"`
-	Txpower11A       int           `json:"txpower11a"`
-	ActiveChannels   []interface{} `json:"active_channels"`
-	AllowedChannels  []interface{} `json:"allowed_channels"`
-	AllowedCountries []interface{} `json:"allowed_countries"`
-	// Type default value is ""
-	Type string `json:"type"`
-	// LanMac description: (MACADDR)
-	// LanMac default value is "00:00:00:00:00:00"
-	LanMac string `json:"lan_mac"`
-	// Status default value is false
-	Status        bool          `json:"status"`
-	TimeSelect11A []interface{} `json:"time_select11a"`
-	AutoChannel   int           `json:"auto_channel"`
-	// ChannelWidth11A can be one of: []string{"HT20", "HT40", "VHT20", "VHT40", "VHT80"}
-	// ChannelWidth11A default value is "HT20"
-	ChannelWidth11A string `json:"channel_width11a"`
-	// Id default value is "Remote Wifi Device"
-	Id       string `json:"id"`
-	MaxSsids int    `json:"max_ssids"`
-	// MeshAbility default value is false
-	MeshAbility bool `json:"mesh_ability"`
-	// MeshAbility11G default value is false
-	MeshAbility11G bool `json:"mesh_ability11g"`
-	// R0KhSecret default value is ""
-	R0KhSecret string        `json:"r0kh_secret"`
-	TimeSelect []interface{} `json:"time_select"`
-	// ChannelWidth can be one of: []string{"HT20", "HT40"}
-	// ChannelWidth default value is "HT20"
-	ChannelWidth string `json:"channel_width"`
-	// DfsAbility default value is false
-	DfsAbility bool `json:"dfs_ability"`
-	Channel    int  `json:"channel"`
-	// Country description: (REGEX)
-	// Country default value is ""
-	Country string `json:"country"`
-	// Interface description: REF(interface/*)
-	// Interface default value is ""
-	Interface string `json:"interface"`
-	// Stp default value is false
-	Stp bool `json:"stp"`
-	// TxPowerControl default value is false
-	TxPowerControl bool `json:"tx_power_control"`
-	// WifiMac description: (MACADDR)
-	// WifiMac default value is "00:00:00:00:00:00"
-	WifiMac string `json:"wifi_mac"`
-	// AcAbility default value is false
-	AcAbility bool `json:"ac_ability"`
+	Locked      string `json:"_locked"`
+	Reference   string `json:"_ref"`
+	ObjectType  string `json:"_type"`
+	AutoChannel int    `json:"auto_channel"`
 	// Band can be one of: []string{"g", "a"}
 	// Band default value is ""
 	Band string `json:"band"`
+	// Id default value is "Remote Wifi Device"
+	Id string `json:"id"`
+	// LanMac description: (MACADDR)
+	// LanMac default value is "00:00:00:00:00:00"
+	LanMac            string        `json:"lan_mac"`
+	AllowedChannels   []interface{} `json:"allowed_channels"`
+	AllowedCountries  []interface{} `json:"allowed_countries"`
+	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	ApVlantag         int           `json:"ap_vlantag"`
+	// ChannelWidth can be one of: []string{"HT20", "HT40"}
+	// ChannelWidth default value is "HT20"
+	ChannelWidth string `json:"channel_width"`
+	// LastIp description: (IPADDR)
+	// LastIp default value is ""
+	LastIp string `json:"last_ip"`
+	// MeshAbility11G default value is false
+	MeshAbility11G bool `json:"mesh_ability11g"`
+	// R0KhSecret default value is ""
+	R0KhSecret string `json:"r0kh_secret"`
+	// TimeScheduling11A default value is false
+	TimeScheduling11A bool          `json:"time_scheduling11a"`
+	TimeSelect11A     []interface{} `json:"time_select11a"`
+	// AcAbility default value is false
+	AcAbility      bool          `json:"ac_ability"`
+	ActiveChannels []interface{} `json:"active_channels"`
+	AutoChannel11A int           `json:"auto_channel11a"`
+	Channel        int           `json:"channel"`
+	// DfsAbility default value is false
+	DfsAbility           bool `json:"dfs_ability"`
+	ScanInterval11A      int  `json:"scan_interval11a"`
+	SchedScanInterval11A int  `json:"sched_scan_interval11a"`
+	// TimeScheduling default value is false
+	TimeScheduling bool `json:"time_scheduling"`
+	// Vlantagging default value is false
+	Vlantagging bool          `json:"vlantagging"`
+	BridgeModes []interface{} `json:"bridge_modes"`
+	Channel11A  int           `json:"channel11a"`
+	// MeshAbility default value is false
+	MeshAbility  bool `json:"mesh_ability"`
+	ScanInterval int  `json:"scan_interval"`
+	// ChannelWidth11A can be one of: []string{"HT20", "HT40", "VHT20", "VHT40", "VHT80"}
+	// ChannelWidth11A default value is "HT20"
+	ChannelWidth11A string `json:"channel_width11a"`
+	// Country description: (REGEX)
+	// Country default value is ""
+	Country string `json:"country"`
+	// Key default value is ""
+	Key  string `json:"key"`
+	Name string `json:"name"`
+	// Stp default value is false
+	Stp bool `json:"stp"`
+	// TxPowerControl default value is false
+	TxPowerControl bool          `json:"tx_power_control"`
+	MaxSsids       int           `json:"max_ssids"`
+	TimeSelect     []interface{} `json:"time_select"`
+	// TunnelId default value is ""
+	TunnelId   string `json:"tunnel_id"`
+	Txpower    int    `json:"txpower"`
+	Txpower11A int    `json:"txpower11a"`
+	Comment    string `json:"comment"`
+	// Enabled default value is false
+	Enabled  bool          `json:"enabled"`
+	Networks []interface{} `json:"networks"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// Location default value is ""
+	Location string `json:"location"`
+	// MeshAbility11A default value is false
+	MeshAbility11A    bool `json:"mesh_ability11a"`
+	SchedScanInterval int  `json:"sched_scan_interval"`
+	// Type default value is ""
+	Type string `json:"type"`
+	// WifiMac description: (MACADDR)
+	// WifiMac default value is "00:00:00:00:00:00"
+	WifiMac string `json:"wifi_mac"`
 }
 
 var _ sophos.RestGetter = &AweDevice{}
@@ -297,11 +297,11 @@ type AweGroups []AweGroup
 
 // AweGroup represents a UTM group
 type AweGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AweGroup{}
@@ -355,47 +355,47 @@ type AweLocals []AweLocal
 
 // AweLocal represents a UTM SG wifi
 type AweLocal struct {
-	Locked      string        `json:"_locked"`
-	Reference   string        `json:"_ref"`
-	_type       string        `json:"_type"`
-	BridgeModes []interface{} `json:"bridge_modes"`
-	Comment     string        `json:"comment"`
-	MaxSsids    int           `json:"max_ssids"`
-	Networks    []interface{} `json:"networks"`
-	Name        string        `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Id default value is "Remote Wifi Device"
+	Id       string        `json:"id"`
+	Name     string        `json:"name"`
+	Networks []interface{} `json:"networks"`
 	// Status default value is false
-	Status          bool          `json:"status"`
-	AllowedChannels []interface{} `json:"allowed_channels"`
+	Status         bool          `json:"status"`
+	ActiveChannels []interface{} `json:"active_channels"`
 	// Band can be one of: []string{"g", "a"}
 	// Band default value is "g"
-	Band    string `json:"band"`
-	Channel int    `json:"channel"`
-	// DfsAbility default value is false
-	DfsAbility bool `json:"dfs_ability"`
-	// Id default value is "Remote Wifi Device"
-	Id string `json:"id"`
-	// MeshAbility11A default value is false
-	MeshAbility11A bool `json:"mesh_ability11a"`
-	// TimeScheduling default value is false
-	TimeScheduling bool `json:"time_scheduling"`
-	// TxPowerControl default value is false
-	TxPowerControl bool `json:"tx_power_control"`
-	AutoChannel    int  `json:"auto_channel"`
+	Band            string        `json:"band"`
+	Channel         int           `json:"channel"`
+	Comment         string        `json:"comment"`
+	TimeSelect      []interface{} `json:"time_select"`
+	AllowedChannels []interface{} `json:"allowed_channels"`
+	ScanInterval    int           `json:"scan_interval"`
+	Txpower         int           `json:"txpower"`
 	// MeshAbility11G default value is false
 	MeshAbility11G bool `json:"mesh_ability11g"`
-	ScanInterval   int  `json:"scan_interval"`
-	Txpower        int  `json:"txpower"`
-	// Type default value is ""
-	Type string `json:"type"`
+	// TimeScheduling default value is false
+	TimeScheduling bool `json:"time_scheduling"`
 	// WifiMac description: (MACADDR)
 	// WifiMac default value is "00:00:00:00:00:00"
-	WifiMac           string        `json:"wifi_mac"`
-	ActiveChannels    []interface{} `json:"active_channels"`
-	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	WifiMac           string `json:"wifi_mac"`
+	ApLocaldebuglevel int    `json:"ap_localdebuglevel"`
+	AutoChannel       int    `json:"auto_channel"`
+	MaxSsids          int    `json:"max_ssids"`
 	// MeshAbility default value is false
-	MeshAbility       bool          `json:"mesh_ability"`
-	SchedScanInterval int           `json:"sched_scan_interval"`
-	TimeSelect        []interface{} `json:"time_select"`
+	MeshAbility bool `json:"mesh_ability"`
+	// TxPowerControl default value is false
+	TxPowerControl bool `json:"tx_power_control"`
+	// Type default value is ""
+	Type        string        `json:"type"`
+	BridgeModes []interface{} `json:"bridge_modes"`
+	// DfsAbility default value is false
+	DfsAbility bool `json:"dfs_ability"`
+	// MeshAbility11A default value is false
+	MeshAbility11A    bool `json:"mesh_ability11a"`
+	SchedScanInterval int  `json:"sched_scan_interval"`
 }
 
 var _ sophos.RestGetter = &AweLocal{}
@@ -449,76 +449,76 @@ type AweReds []AweRed
 
 // AweRed represents a UTM RED wifi
 type AweRed struct {
-	Locked         string        `json:"_locked"`
-	Reference      string        `json:"_ref"`
-	_type          string        `json:"_type"`
-	ActiveChannels []interface{} `json:"active_channels"`
-	Channel        int           `json:"channel"`
-	// DfsAbility default value is false
-	DfsAbility bool `json:"dfs_ability"`
-	// Enabled default value is false
-	Enabled bool `json:"enabled"`
-	// Location default value is ""
-	Location string `json:"location"`
-	// Vlantagging default value is false
-	Vlantagging bool `json:"vlantagging"`
-	// Band can be one of: []string{"g", "a"}
-	// Band default value is "g"
-	Band string `json:"band"`
-	// Key default value is ""
-	Key  string `json:"key"`
-	Name string `json:"name"`
-	// Status default value is false
-	Status bool `json:"status"`
-	// AcAbility default value is false
-	AcAbility bool `json:"ac_ability"`
-	// Interface description: REF(interface/*)
-	// Interface default value is ""
-	Interface string `json:"interface"`
-	// TimeScheduling default value is false
-	TimeScheduling bool `json:"time_scheduling"`
-	// WifiMac description: (MACADDR)
-	// WifiMac default value is "00:00:00:00:00:00"
-	WifiMac         string        `json:"wifi_mac"`
-	AllowedChannels []interface{} `json:"allowed_channels"`
-	AutoChannel     int           `json:"auto_channel"`
-	// LanMac description: (MACADDR)
-	// LanMac default value is "00:00:00:00:00:00"
-	LanMac           string        `json:"lan_mac"`
-	AllowedCountries []interface{} `json:"allowed_countries"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// ChannelWidth can be one of: []string{"HT20", "HT40"}
 	// ChannelWidth default value is "HT20"
 	ChannelWidth string `json:"channel_width"`
 	// Country description: (REGEX)
 	// Country default value is ""
 	Country string `json:"country"`
-	// ForcedCountry default value is ""
-	ForcedCountry     string        `json:"forced_country"`
-	TimeSelect        []interface{} `json:"time_select"`
-	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
-	ApVlantag         int           `json:"ap_vlantag"`
-	BridgeModes       []interface{} `json:"bridge_modes"`
+	// Interface description: REF(interface/*)
+	// Interface default value is ""
+	Interface string `json:"interface"`
+	// LanMac description: (MACADDR)
+	// LanMac default value is "00:00:00:00:00:00"
+	LanMac string `json:"lan_mac"`
 	// LastIp description: (IPADDR)
 	// LastIp default value is ""
-	LastIp       string        `json:"last_ip"`
-	Networks     []interface{} `json:"networks"`
-	ScanInterval int           `json:"scan_interval"`
-	// TxPowerControl default value is false
-	TxPowerControl bool `json:"tx_power_control"`
-	// Id default value is "Remote Wifi Device"
-	Id       string `json:"id"`
-	MaxSsids int    `json:"max_ssids"`
+	LastIp string `json:"last_ip"`
+	// Status default value is false
+	Status     bool          `json:"status"`
+	TimeSelect []interface{} `json:"time_select"`
+	// WifiMac description: (MACADDR)
+	// WifiMac default value is "00:00:00:00:00:00"
+	WifiMac          string        `json:"wifi_mac"`
+	AllowedCountries []interface{} `json:"allowed_countries"`
+	Channel          int           `json:"channel"`
+	// ForcedCountry default value is ""
+	ForcedCountry string `json:"forced_country"`
+	MaxSsids      int    `json:"max_ssids"`
 	// R0KhSecret default value is ""
 	R0KhSecret string `json:"r0kh_secret"`
-	Txpower    int    `json:"txpower"`
-	Comment    string `json:"comment"`
-	// MeshAbility default value is false
-	MeshAbility       bool `json:"mesh_ability"`
-	SchedScanInterval int  `json:"sched_scan_interval"`
 	// TunnelId default value is ""
 	TunnelId string `json:"tunnel_id"`
+	// Vlantagging default value is false
+	Vlantagging bool `json:"vlantagging"`
+	// AcAbility default value is false
+	AcAbility         bool          `json:"ac_ability"`
+	AllowedChannels   []interface{} `json:"allowed_channels"`
+	ApLocaldebuglevel int           `json:"ap_localdebuglevel"`
+	// Band can be one of: []string{"g", "a"}
+	// Band default value is "g"
+	Band        string        `json:"band"`
+	BridgeModes []interface{} `json:"bridge_modes"`
+	// Enabled default value is false
+	Enabled bool `json:"enabled"`
+	// TimeScheduling default value is false
+	TimeScheduling bool `json:"time_scheduling"`
+	// TxPowerControl default value is false
+	TxPowerControl bool `json:"tx_power_control"`
+	// DfsAbility default value is false
+	DfsAbility  bool `json:"dfs_ability"`
+	ApVlantag   int  `json:"ap_vlantag"`
+	AutoChannel int  `json:"auto_channel"`
+	// Location default value is ""
+	Location       string        `json:"location"`
+	ScanInterval   int           `json:"scan_interval"`
+	Txpower        int           `json:"txpower"`
+	ActiveChannels []interface{} `json:"active_channels"`
+	// MeshAbility default value is false
+	MeshAbility bool          `json:"mesh_ability"`
+	Networks    []interface{} `json:"networks"`
 	// Type default value is ""
-	Type string `json:"type"`
+	Type    string `json:"type"`
+	Comment string `json:"comment"`
+	// Id default value is "Remote Wifi Device"
+	Id string `json:"id"`
+	// Key default value is ""
+	Key               string `json:"key"`
+	Name              string `json:"name"`
+	SchedScanInterval int    `json:"sched_scan_interval"`
 }
 
 var _ sophos.RestGetter = &AweRed{}

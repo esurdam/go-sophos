@@ -143,7 +143,7 @@ type ReverseProxyAuthProfiles []ReverseProxyAuthProfile
 type ReverseProxyAuthProfile struct {
 	Locked                          string        `json:"_locked"`
 	Reference                       string        `json:"_ref"`
-	_type                           string        `json:"_type"`
+	ObjectType                      string        `json:"_type"`
 	Aaa                             []string      `json:"aaa"`
 	BackendMode                     string        `json:"backend_mode"`
 	BackendStripBasicAuth           bool          `json:"backend_strip_basic_auth"`
@@ -221,7 +221,7 @@ func (*ReverseProxyAuthProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyAuthProfile) GetType() string { return r._type }
+func (r *ReverseProxyAuthProfile) GetType() string { return r.ObjectType }
 
 // ReverseProxyBackends is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyBackends []ReverseProxyBackend
@@ -230,7 +230,7 @@ type ReverseProxyBackends []ReverseProxyBackend
 type ReverseProxyBackend struct {
 	Locked                          string `json:"_locked"`
 	Reference                       string `json:"_ref"`
-	_type                           string `json:"_type"`
+	ObjectType                      string `json:"_type"`
 	Comment                         string `json:"comment"`
 	DisableBackendConnectionPooling bool   `json:"disable_backend_connection_pooling"`
 	Host                            string `json:"host"`
@@ -292,43 +292,43 @@ func (*ReverseProxyBackend) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyBackend) GetType() string { return r._type }
+func (r *ReverseProxyBackend) GetType() string { return r.ObjectType }
 
 // ReverseProxyExceptions is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyExceptions []ReverseProxyException
 
 // ReverseProxyException represents a UTM webserver protection exception
 type ReverseProxyException struct {
-	Locked                   string        `json:"_locked"`
-	Reference                string        `json:"_ref"`
-	_type                    string        `json:"_type"`
-	SkipCustomThreatsFilters []interface{} `json:"skip_custom_threats_filters"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Skiphtmlrewrite default value is false
+	Skiphtmlrewrite bool `json:"skiphtmlrewrite"`
+	// Skiptft default value is false
+	Skiptft bool `json:"skiptft"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+	Name    string `json:"name"`
+	// Skipcookie default value is false
+	Skipcookie                  bool          `json:"skipcookie"`
+	Path                        []interface{} `json:"path"`
+	SkipCustomThreatsFilters    []interface{} `json:"skip_custom_threats_filters"`
+	SkipThreatsFilterCategories []interface{} `json:"skip_threats_filter_categories"`
+	// Skipav default value is false
+	Skipav bool `json:"skipav"`
+	// Skipbadclients default value is false
+	Skipbadclients bool `json:"skipbadclients"`
 	// Skipform default value is false
 	Skipform bool `json:"skipform"`
 	// SkipformMissingtoken default value is false
 	SkipformMissingtoken bool `json:"skipform_missingtoken"`
-	// Skipurl default value is false
-	Skipurl bool   `json:"skipurl"`
-	Comment string `json:"comment"`
-	// Skiptft default value is false
-	Skiptft bool `json:"skiptft"`
-	// Status default value is false
-	Status bool   `json:"status"`
-	Name   string `json:"name"`
 	// Op can be one of: []string{"AND", "OR"}
 	// Op default value is "AND"
-	Op   string        `json:"op"`
-	Path []interface{} `json:"path"`
-	// Skipav default value is false
-	Skipav bool `json:"skipav"`
-	// Skipcookie default value is false
-	Skipcookie                  bool          `json:"skipcookie"`
-	Source                      []interface{} `json:"source"`
-	SkipThreatsFilterCategories []interface{} `json:"skip_threats_filter_categories"`
-	// Skipbadclients default value is false
-	Skipbadclients bool `json:"skipbadclients"`
-	// Skiphtmlrewrite default value is false
-	Skiphtmlrewrite bool `json:"skiphtmlrewrite"`
+	Op string `json:"op"`
+	// Skipurl default value is false
+	Skipurl bool          `json:"skipurl"`
+	Source  []interface{} `json:"source"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyException{}
@@ -384,12 +384,12 @@ type ReverseProxyFilters []ReverseProxyFilter
 
 // ReverseProxyFilter represents a UTM web application firewall filter rule
 type ReverseProxyFilter struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Expr      string `json:"expr"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Expr       string `json:"expr"`
+	Name       string `json:"name"`
 	// Target can be one of: []string{"HTTP_REFERER", "REQUEST_URI", "THE_REQUEST"}
 	Target string `json:"target"`
 }
@@ -447,10 +447,10 @@ type ReverseProxyFormTemplates []ReverseProxyFormTemplate
 
 // ReverseProxyFormTemplate is a generated Sophos object
 type ReverseProxyFormTemplate struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Assets    struct {
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Assets     struct {
 		DefaultStylesheet_css string `json:"default_stylesheet.css"`
 	} `json:"assets"`
 	Comment  string `json:"comment"`
@@ -508,7 +508,7 @@ func (*ReverseProxyFormTemplate) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyFormTemplate) GetType() string { return r._type }
+func (r *ReverseProxyFormTemplate) GetType() string { return r.ObjectType }
 
 // ReverseProxyFrontends is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyFrontends []ReverseProxyFrontend
@@ -517,7 +517,7 @@ type ReverseProxyFrontends []ReverseProxyFrontend
 type ReverseProxyFrontend struct {
 	Locked               string        `json:"_locked"`
 	Reference            string        `json:"_ref"`
-	_type                string        `json:"_type"`
+	ObjectType           string        `json:"_type"`
 	AddContentTypeHeader bool          `json:"add_content_type_header"`
 	Address              string        `json:"address"`
 	AllowedNetworks      []string      `json:"allowed_networks"`
@@ -589,18 +589,18 @@ func (*ReverseProxyFrontend) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyFrontend) GetType() string { return r._type }
+func (r *ReverseProxyFrontend) GetType() string { return r.ObjectType }
 
 // ReverseProxyGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyGroups []ReverseProxyGroup
 
 // ReverseProxyGroup represents a UTM group
 type ReverseProxyGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyGroup{}
@@ -658,7 +658,7 @@ type ReverseProxyLocations []ReverseProxyLocation
 type ReverseProxyLocation struct {
 	Locked               string        `json:"_locked"`
 	Reference            string        `json:"_ref"`
-	_type                string        `json:"_type"`
+	ObjectType           string        `json:"_type"`
 	AccessControl        string        `json:"access_control"`
 	AllowedNetworks      []string      `json:"allowed_networks"`
 	AuthProfile          string        `json:"auth_profile"`
@@ -724,7 +724,7 @@ func (*ReverseProxyLocation) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyLocation) GetType() string { return r._type }
+func (r *ReverseProxyLocation) GetType() string { return r.ObjectType }
 
 // ReverseProxyProfiles is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyProfiles []ReverseProxyProfile
@@ -733,7 +733,7 @@ type ReverseProxyProfiles []ReverseProxyProfile
 type ReverseProxyProfile struct {
 	Locked                       string        `json:"_locked"`
 	Reference                    string        `json:"_ref"`
-	_type                        string        `json:"_type"`
+	ObjectType                   string        `json:"_type"`
 	Av                           bool          `json:"av"`
 	AvBlockUnscannable           bool          `json:"av_block_unscannable"`
 	AvDirections                 string        `json:"av_directions"`
@@ -819,7 +819,7 @@ func (*ReverseProxyProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *ReverseProxyProfile) GetType() string { return r._type }
+func (r *ReverseProxyProfile) GetType() string { return r.ObjectType }
 
 // ReverseProxyRedirections is an Sophos Endpoint subType and implements sophos.RestObject
 type ReverseProxyRedirections []ReverseProxyRedirection
@@ -828,16 +828,7 @@ type ReverseProxyRedirections []ReverseProxyRedirection
 type ReverseProxyRedirection struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
-	TargetPort int    `json:"target_port"`
-	// TargetProtocol can be one of: []string{"http", "https"}
-	// TargetProtocol default value is "http"
-	TargetProtocol string `json:"target_protocol"`
-	// Frontend description: REF(reverse_proxy/frontend)
-	Frontend string `json:"frontend"`
-	// ResponseCode can be one of: []string{"301", "302", "303", "307", "308"}
-	// ResponseCode default value is "302"
-	ResponseCode string `json:"response_code"`
+	ObjectType string `json:"_type"`
 	// Status default value is false
 	Status     bool   `json:"status"`
 	TargetHost string `json:"target_host"`
@@ -845,10 +836,19 @@ type ReverseProxyRedirection struct {
 	TargetHostIpv6 bool `json:"target_host_ipv6"`
 	// TargetPath default value is "/"
 	TargetPath string `json:"target_path"`
+	TargetPort int    `json:"target_port"`
 	Comment    string `json:"comment"`
-	Name       string `json:"name"`
+	// ResponseCode can be one of: []string{"301", "302", "303", "307", "308"}
+	// ResponseCode default value is "302"
+	ResponseCode string `json:"response_code"`
 	// SourcePath default value is "/"
 	SourcePath string `json:"source_path"`
+	// Frontend description: REF(reverse_proxy/frontend)
+	Frontend string `json:"frontend"`
+	Name     string `json:"name"`
+	// TargetProtocol can be one of: []string{"http", "https"}
+	// TargetProtocol default value is "http"
+	TargetProtocol string `json:"target_protocol"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyRedirection{}
@@ -904,14 +904,14 @@ type ReverseProxyThreatsFilters []ReverseProxyThreatsFilter
 
 // ReverseProxyThreatsFilter represents a UTM custom threat filter category
 type ReverseProxyThreatsFilter struct {
-	Locked           string        `json:"_locked"`
-	Reference        string        `json:"_ref"`
-	_type            string        `json:"_type"`
-	OrderedFilenames []interface{} `json:"ordered_filenames"`
-	Comment          string        `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// Files description: (HASH)
-	Files interface{} `json:"files"`
-	Name  string      `json:"name"`
+	Files            interface{}   `json:"files"`
+	Name             string        `json:"name"`
+	OrderedFilenames []interface{} `json:"ordered_filenames"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyThreatsFilter{}

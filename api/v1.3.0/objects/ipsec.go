@@ -80,11 +80,11 @@ type IpsecGroups []IpsecGroup
 
 // IpsecGroup represents a UTM group
 type IpsecGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &IpsecGroup{}
@@ -140,7 +140,7 @@ type IpsecPolicys []IpsecPolicy
 type IpsecPolicy struct {
 	Locked            string `json:"_locked"`
 	Reference         string `json:"_ref"`
-	_type             string `json:"_type"`
+	ObjectType        string `json:"_type"`
 	Comment           string `json:"comment"`
 	IkeAuthAlg        string `json:"ike_auth_alg"`
 	IkeDhGroup        string `json:"ike_dh_group"`
@@ -204,7 +204,7 @@ func (*IpsecPolicy) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *IpsecPolicy) GetType() string { return i._type }
+func (i *IpsecPolicy) GetType() string { return i.ObjectType }
 
 // IpsecRemoteGateways is an Sophos Endpoint subType and implements sophos.RestObject
 type IpsecRemoteGateways []IpsecRemoteGateway
@@ -213,7 +213,7 @@ type IpsecRemoteGateways []IpsecRemoteGateway
 type IpsecRemoteGateway struct {
 	Locked         string   `json:"_locked"`
 	Reference      string   `json:"_ref"`
-	_type          string   `json:"_type"`
+	ObjectType     string   `json:"_type"`
 	Authentication string   `json:"authentication"`
 	Comment        string   `json:"comment"`
 	Ecn            bool     `json:"ecn"`
@@ -275,4 +275,4 @@ func (*IpsecRemoteGateway) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (i *IpsecRemoteGateway) GetType() string { return i._type }
+func (i *IpsecRemoteGateway) GetType() string { return i.ObjectType }

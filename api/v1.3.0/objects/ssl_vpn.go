@@ -85,7 +85,7 @@ type SslVpnClientConnections []SslVpnClientConnection
 type SslVpnClientConnection struct {
 	Locked                  string   `json:"_locked"`
 	Reference               string   `json:"_ref"`
-	_type                   string   `json:"_type"`
+	ObjectType              string   `json:"_type"`
 	AuthenticationAlgorithm string   `json:"authentication_algorithm"`
 	AutoPfIn                string   `json:"auto_pf_in"`
 	AutoPfOut               string   `json:"auto_pf_out"`
@@ -168,18 +168,18 @@ func (*SslVpnClientConnection) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SslVpnClientConnection) GetType() string { return s._type }
+func (s *SslVpnClientConnection) GetType() string { return s.ObjectType }
 
 // SslVpnGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnGroups []SslVpnGroup
 
 // SslVpnGroup represents a UTM group
 type SslVpnGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SslVpnGroup{}
@@ -237,7 +237,7 @@ type SslVpnRemoteAccessProfiles []SslVpnRemoteAccessProfile
 type SslVpnRemoteAccessProfile struct {
 	Locked     string   `json:"_locked"`
 	Reference  string   `json:"_ref"`
-	_type      string   `json:"_type"`
+	ObjectType string   `json:"_type"`
 	Aaa        []string `json:"aaa"`
 	AutoPfIn   string   `json:"auto_pf_in"`
 	AutoPfrule bool     `json:"auto_pfrule"`
@@ -298,41 +298,41 @@ func (*SslVpnRemoteAccessProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SslVpnRemoteAccessProfile) GetType() string { return s._type }
+func (s *SslVpnRemoteAccessProfile) GetType() string { return s.ObjectType }
 
 // SslVpnServerConnections is an Sophos Endpoint subType and implements sophos.RestObject
 type SslVpnServerConnections []SslVpnServerConnection
 
 // SslVpnServerConnection represents a UTM SSL VPN site-to-site server connection
 type SslVpnServerConnection struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// AutoPfOut description: REF(packetfilter/packetfilter)
-	// AutoPfOut default value is ""
-	AutoPfOut     string        `json:"auto_pf_out"`
-	Comment       string        `json:"comment"`
-	LocalNetworks []interface{} `json:"local_networks"`
-	// Status default value is false
-	Status bool `json:"status"`
-	// StaticIpStatus default value is false
-	StaticIpStatus bool `json:"static_ip_status"`
-	// AutoPfIn description: REF(packetfilter/packetfilter)
-	// AutoPfIn default value is ""
-	AutoPfIn string `json:"auto_pf_in"`
-	// AutoPfrule default value is false
-	AutoPfrule bool   `json:"auto_pfrule"`
-	Name       string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// Peer description: REF(aaa/user)
 	// Peer default value is ""
 	Peer           string        `json:"peer"`
 	RemoteNetworks []interface{} `json:"remote_networks"`
-	// StaticIp description: (IPADDR)
-	// StaticIp default value is "0.0.0.0"
-	StaticIp string `json:"static_ip"`
 	// StaticIp6 description: (IP6ADDR)
 	// StaticIp6 default value is "::"
 	StaticIp6 string `json:"static_ip6"`
+	// StaticIpStatus default value is false
+	StaticIpStatus bool `json:"static_ip_status"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// AutoPfrule default value is false
+	AutoPfrule bool `json:"auto_pfrule"`
+	// AutoPfOut description: REF(packetfilter/packetfilter)
+	// AutoPfOut default value is ""
+	AutoPfOut     string        `json:"auto_pf_out"`
+	LocalNetworks []interface{} `json:"local_networks"`
+	Name          string        `json:"name"`
+	// StaticIp description: (IPADDR)
+	// StaticIp default value is "0.0.0.0"
+	StaticIp string `json:"static_ip"`
+	// AutoPfIn description: REF(packetfilter/packetfilter)
+	// AutoPfIn default value is ""
+	AutoPfIn string `json:"auto_pf_in"`
 }
 
 var _ sophos.RestGetter = &SslVpnServerConnection{}

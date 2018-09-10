@@ -133,32 +133,32 @@ type Packetfilter1to1Nats []Packetfilter1to1Nat
 
 // Packetfilter1to1Nat represents a UTM 1to1nat
 type Packetfilter1to1Nat struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// MapTo description: REF(network/network)
-	MapTo string `json:"map_to"`
-	// Mode can be one of: []string{"mapsrc", "mapdst"}
-	Mode string `json:"mode"`
-	Name string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Service description: REF(service/*)
 	Service string `json:"service"`
 	// Source description: REF(network/*)
 	Source string `json:"source"`
+	// Status default value is false
+	Status bool `json:"status"`
 	// AutoPfIn description: REF(packetfilter/packetfilter)
 	// AutoPfIn default value is ""
 	AutoPfIn string `json:"auto_pf_in"`
-	// Destination description: REF(network/*)
-	Destination string `json:"destination"`
-	// Log default value is false
-	Log bool `json:"log"`
-	// Status default value is false
-	Status bool `json:"status"`
 	// AutoPfrule default value is false
 	AutoPfrule bool   `json:"auto_pfrule"`
 	Comment    string `json:"comment"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	// Mode can be one of: []string{"mapsrc", "mapdst"}
+	Mode string `json:"mode"`
 	// Group default value is ""
 	Group string `json:"group"`
+	// Log default value is false
+	Log bool `json:"log"`
+	// MapTo description: REF(network/network)
+	MapTo string `json:"map_to"`
+	Name  string `json:"name"`
 }
 
 var _ sophos.RestGetter = &Packetfilter1to1Nat{}
@@ -214,9 +214,15 @@ type PacketfilterGenericProxys []PacketfilterGenericProxy
 
 // PacketfilterGenericProxy represents a UTM generic proxy rule
 type PacketfilterGenericProxy struct {
-	Locked          string        `json:"_locked"`
-	Reference       string        `json:"_ref"`
-	_type           string        `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Status default value is false
+	Status bool `json:"status"`
+	// Tohost description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
+	Tohost string `json:"tohost"`
+	// Toservice description: REF(service/*)
+	Toservice       string        `json:"toservice"`
 	AllowedNetworks []interface{} `json:"allowed_networks"`
 	Comment         string        `json:"comment"`
 	// Ininterface description: REF(interface/*)
@@ -224,12 +230,6 @@ type PacketfilterGenericProxy struct {
 	Name        string `json:"name"`
 	// Service description: REF(service/*)
 	Service string `json:"service"`
-	// Status default value is false
-	Status bool `json:"status"`
-	// Tohost description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
-	Tohost string `json:"tohost"`
-	// Toservice description: REF(service/*)
-	Toservice string `json:"toservice"`
 }
 
 var _ sophos.RestGetter = &PacketfilterGenericProxy{}
@@ -285,11 +285,11 @@ type PacketfilterGroups []PacketfilterGroup
 
 // PacketfilterGroup represents a UTM group
 type PacketfilterGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Name       string `json:"name"`
+	Comment    string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &PacketfilterGroup{}
@@ -345,38 +345,38 @@ type PacketfilterLoadbalances []PacketfilterLoadbalance
 
 // PacketfilterLoadbalance represents a UTM load balancing rule
 type PacketfilterLoadbalance struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// Service description: REF(service/*)
 	Service string `json:"service"`
+	Comment string `json:"comment"`
+	// DestinationNatStatus description: (HASH)
+	DestinationNatStatus interface{} `json:"destination_nat_status"`
+	// Scheduler description: REF(scheduler/loadbalance)
+	// Scheduler default value is ""
+	Scheduler string `json:"scheduler"`
+	// AutoPfrule default value is true
+	AutoPfrule          bool          `json:"auto_pfrule"`
+	DestinationNatGroup []interface{} `json:"destination_nat_group"`
+	Name                string        `json:"name"`
+	// ShutdownOverride description: REF(override/objref)
+	// ShutdownOverride default value is ""
+	ShutdownOverride string `json:"shutdown_override"`
+	// DestinationNatStatus6 description: (HASH)
+	DestinationNatStatus6 interface{} `json:"destination_nat_status6"`
+	// ShutdownAddress default value is false
+	ShutdownAddress bool `json:"shutdown_address"`
 	// ShutdownCondition description: REF(condition/objref)
 	// ShutdownCondition default value is ""
 	ShutdownCondition string `json:"shutdown_condition"`
 	// Status default value is false
 	Status bool `json:"status"`
-	// AutoPfrule default value is true
-	AutoPfrule bool `json:"auto_pfrule"`
-	// Destination description: REF(network/*)
-	Destination         string        `json:"destination"`
-	DestinationNatGroup []interface{} `json:"destination_nat_group"`
-	// DestinationNatStatus description: (HASH)
-	DestinationNatStatus interface{} `json:"destination_nat_status"`
 	// AutoPfIn description: REF(packetfilter/packetfilter)
 	// AutoPfIn default value is ""
 	AutoPfIn string `json:"auto_pf_in"`
-	// DestinationNatStatus6 description: (HASH)
-	DestinationNatStatus6 interface{} `json:"destination_nat_status6"`
-	// Scheduler description: REF(scheduler/loadbalance)
-	// Scheduler default value is ""
-	Scheduler string `json:"scheduler"`
-	// ShutdownAddress default value is false
-	ShutdownAddress bool `json:"shutdown_address"`
-	// ShutdownOverride description: REF(override/objref)
-	// ShutdownOverride default value is ""
-	ShutdownOverride string `json:"shutdown_override"`
-	Name             string `json:"name"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
 }
 
 var _ sophos.RestGetter = &PacketfilterLoadbalance{}
@@ -432,9 +432,13 @@ type PacketfilterMangles []PacketfilterMangle
 
 // PacketfilterMangle represents a UTM packet mangle rule
 type PacketfilterMangle struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
+	// Source description: REF(network/*)
+	Source string `json:"source"`
 	// Status default value is false
 	Status  bool          `json:"status"`
 	Action  []interface{} `json:"action"`
@@ -444,10 +448,6 @@ type PacketfilterMangle struct {
 	// Direction can be one of: []string{"in", "out"}
 	Direction string `json:"direction"`
 	Name      string `json:"name"`
-	// Service description: REF(service/*)
-	Service string `json:"service"`
-	// Source description: REF(network/*)
-	Source string `json:"source"`
 }
 
 var _ sophos.RestGetter = &PacketfilterMangle{}
@@ -505,7 +505,7 @@ type PacketfilterMasqs []PacketfilterMasq
 type PacketfilterMasq struct {
 	Locked                   string `json:"_locked"`
 	Reference                string `json:"_ref"`
-	_type                    string `json:"_type"`
+	ObjectType               string `json:"_type"`
 	AdditionalAddress        string `json:"additional_address"`
 	AdditionalAddressRestore string `json:"additional_address_restore"`
 	Comment                  string `json:"comment"`
@@ -564,7 +564,7 @@ func (*PacketfilterMasq) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (p *PacketfilterMasq) GetType() string { return p._type }
+func (p *PacketfilterMasq) GetType() string { return p.ObjectType }
 
 // PacketfilterNats is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterNats []PacketfilterNat
@@ -573,7 +573,7 @@ type PacketfilterNats []PacketfilterNat
 type PacketfilterNat struct {
 	Locked                string `json:"_locked"`
 	Reference             string `json:"_ref"`
-	_type                 string `json:"_type"`
+	ObjectType            string `json:"_type"`
 	AutoPfIn              string `json:"auto_pf_in"`
 	AutoPfrule            bool   `json:"auto_pfrule"`
 	Comment               string `json:"comment"`
@@ -641,7 +641,7 @@ func (*PacketfilterNat) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (p *PacketfilterNat) GetType() string { return p._type }
+func (p *PacketfilterNat) GetType() string { return p.ObjectType }
 
 // PacketfilterPacketfilters is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterPacketfilters []PacketfilterPacketfilter
@@ -650,7 +650,7 @@ type PacketfilterPacketfilters []PacketfilterPacketfilter
 type PacketfilterPacketfilter struct {
 	Locked             string   `json:"_locked"`
 	Reference          string   `json:"_ref"`
-	_type              string   `json:"_type"`
+	ObjectType         string   `json:"_type"`
 	Action             string   `json:"action"`
 	Auto               bool     `json:"auto"`
 	AutoType           string   `json:"auto_type"`
@@ -717,19 +717,19 @@ func (*PacketfilterPacketfilter) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (p *PacketfilterPacketfilter) GetType() string { return p._type }
+func (p *PacketfilterPacketfilter) GetType() string { return p.ObjectType }
 
 // PacketfilterRulesets is an Sophos Endpoint subType and implements sophos.RestObject
 type PacketfilterRulesets []PacketfilterRuleset
 
 // PacketfilterRuleset represents a UTM ruleset
 type PacketfilterRuleset struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Comment   string        `json:"comment"`
-	Name      string        `json:"name"`
-	Rules     []interface{} `json:"rules"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Comment    string        `json:"comment"`
+	Name       string        `json:"name"`
+	Rules      []interface{} `json:"rules"`
 	// RulesStatus description: (HASH)
 	RulesStatus interface{} `json:"rules_status"`
 	// Status default value is false

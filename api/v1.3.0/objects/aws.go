@@ -66,11 +66,11 @@ type AwsGroups []AwsGroup
 
 // AwsGroup represents a UTM aws->group
 type AwsGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AwsGroup{}
@@ -126,7 +126,7 @@ type AwsInstanceTypes []AwsInstanceType
 type AwsInstanceType struct {
 	Locked             string      `json:"_locked"`
 	Reference          string      `json:"_ref"`
-	_type              string      `json:"_type"`
+	ObjectType         string      `json:"_type"`
 	Comment            string      `json:"comment"`
 	CPUCores           int64       `json:"cpu_cores"`
 	Deprecated         bool        `json:"deprecated"`
@@ -185,7 +185,7 @@ func (*AwsInstanceType) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AwsInstanceType) GetType() string { return a._type }
+func (a *AwsInstanceType) GetType() string { return a.ObjectType }
 
 // AwsRegions is an Sophos Endpoint subType and implements sophos.RestObject
 type AwsRegions []AwsRegion
@@ -194,7 +194,7 @@ type AwsRegions []AwsRegion
 type AwsRegion struct {
 	Locked            string   `json:"_locked"`
 	Reference         string   `json:"_ref"`
-	_type             string   `json:"_type"`
+	ObjectType        string   `json:"_type"`
 	AvailabilityZones []string `json:"availability_zones"`
 	Code              string   `json:"code"`
 	Comment           string   `json:"comment"`
@@ -250,4 +250,4 @@ func (*AwsRegion) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *AwsRegion) GetType() string { return a._type }
+func (a *AwsRegion) GetType() string { return a.ObjectType }

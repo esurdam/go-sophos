@@ -72,11 +72,11 @@ type SnmpGroups []SnmpGroup
 
 // SnmpGroup represents a UTM group
 type SnmpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SnmpGroup{}
@@ -130,12 +130,9 @@ type SnmpTraps []SnmpTrap
 
 // SnmpTrap represents a UTM SNMP trap
 type SnmpTrap struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// AuthPassword description: (SNMPSTRING)
-	// AuthPassword default value is ""
-	AuthPassword string `json:"auth_password"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// EncryptType can be one of: []string{"None", "DES", "AES"}
 	// EncryptType default value is "None"
 	EncryptType string `json:"encrypt_type"`
@@ -143,7 +140,6 @@ type SnmpTrap struct {
 	Engineid string `json:"engineid"`
 	// Host description: REF(network/host), REF(network/dns_host), REF(network/availability_group)
 	Host string `json:"host"`
-	Name string `json:"name"`
 	// Version can be one of: []string{"v2c", "v3"}
 	// Version default value is "v2c"
 	Version string `json:"version"`
@@ -154,14 +150,18 @@ type SnmpTrap struct {
 	// Community description: (SNMPSTRING)
 	// Community default value is "public"
 	Community string `json:"community"`
-	// EncryptPassword description: (SNMPSTRING)
-	// EncryptPassword default value is ""
-	EncryptPassword string `json:"encrypt_password"`
 	// Status default value is true
 	Status bool `json:"status"`
 	// Username description: (SNMPSTRING)
 	// Username default value is ""
 	Username string `json:"username"`
+	// AuthPassword description: (SNMPSTRING)
+	// AuthPassword default value is ""
+	AuthPassword string `json:"auth_password"`
+	// EncryptPassword description: (SNMPSTRING)
+	// EncryptPassword default value is ""
+	EncryptPassword string `json:"encrypt_password"`
+	Name            string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SnmpTrap{}

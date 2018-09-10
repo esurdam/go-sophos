@@ -68,11 +68,11 @@ type HotspotGroups []HotspotGroup
 
 // HotspotGroup represents a UTM group
 type HotspotGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &HotspotGroup{}
@@ -128,66 +128,66 @@ type HotspotPortals []HotspotPortal
 
 // HotspotPortal represents a UTM hotspot
 type HotspotPortal struct {
-	Locked      string        `json:"_locked"`
-	Reference   string        `json:"_ref"`
-	_type       string        `json:"_type"`
-	RedirectUrl string        `json:"redirect_url"`
-	Title       string        `json:"title"`
-	AdminUsers  []interface{} `json:"admin_users"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// SslRedirect default value is false
+	SslRedirect     bool `json:"ssl_redirect"`
+	VouchersPerPage int  `json:"vouchers_per_page"`
+	// Logo default value is ""
+	Logo  string `json:"logo"`
+	Name  string `json:"name"`
+	Title string `json:"title"`
+	// CustomAssets description: (HASH)
+	CustomAssets interface{} `json:"custom_assets"`
+	Comment      string      `json:"comment"`
+	// CustomizationType can be one of: []string{"basic", "full"}
+	// CustomizationType default value is "basic"
+	CustomizationType string `json:"customization_type"`
+	// FiasCodeset can be one of: []string{"cp850", "cp1252"}
+	// FiasCodeset default value is "cp850"
+	FiasCodeset string `json:"fias_codeset"`
 	// FiasPort description: REF(service/tcp)
 	// FiasPort default value is ""
 	FiasPort string `json:"fias_port"`
-	Maclimit int    `json:"maclimit"`
-	// PwTime description: (TIME)
-	PwTime          string `json:"pw_time"`
-	VouchersPerPage int    `json:"vouchers_per_page"`
 	// Hostname description: REF(network/dns_host)
 	// Hostname default value is ""
 	Hostname string `json:"hostname"`
 	// HostnameType can be one of: []string{"none", "custom"}
 	// HostnameType default value is "none"
 	HostnameType string `json:"hostname_type"`
-	// Template description: (HASH)
-	Template interface{}   `json:"template"`
-	Vouchers []interface{} `json:"vouchers"`
-	// CustomAssets description: (HASH)
-	CustomAssets interface{} `json:"custom_assets"`
-	// SyncPsk default value is false
-	SyncPsk bool `json:"sync_psk"`
-	// Type can be one of: []string{"terms", "password", "voucher", "backend_auth", "sms", "fias"}
-	Type    string `json:"type"`
-	Comment string `json:"comment"`
-	Expiry  int    `json:"expiry"`
-	// Logo default value is ""
-	Logo string `json:"logo"`
-	// VoucherTemplate description: (HASH)
-	VoucherTemplate interface{}   `json:"voucher_template"`
-	Interfaces      []interface{} `json:"interfaces"`
+	// LogoResize default value is false
+	LogoResize bool          `json:"logo_resize"`
+	AdminUsers []interface{} `json:"admin_users"`
 	// Pagesize default value is "a4"
-	Pagesize string `json:"pagesize"`
-	SmsText  string `json:"sms_text"`
-	Terms    string `json:"terms"`
-	// FiasCodeset can be one of: []string{"cp850", "cp1252"}
-	// FiasCodeset default value is "cp850"
-	FiasCodeset string `json:"fias_codeset"`
+	Pagesize    string `json:"pagesize"`
+	RedirectUrl string `json:"redirect_url"`
+	// VoucherQrcode default value is false
+	VoucherQrcode bool          `json:"voucher_qrcode"`
+	Maclimit      int           `json:"maclimit"`
+	HotspotUsers  []interface{} `json:"hotspot_users"`
+	// PwTime description: (TIME)
+	PwTime      string `json:"pw_time"`
+	Description string `json:"description"`
+	SmsText     string `json:"sms_text"`
+	// SyncPsk default value is false
+	SyncPsk  bool          `json:"sync_psk"`
+	Mail     []interface{} `json:"mail"`
+	Vouchers []interface{} `json:"vouchers"`
+	// Template description: (HASH)
+	Template interface{} `json:"template"`
 	// FiasServer description: REF(network/host), REF(network/dns_host)
 	// FiasServer default value is ""
-	FiasServer   string        `json:"fias_server"`
-	HotspotUsers []interface{} `json:"hotspot_users"`
+	FiasServer string        `json:"fias_server"`
+	Interfaces []interface{} `json:"interfaces"`
 	// LogoFilename default value is "default_logo.png"
 	LogoFilename string `json:"logo_filename"`
-	// LogoResize default value is false
-	LogoResize bool   `json:"logo_resize"`
-	Name       string `json:"name"`
-	// VoucherQrcode default value is false
-	VoucherQrcode bool `json:"voucher_qrcode"`
-	// CustomizationType can be one of: []string{"basic", "full"}
-	// CustomizationType default value is "basic"
-	CustomizationType string        `json:"customization_type"`
-	Description       string        `json:"description"`
-	Mail              []interface{} `json:"mail"`
-	// SslRedirect default value is false
-	SslRedirect bool `json:"ssl_redirect"`
+	Terms        string `json:"terms"`
+	// Type can be one of: []string{"terms", "password", "voucher", "backend_auth", "sms", "fias"}
+	Type string `json:"type"`
+	// VoucherTemplate description: (HASH)
+	VoucherTemplate interface{} `json:"voucher_template"`
+	Expiry          int         `json:"expiry"`
 }
 
 var _ sophos.RestGetter = &HotspotPortal{}
@@ -245,12 +245,12 @@ type HotspotVouchers []HotspotVoucher
 type HotspotVoucher struct {
 	Locked       string `json:"_locked"`
 	Reference    string `json:"_ref"`
-	_type        string `json:"_type"`
+	ObjectType   string `json:"_type"`
+	Name         string `json:"name"`
+	Timequota    int    `json:"timequota"`
 	Trafficlimit int    `json:"trafficlimit"`
 	Comment      string `json:"comment"`
 	Expiry       int    `json:"expiry"`
-	Name         string `json:"name"`
-	Timequota    int    `json:"timequota"`
 }
 
 var _ sophos.RestGetter = &HotspotVoucher{}

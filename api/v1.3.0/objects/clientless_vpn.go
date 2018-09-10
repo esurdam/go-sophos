@@ -62,7 +62,7 @@ type ClientlessVpnConnections []ClientlessVpnConnection
 type ClientlessVpnConnection struct {
 	Locked        string        `json:"_locked"`
 	Reference     string        `json:"_ref"`
-	_type         string        `json:"_type"`
+	ObjectType    string        `json:"_type"`
 	AllowedUsers  []string      `json:"allowed_users"`
 	AutoLogin     bool          `json:"auto_login"`
 	Comment       string        `json:"comment"`
@@ -132,18 +132,18 @@ func (*ClientlessVpnConnection) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *ClientlessVpnConnection) GetType() string { return c._type }
+func (c *ClientlessVpnConnection) GetType() string { return c.ObjectType }
 
 // ClientlessVpnGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type ClientlessVpnGroups []ClientlessVpnGroup
 
 // ClientlessVpnGroup represents a UTM group
 type ClientlessVpnGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ClientlessVpnGroup{}

@@ -66,11 +66,11 @@ type RouteGroups []RouteGroup
 
 // RouteGroup represents a UTM group
 type RouteGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &RouteGroup{}
@@ -124,25 +124,25 @@ type RoutePolicys []RoutePolicy
 
 // RoutePolicy represents a UTM policy route
 type RoutePolicy struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Destination description: REF(network/*)
+	Destination string `json:"destination"`
+	Name        string `json:"name"`
+	// Service description: REF(service/*)
+	Service string `json:"service"`
 	// Source description: REF(network/*)
 	Source string `json:"source"`
+	// Status default value is false
+	Status bool `json:"status"`
 	// Target description: REF(/*)
 	Target string `json:"target"`
 	// Type can be one of: []string{"itf", "host"}
 	Type    string `json:"type"`
 	Comment string `json:"comment"`
-	// Destination description: REF(network/*)
-	Destination string `json:"destination"`
 	// Interface description: REF(interface/*)
 	Interface string `json:"interface"`
-	// Service description: REF(service/*)
-	Service string `json:"service"`
-	// Status default value is false
-	Status bool `json:"status"`
 }
 
 var _ sophos.RestGetter = &RoutePolicy{}
@@ -198,16 +198,16 @@ type RouteStatics []RouteStatic
 
 // RouteStatic is a generated Sophos object
 type RouteStatic struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Metric    int64  `json:"metric"`
-	Name      string `json:"name"`
-	Network   string `json:"network"`
-	Status    bool   `json:"status"`
-	Target    string `json:"target"`
-	Type      string `json:"type"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Metric     int64  `json:"metric"`
+	Name       string `json:"name"`
+	Network    string `json:"network"`
+	Status     bool   `json:"status"`
+	Target     string `json:"target"`
+	Type       string `json:"type"`
 }
 
 var _ sophos.RestGetter = &RouteStatic{}
@@ -259,4 +259,4 @@ func (*RouteStatic) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *RouteStatic) GetType() string { return r._type }
+func (r *RouteStatic) GetType() string { return r.ObjectType }

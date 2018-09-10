@@ -127,7 +127,7 @@ type SmtpExceptions []SmtpException
 type SmtpException struct {
 	Locked     string        `json:"_locked"`
 	Reference  string        `json:"_ref"`
-	_type      string        `json:"_type"`
+	ObjectType string        `json:"_type"`
 	Name       string        `json:"name"`
 	Networks   []interface{} `json:"networks"`
 	Recipients []interface{} `json:"recipients"`
@@ -191,11 +191,11 @@ type SmtpGroups []SmtpGroup
 
 // SmtpGroup represents a UTM group
 type SmtpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &SmtpGroup{}
@@ -251,7 +251,7 @@ type SmtpHeaderOperations []SmtpHeaderOperation
 type SmtpHeaderOperation struct {
 	Locked     string `json:"_locked"`
 	Reference  string `json:"_ref"`
-	_type      string `json:"_type"`
+	ObjectType string `json:"_type"`
 	Comment    string `json:"comment"`
 	HeaderName string `json:"header_name"`
 	Name       string `json:"name"`
@@ -317,7 +317,7 @@ type SmtpProfiles []SmtpProfile
 type SmtpProfile struct {
 	Locked                      string        `json:"_locked"`
 	Reference                   string        `json:"_ref"`
-	_type                       string        `json:"_type"`
+	ObjectType                  string        `json:"_type"`
 	AdBaseDn                    string        `json:"ad_base_dn"`
 	Batv                        bool          `json:"batv"`
 	CffAv                       string        `json:"cff_av"`
@@ -416,4 +416,4 @@ func (*SmtpProfile) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (s *SmtpProfile) GetType() string { return s._type }
+func (s *SmtpProfile) GetType() string { return s.ObjectType }

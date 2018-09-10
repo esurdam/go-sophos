@@ -60,10 +60,10 @@ type StasCollectors []StasCollector
 
 // StasCollector represents a UTM STAS Collector
 type StasCollector struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
 	// Host description: REF(network/host), REF(network/dns_host)
 	Host string `json:"host"`
 	Name string `json:"name"`
@@ -125,11 +125,11 @@ type StasGroups []StasGroup
 
 // StasGroup represents a UTM stas->group
 type StasGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &StasGroup{}

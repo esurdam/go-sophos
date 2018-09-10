@@ -75,14 +75,14 @@ type GeoipDstexceptions []GeoipDstexception
 type GeoipDstexception struct {
 	Locked              string        `json:"_locked"`
 	Reference           string        `json:"_ref"`
-	_type               string        `json:"_type"`
-	Comment             string        `json:"comment"`
+	ObjectType          string        `json:"_type"`
 	Countries           []interface{} `json:"countries"`
 	DestinationNetworks []interface{} `json:"destination_networks"`
 	Name                string        `json:"name"`
 	Services            []interface{} `json:"services"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
 }
 
 var _ sophos.RestGetter = &GeoipDstexception{}
@@ -138,12 +138,12 @@ type GeoipGeoipgroups []GeoipGeoipgroup
 
 // GeoipGeoipgroup is a generated Sophos object
 type GeoipGeoipgroup struct {
-	Locked    string   `json:"_locked"`
-	Reference string   `json:"_ref"`
-	_type     string   `json:"_type"`
-	Comment   string   `json:"comment"`
-	Countries []string `json:"countries"`
-	Name      string   `json:"name"`
+	Locked     string   `json:"_locked"`
+	Reference  string   `json:"_ref"`
+	ObjectType string   `json:"_type"`
+	Comment    string   `json:"comment"`
+	Countries  []string `json:"countries"`
+	Name       string   `json:"name"`
 }
 
 var _ sophos.RestGetter = &GeoipGeoipgroup{}
@@ -195,18 +195,18 @@ func (*GeoipGeoipgroup) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (g *GeoipGeoipgroup) GetType() string { return g._type }
+func (g *GeoipGeoipgroup) GetType() string { return g.ObjectType }
 
 // GeoipGroups is an Sophos Endpoint subType and implements sophos.RestObject
 type GeoipGroups []GeoipGroup
 
 // GeoipGroup represents a UTM group
 type GeoipGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Name      string `json:"name"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &GeoipGroup{}
@@ -262,14 +262,14 @@ type GeoipSrcexceptions []GeoipSrcexception
 type GeoipSrcexception struct {
 	Locked         string        `json:"_locked"`
 	Reference      string        `json:"_ref"`
-	_type          string        `json:"_type"`
+	ObjectType     string        `json:"_type"`
+	Name           string        `json:"name"`
 	Services       []interface{} `json:"services"`
 	SourceNetworks []interface{} `json:"source_networks"`
 	// Status default value is false
 	Status    bool          `json:"status"`
 	Comment   string        `json:"comment"`
 	Countries []interface{} `json:"countries"`
-	Name      string        `json:"name"`
 }
 
 var _ sophos.RestGetter = &GeoipSrcexception{}

@@ -66,11 +66,11 @@ type AweNetworkDeviceAssociationGroups []AweNetworkDeviceAssociationGroup
 
 // AweNetworkDeviceAssociationGroup represents a UTM group
 type AweNetworkDeviceAssociationGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &AweNetworkDeviceAssociationGroup{}
@@ -128,18 +128,18 @@ type AweNetworkDeviceAssociationMeshRoles []AweNetworkDeviceAssociationMeshRole
 
 // AweNetworkDeviceAssociationMeshRole represents a UTM assign device to mesh network
 type AweNetworkDeviceAssociationMeshRole struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	// Role can be one of: []string{"point", "portal"}
+	// Role default value is "portal"
+	Role    string `json:"role"`
+	Comment string `json:"comment"`
 	// Device description: REF(awe/device)
 	Device string `json:"device"`
 	// Mesh description: REF(itfhw/awe_network)
 	Mesh string `json:"mesh"`
 	Name string `json:"name"`
-	// Role can be one of: []string{"point", "portal"}
-	// Role default value is "portal"
-	Role string `json:"role"`
 }
 
 var _ sophos.RestGetter = &AweNetworkDeviceAssociationMeshRole{}

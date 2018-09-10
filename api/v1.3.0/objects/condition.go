@@ -60,11 +60,11 @@ type ConditionGroups []ConditionGroup
 
 // ConditionGroup represents a UTM group
 type ConditionGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ConditionGroup{}
@@ -120,15 +120,15 @@ type ConditionObjrefs []ConditionObjref
 
 // ConditionObjref is a generated Sophos object
 type ConditionObjref struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Attr      string `json:"attr"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
-	Operator  string `json:"operator"`
-	Ref       string `json:"ref"`
-	Value     string `json:"value"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Attr       string `json:"attr"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
+	Operator   string `json:"operator"`
+	Ref        string `json:"ref"`
+	Value      string `json:"value"`
 }
 
 var _ sophos.RestGetter = &ConditionObjref{}
@@ -180,4 +180,4 @@ func (*ConditionObjref) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (c *ConditionObjref) GetType() string { return c._type }
+func (c *ConditionObjref) GetType() string { return c.ObjectType }

@@ -407,7 +407,7 @@ func (dnsMock) References() []string {
 type dhcpServerMock struct {
 	Locked          string   `json:"_locked"`
 	Reference       string   `json:"_ref"`
-	_type           string   `json:"_type"`
+	ObjectType      string   `json:"_type"`
 	Address         string   `json:"address"`
 	Comment         string   `json:"comment"`
 	Custom          string   `json:"custom"`

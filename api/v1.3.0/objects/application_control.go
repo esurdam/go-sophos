@@ -60,11 +60,11 @@ type ApplicationControlGroups []ApplicationControlGroup
 
 // ApplicationControlGroup represents a UTM group
 type ApplicationControlGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &ApplicationControlGroup{}
@@ -122,7 +122,7 @@ type ApplicationControlRules []ApplicationControlRule
 type ApplicationControlRule struct {
 	Locked                  string        `json:"_locked"`
 	Reference               string        `json:"_ref"`
-	_type                   string        `json:"_type"`
+	ObjectType              string        `json:"_type"`
 	Action                  string        `json:"action"`
 	Applications            []string      `json:"applications"`
 	Comment                 string        `json:"comment"`
@@ -186,4 +186,4 @@ func (*ApplicationControlRule) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (a *ApplicationControlRule) GetType() string { return a._type }
+func (a *ApplicationControlRule) GetType() string { return a.ObjectType }

@@ -60,11 +60,11 @@ type RoleGroups []RoleGroup
 
 // RoleGroup represents a UTM group
 type RoleGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &RoleGroup{}
@@ -120,7 +120,7 @@ type RoleRoles []RoleRole
 type RoleRole struct {
 	Locked         string   `json:"_locked"`
 	Reference      string   `json:"_ref"`
-	_type          string   `json:"_type"`
+	ObjectType     string   `json:"_type"`
 	Comment        string   `json:"comment"`
 	Members        []string `json:"members"`
 	Name           string   `json:"name"`
@@ -175,4 +175,4 @@ func (*RoleRole) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (r *RoleRole) GetType() string { return r._type }
+func (r *RoleRole) GetType() string { return r.ObjectType }

@@ -93,11 +93,11 @@ type DhcpGroups []DhcpGroup
 
 // DhcpGroup represents a UTM group
 type DhcpGroup struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	Comment   string `json:"comment"`
-	Name      string `json:"name"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	Comment    string `json:"comment"`
+	Name       string `json:"name"`
 }
 
 var _ sophos.RestGetter = &DhcpGroup{}
@@ -151,24 +151,24 @@ type DhcpOptions []DhcpOption
 
 // DhcpOption is a generated Sophos object
 type DhcpOption struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Address   string        `json:"address"`
-	Code      int64         `json:"code"`
-	Comment   string        `json:"comment"`
-	DhcpName  string        `json:"dhcp_name"`
-	Host      []interface{} `json:"host"`
-	Integer   int64         `json:"integer"`
-	Mac       string        `json:"mac"`
-	Name      string        `json:"name"`
-	Scope     string        `json:"scope"`
-	Server    []interface{} `json:"server"`
-	Status    bool          `json:"status"`
-	String    string        `json:"string"`
-	Text      string        `json:"text"`
-	Type      string        `json:"type"`
-	Vendor    string        `json:"vendor"`
+	Locked     string        `json:"_locked"`
+	Reference  string        `json:"_ref"`
+	ObjectType string        `json:"_type"`
+	Address    string        `json:"address"`
+	Code       int64         `json:"code"`
+	Comment    string        `json:"comment"`
+	DhcpName   string        `json:"dhcp_name"`
+	Host       []interface{} `json:"host"`
+	Integer    int64         `json:"integer"`
+	Mac        string        `json:"mac"`
+	Name       string        `json:"name"`
+	Scope      string        `json:"scope"`
+	Server     []interface{} `json:"server"`
+	Status     bool          `json:"status"`
+	String     string        `json:"string"`
+	Text       string        `json:"text"`
+	Type       string        `json:"type"`
+	Vendor     string        `json:"vendor"`
 }
 
 var _ sophos.RestGetter = &DhcpOption{}
@@ -218,38 +218,38 @@ func (*DhcpOption) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (d *DhcpOption) GetType() string { return d._type }
+func (d *DhcpOption) GetType() string { return d.ObjectType }
 
 // DhcpOption6s is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpOption6s []DhcpOption6
 
 // DhcpOption6 represents a UTM DHCPv6 option
 type DhcpOption6 struct {
-	Locked    string        `json:"_locked"`
-	Reference string        `json:"_ref"`
-	_type     string        `json:"_type"`
-	Comment   string        `json:"comment"`
-	Host      []interface{} `json:"host"`
-	// Mac description: (HEXSTRING)
-	Mac  string `json:"mac"`
-	Name string `json:"name"`
-	// Address description: REF(network/interface_address), REF(network/host), REF(network/dns_host), REF(network/dns_group), REF(network/availability_group), REF(network/group)
-	Address  string        `json:"address"`
-	Server   []interface{} `json:"server"`
-	Vendor   string        `json:"vendor"`
-	DhcpName string        `json:"dhcp_name"`
-	Integer  int           `json:"integer"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// String description: (HEXSTRING)
 	String string `json:"string"`
-	// Type can be one of: []string{"ip-address", "text", "string", "integer"}
-	Type string `json:"type"`
-	// Code description: Constraints: 7, 10-12, 15-18, 21-255
-	Code int `json:"code"`
-	// Scope can be one of: []string{"global", "server", "host", "mac", "vendor"}
-	Scope string `json:"scope"`
+	// Address description: REF(network/interface_address), REF(network/host), REF(network/dns_host), REF(network/dns_group), REF(network/availability_group), REF(network/group)
+	Address string        `json:"address"`
+	Host    []interface{} `json:"host"`
+	// Mac description: (HEXSTRING)
+	Mac    string        `json:"mac"`
+	Server []interface{} `json:"server"`
 	// Status default value is false
 	Status bool   `json:"status"`
 	Text   string `json:"text"`
+	// Code description: Constraints: 7, 10-12, 15-18, 21-255
+	Code     int    `json:"code"`
+	Comment  string `json:"comment"`
+	DhcpName string `json:"dhcp_name"`
+	Integer  int    `json:"integer"`
+	Name     string `json:"name"`
+	// Scope can be one of: []string{"global", "server", "host", "mac", "vendor"}
+	Scope string `json:"scope"`
+	// Type can be one of: []string{"ip-address", "text", "string", "integer"}
+	Type   string `json:"type"`
+	Vendor string `json:"vendor"`
 }
 
 var _ sophos.RestGetter = &DhcpOption6{}
@@ -307,7 +307,7 @@ type DhcpServers []DhcpServer
 type DhcpServer struct {
 	Locked          string   `json:"_locked"`
 	Reference       string   `json:"_ref"`
-	_type           string   `json:"_type"`
+	ObjectType      string   `json:"_type"`
 	Address         string   `json:"address"`
 	Comment         string   `json:"comment"`
 	Custom          string   `json:"custom"`
@@ -377,53 +377,53 @@ func (*DhcpServer) UsedByPath(ref string) string {
 }
 
 // GetType implements sophos.Object
-func (d *DhcpServer) GetType() string { return d._type }
+func (d *DhcpServer) GetType() string { return d.ObjectType }
 
 // DhcpServer6s is an Sophos Endpoint subType and implements sophos.RestObject
 type DhcpServer6s []DhcpServer6
 
 // DhcpServer6 represents a UTM DHCPv6 server
 type DhcpServer6 struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Domain default value is ""
-	Domain   string `json:"domain"`
-	PrefdLft int    `json:"prefd_lft"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
+	DefaultLft int    `json:"default_lft"`
 	// RangeEnd description: (IP6ADDR)
 	RangeEnd string `json:"range_end"`
 	// Address description: REF(itfparams/*)
 	Address string `json:"address"`
-	// Dns1 description: (IP6ADDR)
-	// Dns1 default value is "::"
-	Dns1     string        `json:"dns1"`
-	Mappings []interface{} `json:"mappings"`
-	Netmask6 int           `json:"netmask6"`
-	// Mtu description: Constraints: 0, 1280-9000
-	Mtu  int    `json:"mtu"`
-	Name string `json:"name"`
-	// ProxyAutoconfig default value is false
-	ProxyAutoconfig bool `json:"proxy_autoconfig"`
-	// RangeStart description: (IP6ADDR)
-	RangeStart string `json:"range_start"`
-	Comment    string `json:"comment"`
-	DefaultLft int    `json:"default_lft"`
-	// DenyUnknown default value is false
-	DenyUnknown bool `json:"deny_unknown"`
+	// Domain default value is ""
+	Domain string `json:"domain"`
 	// Interface description: REF(interface/ethernet), REF(interface/vlan), REF(interface/bridge)
 	Interface string `json:"interface"`
-	ValidLft  int    `json:"valid_lft"`
-	// Status default value is false
-	Status bool `json:"status"`
+	// OnLink default value is false
+	OnLink   bool `json:"on_link"`
+	PrefdLft int  `json:"prefd_lft"`
+	// RelayMode default value is false
+	RelayMode bool `json:"relay_mode"`
 	// Custom default value is ""
 	Custom string `json:"custom"`
 	// Dns2 description: (IP6ADDR)
 	// Dns2 default value is "::"
-	Dns2 string `json:"dns2"`
-	// OnLink default value is false
-	OnLink bool `json:"on_link"`
-	// RelayMode default value is false
-	RelayMode bool `json:"relay_mode"`
+	Dns2     string        `json:"dns2"`
+	Mappings []interface{} `json:"mappings"`
+	// Mtu description: Constraints: 0, 1280-9000
+	Mtu int `json:"mtu"`
+	// RangeStart description: (IP6ADDR)
+	RangeStart string `json:"range_start"`
+	// Status default value is false
+	Status  bool   `json:"status"`
+	Comment string `json:"comment"`
+	// Dns1 description: (IP6ADDR)
+	// Dns1 default value is "::"
+	Dns1     string `json:"dns1"`
+	Name     string `json:"name"`
+	Netmask6 int    `json:"netmask6"`
+	// ProxyAutoconfig default value is false
+	ProxyAutoconfig bool `json:"proxy_autoconfig"`
+	ValidLft        int  `json:"valid_lft"`
+	// DenyUnknown default value is false
+	DenyUnknown bool `json:"deny_unknown"`
 }
 
 var _ sophos.RestGetter = &DhcpServer6{}
@@ -479,42 +479,42 @@ type DhcpStatelesss []DhcpStateless
 
 // DhcpStateless represents a UTM IPv6 prefix advertisement
 type DhcpStateless struct {
-	Locked    string `json:"_locked"`
-	Reference string `json:"_ref"`
-	_type     string `json:"_type"`
-	// Address description: REF(itfparams/*)
-	Address string `json:"address"`
-	Comment string `json:"comment"`
-	// Dns1 description: (IP6ADDR)
-	// Dns1 default value is "::"
-	Dns1 string `json:"dns1"`
-	// ManagedFlag default value is false
-	ManagedFlag bool `json:"managed_flag"`
+	Locked     string `json:"_locked"`
+	Reference  string `json:"_ref"`
+	ObjectType string `json:"_type"`
 	// StatelessServerStatus default value is true
 	StatelessServerStatus bool `json:"stateless_server_status"`
-	// Interface description: REF(interface/ethernet), REF(interface/vlan), REF(interface/bridge)
-	Interface string `json:"interface"`
-	Name      string `json:"name"`
-	// OnLink default value is false
-	OnLink     bool `json:"on_link"`
-	PrefdLft   int  `json:"prefd_lft"`
-	ValidLft   int  `json:"valid_lft"`
-	DefaultLft int  `json:"default_lft"`
 	// Dns2 description: (IP6ADDR)
 	// Dns2 default value is "::"
 	Dns2 string `json:"dns2"`
 	// Domain default value is ""
 	Domain string `json:"domain"`
+	// ManagedFlag default value is false
+	ManagedFlag bool   `json:"managed_flag"`
+	Name        string `json:"name"`
+	Comment     string `json:"comment"`
+	// Interface description: REF(interface/ethernet), REF(interface/vlan), REF(interface/bridge)
+	Interface string `json:"interface"`
+	PrefdLft  int    `json:"prefd_lft"`
+	// ProxyAutoconfig default value is false
+	ProxyAutoconfig bool `json:"proxy_autoconfig"`
+	DefaultLft      int  `json:"default_lft"`
+	// Dns1 description: (IP6ADDR)
+	// Dns1 default value is "::"
+	Dns1 string `json:"dns1"`
 	// OtherConfig default value is false
 	OtherConfig bool `json:"other_config"`
 	// Status default value is false
-	Status bool `json:"status"`
+	Status   bool `json:"status"`
+	ValidLft int  `json:"valid_lft"`
+	// Address description: REF(itfparams/*)
+	Address string `json:"address"`
 	// Custom default value is ""
 	Custom string `json:"custom"`
 	// Mtu description: Constraints: 0, 1280-9000
 	Mtu int `json:"mtu"`
-	// ProxyAutoconfig default value is false
-	ProxyAutoconfig bool `json:"proxy_autoconfig"`
+	// OnLink default value is false
+	OnLink bool `json:"on_link"`
 }
 
 var _ sophos.RestGetter = &DhcpStateless{}
