@@ -97,7 +97,7 @@ nodes.LicensingActiveIps
 
 Each file in the [objects](api/v1.3.0/objects) dir represents an [Endpoint](nodes.go#L7) generated from a [Definition](definition.go) and contains its generated Objects.
 
-Objects implement the [RestObject](nodes.go) interface:
+Objects implement the [RestObject](nodes.go#L46) interface:
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
@@ -106,7 +106,7 @@ var dns objects.Dns
 err := client.GetObject(&dns)
 ```
 
-Notice that some objects are pluralized and only implement the [RestGetter](nodes.go) interface:
+Notice that some objects are pluralized and only implement the [RestGetter](nodes.go#L56) interface:
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
 
@@ -123,7 +123,7 @@ for _, s := range ss {
 }
 ```
 
-Note that [Endpoint](nodes.go#L5) types contain their [Definition](definition.go#L3):
+Note that [Endpoint](nodes.go#L2) types contain their [Definition](definition.go#L3):
 
 ```go
 import "github.com/esurdam/go-sophos/api/v1.3.0/objects"
