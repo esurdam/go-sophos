@@ -3,6 +3,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -21,6 +22,7 @@ import (
 var (
 	client  *sophos.Client
 	rootDir string
+	debug   bool
 
 	numberSequence    = regexp.MustCompile(`([a-zA-Z])(\d+)([a-zA-Z]?)`)
 	numberReplacement = []byte(`$1 $2 $3`)
@@ -39,32 +41,37 @@ type (
 	definition struct {
 		Description string
 		Name        string
-		Link        string // path to definition
-		Swag        *swag  // the definition from the UTM
-		Node        *node  // a representation of the Node
+		Link        string    // path to definition
+		Swag        *swag     // the definition from the UTM
+		Endpoint    *endpoint // a representation of the Endpoint
 	}
 	// map[path]map[method]methodDescription
 	swag struct {
 		Paths map[string]methodMap
+		// Definitions are Object definitions
+		Definitions map[string]struct {
+			Properties map[string]struct {
+				Type    string
+				Default interface{}
+			}
+			Description string
+			Type        string
+		}
 	}
-	methodMap map[string]methodDescriptions
-
-	methodDescriptions struct {
+	methodMap map[string]struct {
 		Description string
-		Parameters  []parameter
-		Tags        []string
-		Responses   map[int]struct{ Description string }
+		Parameters  []struct {
+			Name        string
+			In          string
+			Description string
+			Type        string
+			Required    bool
+		}
+		Tags      []string
+		Responses map[int]struct{ Description string }
 	}
-
-	parameter struct {
-		Name        string
-		In          string
-		Description string
-		Type        string
-		Required    bool
-	}
-	node struct {
-		Definition  *definition
+	endpoint struct {
+		Definition  *definition `json:"-"` //used in template
 		Title, Name string
 		Bytes       string
 		Routes      []string
@@ -72,23 +79,23 @@ type (
 		Methods     []string
 		SubTypes    []subtype
 		References  []string
-		Paths       map[string]methodMap
+		Paths       map[string]methodMap `json:"-"`
 	}
 	subtype struct {
-		Name        string
-		JsonTag     string
-		GetPath     string
-		GetPaths    []string
-		PutPath     string
-		PostPath    string
-		DeletePath  string
-		PatchPath   string
-		HasRef      bool
-		Bytes       string
-		MethodDescs methodMap
-		Node        *node
-		IsPlural    bool
-		IsType      bool
+		Name              string
+		JsonTag           string
+		GetPath           string
+		GetPaths          []string
+		PutPath           string
+		PostPath          string
+		DeletePath        string
+		PatchPath         string
+		HasRef            bool
+		Bytes             string
+		Node              *endpoint `json:"-"`
+		IsPlural          bool
+		IsPluralInterface bool
+		IsType            bool
 	}
 )
 
@@ -167,13 +174,15 @@ func main() {
 
 		f.Write([]byte(header))
 
-		// enc := json.NewEncoder(os.Stdout)
-		// enc.SetIndent("", "    ")
-		// if err := enc.Encode(def.Node); err != nil {
-		// 	panic(err)
-		// }
+		if debug {
+			enc := json.NewEncoder(os.Stdout)
+			enc.SetIndent("", "    ")
+			if err := enc.Encode(def.Endpoint); err != nil {
+				panic(err)
+			}
+		}
 		fmt.Printf("writing %s\n", def.Name)
-		err = def.Node.ExecuteTemplate(f)
+		err = def.Endpoint.ExecuteTemplate(f)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
@@ -283,7 +292,7 @@ func handleNodesNode() error {
 	//
 	// for _, key := range keys {
 	// 	strKey := strings.Replace(key, ".", "_", -1)
-	// 	// f2.Write([]byte(fmt.Sprintf(" %sNode = sophos.Node(\"%s\")\n", toCamelInitCase(strKey, true), key)))
+	// 	// f2.Write([]byte(fmt.Sprintf(" %sNode = sophos.Endpoint(\"%s\")\n", toCamelInitCase(strKey, true), key)))
 	// 	f2.Write([]byte(fmt.Sprintf("type %s struct{ Path string, Value %s}", toCamelInitCase(strKey, true), key)))
 	// }
 
@@ -386,23 +395,23 @@ func (def *definition) process() error {
 		return err
 	}
 
-	// format the path, see if its a node endpoint
+	// format the path, see if its a endpoint endpoint
 	path := fmt.Sprintf("/api/%s", strings.ToLower(def.Name))
 	if def.Name != "Nodes" {
 		path = fmt.Sprintf("/api/nodes/%s", strings.ToLower(def.Name))
 	}
 
-	// the node will represent this definition
-	def.Node = &node{
+	// the endpoint will represent this definition
+	def.Endpoint = &endpoint{
 		Definition: def,
 		Title:      toCamelInitCase(def.Name, true),
 		Name:       def.Name,
 		Path:       path,
 	}
 
-	ep := def.Node
+	ep := def.Endpoint
 
-	def.Node.fetch()
+	def.Endpoint.fetch()
 	ep.Paths = def.Swag.Paths
 	if def.Name == "Nodes" {
 		return handleNodesNode()
@@ -410,7 +419,7 @@ func (def *definition) process() error {
 
 	// Swag.Paths contains a mapping of path -> map[method]methodDescription
 	for path, methodMap := range def.Swag.Paths {
-		// add the path to the known Node Paths
+		// add the path to the known Endpoint Paths
 		ep.Routes = append(ep.Routes, path)
 		// make a human readable name
 		parts := strings.Split(path, "/")
@@ -422,14 +431,13 @@ func (def *definition) process() error {
 		}
 
 		// parse each method and generate subtypes
-		for method := range methodMap {
-			// add the method to the known Node methods
+		for method, d := range methodMap {
+			// add the method to the known Endpoint methods
 			ep.AddMethod(method)
 			s := subtype{
-				Name:        toCamelInitCase(def.Name+"_"+name, true),
-				JsonTag:     def.Name + "_" + name,
-				MethodDescs: methodMap,
-				Node:        def.Node,
+				Name:    toCamelInitCase(def.Name+"_"+name, true),
+				JsonTag: def.Name + "_" + name,
+				Node:    def.Endpoint,
 			}
 
 			if s.Name == "StatusStatus" {
@@ -441,7 +449,7 @@ func (def *definition) process() error {
 				s.HasRef = true
 				// change the name to uppercase Ref
 				name = strings.Replace(name, "{ref}", "{Ref}", -1)
-				// add the name to the known Node references
+				// add the name to the known Endpoint references
 				ep.AddReference(toCamelInitCase(def.Name+"_"+name, true))
 			} else {
 				s.GetPath = path
@@ -464,6 +472,11 @@ func (def *definition) process() error {
 				s.PutPath = path
 			}
 			if method == "post" {
+				enc := json.NewEncoder(os.Stdout)
+				enc.SetIndent("", "    ")
+				if err := enc.Encode(def.Swag.Definitions[strings.Replace(d.Tags[0], "/", ".", -1)]); err != nil {
+					panic(err)
+				}
 				s.PostPath = path
 			}
 			if method == "delete" {
@@ -473,7 +486,7 @@ func (def *definition) process() error {
 				s.PatchPath = path
 			}
 
-			// Add the subtype to the node
+			// Add the subtype to the endpoint
 			ep.AddSubType(s)
 		}
 
@@ -486,17 +499,17 @@ func (def *definition) process() error {
 	return nil
 }
 
-// fetch fetches the node itself
-func (n *node) fetch() error {
+// fetch fetches the endpoint itself
+func (n *endpoint) fetch() error {
 	// get the struct
 	r, err := client.Get(n.Path)
 	if err != nil {
-		// error here is okay since node/endpoint is not a /node/{{Path}} subtype
+		// error here is okay since endpoint/endpoint is not a /endpoint/{{Path}} subtype
 		// objects wil be retrieved from endpoints
 		// log.Println("could not get path")
 		return err
 	}
-	// write the node data
+	// write the endpoint data
 	byt, err := gojson.Generate(r.Body, gojson.ParseJson, n.Title, "main", []string{"json"}, false)
 	if err != nil {
 		log.Printf("could not gojson response: %s, %s\n", n.Path, err.Error())
@@ -550,7 +563,7 @@ func (n *node) fetch() error {
 	return nil
 }
 
-func (n *node) AddReference(ref string) {
+func (n *endpoint) AddReference(ref string) {
 	for _, se := range n.References {
 		if se == ref {
 			return
@@ -559,7 +572,7 @@ func (n *node) AddReference(ref string) {
 	n.References = append(n.References, ref)
 }
 
-func (n *node) AddMethod(m string) {
+func (n *endpoint) AddMethod(m string) {
 	for _, se := range n.Methods {
 		if se == m {
 			return
@@ -568,7 +581,7 @@ func (n *node) AddMethod(m string) {
 	n.Methods = append(n.Methods, m)
 }
 
-func (n *node) AddSubType(s subtype) {
+func (n *endpoint) AddSubType(s subtype) {
 	for idx, se := range n.SubTypes {
 		if se.Name == s.Name {
 			if s.HasRef {
@@ -604,6 +617,10 @@ func (n *node) AddSubType(s subtype) {
 
 			if !se.IsPlural && s.IsPlural {
 				n.SubTypes[idx].IsPlural = s.IsPlural
+			}
+
+			if !se.IsPluralInterface && s.IsPluralInterface {
+				n.SubTypes[idx].IsPluralInterface = s.IsPluralInterface
 			}
 
 			if !se.IsType && s.IsType {
@@ -665,14 +682,15 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 				outBuf.Write([]byte(newType))
 				continue
 			}
-			// if strings.HasSuffix(line, " []interface{}\n") {
-			// 	// make pluralized
-			// 	newLine := strings.Replace(line, " []interface{}", "s []"+toCamelInitCase(name, true), 1)
-			// 	outBuf.Write([]byte(newLine))
-			// 	newType := strings.Replace(line, " []interface{}", " interface{}", 1)
-			// 	outBuf.Write([]byte(newType))
-			// 	continue
-			// }
+			if strings.HasSuffix(line, " []interface{}\n") {
+				// 	// make pluralized
+				s.IsPluralInterface = true
+				// 	newLine := strings.Replace(line, " []interface{}", "s []"+toCamelInitCase(name, true), 1)
+				// 	outBuf.Write([]byte(newLine))
+				// 	newType := strings.Replace(line, " []interface{}", " interface{}", 1)
+				// 	outBuf.Write([]byte(newType))
+				// 	continue
+			}
 		}
 
 		if strings.Contains(line, "`json:\"_type\"`") {
@@ -856,7 +874,7 @@ var funcMap = template.FuncMap{
 	},
 }
 
-func (n *node) ExecuteTemplate(w io.Writer) error {
+func (n *endpoint) ExecuteTemplate(w io.Writer) error {
 	tmpl, err := template.New("").Funcs(funcMap).Parse(nodeTemplate)
 	if err != nil {
 		return err
