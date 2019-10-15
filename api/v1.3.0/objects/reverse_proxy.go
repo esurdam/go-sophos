@@ -1,6 +1,7 @@
 package objects
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/esurdam/go-sophos"
@@ -532,7 +533,7 @@ type ReverseProxyFrontend struct {
 	Lbmethod             string        `json:"lbmethod"`
 	Locations            []string      `json:"locations"`
 	Name                 string        `json:"name"`
-	Port                 int64         `json:"port"`
+	Port                 json.Number   `json:"port"`
 	Preservehost         bool          `json:"preservehost"`
 	Profile              string        `json:"profile"`
 	Status               bool          `json:"status"`
