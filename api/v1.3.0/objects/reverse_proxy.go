@@ -539,6 +539,7 @@ type ReverseProxyFrontend struct {
 	Status               bool          `json:"status"`
 	Type                 string        `json:"type"`
 	Xheaders             bool          `json:"xheaders"`
+	MinTLS               string        `json:"min_tls"`
 }
 
 var _ sophos.RestGetter = &ReverseProxyFrontend{}
