@@ -234,7 +234,7 @@ func (c Client) GetObject(o RestGetter, options ...Option) error {
 // PostObject POSTs the RestObject
 func (c Client) PostObject(o RestObject, options ...Option) error {
 	byt, _ := json.Marshal(o)
-	res, err := c.Post(o.PostPath(), bytes.NewReader(byt))
+	res, err := c.Post(o.PostPath(), bytes.NewReader(byt), options...)
 
 	if res.StatusCode == http.StatusCreated {
 		// Operation successful and created a new resource. The newly created
