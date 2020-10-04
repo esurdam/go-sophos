@@ -15,7 +15,7 @@ var (
 )
 
 func init() {
-	if len(os.Args) == 2 {
+	if len(os.Args) == 3 {
 		endpoint = os.Args[1]
 		token = os.Args[2]
 	}
