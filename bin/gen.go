@@ -27,7 +27,7 @@ var (
 	numberSequence    = regexp.MustCompile(`([a-zA-Z])(\d+)([a-zA-Z]?)`)
 	numberReplacement = []byte(`$1 $2 $3`)
 	header            = `package objects
-	
+
 import (
 	"fmt"
 
@@ -216,13 +216,13 @@ func({{firstLetter .Name}} *{{.Name}})Update(client sophos.ClientInterface, opti
 
 var nodeFuncsTemplate = `
 // Get{{.Name}} gets the {{.Path}} value from the UTM
-func Get{{.Name}}(client sophos.ClientInterface, options ...sophos.Option) (val {{.Val}}, err error) { 
+func Get{{.Name}}(client sophos.ClientInterface, options ...sophos.Option) (val {{.Val}}, err error) {
 	err = get(client, "/api/nodes/{{.Path}}", &val, options...)
 	return
 }
 
 // Update{{.Name}} PUTs the {{.Path}} value to the UTM
-func Update{{.Name}}(client sophos.ClientInterface, val {{.Val}}, options ...sophos.Option) (err error) { 
+func Update{{.Name}}(client sophos.ClientInterface, val {{.Val}}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/{{.Path}}", val, options...)
 }
 `
@@ -297,9 +297,9 @@ func handleNodesNode() error {
 ` + nodesHeader))
 	//
 	// for _, key := range keys {
-	// 	strKey := strings.Replace(key, ".", "_", -1)
-	// 	// f2.Write([]byte(fmt.Sprintf(" %sNode = sophos.Endpoint(\"%s\")\n", toCamelInitCase(strKey, true), key)))
-	// 	f2.Write([]byte(fmt.Sprintf("type %s struct{ Path string, Value %s}", toCamelInitCase(strKey, true), key)))
+	//	strKey := strings.Replace(key, ".", "_", -1)
+	//	// f2.Write([]byte(fmt.Sprintf(" %sNode = sophos.Endpoint(\"%s\")\n", toCamelInitCase(strKey, true), key)))
+	//	f2.Write([]byte(fmt.Sprintf("type %s struct{ Path string, Value %s}", toCamelInitCase(strKey, true), key)))
 	// }
 
 	for _, key := range keys {
@@ -328,7 +328,7 @@ func handleNodesNode() error {
 	}
 	// ft, err := os.Create(subDir + "/handlers_test.go")
 	// if err != nil {
-	// 	log.Fatal(err)
+	//	log.Fatal(err)
 	// }
 	// ft.Write([]byte(nodesTestTemp))
 
@@ -362,9 +362,9 @@ func put(c sophos.ClientInterface, path string, val interface{}, options ...soph
 		})
 
 		// executeTmpl(ft, nodeFuncsTestTemplate, &nftd{
-		// 	Name: toCamelInitCase(strKey, true),
-		// 	Val:  valueType,
-		// 	Path: key,
+		//	Name: toCamelInitCase(strKey, true),
+		//	Val:  valueType,
+		//	Path: key,
 		// })
 
 		// f.Write([]byte(fmt.Sprintf(" %sValue %s\n", toCamelInitCase(strKey, true), valueType)))
@@ -511,7 +511,7 @@ func (n *endpoint) fetch() error {
 		return err
 	}
 	// write the endpoint data
-	byt, err := gojson.Generate(r.Body, gojson.ParseJson, n.Title, "main", []string{"json"}, false)
+	byt, err := gojson.Generate(r.Body, gojson.ParseJson, n.Title, "main", []string{"json"}, false, true)
 	if err != nil {
 		log.Printf("could not gojson response: %s, %s\n", n.Path, err.Error())
 		// error here means we will manually create a parent struct
@@ -655,7 +655,7 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 	if name == "StatusStatus" {
 		name = "StatusVersion"
 	}
-	byt, err := gojson.Generate(resp.Body, gojson.ParseJson, name, "main", []string{"json"}, false)
+	byt, err := gojson.Generate(resp.Body, gojson.ParseJson, name, "main", []string{"json"}, false, true)
 	if err != nil {
 		log.Printf("could not gojson response: %s\n", path)
 		return nil, err
@@ -685,7 +685,7 @@ func makeStructBytes(s *subtype, path, name string) (*bytes.Buffer, error) {
 				continue
 			}
 			if strings.HasSuffix(line, " []interface{}\n") {
-				// 	// make pluralized
+				//	// make pluralized
 				s.IsPlural = true
 				s.IsPluralInterface = true
 				newLine := strings.Replace(line, " []interface{}", "s []"+name, 1)
@@ -821,7 +821,7 @@ func({{.Title}}) ApiRoutes() []string{
 	}
 }
 
-// References returns the {{.Title}}'s references. These strings serve no purpose other than to demonstrate which 
+// References returns the {{.Title}}'s references. These strings serve no purpose other than to demonstrate which
 // Reference keys are used for this Endpoint
 func({{.Title}}) References() []string {
 	return []string{
@@ -878,7 +878,7 @@ func(*{{.Name}}) PutPath(ref string) string {
 }
 
 // UsedByPath implements sophos.RestObject{{getUsedBy .}}
-func(*{{.Name}}) UsedByPath(ref string) string { 
+func(*{{.Name}}) UsedByPath(ref string) string {
 	return fmt.Sprintf("/api{{asRefUrl .PutPath}}/usedby", ref)
 }
 

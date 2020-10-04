@@ -1,6 +1,7 @@
 package objects
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/esurdam/go-sophos"
@@ -891,18 +892,18 @@ type NetworkNetworks []NetworkNetwork
 
 // NetworkNetwork is a generated Sophos object
 type NetworkNetwork struct {
-	Locked     string `json:"_locked"`
-	Reference  string `json:"_ref"`
-	ObjectType string `json:"_type"`
-	Address    string `json:"address"`
-	Address6   string `json:"address6"`
-	Comment    string `json:"comment"`
-	Interface  string `json:"interface"`
-	Name       string `json:"name"`
-	Netmask    int64  `json:"netmask"`
-	Netmask6   int64  `json:"netmask6"`
-	Resolved   bool   `json:"resolved"`
-	Resolved6  bool   `json:"resolved6"`
+	Locked     string      `json:"_locked"`
+	Reference  string      `json:"_ref"`
+	ObjectType string      `json:"_type"`
+	Address    string      `json:"address"`
+	Address6   string      `json:"address6"`
+	Comment    string      `json:"comment"`
+	Interface  string      `json:"interface"`
+	Name       string      `json:"name"`
+	Netmask    json.Number `json:"netmask"`
+	Netmask6   json.Number `json:"netmask6"`
+	Resolved   bool        `json:"resolved"`
+	Resolved6  bool        `json:"resolved6"`
 }
 
 var _ sophos.RestGetter = &NetworkNetwork{}
