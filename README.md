@@ -6,6 +6,7 @@
 [![codecov](https://codecov.io/gh/esurdam/go-sophos/branch/master/graph/badge.svg)](https://codecov.io/gh/esurdam/go-sophos)
 ![go workflow](https://github.com/esurdam/go-sophos/actions/workflows/go.yml/badge.svg)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/esurdam/go-sophos/blob/master/LICENSE)
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go/#third-party-apis)
 
 A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go with zero dependencies. 
 
