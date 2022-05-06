@@ -4,7 +4,7 @@
 [![Documentation](https://godoc.org/github.com/esurdam/go-sophos?status.svg)](http://godoc.org/github.com/esurdam/go-sophos)
 [![Go Report Card](https://goreportcard.com/badge/github.com/esurdam/go-sophos)](https://goreportcard.com/report/github.com/esurdam/go-sophos)
 [![codecov](https://codecov.io/gh/esurdam/go-sophos/branch/master/graph/badge.svg)](https://codecov.io/gh/esurdam/go-sophos)
-![go workflow](https://github.com/esurdam/go-sophos/workflows/go.yml/badge.svg)
+![go workflow](https://github.com/esurdam/go-sophos/actions/workflows/go.yml/badge.svg)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/esurdam/go-sophos/blob/master/LICENSE)
 
 A [Sophos UTM REST API client](https://www.sophos.com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API.pdf?la=en) for Go with zero dependencies. 
