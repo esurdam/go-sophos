@@ -18,6 +18,19 @@ func (a *AccServer1AuthSecret) Update(client sophos.ClientInterface, options ...
 	return put(client, "/api/nodes/acc.server1.auth.secret", a.Value, options...)
 }
 
+// AccServer1AuthServerCert represents the acc.server1.auth.server_cert node and implements sophos.Node
+type AccServer1AuthServerCert struct{ Value string }
+
+// Get gets the acc.server1.auth.server_cert value from the UTM
+func (a *AccServer1AuthServerCert) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/acc.server1.auth.server_cert", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAccServer1AuthServerCert
+func (a *AccServer1AuthServerCert) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/acc.server1.auth.server_cert", a.Value, options...)
+}
+
 // AccServer1AuthStatus represents the acc.server1.auth.status node and implements sophos.Node
 type AccServer1AuthStatus struct{ Value bool }
 
@@ -81,6 +94,19 @@ func (a *AccServer2AuthSecret) Get(client sophos.ClientInterface, options ...sop
 // Update is syntactic sugar for UpdateAccServer2AuthSecret
 func (a *AccServer2AuthSecret) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/acc.server2.auth.secret", a.Value, options...)
+}
+
+// AccServer2AuthServerCert represents the acc.server2.auth.server_cert node and implements sophos.Node
+type AccServer2AuthServerCert struct{ Value string }
+
+// Get gets the acc.server2.auth.server_cert value from the UTM
+func (a *AccServer2AuthServerCert) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/acc.server2.auth.server_cert", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAccServer2AuthServerCert
+func (a *AccServer2AuthServerCert) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/acc.server2.auth.server_cert", a.Value, options...)
 }
 
 // AccServer2AuthStatus represents the acc.server2.auth.status node and implements sophos.Node
@@ -500,7 +526,7 @@ func (a *AfcNumQueues) Update(client sophos.ClientInterface, options ...sophos.O
 }
 
 // AfcRules represents the afc.rules node and implements sophos.Node
-type AfcRules struct{ Value []string }
+type AfcRules struct{ Value []interface{} }
 
 // Get gets the afc.rules value from the UTM
 func (a *AfcRules) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -523,6 +549,19 @@ func (a *AfcStatus) Get(client sophos.ClientInterface, options ...sophos.Option)
 // Update is syntactic sugar for UpdateAfcStatus
 func (a *AfcStatus) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/afc.status", a.Value, options...)
+}
+
+// AfcSubappDetection represents the afc.subapp_detection node and implements sophos.Node
+type AfcSubappDetection struct{ Value bool }
+
+// Get gets the afc.subapp_detection value from the UTM
+func (a *AfcSubappDetection) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/afc.subapp_detection", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAfcSubappDetection
+func (a *AfcSubappDetection) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/afc.subapp_detection", a.Value, options...)
 }
 
 // AfcSubmitUnknownTrafficData represents the afc.submit_unknown_traffic_data node and implements sophos.Node
@@ -603,6 +642,45 @@ func (a *AmazonVpcStatus) Update(client sophos.ClientInterface, options ...sopho
 	return put(client, "/api/nodes/amazon_vpc.status", a.Value, options...)
 }
 
+// AptpDbPlugin represents the aptp.db_plugin node and implements sophos.Node
+type AptpDbPlugin struct{ Value string }
+
+// Get gets the aptp.db_plugin value from the UTM
+func (a *AptpDbPlugin) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/aptp.db_plugin", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAptpDbPlugin
+func (a *AptpDbPlugin) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.db_plugin", a.Value, options...)
+}
+
+// AptpNumServers represents the aptp.num_servers node and implements sophos.Node
+type AptpNumServers struct{ Value int64 }
+
+// Get gets the aptp.num_servers value from the UTM
+func (a *AptpNumServers) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/aptp.num_servers", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAptpNumServers
+func (a *AptpNumServers) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.num_servers", a.Value, options...)
+}
+
+// AptpNumThreads represents the aptp.num_threads node and implements sophos.Node
+type AptpNumThreads struct{ Value int64 }
+
+// Get gets the aptp.num_threads value from the UTM
+func (a *AptpNumThreads) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/aptp.num_threads", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAptpNumThreads
+func (a *AptpNumThreads) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.num_threads", a.Value, options...)
+}
+
 // AptpPolicy represents the aptp.policy node and implements sophos.Node
 type AptpPolicy struct{ Value string }
 
@@ -614,6 +692,19 @@ func (a *AptpPolicy) Get(client sophos.ClientInterface, options ...sophos.Option
 // Update is syntactic sugar for UpdateAptpPolicy
 func (a *AptpPolicy) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/aptp.policy", a.Value, options...)
+}
+
+// AptpPort represents the aptp.port node and implements sophos.Node
+type AptpPort struct{ Value int64 }
+
+// Get gets the aptp.port value from the UTM
+func (a *AptpPort) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/aptp.port", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAptpPort
+func (a *AptpPort) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.port", a.Value, options...)
 }
 
 // AptpRuleModifiers represents the aptp.rule_modifiers node and implements sophos.Node
@@ -1071,6 +1162,19 @@ func (a *AuthCacheLifetime) Update(client sophos.ClientInterface, options ...sop
 	return put(client, "/api/nodes/auth.cache_lifetime", a.Value, options...)
 }
 
+// AuthDelayedIpsetExpansion represents the auth.delayed_ipset_expansion node and implements sophos.Node
+type AuthDelayedIpsetExpansion struct{ Value map[string]interface{} }
+
+// Get gets the auth.delayed_ipset_expansion value from the UTM
+func (a *AuthDelayedIpsetExpansion) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/auth.delayed_ipset_expansion", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAuthDelayedIpsetExpansion
+func (a *AuthDelayedIpsetExpansion) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/auth.delayed_ipset_expansion", a.Value, options...)
+}
+
 // AuthEdirSsoEmConflict represents the auth.edir_sso.em_conflict node and implements sophos.Node
 type AuthEdirSsoEmConflict struct{ Value string }
 
@@ -1319,7 +1423,7 @@ func (a *AuthUpdateBackendGroupMembersStatus) Update(client sophos.ClientInterfa
 }
 
 // AweAllowedInterfaces represents the awe.allowed_interfaces node and implements sophos.Node
-type AweAllowedInterfaces struct{ Value []interface{} }
+type AweAllowedInterfaces struct{ Value []string }
 
 // Get gets the awe.allowed_interfaces value from the UTM
 func (a *AweAllowedInterfaces) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -1397,7 +1501,7 @@ func (a *AweGlobalApSoftlimit) Update(client sophos.ClientInterface, options ...
 }
 
 // AweGlobalApVlantag represents the awe.global.ap_vlantag node and implements sophos.Node
-type AweGlobalApVlantag struct{ Value int64 }
+type AweGlobalApVlantag struct{ Value map[string]interface{} }
 
 // Get gets the awe.global.ap_vlantag value from the UTM
 func (a *AweGlobalApVlantag) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -1410,7 +1514,7 @@ func (a *AweGlobalApVlantag) Update(client sophos.ClientInterface, options ...so
 }
 
 // AweGlobalAweStatus represents the awe.global.awe_status node and implements sophos.Node
-type AweGlobalAweStatus struct{ Value map[string]interface{} }
+type AweGlobalAweStatus struct{ Value int64 }
 
 // Get gets the awe.global.awe_status value from the UTM
 func (a *AweGlobalAweStatus) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -1472,6 +1576,19 @@ func (a *AweGlobalMagicIp) Get(client sophos.ClientInterface, options ...sophos.
 // Update is syntactic sugar for UpdateAweGlobalMagicIp
 func (a *AweGlobalMagicIp) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.global.magic_ip", a.Value, options...)
+}
+
+// AweGlobalMultiWifiIfaceBr represents the awe.global.multi_wifi_iface_br node and implements sophos.Node
+type AweGlobalMultiWifiIfaceBr struct{ Value bool }
+
+// Get gets the awe.global.multi_wifi_iface_br value from the UTM
+func (a *AweGlobalMultiWifiIfaceBr) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/awe.global.multi_wifi_iface_br", &a.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateAweGlobalMultiWifiIfaceBr
+func (a *AweGlobalMultiWifiIfaceBr) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/awe.global.multi_wifi_iface_br", a.Value, options...)
 }
 
 // AweGlobalNotificationTimeout represents the awe.global.notification_timeout node and implements sophos.Node
@@ -1566,7 +1683,7 @@ func (a *AweGlobalVlantagging) Update(client sophos.ClientInterface, options ...
 }
 
 // AweNetworks represents the awe.networks node and implements sophos.Node
-type AweNetworks struct{ Value []string }
+type AweNetworks struct{ Value []interface{} }
 
 // Get gets the awe.networks value from the UTM
 func (a *AweNetworks) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -1812,6 +1929,123 @@ func (c *CaGlobalCasHttpProxyUntrusted) Update(client sophos.ClientInterface, op
 	return put(client, "/api/nodes/ca.global_cas.http_proxy.untrusted", c.Value, options...)
 }
 
+// CaLetsencryptAccountId represents the ca.letsencrypt.account_id node and implements sophos.Node
+type CaLetsencryptAccountId struct{ Value string }
+
+// Get gets the ca.letsencrypt.account_id value from the UTM
+func (c *CaLetsencryptAccountId) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.account_id", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptAccountId
+func (c *CaLetsencryptAccountId) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.account_id", c.Value, options...)
+}
+
+// CaLetsencryptAccountKey represents the ca.letsencrypt.account_key node and implements sophos.Node
+type CaLetsencryptAccountKey struct{ Value string }
+
+// Get gets the ca.letsencrypt.account_key value from the UTM
+func (c *CaLetsencryptAccountKey) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.account_key", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptAccountKey
+func (c *CaLetsencryptAccountKey) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.account_key", c.Value, options...)
+}
+
+// CaLetsencryptAcmeServer represents the ca.letsencrypt.acme_server node and implements sophos.Node
+type CaLetsencryptAcmeServer struct{ Value string }
+
+// Get gets the ca.letsencrypt.acme_server value from the UTM
+func (c *CaLetsencryptAcmeServer) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.acme_server", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptAcmeServer
+func (c *CaLetsencryptAcmeServer) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.acme_server", c.Value, options...)
+}
+
+// CaLetsencryptDebug represents the ca.letsencrypt.debug node and implements sophos.Node
+type CaLetsencryptDebug struct{ Value bool }
+
+// Get gets the ca.letsencrypt.debug value from the UTM
+func (c *CaLetsencryptDebug) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.debug", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptDebug
+func (c *CaLetsencryptDebug) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.debug", c.Value, options...)
+}
+
+// CaLetsencryptErrorInfo represents the ca.letsencrypt.error_info node and implements sophos.Node
+type CaLetsencryptErrorInfo struct{ Value string }
+
+// Get gets the ca.letsencrypt.error_info value from the UTM
+func (c *CaLetsencryptErrorInfo) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.error_info", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptErrorInfo
+func (c *CaLetsencryptErrorInfo) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.error_info", c.Value, options...)
+}
+
+// CaLetsencryptErrorMessage represents the ca.letsencrypt.error_message node and implements sophos.Node
+type CaLetsencryptErrorMessage struct{ Value string }
+
+// Get gets the ca.letsencrypt.error_message value from the UTM
+func (c *CaLetsencryptErrorMessage) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.error_message", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptErrorMessage
+func (c *CaLetsencryptErrorMessage) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.error_message", c.Value, options...)
+}
+
+// CaLetsencryptRegistrationInfo represents the ca.letsencrypt.registration_info node and implements sophos.Node
+type CaLetsencryptRegistrationInfo struct{ Value string }
+
+// Get gets the ca.letsencrypt.registration_info value from the UTM
+func (c *CaLetsencryptRegistrationInfo) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.registration_info", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptRegistrationInfo
+func (c *CaLetsencryptRegistrationInfo) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.registration_info", c.Value, options...)
+}
+
+// CaLetsencryptStatus represents the ca.letsencrypt.status node and implements sophos.Node
+type CaLetsencryptStatus struct{ Value bool }
+
+// Get gets the ca.letsencrypt.status value from the UTM
+func (c *CaLetsencryptStatus) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.status", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptStatus
+func (c *CaLetsencryptStatus) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.status", c.Value, options...)
+}
+
+// CaLetsencryptTosUrl represents the ca.letsencrypt.tos_url node and implements sophos.Node
+type CaLetsencryptTosUrl struct{ Value string }
+
+// Get gets the ca.letsencrypt.tos_url value from the UTM
+func (c *CaLetsencryptTosUrl) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ca.letsencrypt.tos_url", &c.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateCaLetsencryptTosUrl
+func (c *CaLetsencryptTosUrl) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.tos_url", c.Value, options...)
+}
+
 // CrlsCrls represents the crls.crls node and implements sophos.Node
 type CrlsCrls struct{ Value []interface{} }
 
@@ -1953,6 +2187,19 @@ func (d *DebugmodeEnabled) Get(client sophos.ClientInterface, options ...sophos.
 // Update is syntactic sugar for UpdateDebugmodeEnabled
 func (d *DebugmodeEnabled) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/debugmode.enabled", d.Value, options...)
+}
+
+// DhcpDhclientBindToInterface represents the dhcp.dhclient_bind_to_interface node and implements sophos.Node
+type DhcpDhclientBindToInterface struct{ Value bool }
+
+// Get gets the dhcp.dhclient_bind_to_interface value from the UTM
+func (d *DhcpDhclientBindToInterface) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/dhcp.dhclient_bind_to_interface", &d.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateDhcpDhclientBindToInterface
+func (d *DhcpDhclientBindToInterface) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/dhcp.dhclient_bind_to_interface", d.Value, options...)
 }
 
 // DhcpRelayDhcpServer represents the dhcp.relay.dhcp_server node and implements sophos.Node
@@ -2319,8 +2566,21 @@ func (d *DnsRecheckInterval) Update(client sophos.ClientInterface, options ...so
 	return put(client, "/api/nodes/dns.recheck_interval", d.Value, options...)
 }
 
+// DnsRetryForNonexistingNxdomain represents the dns.retry_for_nonexisting_nxdomain node and implements sophos.Node
+type DnsRetryForNonexistingNxdomain struct{ Value int64 }
+
+// Get gets the dns.retry_for_nonexisting_nxdomain value from the UTM
+func (d *DnsRetryForNonexistingNxdomain) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/dns.retry_for_nonexisting_nxdomain", &d.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateDnsRetryForNonexistingNxdomain
+func (d *DnsRetryForNonexistingNxdomain) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/dns.retry_for_nonexisting_nxdomain", d.Value, options...)
+}
+
 // DnsRoutes represents the dns.routes node and implements sophos.Node
-type DnsRoutes struct{ Value []string }
+type DnsRoutes struct{ Value []interface{} }
 
 // Get gets the dns.routes value from the UTM
 func (d *DnsRoutes) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -2645,7 +2905,7 @@ func (e *EmailpkiOptionsPolicyVerify) Update(client sophos.ClientInterface, opti
 }
 
 // EndpointAacAllowedNetworks represents the endpoint.aac.allowed_networks node and implements sophos.Node
-type EndpointAacAllowedNetworks struct{ Value []string }
+type EndpointAacAllowedNetworks struct{ Value []interface{} }
 
 // Get gets the endpoint.aac.allowed_networks value from the UTM
 func (e *EndpointAacAllowedNetworks) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -2658,7 +2918,7 @@ func (e *EndpointAacAllowedNetworks) Update(client sophos.ClientInterface, optio
 }
 
 // EndpointAacAllowedUsers represents the endpoint.aac.allowed_users node and implements sophos.Node
-type EndpointAacAllowedUsers struct{ Value []string }
+type EndpointAacAllowedUsers struct{ Value []interface{} }
 
 // Get gets the endpoint.aac.allowed_users value from the UTM
 func (e *EndpointAacAllowedUsers) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -3906,7 +4166,7 @@ func (e *EppEmail) Update(client sophos.ClientInterface, options ...sophos.Optio
 }
 
 // EppEndpoints represents the epp.endpoints node and implements sophos.Node
-type EppEndpoints struct{ Value []interface{} }
+type EppEndpoints struct{ Value []string }
 
 // Get gets the epp.endpoints value from the UTM
 func (e *EppEndpoints) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -5998,6 +6258,19 @@ func (h *HttpAdssoRedirectUseHostname) Update(client sophos.ClientInterface, opt
 	return put(client, "/api/nodes/http.adsso_redirect_use_hostname", h.Value, options...)
 }
 
+// HttpAllowHttpsTrafficOverHttpPort represents the http.allow_https_traffic_over_http_port node and implements sophos.Node
+type HttpAllowHttpsTrafficOverHttpPort struct{ Value bool }
+
+// Get gets the http.allow_https_traffic_over_http_port value from the UTM
+func (h *HttpAllowHttpsTrafficOverHttpPort) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.allow_https_traffic_over_http_port", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpAllowHttpsTrafficOverHttpPort
+func (h *HttpAllowHttpsTrafficOverHttpPort) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.allow_https_traffic_over_http_port", h.Value, options...)
+}
+
 // HttpAllowSsl3 represents the http.allow_ssl3 node and implements sophos.Node
 type HttpAllowSsl3 struct{ Value bool }
 
@@ -6388,6 +6661,19 @@ func (h *HttpDeferlength) Update(client sophos.ClientInterface, options ...sopho
 	return put(client, "/api/nodes/http.deferlength", h.Value, options...)
 }
 
+// HttpDeferredDownloadReadyTimeout represents the http.deferred_download_ready_timeout node and implements sophos.Node
+type HttpDeferredDownloadReadyTimeout struct{ Value int64 }
+
+// Get gets the http.deferred_download_ready_timeout value from the UTM
+func (h *HttpDeferredDownloadReadyTimeout) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.deferred_download_ready_timeout", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpDeferredDownloadReadyTimeout
+func (h *HttpDeferredDownloadReadyTimeout) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.deferred_download_ready_timeout", h.Value, options...)
+}
+
 // HttpDisplayHttpBlockpageExplicitMode represents the http.display_http_blockpage_explicit_mode node and implements sophos.Node
 type HttpDisplayHttpBlockpageExplicitMode struct{ Value bool }
 
@@ -6438,6 +6724,19 @@ func (h *HttpEdirDelayBasicAuth) Get(client sophos.ClientInterface, options ...s
 // Update is syntactic sugar for UpdateHttpEdirDelayBasicAuth
 func (h *HttpEdirDelayBasicAuth) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/http.edir_delay_basic_auth", h.Value, options...)
+}
+
+// HttpEnableHsts represents the http.enable_hsts node and implements sophos.Node
+type HttpEnableHsts struct{ Value bool }
+
+// Get gets the http.enable_hsts value from the UTM
+func (h *HttpEnableHsts) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.enable_hsts", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpEnableHsts
+func (h *HttpEnableHsts) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.enable_hsts", h.Value, options...)
 }
 
 // HttpEnableOutInterface represents the http.enable_out_interface node and implements sophos.Node
@@ -6700,6 +6999,19 @@ func (h *HttpOpendirectoryKeytab) Update(client sophos.ClientInterface, options 
 	return put(client, "/api/nodes/http.opendirectory_keytab", h.Value, options...)
 }
 
+// HttpOverrideProceedProtocol represents the http.override_proceed_protocol node and implements sophos.Node
+type HttpOverrideProceedProtocol struct{ Value bool }
+
+// Get gets the http.override_proceed_protocol value from the UTM
+func (h *HttpOverrideProceedProtocol) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.override_proceed_protocol", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpOverrideProceedProtocol
+func (h *HttpOverrideProceedProtocol) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.override_proceed_protocol", h.Value, options...)
+}
+
 // HttpPacFile represents the http.pac_file node and implements sophos.Node
 type HttpPacFile struct{ Value string }
 
@@ -6934,6 +7246,19 @@ func (h *HttpResponseTimeout) Update(client sophos.ClientInterface, options ...s
 	return put(client, "/api/nodes/http.response_timeout", h.Value, options...)
 }
 
+// HttpSaviScanTimeout represents the http.savi_scan_timeout node and implements sophos.Node
+type HttpSaviScanTimeout struct{ Value map[string]interface{} }
+
+// Get gets the http.savi_scan_timeout value from the UTM
+func (h *HttpSaviScanTimeout) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.savi_scan_timeout", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpSaviScanTimeout
+func (h *HttpSaviScanTimeout) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.savi_scan_timeout", h.Value, options...)
+}
+
 // HttpScLocalDb represents the http.sc_local_db node and implements sophos.Node
 type HttpScLocalDb struct{ Value string }
 
@@ -7153,6 +7478,19 @@ func (h *HttpUseConnectionInsteadofProxyconnection) Get(client sophos.ClientInte
 // Update is syntactic sugar for UpdateHttpUseConnectionInsteadofProxyconnection
 func (h *HttpUseConnectionInsteadofProxyconnection) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/http.use_connection_insteadof_proxyconnection", h.Value, options...)
+}
+
+// HttpUseDnsCnameSafesearch represents the http.use_dns_cname_safesearch node and implements sophos.Node
+type HttpUseDnsCnameSafesearch struct{ Value bool }
+
+// Get gets the http.use_dns_cname_safesearch value from the UTM
+func (h *HttpUseDnsCnameSafesearch) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/http.use_dns_cname_safesearch", &h.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateHttpUseDnsCnameSafesearch
+func (h *HttpUseDnsCnameSafesearch) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.use_dns_cname_safesearch", h.Value, options...)
 }
 
 // HttpUseDstaddrForGeopiplookup represents the http.use_dstaddr_for_geopiplookup node and implements sophos.Node
@@ -7376,6 +7714,45 @@ func (i *InterfacesAdvancedArpAnnounce) Update(client sophos.ClientInterface, op
 	return put(client, "/api/nodes/interfaces.advanced.arp_announce", i.Value, options...)
 }
 
+// InterfacesAdvancedArpCacheGcThresh1 represents the interfaces.advanced.arp_cache_gc_thresh1 node and implements sophos.Node
+type InterfacesAdvancedArpCacheGcThresh1 struct{ Value int64 }
+
+// Get gets the interfaces.advanced.arp_cache_gc_thresh1 value from the UTM
+func (i *InterfacesAdvancedArpCacheGcThresh1) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh1", &i.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateInterfacesAdvancedArpCacheGcThresh1
+func (i *InterfacesAdvancedArpCacheGcThresh1) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh1", i.Value, options...)
+}
+
+// InterfacesAdvancedArpCacheGcThresh2 represents the interfaces.advanced.arp_cache_gc_thresh2 node and implements sophos.Node
+type InterfacesAdvancedArpCacheGcThresh2 struct{ Value int64 }
+
+// Get gets the interfaces.advanced.arp_cache_gc_thresh2 value from the UTM
+func (i *InterfacesAdvancedArpCacheGcThresh2) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh2", &i.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateInterfacesAdvancedArpCacheGcThresh2
+func (i *InterfacesAdvancedArpCacheGcThresh2) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh2", i.Value, options...)
+}
+
+// InterfacesAdvancedArpCacheGcThresh3 represents the interfaces.advanced.arp_cache_gc_thresh3 node and implements sophos.Node
+type InterfacesAdvancedArpCacheGcThresh3 struct{ Value int64 }
+
+// Get gets the interfaces.advanced.arp_cache_gc_thresh3 value from the UTM
+func (i *InterfacesAdvancedArpCacheGcThresh3) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh3", &i.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateInterfacesAdvancedArpCacheGcThresh3
+func (i *InterfacesAdvancedArpCacheGcThresh3) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh3", i.Value, options...)
+}
+
 // InterfacesAdvancedArpIgnore represents the interfaces.advanced.arp_ignore node and implements sophos.Node
 type InterfacesAdvancedArpIgnore struct{ Value map[string]interface{} }
 
@@ -7426,6 +7803,19 @@ func (i *IpsDnsServers) Get(client sophos.ClientInterface, options ...sophos.Opt
 // Update is syntactic sugar for UpdateIpsDnsServers
 func (i *IpsDnsServers) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/ips.dns_servers", i.Value, options...)
+}
+
+// IpsEnableAcceptForAllPackets represents the ips.enable_accept_for_all_packets node and implements sophos.Node
+type IpsEnableAcceptForAllPackets struct{ Value bool }
+
+// Get gets the ips.enable_accept_for_all_packets value from the UTM
+func (i *IpsEnableAcceptForAllPackets) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ips.enable_accept_for_all_packets", &i.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateIpsEnableAcceptForAllPackets
+func (i *IpsEnableAcceptForAllPackets) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ips.enable_accept_for_all_packets", i.Value, options...)
 }
 
 // IpsEngine represents the ips.engine node and implements sophos.Node
@@ -7949,7 +8339,7 @@ func (i *IpsecAdvancedPskVpnIdType) Update(client sophos.ClientInterface, option
 }
 
 // IpsecConnections represents the ipsec.connections node and implements sophos.Node
-type IpsecConnections struct{ Value []string }
+type IpsecConnections struct{ Value []interface{} }
 
 // Get gets the ipsec.connections value from the UTM
 func (i *IpsecConnections) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -8326,7 +8716,7 @@ func (i *Ipv6Status) Update(client sophos.ClientInterface, options ...sophos.Opt
 }
 
 // LicensingActiveIps represents the licensing.active_ips node and implements sophos.Node
-type LicensingActiveIps struct{ Value []string }
+type LicensingActiveIps struct{ Value []interface{} }
 
 // Get gets the licensing.active_ips value from the UTM
 func (l *LicensingActiveIps) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -8507,6 +8897,19 @@ func (l *LogfilesLocalStatus) Update(client sophos.ClientInterface, options ...s
 	return put(client, "/api/nodes/logfiles.local.status", l.Value, options...)
 }
 
+// LogfilesLocalSyslogMaxConnections represents the logfiles.local.syslog_max_connections node and implements sophos.Node
+type LogfilesLocalSyslogMaxConnections struct{ Value int64 }
+
+// Get gets the logfiles.local.syslog_max_connections value from the UTM
+func (l *LogfilesLocalSyslogMaxConnections) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/logfiles.local.syslog_max_connections", &l.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateLogfilesLocalSyslogMaxConnections
+func (l *LogfilesLocalSyslogMaxConnections) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/logfiles.local.syslog_max_connections", l.Value, options...)
+}
+
 // LogfilesRemoteFtpService represents the logfiles.remote.ftp_service node and implements sophos.Node
 type LogfilesRemoteFtpService struct{ Value string }
 
@@ -8557,6 +8960,19 @@ func (l *LogfilesRemotePath) Get(client sophos.ClientInterface, options ...sopho
 // Update is syntactic sugar for UpdateLogfilesRemotePath
 func (l *LogfilesRemotePath) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/logfiles.remote.path", l.Value, options...)
+}
+
+// LogfilesRemoteSmbMaxProtocolLevel represents the logfiles.remote.smb_max_protocol_level node and implements sophos.Node
+type LogfilesRemoteSmbMaxProtocolLevel struct{ Value string }
+
+// Get gets the logfiles.remote.smb_max_protocol_level value from the UTM
+func (l *LogfilesRemoteSmbMaxProtocolLevel) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/logfiles.remote.smb_max_protocol_level", &l.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateLogfilesRemoteSmbMaxProtocolLevel
+func (l *LogfilesRemoteSmbMaxProtocolLevel) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/logfiles.remote.smb_max_protocol_level", l.Value, options...)
 }
 
 // LogfilesRemoteSmbWorkgroup represents the logfiles.remote.smb_workgroup node and implements sophos.Node
@@ -8975,6 +9391,19 @@ func (m *MobileControlUsername) Update(client sophos.ClientInterface, options ..
 	return put(client, "/api/nodes/mobile_control.username", m.Value, options...)
 }
 
+// NatEnableCacheAutonat represents the nat.enable_cache_autonat node and implements sophos.Node
+type NatEnableCacheAutonat struct{ Value bool }
+
+// Get gets the nat.enable_cache_autonat value from the UTM
+func (n *NatEnableCacheAutonat) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/nat.enable_cache_autonat", &n.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateNatEnableCacheAutonat
+func (n *NatEnableCacheAutonat) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/nat.enable_cache_autonat", n.Value, options...)
+}
+
 // NatRules represents the nat.rules node and implements sophos.Node
 type NatRules struct{ Value []string }
 
@@ -9158,7 +9587,7 @@ func (n *NotificationsSmtpUsername) Update(client sophos.ClientInterface, option
 }
 
 // NtpAllowedNetworks represents the ntp.allowed_networks node and implements sophos.Node
-type NtpAllowedNetworks struct{ Value []string }
+type NtpAllowedNetworks struct{ Value []interface{} }
 
 // Get gets the ntp.allowed_networks value from the UTM
 func (n *NtpAllowedNetworks) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -9246,6 +9675,19 @@ func (p *PacketfilterAdvancedFtpPorts) Get(client sophos.ClientInterface, option
 // Update is syntactic sugar for UpdatePacketfilterAdvancedFtpPorts
 func (p *PacketfilterAdvancedFtpPorts) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/packetfilter.advanced.ftp_ports", p.Value, options...)
+}
+
+// PacketfilterAdvancedIpSetMax represents the packetfilter.advanced.ip_set_max node and implements sophos.Node
+type PacketfilterAdvancedIpSetMax struct{ Value int64 }
+
+// Get gets the packetfilter.advanced.ip_set_max value from the UTM
+func (p *PacketfilterAdvancedIpSetMax) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/packetfilter.advanced.ip_set_max", &p.Value, options...)
+}
+
+// Update is syntactic sugar for UpdatePacketfilterAdvancedIpSetMax
+func (p *PacketfilterAdvancedIpSetMax) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/packetfilter.advanced.ip_set_max", p.Value, options...)
 }
 
 // PacketfilterAdvancedLogBroadcasts represents the packetfilter.advanced.log_broadcasts node and implements sophos.Node
@@ -9742,6 +10184,19 @@ func (p *PimSmDebug) Update(client sophos.ClientInterface, options ...sophos.Opt
 	return put(client, "/api/nodes/pim_sm.debug", p.Value, options...)
 }
 
+// PimSmEnableSubnetMulticasting represents the pim_sm.enable_subnet_multicasting node and implements sophos.Node
+type PimSmEnableSubnetMulticasting struct{ Value bool }
+
+// Get gets the pim_sm.enable_subnet_multicasting value from the UTM
+func (p *PimSmEnableSubnetMulticasting) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/pim_sm.enable_subnet_multicasting", &p.Value, options...)
+}
+
+// Update is syntactic sugar for UpdatePimSmEnableSubnetMulticasting
+func (p *PimSmEnableSubnetMulticasting) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/pim_sm.enable_subnet_multicasting", p.Value, options...)
+}
+
 // PimSmInterfaces represents the pim_sm.interfaces node and implements sophos.Node
 type PimSmInterfaces struct{ Value []interface{} }
 
@@ -10223,6 +10678,19 @@ func (p *PortalAllowedUsers) Update(client sophos.ClientInterface, options ...so
 	return put(client, "/api/nodes/portal.allowed_users", p.Value, options...)
 }
 
+// PortalCert represents the portal.cert node and implements sophos.Node
+type PortalCert struct{ Value string }
+
+// Get gets the portal.cert value from the UTM
+func (p *PortalCert) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/portal.cert", &p.Value, options...)
+}
+
+// Update is syntactic sugar for UpdatePortalCert
+func (p *PortalCert) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/portal.cert", p.Value, options...)
+}
+
 // PortalHideItems represents the portal.hide_items node and implements sophos.Node
 type PortalHideItems struct{ Value []interface{} }
 
@@ -10665,6 +11133,19 @@ func (r *RedRegistryKey) Update(client sophos.ClientInterface, options ...sophos
 	return put(client, "/api/nodes/red.registry_key", r.Value, options...)
 }
 
+// RedReshowEula represents the red.reshow_eula node and implements sophos.Node
+type RedReshowEula struct{ Value bool }
+
+// Get gets the red.reshow_eula value from the UTM
+func (r *RedReshowEula) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/red.reshow_eula", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateRedReshowEula
+func (r *RedReshowEula) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/red.reshow_eula", r.Value, options...)
+}
+
 // RedServerCert represents the red.server_cert node and implements sophos.Node
 type RedServerCert struct{ Value string }
 
@@ -10715,6 +11196,19 @@ func (r *RedTls12Only) Get(client sophos.ClientInterface, options ...sophos.Opti
 // Update is syntactic sugar for UpdateRedTls12Only
 func (r *RedTls12Only) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/red.tls_1_2_only", r.Value, options...)
+}
+
+// RedUseUnifiedFirmware represents the red.use_unified_firmware node and implements sophos.Node
+type RedUseUnifiedFirmware struct{ Value bool }
+
+// Get gets the red.use_unified_firmware value from the UTM
+func (r *RedUseUnifiedFirmware) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/red.use_unified_firmware", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateRedUseUnifiedFirmware
+func (r *RedUseUnifiedFirmware) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/red.use_unified_firmware", r.Value, options...)
 }
 
 // RemoteAccessAdvancedMsdns1 represents the remote_access.advanced.msdns1 node and implements sophos.Node
@@ -11053,6 +11547,19 @@ func (r *RemoteSyslogTarget) Get(client sophos.ClientInterface, options ...sopho
 // Update is syntactic sugar for UpdateRemoteSyslogTarget
 func (r *RemoteSyslogTarget) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/remote_syslog.target", r.Value, options...)
+}
+
+// RemoteSyslogTimeReopen represents the remote_syslog.time_reopen node and implements sophos.Node
+type RemoteSyslogTimeReopen struct{ Value int64 }
+
+// Get gets the remote_syslog.time_reopen value from the UTM
+func (r *RemoteSyslogTimeReopen) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/remote_syslog.time_reopen", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateRemoteSyslogTimeReopen
+func (r *RemoteSyslogTimeReopen) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/remote_syslog.time_reopen", r.Value, options...)
 }
 
 // ReportingAccountingKeepdays represents the reporting.accounting_keepdays node and implements sophos.Node
@@ -11601,6 +12108,32 @@ func (r *ReverseProxyBlacklistGeoipCodes) Update(client sophos.ClientInterface, 
 	return put(client, "/api/nodes/reverse_proxy.blacklist.geoip_codes", r.Value, options...)
 }
 
+// ReverseProxyBlacklistSxlBlocksets represents the reverse_proxy.blacklist.sxl_blocksets node and implements sophos.Node
+type ReverseProxyBlacklistSxlBlocksets struct{ Value []string }
+
+// Get gets the reverse_proxy.blacklist.sxl_blocksets value from the UTM
+func (r *ReverseProxyBlacklistSxlBlocksets) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/reverse_proxy.blacklist.sxl_blocksets", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateReverseProxyBlacklistSxlBlocksets
+func (r *ReverseProxyBlacklistSxlBlocksets) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.blacklist.sxl_blocksets", r.Value, options...)
+}
+
+// ReverseProxyBlacklistSxlZone represents the reverse_proxy.blacklist.sxl_zone node and implements sophos.Node
+type ReverseProxyBlacklistSxlZone struct{ Value string }
+
+// Get gets the reverse_proxy.blacklist.sxl_zone value from the UTM
+func (r *ReverseProxyBlacklistSxlZone) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/reverse_proxy.blacklist.sxl_zone", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateReverseProxyBlacklistSxlZone
+func (r *ReverseProxyBlacklistSxlZone) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.blacklist.sxl_zone", r.Value, options...)
+}
+
 // ReverseProxyCookiesignkey represents the reverse_proxy.cookiesignkey node and implements sophos.Node
 type ReverseProxyCookiesignkey struct{ Value string }
 
@@ -11874,6 +12407,19 @@ func (r *ReverseProxyPort) Update(client sophos.ClientInterface, options ...soph
 	return put(client, "/api/nodes/reverse_proxy.port", r.Value, options...)
 }
 
+// ReverseProxyProxypassreverseForFrontend represents the reverse_proxy.proxypassreverse_for_frontend node and implements sophos.Node
+type ReverseProxyProxypassreverseForFrontend struct{ Value bool }
+
+// Get gets the reverse_proxy.proxypassreverse_for_frontend value from the UTM
+func (r *ReverseProxyProxypassreverseForFrontend) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/reverse_proxy.proxypassreverse_for_frontend", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateReverseProxyProxypassreverseForFrontend
+func (r *ReverseProxyProxypassreverseForFrontend) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.proxypassreverse_for_frontend", r.Value, options...)
+}
+
 // ReverseProxyProxyprotocol represents the reverse_proxy.proxyprotocol node and implements sophos.Node
 type ReverseProxyProxyprotocol struct{ Value bool }
 
@@ -11885,6 +12431,19 @@ func (r *ReverseProxyProxyprotocol) Get(client sophos.ClientInterface, options .
 // Update is syntactic sugar for UpdateReverseProxyProxyprotocol
 func (r *ReverseProxyProxyprotocol) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/reverse_proxy.proxyprotocol", r.Value, options...)
+}
+
+// ReverseProxyReloadMethod represents the reverse_proxy.reload_method node and implements sophos.Node
+type ReverseProxyReloadMethod struct{ Value string }
+
+// Get gets the reverse_proxy.reload_method value from the UTM
+func (r *ReverseProxyReloadMethod) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/reverse_proxy.reload_method", &r.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateReverseProxyReloadMethod
+func (r *ReverseProxyReloadMethod) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.reload_method", r.Value, options...)
 }
 
 // ReverseProxyRequestLineLimit represents the reverse_proxy.request_line_limit node and implements sophos.Node
@@ -12031,7 +12590,7 @@ func (r *RoutesPolicy) Update(client sophos.ClientInterface, options ...sophos.O
 }
 
 // RoutesStatic represents the routes.static node and implements sophos.Node
-type RoutesStatic struct{ Value []string }
+type RoutesStatic struct{ Value []interface{} }
 
 // Get gets the routes.static value from the UTM
 func (r *RoutesStatic) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -12993,7 +13552,7 @@ func (s *SettingsTimezone) Update(client sophos.ClientInterface, options ...soph
 }
 
 // SipAllowedNetworks represents the sip.allowed_networks node and implements sophos.Node
-type SipAllowedNetworks struct{ Value []string }
+type SipAllowedNetworks struct{ Value []interface{} }
 
 // Get gets the sip.allowed_networks value from the UTM
 func (s *SipAllowedNetworks) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -13032,7 +13591,7 @@ func (s *SipLogRelated) Update(client sophos.ClientInterface, options ...sophos.
 }
 
 // SipServers represents the sip.servers node and implements sophos.Node
-type SipServers struct{ Value []string }
+type SipServers struct{ Value []interface{} }
 
 // Get gets the sip.servers value from the UTM
 func (s *SipServers) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -13133,6 +13692,19 @@ func (s *SmsClientUsername) Get(client sophos.ClientInterface, options ...sophos
 // Update is syntactic sugar for UpdateSmsClientUsername
 func (s *SmsClientUsername) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/sms_client.username", s.Value, options...)
+}
+
+// SmtpAdLookupContacts represents the smtp.ad_lookup_contacts node and implements sophos.Node
+type SmtpAdLookupContacts struct{ Value bool }
+
+// Get gets the smtp.ad_lookup_contacts value from the UTM
+func (s *SmtpAdLookupContacts) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.ad_lookup_contacts", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpAdLookupContacts
+func (s *SmtpAdLookupContacts) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.ad_lookup_contacts", s.Value, options...)
 }
 
 // SmtpAuthAaa represents the smtp.auth_aaa node and implements sophos.Node
@@ -13538,6 +14110,19 @@ func (s *SmtpRelays) Update(client sophos.ClientInterface, options ...sophos.Opt
 	return put(client, "/api/nodes/smtp.relays", s.Value, options...)
 }
 
+// SmtpSasiToken represents the smtp.sasi_token node and implements sophos.Node
+type SmtpSasiToken struct{ Value string }
+
+// Get gets the smtp.sasi_token value from the UTM
+func (s *SmtpSasiToken) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.sasi_token", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpSasiToken
+func (s *SmtpSasiToken) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.sasi_token", s.Value, options...)
+}
+
 // SmtpScanOutgoingEmails represents the smtp.scan_outgoing_emails node and implements sophos.Node
 type SmtpScanOutgoingEmails struct{ Value bool }
 
@@ -13707,6 +14292,32 @@ func (s *SmtpSmtpAcceptPerHostMax) Update(client sophos.ClientInterface, options
 	return put(client, "/api/nodes/smtp.smtp_accept_per_host_max", s.Value, options...)
 }
 
+// SmtpSmtpAllowedInterfaces represents the smtp.smtp_allowed_interfaces node and implements sophos.Node
+type SmtpSmtpAllowedInterfaces struct{ Value []interface{} }
+
+// Get gets the smtp.smtp_allowed_interfaces value from the UTM
+func (s *SmtpSmtpAllowedInterfaces) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.smtp_allowed_interfaces", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpSmtpAllowedInterfaces
+func (s *SmtpSmtpAllowedInterfaces) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.smtp_allowed_interfaces", s.Value, options...)
+}
+
+// SmtpSmtpListenOnItf represents the smtp.smtp_listen_on_itf node and implements sophos.Node
+type SmtpSmtpListenOnItf struct{ Value string }
+
+// Get gets the smtp.smtp_listen_on_itf value from the UTM
+func (s *SmtpSmtpListenOnItf) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.smtp_listen_on_itf", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpSmtpListenOnItf
+func (s *SmtpSmtpListenOnItf) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.smtp_listen_on_itf", s.Value, options...)
+}
+
 // SmtpStatus represents the smtp.status node and implements sophos.Node
 type SmtpStatus struct{ Value bool }
 
@@ -13824,6 +14435,32 @@ func (s *SmtpTransparentSkipAutoPf) Update(client sophos.ClientInterface, option
 	return put(client, "/api/nodes/smtp.transparent_skip_auto_pf", s.Value, options...)
 }
 
+// SmtpTransparentSmtps represents the smtp.transparent_smtps node and implements sophos.Node
+type SmtpTransparentSmtps struct{ Value bool }
+
+// Get gets the smtp.transparent_smtps value from the UTM
+func (s *SmtpTransparentSmtps) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.transparent_smtps", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpTransparentSmtps
+func (s *SmtpTransparentSmtps) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.transparent_smtps", s.Value, options...)
+}
+
+// SmtpTransparentStartTls represents the smtp.transparent_start_tls node and implements sophos.Node
+type SmtpTransparentStartTls struct{ Value bool }
+
+// Get gets the smtp.transparent_start_tls value from the UTM
+func (s *SmtpTransparentStartTls) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.transparent_start_tls", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpTransparentStartTls
+func (s *SmtpTransparentStartTls) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.transparent_start_tls", s.Value, options...)
+}
+
 // SmtpUpstreamHosts represents the smtp.upstream_hosts node and implements sophos.Node
 type SmtpUpstreamHosts struct{ Value []interface{} }
 
@@ -13848,6 +14485,19 @@ func (s *SmtpUpstreamHostsOnly) Get(client sophos.ClientInterface, options ...so
 // Update is syntactic sugar for UpdateSmtpUpstreamHostsOnly
 func (s *SmtpUpstreamHostsOnly) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/smtp.upstream_hosts_only", s.Value, options...)
+}
+
+// SmtpUseClientMime represents the smtp.use_client_mime node and implements sophos.Node
+type SmtpUseClientMime struct{ Value string }
+
+// Get gets the smtp.use_client_mime value from the UTM
+func (s *SmtpUseClientMime) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/smtp.use_client_mime", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSmtpUseClientMime
+func (s *SmtpUseClientMime) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.use_client_mime", s.Value, options...)
 }
 
 // SnmpAllowedNetworks represents the snmp.allowed_networks node and implements sophos.Node
@@ -14033,7 +14683,7 @@ func (s *SnmpVersion) Update(client sophos.ClientInterface, options ...sophos.Op
 }
 
 // SocksAaa represents the socks.aaa node and implements sophos.Node
-type SocksAaa struct{ Value []string }
+type SocksAaa struct{ Value []interface{} }
 
 // Get gets the socks.aaa value from the UTM
 func (s *SocksAaa) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -14046,7 +14696,7 @@ func (s *SocksAaa) Update(client sophos.ClientInterface, options ...sophos.Optio
 }
 
 // SocksAllowedNetworks represents the socks.allowed_networks node and implements sophos.Node
-type SocksAllowedNetworks struct{ Value []string }
+type SocksAllowedNetworks struct{ Value []interface{} }
 
 // Get gets the socks.allowed_networks value from the UTM
 func (s *SocksAllowedNetworks) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -14539,6 +15189,19 @@ func (s *SslVpnEncryptionAlgorithm) Update(client sophos.ClientInterface, option
 	return put(client, "/api/nodes/ssl_vpn.encryption_algorithm", s.Value, options...)
 }
 
+// SslVpnFallbackDisable represents the ssl_vpn.fallback_disable node and implements sophos.Node
+type SslVpnFallbackDisable struct{ Value bool }
+
+// Get gets the ssl_vpn.fallback_disable value from the UTM
+func (s *SslVpnFallbackDisable) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/ssl_vpn.fallback_disable", &s.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateSslVpnFallbackDisable
+func (s *SslVpnFallbackDisable) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ssl_vpn.fallback_disable", s.Value, options...)
+}
+
 // SslVpnHostname represents the ssl_vpn.hostname node and implements sophos.Node
 type SslVpnHostname struct{ Value string }
 
@@ -14799,6 +15462,19 @@ func (u *Up2DateCacheUseAcc) Update(client sophos.ClientInterface, options ...so
 	return put(client, "/api/nodes/up2date.cache_use_acc", u.Value, options...)
 }
 
+// Up2DateForceInsecureUp2Date represents the up2date.force_insecure_up2date node and implements sophos.Node
+type Up2DateForceInsecureUp2Date struct{ Value bool }
+
+// Get gets the up2date.force_insecure_up2date value from the UTM
+func (u *Up2DateForceInsecureUp2Date) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/up2date.force_insecure_up2date", &u.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateUp2DateForceInsecureUp2Date
+func (u *Up2DateForceInsecureUp2Date) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/up2date.force_insecure_up2date", u.Value, options...)
+}
+
 // Up2DateParentProxyAuthPass represents the up2date.parent_proxy_auth_pass node and implements sophos.Node
 type Up2DateParentProxyAuthPass struct{ Value string }
 
@@ -14878,7 +15554,7 @@ func (u *Up2DateParentProxyStatus) Update(client sophos.ClientInterface, options
 }
 
 // Up2DatePatternDownloadInterval represents the up2date.pattern_download_interval node and implements sophos.Node
-type Up2DatePatternDownloadInterval struct{ Value map[string]interface{} }
+type Up2DatePatternDownloadInterval struct{ Value int64 }
 
 // Get gets the up2date.pattern_download_interval value from the UTM
 func (u *Up2DatePatternDownloadInterval) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
@@ -15018,6 +15694,19 @@ func (u *UplinkCondition) Get(client sophos.ClientInterface, options ...sophos.O
 // Update is syntactic sugar for UpdateUplinkCondition
 func (u *UplinkCondition) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/uplink.condition", u.Value, options...)
+}
+
+// UplinkEnableMultipathStickyRuleFlagWorkaround represents the uplink.enable_multipath_sticky_rule_flag_workaround node and implements sophos.Node
+type UplinkEnableMultipathStickyRuleFlagWorkaround struct{ Value bool }
+
+// Get gets the uplink.enable_multipath_sticky_rule_flag_workaround value from the UTM
+func (u *UplinkEnableMultipathStickyRuleFlagWorkaround) Get(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return get(client, "/api/nodes/uplink.enable_multipath_sticky_rule_flag_workaround", &u.Value, options...)
+}
+
+// Update is syntactic sugar for UpdateUplinkEnableMultipathStickyRuleFlagWorkaround
+func (u *UplinkEnableMultipathStickyRuleFlagWorkaround) Update(client sophos.ClientInterface, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/uplink.enable_multipath_sticky_rule_flag_workaround", u.Value, options...)
 }
 
 // UplinkInterfaces represents the uplink.interfaces node and implements sophos.Node

@@ -33,6 +33,17 @@ func UpdateAccServer1AuthSecret(client sophos.ClientInterface, val string, optio
 	return put(client, "/api/nodes/acc.server1.auth.secret", val, options...)
 }
 
+// GetAccServer1AuthServerCert gets the acc.server1.auth.server_cert value from the UTM
+func GetAccServer1AuthServerCert(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/acc.server1.auth.server_cert", &val, options...)
+	return
+}
+
+// UpdateAccServer1AuthServerCert PUTs the acc.server1.auth.server_cert value to the UTM
+func UpdateAccServer1AuthServerCert(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/acc.server1.auth.server_cert", val, options...)
+}
+
 // GetAccServer1AuthStatus gets the acc.server1.auth.status value from the UTM
 func GetAccServer1AuthStatus(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/acc.server1.auth.status", &val, options...)
@@ -86,6 +97,17 @@ func GetAccServer2AuthSecret(client sophos.ClientInterface, options ...sophos.Op
 // UpdateAccServer2AuthSecret PUTs the acc.server2.auth.secret value to the UTM
 func UpdateAccServer2AuthSecret(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/acc.server2.auth.secret", val, options...)
+}
+
+// GetAccServer2AuthServerCert gets the acc.server2.auth.server_cert value from the UTM
+func GetAccServer2AuthServerCert(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/acc.server2.auth.server_cert", &val, options...)
+	return
+}
+
+// UpdateAccServer2AuthServerCert PUTs the acc.server2.auth.server_cert value to the UTM
+func UpdateAccServer2AuthServerCert(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/acc.server2.auth.server_cert", val, options...)
 }
 
 // GetAccServer2AuthStatus gets the acc.server2.auth.status value from the UTM
@@ -441,13 +463,13 @@ func UpdateAfcNumQueues(client sophos.ClientInterface, val map[string]interface{
 }
 
 // GetAfcRules gets the afc.rules value from the UTM
-func GetAfcRules(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetAfcRules(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/afc.rules", &val, options...)
 	return
 }
 
 // UpdateAfcRules PUTs the afc.rules value to the UTM
-func UpdateAfcRules(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateAfcRules(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/afc.rules", val, options...)
 }
 
@@ -460,6 +482,17 @@ func GetAfcStatus(client sophos.ClientInterface, options ...sophos.Option) (val 
 // UpdateAfcStatus PUTs the afc.status value to the UTM
 func UpdateAfcStatus(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/afc.status", val, options...)
+}
+
+// GetAfcSubappDetection gets the afc.subapp_detection value from the UTM
+func GetAfcSubappDetection(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/afc.subapp_detection", &val, options...)
+	return
+}
+
+// UpdateAfcSubappDetection PUTs the afc.subapp_detection value to the UTM
+func UpdateAfcSubappDetection(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/afc.subapp_detection", val, options...)
 }
 
 // GetAfcSubmitUnknownTrafficData gets the afc.submit_unknown_traffic_data value from the UTM
@@ -528,6 +561,39 @@ func UpdateAmazonVpcStatus(client sophos.ClientInterface, val bool, options ...s
 	return put(client, "/api/nodes/amazon_vpc.status", val, options...)
 }
 
+// GetAptpDbPlugin gets the aptp.db_plugin value from the UTM
+func GetAptpDbPlugin(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/aptp.db_plugin", &val, options...)
+	return
+}
+
+// UpdateAptpDbPlugin PUTs the aptp.db_plugin value to the UTM
+func UpdateAptpDbPlugin(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.db_plugin", val, options...)
+}
+
+// GetAptpNumServers gets the aptp.num_servers value from the UTM
+func GetAptpNumServers(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/aptp.num_servers", &val, options...)
+	return
+}
+
+// UpdateAptpNumServers PUTs the aptp.num_servers value to the UTM
+func UpdateAptpNumServers(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.num_servers", val, options...)
+}
+
+// GetAptpNumThreads gets the aptp.num_threads value from the UTM
+func GetAptpNumThreads(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/aptp.num_threads", &val, options...)
+	return
+}
+
+// UpdateAptpNumThreads PUTs the aptp.num_threads value to the UTM
+func UpdateAptpNumThreads(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.num_threads", val, options...)
+}
+
 // GetAptpPolicy gets the aptp.policy value from the UTM
 func GetAptpPolicy(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/aptp.policy", &val, options...)
@@ -537,6 +603,17 @@ func GetAptpPolicy(client sophos.ClientInterface, options ...sophos.Option) (val
 // UpdateAptpPolicy PUTs the aptp.policy value to the UTM
 func UpdateAptpPolicy(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/aptp.policy", val, options...)
+}
+
+// GetAptpPort gets the aptp.port value from the UTM
+func GetAptpPort(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/aptp.port", &val, options...)
+	return
+}
+
+// UpdateAptpPort PUTs the aptp.port value to the UTM
+func UpdateAptpPort(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/aptp.port", val, options...)
 }
 
 // GetAptpRuleModifiers gets the aptp.rule_modifiers value from the UTM
@@ -924,6 +1001,17 @@ func UpdateAuthCacheLifetime(client sophos.ClientInterface, val int64, options .
 	return put(client, "/api/nodes/auth.cache_lifetime", val, options...)
 }
 
+// GetAuthDelayedIpsetExpansion gets the auth.delayed_ipset_expansion value from the UTM
+func GetAuthDelayedIpsetExpansion(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
+	err = get(client, "/api/nodes/auth.delayed_ipset_expansion", &val, options...)
+	return
+}
+
+// UpdateAuthDelayedIpsetExpansion PUTs the auth.delayed_ipset_expansion value to the UTM
+func UpdateAuthDelayedIpsetExpansion(client sophos.ClientInterface, val map[string]interface{}, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/auth.delayed_ipset_expansion", val, options...)
+}
+
 // GetAuthEdirSsoEmConflict gets the auth.edir_sso.em_conflict value from the UTM
 func GetAuthEdirSsoEmConflict(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/auth.edir_sso.em_conflict", &val, options...)
@@ -1134,13 +1222,13 @@ func UpdateAuthUpdateBackendGroupMembersStatus(client sophos.ClientInterface, va
 }
 
 // GetAweAllowedInterfaces gets the awe.allowed_interfaces value from the UTM
-func GetAweAllowedInterfaces(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
+func GetAweAllowedInterfaces(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
 	err = get(client, "/api/nodes/awe.allowed_interfaces", &val, options...)
 	return
 }
 
 // UpdateAweAllowedInterfaces PUTs the awe.allowed_interfaces value to the UTM
-func UpdateAweAllowedInterfaces(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
+func UpdateAweAllowedInterfaces(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.allowed_interfaces", val, options...)
 }
 
@@ -1200,24 +1288,24 @@ func UpdateAweGlobalApSoftlimit(client sophos.ClientInterface, val int64, option
 }
 
 // GetAweGlobalApVlantag gets the awe.global.ap_vlantag value from the UTM
-func GetAweGlobalApVlantag(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+func GetAweGlobalApVlantag(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
 	err = get(client, "/api/nodes/awe.global.ap_vlantag", &val, options...)
 	return
 }
 
 // UpdateAweGlobalApVlantag PUTs the awe.global.ap_vlantag value to the UTM
-func UpdateAweGlobalApVlantag(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+func UpdateAweGlobalApVlantag(client sophos.ClientInterface, val map[string]interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.global.ap_vlantag", val, options...)
 }
 
 // GetAweGlobalAweStatus gets the awe.global.awe_status value from the UTM
-func GetAweGlobalAweStatus(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
+func GetAweGlobalAweStatus(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
 	err = get(client, "/api/nodes/awe.global.awe_status", &val, options...)
 	return
 }
 
 // UpdateAweGlobalAweStatus PUTs the awe.global.awe_status value to the UTM
-func UpdateAweGlobalAweStatus(client sophos.ClientInterface, val map[string]interface{}, options ...sophos.Option) (err error) {
+func UpdateAweGlobalAweStatus(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.global.awe_status", val, options...)
 }
 
@@ -1263,6 +1351,17 @@ func GetAweGlobalMagicIp(client sophos.ClientInterface, options ...sophos.Option
 // UpdateAweGlobalMagicIp PUTs the awe.global.magic_ip value to the UTM
 func UpdateAweGlobalMagicIp(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.global.magic_ip", val, options...)
+}
+
+// GetAweGlobalMultiWifiIfaceBr gets the awe.global.multi_wifi_iface_br value from the UTM
+func GetAweGlobalMultiWifiIfaceBr(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/awe.global.multi_wifi_iface_br", &val, options...)
+	return
+}
+
+// UpdateAweGlobalMultiWifiIfaceBr PUTs the awe.global.multi_wifi_iface_br value to the UTM
+func UpdateAweGlobalMultiWifiIfaceBr(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/awe.global.multi_wifi_iface_br", val, options...)
 }
 
 // GetAweGlobalNotificationTimeout gets the awe.global.notification_timeout value from the UTM
@@ -1343,13 +1442,13 @@ func UpdateAweGlobalVlantagging(client sophos.ClientInterface, val bool, options
 }
 
 // GetAweNetworks gets the awe.networks value from the UTM
-func GetAweNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetAweNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/awe.networks", &val, options...)
 	return
 }
 
 // UpdateAweNetworks PUTs the awe.networks value to the UTM
-func UpdateAweNetworks(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateAweNetworks(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/awe.networks", val, options...)
 }
 
@@ -1551,6 +1650,105 @@ func UpdateCaGlobalCasHttpProxyUntrusted(client sophos.ClientInterface, val []in
 	return put(client, "/api/nodes/ca.global_cas.http_proxy.untrusted", val, options...)
 }
 
+// GetCaLetsencryptAccountId gets the ca.letsencrypt.account_id value from the UTM
+func GetCaLetsencryptAccountId(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.account_id", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptAccountId PUTs the ca.letsencrypt.account_id value to the UTM
+func UpdateCaLetsencryptAccountId(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.account_id", val, options...)
+}
+
+// GetCaLetsencryptAccountKey gets the ca.letsencrypt.account_key value from the UTM
+func GetCaLetsencryptAccountKey(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.account_key", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptAccountKey PUTs the ca.letsencrypt.account_key value to the UTM
+func UpdateCaLetsencryptAccountKey(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.account_key", val, options...)
+}
+
+// GetCaLetsencryptAcmeServer gets the ca.letsencrypt.acme_server value from the UTM
+func GetCaLetsencryptAcmeServer(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.acme_server", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptAcmeServer PUTs the ca.letsencrypt.acme_server value to the UTM
+func UpdateCaLetsencryptAcmeServer(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.acme_server", val, options...)
+}
+
+// GetCaLetsencryptDebug gets the ca.letsencrypt.debug value from the UTM
+func GetCaLetsencryptDebug(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.debug", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptDebug PUTs the ca.letsencrypt.debug value to the UTM
+func UpdateCaLetsencryptDebug(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.debug", val, options...)
+}
+
+// GetCaLetsencryptErrorInfo gets the ca.letsencrypt.error_info value from the UTM
+func GetCaLetsencryptErrorInfo(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.error_info", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptErrorInfo PUTs the ca.letsencrypt.error_info value to the UTM
+func UpdateCaLetsencryptErrorInfo(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.error_info", val, options...)
+}
+
+// GetCaLetsencryptErrorMessage gets the ca.letsencrypt.error_message value from the UTM
+func GetCaLetsencryptErrorMessage(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.error_message", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptErrorMessage PUTs the ca.letsencrypt.error_message value to the UTM
+func UpdateCaLetsencryptErrorMessage(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.error_message", val, options...)
+}
+
+// GetCaLetsencryptRegistrationInfo gets the ca.letsencrypt.registration_info value from the UTM
+func GetCaLetsencryptRegistrationInfo(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.registration_info", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptRegistrationInfo PUTs the ca.letsencrypt.registration_info value to the UTM
+func UpdateCaLetsencryptRegistrationInfo(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.registration_info", val, options...)
+}
+
+// GetCaLetsencryptStatus gets the ca.letsencrypt.status value from the UTM
+func GetCaLetsencryptStatus(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.status", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptStatus PUTs the ca.letsencrypt.status value to the UTM
+func UpdateCaLetsencryptStatus(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.status", val, options...)
+}
+
+// GetCaLetsencryptTosUrl gets the ca.letsencrypt.tos_url value from the UTM
+func GetCaLetsencryptTosUrl(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/ca.letsencrypt.tos_url", &val, options...)
+	return
+}
+
+// UpdateCaLetsencryptTosUrl PUTs the ca.letsencrypt.tos_url value to the UTM
+func UpdateCaLetsencryptTosUrl(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ca.letsencrypt.tos_url", val, options...)
+}
+
 // GetCrlsCrls gets the crls.crls value from the UTM
 func GetCrlsCrls(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/crls.crls", &val, options...)
@@ -1670,6 +1868,17 @@ func GetDebugmodeEnabled(client sophos.ClientInterface, options ...sophos.Option
 // UpdateDebugmodeEnabled PUTs the debugmode.enabled value to the UTM
 func UpdateDebugmodeEnabled(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/debugmode.enabled", val, options...)
+}
+
+// GetDhcpDhclientBindToInterface gets the dhcp.dhclient_bind_to_interface value from the UTM
+func GetDhcpDhclientBindToInterface(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/dhcp.dhclient_bind_to_interface", &val, options...)
+	return
+}
+
+// UpdateDhcpDhclientBindToInterface PUTs the dhcp.dhclient_bind_to_interface value to the UTM
+func UpdateDhcpDhclientBindToInterface(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/dhcp.dhclient_bind_to_interface", val, options...)
 }
 
 // GetDhcpRelayDhcpServer gets the dhcp.relay.dhcp_server value from the UTM
@@ -1980,14 +2189,25 @@ func UpdateDnsRecheckInterval(client sophos.ClientInterface, val int64, options 
 	return put(client, "/api/nodes/dns.recheck_interval", val, options...)
 }
 
+// GetDnsRetryForNonexistingNxdomain gets the dns.retry_for_nonexisting_nxdomain value from the UTM
+func GetDnsRetryForNonexistingNxdomain(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/dns.retry_for_nonexisting_nxdomain", &val, options...)
+	return
+}
+
+// UpdateDnsRetryForNonexistingNxdomain PUTs the dns.retry_for_nonexisting_nxdomain value to the UTM
+func UpdateDnsRetryForNonexistingNxdomain(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/dns.retry_for_nonexisting_nxdomain", val, options...)
+}
+
 // GetDnsRoutes gets the dns.routes value from the UTM
-func GetDnsRoutes(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetDnsRoutes(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/dns.routes", &val, options...)
 	return
 }
 
 // UpdateDnsRoutes PUTs the dns.routes value to the UTM
-func UpdateDnsRoutes(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateDnsRoutes(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/dns.routes", val, options...)
 }
 
@@ -2256,24 +2476,24 @@ func UpdateEmailpkiOptionsPolicyVerify(client sophos.ClientInterface, val bool, 
 }
 
 // GetEndpointAacAllowedNetworks gets the endpoint.aac.allowed_networks value from the UTM
-func GetEndpointAacAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetEndpointAacAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/endpoint.aac.allowed_networks", &val, options...)
 	return
 }
 
 // UpdateEndpointAacAllowedNetworks PUTs the endpoint.aac.allowed_networks value to the UTM
-func UpdateEndpointAacAllowedNetworks(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateEndpointAacAllowedNetworks(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/endpoint.aac.allowed_networks", val, options...)
 }
 
 // GetEndpointAacAllowedUsers gets the endpoint.aac.allowed_users value from the UTM
-func GetEndpointAacAllowedUsers(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetEndpointAacAllowedUsers(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/endpoint.aac.allowed_users", &val, options...)
 	return
 }
 
 // UpdateEndpointAacAllowedUsers PUTs the endpoint.aac.allowed_users value to the UTM
-func UpdateEndpointAacAllowedUsers(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateEndpointAacAllowedUsers(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/endpoint.aac.allowed_users", val, options...)
 }
 
@@ -3323,13 +3543,13 @@ func UpdateEppEmail(client sophos.ClientInterface, val string, options ...sophos
 }
 
 // GetEppEndpoints gets the epp.endpoints value from the UTM
-func GetEppEndpoints(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
+func GetEppEndpoints(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
 	err = get(client, "/api/nodes/epp.endpoints", &val, options...)
 	return
 }
 
 // UpdateEppEndpoints PUTs the epp.endpoints value to the UTM
-func UpdateEppEndpoints(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
+func UpdateEppEndpoints(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/epp.endpoints", val, options...)
 }
 
@@ -5093,6 +5313,17 @@ func UpdateHttpAdssoRedirectUseHostname(client sophos.ClientInterface, val bool,
 	return put(client, "/api/nodes/http.adsso_redirect_use_hostname", val, options...)
 }
 
+// GetHttpAllowHttpsTrafficOverHttpPort gets the http.allow_https_traffic_over_http_port value from the UTM
+func GetHttpAllowHttpsTrafficOverHttpPort(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/http.allow_https_traffic_over_http_port", &val, options...)
+	return
+}
+
+// UpdateHttpAllowHttpsTrafficOverHttpPort PUTs the http.allow_https_traffic_over_http_port value to the UTM
+func UpdateHttpAllowHttpsTrafficOverHttpPort(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.allow_https_traffic_over_http_port", val, options...)
+}
+
 // GetHttpAllowSsl3 gets the http.allow_ssl3 value from the UTM
 func GetHttpAllowSsl3(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/http.allow_ssl3", &val, options...)
@@ -5423,6 +5654,17 @@ func UpdateHttpDeferlength(client sophos.ClientInterface, val int64, options ...
 	return put(client, "/api/nodes/http.deferlength", val, options...)
 }
 
+// GetHttpDeferredDownloadReadyTimeout gets the http.deferred_download_ready_timeout value from the UTM
+func GetHttpDeferredDownloadReadyTimeout(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/http.deferred_download_ready_timeout", &val, options...)
+	return
+}
+
+// UpdateHttpDeferredDownloadReadyTimeout PUTs the http.deferred_download_ready_timeout value to the UTM
+func UpdateHttpDeferredDownloadReadyTimeout(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.deferred_download_ready_timeout", val, options...)
+}
+
 // GetHttpDisplayHttpBlockpageExplicitMode gets the http.display_http_blockpage_explicit_mode value from the UTM
 func GetHttpDisplayHttpBlockpageExplicitMode(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/http.display_http_blockpage_explicit_mode", &val, options...)
@@ -5465,6 +5707,17 @@ func GetHttpEdirDelayBasicAuth(client sophos.ClientInterface, options ...sophos.
 // UpdateHttpEdirDelayBasicAuth PUTs the http.edir_delay_basic_auth value to the UTM
 func UpdateHttpEdirDelayBasicAuth(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/http.edir_delay_basic_auth", val, options...)
+}
+
+// GetHttpEnableHsts gets the http.enable_hsts value from the UTM
+func GetHttpEnableHsts(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/http.enable_hsts", &val, options...)
+	return
+}
+
+// UpdateHttpEnableHsts PUTs the http.enable_hsts value to the UTM
+func UpdateHttpEnableHsts(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.enable_hsts", val, options...)
 }
 
 // GetHttpEnableOutInterface gets the http.enable_out_interface value from the UTM
@@ -5687,6 +5940,17 @@ func UpdateHttpOpendirectoryKeytab(client sophos.ClientInterface, val string, op
 	return put(client, "/api/nodes/http.opendirectory_keytab", val, options...)
 }
 
+// GetHttpOverrideProceedProtocol gets the http.override_proceed_protocol value from the UTM
+func GetHttpOverrideProceedProtocol(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/http.override_proceed_protocol", &val, options...)
+	return
+}
+
+// UpdateHttpOverrideProceedProtocol PUTs the http.override_proceed_protocol value to the UTM
+func UpdateHttpOverrideProceedProtocol(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.override_proceed_protocol", val, options...)
+}
+
 // GetHttpPacFile gets the http.pac_file value from the UTM
 func GetHttpPacFile(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/http.pac_file", &val, options...)
@@ -5885,6 +6149,17 @@ func UpdateHttpResponseTimeout(client sophos.ClientInterface, val int64, options
 	return put(client, "/api/nodes/http.response_timeout", val, options...)
 }
 
+// GetHttpSaviScanTimeout gets the http.savi_scan_timeout value from the UTM
+func GetHttpSaviScanTimeout(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
+	err = get(client, "/api/nodes/http.savi_scan_timeout", &val, options...)
+	return
+}
+
+// UpdateHttpSaviScanTimeout PUTs the http.savi_scan_timeout value to the UTM
+func UpdateHttpSaviScanTimeout(client sophos.ClientInterface, val map[string]interface{}, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.savi_scan_timeout", val, options...)
+}
+
 // GetHttpScLocalDb gets the http.sc_local_db value from the UTM
 func GetHttpScLocalDb(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/http.sc_local_db", &val, options...)
@@ -6070,6 +6345,17 @@ func GetHttpUseConnectionInsteadofProxyconnection(client sophos.ClientInterface,
 // UpdateHttpUseConnectionInsteadofProxyconnection PUTs the http.use_connection_insteadof_proxyconnection value to the UTM
 func UpdateHttpUseConnectionInsteadofProxyconnection(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/http.use_connection_insteadof_proxyconnection", val, options...)
+}
+
+// GetHttpUseDnsCnameSafesearch gets the http.use_dns_cname_safesearch value from the UTM
+func GetHttpUseDnsCnameSafesearch(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/http.use_dns_cname_safesearch", &val, options...)
+	return
+}
+
+// UpdateHttpUseDnsCnameSafesearch PUTs the http.use_dns_cname_safesearch value to the UTM
+func UpdateHttpUseDnsCnameSafesearch(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/http.use_dns_cname_safesearch", val, options...)
 }
 
 // GetHttpUseDstaddrForGeopiplookup gets the http.use_dstaddr_for_geopiplookup value from the UTM
@@ -6259,6 +6545,39 @@ func UpdateInterfacesAdvancedArpAnnounce(client sophos.ClientInterface, val map[
 	return put(client, "/api/nodes/interfaces.advanced.arp_announce", val, options...)
 }
 
+// GetInterfacesAdvancedArpCacheGcThresh1 gets the interfaces.advanced.arp_cache_gc_thresh1 value from the UTM
+func GetInterfacesAdvancedArpCacheGcThresh1(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh1", &val, options...)
+	return
+}
+
+// UpdateInterfacesAdvancedArpCacheGcThresh1 PUTs the interfaces.advanced.arp_cache_gc_thresh1 value to the UTM
+func UpdateInterfacesAdvancedArpCacheGcThresh1(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh1", val, options...)
+}
+
+// GetInterfacesAdvancedArpCacheGcThresh2 gets the interfaces.advanced.arp_cache_gc_thresh2 value from the UTM
+func GetInterfacesAdvancedArpCacheGcThresh2(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh2", &val, options...)
+	return
+}
+
+// UpdateInterfacesAdvancedArpCacheGcThresh2 PUTs the interfaces.advanced.arp_cache_gc_thresh2 value to the UTM
+func UpdateInterfacesAdvancedArpCacheGcThresh2(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh2", val, options...)
+}
+
+// GetInterfacesAdvancedArpCacheGcThresh3 gets the interfaces.advanced.arp_cache_gc_thresh3 value from the UTM
+func GetInterfacesAdvancedArpCacheGcThresh3(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh3", &val, options...)
+	return
+}
+
+// UpdateInterfacesAdvancedArpCacheGcThresh3 PUTs the interfaces.advanced.arp_cache_gc_thresh3 value to the UTM
+func UpdateInterfacesAdvancedArpCacheGcThresh3(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/interfaces.advanced.arp_cache_gc_thresh3", val, options...)
+}
+
 // GetInterfacesAdvancedArpIgnore gets the interfaces.advanced.arp_ignore value from the UTM
 func GetInterfacesAdvancedArpIgnore(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
 	err = get(client, "/api/nodes/interfaces.advanced.arp_ignore", &val, options...)
@@ -6301,6 +6620,17 @@ func GetIpsDnsServers(client sophos.ClientInterface, options ...sophos.Option) (
 // UpdateIpsDnsServers PUTs the ips.dns_servers value to the UTM
 func UpdateIpsDnsServers(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/ips.dns_servers", val, options...)
+}
+
+// GetIpsEnableAcceptForAllPackets gets the ips.enable_accept_for_all_packets value from the UTM
+func GetIpsEnableAcceptForAllPackets(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/ips.enable_accept_for_all_packets", &val, options...)
+	return
+}
+
+// UpdateIpsEnableAcceptForAllPackets PUTs the ips.enable_accept_for_all_packets value to the UTM
+func UpdateIpsEnableAcceptForAllPackets(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ips.enable_accept_for_all_packets", val, options...)
 }
 
 // GetIpsEngine gets the ips.engine value from the UTM
@@ -6744,13 +7074,13 @@ func UpdateIpsecAdvancedPskVpnIdType(client sophos.ClientInterface, val string, 
 }
 
 // GetIpsecConnections gets the ipsec.connections value from the UTM
-func GetIpsecConnections(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetIpsecConnections(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/ipsec.connections", &val, options...)
 	return
 }
 
 // UpdateIpsecConnections PUTs the ipsec.connections value to the UTM
-func UpdateIpsecConnections(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateIpsecConnections(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/ipsec.connections", val, options...)
 }
 
@@ -7063,13 +7393,13 @@ func UpdateIpv6Status(client sophos.ClientInterface, val bool, options ...sophos
 }
 
 // GetLicensingActiveIps gets the licensing.active_ips value from the UTM
-func GetLicensingActiveIps(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetLicensingActiveIps(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/licensing.active_ips", &val, options...)
 	return
 }
 
 // UpdateLicensingActiveIps PUTs the licensing.active_ips value to the UTM
-func UpdateLicensingActiveIps(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateLicensingActiveIps(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/licensing.active_ips", val, options...)
 }
 
@@ -7216,6 +7546,17 @@ func UpdateLogfilesLocalStatus(client sophos.ClientInterface, val bool, options 
 	return put(client, "/api/nodes/logfiles.local.status", val, options...)
 }
 
+// GetLogfilesLocalSyslogMaxConnections gets the logfiles.local.syslog_max_connections value from the UTM
+func GetLogfilesLocalSyslogMaxConnections(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/logfiles.local.syslog_max_connections", &val, options...)
+	return
+}
+
+// UpdateLogfilesLocalSyslogMaxConnections PUTs the logfiles.local.syslog_max_connections value to the UTM
+func UpdateLogfilesLocalSyslogMaxConnections(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/logfiles.local.syslog_max_connections", val, options...)
+}
+
 // GetLogfilesRemoteFtpService gets the logfiles.remote.ftp_service value from the UTM
 func GetLogfilesRemoteFtpService(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/logfiles.remote.ftp_service", &val, options...)
@@ -7258,6 +7599,17 @@ func GetLogfilesRemotePath(client sophos.ClientInterface, options ...sophos.Opti
 // UpdateLogfilesRemotePath PUTs the logfiles.remote.path value to the UTM
 func UpdateLogfilesRemotePath(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/logfiles.remote.path", val, options...)
+}
+
+// GetLogfilesRemoteSmbMaxProtocolLevel gets the logfiles.remote.smb_max_protocol_level value from the UTM
+func GetLogfilesRemoteSmbMaxProtocolLevel(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/logfiles.remote.smb_max_protocol_level", &val, options...)
+	return
+}
+
+// UpdateLogfilesRemoteSmbMaxProtocolLevel PUTs the logfiles.remote.smb_max_protocol_level value to the UTM
+func UpdateLogfilesRemoteSmbMaxProtocolLevel(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/logfiles.remote.smb_max_protocol_level", val, options...)
 }
 
 // GetLogfilesRemoteSmbWorkgroup gets the logfiles.remote.smb_workgroup value from the UTM
@@ -7612,6 +7964,17 @@ func UpdateMobileControlUsername(client sophos.ClientInterface, val string, opti
 	return put(client, "/api/nodes/mobile_control.username", val, options...)
 }
 
+// GetNatEnableCacheAutonat gets the nat.enable_cache_autonat value from the UTM
+func GetNatEnableCacheAutonat(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/nat.enable_cache_autonat", &val, options...)
+	return
+}
+
+// UpdateNatEnableCacheAutonat PUTs the nat.enable_cache_autonat value to the UTM
+func UpdateNatEnableCacheAutonat(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/nat.enable_cache_autonat", val, options...)
+}
+
 // GetNatRules gets the nat.rules value from the UTM
 func GetNatRules(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
 	err = get(client, "/api/nodes/nat.rules", &val, options...)
@@ -7767,13 +8130,13 @@ func UpdateNotificationsSmtpUsername(client sophos.ClientInterface, val string, 
 }
 
 // GetNtpAllowedNetworks gets the ntp.allowed_networks value from the UTM
-func GetNtpAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetNtpAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/ntp.allowed_networks", &val, options...)
 	return
 }
 
 // UpdateNtpAllowedNetworks PUTs the ntp.allowed_networks value to the UTM
-func UpdateNtpAllowedNetworks(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateNtpAllowedNetworks(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/ntp.allowed_networks", val, options...)
 }
 
@@ -7841,6 +8204,17 @@ func GetPacketfilterAdvancedFtpPorts(client sophos.ClientInterface, options ...s
 // UpdatePacketfilterAdvancedFtpPorts PUTs the packetfilter.advanced.ftp_ports value to the UTM
 func UpdatePacketfilterAdvancedFtpPorts(client sophos.ClientInterface, val []int64, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/packetfilter.advanced.ftp_ports", val, options...)
+}
+
+// GetPacketfilterAdvancedIpSetMax gets the packetfilter.advanced.ip_set_max value from the UTM
+func GetPacketfilterAdvancedIpSetMax(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/packetfilter.advanced.ip_set_max", &val, options...)
+	return
+}
+
+// UpdatePacketfilterAdvancedIpSetMax PUTs the packetfilter.advanced.ip_set_max value to the UTM
+func UpdatePacketfilterAdvancedIpSetMax(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/packetfilter.advanced.ip_set_max", val, options...)
 }
 
 // GetPacketfilterAdvancedLogBroadcasts gets the packetfilter.advanced.log_broadcasts value from the UTM
@@ -8261,6 +8635,17 @@ func UpdatePimSmDebug(client sophos.ClientInterface, val bool, options ...sophos
 	return put(client, "/api/nodes/pim_sm.debug", val, options...)
 }
 
+// GetPimSmEnableSubnetMulticasting gets the pim_sm.enable_subnet_multicasting value from the UTM
+func GetPimSmEnableSubnetMulticasting(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/pim_sm.enable_subnet_multicasting", &val, options...)
+	return
+}
+
+// UpdatePimSmEnableSubnetMulticasting PUTs the pim_sm.enable_subnet_multicasting value to the UTM
+func UpdatePimSmEnableSubnetMulticasting(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/pim_sm.enable_subnet_multicasting", val, options...)
+}
+
 // GetPimSmInterfaces gets the pim_sm.interfaces value from the UTM
 func GetPimSmInterfaces(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/pim_sm.interfaces", &val, options...)
@@ -8668,6 +9053,17 @@ func UpdatePortalAllowedUsers(client sophos.ClientInterface, val []interface{}, 
 	return put(client, "/api/nodes/portal.allowed_users", val, options...)
 }
 
+// GetPortalCert gets the portal.cert value from the UTM
+func GetPortalCert(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/portal.cert", &val, options...)
+	return
+}
+
+// UpdatePortalCert PUTs the portal.cert value to the UTM
+func UpdatePortalCert(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/portal.cert", val, options...)
+}
+
 // GetPortalHideItems gets the portal.hide_items value from the UTM
 func GetPortalHideItems(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/portal.hide_items", &val, options...)
@@ -9042,6 +9438,17 @@ func UpdateRedRegistryKey(client sophos.ClientInterface, val string, options ...
 	return put(client, "/api/nodes/red.registry_key", val, options...)
 }
 
+// GetRedReshowEula gets the red.reshow_eula value from the UTM
+func GetRedReshowEula(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/red.reshow_eula", &val, options...)
+	return
+}
+
+// UpdateRedReshowEula PUTs the red.reshow_eula value to the UTM
+func UpdateRedReshowEula(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/red.reshow_eula", val, options...)
+}
+
 // GetRedServerCert gets the red.server_cert value from the UTM
 func GetRedServerCert(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/red.server_cert", &val, options...)
@@ -9084,6 +9491,17 @@ func GetRedTls12Only(client sophos.ClientInterface, options ...sophos.Option) (v
 // UpdateRedTls12Only PUTs the red.tls_1_2_only value to the UTM
 func UpdateRedTls12Only(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/red.tls_1_2_only", val, options...)
+}
+
+// GetRedUseUnifiedFirmware gets the red.use_unified_firmware value from the UTM
+func GetRedUseUnifiedFirmware(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/red.use_unified_firmware", &val, options...)
+	return
+}
+
+// UpdateRedUseUnifiedFirmware PUTs the red.use_unified_firmware value to the UTM
+func UpdateRedUseUnifiedFirmware(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/red.use_unified_firmware", val, options...)
 }
 
 // GetRemoteAccessAdvancedMsdns1 gets the remote_access.advanced.msdns1 value from the UTM
@@ -9370,6 +9788,17 @@ func GetRemoteSyslogTarget(client sophos.ClientInterface, options ...sophos.Opti
 // UpdateRemoteSyslogTarget PUTs the remote_syslog.target value to the UTM
 func UpdateRemoteSyslogTarget(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/remote_syslog.target", val, options...)
+}
+
+// GetRemoteSyslogTimeReopen gets the remote_syslog.time_reopen value from the UTM
+func GetRemoteSyslogTimeReopen(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
+	err = get(client, "/api/nodes/remote_syslog.time_reopen", &val, options...)
+	return
+}
+
+// UpdateRemoteSyslogTimeReopen PUTs the remote_syslog.time_reopen value to the UTM
+func UpdateRemoteSyslogTimeReopen(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/remote_syslog.time_reopen", val, options...)
 }
 
 // GetReportingAccountingKeepdays gets the reporting.accounting_keepdays value from the UTM
@@ -9834,6 +10263,28 @@ func UpdateReverseProxyBlacklistGeoipCodes(client sophos.ClientInterface, val []
 	return put(client, "/api/nodes/reverse_proxy.blacklist.geoip_codes", val, options...)
 }
 
+// GetReverseProxyBlacklistSxlBlocksets gets the reverse_proxy.blacklist.sxl_blocksets value from the UTM
+func GetReverseProxyBlacklistSxlBlocksets(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+	err = get(client, "/api/nodes/reverse_proxy.blacklist.sxl_blocksets", &val, options...)
+	return
+}
+
+// UpdateReverseProxyBlacklistSxlBlocksets PUTs the reverse_proxy.blacklist.sxl_blocksets value to the UTM
+func UpdateReverseProxyBlacklistSxlBlocksets(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.blacklist.sxl_blocksets", val, options...)
+}
+
+// GetReverseProxyBlacklistSxlZone gets the reverse_proxy.blacklist.sxl_zone value from the UTM
+func GetReverseProxyBlacklistSxlZone(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/reverse_proxy.blacklist.sxl_zone", &val, options...)
+	return
+}
+
+// UpdateReverseProxyBlacklistSxlZone PUTs the reverse_proxy.blacklist.sxl_zone value to the UTM
+func UpdateReverseProxyBlacklistSxlZone(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.blacklist.sxl_zone", val, options...)
+}
+
 // GetReverseProxyCookiesignkey gets the reverse_proxy.cookiesignkey value from the UTM
 func GetReverseProxyCookiesignkey(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/reverse_proxy.cookiesignkey", &val, options...)
@@ -10065,6 +10516,17 @@ func UpdateReverseProxyPort(client sophos.ClientInterface, val int64, options ..
 	return put(client, "/api/nodes/reverse_proxy.port", val, options...)
 }
 
+// GetReverseProxyProxypassreverseForFrontend gets the reverse_proxy.proxypassreverse_for_frontend value from the UTM
+func GetReverseProxyProxypassreverseForFrontend(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/reverse_proxy.proxypassreverse_for_frontend", &val, options...)
+	return
+}
+
+// UpdateReverseProxyProxypassreverseForFrontend PUTs the reverse_proxy.proxypassreverse_for_frontend value to the UTM
+func UpdateReverseProxyProxypassreverseForFrontend(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.proxypassreverse_for_frontend", val, options...)
+}
+
 // GetReverseProxyProxyprotocol gets the reverse_proxy.proxyprotocol value from the UTM
 func GetReverseProxyProxyprotocol(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/reverse_proxy.proxyprotocol", &val, options...)
@@ -10074,6 +10536,17 @@ func GetReverseProxyProxyprotocol(client sophos.ClientInterface, options ...soph
 // UpdateReverseProxyProxyprotocol PUTs the reverse_proxy.proxyprotocol value to the UTM
 func UpdateReverseProxyProxyprotocol(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/reverse_proxy.proxyprotocol", val, options...)
+}
+
+// GetReverseProxyReloadMethod gets the reverse_proxy.reload_method value from the UTM
+func GetReverseProxyReloadMethod(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/reverse_proxy.reload_method", &val, options...)
+	return
+}
+
+// UpdateReverseProxyReloadMethod PUTs the reverse_proxy.reload_method value to the UTM
+func UpdateReverseProxyReloadMethod(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/reverse_proxy.reload_method", val, options...)
 }
 
 // GetReverseProxyRequestLineLimit gets the reverse_proxy.request_line_limit value from the UTM
@@ -10198,13 +10671,13 @@ func UpdateRoutesPolicy(client sophos.ClientInterface, val []interface{}, option
 }
 
 // GetRoutesStatic gets the routes.static value from the UTM
-func GetRoutesStatic(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetRoutesStatic(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/routes.static", &val, options...)
 	return
 }
 
 // UpdateRoutesStatic PUTs the routes.static value to the UTM
-func UpdateRoutesStatic(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateRoutesStatic(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/routes.static", val, options...)
 }
 
@@ -11012,13 +11485,13 @@ func UpdateSettingsTimezone(client sophos.ClientInterface, val string, options .
 }
 
 // GetSipAllowedNetworks gets the sip.allowed_networks value from the UTM
-func GetSipAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetSipAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/sip.allowed_networks", &val, options...)
 	return
 }
 
 // UpdateSipAllowedNetworks PUTs the sip.allowed_networks value to the UTM
-func UpdateSipAllowedNetworks(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateSipAllowedNetworks(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/sip.allowed_networks", val, options...)
 }
 
@@ -11045,13 +11518,13 @@ func UpdateSipLogRelated(client sophos.ClientInterface, val bool, options ...sop
 }
 
 // GetSipServers gets the sip.servers value from the UTM
-func GetSipServers(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetSipServers(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/sip.servers", &val, options...)
 	return
 }
 
 // UpdateSipServers PUTs the sip.servers value to the UTM
-func UpdateSipServers(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateSipServers(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/sip.servers", val, options...)
 }
 
@@ -11130,6 +11603,17 @@ func GetSmsClientUsername(client sophos.ClientInterface, options ...sophos.Optio
 // UpdateSmsClientUsername PUTs the sms_client.username value to the UTM
 func UpdateSmsClientUsername(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/sms_client.username", val, options...)
+}
+
+// GetSmtpAdLookupContacts gets the smtp.ad_lookup_contacts value from the UTM
+func GetSmtpAdLookupContacts(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/smtp.ad_lookup_contacts", &val, options...)
+	return
+}
+
+// UpdateSmtpAdLookupContacts PUTs the smtp.ad_lookup_contacts value to the UTM
+func UpdateSmtpAdLookupContacts(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.ad_lookup_contacts", val, options...)
 }
 
 // GetSmtpAuthAaa gets the smtp.auth_aaa value from the UTM
@@ -11473,6 +11957,17 @@ func UpdateSmtpRelays(client sophos.ClientInterface, val []interface{}, options 
 	return put(client, "/api/nodes/smtp.relays", val, options...)
 }
 
+// GetSmtpSasiToken gets the smtp.sasi_token value from the UTM
+func GetSmtpSasiToken(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/smtp.sasi_token", &val, options...)
+	return
+}
+
+// UpdateSmtpSasiToken PUTs the smtp.sasi_token value to the UTM
+func UpdateSmtpSasiToken(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.sasi_token", val, options...)
+}
+
 // GetSmtpScanOutgoingEmails gets the smtp.scan_outgoing_emails value from the UTM
 func GetSmtpScanOutgoingEmails(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/smtp.scan_outgoing_emails", &val, options...)
@@ -11616,6 +12111,28 @@ func UpdateSmtpSmtpAcceptPerHostMax(client sophos.ClientInterface, val int64, op
 	return put(client, "/api/nodes/smtp.smtp_accept_per_host_max", val, options...)
 }
 
+// GetSmtpSmtpAllowedInterfaces gets the smtp.smtp_allowed_interfaces value from the UTM
+func GetSmtpSmtpAllowedInterfaces(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
+	err = get(client, "/api/nodes/smtp.smtp_allowed_interfaces", &val, options...)
+	return
+}
+
+// UpdateSmtpSmtpAllowedInterfaces PUTs the smtp.smtp_allowed_interfaces value to the UTM
+func UpdateSmtpSmtpAllowedInterfaces(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.smtp_allowed_interfaces", val, options...)
+}
+
+// GetSmtpSmtpListenOnItf gets the smtp.smtp_listen_on_itf value from the UTM
+func GetSmtpSmtpListenOnItf(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/smtp.smtp_listen_on_itf", &val, options...)
+	return
+}
+
+// UpdateSmtpSmtpListenOnItf PUTs the smtp.smtp_listen_on_itf value to the UTM
+func UpdateSmtpSmtpListenOnItf(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.smtp_listen_on_itf", val, options...)
+}
+
 // GetSmtpStatus gets the smtp.status value from the UTM
 func GetSmtpStatus(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
 	err = get(client, "/api/nodes/smtp.status", &val, options...)
@@ -11715,6 +12232,28 @@ func UpdateSmtpTransparentSkipAutoPf(client sophos.ClientInterface, val bool, op
 	return put(client, "/api/nodes/smtp.transparent_skip_auto_pf", val, options...)
 }
 
+// GetSmtpTransparentSmtps gets the smtp.transparent_smtps value from the UTM
+func GetSmtpTransparentSmtps(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/smtp.transparent_smtps", &val, options...)
+	return
+}
+
+// UpdateSmtpTransparentSmtps PUTs the smtp.transparent_smtps value to the UTM
+func UpdateSmtpTransparentSmtps(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.transparent_smtps", val, options...)
+}
+
+// GetSmtpTransparentStartTls gets the smtp.transparent_start_tls value from the UTM
+func GetSmtpTransparentStartTls(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/smtp.transparent_start_tls", &val, options...)
+	return
+}
+
+// UpdateSmtpTransparentStartTls PUTs the smtp.transparent_start_tls value to the UTM
+func UpdateSmtpTransparentStartTls(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.transparent_start_tls", val, options...)
+}
+
 // GetSmtpUpstreamHosts gets the smtp.upstream_hosts value from the UTM
 func GetSmtpUpstreamHosts(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/smtp.upstream_hosts", &val, options...)
@@ -11735,6 +12274,17 @@ func GetSmtpUpstreamHostsOnly(client sophos.ClientInterface, options ...sophos.O
 // UpdateSmtpUpstreamHostsOnly PUTs the smtp.upstream_hosts_only value to the UTM
 func UpdateSmtpUpstreamHostsOnly(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/smtp.upstream_hosts_only", val, options...)
+}
+
+// GetSmtpUseClientMime gets the smtp.use_client_mime value from the UTM
+func GetSmtpUseClientMime(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
+	err = get(client, "/api/nodes/smtp.use_client_mime", &val, options...)
+	return
+}
+
+// UpdateSmtpUseClientMime PUTs the smtp.use_client_mime value to the UTM
+func UpdateSmtpUseClientMime(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/smtp.use_client_mime", val, options...)
 }
 
 // GetSnmpAllowedNetworks gets the snmp.allowed_networks value from the UTM
@@ -11892,24 +12442,24 @@ func UpdateSnmpVersion(client sophos.ClientInterface, val string, options ...sop
 }
 
 // GetSocksAaa gets the socks.aaa value from the UTM
-func GetSocksAaa(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetSocksAaa(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/socks.aaa", &val, options...)
 	return
 }
 
 // UpdateSocksAaa PUTs the socks.aaa value to the UTM
-func UpdateSocksAaa(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateSocksAaa(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/socks.aaa", val, options...)
 }
 
 // GetSocksAllowedNetworks gets the socks.allowed_networks value from the UTM
-func GetSocksAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []string, err error) {
+func GetSocksAllowedNetworks(client sophos.ClientInterface, options ...sophos.Option) (val []interface{}, err error) {
 	err = get(client, "/api/nodes/socks.allowed_networks", &val, options...)
 	return
 }
 
 // UpdateSocksAllowedNetworks PUTs the socks.allowed_networks value to the UTM
-func UpdateSocksAllowedNetworks(client sophos.ClientInterface, val []string, options ...sophos.Option) (err error) {
+func UpdateSocksAllowedNetworks(client sophos.ClientInterface, val []interface{}, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/socks.allowed_networks", val, options...)
 }
 
@@ -12320,6 +12870,17 @@ func UpdateSslVpnEncryptionAlgorithm(client sophos.ClientInterface, val string, 
 	return put(client, "/api/nodes/ssl_vpn.encryption_algorithm", val, options...)
 }
 
+// GetSslVpnFallbackDisable gets the ssl_vpn.fallback_disable value from the UTM
+func GetSslVpnFallbackDisable(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/ssl_vpn.fallback_disable", &val, options...)
+	return
+}
+
+// UpdateSslVpnFallbackDisable PUTs the ssl_vpn.fallback_disable value to the UTM
+func UpdateSslVpnFallbackDisable(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/ssl_vpn.fallback_disable", val, options...)
+}
+
 // GetSslVpnHostname gets the ssl_vpn.hostname value from the UTM
 func GetSslVpnHostname(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/ssl_vpn.hostname", &val, options...)
@@ -12540,6 +13101,17 @@ func UpdateUp2DateCacheUseAcc(client sophos.ClientInterface, val bool, options .
 	return put(client, "/api/nodes/up2date.cache_use_acc", val, options...)
 }
 
+// GetUp2DateForceInsecureUp2Date gets the up2date.force_insecure_up2date value from the UTM
+func GetUp2DateForceInsecureUp2Date(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/up2date.force_insecure_up2date", &val, options...)
+	return
+}
+
+// UpdateUp2DateForceInsecureUp2Date PUTs the up2date.force_insecure_up2date value to the UTM
+func UpdateUp2DateForceInsecureUp2Date(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/up2date.force_insecure_up2date", val, options...)
+}
+
 // GetUp2DateParentProxyAuthPass gets the up2date.parent_proxy_auth_pass value from the UTM
 func GetUp2DateParentProxyAuthPass(client sophos.ClientInterface, options ...sophos.Option) (val string, err error) {
 	err = get(client, "/api/nodes/up2date.parent_proxy_auth_pass", &val, options...)
@@ -12607,13 +13179,13 @@ func UpdateUp2DateParentProxyStatus(client sophos.ClientInterface, val bool, opt
 }
 
 // GetUp2DatePatternDownloadInterval gets the up2date.pattern_download_interval value from the UTM
-func GetUp2DatePatternDownloadInterval(client sophos.ClientInterface, options ...sophos.Option) (val map[string]interface{}, err error) {
+func GetUp2DatePatternDownloadInterval(client sophos.ClientInterface, options ...sophos.Option) (val int64, err error) {
 	err = get(client, "/api/nodes/up2date.pattern_download_interval", &val, options...)
 	return
 }
 
 // UpdateUp2DatePatternDownloadInterval PUTs the up2date.pattern_download_interval value to the UTM
-func UpdateUp2DatePatternDownloadInterval(client sophos.ClientInterface, val map[string]interface{}, options ...sophos.Option) (err error) {
+func UpdateUp2DatePatternDownloadInterval(client sophos.ClientInterface, val int64, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/up2date.pattern_download_interval", val, options...)
 }
 
@@ -12725,6 +13297,17 @@ func GetUplinkCondition(client sophos.ClientInterface, options ...sophos.Option)
 // UpdateUplinkCondition PUTs the uplink.condition value to the UTM
 func UpdateUplinkCondition(client sophos.ClientInterface, val string, options ...sophos.Option) (err error) {
 	return put(client, "/api/nodes/uplink.condition", val, options...)
+}
+
+// GetUplinkEnableMultipathStickyRuleFlagWorkaround gets the uplink.enable_multipath_sticky_rule_flag_workaround value from the UTM
+func GetUplinkEnableMultipathStickyRuleFlagWorkaround(client sophos.ClientInterface, options ...sophos.Option) (val bool, err error) {
+	err = get(client, "/api/nodes/uplink.enable_multipath_sticky_rule_flag_workaround", &val, options...)
+	return
+}
+
+// UpdateUplinkEnableMultipathStickyRuleFlagWorkaround PUTs the uplink.enable_multipath_sticky_rule_flag_workaround value to the UTM
+func UpdateUplinkEnableMultipathStickyRuleFlagWorkaround(client sophos.ClientInterface, val bool, options ...sophos.Option) (err error) {
+	return put(client, "/api/nodes/uplink.enable_multipath_sticky_rule_flag_workaround", val, options...)
 }
 
 // GetUplinkInterfaces gets the uplink.interfaces value from the UTM
