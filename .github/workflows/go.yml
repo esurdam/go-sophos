@@ -1,12 +1,12 @@
 name: Github CI
-# Reference: https://github.com/tensorflow/tensorboard/blob/48c0a2d814c755937f5950e251e8071199c99d38/.github/workflows/ci.yml#L55-L74
+
 on:
   push:
     branches:
       - feature/*
-      - main
+      - master
   pull_request:
-    branches: [ testing ]
+    branches: [ testing, master ]
 
 env:
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -25,10 +25,3 @@ jobs:
         run: make test && bash <(curl -s https://codecov.io/bash)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish code cov
-        uses: actions/upload-artifact@v2
-        with:
-          name: code covarege report
-          path: |
-            coverage.html
-            coverage.txt
