@@ -1,0 +1,34 @@
+name: Github CI
+# Reference: https://github.com/tensorflow/tensorboard/blob/48c0a2d814c755937f5950e251e8071199c99d38/.github/workflows/ci.yml#L55-L74
+on:
+  push:
+    branches:
+      - feature/*
+      - main
+  pull_request:
+    branches: [ testing ]
+
+env:
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+jobs:
+  test:
+    name: 'test'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16.x
+      - uses: actions/checkout@v2
+      - name: test
+        run: make test && bash <(curl -s https://codecov.io/bash)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish code cov
+        uses: actions/upload-artifact@v2
+        with:
+          name: code covarege report
+          path: |
+            coverage.html
+            coverage.txt
